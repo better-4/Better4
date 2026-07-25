@@ -3,4 +3,5 @@
 	url = git@github.com:PARTYMANX/partymod-thps4.git
 [submodule "vendor/LegacyTHPS"]
 	path = vendor/LegacyTHPS
-	url = git@github.com:DCxDemo/LegacyTHPS.git
+	url = git@github.com:better-4/LegacyTHPS.git
+	branch = better-4
