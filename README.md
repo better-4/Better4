@@ -16,7 +16,6 @@ Better4 is a modpack which includes modern gameplay and QOL features while maint
 ## Install VS Build Tools and .NET SDK
 
 ```powershell
-winget install -e --id Microsoft.DotNet.SDK.10
 winget install -e --id Microsoft.VisualStudio.2022.BuildTools
 ```
 
@@ -70,7 +69,10 @@ msbuild .\partymod.vcxproj /p:configuration=release /p:optimize=false
 
 ## Build QScriptEd CLI
 
+Depends on .NET SDK
+
 ```
 cd vendor/LegacyTHPS/editors/ThpsQScriptEd
+dotnet build -p:configuration=release
 msbuild .\ThpsQScriptEd.csproj /p:configuration=release
 ```
