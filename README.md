@@ -11,67 +11,64 @@ Better4 is a modpack which includes modern gameplay and QOL features while maint
 * Online multiplayer (*WIP*)
 * Better observe mode (*WIP*)
 
-# Building
+# Development
 
-## Install VS Build Tools and .NET SDK
-
-```powershell
-winget install -e --id Microsoft.VisualStudio.2022.BuildTools
-```
-
-## Install vcpkg / SDL2
-
-[vcpkg](https://vcpkg.io/en/) is a C/C++ package manager used to provide the SDL2 dependency for PARTYMOD.
-
-```
-git clone https://github.com/microsoft/vcpkg.git
-cd vcpkg
-.\bootstrap-vcpkg.bat
-.\vcpkg.exe install sdl2:x86-windows
-```
-
-Set `$VCPKG_ROOT` to `$PWD`:
-
-<details>
-<summary>Powershell</summary>
-
-### Shell-local (disappears on shell restart)
-
-```ps
-$env:VCPKG_ROOT = $PWD.Path
-```
-
-### Persistent (requires running as administrator)
-
-```ps
-[Environment]::SetEnvironmentVariable("VCPKG_ROOT", $PWD.Path, "User")
-```
-</details>
-
-## Clone Better4
+Clone the Better4 repo with the `--recurse-submodules` option:
 
 ```
 git clone --recurse-submodules git@github.com:better-4/Better4.git  # or https://github.com/better-4/Better4.git
 cd Better4
 ```
 
-## Build PARTYMOD
+## Building with Docker
+
+Using Docker is the easiest way to build Better4, as it automates the process of pulling build dependencies and building a release.
+
+Install [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/), then verify the Docker Engine is running and run:
+
+```
+docker build -f docker/Dockerfile --target export -o build/out .
+```
+
+Build artifacts will be exported to the `build/out` directory.
+
+## Building natively
+
+If you prefer to build natively on Windows, you'll need to install quite a few dependencies.
+
+### Install VS Build Tools and .NET SDK
+
+VS Build Tools are required to build PARTYMOD, whereas the .NET SDK is required to build the QB script (de)compiler.
+
+```powershell
+winget install -e --id Microsoft.VisualStudio.2022.BuildTools
+winget install -e --id Microsoft.DotNet.SDK.10
+```
+
+### Install vcpkg / sdl2:x86-windows
+
+```powershell
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+.\vcpkg.exe install sdl2:x86-windows
+```
+
+### Build QScriptEd CLI
+
+```
+cd vendor/LegacyTHPS/editors/ThpsQScriptEd
+dotnet build -p:configuration=release
+```
+
+### Build PARTYMOD
 
 ```
 cd vendor/partymod-thps4
 mkdir build
 cd build
-cmake .. -A win32 -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake"
+cmake .. -A win32 -DCMAKE_TOOLCHAIN_FILE=C:/[vcpkg directory]/scripts/buildsystems/vcpkg.cmake
 msbuild .\partypatcher.vcxproj /p:configuration=release
 msbuild .\partyconfig.vcxproj /p:configuration=release
 msbuild .\partymod.vcxproj /p:configuration=release /p:optimize=false
-```
-
-## Build QScriptEd CLI
-
-Depends on .NET SDK
-
-```
-cd vendor/LegacyTHPS/editors/ThpsQScriptEd
-dotnet build -p:configuration=release
 ```

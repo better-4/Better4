@@ -1,31 +1,13 @@
 # syntax=docker/dockerfile:1.7
 #
-# Better4 cross-build image: Linux base + MSVC-under-Wine (msvc-wine).
-#
-# Builds the Windows (x86) PARTYMOD artifacts and the .NET QScriptEd CLI
-# entirely on Linux. The real MSVC toolchain runs under Wine, so MSVC-only
-# constructs (#pragma comment(linker,...), __declspec, comctl32/UxTheme, the
-# manifest dependency) work exactly as on Windows.
-#
-# Stages are ordered least-volatile -> most-volatile so BuildKit reuses the
-# expensive MSVC/SDK/.NET download layers across source changes. The three
-# heavy downloads (MSVC, SDL2, .NET) each live in their own stage and are
-# COPYed into the toolchain stage, so a change to one never invalidates the
-# others.
+# Better4 image: Ubuntu base + msvc-wine.
 #
 # Usage:
-#   # extract artifacts to ./build/out
 #   DOCKER_BUILDKIT=1 docker build -f docker/Dockerfile --target export -o build/out .
-#   # or produce a reusable build image
-#   DOCKER_BUILDKIT=1 docker build -f docker/Dockerfile --target build -t better4-build .
 
 ########################################
 # Stage: base — OS + build dependencies
 ########################################
-# Ubuntu 24.04 is the base msvc-wine itself targets/tests: its `wine64` package
-# provides the /usr/bin/wine64 launcher the compiler wrappers call. (Debian's
-# wine64 package ships only the libraries, not the launcher, so the wrappers
-# fail with an empty command.)
 ARG BASE_IMAGE=ubuntu:24.04
 FROM ${BASE_IMAGE} AS base
 
@@ -51,8 +33,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libicu74 \
     && rm -rf /var/lib/apt/lists/*
 
-# Initialise the Wine prefix once so per-compile invocations skip first-run cost
-# (mirrors msvc-wine's own Dockerfile: init, then wait for wineserver to exit).
 RUN $(command -v wine64 || command -v wine) wineboot --init \
     && while pgrep wineserver >/dev/null; do sleep 1; done
 
@@ -62,10 +42,9 @@ RUN $(command -v wine64 || command -v wine) wineboot --init \
 FROM base AS msvc
 
 # Pin these for reproducible images. Empty version => msvc-wine's default (latest).
-ARG MSVC_WINE_REF=master
-ARG MSVC_VERSION=
-ARG SDK_VERSION=
-# "host x86" = x64 host tools that cross-compile to 32-bit x86 (no 32-bit Wine needed).
+ARG MSVC_WINE_REF=514f8ea34842cd6d831804d0e9658d3a32870ae1
+ARG MSVC_VERSION=17.14
+ARG SDK_VERSION=10.0.22621
 ARG MSVC_ARCHS="host x86"
 
 RUN git clone https://github.com/mstorsjo/msvc-wine.git /opt/msvc-wine \
@@ -98,7 +77,7 @@ RUN curl -fsSL -o /tmp/sdl2.zip \
     && rm /tmp/sdl2.zip
 
 ########################################
-# Stage: dotnet — .NET SDK for the QScriptEd CLI (pinned channel)
+# Stage: dotnet — .NET SDK (for QScriptEd)
 ########################################
 FROM base AS dotnet
 ARG DOTNET_CHANNEL=8.0
@@ -124,22 +103,32 @@ ENV DOTNET_ROOT=/opt/dotnet \
     DOTNET_NOLOGO=1
 
 ########################################
+# Stage: qscripted — build the QScriptEd .NET CLI
+########################################
+FROM toolchain AS qscripted
+WORKDIR /src
+COPY vendor/LegacyTHPS/editors/ThpsQScriptEd vendor/LegacyTHPS/editors/ThpsQScriptEd
+RUN --mount=type=cache,target=/root/.nuget/packages \
+    dotnet build vendor/LegacyTHPS/editors/ThpsQScriptEd/ThpsQScriptEd.csproj \
+        -c Release -o /opt/qscripted
+
+########################################
 # Stage: build — compile the project (invalidated by source changes only)
 ########################################
 FROM toolchain AS build
 WORKDIR /src
 
-# Copy the build driver first so editing sources doesn't re-copy the script layer.
 COPY docker/build.sh /usr/local/bin/build.sh
 RUN chmod +x /usr/local/bin/build.sh
 
+COPY --from=qscripted /opt/qscripted /opt/qscripted
 COPY . /src
 
 # /build (CMake/Ninja object files) and the NuGet cache persist across builds via
 # BuildKit cache mounts; final artifacts are written to /out (a real image dir).
 RUN --mount=type=cache,target=/build \
     --mount=type=cache,target=/root/.nuget/packages \
-    OUT=/out BUILD_ROOT=/build /usr/local/bin/build.sh
+    OUT=/out BUILD_ROOT=/build QSCRIPTED=/opt/qscripted /usr/local/bin/build.sh
 
 ########################################
 # Stage: export — artifacts only (docker build --target export -o <dir>)
