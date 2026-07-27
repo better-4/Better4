@@ -1,0 +1,10 @@
+# Keep the build context lean so source-only changes invalidate as few layers as
+# possible. Submodule sources under vendor/ are intentionally NOT ignored.
+.git
+**/.git
+**/build/
+build/
+dist/
+**/bin/
+**/obj/
+*.log

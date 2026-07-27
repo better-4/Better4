@@ -74,5 +74,4 @@ Depends on .NET SDK
 ```
 cd vendor/LegacyTHPS/editors/ThpsQScriptEd
 dotnet build -p:configuration=release
-msbuild .\ThpsQScriptEd.csproj /p:configuration=release
 ```
