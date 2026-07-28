@@ -71,6 +71,12 @@ for q in "${SRC}"/data/scripts/*.q; do
   dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${q}" "${OUT}/data/scripts/${name}.qb"
 done
 
+echo "==> Configuring + building thps4-server-browser"
+cmake -G Ninja -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
+  -S "${SRC}/src/thps4-server-browser" -B "${BUILD_ROOT}/serverbrowser"
+cmake --build "${BUILD_ROOT}/serverbrowser" --target th4-server-browser
+cp "${BUILD_ROOT}/serverbrowser/th4-server-browser.exe" "${OUT}/"
+
 echo "==> Copying gslist"
 cp -r "${SRC}/vendor/gslist" "${OUT}/gslist"
 

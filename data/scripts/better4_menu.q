@@ -41,16 +41,19 @@ script quit_observing
     if IsHost
       exit_pause_menu
       Wait 60 gameframe
+      debugrendermode
       LoadPendingPlayers
+      Wait 120 gameframe
+      debugrendermode
     endif
   endif
 endscript
-script LoadPendingPlayersScript
-  LoadPendingPlayers
-endscript
 script host_process_remote_exit_observer
   Wait 60 gameframe
+  debugrendermode
   LoadPendingPlayers
+  Wait 120 gameframe
+  debugrendermode
 endscript
 script destroy_mod_menu
   ClearEventBuffer

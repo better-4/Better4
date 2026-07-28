@@ -12,7 +12,7 @@ script SkateshopAI stopskateshopstreams = 1
   SpawnSkaterScript BlinkEyes
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
-  if ( <name> = jenna )
+  if ( <name> = JENNA )
     Printf "switching on shoes..................."
     SwitchOnAtomic shoes
   endif
@@ -38,8 +38,8 @@ script SkateshopAI stopskateshopstreams = 1
       case Steamer
         Printf "THIS IS ELISSA"
          <name> = editskater_male
-      case jenna
-         <name> = jenna
+      case JENNA
+         <name> = JENNA
       default
          <name> = editskater_female
         Printf "THIS IS A CHICK"
@@ -187,7 +187,7 @@ script SkateshopAI stopskateshopstreams = 1
       @PlayAnim Anim = Idle_Bam
       @PlayAnim Anim = Idle_Bam
       @PlayAnim Anim = Idle_BamHit BlendPeriod = 0
-      if not GotParam noSFX
+      if not GotParam NoSFX
         Wait 1.02 seconds
         Obj_PlaySound bitchslap2 vol = 150 pitch = 97
       endif
@@ -290,7 +290,7 @@ script SkateshopAI stopskateshopstreams = 1
       PlayAnim randompermute( @Anim = Idle_Eddie
       @Anim = Idle_Eddie
        ) stream_freq = randomrange(0, 20)
-    case vallely
+    case Vallely
       PlayAnim randompermute( @Anim = Idle_Vallely
       WaitAnimFinished
       PlayAnim Anim = Idle_Vallely
@@ -372,7 +372,7 @@ script SkateshopAI stopskateshopstreams = 1
       @Anim = Idle_Vallely
       @Anim = Idle_Vallely
        ) stream_freq = randomrange(0, 20)
-    case jango
+    case JANGO
       random( @PlayAnim Anim = Idle_JangoSEC1
       @PlayAnim Anim = Idle_JangoSEC1
       @PlayAnim Anim = Idle_JangoSEC1
@@ -381,13 +381,13 @@ script SkateshopAI stopskateshopstreams = 1
       Wait 0.5 seconds
       Obj_GetId
       MangleChecksums a = skatersplash b = <objId>
-      SetScript name = <mangled_id> emitscript = emit_jumpjets
+      SetScript name = <mangled_id> Emitscript = emit_jumpjets
       EmptyParticleSystem name = <mangled_id>
       ParticlesOn name = <mangled_id>
       Wait 2 second
       ParticlesOff name = <mangled_id>
        ) stream_freq = randomrange(0, 10)
-    case jenna
+    case JENNA
       random( @PlayAnim Anim = Idle_JennaPose1
       WaitAnimFinished
       PlayAnim Anim = Idle_JennaPoseToBend
@@ -416,7 +416,7 @@ script SkateshopAI stopskateshopstreams = 1
        ) stream_freq = randomrange(0, 2)
     case neversoft
       random( @PlayAnim Anim = Idle_BamHit BlendPeriod = 0
-      if not GotParam noSFX
+      if not GotParam NoSFX
         Wait 1.02 seconds
         Obj_PlaySound bitchslap2 vol = 150 pitch = 97
         Wait 1.02 seconds
@@ -455,7 +455,7 @@ script SkateshopAI stopskateshopstreams = 1
       WaitAnimFinished
       BlendPeriodOut 0
       FireEvent type = finished_credit_anim
-      @PlayAnim Anim = _360FlipNoseManual
+      @PlayAnim Anim = _360FlipNosemanual
       WaitAnimFinished
       BlendPeriodOut 0
       FireEvent type = finished_credit_anim
@@ -552,14 +552,14 @@ script SkateshopAI stopskateshopstreams = 1
   repeat
 endscript
 script PlayThrowBoardSound
-  if not GotParam noSFX
+  if not GotParam NoSFX
     Wait 1.22 second
     PlaySound BoardThrowDown vol = 300
   endif
 endscript
 script TurnOnSSGuitar
   DestroyAllSpecialItems
-  TurnOnSpecialItem specialitem_details = guitar_skateshop_details
+  TurnOnSpecialItem SpecialItem_details = guitar_skateshop_details
 endscript
 script Play_HawkIdleSet
   PlayAnim Anim = Idle_HawkFromStandIdle
@@ -609,7 +609,7 @@ endscript
 script skateshop_rotate_skater
   begin
     if ControllerPressed <button>
-      skater:rotate Y = <angle>
+      skater:Rotate Y = <angle>
     else
       break
     endif
@@ -659,9 +659,9 @@ script start_internet_game
   SetNetworkMode INTERNET_MODE
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
-  MakeSkaterGoto SkateshopAI params = { noSFX }
+  MakeSkaterGoto SkateshopAI params = { NoSFX }
   SetMemThreadSafe off
-  KillSpawnedScript name = Skateshop_slideshow
+  KillSpawnedScript name = Skateshop_Slideshow
   SpawnScript attract_mode_timer
   SpawnSecondControllerCheck
   Wait 5 gameframe
@@ -672,7 +672,7 @@ script create_main_menu
   add_main_menu_textures_to_vram
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
-  MakeSkaterGoto SkateshopAI params = { noSFX }
+  MakeSkaterGoto SkateshopAI params = { NoSFX }
   SetMemThreadSafe off
   SetMenuPadMappings [ active
     use_as_first
@@ -948,8 +948,8 @@ script create_main_menu
   }
   RunScriptOnScreenElement id = main_menu menu_onscreen
   FireEvent type = focus target = attract_container
-  KillSpawnedScript name = Skateshop_slideshow
-  SpawnScript Skateshop_slideshow
+  KillSpawnedScript name = Skateshop_Slideshow
+  SpawnScript Skateshop_Slideshow
   SpawnScript attract_mode_timer
   SpawnSecondControllerCheck
   Wait 5 gameframe
@@ -1084,7 +1084,7 @@ script main_menu_unfocus
   }
 endscript
 script main_menu_exit
-  KillSpawnedScript name = Skateshop_slideshow
+  KillSpawnedScript name = Skateshop_Slideshow
   KillSpawnedScript name = attract_mode_timer
   StopSecondControllerCheck
   if ObjectExists id = current_menu_anchor
@@ -1158,7 +1158,7 @@ script reset_attract_mode_timer
   KillSpawnedScript name = attract_mode_timer
   SpawnScript attract_mode_timer
 endscript
-script Skateshop_slideshow
+script Skateshop_Slideshow
   begin
     Wait 10 seconds
     KillSkaterCamAnim all
@@ -1479,13 +1479,13 @@ script create_career_options_menu
   }
   draw_menu_box delta_pos = (92, 30) middle_repeat = 4 box_right_scale = (0.8, 0.43)
   KillSkaterCamAnim all
-  KillSpawnedScript name = Skateshop_slideshow
+  KillSpawnedScript name = Skateshop_Slideshow
   PlaySkaterCamAnim name = SS_MenuCam play_hold
-  SpawnScript Skateshop_slideshow
+  SpawnScript Skateshop_Slideshow
   RunScriptOnScreenElement id = ss_career_options_menu animate_in
 endscript
 script career_options_menu_exit
-  KillSpawnedScript name = Skateshop_slideshow
+  KillSpawnedScript name = Skateshop_Slideshow
   dialog_box_exit
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1545,15 +1545,15 @@ script reset_career
 endscript
 script reset_secret_skaters
   SetSkaterProfileInfoByName name = eddie params = { is_hidden = 1 }
-  SetSkaterProfileInfoByName name = jango params = { is_hidden = 1 }
-  SetSkaterProfileInfoByName name = vallely params = { is_hidden = 1 }
-  SetSkaterProfileInfoByName name = jenna params = { is_hidden = 1 }
+  SetSkaterProfileInfoByName name = JANGO params = { is_hidden = 1 }
+  SetSkaterProfileInfoByName name = Vallely params = { is_hidden = 1 }
+  SetSkaterProfileInfoByName name = JENNA params = { is_hidden = 1 }
 endscript
 script launch_pre_cas_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen callback = create_setup_options_menu
 endscript
 script pre_cas_menu_exit
-  KillSpawnedScript name = Skateshop_slideshow
+  KillSpawnedScript name = Skateshop_Slideshow
   dialog_box_exit
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1594,7 +1594,7 @@ script create_pre_cas_menu
   draw_menu_box
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
-  SpawnScript Skateshop_slideshow
+  SpawnScript Skateshop_Slideshow
   RunScriptOnScreenElement id = ss_pre_cas_menu animate_in
 endscript
 script cas_overwrite_warning title = 'Overwrite'
@@ -1824,7 +1824,7 @@ script create_ss_menu
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
   skater:BlendPeriodOut 0.0
-  skater:obj_movetonode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
   Kill name = SSO_Fence05
   Create name = SSO_Fence02
   if GotParam change_gamemode
@@ -2253,7 +2253,7 @@ script skateshop_practice_quit
   GoalManager_HidePoints
   GoalManager_HideGoalPoints
   skater:BlendPeriodOut 0.0
-  skater:obj_movetonode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
   MakeSkaterGoto SkateshopAI params = { }
   launch_ss_menu
 endscript
@@ -2268,7 +2268,7 @@ script skateshop_create_cas_menu
     Change came_to_cas_menu_from_main_menu = 0
   endif
   launch_edit_skater_menu <...>
-  skater:obj_movetonode name = TRG_SS_Appearance orient
+  skater:Obj_MoveToNode name = TRG_SS_Appearance orient
 endscript
 script launch_select_skater_menu
   if ObjectExists id = current_menu_anchor
@@ -2282,7 +2282,7 @@ script launch_select_skater_menu
     endif
     KillSkaterCamAnim all
     PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
-    skater:obj_movetonode name = TRG_SS_SkaterChoosing orient
+    skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
     if not GotParam From2p
     else
       Printf "GOTPARAM FROM 2p"
@@ -2448,7 +2448,7 @@ script create_select_skater_menu
   select_skater_get_current_skater_name
   AssignAlias id = select_skater_hmenu alias = current_menu
   FireEvent type = focus target = select_skater_hmenu data = { child_id = <current_skater> }
-  skater:settags stopskateshopstreams = 0
+  skater:SetTags stopskateshopstreams = 0
 endscript
 script show_level_select_pro_challenge
   GetCurrentSkaterProfileIndex
@@ -2807,7 +2807,7 @@ script select_skater_hmenu_choose
     BindFrontEndToController front_end_pad = <currentSkaterProfileIndex> controller = <controller_index>
     StopStream
     GetCurrentSkaterProfileIndex
-    skater:obj_spawnscript SkateshopGO
+    skater:Obj_SpawnScript SkateshopGO
     add_pause_menu_textures_to_vram
     if InSplitScreenGame
       launch_ss_menu <...>
@@ -2827,7 +2827,7 @@ script select_skater_hmenu_choose
     GoalManager_ReplaceTrickText all
     exit_pause_menu
   endif
-  skater:settags stopskateshopstreams = 1
+  skater:SetTags stopskateshopstreams = 1
 endscript
 script SkateshopGO
   Wait 0.18 seconds
@@ -2853,7 +2853,7 @@ script select_skater_menu_back
     endif
   else
   endif
-  skater:settags stopskateshopstreams = 1
+  skater:SetTags stopskateshopstreams = 1
   add_pause_menu_textures_to_vram
    <callback>
 endscript
@@ -2928,7 +2928,7 @@ script launch_edit_skater_menu
   endif
   GoalManager_HidePoints
   GoalManager_HideGoalPoints
-  MakeSkaterGoto SkateshopAI params = { noSFX CAS_Screen }
+  MakeSkaterGoto SkateshopAI params = { NoSFX CAS_Screen }
   create_edit_skater_menu <...> animate
 endscript
 script create_edit_skater_menu
@@ -3028,8 +3028,8 @@ script edit_skater_create_main_menu
     id = edit_skater_vmenu
     event_handlers = [ { pad_back generic_menu_pad_back_sound }
       { pad_back edit_skater_menu_exit params = <...> }
-      { pad_up generic_menu_up_or_down_sound params = { up } }
-      { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_up generic_menu_up_or_down_sound params = { Up } }
+      { pad_down generic_menu_up_or_down_sound params = { Down } }
     ]
     replace_handlers
   }
@@ -3463,8 +3463,8 @@ script edit_skater_info_menu id = edit_skater_anchor_middle
     event_handlers = [
       { pad_back generic_menu_pad_back_sound }
       { pad_back edit_skater_create_main_menu }
-      { pad_up generic_menu_up_or_down_sound params = { up } }
-      { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_up generic_menu_up_or_down_sound params = { Up } }
+      { pad_down generic_menu_up_or_down_sound params = { Down } }
     ]
   }
   AssignAlias id = edit_skater_info_vmenu alias = current_menu
@@ -3756,7 +3756,7 @@ script perform_skater_sexchange
     SetScreenElementProps { id = { skater_sex_value child = 2 } text = "Female" }
   endswitch
   if LevelIs load_skateshop
-    MakeSkaterGoto SkateshopAI params = { noSFX CAS_Screen }
+    MakeSkaterGoto SkateshopAI params = { NoSFX CAS_Screen }
   endif
 endscript
 script edit_skater_create_cas_menu
@@ -3994,8 +3994,8 @@ script edit_skater_create_scrolling_menu
     spacing_between = <spacing_between>
     event_handlers = [ { pad_up set_which_arrow params = { arrow = edit_skater_menu_up_arrow } }
       { pad_down set_which_arrow params = { arrow = edit_skater_menu_down_arrow } }
-      { pad_up generic_menu_up_or_down_sound params = { up } }
-      { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_up generic_menu_up_or_down_sound params = { Up } }
+      { pad_down generic_menu_up_or_down_sound params = { Down } }
       { pad_back generic_menu_pad_back_sound }
       { pad_back <pad_back_script> params = <pad_back_params> }
     ]
@@ -4638,7 +4638,7 @@ script edit_skater_menu_exit
       if IsTrue came_to_cas_menu_from_main_menu
         create_pre_cas_menu
       else
-        skater:obj_movetonode name = TRG_SS_SkaterChoosing orient
+        skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
         launch_ss_menu
       endif
     else
@@ -4725,7 +4725,7 @@ script edit_skater_info_unfocus rgba = [ 128 128 128 20 ]
   SetScreenElementProps { id = { <id> child = 0 } rgba = [ 88 105 112 128 ] }
 endscript
 script set_which_arrow
-  settags arrow_id = <arrow>
+  SetTags arrow_id = <arrow>
 endscript
 script menu_vert_blink_arrow menu_id = current_menu
   if not ObjectExists id = <id>
@@ -5052,7 +5052,7 @@ edit_skater_head_options = [
     is_visible_script2 = check_for_head_flags
     is_visible_params2 = { group = glasses_items }
     is_enabled_script = check_if_group_editable
-    is_enabled_params = { parts = [ glasses ] }
+    is_enabled_params = { parts = [ Glasses ] }
   }
   {
     text = 'Glasses Color'
@@ -5062,7 +5062,7 @@ edit_skater_head_options = [
     is_visible_script2 = check_for_head_flags
     is_visible_params2 = { group = glasses_items }
     is_enabled_script = check_if_part_colorable
-    is_enabled_params = { parts = [ glasses ] }
+    is_enabled_params = { parts = [ Glasses ] }
   }
 ]
 edit_skater_torso_options = [
@@ -5305,14 +5305,14 @@ edit_skater_pad_options = [
 ]
 edit_skater_secret_gear = [
   { text = 'O.D. Head' price = 400 flag = CAS_UNLOCK_02 desc_id = #"Officer Dick" part = skater_m_head male_ok = 1 }
-  { text = 'Ollie Head' price = 400 flag = CAS_UNLOCK_03 desc_id = ollie part = skater_m_head male_ok = 1 }
+  { text = 'Ollie Head' price = 400 flag = CAS_UNLOCK_03 desc_id = Ollie part = skater_m_head male_ok = 1 }
   { text = 'Kenny Head' price = 400 flag = CAS_UNLOCK_04 desc_id = Kenny part = skater_m_head male_ok = 1 }
   { text = 'Metal Head' price = 300 flag = CAS_UNLOCK_05 desc_id = #"Metal Head" part = skater_m_head male_ok = 1 }
   { text = 'Clown Head' price = 300 flag = CAS_UNLOCK_06 desc_id = Clown part = skater_m_head male_ok = 1 }
   { text = 'Eraser Hair' price = 250 flag = CAS_UNLOCK_07 desc_id = #"Eraser Head" part = skater_m_hair male_ok = 1 }
   { text = 'Clown Hair' price = 250 flag = CAS_UNLOCK_08 desc_id = #"Clown Hair" part = skater_m_hair male_ok = 1 }
   { text = 'Paper Bag' price = 300 flag = CAS_UNLOCK_09 desc_id = #"Paper Bag" part = hat male_ok = 1 female_ok = 1 }
-  { text = 'King Glasses' price = 100 flag = CAS_UNLOCK_10 desc_id = #"King Glasses" part = glasses male_ok = 1 female_ok = 1 }
+  { text = 'King Glasses' price = 100 flag = CAS_UNLOCK_10 desc_id = #"King Glasses" part = Glasses male_ok = 1 female_ok = 1 }
   { text = 'O.D. Shirt' price = 250 flag = CAS_UNLOCK_11 desc_id = #"Officer Dick Shirt" part = skater_m_torso male_ok = 1 }
   { text = 'Ollie Coat' price = 250 flag = CAS_UNLOCK_12 desc_id = #"Ollie Coat" part = skater_m_torso male_ok = 1 }
   { text = 'Kilt' price = 250 flag = CAS_UNLOCK_13 desc_id = Kilt part = skater_m_legs male_ok = 1 }

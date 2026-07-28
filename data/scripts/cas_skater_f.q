@@ -160,7 +160,7 @@ skater_f_torso = [
   {
     desc_id = None
     frontend_desc = 'None'
-    only_with = [ jenna ]
+    only_with = [ JENNA ]
     no_color
   }
   {

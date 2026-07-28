@@ -146,7 +146,7 @@ script new_screen_element_test
   PopMemProfile
 endscript
 script handle_start_pressed
-  root_window:gettags
+  root_window:GetTags
   if ChecksumEquals a = <menu_state> b = on
     if GotParam pause_controller
       if not ( <pause_controller> = -1 )
@@ -290,8 +290,8 @@ script make_new_menu { menu_title = "Paused"
       internal_scale = <internal_scale>
       internal_just = <internal_just>
        <dont_allow_wrap>
-      event_handlers = [ { pad_up generic_menu_up_or_down_sound params = { up } }
-        { pad_down generic_menu_up_or_down_sound params = { down } }
+      event_handlers = [ { pad_up generic_menu_up_or_down_sound params = { Up } }
+        { pad_down generic_menu_up_or_down_sound params = { Down } }
         { pad_back generic_menu_pad_back_sound }
       ]
     }
@@ -312,8 +312,8 @@ script make_new_menu { menu_title = "Paused"
       internal_scale = <internal_scale>
       internal_just = <internal_just>
        <dont_allow_wrap>
-      event_handlers = [ { pad_up generic_menu_up_or_down_sound params = { up } }
-        { pad_down generic_menu_up_or_down_sound params = { down } }
+      event_handlers = [ { pad_up generic_menu_up_or_down_sound params = { Up } }
+        { pad_down generic_menu_up_or_down_sound params = { Down } }
         { pad_back <pad_back_script> }
       ]
     }
@@ -366,8 +366,8 @@ script make_new_sprite_menu menu_id = main_menu_anchor vmenu_id = main_menu pad_
     internal_just = [ left top ]
     event_handlers = [ { pad_back generic_menu_pad_back_sound }
       { pad_back <pad_back_script> params = <pad_back_params> }
-      { pad_up generic_menu_up_or_down_sound params = { up } }
-      { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_up generic_menu_up_or_down_sound params = { Up } }
+      { pad_down generic_menu_up_or_down_sound params = { Down } }
     ]
   }
   AssignAlias id = <menu_id> alias = current_menu_anchor
@@ -542,7 +542,7 @@ script create_pause_menu
   endif
   if InNetGame
     if LocalSkaterExists
-      skater:netdisableplayerinput
+      skater:NetDisablePlayerInput
     endif
   else
     if CustomParkMode editing
@@ -573,7 +573,7 @@ script create_pause_menu
     create_helper_text generic_helper_text_no_back
   endif
   kill_start_key_binding
-  if GameModeEquals is_singlesession
+  if GameModeEquals Is_SingleSession
     if GoalManager_GoalIsActive name = TrickAttack
       make_sprite_menu_item text = "Continue" id = menu_continue pad_choose_script = handle_start_pressed
       make_text_sprite texture = PA_continue parent = menu_continue
@@ -631,7 +631,7 @@ script create_pause_menu
     make_sprite_menu_item text = "View Goals" id = menu_view_goals pad_choose_script = create_view_goals_menu
     make_text_sprite texture = PA_view parent = menu_view_goals
   else
-    if GameModeEquals is_singlesession
+    if GameModeEquals Is_SingleSession
       make_sprite_menu_item text = "Retry High Score" id = menu_retry_high_score pad_choose_script = change_gamemode_singlesession_menu
       make_text_sprite texture = PA_rescore parent = menu_retry_high_score
     endif
@@ -720,7 +720,7 @@ script create_pause_menu
           pad_choose_params = { menu_select_script = set_custom_restart }
         }
         make_text_sprite texture = PA_set_cust parent = menu_set_custom
-        if skater:setcustomrestart
+        if skater:SetCustomRestart
           make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
           make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
         endif
@@ -728,10 +728,10 @@ script create_pause_menu
     endif
   else
     if not GoalManager_HasActiveGoals count_all
-      if not skater:playerinputisdisabled
+      if not skater:PlayerInputIsDisabled
         make_sprite_menu_item text = "Set Cust Restart" id = menu_set_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = set_custom_restart }
         make_text_sprite texture = PA_set_cust parent = menu_set_custom
-        if skater:setcustomrestart
+        if skater:SetCustomRestart
           make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
           make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
         endif
@@ -815,7 +815,7 @@ script exit_pause_menu menu_id = current_menu_anchor
   Debounce X time = 0.3
   if InNetGame
     if LocalSkaterExists
-      skater:netenableplayerinput
+      skater:NetEnablePlayerInput
     endif
   endif
   if not RunningReplay
@@ -892,10 +892,10 @@ script kill_pause_menu_cams
   kill_proset_cams
 endscript
 script set_custom_restart
-  skater:setcustomrestart Set
+  skater:SetCustomRestart Set
 endscript
 script skip_to_custom_restart
-  skater:skiptocustomrestart
+  skater:SkipToCustomRestart
 endscript
 script launch_restart_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_restart_menu
@@ -1083,8 +1083,8 @@ script create_gap_menu
     event_handlers = [
       { pad_up set_which_arrow params = { arrow = view_gaps_menu_up_arrow } }
       { pad_down set_which_arrow params = { arrow = view_gaps_menu_down_arrow } }
-      { pad_up generic_menu_up_or_down_sound params = { up } }
-      { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_up generic_menu_up_or_down_sound params = { Up } }
+      { pad_down generic_menu_up_or_down_sound params = { Down } }
       { pad_back generic_menu_pad_back_sound }
     ]
   }
@@ -1173,10 +1173,10 @@ endscript
 script preview_gap
   SetProps rgba = [ 127 102 0 100 ]
   DoMorph time = 0.1 scale = 0.85
-  gettags
+  GetTags
 endscript
 script gap_menu_focus
-  gettags
+  GetTags
   if ( <times> > 0 )
     rgba = [ 99 121 6 128 ]
   else
@@ -1213,13 +1213,13 @@ script gap_menu_focus
       rgba = [ 128 128 128 85 ]
     }
   endif
-  gap_vmenu:gettags
+  gap_vmenu:GetTags
   if GotParam arrow_id
     menu_vert_blink_arrow { id = <arrow_id> }
   endif
 endscript
 script gap_menu_unfocus
-  gettags
+  GetTags
   if ( <times> > 0 )
     rgba = [ 25 83 67 128 ]
   else
@@ -1459,7 +1459,7 @@ endscript
 script bootstrap_quit
   dialog_box_exit
   SetButtonEventMappings block_menu_input
-  skater:disableplayerinput
+  skater:DisablePlayerInput
   PauseGame
   Cleanup
   DisplayLoadingScreen "loadscrn_marketing"
@@ -1795,8 +1795,8 @@ script level_select_create_menu_block
     just = [ left top ]
     internal_just = [ left center ]
     event_handlers = [ { pad_back <pad_back_script> params = { <...> } }
-      { pad_up generic_menu_up_or_down_sound params = { up } }
-      { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_up generic_menu_up_or_down_sound params = { Up } }
+      { pad_down generic_menu_up_or_down_sound params = { Down } }
       { pad_back generic_menu_pad_back_sound }
     ]
     padding_scale = 0.9
@@ -2389,7 +2389,7 @@ script level_select_menu_exit
   endif
 endscript
 script level_select_menu_focus
-  gettags
+  GetTags
   SetScreenElementProps {
     id = { <id> child = 0 }
     rgba = [ 128 118 0 128 ]
@@ -2912,7 +2912,7 @@ script level_select_animate_info
   DoMorph scale = 1
 endscript
 script level_select_menu_unfocus
-  gettags
+  GetTags
   SetScreenElementProps {
     id = { <id> child = 0 }
     rgba = <rgba>
@@ -3626,7 +3626,7 @@ script create_options_score_display_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script toggle_show_name_option
-  gettags
+  GetTags
   GetPreferenceString pref_type = network show_names
   if ( <ui_string> = "Off" )
     text = "On"
@@ -3640,7 +3640,7 @@ script toggle_show_name_option
   endif
 endscript
 script toggle_auto_brake_option
-  gettags
+  GetTags
   GetPreferenceString pref_type = network auto_brake
   if ( <ui_string> = "Off" )
     text = "On"
@@ -3897,7 +3897,7 @@ script create_cheats_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script cheats_menu_change_flag
-  gettags
+  GetTags
   if GetGlobalFlag flag = <flag>
     UnSetGlobalFlag flag = <flag>
     toggle_menu_item_off id = <id>
@@ -3907,7 +3907,7 @@ script cheats_menu_change_flag
   endif
 endscript
 script cheats_menu_check_flag
-  gettags
+  GetTags
   if GetGlobalFlag flag = <flag>
     toggle_menu_item_on id = <id>
   else
@@ -3915,7 +3915,7 @@ script cheats_menu_check_flag
   endif
 endscript
 script cheats_menu_check_level_lock
-  gettags
+  GetTags
   if IntegerEquals a = all_levels_unlocked b = 1
     toggle_menu_item_on id = <id>
   else
@@ -3923,7 +3923,7 @@ script cheats_menu_check_level_lock
   endif
 endscript
 script cheats_menu_change_level_lock
-  gettags
+  GetTags
   if IntegerEquals a = all_levels_unlocked b = 1
     toggle_menu_item_off id = <id>
     Change all_levels_unlocked = 0
@@ -3936,7 +3936,7 @@ script cheats_menu_change_level_lock
   pulse_item
 endscript
 script cheats_menu_check_cool_special
-  gettags
+  GetTags
   if IntegerEquals a = COOL_SPECIAL_TRICKS b = 1
     toggle_menu_item_on id = <id>
   else
@@ -3944,7 +3944,7 @@ script cheats_menu_check_cool_special
   endif
 endscript
 script cheats_menu_change_cool_special
-  gettags
+  GetTags
   if IntegerEquals a = COOL_SPECIAL_TRICKS b = 1
     toggle_menu_item_off id = <id>
     Change COOL_SPECIAL_TRICKS = 0
@@ -3966,9 +3966,9 @@ script cheats_menu_UnlockAllGoals
   pulse_item
 endscript
 script cheats_menu_score5mil
-  skater:settrickname "You cheat like Kurt"
-  skater:settrickscore 5000000
-  skater:display
+  skater:SetTrickName "You cheat like Kurt"
+  skater:SetTrickScore 5000000
+  skater:Display
 endscript
 script cheats_menu_turnPro
   GoalManager_TurnPro
@@ -4657,8 +4657,8 @@ script create_playlist_menu
       { pad_up set_which_arrow params = { arrow = view_gaps_menu_up_arrow } }
       { pad_down set_which_arrow params = { arrow = view_gaps_menu_down_arrow } }
       { pad_back generic_menu_pad_back params = { <...> } }
-      { pad_up generic_menu_up_or_down_sound params = { up } }
-      { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_up generic_menu_up_or_down_sound params = { Up } }
+      { pad_down generic_menu_up_or_down_sound params = { Down } }
       { pad_back generic_menu_pad_back_sound }
     ]
   }
@@ -5026,7 +5026,7 @@ script playlist_menu_add_item highlight_bar_scale = (1.9, 1) highlight_bar_pos =
   }
 endscript
 script change_track_state
-  gettags
+  GetTags
   if TrackEnabled <index>
     ChangeTrackState <index> off
     PauseMusic 1
@@ -5037,7 +5037,7 @@ script change_track_state
   endif
 endscript
 script preview_music_track
-  gettags
+  GetTags
   if not TrackEnabled <index>
     ChangeTrackState <index> on
     SetScreenElementProps id = { <id> child = 1 } text = "on"
@@ -5057,18 +5057,18 @@ script preview_music_track
   endif
 endscript
 script playlist_menu_focus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
   SetScreenElementProps { id = { <id> child = 1 } rgba = [ 128 118 0 128 ] }
   SetScreenElementProps { id = { <id> child = 2 } rgba = [ 128 128 128 50 ] }
-  gap_vmenu:gettags
+  gap_vmenu:GetTags
   if GotParam arrow_id
     menu_vert_blink_arrow { id = <arrow_id> }
   endif
   generic_menu_update_arrows menu_id = gap_vmenu up_arrow_id = view_gaps_menu_up_arrow down_arrow_id = view_gaps_menu_down_arrow
 endscript
 script playlist_menu_unfocus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
   RunScriptOnScreenElement id = { <id> child = 1 } do_scale_down
   SetScreenElementProps { id = { <id> child = 2 } rgba = [ 128 128 128 0 ] }
@@ -5091,7 +5091,7 @@ script skip_track_unfocus
   PauseMusic 1
 endscript
 script menu_sound_level_focus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
   RunScriptOnScreenElement id = { <id> child = 2 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
   SetScreenElementProps { id = { <id> child = 1 } rgba = [ 128 128 128 50 ] }
@@ -5112,7 +5112,7 @@ script menu_sound_level_focus
   endif
 endscript
 script menu_sound_level_unfocus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
   RunScriptOnScreenElement id = { <id> child = 2 } do_scale_down
   SetScreenElementProps { id = { <id> child = 1 } rgba = [ 128 128 128 0 ] }
@@ -5120,7 +5120,7 @@ script menu_sound_level_unfocus
   SetScreenElementProps { id = { <id> child = 4 } rgba = [ 128 128 128 0 ] }
 endscript
 script menu_turn_music_down
-  gettags
+  GetTags
   GetValueFromVolume cdvol
   if ( <value> > 0 )
     SetScreenElementProps id = { <id> child = 4 } rgba = [ 128 128 128 128 ]
@@ -5135,7 +5135,7 @@ script menu_turn_music_down
   endif
 endscript
 script menu_turn_music_up
-  gettags
+  GetTags
   GetValueFromVolume cdvol
   if ( <value> < 10 )
     SetScreenElementProps id = { <id> child = 3 } rgba = [ 128 128 128 128 ]
@@ -5152,7 +5152,7 @@ script menu_turn_music_up
   endif
 endscript
 script menu_turn_sound_down
-  gettags
+  GetTags
   GetValueFromVolume sfxvol
   if ( <value> > 0 )
     SetScreenElementProps id = { <id> child = 4 } rgba = [ 128 128 128 128 ]
@@ -5166,7 +5166,7 @@ script menu_turn_sound_down
   endif
 endscript
 script menu_turn_sound_up
-  gettags
+  GetTags
   GetValueFromVolume sfxvol
   if ( <value> < 10 )
     SetScreenElementProps id = { <id> child = 3 } rgba = [ 128 128 128 128 ]
@@ -5436,7 +5436,7 @@ script control_change_values
       SetScreenElementProps id = menu_spintaps_value text = "on"
     endif
   endif
-  gettags
+  GetTags
   if GotParam left
     RunScriptOnScreenElement id = { <id> child = 3 } menu_blink_arrow
   else
@@ -5573,7 +5573,7 @@ script control_config_show_values
   }
 endscript
 script controller_config_focus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
   RunScriptOnScreenElement id = { <id> child = 2 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
   SetScreenElementProps { id = { <id> child = 1 } rgba = [ 128 128 128 50 ] }
@@ -5581,7 +5581,7 @@ script controller_config_focus
   SetScreenElementProps { id = { <id> child = 4 } rgba = [ 128 128 128 85 ] }
 endscript
 script controller_config_unfocus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
   RunScriptOnScreenElement id = { <id> child = 2 } do_scale_down
   SetScreenElementProps { id = { <id> child = 1 } rgba = [ 128 128 128 0 ] }
@@ -5780,7 +5780,7 @@ script animate_movie_in
   SetButtonEventMappings unblock_menu_input
 endscript
 script animate_movie_out
-  gettags
+  GetTags
   SetButtonEventMappings block_menu_input
   SetScreenElementProps id = root_window tags = { menu_state = entering }
   DoMorph time = 0 scale = 190 alpha = 1
@@ -5791,7 +5791,7 @@ script animate_movie_out
   SetButtonEventMappings unblock_menu_input
 endscript
 script movie_menu_focus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
   generic_menu_update_arrows {
     up_arrow_id = movie_up_arrow
@@ -6075,7 +6075,7 @@ script view_goals_menu_set_color
     rgba = <rgba>
     text = <text>
   }
-   <id>:gettags
+   <id>:GetTags
   if GotParam win_record
     SetScreenElementProps {
       id = { <id> child = 1 }
@@ -6090,7 +6090,7 @@ script view_goals_menu_focus_locked
     up_arrow_id = view_goals_menu_up_arrow
     down_arrow_id = view_goals_menu_down_arrow
   }
-  gettags
+  GetTags
   view_goals_menu_set_color id = <id> rgba = [ 67 62 58 128 ]
   RunScriptOnScreenElement id = { <id> child = 0 } do_random_effect
   if GotParam goal_id
@@ -6098,7 +6098,7 @@ script view_goals_menu_focus_locked
   endif
 endscript
 script view_goals_menu_unfocus_locked
-  gettags
+  GetTags
   generic_menu_pad_up_down_sound
   KillSpawnedScript name = do_random_effect
   view_goals_menu_set_color id = <id> rgba = [ 47 42 38 128 ]
@@ -6112,13 +6112,13 @@ script view_goals_menu_focus_unlocked
     up_arrow_id = view_goals_menu_up_arrow
     down_arrow_id = view_goals_menu_down_arrow
   }
-  gettags
+  GetTags
   view_goals_menu_set_color id = <id> rgba = [ 127 102 0 128 ]
   RunScriptOnScreenElement id = { <id> child = 0 } do_random_effect
   view_goals_menu_play_preview_cam <...>
 endscript
 script view_goals_menu_unfocus_unlocked
-  gettags
+  GetTags
   generic_menu_pad_up_down_sound
   KillSpawnedScript name = do_random_effect
   view_goals_menu_set_color id = <id> rgba = [ 88 105 112 128 ]
@@ -6130,12 +6130,12 @@ script view_goals_menu_focus_beaten
     up_arrow_id = view_goals_menu_up_arrow
     down_arrow_id = view_goals_menu_down_arrow
   }
-  gettags
+  GetTags
   view_goals_menu_set_color id = <id> rgba = [ 99 121 6 128 ]
   RunScriptOnScreenElement id = { <id> child = 0 } do_random_effect
 endscript
 script view_goals_menu_unfocus_beaten
-  gettags
+  GetTags
   generic_menu_pad_up_down_sound
   KillSpawnedScript name = do_random_effect
   view_goals_menu_set_color id = <id> rgba = [ 25 83 67 128 ]
@@ -6155,7 +6155,7 @@ endscript
 script view_goals_menu_play_preview_cam
   GoalManager_GetGoalParams name = <goal_id>
   if IsAlive name = <trigger_obj_id>
-     <trigger_obj_id>:obj_getid
+     <trigger_obj_id>:Obj_GetId
      <targetId> = <objId>
     GetSkaterID
     PlaySkaterCamAnim { name = <goal_id>
@@ -6178,7 +6178,7 @@ script view_goals_menu_kill_preview_cam
 endscript
 script view_goals_menu_exit
   if ScreenElementExists id = view_goals_vmenu
-    view_goals_vmenu:gettags
+    view_goals_vmenu:GetTags
     if GotParam current_cam_anim
       GetSkaterID
       KillSkaterCamAnim skater = <objId> name = <current_cam_anim>
@@ -6216,7 +6216,7 @@ script view_goals_menu_remove_textures_from_vram
 endscript
 stat_names = [ { name = air string = "Air" description = "Your jump height out of a half pipe" }
   { name = hangtime string = "Hangtime" description = "How long you stay in the air" }
-  { name = ollie string = "Ollie" description = "How high you jump on flat ground" }
+  { name = Ollie string = "Ollie" description = "How high you jump on flat ground" }
   { name = speed string = "Speed" description = "Your top speed on the ground" }
   { name = spin string = "Spin" description = "How fast you spin in the air" }
   { name = #"switch" string = "Switch" description = "When maxed out, you skate equally well switch and regular" }
@@ -6621,7 +6621,7 @@ script stats_menu_focus
     highlight_rgba = [ 128 128 128 128 ]
     locked_highlight_rgba = [ 128 75 75 128 ]
   }
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up
   if ObjectExists id = stat_point_description
     SetScreenElementProps {
@@ -6632,11 +6632,11 @@ script stats_menu_focus
 endscript
 script stats_menu_unfocus
   stats_menu_update_row name = <name> row_id = <row_id>
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
 endscript
 script stats_menu_done_focus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up
   if ObjectExists id = stat_point_description
     SetScreenElementProps {
@@ -6646,7 +6646,7 @@ script stats_menu_done_focus
   endif
 endscript
 script stats_menu_done_unfocus
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
 endscript
 script stats_menu_change_other_skater_stats
@@ -6680,8 +6680,8 @@ script stats_menu_change_other_skater_stats
     SetSkaterProfileInfoByName name = <name> params = { air = ( <stat_value> + <Change> ) }
   case hangtime
     SetSkaterProfileInfoByName name = <name> params = { hangtime = ( <stat_value> + <Change> ) }
-  case ollie
-    SetSkaterProfileInfoByName name = <name> params = { ollie = ( <stat_value> + <Change> ) }
+  case Ollie
+    SetSkaterProfileInfoByName name = <name> params = { Ollie = ( <stat_value> + <Change> ) }
   case speed
     SetSkaterProfileInfoByName name = <name> params = { speed = ( <stat_value> + <Change> ) }
   case spin
@@ -7157,7 +7157,7 @@ script menu_onscreen menu_id = current_menu_anchor
     DoMorph pos = <pos>
   endif
   SetProps just = [ center center ]
-  gettags
+  GetTags
   if GotParam focus_child
     FireEvent type = focus target = <menu_id> data = { child_id = <focus_child> }
   else
@@ -7171,7 +7171,7 @@ script animate_out menu_id = current_menu_anchor
   PlaySound AnimateOut
   SetButtonEventMappings block_menu_input
   SetScreenElementProps id = root_window tags = { menu_state = leaving }
-  gettags
+  GetTags
   SetProps just = [ center center ]
   DoMorph time = 0 scale = 1.0
   DoMorph time = 0.07 scale = 1.3
@@ -7185,7 +7185,7 @@ endscript
 script menu_offscreen
   SetScreenElementProps id = root_window tags = { menu_state = off }
   SetScreenElementLock id = root_window off
-  gettags
+  GetTags
   FireEvent type = unfocus target = <id>
   DestroyScreenElement id = <id> recurse
 endscript
@@ -7572,7 +7572,7 @@ endscript
 script sprite_focus
   SetProps rgba = [ 127 102 0 128 ]
   SetProps blur_effect
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } scale_sprite_up
   RunScriptOnScreenElement id = <id> do_blur_effect
   SetScreenElementProps {
@@ -7584,7 +7584,7 @@ script sprite_unfocus
   generic_menu_pad_up_down_sound
   SetProps rgba = [ 88 105 112 128 ]
   SetProps no_blur_effect
-  gettags
+  GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } scale_sprite_down
   SetScreenElementProps {
     id = { <id> child = 0 }
@@ -7598,7 +7598,7 @@ script scale_sprite_down
   DoMorph time = 0.0 scale = 0
 endscript
 script do_scale_up rgba = [ 127 102 0 100 ]
-  gettags
+  GetTags
   SetProps rgba = <rgba>
   RunScriptOnScreenElement id = <id> do_random_effect params = { id = <id> }
 endscript
@@ -7611,11 +7611,11 @@ script do_scale_down rgba = [ 88 105 112 128 ]
   SetProps rgba = <rgba>
 endscript
 script do_random_effect
-  gettags
+  GetTags
   SetTags random_effect_done = 0
   RunScriptOnScreenElement id = <id> do_random_effect2
   begin
-    gettags
+    GetTags
     if ( <random_effect_done> = 1 )
       SetTags random_effect_done = 0
       RunScriptOnScreenElement id = <id> do_random_effect2 params = {
@@ -7965,10 +7965,10 @@ script generic_menu_pad_choose_sound
   PlaySound MenuSelect vol = 100
 endscript
 script generic_menu_up_or_down_sound menu_id = current_menu
-  if GotParam up
+  if GotParam Up
     PlaySound MenuUp vol = 100
   endif
-  if GotParam down
+  if GotParam Down
     PlaySound MenuDown vol = 100
   endif
 endscript

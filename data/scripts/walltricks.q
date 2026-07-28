@@ -8,13 +8,13 @@ script WallRide
   Vibrate actuator = 1 percent = 40
   Obj_ClearFlag FLAG_SKATER_MANUALCHEESE
   if GotParam left
-    move X = 36
+    Move X = 36
   else
-    move X = -36
+    Move X = -36
   endif
   if BailIsOn
     SetState air
-    goto DoingTrickBail
+    Goto DoingTrickBail
   endif
   BailOff
   if GetGlobalFlag flag = WALLPLANT_INPUT_FLAG
@@ -30,62 +30,62 @@ script WallRide
       SetTrickName 'BS Wallride'
       PlayAnim Anim = WallRideBackTrans BlendPeriod = 0.0
       WaitAnimFinished
-      PlayAnim Anim = WallRideBackLoop BlendPeriod = 0.1 Cycle
+      PlayAnim Anim = WallRideBackLoop BlendPeriod = 0.1 cycle
     else
       SetTrickName 'FS Wallride'
       PlayAnim Anim = WallRideFrontTrans BlendPeriod = 0.0
       WaitAnimFinished
-      PlayAnim Anim = WallRideFrontLoop BlendPeriod = 0.1 Cycle
+      PlayAnim Anim = WallRideFrontLoop BlendPeriod = 0.1 cycle
     endif
   else
     if Flipped
       SetTrickName 'FS Wallride'
       PlayAnim Anim = WallRideFrontTrans BlendPeriod = 0.0
       WaitAnimFinished
-      PlayAnim Anim = WallRideFrontLoop BlendPeriod = 0.1 Cycle
+      PlayAnim Anim = WallRideFrontLoop BlendPeriod = 0.1 cycle
     else
       SetTrickName 'BS Wallride'
       PlayAnim Anim = WallRideBackTrans BlendPeriod = 0.0
       WaitAnimFinished
-      PlayAnim Anim = WallRideBackLoop BlendPeriod = 0.1 Cycle
+      PlayAnim Anim = WallRideBackLoop BlendPeriod = 0.1 cycle
     endif
   endif
-  display
+  Display
 endscript
 script WallrideEnd
   BlendPeriodOut 0
   SetException Ex = Landed Scr = Land
   ClearExceptions
-  if Inair
-    goto Airborne
+  if InAir
+    Goto Airborne
   endif
 endscript
 script Wallie
   DoNextTrick
-  Vibrate actuator = 1 percent = 50 Duration = 0.1
-  PlayAnim Anim = ollie BlendPeriod = 0.0
+  Vibrate actuator = 1 percent = 50 duration = 0.1
+  PlayAnim Anim = Ollie BlendPeriod = 0.0
   SetTrickName "Wallie"
   SetTrickScore 250
   InAirExceptions
-  display
+  Display
   #"Jump"
   WaitAnimWhilstChecking
-  goto Airborne StretchTime = 10 BlendPeriod = 0
+  Goto Airborne StretchTime = 10 BlendPeriod = 0
 endscript
 WallRideTricks =
-[ { Trigger = { TapTwiceRelease up X 500 } Scr = Trick_WallPlant } ]
+[ { Trigger = { TapTwiceRelease Up X 500 } Scr = Trick_WallPlant } ]
 WallRideTricks_Single =
-[ { Trigger = { TapOnceRelease up X 500 } Scr = Trick_WallPlant } ]
+[ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
 script Trick_WallPlant
   InAirExceptions
-  Vibrate actuator = 1 percent = 50 Duration = 0.1
+  Vibrate actuator = 1 percent = 50 duration = 0.1
   PlayAnim Anim = Boneless BlendPeriod = 0.0
   SetTrickName "Wallplant"
   SetTrickScore 500
-  display
+  Display
   #"Jump" BonelessHeight
   WaitAnimWhilstChecking
-  goto Airborne StretchTime = 10 BlendPeriod = 0
+  Goto Airborne StretchTime = 10 BlendPeriod = 0
 endscript
 script WallRideBail
 endscript

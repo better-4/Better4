@@ -46,7 +46,7 @@ script QuitToDashboard
   switch <Platform>
   case PS2
     ResetPS2
-  case XBox
+  case Xbox
     if IsDemo
       DisplayEndScreen "DemoScreen1"
     endif
@@ -188,12 +188,12 @@ script load_loaded_created_park
   if ( still_in_net_area = 1 )
     back_to_net_host_options
   else
-    if LevelIs load_sk4ed_gameplay
+    if LevelIs load_Sk4Ed_gameplay
       if ( created_park_warning = 1 )
         Change created_park_warning = 0
-        level_select_change_level level = load_sk4ed_gameplay <...> show_warning
+        level_select_change_level level = load_Sk4Ed_gameplay <...> show_warning
       else
-        level_select_change_level level = load_sk4ed_gameplay <...>
+        level_select_change_level level = load_Sk4Ed_gameplay <...>
       endif
     else
       launch_level_select_menu
@@ -205,7 +205,7 @@ script back_to_net_host_options
   prefs = network
   field = "level"
   string = "Created Park"
-  checksum = load_sk4ed_gameplay
+  checksum = load_Sk4Ed_gameplay
   select_host_option <...>
   Change still_in_net_area = 0
   KillSkaterCamAnim all
@@ -238,7 +238,7 @@ script mem_card_message_pause
   begin
     if CustomParkMode editing
       if ScreenElementExists id = controller_unplugged_dialog_anchor
-        Goto NullScript
+        Goto nullscript
       endif
     endif
     if not GotParam NoCardRemovalCheck
@@ -396,7 +396,7 @@ script create_files_menu pos_tweak = (-20, -45)
   }
   set_sub_bg pos = ( (207, 90) + <pos_tweak> )
   if GotParam Save
-     <icon_texture> = PA_Save
+     <icon_texture> = PA_save
   else
      <icon_texture> = PA_Load
   endif
@@ -443,12 +443,12 @@ script create_files_menu pos_tweak = (-20, -45)
   if GotParam DirectoryListing
     if GotParam Save
       if GotParam add_createnew_option
-        ForEachIn <DirectoryListing> Do = files_menu_add_item params = { pad_choose_script = OKToOverwrite MenuFileType = <FileType> Save }
+        ForEachIn <DirectoryListing> do = files_menu_add_item params = { pad_choose_script = OKToOverwrite MenuFileType = <FileType> Save }
       else
-        ForEachIn <DirectoryListing> Do = files_menu_add_item params = { pad_choose_script = OKToOverwrite MenuFileType = <FileType> Save ListAllTypes }
+        ForEachIn <DirectoryListing> do = files_menu_add_item params = { pad_choose_script = OKToOverwrite MenuFileType = <FileType> Save ListAllTypes }
       endif
     else
-      ForEachIn <DirectoryListing> Do = files_menu_add_item params = { pad_choose_script = Load }
+      ForEachIn <DirectoryListing> do = files_menu_add_item params = { pad_choose_script = Load }
     endif
   else
     if not GotParam Save
@@ -467,7 +467,7 @@ script create_files_menu pos_tweak = (-20, -45)
   SetScreenElementProps id = files_scrolling_menu reset_window_top
   CheckForCardRemoval menu_id = files_menu
 endscript
-script files_menu_add_item pad_choose_script = NullScript font = dialog icon_alpha = 1.0
+script files_menu_add_item pad_choose_script = nullscript font = dialog icon_alpha = 1.0
   if GotParam Save
     if not GotParam ListAllTypes
       if not ( <MenuFileType> = <file_type> )
@@ -479,7 +479,7 @@ script files_menu_add_item pad_choose_script = NullScript font = dialog icon_alp
   if IsNGC
     heap = topdown
   else
-    heap = #"default"
+    heap = #"Default"
   endif
   if IsNGC
     CreateScreenElement {
@@ -514,8 +514,8 @@ script files_menu_add_item pad_choose_script = NullScript font = dialog icon_alp
   RemoveParameter Day
   RemoveParameter Hour
   RemoveParameter Minutes
-  RemoveParameter Seconds
-   <container_id>:settags <...>
+  RemoveParameter seconds
+   <container_id>:SetTags <...>
   if IsXBOX
     if GotParam Corrupt
       GetFileTypeName file_type = <file_type>
@@ -547,7 +547,7 @@ script files_menu_add_item pad_choose_script = NullScript font = dialog icon_alp
     switch <Platform>
     case PS2
       FormatText TextName = file_size_text '%d KB' d = ( <total_file_size> -1 )
-    case XBox
+    case Xbox
       FormatText TextName = file_size_text '%d kbs' d = <total_file_size>
     case NGC
       FormatText TextName = file_size_text '%d kbs' d = <total_file_size>
@@ -698,7 +698,7 @@ script files_menu_add_bottom_bar
   if GotParam Save
     GetMemCardSpaceRequired <FileType>
     switch <Platform>
-    case XBox
+    case Xbox
     case NGC
       FormatText {
         TextName = LeftText
@@ -716,7 +716,7 @@ script files_menu_add_bottom_bar
   DisableReset
   GetMemCardSpaceAvailable
   switch <Platform>
-  case XBox
+  case Xbox
     if ( <SpaceAvailable> > 49999 )
       MiddleText = 'Free: 50000+'
     else
@@ -843,7 +843,7 @@ endscript
 script files_menu_focus
   GetTags
    <files_menu_file_info_text> = ''
-  if not GotParam Index
+  if not GotParam index
     GetSummaryInfo <file_type>
   endif
   if not ( ( GotParam BadVersion ) or ( GotParam Corrupt ) )
@@ -855,7 +855,7 @@ script files_menu_focus
         p = ( ( 100 * <NumGoalsBeaten> ) / TotalGoals )
         g = <NumGoalsBeaten>
         t = TotalGoals
-        m = <Cash>
+        m = <cash>
       }
     case NetworkSettings
       FormatText {
@@ -978,7 +978,7 @@ script remove_files_menu_textures_from_vram
 endscript
 script files_menu_delete
   GetTags
-  if GotParam Index
+  if GotParam index
     if GotParam Save
       memcard_menus_cleanup
       GetFileTypeName file_type = <file_type>
@@ -1465,7 +1465,7 @@ script MaybeSaveCustomSkater
       memcard_menus_cleanup
       Change DoneScript = PostAutoSaveCas
       launch_files_menu Save FileType = Cas
-      Goto NullScript
+      Goto nullscript
     endif
   endif
 endscript
@@ -1587,7 +1587,7 @@ script auto_load
       Goto mcmess_DamagedCard
     else
       mem_card_message_pause NoTimerReset NoCardRemovalCheck
-      Goto mcmess_ErrorNotFormatted params = { QuitText = 'Continue without formatting' BackScript = NullScript }
+      Goto mcmess_ErrorNotFormatted params = { QuitText = 'Continue without formatting' BackScript = nullscript }
     endif
   endif
   DisableReset

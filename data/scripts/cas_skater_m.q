@@ -158,7 +158,7 @@ appearance_steamer =
   board = { desc_id = #"Default" }
   deck_graphic = { desc_id = #"Steamer 1" }
   griptape = { desc_id = #"Generic 2" }
-  skater_f_torso = { desc_id = #"Steamer Shirt" }
+  skater_f_torso = { desc_id = #"Steamer shirt" }
   skater_f_legs = { desc_id = #"Steamer Pants" }
   shoes = { desc_id = #"Steamer Shoe" }
   body_shape = steamer_scale_info
@@ -186,7 +186,7 @@ appearance_eddie =
 }
 appearance_jango =
 {
-  body = { desc_id = jango }
+  body = { desc_id = JANGO }
   board = { desc_id = Hover }
   deck_graphic = { desc_id = #"Jango 1" }
 }
@@ -206,7 +206,7 @@ appearance_vallely =
 }
 appearance_jenna =
 {
-  body = { desc_id = Jenna }
+  body = { desc_id = JENNA }
   board = { desc_id = Banana }
   skater_f_torso = { desc_id = #"Tube Top" }
   skater_f_legs = { desc_id = #"Shorts Daisy" }
@@ -219,7 +219,7 @@ appearance_custom_skater_male =
   skater_m_head = { desc_id = #"Light Skin 4" }
   skater_m_hair = { desc_id = #"Buzzed Dark" }
   skater_m_jaw = { desc_id = #"Combo 5" }
-  skater_m_torso = { desc_id = tanktop }
+  skater_m_torso = { desc_id = Tanktop }
   skater_m_legs = { desc_id = #"Cargo Pants" h = 30 s = 20 v = 30 use_default_hsv = 0 }
   skater_m_socks = { desc_id = Medium }
   shoes = { desc_id = #"Koston Shoe" }
@@ -232,7 +232,7 @@ appearance_custom_skater_male =
 appearance_custom_skater_female =
 {
   skater_f_head = { desc_id = #"Tan Skin 5" }
-  skater_f_hair = { desc_id = #"thin long dark" }
+  skater_f_hair = { desc_id = #"Thin Long Dark" }
   body = { desc_id = FemaleBody3 }
   board = { desc_id = #"Default" }
   deck_graphic = { desc_id = #"CAS 1" }
@@ -240,10 +240,10 @@ appearance_custom_skater_female =
   left_bicep_tattoo = { desc_id = #"Tattoo 3" }
   right_bicep_tattoo = { desc_id = #"Tattoo 3" }
   chest_tattoo = { desc_id = #"Tattoo 13" }
-  skater_f_torso = { desc_id = #"tanktop short" }
+  skater_f_torso = { desc_id = #"Tanktop short" }
   accessories = { desc_id = #"bracelet 4" }
-  skater_f_legs = { desc_id = #"ankle Pants" }
-  skater_f_socks = { desc_id = ankle }
+  skater_f_legs = { desc_id = #"Ankle Pants" }
+  skater_f_socks = { desc_id = Ankle }
   shoes = { desc_id = #"Burnquist Shoe" }
   body_shape = female_scale_info
 }
@@ -361,13 +361,13 @@ body = [
     no_scaling_allowed
   }
   {
-    desc_id = jango
+    desc_id = JANGO
     frontend_desc = 'Jango'
     mesh = "models/skater_secret/skater_Jango.skin"
     no_scaling_allowed
   }
   {
-    desc_id = Jenna
+    desc_id = JENNA
     frontend_desc = 'Jenna'
     mesh = "models/skater_secret/skater_jenna.skin"
   }
@@ -684,7 +684,7 @@ skater_m_head = [
     mesh = "models/skater_m/head_officer.skin"
     script disqualify_script
       ClearPart part = hat
-      ClearPart part = Helmet
+      ClearPart part = helmet
       ClearPart part = skater_m_hair
       ClearPart part = skater_m_jaw
     endscript
@@ -698,7 +698,7 @@ skater_m_head = [
     mesh = "models/skater_m/head_ollie.skin"
     script disqualify_script
       ClearPart part = hat
-      ClearPart part = Helmet
+      ClearPart part = helmet
       ClearPart part = skater_m_hair
       ClearPart part = skater_m_jaw
       ClearPart part = Glasses
@@ -713,7 +713,7 @@ skater_m_head = [
     mesh = "models/skater_m/head_Kenny.skin"
     script disqualify_script
       ClearPart part = hat
-      ClearPart part = Helmet
+      ClearPart part = helmet
       ClearPart part = skater_m_hair
       ClearPart part = skater_m_jaw
       ClearPart part = Glasses
@@ -728,7 +728,7 @@ skater_m_head = [
     mesh = "models/skater_m/head_metalmask.skin"
     script disqualify_script
       ClearPart part = hat
-      ClearPart part = Helmet
+      ClearPart part = helmet
       ClearPart part = skater_m_hair
       ClearPart part = skater_m_jaw
       ClearPart part = Glasses
@@ -1435,7 +1435,7 @@ skater_m_torso = [
     is_long_sleeve
   }
   {
-    desc_id = tanktop
+    desc_id = Tanktop
     frontend_desc = 'Tanktop'
     mesh = "models/skater_m/shirt_tanktop.skin"
     supports_logo
@@ -1461,7 +1461,7 @@ skater_m_torso = [
     script disqualify_script
       cas_temp_disq_remove_long_hair
       ClearPart part = hat
-      ClearPart part = Helmet
+      ClearPart part = helmet
       cas_temp_disq_remove_accessories
     endscript
     supports_logo
@@ -1494,7 +1494,7 @@ skater_m_torso = [
       cas_temp_disq_remove_accessories
       cas_temp_disq_remove_long_hair
       ClearPart part = hat
-      ClearPart part = Helmet
+      ClearPart part = helmet
     endscript
     not_with_backpack
     is_long_sleeve
@@ -2574,7 +2574,7 @@ skater_m_socks = [
     mesh = "models/skater_m/extra_socks.skin"
   }
   {
-    desc_id = ankle
+    desc_id = Ankle
     frontend_desc = 'Ankle'
     mesh = "models/skater_m/extra_socks.skin"
     replace = "CS_NN_socks.png"

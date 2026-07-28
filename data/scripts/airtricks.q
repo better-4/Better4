@@ -238,28 +238,28 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     endif
   else
     if GotParam UseCurrent
-      printf "USING THE CURRENT FRAME"
+      Printf "USING THE CURRENT FRAME"
       PlayAnim Anim = <Anim> From = Current BlendPeriod = 0.3 speed = <speed>
     else
       PlayAnim Anim = <Anim> BlendPeriod = 0.3 speed = <speed>
     endif
   endif
   if GotParam BoardRotate
-    BlendperiodOut 0
+    BlendPeriodOut 0
     BoardRotateAfter
   endif
   if GotParam RotateAfter
-    BlendperiodOut 0
+    BlendPeriodOut 0
     RotateAfter
   endif
   if GotParam FlipAfter
-    BlendperiodOut 0
+    BlendPeriodOut 0
     FlipAfter
   endif
   if GotParam ExtraTricks
     SetExtraTricks tricks = <ExtraTricks> duration = 15
   endif
-  wait 15 frames
+  Wait 15 frames
   SetTrickName <name>
   SetTrickScore <Score>
   Display
@@ -270,7 +270,7 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     LaunchSpecialMessage Cool
   endif
   if GotParam Bloodframe
-    wait <Bloodframe> frames
+    Wait <Bloodframe> frames
     if GotParam GutsSound
       PlaySound hitblood04 vol = 200
     else
@@ -278,25 +278,25 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     endif
     Bloodsplat
     Obj_SpawnScript BloodJackAss
-    wait 1 frame
+    Wait 1 frame
     PlaySound headsmackB
   endif
   if GotParam Spinslack
     WaitAnim <Spinslack> frames fromend
-    Canspin
+    CanSpin
   endif
   if GotParam grindslack
     WaitAnim <grindslack> frames fromend
   endif
-  Bailoff
+  BailOff
   WaitAnim <trickslack> frames fromend
   if GotParam IsSpecial
     EndSpecial
   endif
   DoNextTrick
-  Canspin
+  CanSpin
   WaitAnimFinished
-  goto Airborne
+  Goto Airborne
 endscript
 script CheckForOllie
   if GotException Ollied
@@ -340,7 +340,7 @@ script GrabTrick speed = 1.0 X = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIU
     Obj_PlayStream <Stream>
   endif
   if GotParam Bloodframe
-    wait <Bloodframe> frames
+    Wait <Bloodframe> frames
     if GotParam GutsSound
       PlaySound hitblood04 vol = 200
     else
@@ -348,7 +348,7 @@ script GrabTrick speed = 1.0 X = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIU
     endif
     Bloodsplat
     Obj_SpawnScript BloodJackAss
-    wait 1 frame
+    Wait 1 frame
     PlaySound headsmackB
   endif
   WaitAnim 50 percent
@@ -389,52 +389,52 @@ script GrabTrick speed = 1.0 X = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIU
     endif
   repeat
   if GotParam BoardRotate
-    BlendperiodOut 0
+    BlendPeriodOut 0
     BoardRotateAfter
   endif
   if GotParam trickslack
     WaitAnim <trickslack> frames fromend
   endif
-  Bailoff
+  BailOff
   if GotParam IsSpecial
     EndSpecial
   endif
   if GotParam FlipAfter
     FlipAfter
-    BlendperiodOut 0
+    BlendPeriodOut 0
   endif
   if GotParam RotateAfter
-    BlendperiodOut 0
+    BlendPeriodOut 0
     RotateAfter
   endif
   WaitAnimWhilstChecking
-  goto Airborne
+  Goto Airborne
 endscript
 script IfReleased_SquareOrCircle
   if GotParam OutAnim
     PlayAnim Anim = <OutAnim> BlendPeriod = 0.2 speed = <speed>
   else
     if GotParam BackwardsAnim
-      PlayAnim Anim = <BackwardsAnim> Backwards BlendPeriod = 0.2 speed = <speed>
+      PlayAnim Anim = <BackwardsAnim> backwards BlendPeriod = 0.2 speed = <speed>
     else
       if AnimEquals Airwalk
         PlayAnim Anim = <Anim> From = Current to = 0 BlendPeriod = 0.2 speed = <speed>
       else
-        PlayAnim Anim = <Anim> Backwards BlendPeriod = 0.2 speed = <speed>
+        PlayAnim Anim = <Anim> backwards BlendPeriod = 0.2 speed = <speed>
       endif
     endif
   endif
 endscript
 script JumpJets
   ReplayRecordSimpleScriptCall scriptname = _ReplayJumpJets skaterscript
-  Obj_GetID
+  Obj_GetId
   MangleChecksums a = skatersplash b = <objId>
   if not Obj_FlagSet FLAG_SKATER_JUMPJETSON
     if not InNetGame
       if not GameModeEquals Is_SingleSession
         begin
           #"Jump"
-          wait 1 game frame
+          Wait 1 game frame
         repeat 2
         Obj_SpawnScript JumpJetTracker params = { <...> }
       endif
@@ -443,28 +443,28 @@ script JumpJets
   EmptyParticleSystem name = <mangled_id>
   SetScript name = <mangled_id> Emitscript = emit_jumpjets
   ParticlesOn name = <mangled_id>
-  wait 0.5 second
+  Wait 0.5 second
   ParticlesOff name = <mangled_id>
-  wait 0.5 seconds
+  Wait 0.5 seconds
   SetScript name = <mangled_id> Emitscript = emit_skatersplash
 endscript
 script JumpJetTracker
   Obj_SetFlag FLAG_SKATER_JUMPJETSON
-  wait 2 seconds
+  Wait 2 seconds
   Obj_ClearFlag FLAG_SKATER_JUMPJETSON
 endscript
 script _ReplayJumpJets
   SpawnSkaterScript ReplayJumpJets
 endscript
 script ReplayJumpJets
-  Obj_GetID
+  Obj_GetId
   MangleChecksums a = skatersplash b = <objId>
   EmptyParticleSystem name = <mangled_id>
   SetScript name = <mangled_id> Emitscript = emit_jumpjets
   ParticlesOn name = <mangled_id>
-  wait 0.5 second
+  Wait 0.5 second
   ParticlesOff name = <mangled_id>
-  wait 0.5 seconds
+  Wait 0.5 seconds
   SetScript name = <mangled_id> Emitscript = emit_skatersplash
 endscript
 script FlipGrabBlendFS name = 'Kickflip to Indy'
@@ -476,9 +476,9 @@ script FlipGrabBlendFS name = 'Kickflip to Indy'
   endif
   PlayAnim Anim = KickFlipBlendFS BlendPeriod = 0.3 From = Current
   SetTrickName <name>
-  wait 15 frames
+  Wait 15 frames
   Display
-  wait 5 frames
+  Wait 5 frames
   PlayAnim Anim = Indy From = 10 to = end BlendPeriod = 0.3 speed = 1.5
   WaitAnim 10 frames fromend
   DoNextTrick
@@ -497,7 +497,7 @@ script FlipGrabBlendBS name = 'Kickflip to Melon'
   SetTrickName <name>
   WaitAnim 15 frames
   Display
-  wait 10 frames
+  Wait 10 frames
   PlayAnim Anim = MelonGrab From = 20 to = end BlendPeriod = 0.3 speed = 1.4
   WaitAnimFinished
   Reverse
@@ -516,7 +516,7 @@ script FlipGrabBlend GrabStart = 10 GrabSpeed = 1.5
   SetTrickName <name>
   SetTrickScore <Score>
   Display
-  wait 15 frames
+  Wait 15 frames
   PlayAnim Anim = <Anim2> From = <GrabStart> to = end BlendPeriod = 0.3 speed = <GrabSpeed>
   DoNextTrick
   WaitAnimFinished
