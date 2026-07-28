@@ -1,0 +1,22 @@
+#include <windows.h>
+
+#define ID_MYICON       WM_USER + 1
+#define WM_TRAY_NOTIFY  WM_USER + 2
+#define IDR_POPUP_MENU  WM_USER + 3
+#define ID_APP_RELOAD   WM_USER + 4
+#define ID_APP_ABOUT    WM_USER + 5
+#define ID_APP_EXIT     WM_USER + 6
+
+ID_MYICON ICON gslist.ico
+
+IDR_POPUP_MENU MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "POPUP_MENU"
+    BEGIN
+        MENUITEM "&Reload the browser", ID_APP_RELOAD
+        MENUITEM SEPARATOR
+        MENUITEM "&About",              ID_APP_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",               ID_APP_EXIT
+    END
+END

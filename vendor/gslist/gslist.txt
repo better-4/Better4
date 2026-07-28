@@ -1,0 +1,710 @@
+########################################################################
+
+Gslist
+Author:  Luigi Auriemma
+e-mail:  aluigi@autistici.org
+web:     aluigi.org
+
+########################################################################
+
+
+1) Introduction
+2) Features
+3) Installation
+4) Web GUI
+5) Options
+6) Notes, tips and troubleshooting
+7) Conclusion
+
+
+########################################################################
+
+===============
+1) Introduction
+===============
+
+
+Gslist is a command-line game servers browser with multiple advanced
+options and functions.
+It supports an incredible amount of games (over 1000 ever updated
+officially and moreover automatically) for different platforms because
+it is based on the Gamespy master server master.gamespy.com which is
+ever fully updated with the latest games in the world... this is one or
+probably the only advantage of the Gamespy's monopoly for multiplayer
+games.
+
+Naturally this tool is open source (released under GPL) and can be
+compiled on a lot of systems.
+Its usage is suggested moreover for advanced people that play a lot with
+the console (aka terminal or command-line), testers, admins, webmasters
+and anyone who needs something for watching the servers list of a
+specific game and only that, without automatic pings or other extra
+things.
+This tool gives you the list of online servers, that is its main job...
+but it does also other things if needed.
+
+Note that the ports you see when retrieve the servers list are usually
+the query ports, not the game ports (although if often they are the
+same).
+The query port is an UDP port used to send server's informations and the
+game port is usually a parameter contained in these replies.
+
+If you have ideas about new options or functions contact me!
+
+
+########################################################################
+
+===========
+2) Features
+===========
+
+
+Some features of Gslist:
+
+- tons of games supported, it is probably the only application in the
+  world that supports a so long list of games (thanx to the Gamespy's
+  monopoly naturally)
+- an useful server-side filter lets users to receive the list of servers
+  that match specific requirements like no empty servers or servers
+  located in a specific country and more
+- an output option permits to create front-ends for Gslist or to
+  implement Gslist in any enviroment where other applications must read
+  the data contained in the files created by the program or from its
+  direct output (stdout) (these applications must be released under a
+  GPL license naturally)
+- can be used also to query the online servers using the old and new
+  Gamespy query plus a lot of other queries available with the -d option
+- web GUI like any "normal" server browser, read the section below
+- you can launch a specific application for each game server found
+- heartbeat sender, your IP can be inserted in the online servers list
+  and other players can find your server
+- optimized for speed and resources
+- portable and opensource
+- Gslist is ever supported and open to new ideas and features
+- Gslist is also supported by XQF (http://linuxgames.com/xqf/)
+- others...
+
+
+########################################################################
+
+===============
+3) Installation
+===============
+
+
+*nix:
+- compilation requirements: make, pthread, geoip and optionally
+  mysqlclient (apt-get install libgeoip-dev libmysqlclient15-dev)
+- make
+- make install
+  as root, the file gslist will be put in /usr/local/bin
+  note that installing is not required, you need only the gslist
+  executable and nothing more
+- when launched for the first time the tool automatically creates its
+  working directory .gslist in the home directory of the current user
+  (~/.gslist). In this location will be stored the configuration and
+  database files.
+  Anyway exists an option at runtime (-p) for using a different
+  directory
+
+Windows:
+- copy gslist.exe in a directory (c:\gslist for example or c:\windows so
+  you can launch the tool from any location of the disk)
+  From version 0.8.2 you need to have also libmysql.dll (included in the
+  zip package)
+- the tool uses the Application Data folder for storing its
+  configuration and database files
+
+Database update:
+When you install Gslist you need to update the database of the supported
+games (no longer required from version 0.8 for querying the master
+server), all you need is the file gslist.cfg and you can build or
+download it through the -u option.
+A backup copy of this file is available in the Gslist package.
+
+
+########################################################################
+
+==========
+4) Web GUI
+==========
+
+
+The web GUI activable with the -w option or through the double-click on
+gslistweb.exe transforms Gslist is a basic web server which provides a
+full working server browser accessible through any web browser.
+All its html code is valid 4.0 and is totally script free which means it
+works really on any browser and on any system.
+
+Its main target is to be simple, really simple so although you have zero
+experience about ping, servers, configurations, and other things or you
+don't want to read this text you should be able to use it almost
+"immediately".
+
+Now a quick list of things to do when you start Gslist for the first
+time:
+
+1) Update: the first and most necessary step if your database has not
+   been created yet.
+   It downloads all the latest informations about all the supported
+   games. Use it when a new game is not included in your current list
+   From version 0.8 a backup copy of the downloadable database is
+   available in the Gslist zipped package
+
+2) Go on the Scan link in the top menu and click on the button.
+   This function scans some keys of the registry for finding all the
+   supported games you have installed on your system and automatically
+   configures the path of their executables and what type of query they
+   accepts.
+   When this stage is finished you will be automatically redirected in
+   the Configuration menu where you can verify if everything is correct.
+
+3) The Configuration menu is the place where you can set and save your
+   player name, your filter (the filter is EVER temporary and this is
+   the only place where you can save it permanently for each game),
+   options for limiting the amount of visualized games, font size and
+   more.
+   This is also the place where you can set the options for your games:
+
+   - path:   where is located the game executable
+   - find:   a confortable option for selecting the right game
+             executable without writing the full path, if needed.
+             When you have found it copy the text and paste it in the
+             above "path" field or it will not work!
+   - query:  the type of query you want to use, this is automatically
+             set for the specific game when you use Scan or you need to
+             manually choose the exact type of query.
+             The "DirectPlay 8" and "All-Seeing Eye" queries don't work
+             in the interface because don't exist games that use them.
+             The tool gets the default query from the database file but
+             in some rare games this type of query could be wrong so
+             you need to set it manually
+   - filter: sets the custom filter for each game, you can add it
+             manually, add the custom filter stored in memory (created
+             in the Filter section) or reset it
+   - remove: removes the game from the list of configured games
+   - save:   saves the path and the query selected in the configuration
+
+4) Main: the heart of the program, here you have the configured games
+   selectable in the bottom place and all the available servers and
+   their informations in the center.
+   When you select a game Gslist gets the full servers list and starts
+   to ping all the servers found retrieving all their informations.
+   The list is then sorted for ping time.
+   Remember that you are using a browser so CTRL-F does all the searches
+   you can imagine in any page, and same thing is for the Refresh, Back
+   and Forward buttons that are very very useful!
+   The REPING button is able to reping the servers list in memory
+
+5) Search: the place where you can manually add, list, ping or find
+   informations about all the supported game.
+   It is also the only place (with the Main menu naturally) accessible
+   by the external users if you launch Gslist on a non-local interface.
+   Here you can search a specifc text for finding a game or you can
+   simply click on Search with a black field and you will see all the
+   available games.
+   Then is possible to ADD a game to the installed games so you can
+   configure it, or you can LIST the available servers without pinging
+   them, or you can PING them as usual or you can find informations
+   about each specific game
+
+6) Filter: the filter is important for limiting the amount of servers
+   using some rules.
+   Here you can decide if you want to see the empty or full servers or
+   if you want to receive only the list of servers that contain the
+   word "rox" in their name, or the servers located in a specific
+   country and so on.
+   There are 2 fields here, one that shows the full filter and another
+   that simplifies the building of the filter without the need of
+   knowing all the available commands.
+   In fact if you want to see all the non-empty servers is enough to
+   place a zero in the minplayers field and click on Set. That's all.
+   Go in Configuration when and if you want to permanently save your
+   current filter
+
+7) IP: options for pinging an IP, directly joining it or adding it to
+   the favorites menu.
+   The third field for the join and favorites button is used for
+   specifying a password.
+   Remember that game servers sometimes have a game and a query port.
+   The query port is used to get informations from a server while the
+   game port is used only for direct join or direct favorites.
+   Take that in mind because it's important!
+
+8) Favorites: nothing to say, when you go on this menu it automatically
+   gets the informations from the favorites servers and you can join
+   them.
+   The X at the left of the IP is used for removing the favorite.
+   Note that the scanning is an IP at time so if you have 10 favorite
+   servers and none of them is online you must wait the end of the
+   timeout
+
+9) About: other than the links to the program homepage and the viewing
+   of the program version, here you find also a small list of tips for a
+   better usage of the Gslist web interface
+
+X) Quit: closes Gslist
+
+
+Notes:
+- if you double-click on gslistweb.exe when it's running it will start
+  the browser, so don't worry about launching the program many times
+  since it automatically stops the new instances
+- when there are many servers to ping you need to wait some seconds,
+  my BIG suggestion is to set a small timeout (default is 2 seconds) and
+  to not show the unpingable servers in the Configuration menu so you
+  will see only the fastest servers that have replied to your queries
+- this web interface is also good for multi-users so if you set it on
+  your local network interface (like 192.168.0.1) or on all the
+  interfaces (0 or 0.0.0.0) it can be used also by your friends.
+  This network GUI has been created for a single-user environment or in
+  a LAN between friends but NOT to be accessed from Internet on a
+  production server for security reasons (I have avoided any type of bug
+  but never say never) and because could exist some parts of code which
+  are not thread-safe and this could result in mixed results in an
+  intensive multi-user usage.
+  Naturally if you use the default interface 127.0.0.1 nobody except you
+  can access Gslist, so don't worry.
+- in the servers list, 'd' is used for dedicated servers, 'p' for
+  servers protected by password and 'pb' for those which use the
+  Punkbuster anti-cheat system
+- from version 0.8.8 the webGUI uses enctypeX by default which means
+  that it no longer pings the servers because all the informations are
+  collected directly from the master server, the results are practically
+  immediate.
+  the only downside of this solution is that no longer exist the ping.
+  anyway is possible to choose the old enctype 1 or 2 specifying -t 1
+  at command-line (or through a shortcut on Windows).
+- the webgui interface is no longer actively supported
+
+
+########################################################################
+
+==========
+5) Options
+==========
+
+
+-n GAMENAME
+ or
+-N GAMENAME
+ or
+-y GAMENAME GAMEKEY
+ you can retrieve the servers list of a specific game simply specifying
+ its gamename.
+ Gamename is a text string identifying a game, for example aoe for Age
+ of Empires, ut2004 for Unreal Tournament 2004, doom3 for Doom 3, mohaa
+ for Medal of Honor Allied Assault, battlefield2 for the homonym game
+ and so on.
+ All the available gamenames can be seen through the -s and -l options.
+ From version 0.8 is also possible to specify more gamenames separated
+ by commas (without spaces), Gslist will get the servers list of each
+ one of them sequentially and there is no longer a verification of the
+ existence of the gamename in the database, so any gamename is accepted.
+ Example: -N doom3
+          -n halor,ut,battlefield2
+
+
+-l
+ lists the entire database of supported games.
+ The database is contained in a text file called gslist.cfg and is just
+ the same data showed by this option so you can read the file with a
+ normal text editor too.
+ From version 0.8 the database and the gamekeys are no longer required
+
+
+-s PATTERN
+ the most useful function to use Gslist. In fact it must be used to
+ search a specific game, gamename, gamekey or any other thing contained
+ in the file gslist.cfg.
+ The function is case insensitive which means is not important if the
+ pattern you search is in lower, higher of both cases because the
+ function finds it ever.
+ Example: -s unreal, -s UNREAL, -s uNrEaL
+          the result is ever the same for all the 3 examples
+          -s HpWx9z or -s hal and so on
+
+
+-u
+ the function for updating the game database.
+ The gamenames are enough easy to calculate but this database is useful
+ to know what games are supported and for what platform.
+ The list is downloaded from my website but it can be also created
+ manually using the -m or -M options
+ From version 0.8 a backup copy of the gslist.cfg file is available in
+ the Gslist package
+
+
+-U
+ rebuild gslist.cfg, used mainly for debugging.
+
+
+-i HOST PORT
+ sends the \status\ query (known as the old Gamespy query protocol) to
+ a specific server and port and then waits a reply.
+ Naturally the game server must support this type of query (alsmost any
+ game listed supports this or the -I query).
+ Example: -i localhost 7787, -i 192.168.0.1 12203
+          -i 192.168.0.1:12203
+
+
+-I HOST PORT
+ just as above but instead of \status\ it sends the new Gamespy query
+ composed by the bytes "fe fd 00 ?? ?? ?? ?? ff 00 00 01" where
+ ???????? are replaced with a partially random value or with 00.
+ Example: -I localhost 7787, -I 192.168.0.1 12203
+          -I 192.168.0.1:12203
+
+
+-d T HOST PORT
+ this is an option that can be used to query a server using different
+ protocols, like that used by Quake 3, Half-Life, DirectPlay8, Doom3,
+ Source, Tribes 2 and so on.
+ The parameter T is referred to the type of query to use, you can see
+ the list of available queries simply without specifying any parameter
+ or using ? as T parameter.
+ Example: -d 1 127.0.0.1 27960
+          -d 5 localhost 6073
+          -d 1 127.0.0.1:7778
+          -d   or   -d ?   for details
+
+
+-f FILTERS
+ specify a filter to apply to the servers list before returning (so a
+ filter applied by the same master server and not by Gslist).
+ This option is really very useful in some cases, in fact the Gamespy
+ master server supports SQL queries to filter the servers list for
+ example to avoid empty or full servers, or to receive only italian
+ servers and many other things.
+ It's all server-side so that saves also the network bandwidth.
+
+ The valid operators you can use are:
+  <>, !=, >=, !<, <=, !>, =, <, >, (, ), +, -, *, /, %,
+  AND, NOT, OR, LIKE, NOT LIKE, IS NULL, IS NOT NULL
+
+ While the main items are:
+  hostaddr, hostport, gamever, country, hostname,
+  mapname, gametype, gamemode, numplayers, maxplayers
+
+ But is possible to specify any item used in a specific game like
+ password or dedicated for example, they are the same parameters
+ that you see when query the servers of a game
+
+ Is also possible to use the wildcard character %
+ The delimiter for the text strings is the character '
+
+ Some usage examples:
+ - for non-empty servers:    -f "(numplayers > 0)"
+ - for empty servers only:   -f "(numplayers = 0)"
+ - for finding the IP of the server with the name Jackass:
+                             -f "(hostname LIKE 'Jackass')"
+ - for all the servers with a name containing the text ass:
+                             -f "(hostname LIKE '%ass%')"
+ - for italian servers:      -f "(country = 'IT')"
+ - for servers on port 10    -f "(hostport = 10)"
+ - for dedicated servers     -f "(dedicated = 1)"
+                             -f "(dedicated LIKE 'True')"
+ - for passworded servers    -f "(password = 1)"
+                             -f "(password LIKE 'True')"
+ - for servers using the version 1.1 of the game:
+                             -f "(gamever = '1.1')"
+   or
+                             -f "(gamever LIKE '1.1')"
+
+ ...all your fantasy, the filters are so useful and huges that you can
+ do everything you want with them. However remember that the filters
+ refers to the informations obtained by the Gamespy master server from
+ the last query made by it to the game servers (usually a query for each
+ heartbeat) so is possible that you are filtering old informations
+ because heartbeats have a timeout of 5 minutes.
+ Remember ever to delimit your filter with the char ", like in the above
+ examples.
+ Some reference links:
+   http://www.gamespyarcade.com/support/filter.shtml
+   http://www.gamespyarcade.com/support/help/filter.shtml
+   http://www.gamespyarcade.com/helpers/workshop/filters/
+
+
+-r "prog..."
+ a cool and original option. It lets you to execute a specific program
+ for each server and port found.
+ With "prog..." I mean the command to execute with all its arguments.
+ There are 2 patterns that are substituited with the current IP and
+ port of the server found in the servers list, they are #IP for the IP
+ address of the server and #PORT for its query port.
+ If for example I use:
+   -r "echo the server #IP listens on port #PORT, nice"
+ the program will execute the command:
+   echo the server 127.0.0.1 listens on port 100, nice
+   (if the IP and port in the list are 127.0.0.1 and 100, naturally).
+ Other examples are:
+   -r "c:\tools\ping.exe #IP"
+   -r "./myprog -p #PORT #IP"
+
+
+-o [OUT]
+ used to dump the received servers list to files instead of screen or in
+ a different format.
+ You can choose between 5 types of outputs (OUT):
+
+ 1  the servers list is dumped in text format to a file that has the
+    name of GAMENAME plus the extension gsl.
+    The text output is composed by the IP:port and a line-feed (0x0a).
+    Example of quake3.gsl if we have chosen the game Quake 3:
+    1.2.3.4:1234
+    11.22.33.44:4321
+
+ 2  exactly as above with the only difference that the output file is
+    EVER gslist-out.gsl for any game
+
+ 3  the servers list is dumped in binary format to a file that has the
+    name of GAMENAME plus the extension gsl.
+    With binary output I mean the network-byte format used for IPs and
+    ports (just as received from the master server) so the data
+    contained in this output is already ready to be used with sockets.
+    An example of IP and port contained in hex format in the file:
+    7F0000011E62 = 127.0.0.1 7778
+
+ 4  exactly as above with the only difference that the output file is
+    ever gslist-out.gsl for any game
+
+ 5  screen output (stdout) using the classical format IP:port, like
+    127.0.0.1:12345
+
+ 6  hex dump of the raw data received from the server. If you have
+    used the -t 1 or 2 option you will see the encrypted raw data.
+    Needed only for debugging.
+
+ X  if OUT is not 1, 2, 3, 4, 5 or 6 it is considered a filename to
+    which sending all the servers list output (just as what you see
+    normally on the screen)
+
+
+-w IP PORT
+ the web interface. Check section 4 for all the details you need.
+ IP is your local IP interface like 127.0.0.1 for localhost or 0 for ANY
+ interface.
+ PORT is the port you want to use with Gslist, 0 is automatically
+ substituited with 28903.
+
+
+-q
+ quiet output, practically only the list of servers and nothing more.
+
+
+-x S[:P]
+ you can choose a master server and a port different than
+ master.gamespy.com:28900.
+ This option is useful for tests or if you know a master server that
+ uses the Gamespy master server protocol.
+ The port is optional and the default is 28900.
+ Example: -x localhost, -x localhost:12345
+
+
+-b PORT
+ the heartbeats sender. Lets your IP address to be included in the
+ online servers list located on the master server. PORT is the port used
+ by your server (usually the query port).
+ PORT is bound for some milliseconds to be able to reply to the master
+ server's queries or to the possible validation requests that arrives
+ when the heartbeat is sent, so during this short time your server will
+ be not accessible by other users.
+ The -b and -B options must be used with any of the options -n, -N or
+ -y.
+ Note: I consider this option a bit experimental because binding the
+       port could cause some problems or packets loss to your server,
+       so is preferred the option -B.
+       Use it only for tests or for games that don't support the old
+       Gamespy query (\status\).
+       It's also useful for statistical purposes, for example you can
+       see how many clients are online
+ Example for UT2004: -b 7787 -N ut2004
+
+
+-B PORT
+ exactly as above but the PORT will not be bound.
+ Use this option ONLY if your server supports the old Gamespy protocol
+ (\status\) and so it can reply to the master server query.
+ Remember that if you don't reply to the query you will not be added in
+ the servers list.
+
+
+-L SEC
+ puts the tool in a continuous loop, where SEC is the amount of seconds
+ to wait between each cycle.
+ So if you use -L 60 Gslist will retrieve the servers list of a specific
+ game and will redo the same after one minute and so on infinitely until
+ you will break it.
+
+
+-t NUM
+ Gslist supports enctype 0, 1, 2 and -1
+ Enctype 1 or 2 are now default since at the beginning of September 2005
+ Gamespy has removed enctype 0 for the games released from about the year
+ 2002/2003 (like America's Army, UT2003, UT2004 and so on).
+ From version 0.8.6 there is a new enctype available which in reality is
+ just a new protocol at all, it's enough to use -t -1 for selecting it.
+ it allows gslist to act EXACTLY as do all the games which use the
+ Gamespy master server without differences.
+
+
+-c
+ an useful function that shows all the available country codes for the
+ "country" filter (like IT for Italy, US for USA, UK for England and so
+ on).
+
+
+-Y NAME KEY
+ lets you to choose a specific GAMENAME and KEY.
+ From version 0.8 this option is used only for gaining access to the
+ master server, through this option you can specify other games or
+ programs and is useful for possible future compatibility reasons.
+
+
+-p PATH
+ the directory where you want to read or store the Gslist configuration
+ files.
+ From version 0.8 the configuration files are no longer required but this
+ option could be useful in rare cases.
+ For example, if you want to use the gslist.cfg file in the local
+ directory you must use -p .
+
+
+-m
+ or
+-M
+ this is the option I use for creating the gslist.cfg file available for
+ download. You can avoid to use the -u option simply using -m or -M
+ which update the database using the data available on Gamespy and my
+ gshkeys.txt file.
+ The difference between -m and -M is that the second one rebuilds the
+ database from scratch after having deleted the previous local database
+ files.
+
+
+-Q T
+ will query any server available in the servers list retrieved with the
+ -n option. T is just the same parameter used with -d.
+ Source engine, DirectPlay and ASE queries are not supported
+ The data will be showed on the screen using the format:
+
+   IP:PORT \parameter\value\parameter\value\...\parameter\value
+
+
+-X INFO
+ similar to the above option except that all the info are received
+ directly from the same master server which means that there are problems
+ of time and delay, there are no problems of NATted servers or packets
+ lost and so on.
+ it works only with the so called enctypeX (-t -1)
+ the only limitation is that you can use this type of fast query only
+ with games which use the Gamespy master server natively, so for example
+ you can't use -X with Call of Duty 4 or Quake 3 and so on
+ the format of INFO is very simple and the following example should
+ explain anything:
+
+   -t -1 -X \hostname\gamever\numplayers\maxplayers\mapname\gametype
+
+ on linux you could have problems to use the backslash so put the query
+ between marks:
+
+   -t -1 -X "\hostname\gamever\numplayers\maxplayers\mapname\gametype"
+ or
+   -t -1 -X \\hostname\\gamever\\numplayers\\maxplayers\\mapname\\gametype
+
+ note that now gslist uses the enctypeX mode by default so it's no longer
+ needed to specify -t -1 
+
+
+-S
+ show the SQL options
+ this function is experimental and is the implementation of the old
+ gsscansql program I wrote many years ago.
+ Currently there is no documentation about it except the runtime help.
+ requires the -Q option for working
+
+
+-E
+ ignore the SQL errors and continues after some seconds
+
+
+-D MS
+ amount of milliseconds to wait between each query used with the -Q
+ command or when using the webgui
+ this option is VERY important in some conditions, for example if you
+ are behind a restrictive NAT or router and so you can't send too much
+ UDP packets all together
+
+
+-z FILE
+ instead of downloading the servers list from the master server Gslist
+ can get it from a text file containing the list of IP and ports like
+ in the following example:
+ 1.2.3.4 1234
+ 1.2.3.4:1234
+      myserver.org           1234
+
+
+-F
+ additional option for -Q which forces the usage of the Gamespy NAT
+ negotiation for getting informations from the servers which don't reply
+ or are behind NAT/router
+
+
+-C
+ do not filter the colors and the chars >= 0x7f from the replies
+ received by the servers queried with -Q/-X
+
+
+-e
+ this option shows some quick examples to use Gslist and some of its
+ features.
+ Useful if you don't remember the syntax of a command or don't know what
+ you are doing wrong.
+
+
+-v
+ shows the version of Gslist
+
+
+########################################################################
+
+==================================
+6) Notes, tips and troubleshooting
+==================================
+
+
+- if you want to join a server protected by password through the web GUI
+  you need to add &pass=YOURPASS at the end of the /play link, like:
+
+    http://127.0.0.1/play?game=halor&ip=1.2.3.4&port=2302&pass=mypass
+
+- on Unix systems Gslist uses the Pthread library, so if you are on
+  Linux and Gslist closes itself often without errors, try to use the
+  latest Pthread library available
+
+- if in the web GUI you don't see the servers informations but only the
+  list of IP addresses you need probably to specify a different type of
+  query
+
+- compilation options:
+  -DSQL       enables the SQL option
+  -DGSWEB     enables the web interface option
+  -DWINTRAY   enables the Windows interface
+
+- contact me for any other problem
+
+
+########################################################################
+
+=============
+7) Conclusion
+=============
+
+
+As already said the program is open to new ideas and functions so let me
+know your ideas, suggestions and feedback (moreover bug reports) or if
+you have not understood something.
+
+
+########################################################################
