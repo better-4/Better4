@@ -16,7 +16,7 @@ Better4 is a modpack which includes modern gameplay and QOL features while maint
 Clone the Better4 repo with the `--recurse-submodules` option:
 
 ```
-git clone --recurse-submodules git@github.com:better-4/Better4.git  # or https://github.com/better-4/Better4.git
+git clone --recurse-submodules git@github.com:better-4/Better4.git --config core.autocrlf=false --config core.eol=lf
 cd Better4
 ```
 

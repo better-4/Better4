@@ -1,4 +1,3 @@
-
 SpecialTricks =
 [
   { Trigger = { TripleInOrder Up right Square 400 } TrickSlot = SpAir_U_R_Square }

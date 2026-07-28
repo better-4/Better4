@@ -1,11 +1,12 @@
-
 skater_f_head = [
   {
     desc_id = Steamer
     frontend_desc = 'Elissa Steamer'
     mesh = "models/skater_f/head_steamer.skin"
     flags = { is_pro_head is_steamer_head }
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = FemaleBody
+    endscript
   }
   {
     desc_id = #"Light Skin 1"
@@ -155,6 +156,56 @@ skater_f_head = [
       SetPart part = body desc_id = FemaleBody3
     endscript
   }
+  {
+    desc_id = #"Lisa Davies"
+    frontend_desc = 'Lisa Davies'
+    replace = "CS_NH_F_wht_face.png"
+    with = "textures/skater_ns/NS_Head_lisad"
+    in = body
+    script disqualify_script
+      SetPart part = body desc_id = FemaleBody
+    endscript
+  }
+  {
+    desc_id = #"Stacey Ytuarte"
+    frontend_desc = 'Stacey Ytuarte'
+    replace = "CS_NH_F_wht_face.png"
+    with = "textures/skater_ns/NS_Head_staceyy"
+    in = body
+    script disqualify_script
+      SetPart part = body desc_id = FemaleBody3
+    endscript
+  }
+  {
+    desc_id = #"Stacey Drellish"
+    frontend_desc = 'Stacey Drellish'
+    replace = "CS_NH_F_wht_face.png"
+    with = "textures/skater_ns/ATVI_Head_staceyd"
+    in = body
+    script disqualify_script
+      SetPart part = body desc_id = FemaleBody
+    endscript
+  }
+  {
+    desc_id = #"Lindsey Hayes"
+    frontend_desc = 'Lindsey Hayes'
+    replace = "CS_NH_F_wht_face.png"
+    with = "textures/skater_ns/ATVI_Head_lindseyh"
+    in = body
+    script disqualify_script
+      SetPart part = body desc_id = FemaleBody
+    endscript
+  }
+  {
+    desc_id = #"Marilena Rixfor"
+    frontend_desc = 'Marilena Rixfor'
+    replace = "CS_NH_F_wht_face.png"
+    with = "textures/skater_ns/ATVI_Head_Marilenar"
+    in = body
+    script disqualify_script
+      SetPart part = body desc_id = FemaleBody3
+    endscript
+  }
 ]
 skater_f_torso = [
   {
@@ -284,13 +335,11 @@ skater_f_torso = [
     frontend_desc = 'Jersey'
     mesh = "models/skater_f/shirt_jersey.skin"
     shows_panties
-    not_with_backpack
   }
   {
     desc_id = #"RS Blouse"
     frontend_desc = 'RS Blouse'
     mesh = "models/skater_f/shirt_RSbutton.skin"
-    not_with_backpack
     is_long_sleeve
   }
   {
@@ -301,17 +350,12 @@ skater_f_torso = [
     with = "textures/skater_m/CS_JB_F_shirt_buttondwn_plaid"
     replace1 = "CS_JB_F_sleeve_buttondwn.png"
     with1 = "textures/skater_m/CS_JB_F_sleeve_buttondwn_plaid"
-    not_with_backpack
     is_long_sleeve
   }
   {
     desc_id = #"LS Blouse"
     frontend_desc = 'LS Blouse'
     mesh = "models/skater_f/shirt_LSbutton.skin"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
-    not_with_backpack
     is_long_sleeve
   }
   {
@@ -322,10 +366,6 @@ skater_f_torso = [
     with = "textures/skater_m/CS_JB_shirt_buttonflannel"
     replace1 = "CS_JB_F_sleeve_buttondwn.png"
     with1 = "textures/skater_m/CS_JB_sleeve_longflannel"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
-    not_with_backpack
     is_long_sleeve
   }
   {
@@ -333,16 +373,13 @@ skater_f_torso = [
     frontend_desc = 'Denim Jacket'
     mesh = "models/skater_f/shirt_denimjacket.skin"
     shows_panties
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Baggy Vest"
     frontend_desc = 'Baggy Vest'
     mesh = "models/skater_f/shirt_baggyvest.skin"
     shows_panties
-    not_with_backpack
   }
   {
     desc_id = #"Sniper Vest"
@@ -351,7 +388,6 @@ skater_f_torso = [
     replace = "CS_NH_baggyvest.png"
     with = "textures/skater_m/CS_NH_baggyvest_flak"
     shows_panties
-    not_with_backpack
   }
   {
     desc_id = #"Leather Vest"
@@ -360,7 +396,6 @@ skater_f_torso = [
     replace = "CS_NH_baggyvest.png"
     with = "textures/skater_m/CS_NH_leathervest"
     shows_panties
-    not_with_backpack
   }
   {
     desc_id = #"Padded Vest"
@@ -369,18 +404,12 @@ skater_f_torso = [
     replace = "CS_NH_baggyvest.png"
     with = "textures/skater_m/CS_NH_baggyvest_padded"
     shows_panties
-    not_with_backpack
   }
   {
     desc_id = #"Snow Jacket"
     frontend_desc = 'Snow Jacket'
     mesh = "models/skater_f/shirt_snowjacket.skin"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Padded Jacket"
@@ -388,29 +417,15 @@ skater_f_torso = [
     mesh = "models/skater_f/shirt_snowjacket.skin"
     replace = "CS_JB_F_shirt_snowjacket.png"
     with = "textures/skater_m/CS_NH_snowjacket_padded"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Up"
     frontend_desc = 'Hoody Up'
     mesh = "models/skater_f/shirt_lshoodup.skin"
-    script disqualify_script
-      cas_temp_disq_remove_long_hair
-      ClearPart part = hat
-      ClearPart part = helmet
-      cas_temp_disq_remove_accessories
-    endscript
     supports_logo
     no_back_logo
-    not_with_elissa
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Up Stripe"
@@ -422,16 +437,7 @@ skater_f_torso = [
     with1 = "textures/skater_m/CS_JB_shirt_hoodyupstripe2"
     replace2 = "CS_JB_sleeve_hoodyup.png"
     with2 = "textures/skater_m/CS_JB_sleeve_hoodyupstripe"
-    script disqualify_script
-      cas_temp_disq_remove_long_hair
-      ClearPart part = hat
-      ClearPart part = helmet
-      cas_temp_disq_remove_accessories
-    endscript
-    not_with_elissa
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Down"
@@ -439,13 +445,7 @@ skater_f_torso = [
     mesh = "models/skater_f/shirt_lshooddown.skin"
     supports_logo
     no_back_logo
-    not_with_elissa
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_hat
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
   }
   {
     desc_id = #"Hoody Down Stripe"
@@ -455,19 +455,12 @@ skater_f_torso = [
     with = "textures/skater_m/CS_JB_shirt_hoodydownstripe"
     replace1 = "CS_JB_sleeve_hoodydown.png"
     with1 = "textures/skater_m/CS_JB_sleeve_hoodydownstripe"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
-    not_with_elissa
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Steamer shirt"
     frontend_desc = 'Steamer Shirt'
     mesh = "models/skater_f/shirt_steamer.skin"
-    not_with_backpack
   }
   {
     desc_id = #"Tube Top"
@@ -542,14 +535,12 @@ skater_f_torso = [
     desc_id = #"Button Shirt"
     frontend_desc = 'Button Shirt'
     mesh = "models/skater_m/shirt_ssbutton.skin"
-    not_with_backpack
     is_long_sleeve
   }
   {
     desc_id = #"Open Shirt"
     frontend_desc = 'Open Shirt'
     mesh = "models/skater_m/shirt_ssopen.skin"
-    not_with_backpack
     is_long_sleeve
   }
   {
@@ -557,9 +548,6 @@ skater_f_torso = [
     frontend_desc = 'Long Sleeve'
     mesh = "models/skater_m/shirt_T_longsleeve.skin"
     supports_logo
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -568,29 +556,18 @@ skater_f_torso = [
     mesh = "models/skater_m/shirt_T_longsleeve.skin"
     replace = "CS_JB_shirt_Tlongsleeve.png"
     with = "textures/skater_m/CS_JB_shirt_TLSstripe"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
     desc_id = #"LS Button Shirt"
     frontend_desc = 'LS Button Shirt'
     mesh = "models/skater_m/shirt_LSbutton.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
     desc_id = #"LS Open Shirt"
     frontend_desc = 'LS Open Shirt'
     mesh = "models/skater_m/shirt_lsopen.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -601,11 +578,7 @@ skater_f_torso = [
     with = "textures/skater_m/CS_NH_lasek_shirt"
     replace1 = "CS_NH_Thomas_sleeve.png"
     with1 = "textures/skater_m/CS_NH_lasek_sleeve"
-    not_with_backpack
     is_cab
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -616,10 +589,6 @@ skater_f_torso = [
     with = "textures/skater_m/CS_JB_shirt_buttonflannel"
     replace1 = "CS_JB_sleeve_long.png"
     with1 = "textures/skater_m/CS_JB_sleeve_longflannel"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -630,11 +599,7 @@ skater_f_torso = [
     with = "textures/skater_m/CS_JB_shirt_buttonflannel"
     replace1 = "CS_NH_Thomas_sleeve.png"
     with1 = "textures/skater_m/CS_JB_sleeve_longflannel"
-    not_with_backpack
     is_cab
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -661,18 +626,9 @@ skater_f_torso = [
     is_margera
     is_mullen
     is_reynolds
-    script disqualify_script
-      cas_temp_disq_remove_long_hair
-      ClearPart part = hat
-      ClearPart part = helmet
-      cas_temp_disq_remove_accessories
-    endscript
     supports_logo
     no_back_logo
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_head
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Up Stripe"
@@ -693,16 +649,7 @@ skater_f_torso = [
     is_margera
     is_mullen
     is_reynolds
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-      cas_temp_disq_remove_long_hair
-      ClearPart part = hat
-      ClearPart part = helmet
-    endscript
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_head
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Down"
@@ -710,12 +657,7 @@ skater_f_torso = [
     mesh = "models/skater_m/shirt_lshooddown.skin"
     supports_logo
     no_back_logo
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Down Stripe"
@@ -725,19 +667,12 @@ skater_f_torso = [
     with = "textures/skater_m/CS_JB_shirt_hoodydownstripe"
     replace1 = "CS_JB_sleeve_hoodydown.png"
     with1 = "textures/skater_m/CS_JB_sleeve_hoodydownstripe"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Denim Vest"
     frontend_desc = 'Denim Vest'
     mesh = "models/skater_m/shirt_rockervest.skin"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Leather Vest"
@@ -745,8 +680,6 @@ skater_f_torso = [
     mesh = "models/skater_m/shirt_rockervest.skin"
     replace = "CS_NN_Shirt_rockervest01.png"
     with = "textures/skater_m/CS_JB_shirt_leathervest"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Baggy Vest"
@@ -754,15 +687,11 @@ skater_f_torso = [
     mesh = "models/skater_m/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest_camo.png"
     with = "textures/skater_m/CS_JB_shirt_bagvest"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Camo Vest"
     frontend_desc = 'Camo Vest'
     mesh = "models/skater_m/shirt_baggyvest.skin"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Padded Vest"
@@ -770,8 +699,6 @@ skater_f_torso = [
     mesh = "models/skater_m/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest_camo.png"
     with = "textures/skater_m/CS_JB_shirt_bagvest_padded"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Flak Vest"
@@ -779,19 +706,12 @@ skater_f_torso = [
     mesh = "models/skater_m/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest_camo.png"
     with = "textures/skater_m/CS_JB_shirt_bagvest_flak"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Snow Jacket"
     frontend_desc = 'Snow Jacket'
     mesh = "models/skater_m/shirt_snowjacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Padded Jacket"
@@ -801,43 +721,24 @@ skater_f_torso = [
     with = "textures/skater_m/CS_JB_shirt_snowjacket_padded"
     replace1 = "CS_JB_sleeve_snowjacket.png"
     with1 = "textures/skater_m/CS_JB_sleeve_snowjacket_padded"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Leather Jacket"
     frontend_desc = 'Leather Jacket'
     mesh = "models/skater_m/shirt_leatherjacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = Windbreaker
     frontend_desc = 'Windbreaker'
     mesh = "models/skater_m/shirt_windbreaker.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = Sweater
     frontend_desc = 'Sweater'
     mesh = "models/skater_m/shirt_sweater.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -852,24 +753,14 @@ skater_f_torso = [
     mesh = "models/skater_m/shirt_officer.skin"
     unlock_flag = CAS_UNLOCK_11
     is_clowny
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Ollie Coat"
     frontend_desc = 'Ollie Coat'
     mesh = "models/skater_m/shirt_ollie.skin"
     unlock_flag = CAS_UNLOCK_12
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Burnquist Shirt"
@@ -879,10 +770,6 @@ skater_f_torso = [
     with = "textures/skater_m/CS_NH_burnquist_shirt"
     replace1 = "CS_JB_sleeve_long.png"
     with1 = "textures/skater_m/CS_NH_burnquist_sleeve"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -927,9 +814,6 @@ skater_f_torso = [
     desc_id = #"Hawk Shirt"
     frontend_desc = 'Hawk Shirt'
     mesh = "models/skater_m/shirt_hawk.skin"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -942,17 +826,12 @@ skater_f_torso = [
     with1 = "textures/skater_m/CS_NH_lasek_sleeve"
     replace2 = "CS_NH_undershirt.png"
     with2 = "textures/skater_m/CS_NN_lasek_ushirt"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
     desc_id = #"Margera Shirt"
     frontend_desc = 'Margera Shirt'
     mesh = "models/skater_m/shirt_margera.skin"
-    not_with_backpack
     is_long_sleeve
   }
   {
@@ -975,32 +854,18 @@ skater_f_torso = [
     desc_id = #"Reynolds Jacket"
     frontend_desc = 'Reynolds Jacket'
     mesh = "models/skater_m/shirt_reynolds_jacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Rowley Jacket"
     frontend_desc = 'Rowley Jacket'
     mesh = "models/skater_m/shirt_rowley_jacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Thomas Shirt"
     frontend_desc = 'Thomas Shirt'
     mesh = "models/skater_m/shirt_thomas.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1098,19 +963,11 @@ skater_f_legs = [
     desc_id = #"Baggy Pants"
     frontend_desc = 'Baggy Pants'
     mesh = "models/skater_f/pant_baggy.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Regular Pants"
     frontend_desc = 'Regular Pants'
     mesh = "models/skater_f/pant_regular.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Floral Pants"
@@ -1118,10 +975,6 @@ skater_f_legs = [
     mesh = "models/skater_f/pant_regular.skin"
     replace = "CS_NH_steamer_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_flora"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Snow Pants"
@@ -1129,10 +982,6 @@ skater_f_legs = [
     mesh = "models/skater_f/pant_baggy.skin"
     replace = "CS_NH_steamer_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_snow"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Camo Pants"
@@ -1140,10 +989,6 @@ skater_f_legs = [
     mesh = "models/skater_f/pant_baggy.skin"
     replace = "CS_NH_steamer_pants.png"
     with = "textures/skater_m/CS_NH_cargoshorts_camo"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Stripe Pants"
@@ -1151,10 +996,6 @@ skater_f_legs = [
     mesh = "models/skater_f/pant_regular.skin"
     replace = "CS_NH_steamer_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_stripe"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Cord Pants"
@@ -1162,27 +1003,16 @@ skater_f_legs = [
     mesh = "models/skater_f/pant_regular.skin"
     replace = "CS_NH_steamer_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_cord"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Tight Pants"
     frontend_desc = 'Tight Pants'
     mesh = "models/skater_f/pant_tight.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Ankle Pants"
     frontend_desc = 'Ankle Pants'
     mesh = "models/skater_f/pant_ankle.skin"
-    script disqualify_script
-      cas_temp_disq_remove_kneepads
-    endscript
     shows_panties
   }
   {
@@ -1195,10 +1025,6 @@ skater_f_legs = [
     desc_id = #"Steamer Pants"
     frontend_desc = 'Steamer Pants'
     mesh = "models/skater_f/pant_steamer.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-      cas_temp_disq_remove_kneepads
-    endscript
   }
   {
     desc_id = #"Cargo Shorts"
@@ -1231,7 +1057,6 @@ skater_f_legs = [
     frontend_desc = 'Vert Shorts'
     mesh = "models/skater_m/pant_vertshorts.skin"
     supports_kneepads
-    hidden
   }
   {
     desc_id = #"Short Shorts"
@@ -1256,17 +1081,11 @@ skater_f_legs = [
     desc_id = #"Baggy Pants"
     frontend_desc = 'Baggy Pants'
     mesh = "models/skater_m/pant_baggy.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Cargo Pants"
     frontend_desc = 'Cargo Pants'
     mesh = "models/skater_m/pant_cargolong.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Camo Pants"
@@ -1274,9 +1093,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_cargoshorts_camo"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Stripe Pants"
@@ -1284,9 +1100,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_stripe"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Cord Pants"
@@ -1294,9 +1107,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_cord"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Tight Pants"
@@ -1304,9 +1114,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_tight.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_hawk_alt_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Plaid Punk Pants"
@@ -1314,9 +1121,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_tight.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_JB_pants_plaidpunk"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Hawk Pants"
@@ -1324,9 +1128,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_hawk_alt_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Burnquist Pants"
@@ -1334,9 +1135,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Burnquist_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Caballero Pants"
@@ -1344,9 +1142,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_caballero_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Campbell Pants"
@@ -1354,9 +1149,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_campbell_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Glifberg Pants"
@@ -1364,9 +1156,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Glifberg_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Koston Pants"
@@ -1374,9 +1163,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Koston_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Lasek Pants"
@@ -1384,9 +1170,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_lasek_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Margera Pants"
@@ -1394,9 +1177,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Margera_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Muska Pants"
@@ -1404,10 +1184,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_muska_pants"
-    hidden
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Reynolds Pants"
@@ -1415,9 +1191,6 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Reynolds_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Rowley Pants"
@@ -1425,17 +1198,11 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Rowley_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Thomas Pants"
     frontend_desc = 'Thomas Pants'
     mesh = "models/skater_m/pant_thomas.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Vallely Shorts"
@@ -1475,9 +1242,6 @@ skater_f_legs = [
     replace1 = "NN_Thomas_beltbuckle.png"
     with1 = "textures/skater_m/CS_NN_Ollie_beltbuckle"
     unlock_flag = CAS_UNLOCK_16
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Clown Pants"
@@ -1486,9 +1250,6 @@ skater_f_legs = [
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NN_baggypants_Clown"
     unlock_flag = CAS_UNLOCK_17
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
 ]
 skater_f_hair = [
@@ -1643,7 +1404,6 @@ skater_f_kneepads = [
     desc_id = #"Knee Pads"
     frontend_desc = 'Knee Pads'
     mesh = "models/skater_m/extra_kneepad.skin"
-    force_vert_shorts
   }
   {
     desc_id = #"Vert Knee Pads"
@@ -1651,7 +1411,6 @@ skater_f_kneepads = [
     mesh = "models/skater_m/extra_kneepad.skin"
     replace = "CS_NN_kneepad01.png"
     with = "textures/skater_m/CS_NN_kneepad02"
-    force_vert_shorts
   }
 ]
 skater_f_socks = [
@@ -1704,7 +1463,6 @@ skater_f_elbowpads = [
     desc_id = #"Elbow Pads"
     frontend_desc = 'Elbow Pads'
     mesh = "models/skater_m/extra_elbowpad.skin"
-    force_short_sleeve
   }
   {
     desc_id = #" Vert Elbow Pads"
@@ -1712,7 +1470,6 @@ skater_f_elbowpads = [
     mesh = "models/skater_m/extra_elbowpad.skin"
     replace = "CS_NN_elbow01.png"
     with = "textures/skater_m/CS_NN_elbow02"
-    force_short_sleeve
   }
 ]
 skater_f_backpack = [
@@ -1726,7 +1483,6 @@ skater_f_backpack = [
     frontend_desc = 'Backpack 1'
     mesh = "models/skater_f/extra_backpack.skin"
     is_backpack
-    not_with_elissa
   }
   {
     desc_id = #"Backpack 2"
@@ -1735,6 +1491,5 @@ skater_f_backpack = [
     replace = "CS_MLS_backpack01F.png"
     with = "textures/skater_m/CS_MLS_backpack02F"
     is_backpack
-    not_with_elissa
   }
 ]

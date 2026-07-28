@@ -1,4 +1,3 @@
-
 appearance_burnquist =
 {
   skater_m_head = { desc_id = Burnquist }
@@ -267,7 +266,6 @@ body = [
     with3 = "textures/skater_m/CS_NH_M_blk_leg"
     replace4 = "CS_NN_wht_foot.png"
     with4 = "textures/skater_m/CS_NN_blk_foot"
-    hidden
   }
   {
     desc_id = MuskaBody
@@ -279,7 +277,6 @@ body = [
     with1 = "textures/skater_m/CS_NH_Muska_torso"
     replace2 = "CS_NH_M_wht_hand.png"
     with2 = "textures/skater_m/CS_NH_Muska_hand"
-    hidden
   }
   {
     desc_id = VallelyBody
@@ -299,7 +296,6 @@ body = [
     with5 = "textures/skater_m/CS_NN_MikeV_LtatL"
     replace6 = "CS_NN_tat_back00.png"
     with6 = "textures/skater_m/CS_NN_MikeV_Back"
-    hidden
   }
   {
     desc_id = MaleBody3
@@ -315,7 +311,6 @@ body = [
     with3 = "textures/skater_m/CS_NH_M_bwn_leg"
     replace4 = "CS_NN_wht_foot.png"
     with4 = "textures/skater_m/CS_NN_bwn_foot"
-    hidden
   }
   {
     desc_id = FemaleBody
@@ -336,7 +331,6 @@ body = [
     with3 = "textures/skater_m/CS_NH_f_blk_leg"
     replace4 = "CS_NN_F_wht_foot.png"
     with4 = "textures/skater_m/CS_NN_F_blk_foot"
-    hidden
   }
   {
     desc_id = FemaleBody3
@@ -352,7 +346,6 @@ body = [
     with3 = "textures/skater_m/CS_NH_f_bwn_leg"
     replace4 = "CS_NN_F_wht_foot.png"
     with4 = "textures/skater_m/CS_NN_F_bwn_foot"
-    hidden
   }
   {
     desc_id = eddie
@@ -417,7 +410,6 @@ skater_m_head = [
       SetPart part = body desc_id = MaleBody3
     endscript
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Caballero
@@ -427,7 +419,6 @@ skater_m_head = [
       SetPart part = body desc_id = MaleBody3
     endscript
     flags = { is_pro_head is_caballero_head }
-    hidden
     bighead_scale_info = caballero_bighead_scale_info
   }
   {
@@ -441,21 +432,18 @@ skater_m_head = [
     with = "textures/skater_m/CS_NH_campbell_arm"
     in = body
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Glifberg
     frontend_desc = 'Glifberg'
     mesh = "models/skater_m/head_glifberg.skin"
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Hawk
     frontend_desc = 'Hawk'
     mesh = "models/skater_m/head_hawk.skin"
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Koston
@@ -465,14 +453,12 @@ skater_m_head = [
       SetPart part = body desc_id = MaleBody3
     endscript
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Lasek
     frontend_desc = 'Lasek'
     mesh = "models/skater_m/head_lasek.skin"
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Margera
@@ -482,35 +468,30 @@ skater_m_head = [
     with = "textures/skater_m/CS_NH_margera_torso"
     in = body
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Mullen
     frontend_desc = 'Mullen'
     mesh = "models/skater_m/head_mullen.skin"
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Muska
     frontend_desc = 'Muska'
     mesh = "models/skater_m/head_muska.skin"
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Reynolds
     frontend_desc = 'Reynolds'
     mesh = "models/skater_m/head_reynolds.skin"
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Rowley
     frontend_desc = 'Rowley'
     mesh = "models/skater_m/head_rowley.skin"
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Thomas
@@ -520,7 +501,6 @@ skater_m_head = [
     with = "textures/skater_m/CS_NN_Thomas_leg"
     in = body
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = Vallely
@@ -528,7 +508,6 @@ skater_m_head = [
     mesh = "models/skater_m/head_vallely.skin"
     in = body
     flags = { is_pro_head }
-    hidden
   }
   {
     desc_id = #"Dark Skin 1"
@@ -682,13 +661,6 @@ skater_m_head = [
     desc_id = #"Officer Dick"
     frontend_desc = 'Officer Dick'
     mesh = "models/skater_m/head_officer.skin"
-    script disqualify_script
-      ClearPart part = hat
-      ClearPart part = helmet
-      ClearPart part = skater_m_hair
-      ClearPart part = skater_m_jaw
-    endscript
-    lockout_parts = [ hat_items helmet_items hair_items facial_hair_items ]
     unlock_flag = CAS_UNLOCK_02
     is_weird_head
   }
@@ -696,14 +668,6 @@ skater_m_head = [
     desc_id = Ollie
     frontend_desc = 'Ollie the Bum'
     mesh = "models/skater_m/head_ollie.skin"
-    script disqualify_script
-      ClearPart part = hat
-      ClearPart part = helmet
-      ClearPart part = skater_m_hair
-      ClearPart part = skater_m_jaw
-      ClearPart part = Glasses
-    endscript
-    lockout_parts = [ hat_items helmet_items hair_items facial_hair_items glasses_items ]
     unlock_flag = CAS_UNLOCK_03
     is_weird_head
   }
@@ -711,14 +675,6 @@ skater_m_head = [
     desc_id = Kenny
     frontend_desc = 'Kenny'
     mesh = "models/skater_m/head_Kenny.skin"
-    script disqualify_script
-      ClearPart part = hat
-      ClearPart part = helmet
-      ClearPart part = skater_m_hair
-      ClearPart part = skater_m_jaw
-      ClearPart part = Glasses
-    endscript
-    lockout_parts = [ hat_items helmet_items hair_items facial_hair_items glasses_items ]
     unlock_flag = CAS_UNLOCK_04
     is_weird_head
   }
@@ -726,15 +682,7 @@ skater_m_head = [
     desc_id = #"Metal Head"
     frontend_desc = 'Metal Head'
     mesh = "models/skater_m/head_metalmask.skin"
-    script disqualify_script
-      ClearPart part = hat
-      ClearPart part = helmet
-      ClearPart part = skater_m_hair
-      ClearPart part = skater_m_jaw
-      ClearPart part = Glasses
-    endscript
     unlock_flag = CAS_UNLOCK_05
-    lockout_parts = [ hat_items helmet_items hair_items facial_hair_items glasses_items ]
   }
   {
     desc_id = Clown
@@ -750,7 +698,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_math"
-    hidden
   }
   {
     desc_id = #"Rick Thorne"
@@ -758,7 +705,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_rickt"
-    hidden
   }
   {
     desc_id = #"Atiba Jefferson"
@@ -766,7 +712,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_atibaj"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody2
+    endscript
   }
   {
     desc_id = #"Parking Guy"
@@ -774,7 +722,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_parking"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody3
+    endscript
   }
   {
     desc_id = #"Aaron Skillman"
@@ -782,13 +732,11 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_AaronS"
-    hidden
   }
   {
     desc_id = #"Alan Flores"
     frontend_desc = 'Alan Flores'
     mesh = "models/skater_m/Head_Neversoft.skin"
-    hidden
   }
   {
     desc_id = #"Adam Lippmann"
@@ -796,7 +744,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_AdamL"
-    hidden
   }
   {
     desc_id = #"Andy Marchal"
@@ -804,7 +751,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_Andym"
-    hidden
   }
   {
     desc_id = #"Brad Bulkley"
@@ -812,7 +758,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_bradb"
-    hidden
   }
   {
     desc_id = #"Brian Jennings"
@@ -820,7 +765,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_brianj"
-    hidden
   }
   {
     desc_id = #"Andrew Gault"
@@ -828,7 +772,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_chadf"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody2
+    endscript
   }
   {
     desc_id = #"Chauwa Steel"
@@ -836,7 +782,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_Chauwas"
-    hidden
   }
   {
     desc_id = #"Chris Rausch"
@@ -844,7 +789,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_chrisr"
-    hidden
   }
   {
     desc_id = #"Chris Peacock"
@@ -852,7 +796,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_chrisp"
-    hidden
   }
   {
     desc_id = #"Chris Ward"
@@ -860,7 +803,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_chrisw"
-    hidden
   }
   {
     desc_id = #"Dana Mackenzie"
@@ -868,7 +810,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_danam"
-    hidden
   }
   {
     desc_id = #"Darren Thorne"
@@ -876,7 +817,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_darrent"
-    hidden
   }
   {
     desc_id = #"Dave Cowling"
@@ -884,7 +824,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_davec"
-    hidden
   }
   {
     desc_id = #"David Rowe"
@@ -892,7 +831,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_davidr"
-    hidden
   }
   {
     desc_id = #"Garrett Jost"
@@ -900,7 +838,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_garretj"
-    hidden
   }
   {
     desc_id = #"Gary Jesdanun"
@@ -908,7 +845,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_garyj"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody3
+    endscript
   }
   {
     desc_id = #"Henry Ji"
@@ -916,7 +855,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_henryj"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody3
+    endscript
   }
   {
     desc_id = #"Jason Uyeda"
@@ -924,7 +865,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_jasonu"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody3
+    endscript
   }
   {
     desc_id = #"Jim Jagger"
@@ -932,7 +875,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_jimj"
-    hidden
   }
   {
     desc_id = #"Joe Pease"
@@ -940,7 +882,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_joep"
-    hidden
   }
   {
     desc_id = #"Joel Jewett"
@@ -948,7 +889,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_joelj"
-    hidden
   }
   {
     desc_id = #"Johnny Ow"
@@ -956,7 +896,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_johnnyO"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody3
+    endscript
   }
   {
     desc_id = #"Jon Bailey"
@@ -964,7 +906,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_jonb"
-    hidden
   }
   {
     desc_id = #"Kendall Harris"
@@ -972,7 +913,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_kenh"
-    hidden
   }
   {
     desc_id = #"Kevin Mulhall"
@@ -980,7 +920,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_kevinm"
-    hidden
   }
   {
     desc_id = #"Kurt Gutierrez"
@@ -988,7 +927,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_kurtg"
-    hidden
   }
   {
     desc_id = #"Larry Liberty"
@@ -996,18 +934,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_larryl"
-    hidden
-  }
-  {
-    desc_id = #"Lisa Davies"
-    frontend_desc = 'Lisa Davies'
-    replace = "CS_NH_F_wht_face.png"
-    with = "textures/skater_ns/NS_Head_lisad"
-    in = body
-    hidden
-    script disqualify_script
-      SetPart part = body desc_id = FemaleBody
-    endscript
   }
   {
     desc_id = #"Mark Scott"
@@ -1015,7 +941,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_marks"
-    hidden
   }
   {
     desc_id = #"Mick West"
@@ -1023,7 +948,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_mickw"
-    hidden
   }
   {
     desc_id = #"Mike Day"
@@ -1031,7 +955,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_miked"
-    hidden
   }
   {
     desc_id = #"Nolan Nelson"
@@ -1039,7 +962,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_nolann"
-    hidden
   }
   {
     desc_id = #"Paul Robinson"
@@ -1047,7 +969,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_paulr"
-    hidden
   }
   {
     desc_id = #"Pete Day"
@@ -1055,7 +976,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_peted"
-    hidden
   }
   {
     desc_id = #"Ralph D'amato"
@@ -1063,7 +983,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_ralphd"
-    hidden
   }
   {
     desc_id = #"Ryan McMahon"
@@ -1071,7 +990,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_ryanm"
-    hidden
   }
   {
     desc_id = #"Connor Jewett"
@@ -1079,7 +997,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_sandyj"
-    hidden
   }
   {
     desc_id = #"William Pease"
@@ -1087,18 +1004,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_scottp"
-    hidden
-  }
-  {
-    desc_id = #"Stacey Ytuarte"
-    frontend_desc = 'Stacey Ytuarte'
-    replace = "CS_NH_F_wht_face.png"
-    with = "textures/skater_ns/NS_Head_staceyy"
-    in = body
-    hidden
-    script disqualify_script
-      SetPart part = body desc_id = FemaleBody3
-    endscript
   }
   {
     desc_id = #"Steve Ganem"
@@ -1106,7 +1011,9 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_steveg"
-    hidden
+    script disqualify_script
+      SetPart part = body desc_id = MaleBody3
+    endscript
   }
   {
     desc_id = #"Ted Barber"
@@ -1114,7 +1021,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_tedb"
-    hidden
   }
   {
     desc_id = #"Todd Wahoske"
@@ -1122,7 +1028,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_toddw"
-    hidden
   }
   {
     desc_id = #"Zac Drake"
@@ -1130,7 +1035,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/NS_Head_zacd"
-    hidden
   }
   {
     desc_id = #"Matt Mcpherson"
@@ -1138,7 +1042,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/ATVI_Head_mattm"
-    hidden
   }
   {
     desc_id = #"Mike Lashever"
@@ -1146,7 +1049,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/ATVI_Head_mikel"
-    hidden
   }
   {
     desc_id = #"Dave Stohl"
@@ -1154,29 +1056,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/ATVI_Head_daves"
-    hidden
-  }
-  {
-    desc_id = #"Stacey Drellish"
-    frontend_desc = 'Stacey Drellish'
-    replace = "CS_NH_F_wht_face.png"
-    with = "textures/skater_ns/ATVI_Head_staceyd"
-    in = body
-    hidden
-    script disqualify_script
-      SetPart part = body desc_id = FemaleBody
-    endscript
-  }
-  {
-    desc_id = #"Lindsey Hayes"
-    frontend_desc = 'Lindsey Hayes'
-    replace = "CS_NH_F_wht_face.png"
-    with = "textures/skater_ns/ATVI_Head_lindseyh"
-    in = body
-    hidden
-    script disqualify_script
-      SetPart part = body desc_id = FemaleBody
-    endscript
   }
   {
     desc_id = #"Mike Ward"
@@ -1184,7 +1063,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/ATVI_Head_mikew"
-    hidden
   }
   {
     desc_id = #"John Rosser"
@@ -1192,7 +1070,6 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/ATVI_Head_ATVI5"
-    hidden
   }
   {
     desc_id = #"Joe Favazza"
@@ -1200,17 +1077,8 @@ skater_m_head = [
     mesh = "models/skater_m/Head_Neversoft.skin"
     replace = "CS_Head_Alan.png"
     with = "textures/skater_ns/ATVI_Head_ATVI6"
-    hidden
-  }
-  {
-    desc_id = #"Marilena Rixfor"
-    frontend_desc = 'Marilena Rixfor'
-    replace = "CS_NH_F_wht_face.png"
-    with = "textures/skater_ns/ATVI_Head_Marilenar"
-    in = body
-    hidden
     script disqualify_script
-      SetPart part = body desc_id = FemaleBody3
+      SetPart part = body desc_id = MaleBody3
     endscript
   }
   {
@@ -1339,14 +1207,12 @@ skater_m_torso = [
     desc_id = #"Button Shirt"
     frontend_desc = 'Button Shirt'
     mesh = "models/skater_m/shirt_ssbutton.skin"
-    not_with_backpack
     is_long_sleeve
   }
   {
     desc_id = #"Open Shirt"
     frontend_desc = 'Open Shirt'
     mesh = "models/skater_m/shirt_ssopen.skin"
-    not_with_backpack
     is_long_sleeve
   }
   {
@@ -1354,9 +1220,6 @@ skater_m_torso = [
     frontend_desc = 'Long Sleeve'
     mesh = "models/skater_m/shirt_T_longsleeve.skin"
     supports_logo
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1365,29 +1228,18 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_T_longsleeve.skin"
     replace = "CS_JB_shirt_Tlongsleeve.png"
     with = "textures/skater_m/CS_JB_shirt_TLSstripe"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
     desc_id = #"LS Button Shirt"
     frontend_desc = 'LS Button Shirt'
     mesh = "models/skater_m/shirt_LSbutton.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
     desc_id = #"LS Open Shirt"
     frontend_desc = 'LS Open Shirt'
     mesh = "models/skater_m/shirt_lsopen.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1398,11 +1250,7 @@ skater_m_torso = [
     with = "textures/skater_m/CS_NH_lasek_shirt"
     replace1 = "CS_NH_Thomas_sleeve.png"
     with1 = "textures/skater_m/CS_NH_lasek_sleeve"
-    not_with_backpack
     is_cab
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1413,10 +1261,6 @@ skater_m_torso = [
     with = "textures/skater_m/CS_JB_shirt_buttonflannel"
     replace1 = "CS_JB_sleeve_long.png"
     with1 = "textures/skater_m/CS_JB_sleeve_longflannel"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1427,11 +1271,7 @@ skater_m_torso = [
     with = "textures/skater_m/CS_JB_shirt_buttonflannel"
     replace1 = "CS_NH_Thomas_sleeve.png"
     with1 = "textures/skater_m/CS_JB_sleeve_longflannel"
-    not_with_backpack
     is_cab
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1458,18 +1298,9 @@ skater_m_torso = [
     is_margera
     is_mullen
     is_reynolds
-    script disqualify_script
-      cas_temp_disq_remove_long_hair
-      ClearPart part = hat
-      ClearPart part = helmet
-      cas_temp_disq_remove_accessories
-    endscript
     supports_logo
     no_back_logo
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_head
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Up Stripe"
@@ -1490,16 +1321,7 @@ skater_m_torso = [
     is_margera
     is_mullen
     is_reynolds
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-      cas_temp_disq_remove_long_hair
-      ClearPart part = hat
-      ClearPart part = helmet
-    endscript
-    not_with_backpack
     is_long_sleeve
-    not_with_weird_head
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Down"
@@ -1507,12 +1329,7 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_lshooddown.skin"
     supports_logo
     no_back_logo
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Hoody Down Stripe"
@@ -1522,19 +1339,12 @@ skater_m_torso = [
     with = "textures/skater_m/CS_JB_shirt_hoodydownstripe"
     replace1 = "CS_JB_sleeve_hoodydown.png"
     with1 = "textures/skater_m/CS_JB_sleeve_hoodydownstripe"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Denim Vest"
     frontend_desc = 'Denim Vest'
     mesh = "models/skater_m/shirt_rockervest.skin"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Leather Vest"
@@ -1542,8 +1352,6 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_rockervest.skin"
     replace = "CS_NN_Shirt_rockervest01.png"
     with = "textures/skater_m/CS_JB_shirt_leathervest"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Baggy Vest"
@@ -1551,15 +1359,11 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest_camo.png"
     with = "textures/skater_m/CS_JB_shirt_bagvest"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Camo Vest"
     frontend_desc = 'Camo Vest'
     mesh = "models/skater_m/shirt_baggyvest.skin"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Padded Vest"
@@ -1567,8 +1371,6 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest_camo.png"
     with = "textures/skater_m/CS_JB_shirt_bagvest_padded"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Flak Vest"
@@ -1576,19 +1378,12 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest_camo.png"
     with = "textures/skater_m/CS_JB_shirt_bagvest_flak"
-    not_with_backpack
-    not_with_weird_hat
   }
   {
     desc_id = #"Snow Jacket"
     frontend_desc = 'Snow Jacket'
     mesh = "models/skater_m/shirt_snowjacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Padded Jacket"
@@ -1598,43 +1393,24 @@ skater_m_torso = [
     with = "textures/skater_m/CS_JB_shirt_snowjacket_padded"
     replace1 = "CS_JB_sleeve_snowjacket.png"
     with1 = "textures/skater_m/CS_JB_sleeve_snowjacket_padded"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Leather Jacket"
     frontend_desc = 'Leather Jacket'
     mesh = "models/skater_m/shirt_leatherjacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = Windbreaker
     frontend_desc = 'Windbreaker'
     mesh = "models/skater_m/shirt_windbreaker.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = Sweater
     frontend_desc = 'Sweater'
     mesh = "models/skater_m/shirt_sweater.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1649,24 +1425,14 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_officer.skin"
     unlock_flag = CAS_UNLOCK_11
     is_clowny
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Ollie Coat"
     frontend_desc = 'Ollie Coat'
     mesh = "models/skater_m/shirt_ollie.skin"
     unlock_flag = CAS_UNLOCK_12
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Burnquist Shirt"
@@ -1676,10 +1442,6 @@ skater_m_torso = [
     with = "textures/skater_m/CS_NH_burnquist_shirt"
     replace1 = "CS_JB_sleeve_long.png"
     with1 = "textures/skater_m/CS_NH_burnquist_sleeve"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1724,9 +1486,6 @@ skater_m_torso = [
     desc_id = #"Hawk Shirt"
     frontend_desc = 'Hawk Shirt'
     mesh = "models/skater_m/shirt_hawk.skin"
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1739,17 +1498,12 @@ skater_m_torso = [
     with1 = "textures/skater_m/CS_NH_lasek_sleeve"
     replace2 = "CS_NH_undershirt.png"
     with2 = "textures/skater_m/CS_NN_lasek_ushirt"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
     desc_id = #"Margera Shirt"
     frontend_desc = 'Margera Shirt'
     mesh = "models/skater_m/shirt_margera.skin"
-    not_with_backpack
     is_long_sleeve
   }
   {
@@ -1772,32 +1526,18 @@ skater_m_torso = [
     desc_id = #"Reynolds Jacket"
     frontend_desc = 'Reynolds Jacket'
     mesh = "models/skater_m/shirt_reynolds_jacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Rowley Jacket"
     frontend_desc = 'Rowley Jacket'
     mesh = "models/skater_m/shirt_rowley_jacket.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
-    not_with_weird_hat
   }
   {
     desc_id = #"Thomas Shirt"
     frontend_desc = 'Thomas Shirt'
     mesh = "models/skater_m/shirt_thomas.skin"
-    not_with_backpack
-    script disqualify_script
-      cas_temp_disq_remove_accessories
-    endscript
     is_long_sleeve
   }
   {
@@ -1867,7 +1607,6 @@ skater_m_legs = [
     frontend_desc = 'Vert Shorts'
     mesh = "models/skater_m/pant_vertshorts.skin"
     supports_kneepads
-    hidden
   }
   {
     desc_id = #"Short Shorts"
@@ -1892,17 +1631,11 @@ skater_m_legs = [
     desc_id = #"Baggy Pants"
     frontend_desc = 'Baggy Pants'
     mesh = "models/skater_m/pant_baggy.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Cargo Pants"
     frontend_desc = 'Cargo Pants'
     mesh = "models/skater_m/pant_cargolong.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Camo Pants"
@@ -1910,9 +1643,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_cargoshorts_camo"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Stripe Pants"
@@ -1920,9 +1650,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_stripe"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Cord Pants"
@@ -1930,9 +1657,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_baggypants_cord"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Tight Pants"
@@ -1940,9 +1664,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_tight.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_hawk_alt_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Plaid Punk Pants"
@@ -1950,9 +1671,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_tight.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_JB_pants_plaidpunk"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Hawk Pants"
@@ -1960,9 +1678,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_hawk_alt_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Burnquist Pants"
@@ -1970,9 +1685,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Burnquist_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Caballero Pants"
@@ -1980,9 +1692,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_caballero_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Campbell Pants"
@@ -1990,9 +1699,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_campbell_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Glifberg Pants"
@@ -2000,9 +1706,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Glifberg_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Koston Pants"
@@ -2010,9 +1713,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Koston_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Lasek Pants"
@@ -2020,9 +1720,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_lasek_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Margera Pants"
@@ -2030,9 +1727,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Margera_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Muska Pants"
@@ -2040,10 +1734,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_baggy.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_muska_pants"
-    hidden
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Reynolds Pants"
@@ -2051,9 +1741,6 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Reynolds_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Rowley Pants"
@@ -2061,17 +1748,11 @@ skater_m_legs = [
     mesh = "models/skater_m/pant_regular.skin"
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NH_Rowley_pants"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Thomas Pants"
     frontend_desc = 'Thomas Pants'
     mesh = "models/skater_m/pant_thomas.skin"
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Vallely Shorts"
@@ -2111,9 +1792,6 @@ skater_m_legs = [
     replace1 = "NN_Thomas_beltbuckle.png"
     with1 = "textures/skater_m/CS_NN_Ollie_beltbuckle"
     unlock_flag = CAS_UNLOCK_16
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
   {
     desc_id = #"Clown Pants"
@@ -2122,9 +1800,6 @@ skater_m_legs = [
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_NN_baggypants_Clown"
     unlock_flag = CAS_UNLOCK_17
-    script disqualify_script
-      cas_temp_disq_remove_socks
-    endscript
   }
 ]
 skater_m_hair = [
@@ -2139,7 +1814,6 @@ skater_m_hair = [
     frontend_desc = 'Buzzed Light'
     mesh = "models/skater_m/Hair_M_W_Buzz.skin"
     is_short_hair
-    not_with_eddie
   }
   {
     desc_id = #"Buzzed Dark"
@@ -2150,7 +1824,6 @@ skater_m_hair = [
     replace1 = "CS_JB_Hair_BuzzL2.png"
     with1 = "textures/skater_m/CS_JB_Hair_BuzzD2"
     is_short_hair
-    not_with_eddie
   }
   {
     desc_id = #"Mohawk Light"
@@ -2158,19 +1831,16 @@ skater_m_hair = [
     mesh = "models/skater_m/Hair_M_W_Mohawk.skin"
     replace = "CS_JB_Hair_MohawkD1.png"
     with = "textures/skater_m/CS_JB_Hair_MohawkL1"
-    not_with_eddie
   }
   {
     desc_id = #"Mohawk Dark"
     frontend_desc = 'Mohawk Dark'
     mesh = "models/skater_m/Hair_M_W_Mohawk.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Liberty Spikes Dark"
     frontend_desc = 'Liberty Spikes Dark'
     mesh = "models/skater_m/Hair_M_LibertySpikes.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Mullet 1 Light"
@@ -2178,19 +1848,16 @@ skater_m_hair = [
     mesh = "models/skater_m/Hair_M_W_Mullet_A.skin"
     replace = "CS_JB_Hair_MulletD1.png"
     with = "textures/skater_m/CS_JB_Hair_MulletL1"
-    not_with_eddie
   }
   {
     desc_id = #"Mullet 1 Dark"
     frontend_desc = 'Mullet 1 Dark'
     mesh = "models/skater_m/Hair_M_W_Mullet_A.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Mullet 2 Dark"
     frontend_desc = 'Mullet 2 Dark'
     mesh = "models/skater_m/Hair_M_Mullet2.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Afro Light"
@@ -2200,13 +1867,11 @@ skater_m_hair = [
     with = "textures/skater_m/CS_JB_Hair_AfroL1"
     replace1 = "CS_JB_Hair_AfroD2.png"
     with1 = "textures/skater_m/CS_JB_Hair_AfroL2"
-    not_with_eddie
   }
   {
     desc_id = #"Afro Dark"
     frontend_desc = 'Afro Dark'
     mesh = "models/skater_m/Hair_M_W_Afro.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Long Light"
@@ -2218,13 +1883,11 @@ skater_m_hair = [
     with1 = "textures/skater_m/CS_JB_Hair_LonghairL2"
     replace2 = "CS_JB_Hair_LonghairD3.png"
     with2 = "textures/skater_m/CS_JB_Hair_LonghairL3"
-    not_with_eddie
   }
   {
     desc_id = #"Long Dark"
     frontend_desc = 'Long Dark'
     mesh = "models/skater_m/Hair_M_W_Longhair_A.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Ponytail Light"
@@ -2236,13 +1899,11 @@ skater_m_hair = [
     with1 = "textures/skater_m/CS_JB_Hair_PonytailL2"
     replace2 = "CS_JB_Hair_PonytailD3.png"
     with2 = "textures/skater_m/CS_JB_Hair_PonytailL3"
-    not_with_eddie
   }
   {
     desc_id = #"Ponytail Dark"
     frontend_desc = 'Ponytail Dark'
     mesh = "models/skater_m/Hair_M_W_Ponytail.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Slick Light"
@@ -2252,13 +1913,11 @@ skater_m_hair = [
     with = "textures/skater_m/CS_JB_Hair_SlickL1"
     replace1 = "CS_JB_Hair_SlickD2.png"
     with1 = "textures/skater_m/CS_JB_Hair_SlickL2"
-    not_with_eddie
   }
   {
     desc_id = #"Slick Dark"
     frontend_desc = 'Slick Dark'
     mesh = "models/skater_m/Hair_M_W_Slick02.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Spiked Light"
@@ -2270,63 +1929,53 @@ skater_m_hair = [
     with1 = "textures/skater_m/CS_JB_Hair_Spiked1_L2"
     replace2 = "CS_JB_Hair_Spiked1_D3.png"
     with2 = "textures/skater_m/CS_JB_Hair_Spiked1_L3"
-    not_with_eddie
   }
   {
     desc_id = #"Spiked Dark"
     frontend_desc = 'Spiked Dark'
     mesh = "models/skater_m/Hair_M_W_Spiked.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Bowl Dark"
     frontend_desc = 'Bowl Dark'
     mesh = "models/skater_m/Hair_M_Bowl.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Medium Dark"
     frontend_desc = 'Medium Dark'
     mesh = "models/skater_m/Hair_M_Medium1.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Flat Top Dark"
     frontend_desc = 'Flat Top Dark'
     mesh = "models/skater_m/Hair_M_JarHead.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Balding Dark"
     frontend_desc = 'Balding Dark'
     mesh = "models/skater_m/Hair_M_Fritz.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Comb Over Dark"
     frontend_desc = 'Comb Over Dark'
     mesh = "models/skater_m/Hair_M_CombOver.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Pompadour Dark"
     frontend_desc = 'Pompadour Dark'
     mesh = "models/skater_m/Hair_M_Pompadour.skin"
-    not_with_eddie
   }
   {
     desc_id = #"Eraser Head"
     frontend_desc = 'Eraser Hair'
     mesh = "models/skater_m/Hair_M_EraserHead.skin"
     unlock_flag = CAS_UNLOCK_07
-    not_with_eddie
   }
   {
     desc_id = #"Clown Hair"
     frontend_desc = 'Clown Hair'
     mesh = "models/skater_m/Hair_M_clown.skin"
     unlock_flag = CAS_UNLOCK_08
-    not_with_eddie
   }
   {
     desc_id = #"Eddie's Hair"
@@ -2346,7 +1995,6 @@ skater_m_kneepads = [
     desc_id = #"Knee Pads"
     frontend_desc = 'Knee Pads'
     mesh = "models/skater_m/extra_kneepad.skin"
-    force_vert_shorts
   }
   {
     desc_id = #"Vert Knee Pads"
@@ -2354,7 +2002,6 @@ skater_m_kneepads = [
     mesh = "models/skater_m/extra_kneepad.skin"
     replace = "CS_NN_kneepad01.png"
     with = "textures/skater_m/CS_NN_kneepad02"
-    force_vert_shorts
   }
 ]
 skater_m_jaw = [
@@ -2605,7 +2252,6 @@ skater_m_elbowpads = [
     desc_id = #"Elbow Pads"
     frontend_desc = 'Elbow Pads'
     mesh = "models/skater_m/extra_elbowpad.skin"
-    force_short_sleeve
   }
   {
     desc_id = #" Vert Elbow Pads"
@@ -2613,19 +2259,16 @@ skater_m_elbowpads = [
     mesh = "models/skater_m/extra_elbowpad.skin"
     replace = "CS_NN_elbow01.png"
     with = "textures/skater_m/CS_NN_elbow02"
-    force_short_sleeve
   }
   {
     desc_id = #"Left Elbow Band"
     frontend_desc = 'Left Elbow Brace'
     mesh = "models/skater_m/extra_elbowbandL.skin"
-    force_short_sleeve
   }
   {
     desc_id = #"Right Elbow Band"
     frontend_desc = 'Right Elbow Brace'
     mesh = "models/skater_m/extra_elbowbandR.skin"
-    force_short_sleeve
   }
 ]
 skater_m_backpack = [
