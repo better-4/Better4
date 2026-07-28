@@ -1,4 +1,3 @@
-
 ALWAYSPLAYMUSIC = 1
 HIDEHUD = 0
 meta_button_map_ps2 = [

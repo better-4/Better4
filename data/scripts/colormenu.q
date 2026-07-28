@@ -1,4 +1,3 @@
-
 colormenu_bar_scale = (4.4, 2)
 colormenu_bar_focus_rgba = [ 128 128 128 118 ]
 colormenu_bar_unfocus_rgba = [ 40 40 40 118 ]
