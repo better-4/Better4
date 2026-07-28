@@ -3198,7 +3198,7 @@ script create_options_menu
       endif
     endif
   endif
-  make_text_sub_menu_item text = "\c3Mod Options" id = menu_mod pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = create_mod_menu }
+  make_text_sub_menu_item text = better4_options_text id = menu_mod pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = better4_menu_options close_script = create_options_menu }
   if not InMultiplayerGame
     if IsNGC
       switch camera_angle
