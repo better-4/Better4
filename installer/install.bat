@@ -1,3 +1,4 @@
+@setlocal enableextensions enabledelayedexpansion
 @echo off
 setlocal
 
@@ -30,31 +31,54 @@ if not exist "%TARGET_DIR%Skate4.exe" (
     exit /b 1
 )
 
+if not "%~2"=="ELEVATED" (
+    (echo test>"%TARGET_DIR%write_test.tmp") 2>nul
+    if exist "%TARGET_DIR%write_test.tmp" (
+        del "%TARGET_DIR%write_test.tmp"
+    ) else (
+        echo "%TARGET_DIR%" is not writable, requesting administrator privileges...
+        powershell -Command "Start-Process -FilePath '%~f0' -ArgumentList @('%~1','ELEVATED') -Verb RunAs"
+        exit /b 0
+    )
+)
+
 echo Installing Better4 to "%TARGET_DIR%"...
 
 for %%F in ("%SCRIPT_DIR%*") do (
     if /I not "%%~fF"=="%~f0" (
-        echo Copying %%~nxF...
-        copy /Y "%%~fF" "%TARGET_DIR%" >nul
+        if /I "%%~nxF"=="partymod.ini" (
+            if exist "%TARGET_DIR%partymod.ini" (
+                echo   %%~nxF ^(already exists, skipping^)
+            ) else (
+                echo   %%~nxF
+                copy /Y "%%~fF" "%TARGET_DIR%" >nul
+            )
+        ) else (
+            echo   %%~nxF
+            copy /Y "%%~fF" "%TARGET_DIR%" >nul
+        )
     )
 )
 
 for /D %%D in ("%SCRIPT_DIR%*") do (
-    echo Copying %%~nxD\...
+    echo   %%~nxD\*
     robocopy "%%~fD" "%TARGET_DIR%%%~nxD" /E >nul
 )
 
 echo.
-echo Patching Skate4.exe (press a key when partypatcher prompts)...
+echo Running partypatcher...
 pushd "%TARGET_DIR%"
+move "%TARGET_DIR%THPS4.exe" "%TARGET_DIR%THPS4.exe.bak" 2>&1 >nul
 .\partypatcher.exe
 popd
 
 echo.
 if exist "%TARGET_DIR%THPS4.exe" (
     echo Better4 installed successfully! Run THPS4.exe to play.
+    del "%TARGET_DIR%THPS4.exe.bak" 2>&1 >nul
 ) else (
     echo Something went wrong - THPS4.exe was not created.
+    move "%TARGET_DIR%THPS4.exe" "%TARGET_DIR%THPS4.exe.bak" 2>&1 >nul
 )
 
 pause

@@ -938,7 +938,7 @@ script create_main_menu
     parent = main_menu
     type = TextElement
     id = better4_mod
-    text = " Better4      v0.2"
+    text = " Better4      v0.3"
     font = newtrickfont
     pos = (320, 380)
     rgba = [ 37 93 159 89 ]

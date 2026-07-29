@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
-#
 # In-container build driver for Better4.
-#
-# Builds the PARTYMOD Windows/x86 artifacts with MSVC-under-Wine, compiles the
-# .q QScript sources under data/scripts/ into .qb via the QScriptEd CLI, and
-# copies the gslist server tool. Everything lands under $OUT.
-#
-# The three PARTYMOD targets need conflicting per-target flags, so each gets its
-# own CMake configure rather than editing the vendored partymod-thps4 CMakeLists:
-#   * partypatcher - console subsystem (prints to stdout), default Release
-#   * partyconfig  - windowed (/SUBSYSTEM:WINDOWS) but still enters int main
-#                    (/ENTRY:mainCRTStartup), Release
-#   * partymod     - shared DLL built with optimisation disabled (/Od); upstream
-#                    notes MSVC miscompiles some functions with optimisation on
+
 set -euo pipefail
 
 SRC="${SRC:-/src}"
@@ -57,25 +45,20 @@ cmake --build "${BUILD_ROOT}/mod" --target partymod
 
 echo "==> Collecting PARTYMOD artifacts"
 cp "${BUILD_ROOT}/patcher/partypatcher.exe" "${OUT}/"
-cp "${BUILD_ROOT}/config/partyconfig.exe"   "${OUT}/"
-cp "${BUILD_ROOT}/mod/partymod.dll"         "${OUT}/"
-# Runtime data files shipped alongside the release.
-cp "${PM}/partymod.ini"          "${OUT}/" 2>/dev/null || true
-cp "${PM}/gamecontrollerdb.txt"  "${OUT}/" 2>/dev/null || true
-# SDL2 runtime DLL (x86) that partymod.dll depends on.
+cp "${BUILD_ROOT}/config/partyconfig.exe" "${OUT}/"
+cp "${BUILD_ROOT}/mod/partymod.dll" "${OUT}/"
+cp "${PM}/partymod.ini" "${OUT}/" 2>/dev/null || true
+cp "${PM}/gamecontrollerdb.txt" "${OUT}/" 2>/dev/null || true
 find /opt/sdl2 -path '*/lib/x86/SDL2.dll' -exec cp {} "${OUT}/" \;
 
 echo "==> Compiling QScript sources (.q -> .qb)"
-for q in "${SRC}"/data/scripts/*.q; do
-  name="$(basename "${q}" .q)"
-  dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${q}" "${OUT}/data/scripts/${name}.qb"
-done
+dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${SRC}"/scripts "${OUT}/data/scripts"
 
 echo "==> Configuring + building thps4-server-browser"
 cmake -G Ninja -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
   -S "${SRC}/src/thps4-server-browser" -B "${BUILD_ROOT}/serverbrowser"
-cmake --build "${BUILD_ROOT}/serverbrowser" --target th4-server-browser
-cp "${BUILD_ROOT}/serverbrowser/th4-server-browser.exe" "${OUT}/"
+cmake --build "${BUILD_ROOT}/serverbrowser" --target thps4-server-browser
+cp "${BUILD_ROOT}/serverbrowser/thps4-server-browser.exe" "${OUT}/"
 
 echo "==> Copying gslist"
 cp -r "${SRC}/vendor/gslist" "${OUT}/gslist"
