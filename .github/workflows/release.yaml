@@ -39,11 +39,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Compute cache image ref
+        id: vars
+        run: echo "cache_ref=ghcr.io/$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')/cache" >> "$GITHUB_OUTPUT"
+
       - name: Build export image
         run: |
           docker buildx build -f docker/Dockerfile --target export -o build/out . \
-            --cache-from type=registry,ref=ghcr.io/${{ github.repository }}/cache \
-            --cache-to type=registry,ref=ghcr.io/${{ github.repository }}/cache,mode=max
+            --cache-from type=registry,ref=${{ steps.vars.outputs.cache_ref }} \
+            --cache-to type=registry,ref=${{ steps.vars.outputs.cache_ref }},mode=max
 
       - name: Package artifacts
         working-directory: build/out
