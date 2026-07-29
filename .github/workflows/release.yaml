@@ -40,10 +40,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build export image
-        env:
-          DOCKER_BUILDKIT: "1"
         run: |
-          docker build -f docker/Dockerfile --target export -o build/out . \
+          docker buildx build -f docker/Dockerfile --target export -o build/out . \
             --cache-from type=registry,ref=ghcr.io/${{ github.repository }}/cache \
             --cache-to type=registry,ref=ghcr.io/${{ github.repository }}/cache,mode=max
 
