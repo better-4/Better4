@@ -52,7 +52,10 @@ cp "${PM}/gamecontrollerdb.txt" "${OUT}/" 2>/dev/null || true
 find /opt/sdl2 -path '*/lib/x86/SDL2.dll' -exec cp {} "${OUT}/" \;
 
 echo "==> Compiling QScript sources (.q -> .qb)"
-dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${SRC}"/scripts "${OUT}/data/scripts"
+dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${SRC}/scripts" "${OUT}/data/scripts"
+
+echo "==> Copying qdir.txt"
+cp "${SRC}/scripts/qdir.txt" "${OUT}/data/scripts/qdir.txt"
 
 echo "==> Configuring + building thps4-server-browser"
 cmake -G Ninja -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \

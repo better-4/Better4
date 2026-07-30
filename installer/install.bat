@@ -37,7 +37,7 @@ if not "%~2"=="ELEVATED" (
         del "%TARGET_DIR%write_test.tmp"
     ) else (
         echo "%TARGET_DIR%" is not writable, requesting administrator privileges...
-        powershell -Command "Start-Process -FilePath '%~f0' -ArgumentList @('%~1','ELEVATED') -Verb RunAs"
+        powershell -Command "Start-Process -FilePath 'cmd.exe' -ArgumentList '/c \"\"%~f0\" \"%~1\" ELEVATED\"' -Verb RunAs"
         exit /b 0
     )
 )
