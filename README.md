@@ -45,7 +45,7 @@ Download the latest GitHub release and drag your `Skate4.exe` onto `install.bat`
 
 A special thank you to the following people, without whom this project would not exist:
 
-* [@zedthps](https://github.com/zedthps) for starting Better4 and bringing THPS4 back
+* [@zedthps](https://github.com/zedthps), [@voss10](https://github.com/voss10), and [@1borgy](https://github.com/1borgy) for their contributions
 * [@PARTYMANX](https://github.com/PARTYMANX) for their work on [partymod-thps4](https://github.com/PARTYMANX/partymod-thps4)
 * [@DCxDemo](https://github.com/DCxDemo) for their work on [THPSQScriptEd](https://github.com/DCxDemo/LegacyTHPS/)
 
