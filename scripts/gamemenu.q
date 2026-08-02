@@ -731,14 +731,14 @@ script create_pause_menu
     endif
   else
     if not GoalManager_HasActiveGoals count_all
-    // if not skater:PlayerInputIsDisabled
-      make_sprite_menu_item text = "Set Cust Restart" id = menu_set_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = set_custom_restart }
-      make_text_sprite texture = PA_set_cust parent = menu_set_custom
-      if skater:SetCustomRestart
-        make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
-        make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
+      if not skater:PlayerInputIsDisabled
+        make_sprite_menu_item text = "Set Cust Restart" id = menu_set_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = set_custom_restart }
+        make_text_sprite texture = PA_set_cust parent = menu_set_custom
+        if skater:SetCustomRestart
+          make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
+          make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
+        endif
       endif
-    // endif
     endif
   endif
   if InNetGame
@@ -3198,7 +3198,7 @@ script create_options_menu
       endif
     endif
   endif
-  make_text_sub_menu_item text = "\c3Mod Options" id = menu_mod pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = create_mod_menu }
+  make_text_sub_menu_item text = better4_options_text id = menu_mod pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = better4_menu_options close_script = create_options_menu }
   if not InMultiplayerGame
     if IsNGC
       switch camera_angle

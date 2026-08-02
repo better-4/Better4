@@ -669,6 +669,9 @@ script start_internet_game
   select_xbox_multiplayer { change_gamemode = change_gamemode_net }
 endscript
 script create_main_menu
+  if ObjectExists id = current_menu_anchor
+    DestroyScreenElement id = current_menu_anchor
+  endif
   add_main_menu_textures_to_vram
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
@@ -688,6 +691,7 @@ script create_main_menu
       ]
     }
   }
+  // Tiny yellow bar at top
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -698,6 +702,7 @@ script create_main_menu
     scale = (14, 0.35)
     just = [ center top ]
   }
+  // Logo
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -707,6 +712,7 @@ script create_main_menu
     rgba = [ 128 128 128 108 ]
     z_priority = 2
   }
+  // Options header
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -718,16 +724,18 @@ script create_main_menu
     rgba = [ 128 128 128 128 ]
     z_priority = 0
   }
+  // Tiny blue bar at bottom
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
     id = main_menu_blue_bar
     texture = stats_notch
-    pos = (324, 350)
+    pos = (324, 370)
     rgba = [ 42 48 77 50 ]
     scale = (14, 0.2)
     just = [ center top ]
   }
+  // Top of overlay
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -738,6 +746,7 @@ script create_main_menu
     scale = <scale>
     just = [ center top ]
   }
+  // Low-opacity overlay rows
   begin
     GetStackedScreenElementPos Y id = <id>
     CreateScreenElement {
@@ -749,8 +758,9 @@ script create_main_menu
       rgba = [ 128 128 128 80 ]
       just = [ left top ]
     }
-  repeat 13
+  repeat 14
   GetStackedScreenElementPos Y id = <id>
+  // Bottom of overlay
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -761,16 +771,18 @@ script create_main_menu
     just = [ left top ]
   }
   GetStackedScreenElementPos X id = main_menu_box_top offset = (-20, 0)
+  // Right of overlay
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
     texture = goal_right
-    scale = (0.8, 1)
+    scale = (0.8, 1.06)
     rgba = [ 128 128 128 80 ]
     pos = <pos>
     just = [ left top ]
   }
   create_icon texture = PA_model pos = (178, 85)
+  // Idk?
   CreateScreenElement {
     type = TextElement
     parent = current_menu
@@ -919,6 +931,10 @@ script create_main_menu
     mark_first_input
     focus_params = { attract_timer }
   }
+  main_menu_add_item { text = better4_options_text
+    pad_choose_script = better4_menu_options
+    pad_choose_params = { close_script = create_main_menu }
+  }
   main_menu_add_item { text = 'Quit'
     id = mm_quit
     pad_choose_script = main_menu_quit
@@ -934,18 +950,7 @@ script create_main_menu
       { pad_right reset_attract_mode_timer }
     ]
   }
-  CreateScreenElement {
-    parent = main_menu
-    type = TextElement
-    id = better4_mod
-    text = " Better4      v0.3"
-    font = newtrickfont
-    pos = (320, 380)
-    rgba = [ 37 93 159 89 ]
-    scale = 0.6
-    just = [ center center ]
-    not_focusable
-  }
+  better4_main_menu_watermark
   RunScriptOnScreenElement id = main_menu menu_onscreen
   FireEvent type = focus target = attract_container
   KillSpawnedScript name = Skateshop_Slideshow
@@ -1018,7 +1023,7 @@ script main_menu_add_item { parent = current_menu
     }
   endif
   if GotParam not_focusable
-     <text_rgba> = [ 60 60 60 75 ]
+    <text_rgba> = [ 60 60 60 75 ]
     CreateScreenElement {
       type = TextElement
       parent = <anchor_id>
@@ -1031,7 +1036,7 @@ script main_menu_add_item { parent = current_menu
       not_focusable
     }
   else
-     <text_rgba> = [ 88 105 112 128 ]
+    <text_rgba> = [ 88 105 112 128 ]
     CreateScreenElement {
       type = TextElement
       parent = <anchor_id>
