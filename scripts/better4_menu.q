@@ -1,6 +1,6 @@
 better4_menu_items = [
   { text = "1-Tap Boostplant" id = wallplant_toggle flag = WALLPLANT_INPUT_FLAG }
-  { text = "Enable Lips" id = lip_toggle flag = LIP_TRICK_FLAG set_script = better4_toggle_lip_set unset_script = better4_toggle_lip_unset }
+  { text = "Lip Tricks" id = lip_toggle flag = LIP_TRICK_FLAG set_script = better4_toggle_lip_set unset_script = better4_toggle_lip_unset }
   { text = "Modern Manuals" id = mm_toggle flag = MODERN_MANUAL_FLAG }
   { text = "Manual Floats" id = mf_toggle flag = MANUAL_FLOAT_FLAG }
   { text = "Nollie 360 Flip" id = nollie_360_toggle flag = NOLLIE_360_FLAG }
