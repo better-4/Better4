@@ -583,15 +583,17 @@ script create_pause_menu
   else
     if not GotParam no_exit
       make_sprite_menu_item text = "Continue" id = menu_continue pad_choose_script = handle_start_pressed
-      if not IsObserving
-        make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe
-      else
-        if not GoalManager_HasActiveGoals
-          make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = quit_observing
+      if InNetGame 
+        if not IsObserving
+            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe
         else
-          make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = quit_observing
+           if not GoalManager_HasActiveGoals
+               make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = quit_observing
+           else
+               make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = quit_observing
+           endif
         endif
-      endif
+      endif  
       make_text_sprite texture = PA_continue parent = menu_continue
     endif
   endif
@@ -666,6 +668,8 @@ script create_pause_menu
           endif
         endif
       else
+        make_sprite_menu_item text = "Restart Game" id = menu_network_restart_select pad_choose_script = network_game_options_selected
+        make_text_sprite texture = PA_retry parent = menu_network_start_select
         make_sprite_menu_item text = "End Current Game" id = menu_network_end_select pad_choose_script = network_end_game_selected
         make_text_sprite texture = PA_end parent = menu_network_end_select
       endif
@@ -727,14 +731,14 @@ script create_pause_menu
     endif
   else
     if not GoalManager_HasActiveGoals count_all
-      if not skater:PlayerInputIsDisabled
+    //if not skater:PlayerInputIsDisabled
         make_sprite_menu_item text = "Set Cust Restart" id = menu_set_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = set_custom_restart }
         make_text_sprite texture = PA_set_cust parent = menu_set_custom
         if skater:SetCustomRestart
           make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
           make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
         endif
-      endif
+      //endif
     endif
   endif
   if InNetGame
@@ -779,7 +783,7 @@ script create_pause_menu
         endif
       endif
     endif
-    make_sprite_menu_item text = "Quit1" id = menu_quit pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = launch_quit_game_dialog }
+    make_sprite_menu_item text = "Quit" id = menu_quit pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = launch_quit_game_dialog }
     make_text_sprite texture = PA_quit parent = menu_quit
   else
     if CustomParkMode testing
