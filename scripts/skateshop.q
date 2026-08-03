@@ -3994,7 +3994,6 @@ script edit_skater_create_scrolling_menu
     parent = edit_skater_scrollingmenu
     id = edit_skater_vmenu
     just = [ left top ]
-    dont_allow_wrap
     padding_scale = <padding_scale>
     spacing_between = <spacing_between>
     event_handlers = [ { pad_up set_which_arrow params = { arrow = edit_skater_menu_up_arrow } }
