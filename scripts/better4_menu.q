@@ -90,12 +90,12 @@ script better4_check_item { // requires: <id>, <flag>
   endif
 endscript
 
-script better4_toggle_lip_set
+script better4_toggle_lip_unset
   Change LipAllowAngle = 15
   Change LipAllowAngle_Override = 60
 endscript
 
-script better4_toggle_lip_unset
+script better4_toggle_lip_set
   Change LipAllowAngle = 360
   Change LipAllowAngle_Override = 360
 endscript
