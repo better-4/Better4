@@ -1,27 +1,27 @@
-better4_version = "v0.3"
+better4_version = "v0.4"
 better4_options_text = 'Better4 Options'
 better4_orange = [ 164 95 26 100 ]
 
 script quit_observing
   if not GoalManager_HasActiveGoals
-    DebugRenderIgnore
+    RequestExitObserverMode
     if IsHost
       exit_pause_menu
       Wait 60 gameframe
-      debugrendermode
+      ToggleOurPendingPlayersFlag
       LoadPendingPlayers
       Wait 120 gameframe
-      debugrendermode
+      ToggleOurPendingPlayersFlag
     endif
   endif
 endscript
 
 script host_process_remote_exit_observer
   Wait 60 gameframe
-  debugrendermode
+  ToggleOurPendingPlayersFlag
   LoadPendingPlayers
   Wait 120 gameframe
-  debugrendermode
+  ToggleOurPendingPlayersFlag
 endscript
 
 script destroy_mod_menu
