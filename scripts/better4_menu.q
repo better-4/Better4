@@ -101,6 +101,7 @@ script better4_toggle_lip_set
 endscript
 
 script better4_main_menu_watermark
+  // better4_ini_demo
   FormatText TextName = better4_watermark "Better4 %s" s = better4_version
   CreateScreenElement {
     parent = current_menu_anchor
@@ -114,4 +115,17 @@ script better4_main_menu_watermark
     z_priority = 9999
     not_focusable
   }
+endscript
+
+script better4_ini_demo
+  if GetIniBool section = "Miscellaneous" key = "Debug"
+    Printf "debug is on"
+  else
+    Printf "debug is off"
+  endif
+
+  GetIniInteger section = "Graphics" key = "ResolutionX" ValueName = resolution_x
+  GetIniInteger section = "Graphics" key = "ResolutionY" ValueName = resolution_y
+  PrintStruct <...>
+  Printf "Resolution is %x by %y" x = <resolution_x> y = <resolution_y>
 endscript
