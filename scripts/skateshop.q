@@ -1,4 +1,3 @@
-
 script SkateshopAI stopskateshopstreams = 1
   SkaterInit NoEndRun ReturnControl NoAnims
   stream_repetition = 4
@@ -551,16 +550,19 @@ script SkateshopAI stopskateshopstreams = 1
     WaitAnimFinished
   repeat
 endscript
+
 script PlayThrowBoardSound
   if not GotParam NoSFX
     Wait 1.22 second
     PlaySound BoardThrowDown vol = 300
   endif
 endscript
+
 script TurnOnSSGuitar
   DestroyAllSpecialItems
   TurnOnSpecialItem SpecialItem_details = guitar_skateshop_details
 endscript
+
 script Play_HawkIdleSet
   PlayAnim Anim = Idle_HawkFromStandIdle
   WaitAnimFinished
@@ -578,6 +580,7 @@ script Play_HawkIdleSet
   WaitAnimFinished
   PlayAnim Anim = StandIdleA
 endscript
+
 script BlinkEyes
   begin
     Wait randomrange(3, 7) seconds
@@ -586,6 +589,7 @@ script BlinkEyes
     Obj_ReplaceTexture src = "cs_nh_eyelid_open.png" dest = "textures/scuffs/cs_nh_eyelid_open"
   repeat
 endscript
+
 script skateshop_rotate_skater_left
   if InSplitScreenGame
     GetCurrentSkaterProfileIndex
@@ -596,6 +600,7 @@ script skateshop_rotate_skater_left
   KillSpawnedScript name = skateshop_rotate_skater
   SpawnScript skateshop_rotate_skater params = { angle = -3 button = L1 }
 endscript
+
 script skateshop_rotate_skater_right
   if InSplitScreenGame
     GetCurrentSkaterProfileIndex
@@ -606,6 +611,7 @@ script skateshop_rotate_skater_right
   KillSpawnedScript name = skateshop_rotate_skater
   SpawnScript skateshop_rotate_skater params = { angle = 3 button = R1 }
 endscript
+
 script skateshop_rotate_skater
   begin
     if ControllerPressed <button>
@@ -616,9 +622,11 @@ script skateshop_rotate_skater
     Wait 1 frame
   repeat
 endscript
+
 script skateshop_not_yet
   launch_main_menu
 endscript
+
 script make_new_skateshop_menu
   SetScreenElementProps { id = root_window
     replace_handlers
@@ -628,11 +636,14 @@ script make_new_skateshop_menu
   }
   make_new_menu <...>
 endscript
+
 script main_menu_start_pressed
 endscript
+
 script skateshop_transition menu_anim = animate_out
   RunScriptOnScreenElement id = current_menu_anchor <menu_anim> callback = skateshop_transition2 callback_params = <...>
 endscript
+
 script skateshop_transition2
   if GotParam cam_anim
     Printf "got a cam_anim"
@@ -644,6 +655,7 @@ script skateshop_transition2
      <new_menu_script>
   endif
 endscript
+
 script launch_main_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -652,6 +664,7 @@ script launch_main_menu
   remove_pause_menu_textures_from_vram
   create_main_menu
 endscript
+
 script start_internet_game
   memcard_menus_cleanup
   add_main_menu_textures_to_vram
@@ -668,6 +681,7 @@ script start_internet_game
   kill_start_key_binding
   select_xbox_multiplayer { change_gamemode = change_gamemode_net }
 endscript
+
 script create_main_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -960,6 +974,7 @@ script create_main_menu
   Wait 5 gameframe
   kill_start_key_binding
 endscript
+
 script main_menu_add_item { parent = current_menu
     font = small
     highlight_bar_scale = (0.92, 1.3)
@@ -1063,6 +1078,7 @@ script main_menu_add_item { parent = current_menu
     z_priority = 3
   }
 endscript
+
 script main_menu_focus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -1080,6 +1096,7 @@ script main_menu_focus
     rgba = [ 128 128 128 50 ]
   }
 endscript
+
 script main_menu_unfocus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
@@ -1088,6 +1105,7 @@ script main_menu_unfocus
     rgba = [ 128 128 128 0 ]
   }
 endscript
+
 script main_menu_exit
   KillSpawnedScript name = Skateshop_Slideshow
   KillSpawnedScript name = attract_mode_timer
@@ -1099,6 +1117,7 @@ script main_menu_exit
   remove_main_menu_textures_from_vram
    <new_menu_script> <...>
 endscript
+
 script main_menu_quit
   menu_confirm_quit { yes_script = ExitGameScript
     title = "Quit Game?"
@@ -1106,16 +1125,19 @@ script main_menu_quit
     no_script = NoExitGameScript
   }
 endscript
+
 script ExitGameScript
   if IsDemo
     DisplayEndScreen "DemoScreen1"
   endif
   QuitGame
 endscript
+
 script NoExitGameScript
   dialog_box_exit
   create_main_menu
 endscript
+
 script add_main_menu_textures_to_vram
   AddTextureToVram "level_top_piece"
   AddTextureToVram "level_repeat_mid"
@@ -1125,6 +1147,7 @@ script add_main_menu_textures_to_vram
   AddTextureToVram "stats_notch"
   AddTextureToVram "THPS4"
 endscript
+
 script remove_main_menu_textures_from_vram
   RemoveTextureFromVram "level_top_piece"
   RemoveTextureFromVram "level_repeat_mid"
@@ -1134,6 +1157,7 @@ script remove_main_menu_textures_from_vram
   RemoveTextureFromVram "stats_notch"
   RemoveTextureFromVram "THPS4"
 endscript
+
 current_attract_movie = 0
 script attract_mode_timer
   max_time = 100
@@ -1158,11 +1182,13 @@ script attract_mode_timer
     endif
   repeat
 endscript
+
 script reset_attract_mode_timer
   Printf "reset_attract_mode_timer"
   KillSpawnedScript name = attract_mode_timer
   SpawnScript attract_mode_timer
 endscript
+
 script Skateshop_Slideshow
   begin
     Wait 10 seconds
@@ -1170,9 +1196,11 @@ script Skateshop_Slideshow
     PlaySkaterCamAnim randomnorepeat( @name = SS_MenuCam01 @name = SS_MenuCam02 @name = SS_MenuCam03 @name = SS_MenuCam04 @name = SS_MenuCam05 @name = SS_MenuCam  ) play_hold
   repeat
 endscript
+
 script launch_setup_options_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen callback = create_setup_options_menu
 endscript
+
 script create_setup_options_menu
   dialog_box_exit
   remove_pause_menu_textures_from_vram
@@ -1386,6 +1414,7 @@ script create_setup_options_menu
   PlaySkaterCamAnim name = SS_menucam_options play_hold
   RunScriptOnScreenElement id = ss_setup_options_menu animate_in
 endscript
+
 script change_blood_value
   if GetGlobalFlag flag = BLOOD_OFF
     SetScreenElementProps id = blood_text text = "Blood: On"
@@ -1395,6 +1424,7 @@ script change_blood_value
     SetGlobalFlag flag = BLOOD_OFF
   endif
 endscript
+
 script confirm_demo
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1411,9 +1441,11 @@ script confirm_demo
     ]
   }
 endscript
+
 script start_motox_demo
   level_select_change_level level = load_motox
 endscript
+
 script options_menu_exit
   dialog_box_exit
   if ObjectExists id = current_menu_anchor
@@ -1423,6 +1455,7 @@ script options_menu_exit
   remove_ss_menu_textures_from_vram
    <new_menu_script> <...>
 endscript
+
 script check_cheat_from_keyboard
   GetTextElementString id = keyboard_current_string
   if not GotParam cancel
@@ -1432,9 +1465,11 @@ script check_cheat_from_keyboard
   add_pause_menu_textures_to_vram
   create_setup_options_menu
 endscript
+
 script launch_career_options_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen callback = create_career_options_menu
 endscript
+
 script create_career_options_menu
   dialog_box_exit
   remove_pause_menu_textures_from_vram
@@ -1489,6 +1524,7 @@ script create_career_options_menu
   SpawnScript Skateshop_Slideshow
   RunScriptOnScreenElement id = ss_career_options_menu animate_in
 endscript
+
 script career_options_menu_exit
   KillSpawnedScript name = Skateshop_Slideshow
   dialog_box_exit
@@ -1499,11 +1535,13 @@ script career_options_menu_exit
   remove_ss_menu_textures_from_vram
    <new_menu_script> <...>
 endscript
+
 script new_career_launch_select_skater_menu
   GoalManager_ResetCareer
   cash_icons_reset
   launch_select_skater_menu
 endscript
+
 script career_overwrite_warning title = 'Overwrite'
   create_snazzy_dialog_box {
     title = <title>
@@ -1521,6 +1559,7 @@ script career_overwrite_warning title = 'Overwrite'
     ]
   }
 endscript
+
 script reset_career
   CareerReset
   GoalManager_ResetCareer
@@ -1548,15 +1587,18 @@ script reset_career
   ResetAllToDefaultProfile
   launch_select_skater_menu
 endscript
+
 script reset_secret_skaters
   SetSkaterProfileInfoByName name = eddie params = { is_hidden = 1 }
   SetSkaterProfileInfoByName name = JANGO params = { is_hidden = 1 }
   SetSkaterProfileInfoByName name = Vallely params = { is_hidden = 1 }
   SetSkaterProfileInfoByName name = JENNA params = { is_hidden = 1 }
 endscript
+
 script launch_pre_cas_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen callback = create_setup_options_menu
 endscript
+
 script pre_cas_menu_exit
   KillSpawnedScript name = Skateshop_Slideshow
   dialog_box_exit
@@ -1567,6 +1609,7 @@ script pre_cas_menu_exit
   remove_ss_menu_textures_from_vram
    <new_menu_script> <...>
 endscript
+
 script create_pre_cas_menu
   dialog_box_exit
   remove_pause_menu_textures_from_vram
@@ -1602,6 +1645,7 @@ script create_pre_cas_menu
   SpawnScript Skateshop_Slideshow
   RunScriptOnScreenElement id = ss_pre_cas_menu animate_in
 endscript
+
 script cas_overwrite_warning title = 'Overwrite'
   create_snazzy_dialog_box {
     title = <title>
@@ -1621,6 +1665,7 @@ script cas_overwrite_warning title = 'Overwrite'
     ]
   }
 endscript
+
 script cas_reset_skater_and_goto_menu
   ResetToDefaultProfile name = custom
   RememberTemporaryAppearance appearance_structure = appearance_custom_skater_male name = old_male_profile
@@ -1632,6 +1677,7 @@ script cas_reset_skater_and_goto_menu
   cas_catchup_trickslots
   skateshop_create_cas_menu came_from_main_menu
 endscript
+
 script career_post_load
   GetCurrentSkaterProfileIndex
   if not ( <currentSkaterProfileIndex> = 0 )
@@ -1662,14 +1708,17 @@ script career_post_load
   endif
   initialize_cash_icons
 endscript
+
 script cas_post_load
   cas_catchup_to_pro_stats_after_load
   cas_catchup_trickslots
 endscript
+
 script jump_to_edit_skater
   dialog_box_exit
   skateshop_create_cas_menu came_from_main_menu
 endscript
+
 script cas_catchup_to_pro_stats_after_load
   if not IsDemo
     GetCurrentSkaterProfileIndex
@@ -1699,6 +1748,7 @@ script cas_catchup_to_pro_stats_after_load
     endif
   endif
 endscript
+
 script cas_catchup_trickslots
   if not IsDemo
     GetCurrentSkaterProfileIndex
@@ -1750,6 +1800,7 @@ script cas_catchup_trickslots
     SetSkaterProfileInfo player = <currentSkaterProfileIndex> params = { max_specials = <cas_desired_total> }
   endif
 endscript
+
 script cas_catchup_to_pro_stats
   GetCurrentSkaterProfileIndex
   if not ( <currentSkaterProfileIndex> = 0 )
@@ -1765,6 +1816,7 @@ script cas_catchup_to_pro_stats
   endif
   SetSkaterProfileInfoByName name = custom params = { points_available = <difference> }
 endscript
+
 script get_total_stat_points_by_name skater_name = Hawk
   GetArraySize stat_names
    <index> = 0
@@ -1786,6 +1838,7 @@ script get_total_stat_points_by_name skater_name = Hawk
   endif
   return total_points = <total_points> max_points = <max_points> points_available = <points_available>
 endscript
+
 script get_total_stat_points_for_current_profile
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -1813,6 +1866,7 @@ script get_total_stat_points_for_current_profile
   endif
   return total_points = <total_points> max_points = <max_points> points_available = <points_available>
 endscript
+
 script launch_ss_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1822,6 +1876,7 @@ script launch_ss_menu
   add_ss_menu_textures_to_vram
   create_ss_menu <...>
 endscript
+
 script create_ss_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -2076,11 +2131,13 @@ script create_ss_menu
   endif
   RunScriptOnScreenElement id = ss_menu animate_in
 endscript
+
 script player_1_ready
   load_second_skater_profile
   MakeSkaterGoto SkateshopAI params = { }
   launch_select_skater_menu
 endscript
+
 script ss_menu_exit
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -2092,6 +2149,7 @@ script ss_menu_exit
      <new_menu_script> <...>
   endif
 endscript
+
 script add_ss_menu_textures_to_vram
   AddTextureToVram "level_top_piece"
   AddTextureToVram "level_repeat_mid"
@@ -2112,6 +2170,7 @@ script add_ss_menu_textures_to_vram
   AddTextureToVram "up_arrow"
   AddTextureToVram "down_arrow"
 endscript
+
 script remove_ss_menu_textures_from_vram
   RemoveTextureFromVram "level_top_piece"
   RemoveTextureFromVram "level_repeat_mid"
@@ -2132,6 +2191,7 @@ script remove_ss_menu_textures_from_vram
   RemoveTextureFromVram "up_arrow"
   RemoveTextureFromVram "down_arrow"
 endscript
+
 script start_practice_run
   SetPractice 1
   SetScoreDegradation 0
@@ -2145,6 +2205,7 @@ script start_practice_run
     replace_handlers
   }
 endscript
+
 script SetUpSkateshopSkaters
   Kill prefix = "TRG_SS_PedPro"
   Create prefix = "TRG_SS_PedPro"
@@ -2194,6 +2255,7 @@ script SetUpSkateshopSkaters
     Kill name = TRG_SS_PedProJamie
   endswitch
 endscript
+
 script start_practice_run_skater
   Create name = SSO_Fence05
   Kill name = SSO_Fence02
@@ -2204,6 +2266,7 @@ script start_practice_run_skater
   ResetSkaters node_name = TRG_SS_SkaterDropIn
   MakeSkaterGoto DropIn
 endscript
+
 script skateshop_practice_pause_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -2227,6 +2290,7 @@ script skateshop_practice_pause_menu
   make_text_sub_menu_item text = 'Quit Practice' pad_choose_script = skateshop_practice_quit
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script skateshop_practice_start_pressed
   unhide_root_window
   GetTags
@@ -2245,6 +2309,7 @@ script skateshop_practice_start_pressed
     skateshop_practice_pause_menu
   endif
 endscript
+
 script skateshop_practice_quit
   SetPractice 0
   SetScreenElementProps {
@@ -2262,6 +2327,7 @@ script skateshop_practice_quit
   MakeSkaterGoto SkateshopAI params = { }
   launch_ss_menu
 endscript
+
 came_to_cas_menu_from_main_menu = 0
 script skateshop_create_cas_menu
   if GotParam came_from_main_menu
@@ -2275,6 +2341,7 @@ script skateshop_create_cas_menu
   launch_edit_skater_menu <...>
   skater:Obj_MoveToNode name = TRG_SS_Appearance orient
 endscript
+
 script launch_select_skater_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -2312,6 +2379,7 @@ script launch_select_skater_menu
   GoalManager_HideGoalPoints
   create_select_skater_menu <...>
 endscript
+
 script create_select_skater_menu
   add_select_skater_textures_to_vram
   ResetComboRecords
@@ -2455,6 +2523,7 @@ script create_select_skater_menu
   FireEvent type = focus target = select_skater_hmenu data = { child_id = <current_skater> }
   skater:SetTags stopskateshopstreams = 0
 endscript
+
 script show_level_select_pro_challenge
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -2547,6 +2616,7 @@ script show_level_select_pro_challenge
     endif
   endif
 endscript
+
 script select_skater_menu_fire_focus
   Printf "select_skater_menu_fire_focus"
   Wait 1 frame
@@ -2554,6 +2624,7 @@ script select_skater_menu_fire_focus
   FireEvent type = focus target = select_skater_hmenu data = { child_id = <current_skater> }
   Printf "select_skater_menu_fire_focus done"
 endscript
+
 script select_skater_create_top_bar scale = (1.14, 1) text = "" parent = select_skater_anchor
    <pos> = <root_pos>
   CreateScreenElement {
@@ -2674,15 +2745,18 @@ script select_skater_create_top_bar scale = (1.14, 1) text = "" parent = select_
     just = [ left top ]
   }
 endscript
+
 script menu_horiz_blink_arrow
   TerminateObjectsScripts id = <arrow_id>
   RunScriptOnScreenElement id = <arrow_id> menu_blink_arrow
 endscript
+
 script back_from_player_two_select
   SetCurrentSkaterProfile 0
   RefreshSkaterModel profile = 0 skater = 0
   launch_select_skater_menu From2p
 endscript
+
 script select_skater_menu_add_hmenu_items
   if GotParam is_hidden
     if ( <is_hidden> = 1 )
@@ -2722,11 +2796,13 @@ script select_skater_menu_add_hmenu_items
     }
   endif
 endscript
+
 script get_current_skater_display_name
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
   return display_name = <display_name>
 endscript
+
 script select_skater_hmenu_focus
   if LevelIs load_skateshop
     select_skater_get_current_skater_name
@@ -2776,21 +2852,25 @@ script select_skater_hmenu_focus
     SpawnScript select_skater_temporarily_disable_menu_input params = { time = 100 }
   endif
 endscript
+
 script select_skater_temporarily_disable_menu_input
   SetButtonEventMappings block_menu_input
   Wait <time>
   SetButtonEventMappings unblock_menu_input
 endscript
+
 script select_skater_get_current_skater_name
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
   return current_skater = <name>
 endscript
+
 script select_skater_hmenu_unfocus
   generic_menu_pad_up_down_sound
   SetProps rgba = [ 70 76 108 128 ]
   DoMorph scale = 1
 endscript
+
 script select_skater_hmenu_choose
   GetCurrentSkaterProfileIndex
   if ControllerBoundToDifferentSkater controller = <device_num> skater = <currentSkaterProfileIndex>
@@ -2834,16 +2914,19 @@ script select_skater_hmenu_choose
   endif
   skater:SetTags stopskateshopstreams = 1
 endscript
+
 script SkateshopGO
   Wait 0.18 seconds
   skater:PlaySkaterStream type = "SSGo"
 endscript
+
 script load_second_skater_profile
   Printf "REFRESHING SKATER MODEL"
   SetCurrentSkaterProfile 1
   RefreshSkaterModel profile = 1 skater = 0
   SyncPlayer2Profile
 endscript
+
 script select_skater_menu_back
   if ObjectExists id = select_skater_anchor
     DestroyScreenElement id = select_skater_anchor
@@ -2862,11 +2945,13 @@ script select_skater_menu_back
   add_pause_menu_textures_to_vram
    <callback>
 endscript
+
 script select_skater_menu_animate_top
   PlaySound LevelAnimateTop
   DoMorph pos = { (0, -120) relative } alpha = 0
   DoMorph time = 0.2 pos = { (0, 120) relative } alpha = 1
 endscript
+
 script select_skater_menu_animate_stats
   DoMorph pos = { (-400, 0) relative } alpha = 0
   DoMorph time = 0.3
@@ -2876,11 +2961,13 @@ script select_skater_menu_animate_stats
   DoMorph time = 0.1 pos = { (1, 0) relative }
   FireEvent type = select_skater_menu_animate_stats_done
 endscript
+
 script select_skater_menu_animate_bottom
   DoMorph pos = { (0, 140) relative } alpha = 0
   DoMorph time = 0.4
   DoMorph time = 0.2 pos = { (0, -138) relative } alpha = 1
 endscript
+
 script add_select_skater_textures_to_vram
   AddTextureToVram "bottom_l_cap"
   AddTextureToVram "bottom_mid"
@@ -2900,6 +2987,7 @@ script add_select_skater_textures_to_vram
   AddTextureToVram "pip_on"
   AddTextureToVram "goal_right"
 endscript
+
 script remove_select_skater_textures_from_vram
   RemoveTextureFromVram "bottom_l_cap"
   RemoveTextureFromVram "bottom_mid"
@@ -2919,11 +3007,13 @@ script remove_select_skater_textures_from_vram
   RemoveTextureFromVram "pip_on"
   RemoveTextureFromVram "goal_right"
 endscript
+
 script menu_blink_arrow
   DoMorph alpha = 0
   Wait 100
   DoMorph time = 0.3 alpha = 1
 endscript
+
 edit_skater_menu_level_1_index = 0
 edit_skater_menu_level_2_index = 0
 script launch_edit_skater_menu
@@ -2936,6 +3026,7 @@ script launch_edit_skater_menu
   MakeSkaterGoto SkateshopAI params = { NoSFX CAS_Screen }
   create_edit_skater_menu <...> animate
 endscript
+
 script create_edit_skater_menu
   pulse_blur
   add_edit_skater_textures_to_vram
@@ -2968,6 +3059,7 @@ script create_edit_skater_menu
     RunScriptOnScreenElement id = edit_skater_anchor_middle select_skater_menu_animate_stats
   endif
 endscript
+
 script edit_skater_create_top_bar scale = (1.14, 1) text = "" parent = select_skater_anchor
    <pos> = <root_pos>
   CreateScreenElement {
@@ -3014,6 +3106,7 @@ script edit_skater_create_top_bar scale = (1.14, 1) text = "" parent = select_sk
     just = [ left top ]
   }
 endscript
+
 script edit_skater_create_main_menu
   if LevelIs load_skateshop
     KillSkaterCamAnim all
@@ -3190,6 +3283,7 @@ script edit_skater_create_main_menu
   }
   FireEvent type = focus target = current_menu data = { grid_index = edit_skater_menu_level_1_index }
 endscript
+
 script check_if_group_editable_and_head_is_unlocked
   check_if_group_editable
   if ( <is_enabled> = 0 )
@@ -3202,6 +3296,7 @@ script check_if_group_editable_and_head_is_unlocked
   endif
   return is_enabled = 1
 endscript
+
 script check_if_board_options_enabled
    <retVal> = 1
   GetCurrentSkaterProfileIndex
@@ -3221,6 +3316,7 @@ script check_if_board_options_enabled
   endif
   return is_enabled = <retVal>
 endscript
+
 script check_if_group_editable
    <retVal> = 1
   GetCurrentSkaterProfileIndex
@@ -3254,6 +3350,7 @@ script check_if_group_editable
   endif
   return is_enabled = <retVal>
 endscript
+
 script check_if_part_logoable
    <retVal> = 0
   if GotParam parts
@@ -3276,6 +3373,7 @@ script check_if_part_logoable
   endif
   return is_enabled = <retVal>
 endscript
+
 script check_if_part_back_logoable
   check_if_part_logoable <...>
   if ( <is_enabled> = 1 )
@@ -3296,6 +3394,7 @@ script check_if_part_back_logoable
   endif
   return is_enabled = <is_enabled>
 endscript
+
 script check_if_item_accessible
    <retVal> = 1
   GetCurrentSkaterProfileIndex
@@ -3314,6 +3413,7 @@ script check_if_item_accessible
   endif
   return is_enabled = <retVal>
 endscript
+
 script check_if_part_colorable
    <retVal> = 0
   if GotParam parts
@@ -3336,6 +3436,7 @@ script check_if_part_colorable
   endif
   return is_enabled = <retVal>
 endscript
+
 script check_option_is_enabled
    <ret_val> = 1
   if GotParam is_enabled_script
@@ -3349,6 +3450,7 @@ script check_option_is_enabled
   endif
   return is_enabled = <ret_val>
 endscript
+
 script check_option_is_visible
    <ret_val> = 1
   if GotParam is_visible_script
@@ -3368,6 +3470,7 @@ script check_option_is_visible
   endif
   return is_visible = <ret_val>
 endscript
+
 script edit_skater_create_options_menu
   edit_skater_create_menu_block {
     tab_texture = tab2
@@ -3439,6 +3542,7 @@ script edit_skater_create_options_menu
     FireEvent type = focus target = current_menu
   endif
 endscript
+
 script edit_skater_info_menu id = edit_skater_anchor_middle
   dialog_box_exit
   if not ObjectExists id = edit_skater_anchor
@@ -3618,6 +3722,7 @@ script edit_skater_info_menu id = edit_skater_anchor_middle
     FireEvent type = focus target = current_menu
   endif
 endscript
+
 script launch_onscreen_keyboard_from_edit_skater
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -3642,6 +3747,7 @@ script launch_onscreen_keyboard_from_edit_skater
     allow_cancel
   }
 endscript
+
 script exit_onscreen_keyboard_from_edit_skater
   GetTextElementString id = keyboard_current_string
   GetCurrentSkaterProfileIndex
@@ -3657,6 +3763,7 @@ script exit_onscreen_keyboard_from_edit_skater
   create_edit_skater_menu
   edit_skater_info_menu
 endscript
+
 script edit_skater_info_change
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -3735,17 +3842,20 @@ script edit_skater_info_change
   endif
   generic_menu_scroll_sideways_sound
 endscript
+
 script confirm_skater_sexchange
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
   perform_skater_sexchange
 endscript
+
 script cancel_skater_sexchange
   edit_skater_info_menu
   FireEvent type = unfocus target = edit_skater_info_vmenu
   FireEvent type = focus target = edit_skater_info_vmenu data = { child_id = skater_sex_value }
 endscript
+
 script perform_skater_sexchange
   edit_skater_info_menu
   FireEvent type = unfocus target = edit_skater_info_vmenu
@@ -3764,6 +3874,7 @@ script perform_skater_sexchange
     MakeSkaterGoto SkateshopAI params = { NoSFX CAS_Screen }
   endif
 endscript
+
 script edit_skater_create_cas_menu
   edit_skater_create_menu_block tab_texture = tab3 middle_texture = repeat_piece3 bottom_texture = menu_bottom
    <pad_back_params> = { options_array = <options_array> cam_anim = <cam_anim> should_add_reset_tattoos = <should_add_reset_tattoos> should_add_reset_scaling = <should_add_reset_scaling> }
@@ -3854,6 +3965,7 @@ script edit_skater_create_cas_menu
   }
   FireEvent type = focus target = current_menu
 endscript
+
 script edit_skater_create_secret_gear_menu
   edit_skater_create_menu_block tab_texture = tab2 middle_texture = repeat_piece2 bottom_texture = menu_bottom
   if ( in_secrets_menu = 1 )
@@ -3945,6 +4057,7 @@ script edit_skater_create_secret_gear_menu
   }
   FireEvent type = focus target = current_menu
 endscript
+
 script edit_skater_create_scrolling_menu
   switch <tab>
   case tab2
@@ -4015,6 +4128,7 @@ script edit_skater_create_scrolling_menu
   endif
   AssignAlias id = edit_skater_vmenu alias = current_menu
 endscript
+
 script get_current_skater_wheel_color_menu_name
    <wheel_color_menu_name> = 'Wheel Color'
   GetCurrentSkaterProfileIndex
@@ -4026,6 +4140,7 @@ script get_current_skater_wheel_color_menu_name
   endif
   return wheel_color_menu_name = <wheel_color_menu_name>
 endscript
+
 script get_current_skater_griptape_menu_enabled
    <retVal> = 1
   GetCurrentSkaterProfileIndex
@@ -4037,6 +4152,7 @@ script get_current_skater_griptape_menu_enabled
   endif
   return griptape_menu_enabled = <retVal>
 endscript
+
 script get_current_skater_use_jets
    <retVal> = 0
   GetCurrentSkaterProfileIndex
@@ -4048,16 +4164,19 @@ script get_current_skater_use_jets
   endif
   return use_jets = <retVal>
 endscript
+
 script get_current_skater_name
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
   return name = <name>
 endscript
+
 script get_current_skater_sponsors
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
   return sponsors = <sponsors>
 endscript
+
 script get_skater_unlocked
   GetSkaterProfileInfoByName name = <name>
   if ( <is_hidden> = 0 )
@@ -4066,6 +4185,7 @@ script get_skater_unlocked
     return is_unlocked = 0
   endif
 endscript
+
 script get_is_neversoft_skater
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -4075,6 +4195,7 @@ script get_is_neversoft_skater
     return is_neversoft_skater = <is_head_locked>
   endif
 endscript
+
 script get_has_weird_hat
    <retVal> = 0
   GetCurrentSkaterProfileIndex
@@ -4086,6 +4207,7 @@ script get_has_weird_hat
   endif
   return has_weird_hat = <retVal>
 endscript
+
 script get_has_weird_head
    <retVal> = 0
   GetCurrentSkaterProfileIndex
@@ -4097,6 +4219,7 @@ script get_has_weird_head
   endif
   return has_weird_head = <retVal>
 endscript
+
 script cas_item_is_visible
    <is_visible> = 1
   if GotParam hidden
@@ -4169,6 +4292,7 @@ script cas_item_is_visible
   endif
   return is_visible = <is_visible> secret_color = <secret_color>
 endscript
+
 script edit_skater_possibly_add_cas_item
   cas_item_is_visible <...>
   if GotParam secret_color
@@ -4197,6 +4321,7 @@ script edit_skater_possibly_add_cas_item
     return cas_item_was_added = 1
   endif
 endscript
+
 script edit_skater_menu_add_item { pad_choose_script = edit_skater_create_cas_menu
     focus_script = edit_skater_menu_focus
     unfocus_script = edit_skater_menu_unfocus
@@ -4298,6 +4423,7 @@ script edit_skater_menu_add_item { pad_choose_script = edit_skater_create_cas_me
   endif
   SetScreenElementLock id = current_menu on
 endscript
+
 script edit_skater_menu_add_secret_item { pad_choose_script = buy_secret_cas_item
     focus_script = secret_gear_focus
     unfocus_script = secret_gear_unfocus
@@ -4387,6 +4513,7 @@ script edit_skater_menu_add_secret_item { pad_choose_script = buy_secret_cas_ite
   endif
   SetScreenElementLock id = current_menu on
 endscript
+
 script buy_secret_cas_item
   pad_choose_script = launch_secret_gear
   if not ( GetGlobalFlag flag = <flag> )
@@ -4395,6 +4522,7 @@ script buy_secret_cas_item
     Printf "you already bought that!"
   endif
 endscript
+
 script add_secret_item_to_cas
   GetActualCASOptionStruct part = <part> desc_id = <desc_id>
   cas_item_is_visible <...>
@@ -4407,6 +4535,7 @@ script add_secret_item_to_cas
     Printf "item %d is disqualified" d = <desc_id>
   endif
 endscript
+
 script secret_gear_focus highlight_bar_scale = (0.85, 1.1) highlight_bar_pos = (-112, -10) text_rgba = [ 128 118 0 128 ]
   GetTags
   SetScreenElementLock id = <id> off
@@ -4438,6 +4567,7 @@ script secret_gear_focus highlight_bar_scale = (0.85, 1.1) highlight_bar_pos = (
     menu_vert_blink_arrow { id = <arrow_id> }
   endif
 endscript
+
 script secret_gear_unfocus text_rgba = [ 88 105 112 128 ]
   GetTags
   generic_menu_pad_up_down_sound
@@ -4451,6 +4581,7 @@ script secret_gear_unfocus text_rgba = [ 88 105 112 128 ]
   SetScreenElementProps id = { <id> child = 0 } rgba = <text_rgba>
   SetScreenElementProps id = { <id> child = 1 } rgba = <text_rgba>
 endscript
+
 script edit_skater_info_add_item { pad_choose_script = nullscript
     pad_right_script = nullscript
     pad_left_script = nullscript
@@ -4575,6 +4706,7 @@ script edit_skater_info_add_item { pad_choose_script = nullscript
     endif
   endif
 endscript
+
 script edit_skater_create_menu_block tab_texture = tab1 middle_texture = repeat_piece bottom_texture = menu_bottom
   if ObjectExists id = edit_skater_anchor_middle
     DestroyScreenElement id = edit_skater_anchor_middle
@@ -4612,6 +4744,7 @@ script edit_skater_create_menu_block tab_texture = tab1 middle_texture = repeat_
     just = [ left top ]
   }
 endscript
+
 script edit_skater_menu_create_tab
   GetStackedScreenElementPos Y id = select_skater_mainbar offset = (0, 20)
   CreateScreenElement {
@@ -4625,6 +4758,7 @@ script edit_skater_menu_create_tab
     just = [ left top ]
   }
 endscript
+
 script edit_skater_menu_exit
   Change edit_skater_menu_level_1_index = 0
   Change edit_skater_menu_level_2_index = 0
@@ -4654,6 +4788,7 @@ script edit_skater_menu_exit
     endif
   endif
 endscript
+
 script edit_skater_menu_focus_with_icon rgba = [ 128 128 128 50 ]
   GetTags
   SetScreenElementProps {
@@ -4663,6 +4798,7 @@ script edit_skater_menu_focus_with_icon rgba = [ 128 128 128 50 ]
   RunScriptOnScreenElement id = { <id> child = { 1 child = 0 } } edit_skater_show_icon
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
 endscript
+
 script edit_skater_menu_unfocus_with_icon rgba = [ 128 128 128 0 ]
   GetTags
   SetScreenElementProps {
@@ -4672,12 +4808,15 @@ script edit_skater_menu_unfocus_with_icon rgba = [ 128 128 128 0 ]
   RunScriptOnScreenElement id = { <id> child = { 1 child = 0 } } edit_skater_hide_icon
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
 endscript
+
 script edit_skater_show_icon
   DoMorph scale = (1.3, 1) time = 0.1
 endscript
+
 script edit_skater_hide_icon
   DoMorph scale = 0
 endscript
+
 script edit_skater_menu_focus rgba = [ 128 118 0 128 ]
   GetTags
   SetScreenElementProps {
@@ -4694,6 +4833,7 @@ script edit_skater_menu_focus rgba = [ 128 118 0 128 ]
     menu_vert_blink_arrow { id = <arrow_id> }
   endif
 endscript
+
 script edit_skater_menu_unfocus
   GetTags
   SetScreenElementProps {
@@ -4702,6 +4842,7 @@ script edit_skater_menu_unfocus
   }
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down params = { rgba = <rgba> }
 endscript
+
 script edit_skater_info_focus rgba = [ 128 98 0 50 ]
   GetTags
   if not GotParam no_bg
@@ -4716,6 +4857,7 @@ script edit_skater_info_focus rgba = [ 128 98 0 50 ]
     SetScreenElementProps { id = { <id> child = 0 } rgba = [ 128 118 0 128 ] }
   endif
 endscript
+
 script edit_skater_info_unfocus rgba = [ 128 128 128 20 ]
   GetTags
   if not GotParam no_bg
@@ -4728,9 +4870,11 @@ script edit_skater_info_unfocus rgba = [ 128 128 128 20 ]
   endif
   SetScreenElementProps { id = { <id> child = 0 } rgba = [ 88 105 112 128 ] }
 endscript
+
 script set_which_arrow
   SetTags arrow_id = <arrow>
 endscript
+
 script menu_vert_blink_arrow menu_id = current_menu
   if not ObjectExists id = <id>
     Printf "bad arrow id"
@@ -4747,6 +4891,7 @@ script menu_vert_blink_arrow menu_id = current_menu
     RunScriptOnScreenElement id = <id> menu_blink_arrow
   endif
 endscript
+
 script draw_menu_box delta_pos = (100, 30) middle_repeat = 7 scale = (1, 1) box_right_scale = (0.8, 0.625) box_bottom_scale = (0.96, 1) box_right_offset = (-20, 0) current_menu_anchor = current_menu_anchor
   GetStackedScreenElementPos X id = <current_menu_anchor>
   CreateScreenElement {
@@ -4796,6 +4941,7 @@ script draw_menu_box delta_pos = (100, 30) middle_repeat = 7 scale = (1, 1) box_
     z_priority = 0
   }
 endscript
+
 script add_edit_skater_textures_to_vram
   AddTextureToVram "longbar"
   AddTextureToVram "longbar_edgy"
@@ -4831,6 +4977,7 @@ script add_edit_skater_textures_to_vram
   AddTextureToVram "ED_tat"
   AddTextureToVram "ED_torso"
 endscript
+
 script remove_edit_skater_textures_from_vram
   RemoveTextureFromVram "longbar"
   RemoveTextureFromVram "longbar_edgy"
@@ -4866,6 +5013,7 @@ script remove_edit_skater_textures_from_vram
   RemoveTextureFromVram "ED_tat"
   RemoveTextureFromVram "ED_torso"
 endscript
+
 script currently_editing_pro
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -4875,6 +5023,7 @@ script currently_editing_pro
     return is_enabled = 0
   endif
 endscript
+
 script currently_editing_custom_or_eddie
    <retVal> = 0
   currently_editing_custom
@@ -4889,6 +5038,7 @@ script currently_editing_custom_or_eddie
   endif
   return is_enabled = <retVal>
 endscript
+
 script currently_editing_custom
   currently_editing_pro
   if ( <is_enabled> = 0 )
@@ -4897,6 +5047,7 @@ script currently_editing_custom
     return is_enabled = 0
   endif
 endscript
+
 script currently_editing_female
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -4906,6 +5057,7 @@ script currently_editing_female
     return is_enabled = 0
   endif
 endscript
+
 script currently_editing_male
   currently_editing_female
   if ( <is_enabled> = 0 )
@@ -4914,6 +5066,7 @@ script currently_editing_male
     return is_enabled = 0
   endif
 endscript
+
 script currently_editing_custom_male
   currently_editing_female
   if ( <is_enabled> = 1 )
@@ -4927,6 +5080,7 @@ script currently_editing_custom_male
     endif
   endif
 endscript
+
 script get_current_skater_get_lockout_parts
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -4937,6 +5091,7 @@ script get_current_skater_get_lockout_parts
     endif
   endif
 endscript
+
 script check_for_shoe_flags
   if GotParam group
     get_current_skater_get_lockout_parts part = shoes
@@ -4957,6 +5112,7 @@ script check_for_shoe_flags
   Printf "enabled item %s" s = <group>
   return is_enabled = 1
 endscript
+
 script check_for_head_flags
   if GotParam group
     get_current_skater_get_lockout_parts part = skater_m_head
@@ -4975,6 +5131,7 @@ script check_for_head_flags
   Printf "enabled item %s" s = <group>
   return is_enabled = 1
 endscript
+
 edit_skater_head_options = [
   {
     text = 'Face'
@@ -5336,16 +5493,20 @@ script launch_park_editor
   BindFrontEndToController front_end_pad = <currentSkaterProfileIndex> controller = <device_num>
   main_menu_play_level level = load_Sk4Ed
 endscript
+
 script main_menu_play_level
   main_menu_exit new_menu_script = main_menu_play_level2 <...>
 endscript
+
 script main_menu_play_level2
   restore_start_key_binding
   change_level level = <level>
 endscript
+
 script leave_front_end
   remove_pause_menu_textures_from_vram
 endscript
+
 script spawn_two_player
   Cleanup preserve_skaters
   LeaveServer
@@ -5367,6 +5528,7 @@ script spawn_two_player
   Printf "------------------------- 4"
   ScreenElementSystemCleanup
 endscript
+
 script launch_two_player
   SetCurrentSkaterProfile 0
   RefreshSkaterModel profile = 0 skater = 0
@@ -5375,6 +5537,7 @@ script launch_two_player
   ]
   SpawnScript spawn_two_player NotSessionSpecific = 1
 endscript
+
 script enable_two_player_option
   if ObjectExists id = main_menu_2_player_option
     main_menu_2_player_option:GetTags
@@ -5403,6 +5566,7 @@ script enable_two_player_option
     endif
   endif
 endscript
+
 script disable_two_player_option
   if ObjectExists id = main_menu_2_player_option
     main_menu_2_player_option:GetTags
@@ -5425,6 +5589,7 @@ script disable_two_player_option
     endif
   endif
 endscript
+
 script enable_system_link_option
   if ObjectExists id = mm_multi_play
     mm_multi_play:GetTags
@@ -5453,6 +5618,7 @@ script enable_system_link_option
     endif
   endif
 endscript
+
 script disable_system_link_option
   if ObjectExists id = mm_multi_play
     mm_multi_play:GetTags
@@ -5475,6 +5641,7 @@ script disable_system_link_option
     endif
   endif
 endscript
+
 attract_mode_movies = [
   "movies\demo_1"
   "movies\demo_2"

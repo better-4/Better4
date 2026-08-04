@@ -1,4 +1,3 @@
-
 script WallRide
   ClearExceptions
   SetException Ex = Landed Scr = Land params = { NoBlend }
@@ -52,6 +51,7 @@ script WallRide
   endif
   Display
 endscript
+
 script WallrideEnd
   BlendPeriodOut 0
   SetException Ex = Landed Scr = Land
@@ -60,6 +60,7 @@ script WallrideEnd
     Goto Airborne
   endif
 endscript
+
 script Wallie
   DoNextTrick
   Vibrate actuator = 1 percent = 50 duration = 0.1
@@ -72,20 +73,21 @@ script Wallie
   WaitAnimWhilstChecking
   Goto Airborne StretchTime = 10 BlendPeriod = 0
 endscript
-WallRideTricks =
-[ { Trigger = { TapTwiceRelease Up X 500 } Scr = Trick_WallPlant } ]
-WallRideTricks_Single =
-[ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
+
+WallRideTricks = [ { Trigger = { TapTwiceRelease Up X 500 } Scr = Trick_WallPlant } ]
+WallRideTricks_Single = [ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
+
 script Trick_WallPlant
   InAirExceptions
   Vibrate actuator = 1 percent = 50 duration = 0.1
   PlayAnim Anim = Boneless BlendPeriod = 0.0
-  SetTrickName "Wallplant"
+  SetTrickName "WalliePlant"
   SetTrickScore 500
   Display
   #"Jump" BonelessHeight
   WaitAnimWhilstChecking
   Goto Airborne StretchTime = 10 BlendPeriod = 0
 endscript
+
 script WallRideBail
 endscript

@@ -20,6 +20,7 @@ DamagedFile = 'DAMAGED FILE !'
 NGCDamagedFile = 'CORRUPT FILE !'
 TotalGoals = 190
 SavingOrLoading = Saving
+
 script GetFileTypeName
   switch <file_type>
   case OptionsAndPros
@@ -40,6 +41,7 @@ script GetFileTypeName
     return filetype_name = ''
   endswitch
 endscript
+
 script QuitToDashboard
   GetPlatform
   switch <Platform>
@@ -54,6 +56,7 @@ script QuitToDashboard
     ResetToIPL
   endswitch
 endscript
+
 script destroy_pause_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -62,6 +65,7 @@ script destroy_pause_menu
   remove_pause_menu_textures_from_vram
   kill_start_key_binding
 endscript
+
 script destroy_main_menu
   KillSpawnedScript name = Skateshop_Slideshow
   KillSkaterCamAnim all
@@ -71,6 +75,7 @@ script destroy_main_menu
   endif
   remove_main_menu_textures_from_vram
 endscript
+
 script destroy_files_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -78,12 +83,14 @@ script destroy_files_menu
   endif
   remove_files_menu_textures_from_vram
 endscript
+
 script destroy_net_settings_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
     Wait 1 gameframe
   endif
 endscript
+
 script destroy_internet_options_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -91,6 +98,7 @@ script destroy_internet_options_menu
   endif
   remove_ss_menu_textures_from_vram
 endscript
+
 script destroy_level_select
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -98,20 +106,24 @@ script destroy_level_select
   endif
   remove_level_select_menu_textures_from_vram
 endscript
+
 script ResetAbortAndDoneScripts
   Change DoneScript = DefaultDoneScript
   Change AbortScript = DefaultAbortScript
   Change RetryScript = DefaultRetryScript
   Change SavingOrLoading = Saving
 endscript
+
 DoneScript = DefaultDoneScript
 script DefaultDoneScript
   Printf "DefaultDoneScript called !!!"
 endscript
+
 AbortScript = DefaultAbortScript
 script DefaultAbortScript
   Printf "DefaultAbortScript called !!!"
 endscript
+
 script memcard_menus_cleanup
   EnableReset
   dialog_box_exit no_pad_start
@@ -124,11 +136,13 @@ script memcard_menus_cleanup
     endif
   endif
 endscript
+
 script back_to_main_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
   create_main_menu
 endscript
+
 script back_to_pause_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
@@ -142,36 +156,43 @@ script back_to_pause_menu
   endif
   Change save_successful = 2
 endscript
+
 script back_to_end_replay_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
   create_in_game_end_replay_menu
 endscript
+
 script back_to_net_settings_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
   create_network_options_menu
 endscript
+
 script back_to_beat_goal
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
   FireEvent type = goal_wait_for_save
 endscript
+
 script back_to_select_skater
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
   launch_select_skater_menu
 endscript
+
 script back_to_options_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
   create_setup_options_menu
 endscript
+
 script back_to_career_options_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
   create_career_options_menu
 endscript
+
 script back_to_created_park_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
@@ -182,6 +203,7 @@ script back_to_created_park_menu
     level_select_created_park_menu
   endif
 endscript
+
 script load_loaded_created_park
   dialog_box_exit
   if ( still_in_net_area = 1 )
@@ -200,6 +222,7 @@ script load_loaded_created_park
     endif
   endif
 endscript
+
 script back_to_net_host_options
   prefs = network
   field = "level"
@@ -214,6 +237,7 @@ script back_to_net_host_options
   endif
   create_network_host_options_menu
 endscript
+
 script back_to_internet_options_menu
   memcard_menus_cleanup
   ResetAbortAndDoneScripts
@@ -224,10 +248,12 @@ script back_to_internet_options_menu
   endif
   Change load_successful = 2
 endscript
+
 RetryScript = DefaultRetryScript
 script DefaultRetryScript
   Printf "DefaultRetryScript called !!!"
 endscript
+
 script mem_card_message_pause
   DisableReset
   if not GotParam NoTimerReset
@@ -257,6 +283,7 @@ script mem_card_message_pause
     Wait 1 gameframe
   repeat
 endscript
+
 script check_card
   DisableReset
   if not CardIsInSlot
@@ -292,6 +319,7 @@ script check_card
     dialog_box_exit no_pad_start
   endif
 endscript
+
 StopCheckingForCardRemoval = 0
 script CheckForCardRemoval
   DisableReset
@@ -316,6 +344,7 @@ script CheckForCardRemoval
     Wait 1 gameframe
   repeat
 endscript
+
 script DoFormatCard
   DisableReset
   if CardIsFormatted
@@ -332,11 +361,13 @@ script DoFormatCard
     Goto mcmess_FormatFailed
   endif
 endscript
+
 script launch_files_menu
   DebugFn 766
   memcard_menus_cleanup
   create_files_menu <...>
 endscript
+
 script create_files_menu pos_tweak = (-20, -45)
   if CustomParkMode editing
     if ScreenElementExists id = controller_unplugged_dialog_anchor
@@ -466,6 +497,7 @@ script create_files_menu pos_tweak = (-20, -45)
   SetScreenElementProps id = files_scrolling_menu reset_window_top
   CheckForCardRemoval menu_id = files_menu
 endscript
+
 script files_menu_add_item pad_choose_script = nullscript font = dialog icon_alpha = 1.0
   if GotParam Save
     if not GotParam ListAllTypes
@@ -603,6 +635,7 @@ script files_menu_add_item pad_choose_script = nullscript font = dialog icon_alp
   }
   files_menu_add_bg parent = <container_id>
 endscript
+
 script files_menu_add_top_bar
   GetStackedScreenElementPos Y id = files_scrolling_menu_title offset = (0, 8)
   CreateScreenElement {
@@ -633,6 +666,7 @@ script files_menu_add_top_bar
   }
   files_menu_add_bg parent = <container_id> cap_texture = grungeframe_top
 endscript
+
 script files_menu_add_bottom_bar
   GetStackedScreenElementPos Y id = files_scrolling_menu
   CreateScreenElement {
@@ -814,6 +848,7 @@ script files_menu_add_bottom_bar
     rgba = <text_bg_rgba>
   }
 endscript
+
 script files_menu_add_bg { cap_texture = grungeframe_mid
     pos = (0, -7)
   }
@@ -839,6 +874,7 @@ script files_menu_add_bg { cap_texture = grungeframe_mid
     z_priority = -1
   }
 endscript
+
 script files_menu_focus
   GetTags
    <files_menu_file_info_text> = ''
@@ -915,6 +951,7 @@ script files_menu_focus
     }
   endif
 endscript
+
 script files_menu_unfocus
   GetTags
   if GotParam Save
@@ -945,6 +982,7 @@ script files_menu_unfocus
     rgba = [ 128 128 128 0 ]
   }
 endscript
+
 script add_files_menu_textures_to_vram
   AddTextureToVram "mem_career"
   AddTextureToVram "mem_net"
@@ -960,6 +998,7 @@ script add_files_menu_textures_to_vram
   AddTextureToVram "PA_Save"
   AddTextureToVram "PA_Load"
 endscript
+
 script remove_files_menu_textures_from_vram
   RemoveTextureFromVram "mem_career"
   RemoveTextureFromVram "mem_net"
@@ -975,6 +1014,7 @@ script remove_files_menu_textures_from_vram
   RemoveTextureFromVram "PA_Save"
   RemoveTextureFromVram "PA_Load"
 endscript
+
 script files_menu_delete
   GetTags
   if GotParam index
@@ -1001,6 +1041,7 @@ script files_menu_delete
     endif
   endif
 endscript
+
 script delete_file
   memcard_menus_cleanup
   Change StopCheckingForCardRemoval = 1
@@ -1024,6 +1065,7 @@ script delete_file
     Goto mcmess_ErrorDeleteFailed
   endif
 endscript
+
 script delete_bad_file
   memcard_menus_cleanup
   ResetTimer
@@ -1062,6 +1104,7 @@ script delete_bad_file
     Goto mcmess_ErrorDeleteFailed
   endif
 endscript
+
 script NGC_delete_bad_file
   memcard_menus_cleanup
   ResetTimer
@@ -1088,6 +1131,7 @@ script NGC_delete_bad_file
     Goto mcmess_ErrorDeleteFailed
   endif
 endscript
+
 script OKToOverwrite
   if GotParam NoGetTags
   else
@@ -1145,6 +1189,7 @@ script OKToOverwrite
   }
   CheckForCardRemoval menu_id = dialog_box_anchor
 endscript
+
 script DeleteOldSaveNew
   memcard_menus_cleanup
   Change StopCheckingForCardRemoval = 1
@@ -1157,6 +1202,7 @@ script DeleteOldSaveNew
     Save filename = <filename> file_type = <new_file_type>
   endif
 endscript
+
 script DeleteOldSaveNewOk
   DebugFn 766
   memcard_menus_cleanup
@@ -1164,10 +1210,12 @@ script DeleteOldSaveNewOk
   ResetTimer
   Save filename = <filename> file_type = <new_file_type>
 endscript
+
 script retry_launch_save_network_settings
   memcard_menus_cleanup
   Goto launch_save_network_settings
 endscript
+
 script launch_save_network_settings
   destroy_net_settings_menu
   remove_main_menu_textures_from_vram
@@ -1178,10 +1226,12 @@ script launch_save_network_settings
   check_card FileType = NetworkSettings Save
   launch_files_menu Save FileType = NetworkSettings
 endscript
+
 script retry_launch_save_internet_settings
   memcard_menus_cleanup
   Goto launch_save_internet_settings
 endscript
+
 script launch_save_internet_settings
   destroy_internet_options_menu
   remove_main_menu_textures_from_vram
@@ -1192,10 +1242,12 @@ script launch_save_internet_settings
   check_card FileType = NetworkSettings Save
   launch_files_menu Save FileType = NetworkSettings
 endscript
+
 script retry_launch_pause_menu_save_game_sequence
   memcard_menus_cleanup
   Goto launch_pause_menu_save_game_sequence
 endscript
+
 script launch_pause_menu_save_game_sequence
   destroy_pause_menu
   Change RetryScript = retry_launch_pause_menu_save_game_sequence
@@ -1206,10 +1258,12 @@ script launch_pause_menu_save_game_sequence
   MaybeSaveCustomSkater
   launch_files_menu Save FileType = OptionsAndPros
 endscript
+
 script retry_launch_end_replay_menu_save_replay_sequence
   memcard_menus_cleanup
   Goto launch_end_replay_menu_save_replay_sequence
 endscript
+
 script launch_end_replay_menu_save_replay_sequence
   destroy_pause_menu
   Change RetryScript = retry_launch_end_replay_menu_save_replay_sequence
@@ -1219,11 +1273,13 @@ script launch_end_replay_menu_save_replay_sequence
   check_card FileType = Replay Save
   launch_files_menu Save FileType = Replay
 endscript
+
 save_successful = 2
 script retry_launch_pause_menu_save_park_sequence
   memcard_menus_cleanup
   Goto launch_pause_menu_save_park_sequence
 endscript
+
 script launch_pause_menu_save_park_sequence
   destroy_pause_menu
   Change RetryScript = retry_launch_pause_menu_save_park_sequence
@@ -1233,10 +1289,12 @@ script launch_pause_menu_save_park_sequence
   check_card FileType = Park Save
   launch_files_menu Save FileType = Park
 endscript
+
 script retry_launch_park_editor_save_park_sequence
   memcard_menus_cleanup
   Goto launch_park_editor_save_park_sequence
 endscript
+
 script launch_park_editor_save_park_sequence
   destroy_pause_menu
   Change RetryScript = retry_launch_park_editor_save_park_sequence
@@ -1247,10 +1305,12 @@ script launch_park_editor_save_park_sequence
   check_card FileType = Park Save
   launch_files_menu Save FileType = Park
 endscript
+
 script retry_launch_pause_menu_load_park_sequence
   memcard_menus_cleanup
   Goto launch_pause_menu_load_park_sequence
 endscript
+
 script launch_pause_menu_load_park_sequence
   destroy_pause_menu
   Change RetryScript = retry_launch_pause_menu_load_park_sequence
@@ -1260,10 +1320,12 @@ script launch_pause_menu_load_park_sequence
   check_card FileType = Park Load
   launch_files_menu Load FileType = Park
 endscript
+
 script retry_launch_level_select_load_park_sequence
   memcard_menus_cleanup
   Goto launch_level_select_load_park_sequence
 endscript
+
 script launch_level_select_load_park_sequence
   destroy_level_select
   Change RetryScript = retry_launch_level_select_load_park_sequence
@@ -1273,11 +1335,13 @@ script launch_level_select_load_park_sequence
   check_card FileType = Park Load
   launch_files_menu Load FileType = Park
 endscript
+
 load_successful = 2
 script retry_launch_upload_park_load_park_sequence
   memcard_menus_cleanup
   Goto launch_upload_park_load_park_sequence
 endscript
+
 script launch_upload_park_load_park_sequence
   Change load_successful = 0
   Change RetryScript = retry_launch_upload_park_load_park_sequence
@@ -1287,10 +1351,12 @@ script launch_upload_park_load_park_sequence
   check_card FileType = Park Load
   launch_files_menu Load FileType = Park
 endscript
+
 script retry_launch_download_park_save_sequence
   memcard_menus_cleanup
   Goto launch_download_park_save_sequence
 endscript
+
 script launch_download_park_save_sequence
   Change RetryScript = retry_launch_download_park_save_sequence
   Change AbortScript = back_from_transfer_succeeded_dialog
@@ -1299,10 +1365,12 @@ script launch_download_park_save_sequence
   check_card FileType = Park Save
   launch_files_menu Save FileType = Park
 endscript
+
 script retry_launch_save_cas_sequence
   memcard_menus_cleanup
   Goto launch_save_cas_sequence
 endscript
+
 script launch_save_cas_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_credits play_hold
@@ -1313,10 +1381,12 @@ script launch_save_cas_sequence
   check_card FileType = Cas Save
   launch_files_menu Save FileType = Cas
 endscript
+
 script retry_launch_options_menu_save_game_sequence
   memcard_menus_cleanup
   Goto launch_options_menu_save_game_sequence
 endscript
+
 script launch_options_menu_save_game_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_options play_hold
@@ -1328,10 +1398,12 @@ script launch_options_menu_save_game_sequence
   MaybeSaveCustomSkater
   launch_files_menu Save FileType = OptionsAndPros
 endscript
+
 script retry_launch_beat_goal_save_game_sequence
   memcard_menus_cleanup
   Goto launch_beat_goal_save_game_sequence
 endscript
+
 script launch_beat_goal_save_game_sequence
   Change RetryScript = retry_launch_beat_goal_save_game_sequence
   Change AbortScript = back_to_beat_goal
@@ -1341,6 +1413,7 @@ script launch_beat_goal_save_game_sequence
   MaybeSaveCustomSkater
   launch_files_menu Save FileType = OptionsAndPros
 endscript
+
 script AppendDigitsToFilenameUntilNoClash
   PauseMusic 1
   PauseStream 1
@@ -1360,6 +1433,7 @@ script AppendDigitsToFilenameUntilNoClash
   PauseMusic -1
   PauseStream -1
 endscript
+
 script CreateNew
   GetTags
   memcard_menus_cleanup
@@ -1397,6 +1471,7 @@ script CreateNew
   }
   CheckForCardRemoval menu_id = keyboard_anchor
 endscript
+
 script CreateNew_Done
   GetTextElementString id = keyboard_current_string
   memcard_menus_cleanup
@@ -1415,6 +1490,7 @@ script CreateNew_Done
     Save filename = <string> file_type = <FileType>
   endif
 endscript
+
 script Save
   memcard_menus_cleanup
   switch <file_type>
@@ -1441,10 +1517,12 @@ script Save
     Goto mcmess_ErrorSaveFailed
   endif
 endscript
+
 script MaybeSaveCustomSkater_Cancel
   memcard_menus_cleanup
   Goto AbortScript
 endscript
+
 script MaybeSaveCustomSkater
   Change SavingOrLoading = Saving
   if not CurrentSkaterIsPro
@@ -1468,11 +1546,13 @@ script MaybeSaveCustomSkater
     endif
   endif
 endscript
+
 script PostAutoSaveCas
   Change DoneScript = AbortScript
   Change SavingOrLoading = Saving
   launch_files_menu Save FileType = OptionsAndPros
 endscript
+
 DoAutoload = 1
 goto_secret_shop = 0
 script maybe_auto_load_from_memory_card
@@ -1512,6 +1592,7 @@ script maybe_auto_load_from_memory_card
     endif
   endif
 endscript
+
 script CheckForCardOnBootup
   ResetAbortAndDoneScripts
   DisableReset
@@ -1539,6 +1620,7 @@ script CheckForCardOnBootup
     Goto mcmess_ErrorNoCardOnBootup
   endif
 endscript
+
 script auto_load
   memcard_menus_cleanup
   if IsInternetGameHost
@@ -1672,10 +1754,12 @@ script auto_load
     endif
   endif
 endscript
+
 script retry_launch_load_network_settings
   memcard_menus_cleanup
   Goto launch_load_network_settings
 endscript
+
 script launch_load_network_settings
   destroy_net_settings_menu
   remove_main_menu_textures_from_vram
@@ -1686,10 +1770,12 @@ script launch_load_network_settings
   check_card FileType = NetworkSettings
   launch_files_menu FileType = NetworkSettings
 endscript
+
 script retry_launch_options_menu_load_game_sequence
   memcard_menus_cleanup
   Goto launch_options_menu_load_game_sequence
 endscript
+
 script launch_options_menu_load_game_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_options play_hold
@@ -1705,10 +1791,12 @@ script launch_options_menu_load_game_sequence
   check_card FileType = OptionsAndPros
   launch_files_menu FileType = OptionsAndPros
 endscript
+
 script retry_launch_options_menu_load_replay_sequence
   memcard_menus_cleanup
   Goto launch_options_menu_load_replay_sequence
 endscript
+
 script launch_options_menu_load_replay_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_options play_hold
@@ -1719,10 +1807,12 @@ script launch_options_menu_load_replay_sequence
   check_card FileType = Replay
   launch_files_menu FileType = Replay
 endscript
+
 script retry_launch_load_cas_sequence
   memcard_menus_cleanup
   Goto launch_load_cas_sequence
 endscript
+
 script launch_load_cas_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_credits play_hold
@@ -1733,10 +1823,12 @@ script launch_load_cas_sequence
   check_card FileType = Cas
   launch_files_menu FileType = Cas
 endscript
+
 script retry_launch_load_cas_from_select_sequence
   memcard_menus_cleanup
   Goto launch_load_cas_from_select_sequence
 endscript
+
 script launch_load_cas_from_select_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_credits play_hold
@@ -1747,6 +1839,7 @@ script launch_load_cas_from_select_sequence
   check_card FileType = Cas
   launch_files_menu FileType = Cas
 endscript
+
 script Load
   GetTags
   if ( ( GotParam BadVersion ) or ( GotParam Corrupt ) )
@@ -1792,6 +1885,7 @@ script Load
     Goto mcmess_ErrorLoadFailed params = { <...> GoBackToFilesMenu }
   endif
 endscript
+
 script MaybeLoadCustomSkater
   if not CurrentSkaterIsPro
     if CustomSkaterFilenameDefined
@@ -1809,6 +1903,7 @@ script MaybeLoadCustomSkater
     endif
   endif
 endscript
+
 script post_load_from_memory_card
   if not GotParam type
     PrintStruct <...>

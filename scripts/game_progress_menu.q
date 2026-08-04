@@ -1,4 +1,3 @@
-
 script game_progress_menu_create
   SetScreenElementLock id = root_window off
   if ObjectExists id = current_menu_anchor
@@ -123,6 +122,7 @@ script game_progress_menu_create
   FireEvent type = focus target = current_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script game_progress_menu_fill
   GoalManager_GetNumberOfGoalPoints total
   FormatText TextName = goal_points "%i / 190" i = <goal_points>
@@ -241,6 +241,7 @@ script game_progress_menu_fill
      <index> = ( <index> + 1 )
   repeat <array_size>
 endscript
+
 script game_progress_menu_add_section_header { first_column_rgba = [ 127 102 0 128 ]
     first_column_scale = 0.8
     second_column_rgba = [ 127 102 0 128 ]
@@ -305,6 +306,7 @@ script game_progress_menu_add_section_header { first_column_rgba = [ 127 102 0 1
     }
   endif
 endscript
+
 script game_progress_menu_add_item
   CreateScreenElement {
     type = ContainerElement
@@ -338,6 +340,7 @@ script game_progress_menu_add_item
     z_priority = 1
   }
 endscript
+
 script game_progress_menu_focus
   GetTags
   SetScreenElementLock id = <id> off
@@ -369,6 +372,7 @@ script game_progress_menu_focus
     menu_vert_blink_arrow { id = <arrow_id> }
   endif
 endscript
+
 script game_progress_menu_unfocus first_column_rgba = [ 88 105 112 128 ]
   GetTags
   SetScreenElementLock id = <id> off
@@ -384,6 +388,7 @@ script game_progress_menu_unfocus first_column_rgba = [ 88 105 112 128 ]
     DestroyScreenElement id = { <id> child = 2 }
   endif
 endscript
+
 script game_progress_menu_exit
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -398,6 +403,7 @@ script game_progress_menu_exit
     create_options_menu
   endif
 endscript
+
 script game_progress_menu_add_textures_to_vram
   AddTextureToVram "PA_Model"
   AddTextureToVram "PA_Shop"
@@ -410,6 +416,7 @@ script game_progress_menu_add_textures_to_vram
   AddTextureToVram "up_arrow"
   AddTextureToVram "down_arrow"
 endscript
+
 script game_progress_menu_remove_textures_from_vram
   RemoveTextureFromVram "PA_Model"
   RemoveTextureFromVram "PA_Shop"
@@ -422,3 +429,4 @@ script game_progress_menu_remove_textures_from_vram
   RemoveTextureFromVram "up_arrow"
   RemoveTextureFromVram "down_arrow"
 endscript
+

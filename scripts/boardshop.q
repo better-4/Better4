@@ -1,4 +1,5 @@
 boardshop_deck_price = 50
+
 script launch_boardshop_menu
   SetScreenElementLock id = root_window off
   pulse_blur
@@ -22,6 +23,7 @@ script launch_boardshop_menu
   boardshop_add_textures_to_vram
   boardshop_create_initial_menus
 endscript
+
 script boardshop_create_initial_menus
   SetScreenElementLock id = root_window off
   if ObjectExists id = current_menu_anchor
@@ -43,6 +45,7 @@ script boardshop_create_initial_menus
     RunScriptOnScreenElement id = boardshop_anchor_top select_skater_menu_animate_top
   endif
 endscript
+
 script boardshop_create_background
   SetScreenElementLock id = current_menu_anchor off
    <root_pos> = (30, 30)
@@ -74,6 +77,7 @@ script boardshop_create_background
   }
   set_sub_bg pos = ( <root_pos> + (152, 12) ) parent = boardshop_anchor_top
 endscript
+
 script boardshop_create_main_menu
   SetScreenElementLock id = current_menu_anchor off
   if ObjectExists id = boardshop_anchor_middle
@@ -164,6 +168,7 @@ script boardshop_create_main_menu
   }
   FireEvent type = focus target = boardshop_vmenu
 endscript
+
 script boardshop_create_deck_menu
   if not GotParam profile_index
     Printf "no index!"
@@ -392,6 +397,7 @@ script boardshop_create_deck_menu
   boardshop_replace_small_deck_textures currentSkaterProfileIndex = <currentSkaterProfileIndex>
   FireEvent type = focus target = boardshop_deck_design_menu
 endscript
+
 script boardshop_create_griptape_menu
   boardshop_sync_to_skater_graphic
   TRG_Deck_Main:boardshop_reset_main_griptape
@@ -497,6 +503,7 @@ script boardshop_create_griptape_menu
   endif
   FireEvent type = focus target = boardshop_griptape_menu
 endscript
+
 script boardshop_create_wheel_color_menu
   TRG_Deck_Main:Unhide
   get_current_skater_use_jets
@@ -554,6 +561,7 @@ script boardshop_create_wheel_color_menu
   repeat 10
   FireEvent type = focus target = boardshop_griptape_menu
 endscript
+
 script boardshop_add_griptape_wheel_menu internal_just = [ left top ]
   if ObjectExists id = boardshop_anchor_middle
     DestroyScreenElement id = boardshop_anchor_middle
@@ -598,6 +606,7 @@ script boardshop_add_griptape_wheel_menu internal_just = [ left top ]
     }
   endif
 endscript
+
 script boardshop_add_menu_title
   CreateScreenElement {
     type = ContainerElement
@@ -647,6 +656,7 @@ script boardshop_add_menu_title
     z_priority = 3
   }
 endscript
+
 script boardshop_add_menu_title_with_arrows
   CreateScreenElement {
     type = ContainerElement
@@ -718,6 +728,7 @@ script boardshop_add_menu_title_with_arrows
     z_priority = 3
   }
 endscript
+
 script boardshop_buy_deck
   FireEvent type = unfocus target = boardshop_deck_design_menu
   DoScreenElementMorph {
@@ -737,6 +748,7 @@ script boardshop_buy_deck
     ]
   }
 endscript
+
 script boardshop_buy_deck_reject
   dialog_box_exit no_pad_start
   GoalManager_GetCash
@@ -762,6 +774,7 @@ script boardshop_buy_deck_reject
   SetScreenElementLock id = boardshop_menu_anchor on
   FireEvent type = focus target = boardshop_deck_design_menu
 endscript
+
 script boardshop_buy_deck_accept
   if GoalManager_SpendCash boardshop_deck_price
     GoalManager_ShowGoalPoints
@@ -776,11 +789,13 @@ script boardshop_buy_deck_accept
     boardshop_buy_deck_reject
   endif
 endscript
+
 script boardshop_not_enough_money
   Printf "you don't have the money!"
   generic_menu_pad_back_sound
   PlaySound CheatBad vol = 50
 endscript
+
 script boardshop_switch_deck_list
   boardshop_reset_small_decks
   Wait 1 gameframe
@@ -828,6 +843,7 @@ script boardshop_switch_deck_list
     }
   endif
 endscript
+
 script boardshop_menu_exit
   if IsAlive name = TRG_Deck_Main
     Kill name = TRG_Deck_Main
@@ -851,6 +867,7 @@ script boardshop_menu_exit
     create_edit_skater_menu <edit_skater_menu_params>
   endif
 endscript
+
 script boardshop_deck_design_focus
   GetTags
   KillSpawnedScript name = boardshop_replace_main_board_texture
@@ -882,6 +899,7 @@ script boardshop_deck_design_focus
   endif
   edit_tricks_menu_focus <...>
 endscript
+
 script boardshop_griptape_focus
   KillSpawnedScript name = boardshop_replace_main_griptape
   if GotParam dest
@@ -889,9 +907,11 @@ script boardshop_griptape_focus
   endif
   edit_tricks_menu_focus <...>
 endscript
+
 script boardshop_change_griptape_group
   SpawnScript boardshop_create_griptape_menu params = <...>
 endscript
+
 script boardshop_reset_small_decks
   KillSpawnedScript name = boardshop_replace_small_deck_textures
   KillSpawnedScript name = boardshop_rotate_small_deck
@@ -902,6 +922,7 @@ script boardshop_reset_small_decks
      <index> = ( <index> + 1 )
   repeat 10
 endscript
+
 script boardshop_reset_small_griptapes
   KillSpawnedScript name = boardshop_rotate_small_griptape
    <index> = 0
@@ -912,6 +933,7 @@ script boardshop_reset_small_griptapes
   repeat 10
   PlaySound BoardsFlip
 endscript
+
 script boardshop_replace_small_deck_textures
   if not GotParam name
     GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -1010,6 +1032,7 @@ script boardshop_replace_small_deck_textures
   endif
   PlaySound BoardsFlip
 endscript
+
 script boardshop_add_textures_to_vram
   AddTextureToVram "PA_Mode"
   AddTextureToVram "grungeframe_top"
@@ -1024,6 +1047,7 @@ script boardshop_add_textures_to_vram
   AddTextureToVram "colorbar"
   AddTextureToVram "bw_slider"
 endscript
+
 script boardshop_remove_textures_from_vram
   RemoveTextureFromVram "PA_Mode"
   RemoveTextureFromVram "grungeframe_top"
@@ -1037,6 +1061,7 @@ script boardshop_remove_textures_from_vram
   RemoveTextureFromVram "stats_notch"
   RemoveTextureFromVram "colorbar"
 endscript
+
 script boardshop_get_small_deck_model_checksum
    <index> = ( <index> + 1 )
   board_id = "TRG_Deck_"
@@ -1046,12 +1071,15 @@ script boardshop_get_small_deck_model_checksum
   FormatText ChecksumName = board_id_checksum "%s%i" s = <board_id> i = <index>
   return model_checksum = <board_id_checksum>
 endscript
+
 script boardshop_menu_choose_deck
   cas_add_item part = deck_graphic desc_id = <desc_id> play_deck_sound
 endscript
+
 script boardshop_menu_choose_griptape
   cas_add_item part = griptape desc_id = <desc_id>
 endscript
+
 script boardshop_sync_to_skater_graphic
   GetCurrentSkaterProfileIndex
   if GetPlayerAppearancePart player = <currentSkaterProfileIndex> part = deck_graphic
@@ -1059,6 +1087,7 @@ script boardshop_sync_to_skater_graphic
     TRG_Deck_Main:Obj_ReplaceTexture src = "DM_thps4_board01.png" dest = <with>
   endif
 endscript
+
 script boardshop_sync_to_skater_griptape
   GetCurrentSkaterProfileIndex
   if GetPlayerAppearancePart player = <currentSkaterProfileIndex> part = griptape
@@ -1066,6 +1095,7 @@ script boardshop_sync_to_skater_griptape
     TRG_Deck_Main:Obj_ReplaceTexture src = "cw_ss_generic_griptape_01.png" dest = <with>
   endif
 endscript
+
 script boardshop_kill_spawned_scripts
   KillSpawnedScript name = boardshop_reset_small_deck
   KillSpawnedScript name = boardshop_reset_small_griptape
@@ -1074,6 +1104,7 @@ script boardshop_kill_spawned_scripts
   KillSpawnedScript name = boardshop_replace_main_board_texture
   KillSpawnedScript name = boardshop_replace_main_griptape
 endscript
+
 script boardshop_rotate_small_deck
   Obj_Rotate absolute = (0, 0, 0)
   Wait <wait_frames> gameframe
@@ -1086,6 +1117,7 @@ script boardshop_rotate_small_deck
   Obj_Rotate time = 0.25 relative = (0, 180, 0)
   Obj_WaitRotate
 endscript
+
 script boardshop_rotate_small_griptape
   Obj_Rotate absolute = (0, 180, 0)
   Wait <wait_frames> gameframe
@@ -1098,29 +1130,37 @@ script boardshop_rotate_small_griptape
   Obj_Rotate time = 0.25 relative = (0, 180, 0)
   Obj_WaitRotate
 endscript
+
 script boardshop_replace_main_board_texture
   Obj_Rotate absolute = (0, 300, 0)
   Wait 1 gameframe
   Obj_ReplaceTexture src = "DM_thps4_board01.png" dest = <dest>
 endscript
+
 script boardshop_replace_main_griptape
   Obj_Rotate absolute = (0, 120, 0)
   Wait 1 gameframe
   Obj_ReplaceTexture src = "cw_ss_generic_griptape_01.png" dest = <dest>
 endscript
+
 script boardshop_reset_main_board
   Obj_Rotate absolute = (0, 300, 0)
 endscript
+
 script boardshop_reset_main_griptape
   Obj_Rotate absolute = (0, 120, 0)
 endscript
+
 script boardshop_reset_main_trucks
   Obj_Rotate absolute = (90, 300, 0)
 endscript
+
 script boardshop_reset_small_deck
   Obj_Rotate absolute = (0, 0, 0)
 endscript
+
 script boardshop_reset_small_griptape
   Obj_Rotate absolute = (0, 180, 0)
 endscript
+
 boardshop_current_deck_list_index = 0

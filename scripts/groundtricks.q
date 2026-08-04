@@ -1,14 +1,10 @@
-
 TRICK_PRELOAD_TIME = 160
-Jumptricks0 =
-[ { Trigger = { TapOnceRelease , Up , X , 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } } ]
-Jumptricks =
-[ { Trigger = { TapTwiceRelease , Up , X , 500 } TrickSlot = JumpSlot } ]
+Jumptricks0 = [ { Trigger = { TapOnceRelease , Up , X , 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } } ]
+Jumptricks = [ { Trigger = { TapTwiceRelease , Up , X , 500 } TrickSlot = JumpSlot } ]
 Trick_Boneless = { Scr = Boneless Params = { Name = 'Boneless' Anim = Boneless Score = 250 } }
 Trick_Fastplant = { Scr = Boneless Params = { Name = 'Fastplant' Anim = Fastplant Score = 250 } }
 Trick_Beanplant = { Scr = Boneless Params = { Name = 'Beanplant' Anim = Beanplant Score = 250 } }
-GroundTricks =
-[
+GroundTricks = [
   { Trigger = { Press , R2 , 20 } Scr = ToggleSwitchRegular }
   { Trigger = { Press , L2 , 20 } Scr = ToggleNollieRegular }
   { Trigger = { HoldThree , R1 , L1 , Down } Scr = ToggleSwitchRegular Params = { PowerSlide } }
@@ -18,14 +14,12 @@ GroundTricks =
   { Trigger = { HoldTwoAndPress , R1 , L1 , Circle , 500 } Scr = Taunt Params = { Anim = Taunt2 string_id = no_way_string } }
   { Trigger = { HoldTwoAndPress , R1 , L1 , X , 500 } Scr = Taunt Params = { Anim = Taunt3 string_id = get_some_string } }
 ]
-NoTricks =
-[
-]
-Reverts =
-[
+NoTricks = []
+Reverts = [
   { Trigger = { Press , R2 , 200 } TrickSlot = ExtraSlot1 }
   { Trigger = { Press , L2 , 200 } TrickSlot = ExtraSlot2 }
 ]
+
 script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim = RevertBS
   ClearLipCombos
   KillExtraTricks
@@ -84,18 +78,21 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   WaitAnimWhilstChecking AndManuals
   Goto OnGroundAI
 endscript
+
 script RevertCheeseTimer
   Obj_SetFlag FLAG_SKATER_REVERTCHEESE
   Wait 25 seconds
   SetTags RevertCheese = 0
   Obj_ClearFlag FLAG_SKATER_REVERTCHEESE
 endscript
+
 script RevertCheeseIncrement
   GetTags
    <RevertCheese> = ( <RevertCheese> + 1 )
   SetTags RevertCheese = <RevertCheese>
   return RevertCheese = <RevertCheese>
 endscript
+
 script ToggleSwitchRegular
   OnGroundExceptions
   SetQueueTricks NoTricks
@@ -172,6 +169,7 @@ script ToggleSwitchRegular
   ClearTrickQueue
   Goto OnGroundAI
 endscript
+
 script CessTrail repeat_times = 20
   if SpeedGreaterThan 400
     if GotParam delay
@@ -193,6 +191,7 @@ script CessTrail repeat_times = 20
     repeat <repeat_times>
   endif
 endscript
+
 script ToggleNollieRegular
   OnGroundExceptions
   SetException Ex = Ollied Scr = Nollie Params = { NoDoNextTrick }
@@ -221,6 +220,7 @@ script ToggleNollieRegular
     Goto OnGroundAI
   endif
 endscript
+
 script Nollie
   if GotParam NoDoNextTrick
   else
@@ -255,6 +255,7 @@ script Nollie
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 script NollieNoDisplay OutSpeed = 1
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
@@ -278,6 +279,7 @@ script NollieNoDisplay OutSpeed = 1
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 Dpad = [ Up Down Left Right Upright UpLeft DownRight DownLeft ]
 script Ollie OutSpeed = 1
   StopSkitch
@@ -326,6 +328,7 @@ script Ollie OutSpeed = 1
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 script NoComply
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
@@ -340,6 +343,7 @@ script NoComply
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 script Beanplant
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
@@ -354,6 +358,7 @@ script Beanplant
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 script Fastplant
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
@@ -368,6 +373,7 @@ script Fastplant
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 script Boneless Anim = Boneless Name = 'Boneless' Score = 250
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
@@ -391,6 +397,7 @@ script Boneless Anim = Boneless Name = 'Boneless' Score = 250
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 script BonelessWaitAnimWhilstChecking
   begin
     DoNextTrick
@@ -406,6 +413,7 @@ script BonelessWaitAnimWhilstChecking
     endif
   repeat
 endscript
+
 script Taunt
   ClearException Ollied
   PlayAnim Anim = <Anim> BlendPeriod = 0.3
@@ -424,6 +432,7 @@ script Taunt
     Goto OnGroundAI
   endif
 endscript
+
 script Props
   OnGroundExceptions
   PlayAnim random( @Anim = Prop @Anim = Cheer1  ) BlendPeriod = 0.3
@@ -440,12 +449,14 @@ script Props
     Goto OnGroundAI
   endif
 endscript
+
 script BitchSlap
   OnGroundExceptions
   PlayAnim Anim = Slapright NoRestart BlendPeriod = 0.3
   WaitAnimWhilstChecking AndManuals
   Goto OnGroundAI
 endscript
+
 script Skitch
   ClearExceptions
   ResetLandedFromVert
@@ -480,6 +491,7 @@ script Skitch
     WaitOneGameFrame
   repeat
 endscript
+
 script SkitchOut
   StopSkitch
   StopBalanceTrick
@@ -490,6 +502,7 @@ script SkitchOut
   WaitAnimFinished
   Goto OnGroundAI
 endscript
+
 script NoBrake_Timer
   CanBrakeOff
   Wait 0.5 seconds

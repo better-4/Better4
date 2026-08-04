@@ -1,4 +1,3 @@
-
 glasses = [
   {
     desc_id = None

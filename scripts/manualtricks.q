@@ -111,6 +111,7 @@ ManualBranches =
   { Trigger = TRIGGER_MANUAL_BRANCHFLIP Trick_360FlipNoseManual }
   { Trigger = { inorder Circle Triangle 300 } Trick_OneFootManual }
 ]
+
 script Manual BlendPeriod = 0.3
   SetTrickName ""
   SetTrickScore 0
@@ -250,11 +251,13 @@ script Manual BlendPeriod = 0.3
     Obj_SpawnScript <SpawnScript>
   endif
 endscript
+
 script CheckForNewTrick_ManualOut
   Printf "give the events back!!!!!!!"
   RestoreExtraTrickEvents 100
   ManualOut
 endscript
+
 Manual_wobble_params = {
   WobbleAmpA = { (0.05, 0.05) STATS_MANUAL }
   WobbleAmpB = { (0.04, 0.04) STATS_MANUAL }
@@ -262,6 +265,7 @@ Manual_wobble_params = {
   WobbleK2 = { (0.0017, 0.0017) STATS_MANUAL }
   SpazFactor = { (1, 1) STATS_MANUAL }
 }
+
 script ManualOut
   if GotParam MadeOtherSkaterBail
   else
@@ -271,6 +275,7 @@ script ManualOut
   SetTrickScore 0
   Display Blockspin
 endscript
+
 script ManualLand
   VibrateOff
   SetException Ex = RunHasEnded Scr = EndOfRun
@@ -292,6 +297,7 @@ script ManualLand
   WaitAnimWhilstChecking
   Goto OnGroundAi
 endscript
+
 script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 0 SpeedMult = 1 speed = 1.0
   SpawnClothingLandScriptHalfMax
   GetManualName
@@ -423,6 +429,7 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
   WaitAnimFinished
   PlayManualBalanceAnim <...>
 endscript
+
 script PlayManualBalanceAnim
   if GotParam BalanceIdle
     PlayAnim Anim = <BalanceIdle> cycle
@@ -438,6 +445,7 @@ script PlayManualBalanceAnim
     repeat
   endif
 endscript
+
 script SetManualExtraTricks parent = 'none'
   if GotParam ExtraTricks2
     SetExtraTricks <ExtraTricks2> <ExtraTricks> ignore = <parent>
@@ -451,14 +459,17 @@ script SetManualExtraTricks parent = 'none'
     endif
   endif
 endscript
+
 script GetManualName ManualName = 'none'
   GetTags
   return ManualName = <ManualName>
 endscript
+
 script GetManualCheese
   GetTags
   return ManualCheese = <ManualCheese>
 endscript
+
 script Fireworks
   Obj_GetId
   MangleChecksums a = skatersplash b = <objId>
@@ -485,6 +496,7 @@ script Fireworks
   Wait 0.25 seconds
   SetScript name = <mangled_id> Emitscript = emit_skatersplash updatescript = skatersplash_update
 endscript
+
 script emit_fireworks
   SetLife min = 0.1 max = 0.3
   SetAngleSpread spread = 0.75
@@ -504,6 +516,7 @@ script emit_fireworks
     Wait 1 game frame
   repeat
 endscript
+
 script fireworks_update bone = head
   begin
     GetBonePosition id = <objId> bone = head

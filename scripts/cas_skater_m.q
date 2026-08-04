@@ -1,5 +1,4 @@
-appearance_burnquist =
-{
+appearance_burnquist = {
   skater_m_head = { desc_id = Burnquist }
   hat = { desc_id = #"Burnquist Cap" }
   body = { desc_id = MaleBody3 }
@@ -12,8 +11,7 @@ appearance_burnquist =
   Glasses = { desc_id = #"Burnquist Glasses" }
   body_shape = hawk_scale_info
 }
-appearance_caballero =
-{
+appearance_caballero = {
   skater_m_head = { desc_id = Caballero }
   body = { desc_id = MaleBody3 }
   board = { desc_id = #"Default" }
@@ -25,8 +23,7 @@ appearance_caballero =
   skater_m_socks = { desc_id = Medium }
   body_shape = caballero_scale_info
 }
-appearance_campbell =
-{
+appearance_campbell = {
   skater_m_head = { desc_id = Campbell }
   hat = { desc_id = #"Campbell Cap" }
   body = { desc_id = MaleBody2 }
@@ -38,8 +35,7 @@ appearance_campbell =
   shoes = { desc_id = #"campbell Shoe" }
   body_shape = campbell_scale_info
 }
-appearance_glifberg =
-{
+appearance_glifberg = {
   skater_m_head = { desc_id = Glifberg }
   body = { desc_id = MaleBody }
   board = { desc_id = #"Default" }
@@ -50,8 +46,7 @@ appearance_glifberg =
   shoes = { desc_id = #"Glifberg Shoe" }
   body_shape = glifberg_scale_info
 }
-appearance_hawk =
-{
+appearance_hawk = {
   skater_m_head = { desc_id = Hawk }
   body = { desc_id = MaleBody }
   board = { desc_id = #"Default" }
@@ -62,8 +57,7 @@ appearance_hawk =
   shoes = { desc_id = #"Hawk Shoe" }
   body_shape = hawk_scale_info
 }
-appearance_koston =
-{
+appearance_koston = {
   skater_m_head = { desc_id = Koston }
   hat = { desc_id = #"Koston Cap" }
   body = { desc_id = MaleBody3 }
@@ -76,8 +70,7 @@ appearance_koston =
   shoes = { desc_id = #"Koston Shoe" }
   body_shape = koston_scale_info
 }
-appearance_lasek =
-{
+appearance_lasek = {
   skater_m_head = { desc_id = Lasek }
   hat = { desc_id = #"Lasek Cap" }
   body = { desc_id = MaleBody }
@@ -89,8 +82,7 @@ appearance_lasek =
   shoes = { desc_id = #"Lasek Shoe" }
   body_shape = lasek_scale_info
 }
-appearance_margera =
-{
+appearance_margera = {
   skater_m_head = { desc_id = Margera }
   body = { desc_id = MaleBody }
   board = { desc_id = #"Default" }
@@ -101,8 +93,7 @@ appearance_margera =
   shoes = { desc_id = #"Margera Shoe" }
   body_shape = margera_scale_info
 }
-appearance_mullen =
-{
+appearance_mullen = {
   skater_m_head = { desc_id = Mullen }
   body = { desc_id = MaleBody }
   board = { desc_id = #"Default" }
@@ -113,8 +104,7 @@ appearance_mullen =
   shoes = { desc_id = #"Mullen Shoe" }
   body_shape = mullen_scale_info
 }
-appearance_muska =
-{
+appearance_muska = {
   body = { desc_id = MuskaBody }
   skater_m_head = { desc_id = Muska }
   board = { desc_id = #"Default" }
@@ -125,8 +115,7 @@ appearance_muska =
   shoes = { desc_id = #"Muska Shoe" }
   body_shape = muska_scale_info
 }
-appearance_reynolds =
-{
+appearance_reynolds = {
   skater_m_head = { desc_id = Reynolds }
   body = { desc_id = MaleBody }
   board = { desc_id = #"Default" }
@@ -137,8 +126,7 @@ appearance_reynolds =
   shoes = { desc_id = #"Reynolds Shoe" }
   body_shape = hawk_scale_info
 }
-appearance_rowley =
-{
+appearance_rowley = {
   skater_m_head = { desc_id = Rowley }
   hat = { desc_id = #"rowley cap" }
   body = { desc_id = MaleBody }
@@ -150,8 +138,7 @@ appearance_rowley =
   shoes = { desc_id = #"Rowley Shoe" }
   body_shape = rowley_scale_info
 }
-appearance_steamer =
-{
+appearance_steamer = {
   skater_f_head = { desc_id = Steamer }
   body = { desc_id = FemaleBody }
   board = { desc_id = #"Default" }
@@ -162,8 +149,7 @@ appearance_steamer =
   shoes = { desc_id = #"Steamer Shoe" }
   body_shape = steamer_scale_info
 }
-appearance_thomas =
-{
+appearance_thomas = {
   skater_m_head = { desc_id = Thomas }
   body = { desc_id = MaleBody }
   board = { desc_id = #"Default" }
@@ -175,22 +161,19 @@ appearance_thomas =
   chest_tattoo = { desc_id = #"Thomas 1" }
   body_shape = thomas_scale_info
 }
-appearance_eddie =
-{
+appearance_eddie = {
   body = { desc_id = eddie }
   board = { desc_id = #"Default" }
   deck_graphic = { desc_id = #"Eddie 1" }
   griptape = { desc_id = #"Generic 9" }
   body_shape = eddie_scale_info
 }
-appearance_jango =
-{
+appearance_jango = {
   body = { desc_id = JANGO }
   board = { desc_id = Hover }
   deck_graphic = { desc_id = #"Jango 1" }
 }
-appearance_vallely =
-{
+appearance_vallely = {
   body = { desc_id = VallelyBody }
   skater_m_head = { desc_id = Vallely }
   board = { desc_id = #"Default" }
@@ -203,8 +186,7 @@ appearance_vallely =
   shoes = { desc_id = #"Vallely Shoe" }
   accessories = { desc_id = #"Wrist Tape" }
 }
-appearance_jenna =
-{
+appearance_jenna = {
   body = { desc_id = JENNA }
   board = { desc_id = Banana }
   skater_f_torso = { desc_id = #"Tube Top" }
@@ -212,8 +194,7 @@ appearance_jenna =
   shoes = { desc_id = #"High Heels" }
   body_shape = jenna_scale_info
 }
-appearance_custom_skater_male =
-{
+appearance_custom_skater_male = {
   body = { desc_id = MaleBody }
   skater_m_head = { desc_id = #"Light Skin 4" }
   skater_m_hair = { desc_id = #"Buzzed Dark" }
@@ -228,8 +209,7 @@ appearance_custom_skater_male =
   deck_graphic = { desc_id = #"CAS 1" }
   griptape = { desc_id = #"Generic 1" }
 }
-appearance_custom_skater_female =
-{
+appearance_custom_skater_female = {
   skater_f_head = { desc_id = #"Tan Skin 5" }
   skater_f_hair = { desc_id = #"Thin Long Dark" }
   body = { desc_id = FemaleBody3 }

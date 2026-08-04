@@ -122,6 +122,7 @@ dialogfont_colors = [
   [ 127 102 0 100 ]
   [ 100 100 128 100 ]
 ]
+
 script new_screen_element_test
   PushMemProfile "Fonts and Bitmaps"
   ScreenElementSystemInit
@@ -144,6 +145,7 @@ script new_screen_element_test
   FireEvent type = focus target = root_window
   PopMemProfile
 endscript
+
 script handle_start_pressed
   root_window:GetTags
   if ChecksumEquals a = <menu_state> b = on
@@ -206,6 +208,7 @@ script handle_start_pressed
     create_pause_menu device_num = <device_num>
   endif
 endscript
+
 script restore_start_key_binding
   SetScreenElementProps {
     id = root_window
@@ -213,6 +216,7 @@ script restore_start_key_binding
     replace_handlers
   }
 endscript
+
 script kill_start_key_binding
   SetScreenElementProps {
     id = root_window
@@ -220,9 +224,11 @@ script kill_start_key_binding
     replace_handlers
   }
 endscript
+
 script make_new_ingame_menu
   make_new_menu <...>
 endscript
+
 script make_new_menu { menu_title = "Paused"
     padding_scale = 1.15
     internal_scale = 1
@@ -332,6 +338,7 @@ script make_new_menu { menu_title = "Paused"
     create_helper_text <helper_text>
   endif
 endscript
+
 script make_new_sprite_menu menu_id = main_menu_anchor vmenu_id = main_menu pad_back_script = exit_pause_menu
   SetScreenElementLock id = root_window off
   CreateScreenElement {
@@ -372,6 +379,7 @@ script make_new_sprite_menu menu_id = main_menu_anchor vmenu_id = main_menu pad_
   AssignAlias id = <menu_id> alias = current_menu_anchor
   AssignAlias id = <vmenu_id> alias = current_menu
 endscript
+
 script set_menu_bg parent = current_menu_anchor
    <number_of_slices> = 7
    <slice_height> = 32
@@ -433,6 +441,7 @@ script set_menu_bg parent = current_menu_anchor
      <height> = ( <height> - <slice_height> )
   repeat
 endscript
+
 script set_sub_bg { parent = current_menu_anchor
     pos = (326, 115)
     scale = (1.17, 1.1)
@@ -450,6 +459,7 @@ script set_sub_bg { parent = current_menu_anchor
     z_priority = 1
   }
 endscript
+
 script set_sub_bg_goal goal_mid_scale = (14.8, 1.33) pos = (250, 23) goal_end_scale = (1, 1.33)
   CreateScreenElement {
     type = SpriteElement
@@ -499,6 +509,7 @@ script set_sub_bg_goal goal_mid_scale = (14.8, 1.33) pos = (250, 23) goal_end_sc
     z_priority = 0
   }
 endscript
+
 script create_icon pos = (176, 115) parent = current_menu_anchor scale = (0.95, 0.95) z_priority = 5
   CreateScreenElement {
     type = SpriteElement
@@ -512,6 +523,7 @@ script create_icon pos = (176, 115) parent = current_menu_anchor scale = (0.95, 
     texture = <texture>
   }
 endscript
+
 script make_text_sprite pos = (-27, 10) just = [ center center ] rgba = [ 128 128 128 50 ] scale = 0.45
   CreateScreenElement {
     type = SpriteElement
@@ -523,6 +535,7 @@ script make_text_sprite pos = (-27, 10) just = [ center center ] rgba = [ 128 12
     scale = <scale>
   }
 endscript
+
 script create_pause_menu
   if CustomParkMode editing
     SetParkEditorPauseMode pause
@@ -798,6 +811,7 @@ script create_pause_menu
   set_menu_bg
   RunScriptOnScreenElement id = pause_menu menu_onscreen
 endscript
+
 script create_mp_pause_menu
   SetButtonEventMappings unblock_menu_input
   make_new_sprite_menu menu_id = pause_menu vmenu_id = pause_vmenu pad_back_script = handle_start_pressed
@@ -814,6 +828,7 @@ script create_mp_pause_menu
   set_menu_bg
   RunScriptOnScreenElement id = pause_menu menu_onscreen
 endscript
+
 script exit_pause_menu menu_id = current_menu_anchor
   Debounce X time = 0.3
   if InNetGame
@@ -891,18 +906,23 @@ script exit_pause_menu menu_id = current_menu_anchor
     hide_root_window
   endif
 endscript
+
 script kill_pause_menu_cams
   kill_proset_cams
 endscript
+
 script set_custom_restart
   skater:SetCustomRestart Set
 endscript
+
 script skip_to_custom_restart
   skater:SkipToCustomRestart
 endscript
+
 script launch_restart_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_restart_menu
 endscript
+
 script create_restart_menu
   make_new_menu menu_id = restart_menu vmenu_id = restart_vmenu menu_title = "RESTART" padding_scale = 0.8 internal_scale = 0.8 type = VScrollingMenu dims = (320, 280)
   SetScreenElementProps { id = restart_menu
@@ -914,26 +934,31 @@ script create_restart_menu
   create_icon texture = PA_restart pos = (169, 108)
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script skip_to_selected_restart
   ResetSkaters <...>
   exit_pause_menu
 endscript
+
 script preview_restart
   pulse_blur start = 200 speed = 5
   ResetSkaters <...>
   SetProps rgba = [ 128 128 0 128 ]
   DoMorph time = 0.25 scale = 1.0
 endscript
+
 script scale_down_restart
   SetProps rgba = [ 88 105 112 128 ]
   DoMorph time = 0.25 scale = 0.8
 endscript
+
 script launch_gap_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
   create_gap_menu
 endscript
+
 script create_gap_menu
   remove_pause_menu_textures_from_vram
   add_gap_menu_textures_to_vram
@@ -1099,6 +1124,7 @@ script create_gap_menu
   AddGapsToMenu initial_scale = 0.8
   RunScriptOnScreenElement id = current_menu_anchor animate_in params = { menu_id = current_menu }
 endscript
+
 script gap_menu_add_item
   if GotParam first_item
     focus_params = { first_item }
@@ -1171,13 +1197,16 @@ script gap_menu_add_item
     scale = 0.8
   }
 endscript
+
 script skip_to_selected_gap
 endscript
+
 script preview_gap
   SetProps rgba = [ 127 102 0 100 ]
   DoMorph time = 0.1 scale = 0.85
   GetTags
 endscript
+
 script gap_menu_focus
   GetTags
   if ( <times> > 0 )
@@ -1221,6 +1250,7 @@ script gap_menu_focus
     menu_vert_blink_arrow { id = <arrow_id> }
   endif
 endscript
+
 script gap_menu_unfocus
   GetTags
   if ( <times> > 0 )
@@ -1238,6 +1268,7 @@ script gap_menu_unfocus
     rgba = <rgba>
   }
 endscript
+
 script gap_menu_exit_to_pause_menu
   GoalManager_ShowPoints
   if not GoalManager_HasActiveGoals
@@ -1248,6 +1279,7 @@ script gap_menu_exit_to_pause_menu
   restore_start_key_binding
   create_pause_menu
 endscript
+
 script add_gap_menu_textures_to_vram
   AddTextureToVram "up_arrow"
   AddTextureToVram "down_arrow"
@@ -1258,6 +1290,7 @@ script add_gap_menu_textures_to_vram
   AddTextureToVram "pa_sound"
   AddTextureToVram "goal_line"
 endscript
+
 script remove_gap_menu_textures_from_vram
   RemoveTextureFromVram "up_arrow"
   RemoveTextureFromVram "down_arrow"
@@ -1268,6 +1301,7 @@ script remove_gap_menu_textures_from_vram
   RemoveTextureFromVram "pa_sound"
   RemoveTextureFromVram "goal_line"
 endscript
+
 script got_all_gaps_screen_create
   if GetGlobalFlag flag = GOT_ALL_GAPS
     return
@@ -1290,6 +1324,7 @@ script got_all_gaps_screen_create
     delay_input
   }
 endscript
+
 script got_all_gaps_screen_exit
   dialog_box_exit
   if LevelIs load_skateshop
@@ -1301,17 +1336,21 @@ script got_all_gaps_screen_exit
   endif
   UnPauseGame
 endscript
+
 script launch_pause_menu cur_menu = current_menu_anchor
   Printf "why was this called?"
 endscript
+
 script menu_confirm_quit_out_yes
   DebugFn766
    <yes_script> params = <...>
 endscript
+
 script menu_confirm_quit_out_no
   DebugFn 766
    <no_script> params = <...>
 endscript
+
 script menu_confirm_quit {
     yes_script = level_select_change_level_quit
     no_script = menu_quit_no
@@ -1349,6 +1388,7 @@ script menu_confirm_quit {
     }
   endif
 endscript
+
 script menu_confirm_quit_park_editor {
     yes_script = launch_park_editor_save_park_sequence
     no_script = parked_quit
@@ -1383,6 +1423,7 @@ script menu_confirm_quit_park_editor {
      <no_script> level = load_skateshop
   endif
 endscript
+
 script menu_confirm_goto_secret_shop {
     yes_script = exit_to_secrets
     no_script = menu_cash_no
@@ -1410,14 +1451,17 @@ script menu_confirm_goto_secret_shop {
   }
   create_helper_text generic_helper_text_left_right parent = dialog_box_anchor
 endscript
+
 script exit_to_secrets
   Change goto_secret_shop = 1
   level_select_change_level_quit level = load_skateshop
 endscript
+
 script exit_to_skaters
   Change goto_secret_shop = 2
   level_select_change_level_quit level = load_skateshop
 endscript
+
 script level_select_change_level_quit
   MakeSkaterGoto SkaterInit
   SetButtonEventMappings block_menu_input
@@ -1450,15 +1494,18 @@ script level_select_change_level_quit
   level_select_change_level <...>
   SetButtonEventMappings unblock_menu_input
 endscript
+
 script menu_quit_no
   generic_menu_pad_back_sound
   dialog_box_exit
   create_pause_menu
 endscript
+
 script menu_cash_no
   dialog_box_exit
   create_options_menu
 endscript
+
 script bootstrap_quit
   dialog_box_exit
   SetButtonEventMappings block_menu_input
@@ -1469,12 +1516,15 @@ script bootstrap_quit
   Wait 5 seconds
   ExitDemo
 endscript
+
 script launch_view_models_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_view_models_menu
 endscript
+
 script make_select_view_model_line
   make_text_sub_menu_item text = <text> pad_choose_script = view_model pad_choose_params = { <...> }
 endscript
+
 script create_view_models_menu
   make_new_menu menu_id = view_models_menu vmenu_id = view_models_vmenu menu_title = "MODELS" type = VScrollingMenu dims = (320, 200)
   SetScreenElementProps { id = view_models_menu event_handlers = [
@@ -1486,18 +1536,22 @@ script create_view_models_menu
   create_icon texture = PA_model
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script view_model
   Printf "View Model here"
   SetViewerModel <...>
   restore_start_key_binding
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen
 endscript
+
 script launch_set_pro_skater_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_set_pro_skater_menu
 endscript
+
 script make_select_set_pro_skater_line
   make_text_sub_menu_item text = <text> pad_choose_script = set_pro_skater pad_choose_params = <...>
 endscript
+
 script create_set_pro_skater_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1527,6 +1581,7 @@ script create_set_pro_skater_menu
   create_icon texture = PA_model
   RunScriptOnScreenElement id = current_menu_anchor animate_in params = { final_pos = (320, 134) }
 endscript
+
 script set_pro_skater
   Printf "Set pro skater here"
   load_pro_skater { profile = 0 skater = 0 <...> }
@@ -1537,12 +1592,15 @@ script set_pro_skater
     exit_pause_menu
   endif
 endscript
+
 script launch_change_skater_appearance_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_change_skater_appearance_menu
 endscript
+
 script make_select_change_skater_appearance_line
   make_text_sub_menu_item text = <text> pad_choose_script = change_skater_appearance pad_choose_params = { <...> }
 endscript
+
 script create_change_skater_appearance_menu
   make_new_menu menu_id = change_skater_appearance_menu vmenu_id = change_skater_appearance_vmenu menu_title = "APPEARANCE"
   SetScreenElementProps { id = change_skater_appearance_menu event_handlers = [
@@ -1554,11 +1612,13 @@ script create_change_skater_appearance_menu
   create_icon texture = PA_model
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script change_skater_appearance
   Printf "Change skater appearance here"
   InitSkaterModel skater = 0 <...>
   exit_pause_menu
 endscript
+
 script create_debug_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1607,42 +1667,52 @@ script create_debug_menu
   create_icon texture = PA_model
   RunScriptOnScreenElement id = current_menu_anchor animate_in params = { final_pos = (320, 134) }
 endscript
+
 script screensaver
   SpawnScript create_startup_menu
   exit_pause_menu
 endscript
+
 script hole_check
   CheckForHoles
   create_pause_menu
 endscript
+
 script launch_toggle_profiler
   ToggleMetrics
   create_pause_menu
 endscript
+
 script launch_dumpshots
   DumpShots
   create_pause_menu
 endscript
+
 script toggle_rails
   ToggleRails
   pulse_item
 endscript
+
 script toggle_wireframe
   ToggleRenderMode
   show_all
   pulse_item
 endscript
+
 script toggle_show_all
   show_all
 endscript
+
 script toggle_show_polys showscript = show_vert
    <showscript>
   pulse_item
 endscript
+
 script launch_keyboard
   DestroyScreenElement id = current_menu_anchor
   create_onscreen_keyboard
 endscript
+
 script launch_level_select_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1654,6 +1724,7 @@ script launch_level_select_menu
   ]
   create_level_select_menu <...>
 endscript
+
 script create_level_select_menu pad_back_script = level_select_menu_exit
   SetScreenElementLock id = root_window off
   pulse_blur
@@ -1721,6 +1792,7 @@ script create_level_select_menu pad_back_script = level_select_menu_exit
   WaitForEvent type = select_skater_menu_animate_stats_done
   SetButtonEventMappings unblock_menu_input
 endscript
+
 script level_select_create_top_bar scale = (1.14, 1) text = "" parent = level_select_anchor
    <pos> = <root_pos>
   CreateScreenElement {
@@ -1767,6 +1839,7 @@ script level_select_create_top_bar scale = (1.14, 1) text = "" parent = level_se
     just = [ left top ]
   }
 endscript
+
 script level_select_create_menu_block
   if ObjectExists id = level_select_anchor_middle
     DestroyScreenElement id = level_select_anchor_middle
@@ -2137,6 +2210,7 @@ script level_select_create_menu_block
     endif
   endif
 endscript
+
 script level_select_create_info_box
   if GameModeEquals is_career
     pos = (320, 240)
@@ -2197,6 +2271,7 @@ script level_select_create_info_box
     z_priority = 4
   }
 endscript
+
 script level_select_menu_add_item
   if ( ( GameModeEquals is_career ) and ( <level_num> = 10 ) )
     return
@@ -2340,10 +2415,12 @@ script level_select_menu_add_item
     rgba = [ 128 128 128 0 ]
   }
 endscript
+
 script network_level_select_pad_back
    <net_pad_back> = 1
   level_select_menu_exit <...>
 endscript
+
 script level_select_menu_exit
   kill_level_select_cams
   if ObjectExists id = current_menu_anchor
@@ -2391,6 +2468,7 @@ script level_select_menu_exit
     endif
   endif
 endscript
+
 script level_select_menu_focus
   GetTags
   SetScreenElementProps {
@@ -2471,6 +2549,7 @@ script level_select_menu_focus
     RunScriptOnScreenElement id = level_select_anchor_info level_select_animate_info
   endif
 endscript
+
 created_park_warning = 0
 script level_select_created_park_menu
   make_new_skateshop_menu {
@@ -2649,6 +2728,7 @@ script level_select_created_park_menu
   FireEvent type = unfocus target = level_select_vmenu
   RunScriptOnScreenElement id = created_park_menu animate_in
 endscript
+
 script created_park_launch
   if GotParam from_server_options
     level_select_created_park_menu_exit from_server_options
@@ -2665,6 +2745,7 @@ script created_park_launch
     endif
   endif
 endscript
+
 script confirm_load_park
   level_select_created_park_menu_exit
   if ObjectExists id = current_menu_anchor
@@ -2694,12 +2775,14 @@ script confirm_load_park
     endif
   endif
 endscript
+
 still_in_net_area = 0
 script return_to_created_park_menu
   dialog_box_exit
   launch_level_select_menu
   level_select_created_park_menu <...>
 endscript
+
 script level_select_created_park_menu_exit
   if ObjectExists id = created_park_menu
     DestroyScreenElement id = created_park_menu
@@ -2717,6 +2800,7 @@ script level_select_created_park_menu_exit
     FireEvent type = focus target = level_select_vmenu
   endif
 endscript
+
 script level_select_created_park_list
   Printf "level_select_created_park_list"
   dialog_box_exit
@@ -2870,6 +2954,7 @@ script level_select_created_park_list
   endif
   RunScriptOnScreenElement id = created_park_menu animate_in
 endscript
+
 script level_select_created_park_list_exit
   if ObjectExists id = created_park_menu
     DestroyScreenElement id = created_park_menu
@@ -2902,18 +2987,22 @@ script level_select_created_park_list_exit
     endif
   endif
 endscript
+
 script premade_park_wait_message
   Printf "premade_park_wait_message"
   DoScreenElementMorph id = current_menu_anchor scale = 0
   create_error_box title = "Loading..." text = "Please wait while the pre-made park is loaded."
   FireEvent type = showed_wait_message target = system
 endscript
+
 script level_select_hide_info
   DoMorph scale = 0
 endscript
+
 script level_select_animate_info
   DoMorph scale = 1
 endscript
+
 script level_select_menu_unfocus
   GetTags
   SetScreenElementProps {
@@ -2932,6 +3021,7 @@ script level_select_menu_unfocus
     rgba = [ 128 128 128 0 ]
   }
 endscript
+
 script level_select_play_cam
   kill_level_select_cams
   if LevelIs load_skateshop
@@ -2942,9 +3032,11 @@ script level_select_play_cam
     SetSkaterCamAnimShouldPause name = MapGuy_ViewCam 0
   endif
 endscript
+
 script kill_level_select_cams
   KillSkaterCamAnim name = MapGuy_ViewCam
 endscript
+
 script really_change_level
   if OnServer
     change_level <...>
@@ -2954,6 +3046,7 @@ script really_change_level
     endif
   endif
 endscript
+
 script level_select_change_level
   PlaySound GoToLoadLevel
   GoalManager_ShowPoints
@@ -2988,8 +3081,10 @@ script level_select_change_level
   restore_start_key_binding
   exit_pause_menu
 endscript
+
 script level_select_invalid_choice
 endscript
+
 script level_select_spend_points_dialog level_name = "Zoo" level = load_zoo
   RunScriptOnScreenElement id = current_menu_anchor hide_main_menu_anchor
   if ( <points_to_unlock> = 1 )
@@ -3016,6 +3111,7 @@ script level_select_spend_points_dialog level_name = "Zoo" level = load_zoo
     ]
   }
 endscript
+
 script level_select_spend_points
   GoalManager_SpendGoalPoints <goal_points>
   SetGlobalFlag flag = <flag>
@@ -3032,18 +3128,22 @@ script level_select_spend_points
   remove_level_select_menu_textures_from_vram
   exit_pause_menu
 endscript
+
 script level_select_dialog_no
   DestroyScreenElement id = dialog_box_anchor
   RunScriptOnScreenElement id = current_menu_anchor show_main_menu_anchor
   Wait 1 frame
   FireEvent type = focus target = current_menu
 endscript
+
 script hide_main_menu_anchor
   DoMorph time = 0 scale = 0
 endscript
+
 script show_main_menu_anchor
   DoMorph time = 0 scale = 1
 endscript
+
 script add_level_select_menu_textures_to_vram
   AddTextureToVram "level_top_piece"
   AddTextureToVram "level_repeat_mid"
@@ -3063,6 +3163,7 @@ script add_level_select_menu_textures_to_vram
   AddTextureToVram "down_arrow"
   AddTextureToVram "goal_line"
 endscript
+
 script remove_level_select_menu_textures_from_vram
   RemoveTextureFromVram "level_top_piece"
   RemoveTextureFromVram "level_repeat_mid"
@@ -3082,6 +3183,7 @@ script remove_level_select_menu_textures_from_vram
   RemoveTextureFromVram "down_arrow"
   RemoveTextureFromVram "goal_line"
 endscript
+
 e3_level_select_menu_level_info = [
   { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_id = Cab_sign_1_College }
   { text = "Zoo" level_num = 7 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = load_zoo taxi_id = Cab_sign_7_Zoo }
@@ -3337,6 +3439,7 @@ script create_options_menu
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script options_menu_add_toggle_item { focus_script = do_scale_up
     unfocus_script = do_scale_down
     pad_choose_script = nullscript
@@ -3391,6 +3494,7 @@ script options_menu_add_toggle_item { focus_script = do_scale_up
     }
   endif
 endscript
+
 camera_angle = 0
 script toggle_camera_angle
   switch camera_angle
@@ -3412,6 +3516,7 @@ script toggle_camera_angle
     ToggleSkaterCamMode skater = 0
   endswitch
 endscript
+
 script create_real_cheats_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -3535,6 +3640,7 @@ script create_real_cheats_menu
   create_icon pos = (174, 45) texture = PA_options
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script make_cheats_menu_item { focus_script = do_scale_up
     unfocus_script = do_scale_down
     pad_choose_script = nullscript
@@ -3594,11 +3700,13 @@ script make_cheats_menu_item { focus_script = do_scale_up
     }
   endif
 endscript
+
 script choose_boolean_option
   set_preferences_from_ui prefs = network <...>
   remove_pause_menu_textures_from_vram
   create_options_menu
 endscript
+
 script back_from_boolean_menus
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -3606,6 +3714,7 @@ script back_from_boolean_menus
   remove_pause_menu_textures_from_vram
   create_options_menu
 endscript
+
 script create_options_score_display_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -3628,6 +3737,7 @@ script create_options_score_display_menu
   create_icon pos = (176, 85) texture = PA_options
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script toggle_show_name_option
   GetTags
   GetPreferenceString pref_type = network show_names
@@ -3642,6 +3752,7 @@ script toggle_show_name_option
     destroy_all_player_names
   endif
 endscript
+
 script toggle_auto_brake_option
   GetTags
   GetPreferenceString pref_type = network auto_brake
@@ -3655,6 +3766,7 @@ script toggle_auto_brake_option
     SetScreenElementProps id = { <id> child = 0 } text = "Off"
   endif
 endscript
+
 script create_gamma_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -3707,6 +3819,7 @@ script create_gamma_menu
   }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script gamma_menu_create_child
   SetScreenElementLock id = <parent> off
   CreateScreenElement {
@@ -3718,6 +3831,7 @@ script gamma_menu_create_child
     pos = (150, 0)
   }
 endscript
+
 script gamma_menu_check_levels
   GetGammaValues
   FormatText TextName = red_text "%i" i = <red>
@@ -3739,6 +3853,7 @@ script gamma_menu_check_levels
     text = <blue_text>
   }
 endscript
+
 script gamma_menu_turn_up
   GetGammaValues
   switch <color>
@@ -3759,6 +3874,7 @@ script gamma_menu_turn_up
   Wait 1 frame
   gamma_menu_check_levels
 endscript
+
 script gamma_menu_turn_down
   GetGammaValues
   switch <color>
@@ -3779,6 +3895,7 @@ script gamma_menu_turn_down
   Wait 1 frame
   gamma_menu_check_levels
 endscript
+
 script create_split_menu callback_script = create_options_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -3796,6 +3913,7 @@ script create_split_menu callback_script = create_options_menu
   make_text_sub_menu_item text = "Vertical" pad_choose_script = generic_menu_pad_choose pad_choose_params = { <...> callback = split_setup_vertical }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script create_screen_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -3821,6 +3939,7 @@ script create_screen_menu
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script screen_option_update_hud_toggle
   if ( HIDEHUD = 1 )
     FormatText TextName = text "HUD: off"
@@ -3832,6 +3951,7 @@ script screen_option_update_hud_toggle
     text = <text>
   }
 endscript
+
 script screen_setup_hide_hud
   if ( HIDEHUD = 0 )
     Change HIDEHUD = 1
@@ -3840,6 +3960,7 @@ script screen_setup_hide_hud
   endif
   screen_option_update_hud_toggle
 endscript
+
 script split_setup_horizontal
   Printf "changing split mode to horizontal"
   SetScreenMode split_horizontal
@@ -3852,6 +3973,7 @@ script split_setup_horizontal
   endif
   UpdateScore
 endscript
+
 script split_setup_vertical
   Printf "changing split mode to vertical"
   SetScreenMode split_vertical
@@ -3864,9 +3986,11 @@ script split_setup_vertical
   endif
   UpdateScore
 endscript
+
 script launch_cheats_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_cheats_menu
 endscript
+
 script create_cheats_menu
   GoalManager_HidePoints
   GoalManager_HideGoalPoints
@@ -3899,6 +4023,7 @@ script create_cheats_menu
   create_icon texture = PA_cheats pos = (180, 40)
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script cheats_menu_change_flag
   GetTags
   if GetGlobalFlag flag = <flag>
@@ -3909,6 +4034,7 @@ script cheats_menu_change_flag
     toggle_menu_item_on id = <id>
   endif
 endscript
+
 script cheats_menu_check_flag
   GetTags
   if GetGlobalFlag flag = <flag>
@@ -3917,6 +4043,7 @@ script cheats_menu_check_flag
     toggle_menu_item_off id = <id>
   endif
 endscript
+
 script cheats_menu_check_level_lock
   GetTags
   if IntegerEquals a = all_levels_unlocked b = 1
@@ -3925,6 +4052,7 @@ script cheats_menu_check_level_lock
     toggle_menu_item_off id = <id>
   endif
 endscript
+
 script cheats_menu_change_level_lock
   GetTags
   if IntegerEquals a = all_levels_unlocked b = 1
@@ -3938,6 +4066,7 @@ script cheats_menu_change_level_lock
   endif
   pulse_item
 endscript
+
 script cheats_menu_check_cool_special
   GetTags
   if IntegerEquals a = COOL_SPECIAL_TRICKS b = 1
@@ -3946,6 +4075,7 @@ script cheats_menu_check_cool_special
     toggle_menu_item_off id = <id>
   endif
 endscript
+
 script cheats_menu_change_cool_special
   GetTags
   if IntegerEquals a = COOL_SPECIAL_TRICKS b = 1
@@ -3959,41 +4089,51 @@ script cheats_menu_change_cool_special
   endif
   pulse_item
 endscript
+
 script cheats_menu_100_stat_points
   AwardStatPoint 100
   pulse_item
 endscript
+
 script cheats_menu_UnlockAllGoals
   GoalManager_UnlockAllGoals
   GoalManager_UnlockProSpecificChallenges
   pulse_item
 endscript
+
 script cheats_menu_score5mil
   skater:SetTrickName "You cheat like Kurt"
   skater:SetTrickScore 5000000
   skater:Display
 endscript
+
 script cheats_menu_turnPro
   GoalManager_TurnPro
 endscript
+
 script cheats_menu_UnBeatAllGoals
   GoalManager_UnBeatAllGoals
 endscript
+
 script cheats_menu_addgoalpoint
   GoalManager_AddGoalPoint
 endscript
+
 script cheats_menu_unlockProChallenges
   GoalManager_UnlockProSpecificChallenges
 endscript
+
 script cheats_menu_cash
   GoalManager_AddCash 5000
 endscript
+
 script cheats_menu_beat_current_goal
   if GoalManager_GetActiveGoalId
     exit_pause_menu
     GoalManager_WinGoal name = <goal_id>
   endif
 endscript
+
 current_soundtrack = #""
 script launch_sound_options_menu
   if GotParam from_options
@@ -4002,6 +4142,7 @@ script launch_sound_options_menu
     RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_sound_options_menu
   endif
 endscript
+
 script create_sound_options_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -4255,6 +4396,7 @@ script create_sound_options_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
   PauseMusic
 endscript
+
 script sound_options_exit
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -4272,6 +4414,7 @@ script sound_options_exit
     create_setup_options_menu
   endif
 endscript
+
 script sound_options_show_levels
   GetValueFromVolume cdvol
   FormatText TextName = cdvol "%v" v = <value>
@@ -4346,6 +4489,7 @@ script sound_options_show_levels
     replace_handlers
   }
 endscript
+
 script create_sound_options_mini_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -4511,6 +4655,7 @@ script create_sound_options_mini_menu
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script sound_mini_menu_select
   switch <choice>
   case inorder
@@ -4528,6 +4673,7 @@ script sound_mini_menu_select
     create_sound_options_menu
   endif
 endscript
+
 SongOrder = 0
 script toggle_song_order
   if ( SongOrder = 1 )
@@ -4540,6 +4686,7 @@ script toggle_song_order
     Change SongOrder = 1
   endif
 endscript
+
 script create_playlist_menu
   if not CD
     if not ( testmusicfromhost = 1 )
@@ -4671,6 +4818,7 @@ script create_playlist_menu
   PrintStruct <...>
   RunScriptOnScreenElement id = current_menu_anchor animate_in params = { menu_id = current_menu }
 endscript
+
 script exit_playlist_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -4682,6 +4830,7 @@ script exit_playlist_menu
     create_sound_options_menu
   endif
 endscript
+
 script create_soundtrack_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -4875,6 +5024,7 @@ script create_soundtrack_menu
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script GetSoundtracks
   GetNumSoundtracks
   index = 0
@@ -4884,6 +5034,7 @@ script GetSoundtracks
   repeat <numsoundtracks>
   return soundtracks
 endscript
+
 script SetSoundtrack
   if IsPS2
     return
@@ -4910,6 +5061,7 @@ script SetSoundtrack
     create_sound_options_menu from_options
   endif
 endscript
+
 script SoundtrackExists trackname = ""
   Printf "trackname = %t" t = <trackname>
   FormatText ChecksumName = tracknamesum "%t" t = <trackname>
@@ -4928,6 +5080,7 @@ script SoundtrackExists trackname = ""
   endif
   return { index = -1 }
 endscript
+
 script set_loaded_soundtrack
   Printf "set_loaded_soundtrack"
   if not IsXBOX
@@ -4945,6 +5098,7 @@ script set_loaded_soundtrack
     UseUserSoundtrack <index>
   endif
 endscript
+
 script current_soundtrack_exists
   GetNumSoundtracks
   if not ( <numsoundtracks> = 0 )
@@ -4960,12 +5114,14 @@ script current_soundtrack_exists
   endif
   return { index = -1 }
 endscript
+
 script soundtrack_focus
   if ObjectExists id = soundtrack_up_arrow
     generic_menu_update_arrows menu_id = soundtrack_vmenu up_arrow_id = soundtrack_up_arrow down_arrow_id = soundtrack_down_arrow
   endif
   main_menu_focus
 endscript
+
 script add_tracks_to_menu
   if IsTrue Xbox
   endif
@@ -4976,6 +5132,7 @@ script add_tracks_to_menu
      <index> = ( <index> + 1 )
   repeat <array_size>
 endscript
+
 script playlist_menu_add_item highlight_bar_scale = (1.9, 1) highlight_bar_pos = (227, 7)
   CreateScreenElement {
     type = ContainerElement
@@ -5028,6 +5185,7 @@ script playlist_menu_add_item highlight_bar_scale = (1.9, 1) highlight_bar_pos =
     z_priority = 3
   }
 endscript
+
 script change_track_state
   GetTags
   if TrackEnabled <index>
@@ -5039,6 +5197,7 @@ script change_track_state
     SetScreenElementProps id = { <id> child = 1 } text = "on"
   endif
 endscript
+
 script preview_music_track
   GetTags
   if not TrackEnabled <index>
@@ -5059,6 +5218,7 @@ script preview_music_track
     PauseMusic 1
   endif
 endscript
+
 script playlist_menu_focus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -5070,6 +5230,7 @@ script playlist_menu_focus
   endif
   generic_menu_update_arrows menu_id = gap_vmenu up_arrow_id = view_gaps_menu_up_arrow down_arrow_id = view_gaps_menu_down_arrow
 endscript
+
 script playlist_menu_unfocus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
@@ -5077,22 +5238,27 @@ script playlist_menu_unfocus
   SetScreenElementProps { id = { <id> child = 2 } rgba = [ 128 128 128 0 ] }
   PauseMusic 1
 endscript
+
 script menu_music_level_focus
   PauseMusic 0
   menu_sound_level_focus { music_level <...> }
 endscript
+
 script menu_music_level_unfocus
   menu_sound_level_unfocus <...>
   PauseMusic 1
 endscript
+
 script skip_track_focus
   PauseMusic 0
   main_menu_focus <...>
 endscript
+
 script skip_track_unfocus
   main_menu_unfocus <...>
   PauseMusic 1
 endscript
+
 script menu_sound_level_focus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -5114,6 +5280,7 @@ script menu_sound_level_focus
     SetScreenElementProps { id = { <id> child = 4 } rgba = [ 128 128 128 85 ] }
   endif
 endscript
+
 script menu_sound_level_unfocus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
@@ -5122,6 +5289,7 @@ script menu_sound_level_unfocus
   SetScreenElementProps { id = { <id> child = 3 } rgba = [ 128 128 128 0 ] }
   SetScreenElementProps { id = { <id> child = 4 } rgba = [ 128 128 128 0 ] }
 endscript
+
 script menu_turn_music_down
   GetTags
   GetValueFromVolume cdvol
@@ -5137,6 +5305,7 @@ script menu_turn_music_down
     Printf "SetCDToAmbience"
   endif
 endscript
+
 script menu_turn_music_up
   GetTags
   GetValueFromVolume cdvol
@@ -5154,6 +5323,7 @@ script menu_turn_music_up
     Printf "SetCDToMusic"
   endif
 endscript
+
 script menu_turn_sound_down
   GetTags
   GetValueFromVolume sfxvol
@@ -5168,6 +5338,7 @@ script menu_turn_sound_down
     SetScreenElementProps id = { <id> child = 3 } rgba = [ 128 128 128 0 ]
   endif
 endscript
+
 script menu_turn_sound_up
   GetTags
   GetValueFromVolume sfxvol
@@ -5182,6 +5353,7 @@ script menu_turn_sound_up
     SetScreenElementProps id = { <id> child = 4 } rgba = [ 128 128 128 0 ]
   endif
 endscript
+
 script sound_options_set_level
   FormatText TextName = vol "%v" v = <level>
   SetScreenElementProps {
@@ -5196,22 +5368,27 @@ script sound_options_set_level
     SetSfxVolume <level>
   endswitch
 endscript
+
 script focus_skip_track
   do_scale_up
   PauseMusic 0
 endscript
+
 script unfocus_skip_track
   do_scale_down
   PauseMusic 1
 endscript
+
 script skip_track
   skiptrack
   pulse_item
 endscript
+
 script pulse_item
   DoMorph time = 0.05 scale = 0.9
   DoMorph time = 0.05 scale = 1.0
 endscript
+
 script change_music_mode
   DoMorph time = 0.1 scale = 0.9
   DoMorph time = 0.1 scale = 1.2
@@ -5224,6 +5401,7 @@ script change_music_mode
     SetScreenElementProps text = "Music Mode: Always On" id = menu_change_musicmode
   endif
 endscript
+
 script create_controller_config_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -5395,6 +5573,7 @@ script create_controller_config_menu
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script controller_config_exit
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -5407,6 +5586,7 @@ script controller_config_exit
     create_setup_options_menu
   endif
 endscript
+
 script control_change_values
   player = ( <controller_number> - 1 )
   if GotParam vibration
@@ -5447,11 +5627,13 @@ script control_change_values
   endif
   generic_menu_pad_choose_sound
 endscript
+
 script control_menu_vibrate_controller
   VibrateController port = <player> actuator = 1 percent = 70
   Wait 250
   VibrateController port = <player> actuator = 1 percent = 0
 endscript
+
 script control_config_show_values
   player = ( <controller_number> - 1 )
   if VibrationIsOn <player>
@@ -5575,6 +5757,7 @@ script control_config_show_values
     replace_handlers
   }
 endscript
+
 script controller_config_focus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -5583,6 +5766,7 @@ script controller_config_focus
   SetScreenElementProps { id = { <id> child = 3 } rgba = [ 128 128 128 85 ] }
   SetScreenElementProps { id = { <id> child = 4 } rgba = [ 128 128 128 85 ] }
 endscript
+
 script controller_config_unfocus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
@@ -5591,6 +5775,7 @@ script controller_config_unfocus
   SetScreenElementProps { id = { <id> child = 3 } rgba = [ 128 128 128 0 ] }
   SetScreenElementProps { id = { <id> child = 4 } rgba = [ 128 128 128 0 ] }
 endscript
+
 script create_movies_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -5757,6 +5942,7 @@ script create_movies_menu
   PlaySkaterCamAnim name = SS_menucam_movies play_hold
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script movie_menu_play_movie
   if ObjectExists id = movie_black_box
     RunScriptOnScreenElement id = movie_black_box animate_movie_in
@@ -5772,6 +5958,7 @@ script movie_menu_play_movie
     RunScriptOnScreenElement id = movie_black_box animate_movie_out
   endif
 endscript
+
 script animate_movie_in
   SetButtonEventMappings block_menu_input
   SetScreenElementProps id = root_window tags = { menu_state = entering }
@@ -5782,6 +5969,7 @@ script animate_movie_in
   SetScreenElementProps id = root_window tags = { menu_state = on }
   SetButtonEventMappings unblock_menu_input
 endscript
+
 script animate_movie_out
   GetTags
   SetButtonEventMappings block_menu_input
@@ -5793,6 +5981,7 @@ script animate_movie_out
   SetScreenElementProps id = root_window tags = { menu_state = on }
   SetButtonEventMappings unblock_menu_input
 endscript
+
 script movie_menu_focus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -5805,6 +5994,7 @@ script movie_menu_focus
     rgba = [ 128 128 128 50 ]
   }
 endscript
+
 movie_info = [
   { name = "Neversoft Logo" file = "movies\nslogo" flag = LEVEL_UNLOCKED_SCH first_name = "" }
   { name = "Activision Logo" file = "movies\atvi" flag = LEVEL_UNLOCKED_SCH first_name = "" }
@@ -5956,6 +6146,7 @@ script create_view_goals_menu
   }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script view_goals_menu_add_item
   CreateScreenElement {
     type = ContainerElement
@@ -6072,6 +6263,7 @@ script view_goals_menu_add_item
     endif
   endif
 endscript
+
 script view_goals_menu_set_color
   SetScreenElementProps {
     id = { <id> child = 0 }
@@ -6087,6 +6279,7 @@ script view_goals_menu_set_color
     }
   endif
 endscript
+
 script view_goals_menu_focus_locked
   generic_menu_update_arrows {
     menu_id = view_goals_vmenu
@@ -6100,6 +6293,7 @@ script view_goals_menu_focus_locked
     view_goals_menu_play_preview_cam <...>
   endif
 endscript
+
 script view_goals_menu_unfocus_locked
   GetTags
   generic_menu_pad_up_down_sound
@@ -6109,6 +6303,7 @@ script view_goals_menu_unfocus_locked
     view_goals_menu_kill_preview_cam <...>
   endif
 endscript
+
 script view_goals_menu_focus_unlocked
   generic_menu_update_arrows {
     menu_id = view_goals_vmenu
@@ -6120,6 +6315,7 @@ script view_goals_menu_focus_unlocked
   RunScriptOnScreenElement id = { <id> child = 0 } do_random_effect
   view_goals_menu_play_preview_cam <...>
 endscript
+
 script view_goals_menu_unfocus_unlocked
   GetTags
   generic_menu_pad_up_down_sound
@@ -6127,6 +6323,7 @@ script view_goals_menu_unfocus_unlocked
   view_goals_menu_set_color id = <id> rgba = [ 88 105 112 128 ]
   view_goals_menu_kill_preview_cam <...>
 endscript
+
 script view_goals_menu_focus_beaten
   generic_menu_update_arrows {
     menu_id = view_goals_vmenu
@@ -6137,24 +6334,29 @@ script view_goals_menu_focus_beaten
   view_goals_menu_set_color id = <id> rgba = [ 99 121 6 128 ]
   RunScriptOnScreenElement id = { <id> child = 0 } do_random_effect
 endscript
+
 script view_goals_menu_unfocus_beaten
   GetTags
   generic_menu_pad_up_down_sound
   KillSpawnedScript name = do_random_effect
   view_goals_menu_set_color id = <id> rgba = [ 25 83 67 128 ]
 endscript
+
 script view_goals_menu_pad_choose_locked
 endscript
+
 script view_goals_menu_start_goal
   view_goals_menu_exit callback = exit_pause_menu
   GoalManager_DeactivateAllGoals
   goal_accept_trigger goal_id = <goal_id> force_start
 endscript
+
 script view_goals_menu_start_beaten_goal
   view_goals_menu_exit callback = exit_pause_menu
   GoalManager_DeactivateAllGoals
   goal_accept_trigger goal_id = <goal_id> force_start
 endscript
+
 script view_goals_menu_play_preview_cam
   GoalManager_GetGoalParams name = <goal_id>
   if IsAlive name = <trigger_obj_id>
@@ -6175,10 +6377,12 @@ script view_goals_menu_play_preview_cam
   endif
   view_goals_vmenu:SetTags current_cam_anim = <goal_id>
 endscript
+
 script view_goals_menu_kill_preview_cam
   GetSkaterID
   KillSkaterCamAnim skater = <objId> name = <goal_id>
 endscript
+
 script view_goals_menu_exit
   if ScreenElementExists id = view_goals_vmenu
     view_goals_vmenu:GetTags
@@ -6199,6 +6403,7 @@ script view_goals_menu_exit
   endif
    <callback>
 endscript
+
 script view_goals_menu_add_textures_to_vram
   AddTextureToVram "PA_View"
   AddTextureToVram "goal_line"
@@ -6208,6 +6413,7 @@ script view_goals_menu_add_textures_to_vram
   AddTextureToVram "goal_mid"
   AddTextureToVram "goal_right"
 endscript
+
 script view_goals_menu_remove_textures_from_vram
   RemoveTextureFromVram "PA_View"
   RemoveTextureFromVram "goal_line"
@@ -6217,6 +6423,7 @@ script view_goals_menu_remove_textures_from_vram
   RemoveTextureFromVram "goal_mid"
   RemoveTextureFromVram "goal_right"
 endscript
+
 stat_names = [ { name = air string = "Air" description = "Your jump height out of a half pipe" }
   { name = hangtime string = "Hangtime" description = "How long you stay in the air" }
   { name = Ollie string = "Ollie" description = "How high you jump on flat ground" }
@@ -6411,6 +6618,7 @@ script create_stats_menu root_pos = (115, 35)
   }
   RunScriptOnScreenElement id = stats_menu animate_in
 endscript
+
 script stats_menu_create_stats_block parent = current_menu scale = 1 pos = (180, 147)
   CreateScreenElement {
     type = ContainerElement
@@ -6429,6 +6637,7 @@ script stats_menu_create_stats_block parent = current_menu scale = 1 pos = (180,
      <index> = ( <index> + 1 )
   repeat <array_size>
 endscript
+
 script stats_menu_add_item z_priority = 2
   FormatText ChecksumName = row_id "stats_menu_names_%n" n = <name>
    <pos> = ( (0, 1) * ( 23 * ( <index> + 1 ) ) )
@@ -6492,9 +6701,11 @@ script stats_menu_add_item z_priority = 2
   }
   stats_menu_update_row <...>
 endscript
+
 script stats_menu_fire_pad_down
   FireEvent type = pad_down target = <target>
 endscript
+
 script stats_menu_update_row highlight_rgba = [ 75 75 75 128 ] locked_highlight_rgba = [ 95 75 75 128 ]
   if IsTrue gary_debug
     if GotParam skater_name
@@ -6543,6 +6754,7 @@ script stats_menu_update_row highlight_rgba = [ 75 75 75 128 ] locked_highlight_
     endif
   repeat
 endscript
+
 script stats_menu_get_original_stat_value
    <stat_name> = <name>
   if GotParam skater_name
@@ -6568,6 +6780,7 @@ script stats_menu_get_original_stat_value
   endif
   return original_stat_value = <original_stat_value>
 endscript
+
 script stats_menu_change_stat
   GetCurrentSkaterProfileIndex
   GetNumStatPointsAvailable player = <currentSkaterProfileIndex>
@@ -6617,6 +6830,7 @@ script stats_menu_change_stat
     }
   endif
 endscript
+
 script stats_menu_focus
   stats_menu_update_row {
     name = <name>
@@ -6633,11 +6847,13 @@ script stats_menu_focus
     }
   endif
 endscript
+
 script stats_menu_unfocus
   stats_menu_update_row name = <name> row_id = <row_id>
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
 endscript
+
 script stats_menu_done_focus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up
@@ -6648,10 +6864,12 @@ script stats_menu_done_focus
     }
   endif
 endscript
+
 script stats_menu_done_unfocus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
 endscript
+
 script stats_menu_change_other_skater_stats
   if ( <current_skater_name> = <name> )
     return
@@ -6707,6 +6925,7 @@ script stats_menu_change_other_skater_stats
     Printf "############### couldn't change points available!"
   endif
 endscript
+
 script stats_menu_exit
   if LevelIs load_skateshop
     launch_ss_menu
@@ -6718,9 +6937,11 @@ script stats_menu_exit
     create_options_menu
   endif
 endscript
+
 script launch_gamemode_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_gamemode_menu
 endscript
+
 script create_gamemode_menu
   make_new_menu menu_id = gamemode_menu vmenu_id = gamemode_vmenu menu_title = "GAMEMODE" helper_text = generic_helper_text
   SetScreenElementProps { id = gamemode_menu
@@ -6738,34 +6959,41 @@ script create_gamemode_menu
   create_icon texture = PA_mode
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script change_gamemode_career
   Printf "********** CHANGING GAME MODE TO CAREER"
   SetGameType career
   SetCurrentGameType
 endscript
+
 script change_gamemode_net
   Printf "********** CHANGING GAME MODE TO NET!!!"
   SetGameType net
   SetCurrentGameType
 endscript
+
 script change_gamemode_singlesession
   SetGameType singlesession
   SetCurrentGameType
 endscript
+
 script change_gamemode_freeskate_2p
   SetGameType freeskate2p
   SetCurrentGameType
 endscript
+
 script change_gamemode_freeskate
   SetGameType freeskate
   SetCurrentGameType
 endscript
+
 script change_gamemode_career_menu
   exit_pause_menu
   SetGameType career
   SetCurrentGameType
   Retry
 endscript
+
 script change_gamemode_singlesession_menu
   kill_all_panel_messages
   SetGameType singlesession
@@ -6774,12 +7002,14 @@ script change_gamemode_singlesession_menu
   Change EndOfReplayShouldJumpToPauseMenu = 0
   Retry
 endscript
+
 script change_gamemode_freeskate_menu
   exit_pause_menu
   SetGameType freeskate
   SetCurrentGameType
   Retry
 endscript
+
 script create_statistics_menu { pad_back_script = statistics_menu_exit
     pad_choose_script = nullscript
   }
@@ -6858,6 +7088,7 @@ script create_statistics_menu { pad_back_script = statistics_menu_exit
   }
   FireEvent type = focus target = current_menu
 endscript
+
 script statistics_menu_add_item
   CreateScreenElement {
     type = ContainerElement
@@ -6904,6 +7135,7 @@ script statistics_menu_add_item
     GetStackedScreenElementPos X id = <id>
   repeat 57
 endscript
+
 script statistics_menu_exit
   GoalManager_ShowPoints
   if not GoalManager_HasActiveGoals
@@ -6917,25 +7149,31 @@ script statistics_menu_exit
   add_pause_menu_textures_to_vram
   create_debug_menu
 endscript
+
 script add_statistics_menu_textures_to_vram
   AddTextureToVram "PA_Stats"
   AddTextureToVram "comp_single_line"
 endscript
+
 script remove_statistics_menu_textures_from_vram
   RemoveTextureFromVram "PA_Stats"
   RemoveTextureFromVram "comp_single_line"
 endscript
+
 script menu_start_autotest
   SetTesterScript TestLevels
   exit_pause_menu
 endscript
+
 script menu_stop_autotest
   KillTesterScript
   exit_pause_menu
 endscript
+
 script launch_menu_test
   RunScriptOnScreenElement id = current_menu_anchor animate_out callback = create_menu_test_menu
 endscript
+
 script menu_select menu_select_script = item_chosen
   if GotParam stop_streams
     StopStream
@@ -6943,10 +7181,12 @@ script menu_select menu_select_script = item_chosen
   exit_pause_menu
    <menu_select_script>
 endscript
+
 script item_chosen menu_id = current_menu_anchor
   Printf "item_chosen"
   RunScriptOnScreenElement id = <menu_id> animate_out callback = create_pause_menu
 endscript
+
 script make_text_sub_menu_item { focus_script = do_scale_up
     unfocus_script = do_scale_down
     pad_choose_script = nullscript
@@ -7018,6 +7258,7 @@ script make_text_sub_menu_item { focus_script = do_scale_up
     }
   endif
 endscript
+
 script make_text_menu_item { focus_script = do_scale_up
     unfocus_script = do_scale_down
     pad_choose_script = item_chosen
@@ -7037,6 +7278,7 @@ script make_text_menu_item { focus_script = do_scale_up
     ]
   }
 endscript
+
 script make_sprite_menu_item { focus_script = sprite_focus
     text = "Default sprite text"
     unfocus_script = sprite_unfocus
@@ -7068,6 +7310,7 @@ script make_sprite_menu_item { focus_script = sprite_focus
      <not_focusable>
   }
 endscript
+
 script make_sprite_sub_menu_item { focus_script = sprite_focus
     text = "Default sprite text"
     unfocus_script = sprite_unfocus
@@ -7089,6 +7332,7 @@ script make_sprite_sub_menu_item { focus_script = sprite_focus
     ]
   }
 endscript
+
 script make_toggle_menu_item { font = small
     child_pos = { (210, 0) relative }
     rgba = [ 88 105 112 128 ]
@@ -7128,18 +7372,21 @@ script make_toggle_menu_item { font = small
     scale = <child_scale>
   }
 endscript
+
 script toggle_menu_item_on
   SetScreenElementProps {
     id = { <id> child = 0 }
     text = "on"
   }
 endscript
+
 script toggle_menu_item_off
   SetScreenElementProps {
     id = { <id> child = 0 }
     text = "off"
   }
 endscript
+
 script animate_in
   PlaySound AnimateIn vol = 200
   SetButtonEventMappings block_menu_input
@@ -7154,6 +7401,7 @@ script animate_in
     SetButtonEventMappings unblock_menu_input
   endif
 endscript
+
 script menu_onscreen menu_id = current_menu_anchor
   DoMorph scale = 1 time = 0
   if GotParam pos
@@ -7170,6 +7418,7 @@ script menu_onscreen menu_id = current_menu_anchor
     SetScreenElementProps id = root_window tags = { menu_state = on }
   endif
 endscript
+
 script animate_out menu_id = current_menu_anchor
   PlaySound AnimateOut
   SetButtonEventMappings block_menu_input
@@ -7185,6 +7434,7 @@ script animate_out menu_id = current_menu_anchor
   DestroyScreenElement id = <menu_id>
   SetButtonEventMappings unblock_menu_input
 endscript
+
 script menu_offscreen
   SetScreenElementProps id = root_window tags = { menu_state = off }
   SetScreenElementLock id = root_window off
@@ -7192,6 +7442,7 @@ script menu_offscreen
   FireEvent type = unfocus target = <id>
   DestroyScreenElement id = <id> recurse
 endscript
+
 script load_textures_to_main_memory
   LoadTexture no_vram_alloc "PanelSprites/paused"
   LoadTexture no_vram_alloc "PanelSprites/SlicePause_1"
@@ -7337,6 +7588,7 @@ script load_textures_to_main_memory
     LoadTexture no_vram_alloc "PanelSprites/gslogo"
   endif
 endscript
+
 script remove_temp_textures_from_vram
   RemoveTextureFromVram no_assert "paused"
   RemoveTextureFromVram no_assert "SlicePause_1"
@@ -7482,6 +7734,7 @@ script remove_temp_textures_from_vram
     RemoveTextureFromVram no_assert "gslogo"
   endif
 endscript
+
 script add_pause_menu_textures_to_vram
   AddTextureToVram "paused"
   AddTextureToVram "SlicePause_1"
@@ -7526,6 +7779,7 @@ script add_pause_menu_textures_to_vram
   AddTextureToVram "stats_notch"
   AddTextureToVram "pip_on"
 endscript
+
 script remove_pause_menu_textures_from_vram
   RemoveTextureFromVram "paused"
   RemoveTextureFromVram "SlicePause_1"
@@ -7570,8 +7824,10 @@ script remove_pause_menu_textures_from_vram
   RemoveTextureFromVram "stats_notch"
   RemoveTextureFromVram "pip_on"
 endscript
+
 script load_all_textures
 endscript
+
 script sprite_focus
   SetProps rgba = [ 127 102 0 128 ]
   SetProps blur_effect
@@ -7583,6 +7839,7 @@ script sprite_focus
     rgba = [ 127 102 0 128 ]
   }
 endscript
+
 script sprite_unfocus
   generic_menu_pad_up_down_sound
   SetProps rgba = [ 88 105 112 128 ]
@@ -7594,17 +7851,21 @@ script sprite_unfocus
     rgba = [ 128 128 128 40 ]
   }
 endscript
+
 script scale_sprite_up
   DoMorph time = 0.1 scale = 0.95
 endscript
+
 script scale_sprite_down
   DoMorph time = 0.0 scale = 0
 endscript
+
 script do_scale_up rgba = [ 127 102 0 100 ]
   GetTags
   SetProps rgba = <rgba>
   RunScriptOnScreenElement id = <id> do_random_effect params = { id = <id> }
 endscript
+
 script do_scale_down rgba = [ 88 105 112 128 ]
   if not GotParam no_sound
     generic_menu_pad_up_down_sound
@@ -7613,6 +7874,7 @@ script do_scale_down rgba = [ 88 105 112 128 ]
   SetProps no_blur_effect
   SetProps rgba = <rgba>
 endscript
+
 script do_random_effect
   GetTags
   SetTags random_effect_done = 0
@@ -7629,6 +7891,7 @@ script do_random_effect
     Wait 10 frame
   repeat
 endscript
+
 script do_random_effect2
   switch <effect>
   case 1
@@ -7674,18 +7937,23 @@ script do_random_effect2
   endswitch
   SetTags random_effect_done = 1
 endscript
+
 script hide_root_window
   RunScriptOnScreenElement id = root_window hide_screen_element
 endscript
+
 script unhide_root_window
   RunScriptOnScreenElement id = root_window unhide_screen_element
 endscript
+
 script hide_screen_element
   DoMorph scale = 0
 endscript
+
 script unhide_screen_element
   DoMorph scale = 1
 endscript
+
 script create_taunt_options_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -7775,6 +8043,7 @@ script create_taunt_options_menu
   draw_menu_box delta_pos = (94, 30) middle_repeat = 12 box_right_scale = (0.8, 0.935) scale = (1.5, 1) box_bottom_scale = (1.45, 1) box_right_offset = (-23, 0)
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script taunt_options_add_item { parent = current_menu
     font = small
     highlight_bar_scale = (1.4, 1.3)
@@ -7879,6 +8148,7 @@ script taunt_options_add_item { parent = current_menu
     rgba = <text_rgba>
   }
 endscript
+
 script create_end_run_menu
   dialog_box_exit
   if ObjectExists id = current_menu_anchor
@@ -7899,6 +8169,7 @@ script create_end_run_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
   kill_start_key_binding
 endscript
+
 script set_taunt_preference
   GetTextElementString id = keyboard_current_string
   set_preferences_from_ui prefs = taunt <...>
@@ -7906,18 +8177,22 @@ script set_taunt_preference
   add_ss_menu_textures_to_vram
   create_taunt_options_menu
 endscript
+
 script taunt_back_from_keyboard
   destroy_onscreen_keyboard
   add_ss_menu_textures_to_vram
   create_taunt_options_menu
 endscript
+
 script launch_onscreen_keyboard_from_taunt_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen callback = pre_create_onscreen_keyboard callback_params = { allow_cancel keyboard_cancel_script = taunt_back_from_keyboard keyboard_done_script = set_taunt_preference keyboard_title = <title> <...> }
 endscript
+
 script pre_create_onscreen_keyboard
   remove_pause_menu_textures_from_vram
   create_onscreen_keyboard allow_cancel keyboard_cancel_script = taunt_back_from_keyboard keyboard_done_script = set_taunt_preference keyboard_title = <title> <...>
 endscript
+
 script generic_menu_update_arrows menu_id = current_menu
   if not ObjectExists id = <up_arrow_id>
     return
@@ -7948,25 +8223,31 @@ script generic_menu_update_arrows menu_id = current_menu
     }
   endif
 endscript
+
 script generic_menu_pad_back
   generic_menu_pad_back_sound
   if GotParam callback
      <callback> <...>
   endif
 endscript
+
 script generic_menu_pad_choose
   if GotParam callback
      <callback> <...>
   endif
 endscript
+
 script generic_menu_pad_back_sound
   PlaySound MenuBack vol = 100
 endscript
+
 script generic_menu_pad_up_down_sound
 endscript
+
 script generic_menu_pad_choose_sound
   PlaySound MenuSelect vol = 100
 endscript
+
 script generic_menu_up_or_down_sound menu_id = current_menu
   if GotParam Up
     PlaySound MenuUp vol = 100
@@ -7975,12 +8256,15 @@ script generic_menu_up_or_down_sound menu_id = current_menu
     PlaySound MenuDown vol = 100
   endif
 endscript
+
 script generic_menu_scroll_sideways_sound
   PlaySound gui_type02 vol = 100
 endscript
+
 script parked_scroll_sideways_sound
   PlaySound gui_type02 vol = 100
 endscript
+
 script generic_keyboard_sound
   PlaySound GUI_click06
 endscript
