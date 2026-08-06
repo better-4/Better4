@@ -1,5 +1,4 @@
-SpecialTricks =
-[
+SpecialTricks = [
   { Trigger = { TripleInOrder Up right Square 400 } TrickSlot = SpAir_U_R_Square }
   { Trigger = { TripleInOrder Up Down Square 400 } TrickSlot = SpAir_U_D_Square }
   { Trigger = { TripleInOrder Up left Square 400 } TrickSlot = SpAir_U_L_Square }
@@ -152,8 +151,7 @@ Trick_Seatbelt = [ { Trigger_Extra_Grab params = { name = 'Seatbelt Air' Score =
 Trick_Indy = { Scr = GrabTrick params = { name = 'Indy' Score = 300 Anim = Indy Idle = Indy_Idle ExtraTricks = Trick_Stiffy } }
 Trick_Stiffy = [ { Trigger_Extra_Grab params = { name = 'Stiffy' Score = 500 Anim = Stiffy Idle = Stiffy_Idle speed = 1.25 ForceInit IsExtra } } ]
 Trick_Revert = { Scr = Revert }
-AirTricks =
-[
+AirTricks = [
   { Trigger = { TripleInOrder left left Square 300 } TrickSlot = Air_L_L_Square }
   { Trigger = { TripleInOrder right right Square 300 } TrickSlot = Air_R_R_Square }
   { Trigger = { TripleInOrder Up Up Square 300 } TrickSlot = Air_U_U_Square }
@@ -182,17 +180,17 @@ AirTricks =
 Trigger_Extra_Grab_Tweak = { Trigger = { ExtraGrabTrickLogic Circle 300 } Scr = GrabTrick }
 Trigger_Extra_Grab = { Trigger = { Press Circle 300 } Scr = GrabTrick }
 Trigger_Extra_Flip = { Trigger = { Press Square 300 } Scr = FlipTrick }
-KickflipExtras =
-[ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Kickflip' Score = 500 Anim = DoubleKickflip ExtraTricks = TripleKickflip speed = 1 IsExtra UseCurrent } }
+KickflipExtras = [ 
+  { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Kickflip' Score = 500 Anim = DoubleKickflip ExtraTricks = TripleKickflip speed = 1 IsExtra UseCurrent } }
   { Trigger = { AirTrickLogic Circle Down 300 } Scr = FlipGrabBlend params = { name = 'Kickflip to Indy' Score = 400 Anim1 = KickFlipBlendFS Anim2 = Indy IsExtra } }
   { Trigger = { AirTrickLogic Circle Up 300 } Scr = FlipGrabBlend params = { name = 'Kickflip to Crail' Score = 400 Anim1 = KickFlipBlendFS Anim2 = Crail IsExtra GrabStart = 5 speed = 1 } }
 ]
-BenihanaFingerflip =
-[
+BenihanaFingerflip = [
   { Trigger = { Press Square 500 } Scr = FlipTrick params = { name = 'Beni Fingerflip' Score = 1000 Anim = BenihanaFingerflip IsExtra } }
   { Trigger = { Press Circle 300 } Scr = GrabTrick params params = { name = 'Sacktap' Score = 1500 Anim = Sacktap_Init Idle = Sacktap_Range OutAnim = Sacktap_out speed = 1.5 ForceInit trickslack = 20 IsExtra } }
 ]
 COOL_SPECIAL_TRICKS = 0
+
 script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   SetTags state = skater_inflip
   GetScriptedStat Skater_Flip_Speed_Stat
@@ -297,11 +295,13 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   WaitAnimFinished
   Goto Airborne
 endscript
+
 script CheckForOllie
   if GotException Ollied
     SetException Ex = Ollied Scr = CalledOllie CallInsteadOfGoto
   endif
 endscript
+
 script CalledOllie
   if AirTimeGreaterThan Skater_Late_Jump_Slop
     ClearException Ollied
@@ -310,6 +310,7 @@ script CalledOllie
     ClearException Ollied
   endif
 endscript
+
 script GrabTrick speed = 1.0 X = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIUM WaitPercent = 60
   ClearTricksFrom Jumptricks Jumptricks0 Jumptricks
   CheckForOllie
@@ -409,6 +410,7 @@ script GrabTrick speed = 1.0 X = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIU
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
+
 script IfReleased_SquareOrCircle
   if GotParam OutAnim
     PlayAnim Anim = <OutAnim> BlendPeriod = 0.2 speed = <speed>
@@ -424,6 +426,7 @@ script IfReleased_SquareOrCircle
     endif
   endif
 endscript
+
 script JumpJets
   ReplayRecordSimpleScriptCall scriptname = _ReplayJumpJets skaterscript
   Obj_GetId
@@ -447,14 +450,17 @@ script JumpJets
   Wait 0.5 seconds
   SetScript name = <mangled_id> Emitscript = emit_skatersplash
 endscript
+
 script JumpJetTracker
   Obj_SetFlag FLAG_SKATER_JUMPJETSON
   Wait 2 seconds
   Obj_ClearFlag FLAG_SKATER_JUMPJETSON
 endscript
+
 script _ReplayJumpJets
   SpawnSkaterScript ReplayJumpJets
 endscript
+
 script ReplayJumpJets
   Obj_GetId
   MangleChecksums a = skatersplash b = <objId>
@@ -466,6 +472,7 @@ script ReplayJumpJets
   Wait 0.5 seconds
   SetScript name = <mangled_id> Emitscript = emit_skatersplash
 endscript
+
 script FlipGrabBlendFS name = 'Kickflip to Indy'
   CheckForOllie
   ClearExtraGrindTrick
@@ -485,6 +492,7 @@ script FlipGrabBlendFS name = 'Kickflip to Indy'
   Reverse
   WaitAnimWhilstChecking
 endscript
+
 script FlipGrabBlendBS name = 'Kickflip to Melon'
   CheckForOllie
   ClearExtraGrindTrick
@@ -503,6 +511,7 @@ script FlipGrabBlendBS name = 'Kickflip to Melon'
   DoNextTrick
   WaitAnimWhilstChecking
 endscript
+
 script FlipGrabBlend GrabStart = 10 GrabSpeed = 1.5
   CheckForOllie
   ClearManualTrick

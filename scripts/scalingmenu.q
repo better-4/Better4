@@ -1,4 +1,3 @@
-
 scalingmenu_bar_scale = (4.4, 2)
 scalingmenu_bar_focus_rgba = [ 128 128 128 128 ]
 scalingmenu_bar_unfocus_rgba = [ 40 40 40 128 ]
@@ -211,16 +210,20 @@ skateshop_scaling_options = [
     is_visible_script = currently_editing_custom
   }
 ]
+
 script scalingmenu_refresh_skaters
   GetCurrentSkaterProfileIndex
   RefreshSkaterScale skater = 0 profile = <currentSkaterProfileIndex>
 endscript
+
 script scalingmenu_increment_uniform
   scalingmenu_increment affectX = 1 affectY = 1 affectZ = 1 <...>
 endscript
+
 script scalingmenu_decrement_uniform
   scalingmenu_decrement affectX = 1 affectY = 1 affectZ = 1 <...>
 endscript
+
 script scalingmenu_get_limits
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
@@ -247,6 +250,7 @@ script scalingmenu_get_limits
   endif
   return min = <min> max = <max>
 endscript
+
 script scalingmenu_increment
   Printf "incrementing scale"
   scalingmenu_get_xyz part = <part>
@@ -279,6 +283,7 @@ script scalingmenu_increment
   scalingmenu_refresh_arrows <...> <handler_params>
   scalingmenu_refresh_skaters
 endscript
+
 script scalingmenu_decrement
   Printf "decrementing scale"
   scalingmenu_get_xyz part = <part>
@@ -311,6 +316,7 @@ script scalingmenu_decrement
   scalingmenu_refresh_arrows <...> <handler_params>
   scalingmenu_refresh_skaters
 endscript
+
 script scalingmenu_reset_to_default
    <X> = 100
    <Y> = 100
@@ -319,6 +325,7 @@ script scalingmenu_reset_to_default
   SetPlayerAppearanceScale player = <currentSkaterProfileIndex> part = <part> X = <X> Y = <Y> z = <z> use_default_scale = 1
   scalingmenu_refresh_skaters
 endscript
+
 script scalingmenu_get_xyz
   GetCurrentSkaterProfileIndex
   GetPlayerAppearancePart player = <currentSkaterProfileIndex> part = <part>
@@ -341,10 +348,12 @@ script scalingmenu_get_xyz
   endif
   return X = <X> Y = <Y> z = <z>
 endscript
+
 script scalingmenu_set_xyz
   GetCurrentSkaterProfileIndex
   SetPlayerAppearanceScale player = <currentSkaterProfileIndex> part = <part> X = <X> Y = <Y> z = <z> use_default_scale = 0
 endscript
+
 script scalingmenu_refresh_arrows
   scalingmenu_get_xyz part = <part>
    <v> = 0
@@ -376,6 +385,7 @@ script scalingmenu_refresh_arrows
     pos = ( (1, 0) * <x_val> )
   }
 endscript
+
 script scalingmenu_focus rgba = [ 128 128 128 50 ]
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -415,6 +425,7 @@ script scalingmenu_focus rgba = [ 128 128 128 50 ]
     down_arrow_id = edit_skater_menu_down_arrow
   }
 endscript
+
 script scalingmenu_unfocus rgba = [ 128 128 128 0 ]
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
@@ -431,6 +442,7 @@ script scalingmenu_unfocus rgba = [ 128 128 128 0 ]
     scale = 0.0
   }
 endscript
+
 script scalingmenu_addslider text = 'XYZ' affectX = 0 affectY = 0 affectZ = 0 id = default_slider_bar
   MangleChecksums a = <id> b = up_arrow
    <up_arrow_id> = <mangled_id>
@@ -480,6 +492,7 @@ script scalingmenu_addslider text = 'XYZ' affectX = 0 affectY = 0 affectZ = 0 id
     down_arrow_texture = scale_down
   }
 endscript
+
 script scalingmenu_add_options_to_menu
   SetScreenElementProps {
     id = current_menu
@@ -546,6 +559,7 @@ script scalingmenu_add_options_to_menu
   }
   create_helper_text generic_helper_text_color_menu
 endscript
+
 script scalingmenu_add_bodyshapes_to_menu
   GetArraySize master_bodyshape_list
    <index> = 0

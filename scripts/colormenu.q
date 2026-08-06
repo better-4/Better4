@@ -19,6 +19,7 @@ colormenu_min_saturation = 0.0
 colormenu_max_saturation = 128.0
 colormenu_min_value = 0.0
 colormenu_max_value = 128.0
+
 script colormenu_focus rgba = [ 128 128 128 50 ]
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -58,6 +59,7 @@ script colormenu_focus rgba = [ 128 128 128 50 ]
     down_arrow_id = edit_skater_menu_down_arrow
   }
 endscript
+
 script colormenu_unfocus rgba = [ 128 128 128 0 ]
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
@@ -74,6 +76,7 @@ script colormenu_unfocus rgba = [ 128 128 128 0 ]
     scale = 0.0
   }
 endscript
+
 script colormenu_get_hsv
   GetCurrentSkaterProfileIndex
   GetPlayerAppearancePart player = <currentSkaterProfileIndex> part = <part>
@@ -96,10 +99,12 @@ script colormenu_get_hsv
   endif
   return h = <h> s = <s> v = <v> use_default_hsv = <use_default_hsv>
 endscript
+
 script colormenu_set_hsv
   GetCurrentSkaterProfileIndex
   SetPlayerAppearanceColor player = <currentSkaterProfileIndex> part = <part> h = <h> s = <s> v = <v> use_default_hsv = 0
 endscript
+
 script colormenu_refresh_arrows
   colormenu_get_hsv part = <part>
   sliderbar_rescale_to_bar min = 0.0 max = 360.0 value = <h> left = colormenu_wrap_arrow_left right = colormenu_wrap_arrow_right
@@ -130,6 +135,7 @@ script colormenu_refresh_arrows
     pos = ( (1, 0) * <x_val> )
   }
 endscript
+
 script colormenu_refresh_skaters
   GetCurrentSkaterProfileIndex
   RefreshSkaterColors skater = 0 profile = <currentSkaterProfileIndex>
@@ -147,6 +153,7 @@ script colormenu_refresh_skaters
     endif
   endif
 endscript
+
 script colormenu_increment_hue
   Printf "incrementing hue"
   colormenu_get_hsv part = <part>
@@ -158,6 +165,7 @@ script colormenu_increment_hue
   colormenu_refresh_arrows part = <part>
   colormenu_refresh_skaters
 endscript
+
 script colormenu_decrement_hue
   Printf "decrementing hue"
   colormenu_get_hsv part = <part>
@@ -169,6 +177,7 @@ script colormenu_decrement_hue
   colormenu_refresh_arrows part = <part>
   colormenu_refresh_skaters
 endscript
+
 script colormenu_increment_saturation
   Printf "incrementing saturation"
   colormenu_get_hsv part = <part>
@@ -180,6 +189,7 @@ script colormenu_increment_saturation
   colormenu_refresh_arrows part = <part>
   colormenu_refresh_skaters
 endscript
+
 script colormenu_decrement_saturation
   Printf "decrementing saturation"
   colormenu_get_hsv part = <part>
@@ -191,6 +201,7 @@ script colormenu_decrement_saturation
   colormenu_refresh_arrows part = <part>
   colormenu_refresh_skaters
 endscript
+
 script colormenu_increment_value
   Printf "incrementing value"
   colormenu_get_hsv part = <part>
@@ -202,6 +213,7 @@ script colormenu_increment_value
   colormenu_refresh_arrows part = <part>
   colormenu_refresh_skaters
 endscript
+
 script colormenu_decrement_value
   Printf "decrementing value"
   colormenu_get_hsv part = <part>
@@ -213,6 +225,7 @@ script colormenu_decrement_value
   colormenu_refresh_arrows part = <part>
   colormenu_refresh_skaters
 endscript
+
 script colormenu_reset_to_default
    <h> = 0
    <s> = 50
@@ -222,6 +235,7 @@ script colormenu_reset_to_default
   colormenu_refresh_arrows part = <part>
   colormenu_refresh_skaters
 endscript
+
 script colormenu_add_options_to_menu
   SetScreenElementProps {
     id = current_menu

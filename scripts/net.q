@@ -1,12 +1,15 @@
 InNetOptionsFromNetPlay = 0
+
 script launch_viewer
   Printf "launch_viewer is no longer needed ... you can remove it from your startup script"
 endscript
+
 script auto_launch_viewer
   LoadFromMemoryCard name = "Network settings" type = NetworkSettings
   UseNetworkPreferences
   LaunchViewer
 endscript
+
 NO_NET_MODE = 0
 LAN_MODE = 1
 INTERNET_MODE = 2
@@ -77,13 +80,16 @@ skill_level_info = [
   { name = "4: Let's Do This " checksum = num_4 }
   { name = "5: Bring It On!  " checksum = num_5 }
 ]
+
 script sign_out
   SignOut
   create_pause_menu
 endscript
+
 script go_to_xbox_dashboard
   GotoXboxDashboard
 endscript
+
 script create_big_black_hiding_box
   unlock_root_window
   CreateScreenElement {
@@ -98,6 +104,7 @@ script create_big_black_hiding_box
     z_priority = 5001
   }
 endscript
+
 script quit_network_game
   if OnXbox
     DisplayLoadingScreen "loadscrn_generic" 17
@@ -138,6 +145,7 @@ script quit_network_game
   endif
   level_select_change_level level = load_skateshop no_levelUnload
 endscript
+
 script spawned_chosen_host_game
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -182,6 +190,7 @@ script chosen_host_game
     endif
   endif
 endscript
+
 script network_selected
   change_gamemode_net
   SetMemThreadSafe
@@ -189,6 +198,7 @@ script network_selected
   UseNetworkPreferences
   TestNetworkSetup
 endscript
+
 script add_network_menu_textures_to_vram
   AddTextureToVram "level_top_piece"
   AddTextureToVram "level_repeat_mid"
@@ -202,6 +212,7 @@ script add_network_menu_textures_to_vram
     AddTextureToVram "gslogo"
   endif
 endscript
+
 script remove_network_menu_textures_from_vram
   RemoveTextureFromVram "level_top_piece"
   RemoveTextureFromVram "level_repeat_mid"
@@ -215,6 +226,7 @@ script remove_network_menu_textures_from_vram
     RemoveTextureFromVram "gslogo"
   endif
 endscript
+
 script launch_network_host_options_sub_menu
   PrintStruct <...>
   if ObjectExists id = current_menu_anchor
@@ -222,19 +234,23 @@ script launch_network_host_options_sub_menu
   endif
    <sub_menu_script> <...>
 endscript
+
 script back_from_account_list_menu
   CancelLogon
   SetNetworkMode
   create_pause_menu
 endscript
+
 script back_from_create_account_dialog
   dialog_box_exit
   back_from_account_list_menu
 endscript
+
 script back_from_wrong_pin_dialog
   dialog_box_exit
   ConnectToInternet
 endscript
+
 script launch_no_accounts_dialog
   create_dialog_box { title = "NO ACCOUNTS FOUND"
     text = "No accounts were found on your system. Would you like to create an account now?"
@@ -243,6 +259,7 @@ script launch_no_accounts_dialog
     ]
   }
 endscript
+
 script launch_auto_server_notification
   destroy_onscreen_keyboard
   create_error_box { title = "Auto-Server"
@@ -253,6 +270,7 @@ script launch_auto_server_notification
     delay_input
   }
 endscript
+
 script launch_auto_server_explanation
   destroy_onscreen_keyboard
   create_error_box { title = "Auto-Serve"
@@ -263,6 +281,7 @@ script launch_auto_server_explanation
     delay_input
   }
 endscript
+
 script launch_fcfs_notification
   if ( <checksum> = boolean_true )
     set_preferences_from_ui prefs = network field = "player_collision" string = "On" <...>
@@ -280,6 +299,7 @@ script launch_fcfs_notification
     delay_input
   }
 endscript
+
 script fcfs_confirm
   DestroyScreenElement id = current_menu_anchor
   remove_ss_menu_textures_from_vram
@@ -291,6 +311,7 @@ script fcfs_confirm
     no_animate
   }
 endscript
+
 script auto_serve_confirm
   DestroyScreenElement id = current_menu_anchor
   remove_ss_menu_textures_from_vram
@@ -302,6 +323,7 @@ script auto_serve_confirm
     no_animate
   }
 endscript
+
 script create_kick_ban_menu
   DestroyScreenElement id = current_menu_anchor
   create_dialog_box { title = <name>
@@ -313,6 +335,7 @@ script create_kick_ban_menu
     no_animate
   }
 endscript
+
 script create_player_options_dialog
   if GotParam allow_remove_homie
     DestroyScreenElement id = current_menu_anchor
@@ -372,6 +395,7 @@ script create_player_options_dialog
     endif
   endif
 endscript
+
 script launch_quit_game_dialog
   dialog_box_exit
   if ObjectExists id = current_menu_anchor
@@ -380,6 +404,7 @@ script launch_quit_game_dialog
   remove_pause_menu_textures_from_vram
   create_quit_game_dialog
 endscript
+
 script create_quit_game_dialog
   create_error_box { title = "Quit Game"
     text = "Are you sure?"
@@ -389,11 +414,13 @@ script create_quit_game_dialog
     no_animate
   }
 endscript
+
 script quit_game_dialog_box_exit
   generic_menu_pad_back_sound
   exit_pause_menu
   dialog_box_exit
 endscript
+
 script launch_wrong_pin_dialog_box
   DestroyScreenElement id = current_menu_anchor
   create_dialog_box { title = "WRONG PIN"
@@ -402,24 +429,29 @@ script launch_wrong_pin_dialog_box
     ]
   }
 endscript
+
 script select_xbox_multiplayer
   change_gamemode_net
   launch_select_skater_menu
 endscript
+
 script launch_network_select_games_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
   create_network_select_games_menu play_cam
 endscript
+
 script launch_remove_players_menu
   DestroyScreenElement id = current_menu_anchor
   create_remove_players_menu
 endscript
+
 script launch_xbox_online_menu
   DestroyScreenElement id = current_menu_anchor
   create_xbox_online_menu
 endscript
+
 script chose_xbox_online
   if AlreadySignedIn
     create_xbox_online_menu
@@ -427,6 +459,7 @@ script chose_xbox_online
     chose_internet
   endif
 endscript
+
 script chose_internet
   SetNetworkMode INTERNET_MODE
   if OnXbox
@@ -448,30 +481,36 @@ script chose_internet
     endif
   endif
 endscript
+
 script confirm_observe
   dialog_box_exit
   EnterObserverMode
 endscript
+
 script chose_observe
   exit_pause_menu
   EnterObserverMode
 endscript
+
 script launch_motd_wait_dialog
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
   create_motd_wait_dialog
 endscript
+
 script launch_network_select_lan_games_menu
   SetNetworkMode LAN_MODE
   launch_network_select_games_menu
 endscript
+
 script launch_network_host_options_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
   create_network_host_options_menu
 endscript
+
 script host_chosen
   console_hide
   GSDisableNet
@@ -479,6 +518,7 @@ script host_chosen
   FreeServerList
   launch_network_host_options_menu
 endscript
+
 script host_net_chosen
   console_hide
   GSEnableNet
@@ -486,11 +526,13 @@ script host_net_chosen
   FreeServerList
   launch_network_host_options_menu
 endscript
+
 script fcfs_selected
   dialog_box_exit
   SetHostMode HOST_MODE_FCFS
   exit_pause_menu
 endscript
+
 script auto_serve_selected
   dialog_box_exit
   GetPreferenceChecksum pref_type = network game_type
@@ -509,6 +551,7 @@ script auto_serve_selected
   SetHostMode HOST_MODE_AUTO_SERVE
   exit_pause_menu
 endscript
+
 script join_chosen
   if FoundServers
     StopServerList
@@ -524,6 +567,7 @@ script join_chosen
     AssignAlias id = server_list_menu alias = current_menu
   endif
 endscript
+
 script observe_chosen
   if FoundServers
     StopServerList
@@ -537,6 +581,7 @@ script observe_chosen
     AssignAlias id = server_list_menu alias = current_menu
   endif
 endscript
+
 script user_list_chosen
   DoScreenElementMorph id = user_list_up_arrow time = 0 scale = 1
   DoScreenElementMorph id = user_list_down_arrow time = 0 scale = 1
@@ -545,6 +590,7 @@ script user_list_chosen
   Change current_lobby_focus = 2
   AssignAlias id = lobby_player_list_menu alias = current_menu
 endscript
+
 script buddy_list_chosen
   FillBuddyList clear_list allow_remove
   DoScreenElementMorph id = player_list_anchor time = 0 scale = 0
@@ -552,6 +598,7 @@ script buddy_list_chosen
   FireEvent type = unfocus target = actions_menu
   FireEvent type = focus target = lobby_buddy_list_menu
 endscript
+
 script add_buddy_chosen
   FillLobbyProspectiveBuddyList
   actions_menu_anchor:DoMorph scale = 0
@@ -560,12 +607,14 @@ script add_buddy_chosen
   FireEvent type = unfocus target = actions_menu
   FireEvent type = focus target = lobby_buddy_list_menu
 endscript
+
 script refresh_chosen
   RefreshServerList
   if InInternetMode
     FillPlayerList
   endif
 endscript
+
 script refocus_actions_menu
   FireEvent type = unfocus target = server_list_menu
   FireEvent type = focus target = actions_menu
@@ -588,17 +637,20 @@ script refocus_actions_menu
     DoScreenElementMorph id = buddy_list_anchor time = 0 scale = 0
   endif
 endscript
+
 script refocus_gamelist_menu
   SetScreenElementProps id = game_list_up_arrow alpha = 1
   SetScreenElementProps id = game_list_down_arrow alpha = 1
   FireEvent type = unfocus target = server_desc_menu
   FireEvent type = focus target = server_list_menu
 endscript
+
 script back_from_internet_options
   ProfileLogOff
   DestroyScreenElement id = current_menu_anchor
   create_network_select_menu
 endscript
+
 script create_profile_warning_dialog
   create_dialog_box { title = "GameSpy Profile"
     text = "Would you like to create a GameSpy profile? When logged in with a profile, you can find friends more easily."
@@ -607,6 +659,7 @@ script create_profile_warning_dialog
     ]
   }
 endscript
+
 script hide_internet_only_menus
   if InInternetMode
     if ObjectExists id = console_message_vmenu
@@ -616,6 +669,7 @@ script hide_internet_only_menus
     DoScreenElementMorph id = player_list_anchor time = 0 scale = 0
   endif
 endscript
+
 script restore_internet_only_menus
   if InInternetMode
     DoScreenElementMorph id = player_list_anchor time = 0 scale = 1
@@ -625,6 +679,7 @@ script restore_internet_only_menus
     endif
   endif
 endscript
+
 script create_internet_options
   dialog_box_exit
   add_ss_menu_textures_to_vram
@@ -707,6 +762,7 @@ script create_internet_options
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script confirm_upload_current_park
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -731,6 +787,7 @@ script confirm_upload_current_park
   }
   create_helper_text generic_helper_text_left_right parent = dialog_box_anchor
 endscript
+
 script confirm_upload_park
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -745,11 +802,13 @@ script confirm_upload_park
     launch_upload_park_load_park_sequence
   endif
 endscript
+
 script upload_content
   Printf "Uploading content"
   create_dialog_box { title = "Uploading file" text = "Starting transfer..." }
   UploadFile
 endscript
+
 script download_content
   Printf "retrieving directory listing"
   DestroyScreenElement id = current_menu_anchor
@@ -758,6 +817,7 @@ script download_content
   }
   DownloadDirectoryList
 endscript
+
 script download_selected_file
   Printf "Downloading content"
   DestroyScreenElement id = current_menu_anchor
@@ -766,6 +826,7 @@ script download_selected_file
   }
   DownloadFile <...>
 endscript
+
 script update_transfer_progress
   if ObjectExists id = dialog_box_text
     SetScreenElementProps {
@@ -774,17 +835,20 @@ script update_transfer_progress
     }
   endif
 endscript
+
 script back_from_transfer_dialog
   FreeDirectoryListing
   dialog_box_exit
   add_network_menu_textures_to_vram
   create_internet_options
 endscript
+
 script back_from_transfer_succeeded_dialog
   dialog_box_exit
   memcard_menus_cleanup
   net_vault_menu_create
 endscript
+
 script LaunchTransferFailedDialog
   net_vault_menu_exit
   dialog_box_exit
@@ -794,6 +858,7 @@ script LaunchTransferFailedDialog
     ]
   }
 endscript
+
 script LaunchDownloadCompleteDialog
   net_vault_menu_exit
   dialog_box_exit
@@ -804,6 +869,7 @@ script LaunchDownloadCompleteDialog
     ]
   }
 endscript
+
 script LaunchUploadCompleteDialog
   net_vault_menu_exit
   dialog_box_exit
@@ -813,10 +879,12 @@ script LaunchUploadCompleteDialog
     ]
   }
 endscript
+
 script back_from_directory_listing
   DestroyScreenElement id = current_menu_anchor
   create_internet_options
 endscript
+
 script LaunchDirectoryListing
   dialog_box_exit
   make_new_menu menu_id = directory_listing_menu vmenu_id = directory_listing_vmenu menu_title = "DIRECTORY CONTENTS" type = VScrollingMenu dims = (200, 300) vscroll_pos = (230, 30) internal_scale = 0.25 allow_wrap = 0
@@ -826,6 +894,7 @@ script LaunchDirectoryListing
   }
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script spawn_lobby_list
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -836,11 +905,13 @@ script spawn_lobby_list
   }
   LobbyConnect
 endscript
+
 script back_from_internet_menu
   console_destroy
   LeaveLobby
   launch_lobby_list
 endscript
+
 script back_from_internet_host_options
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -853,10 +924,12 @@ script back_from_internet_host_options
     launch_network_select_games_menu
   endif
 endscript
+
 script launch_lobby_list
   DestroyScreenElement id = current_menu_anchor
   StartLobbyList
 endscript
+
 script back_from_network_select_menu
   SetNetworkMode
   if ObjectExists id = current_menu_anchor
@@ -868,10 +941,12 @@ script back_from_network_select_menu
     launch_ss_menu
   endif
 endscript
+
 script disconnect_from_internet
   DestroyScreenElement id = current_menu_anchor
   DisconnectFromInternet
 endscript
+
 in_net_lobby = 0
 script create_network_select_menu
   remove_pause_menu_textures_from_vram
@@ -927,6 +1002,7 @@ script create_network_select_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script network_select_menu_exit
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -936,6 +1012,7 @@ script network_select_menu_exit
   add_network_menu_textures_to_vram
    <callback>
 endscript
+
 script make_server_list_menu
   create_console
   console_unhide
@@ -1414,6 +1491,7 @@ script make_server_list_menu
   AssignAlias id = server_list_anchor alias = current_menu_anchor
   AssignAlias id = actions_menu alias = current_menu
 endscript
+
 current_lobby_focus = 0
 script server_list_menu_add_item
   if ObjectExists id = server_list_menu
@@ -1426,6 +1504,7 @@ script server_list_menu_add_item
     update_lobby_server_list
   endif
 endscript
+
 script player_list_add_item
   if ObjectExists id = <id>
     return
@@ -1437,6 +1516,7 @@ script player_list_add_item
     update_lobby_player_list
   endif
 endscript
+
 script update_lobby_player_list
   if ScreenElementExists id = lobby_player_list_menu
     if not ( current_lobby_focus = 2 )
@@ -1449,6 +1529,7 @@ script update_lobby_player_list
     endif
   endif
 endscript
+
 script update_lobby_server_list
   if ScreenElementExists id = server_list_menu
     if not ( current_lobby_focus = 1 )
@@ -1461,6 +1542,7 @@ script update_lobby_server_list
     endif
   endif
 endscript
+
 script return_current_lobby_focus
   switch current_lobby_focus
   case 0
@@ -1473,26 +1555,33 @@ script return_current_lobby_focus
     Printf "return_current_lobby_focus This should never happen!"
   endswitch
 endscript
+
 script server_list_focus
   generic_menu_update_arrows menu_id = server_list_menu up_arrow_id = game_list_up_arrow down_arrow_id = game_list_down_arrow
   describe_selected_server <...>
 endscript
+
 script player_list_focus
   generic_menu_update_arrows menu_id = lobby_player_list_menu up_arrow_id = user_list_up_arrow down_arrow_id = user_list_down_arrow
   main_menu_focus
 endscript
+
 script user_blink_up_arrow
   RunScriptOnScreenElement id = user_list_up_arrow menu_blink_arrow
 endscript
+
 script user_blink_down_arrow
   RunScriptOnScreenElement id = user_list_down_arrow menu_blink_arrow
 endscript
+
 script server_blink_up_arrow
   RunScriptOnScreenElement id = game_list_up_arrow menu_blink_arrow
 endscript
+
 script server_blink_down_arrow
   RunScriptOnScreenElement id = game_list_down_arrow menu_blink_arrow
 endscript
+
 script homie_list_add_item name = "" status = "" location = ""
   Printf "homie_list_add_item"
   if ObjectExists id = lobby_buddy_list_menu
@@ -1542,6 +1631,7 @@ script homie_list_add_item name = "" status = "" location = ""
     truncate_string id = <id> max_width = 205
   endif
 endscript
+
 script homie_list_focus
   generic_menu_update_arrows {
     menu_id = lobby_buddy_list_menu
@@ -1553,6 +1643,7 @@ script homie_list_focus
   SetScreenElementProps id = { <id> child = 1 } rgba = [ 127 102 0 128 ]
   SetScreenElementProps id = { <id> child = 2 } rgba = [ 127 102 0 128 ]
 endscript
+
 script homie_list_unfocus
   GetTags
   generic_menu_pad_up_down_sound
@@ -1561,6 +1652,7 @@ script homie_list_unfocus
   SetScreenElementProps id = { <id> child = 1 } rgba = [ 88 105 112 128 ]
   SetScreenElementProps id = { <id> child = 2 } rgba = [ 88 105 112 128 ]
 endscript
+
 script net_menu_add_bg
   CreateScreenElement {
     type = ContainerElement
@@ -1607,6 +1699,7 @@ script net_menu_add_bg
   }
   return id = <id>
 endscript
+
 script back_from_game_list
   TryJoinServerIPCancel
   RefreshServerList force_refresh
@@ -1615,14 +1708,17 @@ script back_from_game_list
   destroy_server_desc_children
   refocus_actions_menu
 endscript
+
 script back_from_user_list
   actions_menu_anchor:DoMorph scale = 1
   refocus_actions_menu
 endscript
+
 script back_from_buddy_list
   actions_menu_anchor:DoMorph scale = 1
   refocus_actions_menu
 endscript
+
 script start_internet_game2
   SetNetworkMode LAN_MODE
   Change check_for_unplugged_controllers = 1
@@ -1634,10 +1730,12 @@ script start_internet_game2
   endif
   create_network_host_options_menu2
 endscript
+
 script check_ip_from_keyboard_failure_exit
   dialog_box_exit
   create_network_select_games_menu
 endscript
+
 script check_ip_from_keyboard_failure
   TryJoinServerIPCancel
   create_snazzy_dialog_box {
@@ -1660,12 +1758,14 @@ script check_ip_from_keyboard_failure
     create_network_select_games_menu play_cam
   endif
 endscript
+
 script check_ip_from_keyboard_cancel
   dialog_box_exit
   TryJoinServerIPCancel
   add_pause_menu_textures_to_vram
   create_network_select_games_menu play_cam
 endscript
+
 script check_ip_from_keyboard
   GetTextElementString id = keyboard_current_string
   destroy_onscreen_keyboard
@@ -1704,6 +1804,7 @@ script check_ip_from_keyboard
     endif
   endif
 endscript
+
 script check_join_internet_ip
   console_hide
   if ObjectExists id = current_menu_anchor
@@ -1748,6 +1849,7 @@ script check_join_internet_ip
     create_network_select_games_menu play_cam
   endif
 endscript
+
 script create_network_menu_exit
   console_hide
   if ObjectExists id = current_menu_anchor
@@ -1755,6 +1857,7 @@ script create_network_menu_exit
   endif
    <new_menu_script> <...>
 endscript
+
 script create_network_select_games_menu
   if GotParam play_cam
     KillSkaterCamAnim all
@@ -1887,11 +1990,13 @@ script create_network_select_games_menu
     endif
   endif
 endscript
+
 script set_enter_message_focus
   menu_onscreen <...>
   FireEvent type = unfocus target = actions_menu
   FireEvent type = focus target = actions_menu data = { child_id = menu_network_select_chat }
 endscript
+
 script back_to_server_list_from_buddy_list
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1902,6 +2007,7 @@ script back_to_server_list_from_buddy_list
     DoScreenElementMorph id = console_message_vmenu time = 0 scale = 1
   endif
 endscript
+
 script back_to_pause_menu_from_buddy_list
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1911,6 +2017,7 @@ script back_to_pause_menu_from_buddy_list
   GoalManager_ShowPoints
   create_pause_menu
 endscript
+
 script create_remove_players_menu
   make_new_menu menu_id = remove_players_menu vmenu_id = remove_players_vmenu menu_title = "REMOVE WHICH PLAYER?"
   SetScreenElementProps { id = remove_players_menu event_handlers = [
@@ -1920,6 +2027,7 @@ script create_remove_players_menu
   FillRemovePlayersMenu
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script create_xbox_online_menu
   make_new_menu menu_id = xbox_online_menu vmenu_id = xbox_online_vmenu menu_title = "XBOX ONLINE"
   SetScreenElementProps { id = xbox_online_menu event_handlers = [
@@ -1932,6 +2040,7 @@ script create_xbox_online_menu
   make_text_sub_menu_item text = "Xbox Dashboard" id = menu_xonline_dashboard pad_choose_script = go_to_xbox_dashboard
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script create_sit_out_menu
   dialog_box_exit
   remove_pause_menu_textures_from_vram
@@ -1961,12 +2070,15 @@ script create_sit_out_menu
   draw_menu_box middle_repeat = 2 box_right_scale = (0.8, 0.31) scale = (1.25, 1) box_bottom_scale = (1.2, 1) box_right_offset = (-25, 0)
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script launch_network_sit_out_menu
   DestroyScreenElement id = current_menu_anchor
   create_sit_out_menu
 endscript
+
 script do_nothing
 endscript
+
 script create_motd_menu
   dialog_box_exit
   create_dialog_box { title = "MESSAGE"
@@ -1975,18 +2087,21 @@ script create_motd_menu
     ]
   }
 endscript
+
 script create_motd_wait_dialog
   create_dialog_box { title = net_status_msg
     text = net_status_checking_motd
     no_animate
   }
 endscript
+
 script CreateMotdRetryDialog
   dialog_box_exit
   create_dialog_box { title = net_status_msg
     text = <message>
   }
 endscript
+
 script CreateMotdFailedDialog
   dialog_box_exit
   create_dialog_box { title = net_status_msg
@@ -1995,6 +2110,7 @@ script CreateMotdFailedDialog
     ]
   }
 endscript
+
 script CreateBuddyLoginFailedDialog
   dialog_box_exit
   create_dialog_box { title = net_error_msg
@@ -2003,6 +2119,7 @@ script CreateBuddyLoginFailedDialog
     ]
   }
 endscript
+
 script back_from_removed_dialog
   dialog_box_exit
   if EnteringNetGame
@@ -2011,6 +2128,7 @@ script back_from_removed_dialog
     quit_network_game
   endif
 endscript
+
 script CreateServerRemovedYouDialog
   HideLoadingScreen
   force_close_rankings dont_retry
@@ -2027,6 +2145,7 @@ script CreateServerRemovedYouDialog
     delay_input
   }
 endscript
+
 script CreateServerMovedOnDialog
   HideLoadingScreen
   force_close_rankings dont_retry
@@ -2043,6 +2162,7 @@ script CreateServerMovedOnDialog
     delay_input
   }
 endscript
+
 script destroy_server_menu_children
   if ObjectExists id = server_list_menu
     SetScreenElementLock id = server_list_menu off
@@ -2052,33 +2172,39 @@ script destroy_server_menu_children
     endif
   endif
 endscript
+
 script destroy_server_desc_children
   SetScreenElementLock id = server_desc_menu off
   DestroyScreenElement id = server_desc_menu recurse preserve_parent
   refocus_gamelist_menu
 endscript
+
 script destroy_lobby_user_list_children
   if ObjectExists id = lobby_player_list_menu
     prepare_lobby_user_list_for_new_children
     DestroyScreenElement id = lobby_player_list_menu recurse preserve_parent
   endif
 endscript
+
 script destroy_lobby_user
   if ObjectExists id = <user_id>
     DestroyScreenElement id = <user_id>
   endif
 endscript
+
 script destroy_lobby_server
   if ObjectExists id = <server_id>
     DestroyScreenElement id = <server_id>
   endif
 endscript
+
 script destroy_lobby_buddy_list_children
   if ObjectExists id = lobby_buddy_list_menu
     prepare_lobby_buddy_list_for_new_children
     DestroyScreenElement id = lobby_buddy_list_menu recurse preserve_parent
   endif
 endscript
+
 script add_no_servers_found_message
   if ObjectExists id = server_list_menu
     SetScreenElementLock id = server_list_menu off
@@ -2088,35 +2214,42 @@ script add_no_servers_found_message
     endif
   endif
 endscript
+
 script prepare_server_menu_for_new_children
   if ObjectExists id = server_list_menu
     SetScreenElementLock id = server_list_menu off
   endif
 endscript
+
 script prepare_lobby_user_list_for_new_children
   if ObjectExists id = lobby_player_list_menu
     SetScreenElementLock id = lobby_player_list_menu off
   endif
 endscript
+
 script prepare_lobby_buddy_list_for_new_children
   if ObjectExists id = lobby_buddy_list_menu
     SetScreenElementLock id = lobby_buddy_list_menu off
   endif
 endscript
+
 script choose_selected_lobby
   ChooseLobby <...>
   DestroyScreenElement id = current_menu_anchor
   create_joining_lobby_dialog
 endscript
+
 script choose_selected_server
   console_hide
   ChooseServer <...>
   DestroyScreenElement id = current_menu_anchor
 endscript
+
 script describe_selected_server
   main_menu_focus
   DescribeServer <...>
 endscript
+
 script choose_selected_player
   if OnXbox
     RemovePlayer <...>
@@ -2124,36 +2257,44 @@ script choose_selected_player
     CreatePlayerOptions <...>
   endif
 endscript
+
 script choose_selected_account
   ChooseAccount <...>
 endscript
+
 script cancel_remove_player
   CancelRemovePlayer
   dialog_box_exit
   create_pause_menu
 endscript
+
 script kick_player
   KickPlayer
   dialog_box_exit
   create_pause_menu
 endscript
+
 script back_from_dialog
   dialog_box_exit
   create_pause_menu
 endscript
+
 script ban_player
   BanPlayer
   dialog_box_exit
   create_pause_menu
 endscript
+
 script launch_pin_entry_menu
   DestroyScreenElement id = current_menu_anchor
   create_pin_entry_menu
 endscript
+
 script launch_buddy_list
   DestroyScreenElement id = current_menu_anchor
   create_buddy_list_menu
 endscript
+
 script net_chosen_join_server
   LeaveServer
   SetServerMode off
@@ -2166,6 +2307,7 @@ script net_chosen_join_server
   endif
   Change check_for_unplugged_controllers = 0
 endscript
+
 script net_chosen_join_server_ip
   LeaveServer
   SetServerMode off
@@ -2178,6 +2320,7 @@ script net_chosen_join_server_ip
   endif
   Change check_for_unplugged_controllers = 0
 endscript
+
 script create_lobby_list_menu
   make_new_menu { menu_id = lobby_list_menu
     type = VScrollingMenu
@@ -2234,9 +2377,11 @@ script create_lobby_list_menu
   draw_menu_box delta_pos = (96, -20) middle_repeat = 16 box_right_scale = (0.8, 1.185) box_right_offset = (-25, 0) scale = (1.25, 1) box_bottom_scale = (1.2, 1)
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script regions_menu_add_item
   main_menu_add_item <...> highlight_bar_scale = (1.15, 1.3)
 endscript
+
 script regions_menu_set_focus
   generic_menu_update_arrows {
     up_arrow_id = regions_up_arrow
@@ -2248,6 +2393,7 @@ script regions_menu_set_focus
   endif
   main_menu_focus <...>
 endscript
+
 script create_pin_entry_menu
   make_new_menu menu_id = pin_entry_menu vmenu_id = pin_entry_vmenu menu_title = "ENTER PIN"
   SetScreenElementLock id = root_window off
@@ -2257,6 +2403,7 @@ script create_pin_entry_menu
   }
   RunScriptOnScreenElement id = main_menu_anchor menu_onscreen
 endscript
+
 script create_buddy_list_menu
   make_new_menu menu_title = "Friend List"
   SetScreenElementLock id = root_window off
@@ -2266,6 +2413,7 @@ script create_buddy_list_menu
   }
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script back_from_regions_menu
   StopServerList
   FreeServerList
@@ -2273,17 +2421,20 @@ script back_from_regions_menu
   DestroyScreenElement id = current_menu_anchor
   create_internet_options
 endscript
+
 script back_from_network_menu
   StopServerList
   FreeServerList
   DestroyScreenElement id = current_menu_anchor
   create_network_select_menu
 endscript
+
 script back_from_multiplayer_menu
   StopServerList
   FreeServerList
   back_from_network_select_menu <...>
 endscript
+
 script select_host_option
   set_preferences_from_ui <...>
   if ObjectExists id = current_menu_anchor
@@ -2292,10 +2443,12 @@ script select_host_option
     select_host_option2
   endif
 endscript
+
 script select_host_option2
   remove_host_options_sub_menu_textures_from_vram
   launch_network_host_options_menu
 endscript
+
 script select_game_option
   if ( <checksum> = netctf )
     if not InTeamGame
@@ -2316,6 +2469,7 @@ script select_game_option
   endswitch
   create_network_game_options_menu <...>
 endscript
+
 script select_team_mode_option
   set_preferences_from_ui <...>
   if GameModeEquals is_lobby
@@ -2334,6 +2488,7 @@ script select_team_mode_option
   endif
   launch_network_host_options_menu
 endscript
+
 script create_host_options_sub_menu
   make_new_menu menu_id = options_sub_menu vmenu_id = options_sub_vmenu <...> padding_scale = 1 pos = (200, 110)
   SetScreenElementProps { id = options_sub_menu
@@ -2367,6 +2522,7 @@ script create_host_options_sub_menu
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script host_options_sub_menu_add_item { parent = current_menu
     font = dialog
     highlight_bar_scale = (1.15, 1.3)
@@ -2460,16 +2616,19 @@ script host_options_sub_menu_add_item { parent = current_menu
     z_priority = -1
   }
 endscript
+
 script remove_host_options_sub_menu_textures_from_vram
   RemoveTextureFromVram "grungeframe_top"
   RemoveTextureFromVram "grungeframe_mid"
   RemoveTextureFromVram "grungeframe_bot"
 endscript
+
 script add_host_options_sub_menu_textures_to_vram
   AddTextureToVram "grungeframe_top"
   AddTextureToVram "grungeframe_mid"
   AddTextureToVram "grungeframe_bot"
 endscript
+
 script create_game_options_sub_menu
   if ( <pref_field> = "game_type" )
     make_new_menu menu_id = options_sub_menu vmenu_id = options_sub_vmenu <...> pos = (230, 89)
@@ -2490,36 +2649,43 @@ script create_game_options_sub_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script set_host_option_preference
   GetTextElementString id = keyboard_current_string
   set_preferences_from_ui prefs = network <...>
   destroy_onscreen_keyboard
   create_network_host_options_menu
 endscript
+
 script host_options_back_from_keyboard
   destroy_onscreen_keyboard
   create_network_host_options_menu
 endscript
+
 script set_horse_option_preference
   GetTextElementString id = keyboard_current_string
   set_preferences_from_ui prefs = splitscreen <...>
   horse_word_back_from_keyboard
 endscript
+
 script horse_word_back_from_keyboard
   destroy_onscreen_keyboard
   add_pause_menu_textures_to_vram
   create_network_game_options_menu end_run
 endscript
+
 script create_network_host_options_server_name_menu
   GetPreferenceString pref_type = network server_name
   DestroyScreenElement id = current_menu_anchor
   create_onscreen_keyboard allow_cancel keyboard_cancel_script = host_options_back_from_keyboard keyboard_done_script = set_host_option_preference keyboard_title = "SERVER ID" field = "server_name" text = <ui_string> min_length = 1 max_length = 15
 endscript
+
 script create_network_host_options_password_menu
   GetPreferenceString pref_type = network password
   DestroyScreenElement id = current_menu_anchor
   create_onscreen_keyboard password allow_cancel keyboard_cancel_script = host_options_back_from_keyboard keyboard_done_script = set_host_option_preference keyboard_title = "PASSWORD" field = "password" text = <ui_string> min_length = 0 max_length = 9
 endscript
+
 script create_network_host_options_levels_menu
   if IsTrue bootstrap_build
     create_host_options_sub_menu menu_title = "LEVEL" pref_type = network pref_field = "level" array = e3_level_info call_script = select_host_option pos = (227, 112)
@@ -2527,26 +2693,33 @@ script create_network_host_options_levels_menu
     create_host_options_sub_menu menu_title = "LEVEL" pref_type = network pref_field = "level" array = level_info call_script = select_host_option pos = (227, 112) helper_text = generic_helper_text
   endif
 endscript
+
 script create_network_host_options_max_players_menu
   create_host_options_sub_menu menu_title = "PLAYERS" pref_type = network pref_field = "num_players" array = num_players_info pad_choose_script = select_host_option pos = (227, 112) helper_text = generic_helper_text
 endscript
+
 script create_network_host_options_max_observers_menu
   create_host_options_sub_menu menu_title = "OBSERVERS" pref_type = network pref_field = "num_observers" array = num_observers_info pad_choose_script = select_host_option pos = (227, 112) helper_text = generic_helper_text
 endscript
+
 script create_network_host_options_player_collision_menu
   create_host_options_sub_menu menu_title = "PLAYER COLLISION" pref_type = network pref_field = "player_collision" array = on_off_types pad_choose_script = select_host_option helper_text = generic_helper_text
 endscript
+
 script create_network_host_options_team_menu
   create_host_options_sub_menu menu_title = "TEAMS" pref_type = network pref_field = "team_mode" array = team_types pad_choose_script = select_team_mode_option pos = (227, 112) helper_text = generic_helper_text
 endscript
+
 script create_network_host_options_skill_level_menu
   create_host_options_sub_menu menu_title = "SKILL LEVEL" pref_type = network pref_field = "skill_level" array = skill_level_info pad_choose_script = select_host_option pos = (227, 112) helper_text = generic_helper_text
 endscript
+
 script create_mp_game_options_game_type_menu
   create_game_options_sub_menu menu_title = "GAME TYPE" pref_type = splitscreen pref_field = "game_type" array = mp_game_type_info call_script = select_game_option helper_text = generic_helper_text <...>
   set_sub_bg type = SpriteElement pos = (326, 95)
   create_icon texture = PA_options pos = (176, 95)
 endscript
+
 script create_network_game_options_game_type_menu
   if IsTrue Demo_Build
     create_game_options_sub_menu menu_title = "GAME TYPE" pref_type = network pref_field = "game_type" array = net_game_type_info_demo call_script = select_game_option helper_text = generic_helper_text <...>
@@ -2556,6 +2729,7 @@ script create_network_game_options_game_type_menu
   set_sub_bg type = SpriteElement pos = (326, 95)
   create_icon texture = PA_options pos = (176, 95)
 endscript
+
 script create_network_game_options_score_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -2564,6 +2738,7 @@ script create_network_game_options_score_menu
   draw_menu_box delta_pos = (97, 30) middle_repeat = 12 box_right_scale = (0.8, 0.925)
   create_icon texture = PA_options
 endscript
+
 script create_network_game_options_captures_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -2572,6 +2747,7 @@ script create_network_game_options_captures_menu
   draw_menu_box delta_pos = (97, 30)
   create_icon texture = PA_options
 endscript
+
 script create_network_game_options_target_time_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -2580,6 +2756,7 @@ script create_network_game_options_target_time_menu
   draw_menu_box delta_pos = (97, 30)
   create_icon texture = PA_options
 endscript
+
 script create_network_game_options_time_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -2588,6 +2765,7 @@ script create_network_game_options_time_menu
   draw_menu_box delta_pos = (97, 30)
   create_icon texture = PA_options
 endscript
+
 script create_mp_game_options_time_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -2596,6 +2774,7 @@ script create_mp_game_options_time_menu
   draw_menu_box delta_pos = (97, 30)
   create_icon texture = PA_options
 endscript
+
 script create_mp_game_options_horse_time_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -2604,11 +2783,13 @@ script create_mp_game_options_horse_time_menu
   draw_menu_box delta_pos = (97, 30) middle_repeat = 4 box_right_scale = (0.8, 0.428)
   create_icon texture = PA_options
 endscript
+
 script create_mp_game_options_horse_word_menu
   remove_pause_menu_textures_from_vram
   GetPreferenceString pref_type = splitscreen horse_word
   create_onscreen_keyboard allow_cancel keyboard_cancel_script = horse_word_back_from_keyboard keyboard_done_script = set_horse_option_preference keyboard_title = "HORSE WORD" field = "horse_word" text = <ui_string> min_length = 1 max_length = 15 pos = (320, 290)
 endscript
+
 script create_account_list_menu
   make_new_menu menu_id = account_list_menu vmenu_id = account_list_vmenu menu_title = "CHOOSE AN ACCOUNT"
   SetScreenElementLock id = root_window off
@@ -2618,6 +2799,7 @@ script create_account_list_menu
   }
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script create_network_game_options_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -2747,11 +2929,13 @@ script create_network_game_options_menu
   RunScriptOnScreenElement id = current_menu_anchor set_game_options_ready_focus
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script set_game_options_ready_focus
   menu_onscreen <...>
   FireEvent type = unfocus target = host_options_vmenu
   FireEvent type = focus target = host_options_vmenu data = { child_id = menu_network_host_options_ready }
 endscript
+
 script create_network_host_options_menu
   remove_pause_menu_textures_from_vram
   add_host_options_sub_menu_textures_to_vram
@@ -2940,6 +3124,7 @@ script create_network_host_options_menu
   endif
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script create_network_host_options_menu2
   remove_pause_menu_textures_from_vram
   add_host_options_sub_menu_textures_to_vram
@@ -2951,11 +3136,13 @@ script create_network_host_options_menu2
   Wait 1 frame
   chosen_host_game
 endscript
+
 script set_ready_focus
   menu_onscreen <...>
   FireEvent type = unfocus target = host_options_vmenu
   FireEvent type = focus target = host_options_vmenu data = { child_id = menu_network_host_options_ready }
 endscript
+
 script network_host_options_menu_add_item { parent = current_menu
     font = small
     highlight_bar_scale = (1.55, 1.3)
@@ -3039,6 +3226,7 @@ script network_host_options_menu_add_item { parent = current_menu
     z_priority = -1
   }
 endscript
+
 script network_host_options_menu_focus
   GetTags
   SetScreenElementProps {
@@ -3051,6 +3239,7 @@ script network_host_options_menu_focus
     rgba = [ 128 128 128 50 ]
   }
 endscript
+
 script network_host_options_menu_unfocus
   GetTags
   SetScreenElementProps {
@@ -3063,6 +3252,7 @@ script network_host_options_menu_unfocus
     rgba = [ 128 128 128 0 ]
   }
 endscript
+
 script chosen_start_game
   if InNetGame
     GetPreferenceChecksum pref_type = network game_type
@@ -3081,13 +3271,16 @@ script chosen_start_game
     exit_pause_menu
   endif
 endscript
+
 script network_options_selected
   PauseMusicAndStreams 1
   launch_network_host_options_menu
 endscript
+
 script network_game_options_selected
   create_network_game_options_menu <...>
 endscript
+
 script network_start_selected
   if OnServer
     chosen_start_game
@@ -3096,6 +3289,7 @@ script network_start_selected
     exit_pause_menu
   endif
 endscript
+
 script network_end_game_selected
   kill_all_panel_messages
   if InSplitScreenGame
@@ -3108,6 +3302,7 @@ script network_end_game_selected
     EndNetworkGame
   endif
 endscript
+
 script generic_array_menu_setup time = 60
   add_item_script = main_menu_add_item
   if not ( <pref_field> = "game_type" )
@@ -3161,10 +3356,12 @@ script generic_array_menu_setup time = 60
     endif
   repeat
 endscript
+
 script game_options_focus_script
   SetScreenElementProps id = item_description_text text = <description>
   do_scale_up
 endscript
+
 script game_type_description_box
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
@@ -3221,11 +3418,13 @@ script game_type_description_box
   remove_ss_menu_textures_from_vram
   add_pause_menu_textures_to_vram
 endscript
+
 script end_network_game
   kill_all_panel_messages
   dialog_box_exit
   do_backend_retry
 endscript
+
 script CreateServerQuitDialog
   if not LevelIs load_skateshop
     GoalManager_DeactivateAllGoals
@@ -3247,6 +3446,7 @@ script CreateServerQuitDialog
     }
   endif
 endscript
+
 script create_game_ended_dialog
   if not LevelIs load_skateshop
     GoalManager_DeactivateAllGoals
@@ -3263,6 +3463,7 @@ script create_game_ended_dialog
     }
   endif
 endscript
+
 script accept_lost_connection
   dialog_box_exit
   if EnteringNetGame
@@ -3271,6 +3472,7 @@ script accept_lost_connection
     quit_network_game
   endif
 endscript
+
 script CreateLostConnectionDialog
   HideLoadingScreen
   exit_pause_menu
@@ -3290,10 +3492,12 @@ script CreateLostConnectionDialog
     delay_input
   }
 endscript
+
 script BackToServerListFromJoinRefusedDialog
   dialog_box_exit
   create_network_select_games_menu
 endscript
+
 script CreateJoinRefusedDialog
   if InNetGame
     create_dialog_box { title = net_refused_msg
@@ -3313,6 +3517,7 @@ script CreateJoinRefusedDialog
     endif
   endif
 endscript
+
 script create_refused_dialog
   Printf "******* in cancel_join_server 12"
   if InNetGame
@@ -3329,10 +3534,12 @@ script create_refused_dialog
     }
   endif
 endscript
+
 script reattempt_join_server
   ReattemptJoinServer
   PlaySkaterCamAnim name = SS_MenuCam play_hold
 endscript
+
 script cancel_join_server
   Printf "******* in cancel_join_server"
   destroy_onscreen_keyboard
@@ -3378,15 +3585,18 @@ script cancel_join_server
     endif
   repeat
 endscript
+
 script CreateEnterPasswordControl
   dialog_box_exit
   create_onscreen_keyboard password allow_cancel keyboard_cancel_script = cancel_join_server keyboard_done_script = try_password keyboard_title = "ENTER PASSWORD" min_length = 1 max_length = 9
 endscript
+
 script try_password
   GetTextElementString id = keyboard_current_string
   destroy_onscreen_keyboard
   JoinWithPassword <...>
 endscript
+
 script CreateGameInProgressDialog
   dialog_box_exit
   kill_start_key_binding
@@ -3398,6 +3608,7 @@ script CreateGameInProgressDialog
     ]
   }
 endscript
+
 script CreateConnectingDialog
   kill_start_key_binding
   create_dialog_box { title = net_status_msg
@@ -3407,6 +3618,7 @@ script CreateConnectingDialog
     ]
   }
 endscript
+
 script CreateJoiningDialog
   dialog_box_exit
   kill_start_key_binding
@@ -3417,6 +3629,7 @@ script CreateJoiningDialog
     ]
   }
 endscript
+
 script CreateTryingPasswordDialog
   kill_start_key_binding
   create_dialog_box { title = net_status_msg
@@ -3426,14 +3639,17 @@ script CreateTryingPasswordDialog
     ]
   }
 endscript
+
 script wait_for_players
   dialog_box_exit
   create_net_panel_message text = net_message_game_will_start
 endscript
+
 script dont_wait_for_players
   dialog_box_exit
   DropPendingPlayers
 endscript
+
 script CreateWaitForPlayersDialog
   if ObjectExists id = pause_menu
     exit_pause_menu
@@ -3449,13 +3665,16 @@ script CreateWaitForPlayersDialog
     delay_input
   }
 endscript
+
 script back_from_join_timeout
   dialog_box_exit
   create_network_select_games_menu
 endscript
+
 script ShowJoinTimeoutNotice
   SpawnScript cancel_join_server params = { show_timeout }
 endscript
+
 script create_join_timeout_dialog
   create_dialog_box { title = net_status_msg
     text = net_status_join_timeout
@@ -3464,12 +3683,14 @@ script create_join_timeout_dialog
     ]
   }
 endscript
+
 script exit_net_menus
   dialog_box_exit
   SetGameType career
   SetCurrentGameType
   launch_main_menu
 endscript
+
 script create_link_unplugged_front_end_dialog
   back_from_multiplayer_menu no_menu
   create_dialog_box { title = net_status_msg
@@ -3479,6 +3700,7 @@ script create_link_unplugged_front_end_dialog
     ]
   }
 endscript
+
 script link_unplugged_ok
   dialog_box_exit anchor_id = link_lost_dialog_anchor no_pad_start
    <found_menu> = 0
@@ -3503,10 +3725,12 @@ script link_unplugged_ok
     endif
   endif
 endscript
+
 script link_unplugged_quit
   link_unplugged_ok
   launch_quit_game_dialog
 endscript
+
 script create_link_unplugged_dialog
   if ScreenElementExists id = dialog_box_anchor
     return
@@ -3533,12 +3757,14 @@ script create_link_unplugged_dialog
   }
   kill_start_key_binding
 endscript
+
 script exit_async_dialog
   dialog_box_exit
   if GameIsOver
     do_backend_retry
   endif
 endscript
+
 script CreateNotPostedDialog
   kill_all_panel_messages
   create_error_box { title = net_error_msg
@@ -3551,12 +3777,14 @@ script CreateNotPostedDialog
     z_priority = 50
   }
 endscript
+
 script CreateGettingLobbyListDialog
   dialog_box_exit
   create_dialog_box { title = net_status_msg
     text = net_status_getting_lobbies
   }
 endscript
+
 script CreateFailedLobbyListDialog
   LobbyDisconnect
   dialog_box_exit
@@ -3567,6 +3795,7 @@ script CreateFailedLobbyListDialog
     ]
   }
 endscript
+
 script CreateJoinLobbyFailedDialog
   LobbyDisconnect
   dialog_box_exit
@@ -3577,19 +3806,23 @@ script CreateJoinLobbyFailedDialog
     ]
   }
 endscript
+
 script CreateConnectingChatDialog
   create_dialog_box { title = net_status_msg
     text = net_status_connecting_chat
   }
 endscript
+
 script create_joining_lobby_dialog
   create_dialog_box { title = net_status_msg
     text = "Joining lobby..."
   }
 endscript
+
 script create_net_panel_message msg_time = 2000
   create_panel_block id = net_panel_msg <...> pos = (320, 150) rgba = [ 144 144 144 128 ] dims = (450, 0) z_priority = -10 time = <msg_time>
 endscript
+
 script kill_net_panel_messages
   console_clear
   if ObjectExists id = net_panel_msg
@@ -3628,10 +3861,12 @@ script kill_net_panel_messages
      <index> = ( <index> + 1 )
   repeat <array_size>
 endscript
+
 script cancel_connect_to_internet
   dialog_box_exit
   CancelConnectToInternet
 endscript
+
 script create_modem_state_dialog
   create_dialog_box { title = net_status_msg
     text = <text>
@@ -3640,11 +3875,13 @@ script create_modem_state_dialog
     ]
   }
 endscript
+
 script create_modem_status_dialog
   create_dialog_box { title = net_status_msg
     text = <text>
   }
 endscript
+
 script create_modem_final_state_dialog
   create_dialog_box { title = net_status_msg
     text = <text>
@@ -3653,6 +3890,7 @@ script create_modem_final_state_dialog
     ]
   }
 endscript
+
 script cancel_gamespy_connection_failure_dialog
   dialog_box_exit
   ProfileLogOff
@@ -3660,6 +3898,7 @@ script cancel_gamespy_connection_failure_dialog
   create_network_select_menu
   SetNetworkMode
 endscript
+
 script create_gamespy_connection_failure_dialog
   LobbyDisconnect
   create_dialog_box { title = net_error_msg
@@ -3669,6 +3908,7 @@ script create_gamespy_connection_failure_dialog
     ]
   }
 endscript
+
 script lost_connection_to_gamespy
   LobbyDisconnect
   if LevelIs load_skateshop
@@ -3689,6 +3929,7 @@ script lost_connection_to_gamespy
     }
   endif
 endscript
+
 script cancel_keyboard
   if ObjectExists id = keyboard_anchor
     DestroyScreenElement id = keyboard_anchor
@@ -3706,11 +3947,13 @@ script cancel_keyboard
   endif
   create_network_select_games_menu <...>
 endscript
+
 script enter_kb_chat_message
   GetTextElementString id = keyboard_current_string
   cancel_keyboard focus_on_enter_message
   SendMessage text = <string>
 endscript
+
 script create_lobby_onscreen_kb
   if ObjectExists id = console_message_vmenu
     DoScreenElementMorph id = console_message_vmenu alpha = 0
@@ -3720,6 +3963,7 @@ script create_lobby_onscreen_kb
   endif
   create_onscreen_keyboard allow_cancel keyboard_cancel_script = cancel_keyboard keyboard_done_script = enter_kb_chat_message keyboard_title = "ENTER CHAT MESSAGE" min_length = 1
 endscript
+
 script add_multiplayer_mode_goals
   AddGoal_TrickAttack
   AddGoal_ComboMambo
@@ -3731,6 +3975,7 @@ script add_multiplayer_mode_goals
   AddGoal_Horse_Mp
   AddGoal_GoalAttack
 endscript
+
 script create_score_menu
   if not ObjectExists id = net_score_menu
     SetScreenElementLock id = root_window off
@@ -3775,6 +4020,7 @@ script create_score_menu
     RunScriptOnScreenElement id = net_score_menu menu_onscreen params = { preserve_menu_state }
   endif
 endscript
+
 script clear_scores
   if ObjectExists id = net_score_menu
      <index> = 1
@@ -3788,6 +4034,7 @@ script clear_scores
     repeat 8
   endif
 endscript
+
 script update_score
   if ObjectExists id = net_score_menu
     SetScreenElementProps {
@@ -3796,6 +4043,7 @@ script update_score
     }
   endif
 endscript
+
 script entered_network_game
   if InInternetMode
     SetQuietMode
@@ -3810,6 +4058,7 @@ script entered_network_game
   Change check_for_unplugged_controllers = 1
   EnteredNetworkGame
 endscript
+
 script restart_local_server
   SetNetworkMode
   SetServerMode on
@@ -3817,6 +4066,7 @@ script restart_local_server
   StartServer
   JoinServer <...>
 endscript
+
 script handle_keyboard_input
   if ObjectExists id = keyboard_anchor
     if GotParam got_enter
@@ -3834,21 +4084,25 @@ script handle_keyboard_input
     endif
   endif
 endscript
+
 script back_from_profile_options
   DestroyScreenElement id = current_menu_anchor
   remove_buddy_list_textures_from_vram
   create_internet_options
 endscript
+
 script back_from_profile_error
   dialog_box_exit
   create_internet_options
 endscript
+
 script profile_connect
   dialog_box_exit
   if not ProfileLogIn
     create_internet_options
   endif
 endscript
+
 script launch_profile_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -3856,6 +4110,7 @@ script launch_profile_menu
   dialog_box_exit
   create_profile_menu
 endscript
+
 script create_profile_menu
   add_ss_menu_textures_to_vram
   make_new_menu menu_id = profile_options_menu vmenu_id = profile_options_vmenu menu_title = "LOGIN/PROFILE" pos = (225, 109)
@@ -3929,19 +4184,23 @@ script create_profile_menu
   draw_menu_box delta_pos = (94, 30) middle_repeat = 9 box_right_scale = (0.8, 0.75)
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script launch_onscreen_keyboard_from_profile_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen callback = create_onscreen_keyboard callback_params = { allow_cancel keyboard_cancel_script = profile_setup_back_from_keyboard keyboard_done_script = set_profile_setting keyboard_title = <title> <...> }
 endscript
+
 script profile_setup_back_from_keyboard
   destroy_onscreen_keyboard
   create_profile_menu
 endscript
+
 script set_profile_setting
   GetTextElementString id = keyboard_current_string
   set_preferences_from_ui prefs = network <...>
   destroy_onscreen_keyboard
   create_profile_menu
 endscript
+
 script create_profile
   DestroyScreenElement id = current_menu_anchor
   CreateProfile
@@ -3949,16 +4208,19 @@ script create_profile
     text = "Please Wait..."
   }
 endscript
+
 script log_in_profile
   dialog_box_exit
   create_dialog_box { title = net_status_msg
     text = "Logging in..."
   }
 endscript
+
 script back_to_profile_menu
   dialog_box_exit
   create_profile_menu
 endscript
+
 script create_wrong_profile_password_dialog
   dialog_box_exit
   create_dialog_box { title = "WRONG PASSWORD"
@@ -3967,11 +4229,13 @@ script create_wrong_profile_password_dialog
     ]
   }
 endscript
+
 script profile_logged_in
   set_preferences_from_ui prefs = network field = "profile_success" string = "Yes" checksum = boolean_true
   dialog_box_exit
   create_internet_options
 endscript
+
 script launch_add_buddy
   DestroyScreenElement id = current_menu_anchor
   make_new_menu menu_id = add_buddy_menu vmenu_id = lobby_buddy_list_menu menu_title = "ADD HOMIE"
@@ -3982,6 +4246,7 @@ script launch_add_buddy
   FillProspectiveBuddyList
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script cancel_add_buddy
   dialog_box_exit
   Printf "cancel_add_buddy"
@@ -3997,6 +4262,7 @@ script cancel_add_buddy
   Change check_for_unplugged_controllers = 1
   AssignAlias id = lobby_player_list_menu alias = current_menu
 endscript
+
 script cant_add_buddy_prompt_1
   FireEvent type = unfocus target = lobby_player_list_menu
   Change check_for_unplugged_controllers = 0
@@ -4014,6 +4280,7 @@ script cant_add_buddy_prompt_1
     ]
   }
 endscript
+
 script cant_add_buddy_prompt_3
   FireEvent type = unfocus target = lobby_player_list_menu
   Change check_for_unplugged_controllers = 0
@@ -4031,6 +4298,7 @@ script cant_add_buddy_prompt_3
     ]
   }
 endscript
+
 script cant_add_buddy_prompt_2
   FireEvent type = unfocus target = lobby_player_list_menu
   Change check_for_unplugged_controllers = 0
@@ -4048,6 +4316,7 @@ script cant_add_buddy_prompt_2
     ]
   }
 endscript
+
 script cant_add_self_to_buddy_prompt
   FireEvent type = unfocus target = lobby_player_list_menu
   Change check_for_unplugged_controllers = 0
@@ -4065,6 +4334,7 @@ script cant_add_self_to_buddy_prompt
     ]
   }
 endscript
+
 script already_buddy_prompt
   FireEvent type = unfocus target = lobby_player_list_menu
   Change check_for_unplugged_controllers = 0
@@ -4082,6 +4352,7 @@ script already_buddy_prompt
     ]
   }
 endscript
+
 script add_buddy_prompt
   FireEvent type = unfocus target = lobby_player_list_menu
   Change check_for_unplugged_controllers = 0
@@ -4100,6 +4371,7 @@ script add_buddy_prompt
     ]
   }
 endscript
+
 script add_buddy
   if BuddyListFull
     dialog_box_exit
@@ -4110,11 +4382,13 @@ script add_buddy
     create_adding_buddy_dialog
   endif
 endscript
+
 script remove_buddy
   RemoveBuddy <...>
   dialog_box_exit
   create_removed_buddy_dialog
 endscript
+
 script lobby_add_buddy
   dialog_box_exit
   AddBuddy profile = <profile> nick = <net_name>
@@ -4136,6 +4410,7 @@ script lobby_add_buddy
     endif
   endif
 endscript
+
 script create_adding_buddy_dialog
   create_dialog_box { title = net_status_msg
     text = "Adding homie..."
@@ -4144,6 +4419,7 @@ script create_adding_buddy_dialog
     dialog_tracker_id
   }
 endscript
+
 script create_buddy_list_full_dialog
   create_dialog_box { title = net_error_msg
     text = "Your homie list is full. You must remove some homies before adding new ones."
@@ -4151,6 +4427,7 @@ script create_buddy_list_full_dialog
     ]
   }
 endscript
+
 script failed_add_buddy_already_buddy
   if InNetGame
     create_failed_add_buddy_dialog
@@ -4158,6 +4435,7 @@ script failed_add_buddy_already_buddy
     SendMessage text = "User already on homie list." system_message
   endif
 endscript
+
 script added_buddy
   if LevelIs load_skateshop
     FormatText TextName = msg_text "Added %s to homie list." s = <net_name>
@@ -4166,11 +4444,13 @@ script added_buddy
     create_added_buddy_dialog
   endif
 endscript
+
 script removed_buddy
   if ObjectExists id = <id>
     DestroyScreenElement id = <id>
   endif
 endscript
+
 script create_added_buddy_dialog
   if ObjectExists id = dialog_tracker_id
     dialog_box_exit
@@ -4183,6 +4463,7 @@ script create_added_buddy_dialog
     }
   endif
 endscript
+
 script create_removed_buddy_dialog
   dialog_box_exit
   create_dialog_box { title = net_status_msg
@@ -4191,6 +4472,7 @@ script create_removed_buddy_dialog
     ]
   }
 endscript
+
 script create_failed_add_buddy_dialog
   destroy_onscreen_keyboard
   dialog_box_exit
@@ -4200,14 +4482,17 @@ script create_failed_add_buddy_dialog
     ]
   }
 endscript
+
 script close_add_buddy
   dialog_box_exit
   create_pause_menu
 endscript
+
 script accept_buddy_ok
   dialog_box_exit
   create_pause_menu
 endscript
+
 script launch_in_game_buddy_list
   DestroyScreenElement id = current_menu_anchor
   make_new_menu menu_id = buddy_list_menu vmenu_id = lobby_buddy_list_menu menu_title = "HOMIE LIST"
@@ -4218,6 +4503,7 @@ script launch_in_game_buddy_list
   FillBuddyList
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
 endscript
+
 script launch_shell_buddy_list parent = root_window
   dialog_box_exit
   if ObjectExists id = console_message_vmenu
@@ -4379,6 +4665,7 @@ script launch_shell_buddy_list parent = root_window
     RunScriptOnScreenElement id = current_menu_anchor animate_in
   endif
 endscript
+
 script add_buddy_list_textures_to_vram
   AddTextureToVram "pa_homie"
   AddTextureToVram "goal_line"
@@ -4386,6 +4673,7 @@ script add_buddy_list_textures_to_vram
   AddTextureToVram "goal_mid"
   AddTextureToVram "goal_right"
 endscript
+
 script remove_buddy_list_textures_from_vram
   RemoveTextureFromVram "pa_homie"
   RemoveTextureFromVram "goal_line"
@@ -4393,12 +4681,14 @@ script remove_buddy_list_textures_from_vram
   RemoveTextureFromVram "goal_mid"
   RemoveTextureFromVram "goal_right"
 endscript
+
 script back_from_buddy_options
   lobby_buddy_list_menu:DoMorph time = 0 scale = 0.65
   lobby_buddy_list_title:DoMorph time = 0 scale = 0.65
   FireEvent type = focus target = lobby_buddy_list_menu
   dialog_box_exit
 endscript
+
 script present_buddy_options back_script = launch_shell_buddy_list remove_script = lobby_remove_buddy
   if GotParam in_lobby
     if ObjectExists id = current_menu_anchor
@@ -4450,25 +4740,31 @@ script present_buddy_options back_script = launch_shell_buddy_list remove_script
     endif
   endif
 endscript
+
 script join_buddy
   JoinBuddy <...>
 endscript
+
 script observe_buddy
   JoinBuddy <...> observe
 endscript
+
 script lobby_remove_buddy
   RemoveBuddy <...>
   FillBuddyList clear_list allow_remove
   launch_shell_buddy_list
 endscript
+
 script shell_remove_buddy
   RemoveBuddy <...>
   back_from_shell_buddy_options
 endscript
+
 script back_from_shell_buddy_options
   dialog_box_exit
   launch_shell_buddy_list
 endscript
+
 script launch_player_list_menu
   DestroyScreenElement id = current_menu_anchor
   make_new_menu menu_id = buddy_list_menu vmenu_id = lobby_buddy_list_menu menu_title = "PLAYER LIST"
@@ -4483,6 +4779,7 @@ script launch_player_list_menu
   RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script update_buddy_status
   if ObjectExists id = <id>
     SetScreenElementProps {
@@ -4493,6 +4790,7 @@ script update_buddy_status
     }
   endif
 endscript
+
 script StartFreeSkate
   MakeSkaterGosub add_skater_to_world skater = 0
   MakeSkaterGosub add_skater_to_world skater = 1
@@ -4500,6 +4798,7 @@ script StartFreeSkate
   SetCurrentGameType
   SetScreenModeFromGameMode
 endscript
+
 script kill_all_panel_messages
   exit_pause_menu
   dialog_box_exit
@@ -4524,15 +4823,18 @@ script kill_all_panel_messages
     DestroyScreenElement id = goal_message
   endif
 endscript
+
 script StartingNewNetGame
   sound_options_exit just_remove
   edit_tricks_menu_exit just_remove
   kill_all_panel_messages
   GoalManager_SetCanStartGoal 1
 endscript
+
 script unlock_root_window
   SetScreenElementLock id = root_window off
 endscript
+
 script create_player_name
   SetScreenElementLock id = root_window off
   CreateScreenElement {
@@ -4546,6 +4848,7 @@ script create_player_name
     rgba = [ 128 128 0 128 ]
   }
 endscript
+
 script update_player_name
   if not ObjectExists id = <id>
     create_player_name <...>
@@ -4556,11 +4859,13 @@ script update_player_name
     pos3D = <pos3D>
   }
 endscript
+
 script destroy_player_name
   if ObjectExists id = <id>
     DestroyScreenElement id = <id>
   endif
 endscript
+
 script destroy_all_player_names
   if ObjectExists id = skater_name_0
     DestroyScreenElement id = skater_name_0
@@ -4587,6 +4892,7 @@ script destroy_all_player_names
     DestroyScreenElement id = skater_name_7
   endif
 endscript
+
 script create_net_metrics
   SetScreenElementLock id = root_window off
   CreateScreenElement {
@@ -4600,6 +4906,7 @@ script create_net_metrics
     rgba = [ 128 128 0 128 ]
   }
 endscript
+
 script update_net_metrics
   if not ObjectExists id = net_metrics
     create_net_metrics

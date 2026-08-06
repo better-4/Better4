@@ -1,6 +1,6 @@
-
 edit_tricks_menu_1_index = 0
 edit_tricks_menu_2_index = 0
+
 script create_edit_tricks_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -136,6 +136,7 @@ script create_edit_tricks_menu
   FireEvent type = focus target = current_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script create_edit_tricks_sub_menu
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -398,6 +399,7 @@ script create_edit_tricks_sub_menu
   FireEvent type = focus target = edit_tricks_menu_1
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script create_special_tricks_menu
   special_tricks_menu_fill_trick_list
   FireEvent type = unfocus target = edit_tricks_menu_2
@@ -475,6 +477,7 @@ script create_special_tricks_menu
   FireEvent type = focus target = edit_tricks_menu_1
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
+
 script special_tricks_menu_create_menu_3
   SetScreenElementLock id = current_menu_anchor off
   if ObjectExists id = special_tricks_menu_key_combo_up_arrow
@@ -531,6 +534,7 @@ script special_tricks_menu_create_menu_3
     rgba = [ 128 128 128 0 ]
   }
 endscript
+
 script special_tricks_menu_create_current_mapping_list
   if ScreenElementExists id = special_tricks_current_mapping
     DestroyScreenElement id = special_tricks_current_mapping
@@ -554,6 +558,7 @@ script special_tricks_menu_create_current_mapping_list
   repeat <max_specials>
   edit_tricks_menu_assign_current_menu_alias
 endscript
+
 script edit_tricks_menu_create_current_mapping_list
   if ObjectExists id = edit_tricks_menu_current_mapping
     DestroyScreenElement id = edit_tricks_menu_current_mapping
@@ -599,14 +604,17 @@ script edit_tricks_menu_create_current_mapping_list
   endif
   edit_tricks_menu_assign_current_menu_alias
 endscript
+
 script edit_tricks_menu_destroy_current_mapping_list
   if ObjectExists id = edit_tricks_menu_current_mapping
     DestroyScreenElement id = edit_tricks_menu_current_mapping
   endif
 endscript
+
 script special_tricks_menu_fill_trick_list
   ForEachIn special_trick_types do = special_tricks_menu_add_type
 endscript
+
 script edit_tricks_menu_add_item { parent = current_menu
     font = small
     focus_script = edit_tricks_menu_focus
@@ -688,6 +696,7 @@ script edit_tricks_menu_add_item { parent = current_menu
     }
   endif
 endscript
+
 script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu_goto_trick_list
     highlight_bar_scale = (0.38, 1.2)
     parent = edit_tricks_menu_1
@@ -743,6 +752,7 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
     z_priority = 4
   }
 endscript
+
 script edit_tricks_sub_menu_add_trick pad_choose_script = edit_tricks_menu_bind_trick
   CreateScreenElement {
     type = ContainerElement
@@ -767,6 +777,7 @@ script edit_tricks_sub_menu_add_trick pad_choose_script = edit_tricks_menu_bind_
     scale = 0.75
   }
 endscript
+
 script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_goto_trick_list
     highlight_bar_scale = (2, 1.3)
   }
@@ -808,6 +819,7 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     z_priority = 3
   }
 endscript
+
 script special_tricks_menu_add_special_to_mapping
   GetSpecialTrickInfo index = <index>
   CreateScreenElement {
@@ -846,6 +858,7 @@ script special_tricks_menu_add_special_to_mapping
     just = [ left top ]
   }
 endscript
+
 script special_tricks_menu_add_type
   GetConfigurableTricksFromType type = <type> special
   SetScreenElementLock id = edit_tricks_menu_2 off
@@ -907,6 +920,7 @@ script special_tricks_menu_add_type
     not_focusable
   }
 endscript
+
 script special_tricks_menu_add_trick
   if GotParam first_item
     focus_params = { first_item }
@@ -945,6 +959,7 @@ script special_tricks_menu_add_trick
     scale = 0.8
   }
 endscript
+
 script edit_tricks_menu_focus highlight_bar_scale = (1, 1.3) highlight_bar_pos = (-8, 0)
   GetTags
   SetScreenElementLock id = <id> off
@@ -1004,6 +1019,7 @@ script edit_tricks_menu_focus highlight_bar_scale = (1, 1.3) highlight_bar_pos =
     endif
   endif
 endscript
+
 script edit_tricks_menu_unfocus
   GetTags
   if GotParam flagged_deck
@@ -1015,6 +1031,7 @@ script edit_tricks_menu_unfocus
     DestroyScreenElement id = edit_tricks_menu_highlight_bar
   endif
 endscript
+
 script special_tricks_menu_focus highlight_bar_scale = (1.35, 1.3)
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
@@ -1072,11 +1089,13 @@ script special_tricks_menu_focus highlight_bar_scale = (1.35, 1.3)
     endif
   endif
 endscript
+
 script special_tricks_menu_unfocus
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down params = { rgba = <rgba> no_sound }
   DestroyScreenElement id = { <id> child = 1 }
 endscript
+
 script edit_tricks_menu_key_combo_focus
   GetTags
   SetScreenElementLock id = <id> off
@@ -1131,12 +1150,14 @@ script edit_tricks_menu_key_combo_focus
     endif
   endif
 endscript
+
 script edit_tricks_menu_key_combo_unfocus
   GetTags
   if ObjectExists id = key_combo_highlight_bar
     DestroyScreenElement id = key_combo_highlight_bar
   endif
 endscript
+
 script edit_tricks_menu_goto_trick_list
   FireEvent type = unfocus target = edit_tricks_menu_1
   edit_tricks_menu_1_index = <index>
@@ -1151,9 +1172,11 @@ script edit_tricks_menu_goto_trick_list
   endif
   FireEvent type = focus target = edit_tricks_menu_2
 endscript
+
 script edit_tricks_menu_special_tricks_focus
   special_tricks_menu_create_current_mapping_list
 endscript
+
 script special_tricks_menu_goto_trick_list
   GetTags
   if ObjectExists id = special_tricks_temp_trick_highlight_bar
@@ -1194,6 +1217,7 @@ script special_tricks_menu_goto_trick_list
     FireEvent type = focus target = edit_tricks_menu_2
   endif
 endscript
+
 script edit_tricks_menu_back_from_trick_list
   if ObjectExists id = key_combo_highlight_bar
     DestroyScreenElement id = key_combo_highlight_bar
@@ -1215,6 +1239,7 @@ script edit_tricks_menu_back_from_trick_list
     }
   endif
 endscript
+
 script edit_tricks_menu_bind_trick
   if not GotParam new_key_combo
     edit_tricks_menu_2:GetTags
@@ -1293,6 +1318,7 @@ script edit_tricks_menu_bind_trick
      <callback>
   endif
 endscript
+
 script special_tricks_menu_select_trick
   FireEvent type = unfocus target = edit_tricks_menu_2
   DoScreenElementMorph {
@@ -1382,6 +1408,7 @@ script special_tricks_menu_select_trick
   SetScreenElementLock id = edit_tricks_menu_3_parent on
   FireEvent type = focus target = edit_tricks_menu_3
 endscript
+
 script special_tricks_menu_select_key_combo
   edit_tricks_menu_2:GetTags
   edit_tricks_menu_3:GetTags
@@ -1391,10 +1418,12 @@ script special_tricks_menu_select_key_combo
   special_tricks_menu_goto_trick_list
   edit_tricks_menu_back_from_trick_list
 endscript
+
 script edit_tricks_menu_show_on_focus
   GetTags
   DoMorph alpha = 1
 endscript
+
 script edit_tricks_menu_hide_on_unfocus
   DoMorph alpha = 0
   if ObjectExists id = special_tricks_menu_key_combo_up_arrow
@@ -1422,12 +1451,14 @@ script edit_tricks_menu_hide_on_unfocus
     }
   endif
 endscript
+
 script edit_tricks_menu_assign_current_menu_alias
   if not GotParam id
     GetTags
   endif
   AssignAlias id = <id> alias = current_menu
 endscript
+
 script edit_tricks_menu_exit
   if ObjectExists id = edit_tricks_menu_anchor
     DestroyScreenElement id = edit_tricks_menu_anchor
@@ -1449,6 +1480,7 @@ script edit_tricks_menu_exit
     create_options_menu
   endif
 endscript
+
 script edit_tricks_sub_menu_exit
   if ObjectExists id = edit_tricks_sub_menu_anchor
     DestroyScreenElement id = edit_tricks_sub_menu_anchor
@@ -1460,6 +1492,7 @@ script edit_tricks_sub_menu_exit
   endif
   create_edit_tricks_menu
 endscript
+
 script add_edit_tricks_menu_textures_to_vram
   AddTextureToVram "PA_trick"
   AddTextureToVram "PA_grab"
@@ -1476,6 +1509,7 @@ script add_edit_tricks_menu_textures_to_vram
   AddTextureToVram "up_arrow"
   AddTextureToVram "down_arrow"
 endscript
+
 script remove_edit_tricks_menu_textures_from_vram
   RemoveTextureFromVram "PA_trick"
   RemoveTextureFromVram "PA_grab"
@@ -1492,6 +1526,7 @@ script remove_edit_tricks_menu_textures_from_vram
   RemoveTextureFromVram "up_arrow"
   RemoveTextureFromVram "down_arrow"
 endscript
+
 edit_tricks_menu_grab_key_combos = [
   Air_CircleD
   Air_CircleDL
