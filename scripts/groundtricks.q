@@ -67,6 +67,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   BlendPeriodOut 0.0
   Wait 0.1 seconds
   SetException Ex = Ollied Scr = Ollie
+  ResetLandedFromVert
   WaitAnimFinished
   SetRollingFriction #"default"
   DoNextManualTrick FromAir
