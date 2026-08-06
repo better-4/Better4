@@ -669,7 +669,7 @@ script create_pause_menu
         endif
       else
         make_sprite_menu_item text = "Restart Game" id = menu_network_restart_select pad_choose_script = network_game_options_selected
-        make_text_sprite texture = PA_retry parent = menu_network_start_select
+        make_text_sprite texture = PA_retry parent = menu_network_restart_select
         make_sprite_menu_item text = "End Current Game" id = menu_network_end_select pad_choose_script = network_end_game_selected
         make_text_sprite texture = PA_end parent = menu_network_end_select
       endif
