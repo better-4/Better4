@@ -1971,7 +1971,8 @@ script create_ss_menu
         main_menu_add_item { text = 'Ready'
           id = ss_play_level
           pad_choose_script = ss_menu_exit
-          pad_choose_params = { new_menu_script = create_network_select_games_menu play_cam }
+          // pad_choose_params = { new_menu_script = create_network_select_games_menu play_cam }
+          pad_choose_params = { new_menu_script = create_network_select_menu }
         }
       else
         main_menu_add_item { text = 'Ready'
