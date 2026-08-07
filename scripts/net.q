@@ -139,6 +139,7 @@ script quit_network_game
   level_select_change_level level = load_skateshop no_levelUnload
 endscript
 script spawned_chosen_host_game
+  Printf "!! spawned_chosen_host_game"
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
     Wait 1 frame
@@ -146,38 +147,59 @@ script spawned_chosen_host_game
   remove_host_options_sub_menu_textures_from_vram
   Cleanup preserve_skaters
   if IsXBOX
-    DisplayLoadingScreen "loadscrn_system_link_x"
+    Printf "!! xbox loading screen"
+    DisplayLoadingScreen "loadscrn_Online"
+    // DisplayLoadingScreen "loadscrn_system_link_x"
   else
+    Printf "!! online loading screen"
     DisplayLoadingScreen "loadscrn_Online"
   endif
+  Printf "!! FreeServerList"
   FreeServerList
+  Printf "!! LeaveServer"
   LeaveServer
+  Printf "!! SetGameType NetLobby"
   SetGameType NetLobby
+  Printf "!! SetCurrentGameType"
   SetCurrentGameType
+  Printf "!! InitSkaterHeaps"
   InitSkaterHeaps
+  Printf "!! SetServerMode"
   SetServerMode
+  Printf "!! StartServer"
   StartServer
+  Printf "!! SetJoinMode"
   SetJoinMode JOIN_MODE_PLAY
+  Printf "!! JoinServer"
   JoinServer
   begin
+    Printf "!! JoinServerComplete"
     if JoinServerComplete
       break
     else
       Wait 1
     endif
   repeat
+    Printf "!! ChangeLevel"
   ChangeLevel level = use_preferences
+  Printf "!! leave_front_end"
   leave_front_end
+  Printf "!! exit_pause_menu"
   exit_pause_menu
 endscript
 script chosen_host_game
+  Printf "!! chosen_host_game"
   if InNetGame
+    Printf "!! if InNetGame"
     network_start_selected
   else
+    Printf "!! else"
     if InSplitScreenGame
+      Printf "!! if InSplitScreenGame"
       ApplySplitScreenOptions
       chosen_start_game
     else
+      Printf "!! else spawned_chosen_host_game"
       SpawnScript spawned_chosen_host_game NotSessionSpecific = 1
     endif
   endif
@@ -450,6 +472,7 @@ script launch_network_select_lan_games_menu
   launch_network_select_games_menu
 endscript
 script launch_network_host_options_menu
+  Printf "!!launch_network_host_options_menu"
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
@@ -463,6 +486,7 @@ script host_chosen
   launch_network_host_options_menu
 endscript
 script host_net_chosen
+  Printf "!! host_net_chosen"
   console_hide
   GSEnableNet
   StopServerList
@@ -2802,6 +2826,7 @@ script set_game_options_ready_focus
   FireEvent type = focus target = host_options_vmenu data = { child_id = menu_network_host_options_ready }
 endscript
 script create_network_host_options_menu
+  Printf "!!create_network_host_options_menu"
   remove_pause_menu_textures_from_vram
   add_host_options_sub_menu_textures_to_vram
   if OnXbox

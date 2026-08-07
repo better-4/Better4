@@ -101,6 +101,7 @@ script better4_toggle_lip_set
 endscript
 
 script better4_main_menu_watermark
+  GetServerList
   // better4_ini_demo
   FormatText TextName = better4_watermark "Better4 %s" s = better4_version
   CreateScreenElement {
