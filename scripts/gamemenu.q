@@ -737,7 +737,6 @@ script create_pause_menu
           make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
           make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
         endif
-      endif
     endif
   endif
   if InNetGame
