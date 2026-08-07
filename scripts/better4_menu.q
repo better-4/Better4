@@ -93,7 +93,7 @@ script better4_menu_options {
   }
   kill_start_key_binding
   SetScreenElementProps { id = better4_vmenu event_handlers = [
-      { pad_back skateshop_transition Params = { new_menu_script = <close_script> } }
+      { pad_back skateshop_transition params = { new_menu_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
@@ -116,39 +116,35 @@ script better4_menu_item {
   Printf "making menu item %s" s = <text>
   make_toggle_menu_item id = <id> text = <text> scale = <scale> pad_choose_script = better4_toggle_item pad_choose_params = <...>
   SetScreenElementProps { id = <id> event_handlers = [
-      { pad_left better4_toggle_item  Params = <...> }
-      { pad_right better4_toggle_item Params = <...> }
+      { pad_left better4_toggle_item params = <...> }
+      { pad_right better4_toggle_item params = <...> }
     ]
   }
-  RunScriptOnScreenElement id = <id> better4_check_item Params = <...>
+  RunScriptOnScreenElement id = <id> better4_check_item params = <...>
 endscript
-
 script view_dropdown_binds
   verify_dropdown_key
-  <combo_text> = ( ( dropdown_menu_text [ <dropdown_key> ] ).text )
+   <combo_text> = ( ( dropdown_menu_text [ <dropdown_key> ] ).text )
   make_text_sub_menu_item text = <combo_text> scale = 0.85 id = dropdown_button pad_choose_script = NULL
   SetScreenElementProps { id = dropdown_button event_handlers = [
-      { pad_left cycle_dropdown_binds Params = { mode = previous } }
-      { pad_right cycle_dropdown_binds Params = { mode = next } }
+      { pad_left cycle_dropdown_binds params = { mode = previous } }
+      { pad_right cycle_dropdown_binds params = { mode = next } }
     ]
   }
 endscript
-
 script cycle_dropdown_binds
   verify_dropdown_key
-  <dropdown_key> = ( <dropdown_key> + <mode> )
+   <dropdown_key> = ( <dropdown_key> + <mode> )
   if ( <dropdown_key> > 7 )
-    <dropdown_key> = 0
+     <dropdown_key> = 0
   endif
   if ( <dropdown_key> < 0 )
-    <dropdown_key> = 7
+     <dropdown_key> = 7
   endif
   SetIniInteger section = "In Game Controls" key = "DropdownKey" value = <dropdown_key>
-  <combo_text> = ( ( dropdown_menu_text [ <dropdown_key> ] ).text )
+   <combo_text> = ( ( dropdown_menu_text [ <dropdown_key> ] ).text )
   SetScreenElementProps id = dropdown_button text = <combo_text>
 endscript
-
-
 script verify_spine_key
   GetIniInteger section = "In Game Controls" key = "SpineKey" ValueName = spine_key
   if ( <spine_key> > 7 )
@@ -156,47 +152,34 @@ script verify_spine_key
     Printf "Invalid spine binding! Reset to vanilla (0)"
   endif
   if ( <spine_key> < 0 )
-   SetIniInteger section = "In Game Controls" key = "SpineKey" value = 0
-   Printf "Invalid spine binding! Reset to vanilla (0)"
+    SetIniInteger section = "In Game Controls" key = "SpineKey" value = 0
+    Printf "Invalid spine binding! Reset to vanilla (0)"
   endif
   return spine_key = <spine_key>
 endscript
-
 script view_spine_binds
   verify_spine_key
-  <combo_text> = ( ( spine_menu_text [ <spine_key> ] ).text )
+   <combo_text> = ( ( spine_menu_text [ <spine_key> ] ).text )
   make_text_sub_menu_item text = <combo_text> scale = 0.85 id = spine_button pad_choose_script = NULL
   SetScreenElementProps { id = spine_button event_handlers = [
-      { pad_left cycle_spine_binds Params = { mode = previous } }
-      { pad_right cycle_spine_binds Params = { mode = next } }
+      { pad_left cycle_spine_binds params = { mode = previous } }
+      { pad_right cycle_spine_binds params = { mode = next } }
     ]
   }
 endscript
-
 script cycle_spine_binds
   verify_spine_key
-  <spine_key> = ( <spine_key> + <mode> )
+   <spine_key> = ( <spine_key> + <mode> )
   if ( <spine_key> > 7 )
-    <spine_key> = 0
+     <spine_key> = 0
   endif
   if ( <spine_key> < 0 )
-    <spine_key> = 7
+     <spine_key> = 7
   endif
   SetIniInteger section = "In Game Controls" key = "SpineKey" value = <spine_key>
-  <combo_text> = ( ( spine_menu_text [ <spine_key> ] ).text )
+   <combo_text> = ( ( spine_menu_text [ <spine_key> ] ).text )
   SetScreenElementProps id = spine_button text = <combo_text>
 endscript
-
-
-
-
-
-
-
-
-
-
-
 script verify_spin_key
   GetIniInteger section = "In Game Controls" key = "SpinKey" ValueName = spin_key
   if ( <spin_key> > 7 )
@@ -204,159 +187,126 @@ script verify_spin_key
     Printf "Invalid spin binding! Reset to vanilla (0)"
   endif
   if ( <spin_key> < 0 )
-   SetIniInteger section = "In Game Controls" key = "SpinKey" value = 0
-   Printf "Invalid spin binding! Reset to vanilla (0)"
+    SetIniInteger section = "In Game Controls" key = "SpinKey" value = 0
+    Printf "Invalid spin binding! Reset to vanilla (0)"
   endif
   return spin_key = <spin_key>
 endscript
-
 script view_spin_binds
   verify_spin_key
-  <combo_text> = ( ( spin_menu_text [ <spin_key> ] ).text )
+   <combo_text> = ( ( spin_menu_text [ <spin_key> ] ).text )
   make_text_sub_menu_item text = <combo_text> scale = 0.85 id = spin_button pad_choose_script = NULL
   SetScreenElementProps { id = spin_button event_handlers = [
-      { pad_left cycle_spin_binds Params = { mode = previous } }
-      { pad_right cycle_spin_binds Params = { mode = next } }
+      { pad_left cycle_spin_binds params = { mode = previous } }
+      { pad_right cycle_spin_binds params = { mode = next } }
     ]
   }
 endscript
-
 script cycle_spin_binds
   verify_spin_key
-  <spin_key> = ( <spin_key> + <mode> )
+   <spin_key> = ( <spin_key> + <mode> )
   if ( <spin_key> > 3 )
-    <spin_key> = 0
+     <spin_key> = 0
   endif
   if ( <spin_key> < 0 )
-    <spin_key> = 3
+     <spin_key> = 3
   endif
   SetIniInteger section = "In Game Controls" key = "SpinKey" value = <spin_key>
-  <combo_text> = ( ( spin_menu_text [ <spin_key> ] ).text )
+   <combo_text> = ( ( spin_menu_text [ <spin_key> ] ).text )
   SetScreenElementProps id = spin_button text = <combo_text>
 endscript
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 script view_revert_binds
   verify_revert_key
-  <combo_text> = ( ( revert_menu_text [ <revert_key> ] ).text )
+   <combo_text> = ( ( revert_menu_text [ <revert_key> ] ).text )
   make_text_sub_menu_item text = <combo_text> scale = 0.85 id = revert_button pad_choose_script = NULL
   SetScreenElementProps { id = revert_button event_handlers = [
-      { pad_left cycle_revert_binds Params = { mode = previous } }
-      { pad_right cycle_revert_binds Params = { mode = next } }
+      { pad_left cycle_revert_binds params = { mode = previous } }
+      { pad_right cycle_revert_binds params = { mode = next } }
     ]
   }
 endscript
-
 script cycle_revert_binds
   verify_revert_key
-  <revert_key> = ( <revert_key> + <mode> )
+   <revert_key> = ( <revert_key> + <mode> )
   if ( <revert_key> > 7 )
-    <revert_key> = 0
+     <revert_key> = 0
   endif
   if ( <revert_key> < 0 )
-    <revert_key> = 7
+     <revert_key> = 7
   endif
   SetIniInteger section = "In Game Controls" key = "RevertKey" value = <revert_key>
-  <combo_text> = ( ( revert_menu_text [ <revert_key> ] ).text )
+   <combo_text> = ( ( revert_menu_text [ <revert_key> ] ).text )
   SetScreenElementProps id = revert_button text = <combo_text>
 endscript
-
 script view_powerslide_binds
   get_powerslide_key
-  <combo_text> = ( ( powerslide_menu_text [ <powerslide_key> ] ).text )
+   <combo_text> = ( ( powerslide_menu_text [ <powerslide_key> ] ).text )
   make_text_sub_menu_item text = <combo_text> scale = 0.85 id = powerslide_button pad_choose_script = NULL
   SetScreenElementProps { id = powerslide_button event_handlers = [
-      { pad_left cycle_powerslide_binds Params = { mode = previous } }
-      { pad_right cycle_powerslide_binds Params = { mode = next } }
+      { pad_left cycle_powerslide_binds params = { mode = previous } }
+      { pad_right cycle_powerslide_binds params = { mode = next } }
     ]
   }
 endscript
-
 script cycle_powerslide_binds
   get_powerslide_key
-  <powerslide_key> = ( <powerslide_key> + <mode> )
+   <powerslide_key> = ( <powerslide_key> + <mode> )
   if ( <powerslide_key> > 7 )
-    <powerslide_key> = 0
+     <powerslide_key> = 0
   endif
   if ( <powerslide_key> < 0 )
-    <powerslide_key> = 7
+     <powerslide_key> = 7
   endif
   SetIniInteger section = "In Game Controls" key = "PowerSlideKey" value = <powerslide_key>
-  <combo_text> = ( ( powerslide_menu_text [ <powerslide_key> ] ).text )
+   <combo_text> = ( ( powerslide_menu_text [ <powerslide_key> ] ).text )
   SetScreenElementProps id = powerslide_button text = <combo_text>
 endscript
-
 script view_jumptrick
   get_jumptricks
-  <combo_text> = ( ( jumptricks_menu_text [ <jumptrick> ] ).text )
-  make_text_sub_menu_item text = <combo_text> scale = 0.85 id = jumptrick pad_choose_script = NULL
+   <combo_text> = ( ( jumptricks_menu_text [ <jumptrick> ] ).text )
+  make_text_sub_menu_item text = <combo_text> scale = 0.85 id = jumptrick_button pad_choose_script = NULL
   SetScreenElementProps { id = jumptrick_button event_handlers = [
-      { pad_left cycle_jumptrick Params = { mode = previous } }
-      { pad_right cycle_jumptrick Params = { mode = next } }
+      { pad_left cycle_jumptrick params = { mode = previous } }
+      { pad_right cycle_jumptrick params = { mode = next } }
     ]
   }
 endscript
-
 script cycle_jumptrick
   get_jumptricks
-  <jumptrick> = ( <jumptrick> + <mode> )
+   <jumptrick> = ( <jumptrick> + <mode> )
   if ( <jumptrick> > 3 )
-    <jumptrick> = 0
+     <jumptrick> = 0
   endif
   if ( <jumptrick> < 0 )
-    <jumptrick> = 3
+     <jumptrick> = 3
   endif
   SetIniInteger section = "In Game Controls" key = "Jumptrick" value = <jumptrick>
-  <combo_text> = ( ( jumptricks_menu_text [ <jumptrick> ] ).text )
+   <combo_text> = ( ( jumptricks_menu_text [ <jumptrick> ] ).text )
   SetScreenElementProps id = jumptrick_button text = <combo_text>
 endscript
-
 script view_nollie_binds
   get_nollie_key
-  <combo_text> = ( ( nollie_menu_text [ <nollie_key> ] ).text )
+   <combo_text> = ( ( nollie_menu_text [ <nollie_key> ] ).text )
   make_text_sub_menu_item text = <combo_text> scale = 0.85 id = nollie_button pad_choose_script = NULL
   SetScreenElementProps { id = nollie_button event_handlers = [
-      { pad_left cycle_nollie_binds Params = { mode = previous } }
-      { pad_right cycle_nollie_binds Params = { mode = next } }
+      { pad_left cycle_nollie_binds params = { mode = previous } }
+      { pad_right cycle_nollie_binds params = { mode = next } }
     ]
   }
 endscript
-
 script cycle_nollie_binds
   get_nollie_key
-  <nollie_key> = ( <nollie_key> + <mode> )
+   <nollie_key> = ( <nollie_key> + <mode> )
   if ( <nollie_key> > 1 )
-    <nollie_key> = 0
+     <nollie_key> = 0
   endif
   if ( <nollie_key> < 0 )
-    <nollie_key> = 1
+     <nollie_key> = 1
   endif
   SetIniInteger section = "In Game Controls" key = "NollieKey" value = <nollie_key>
-  <combo_text> = ( ( nollie_menu_text [ <nollie_key> ] ).text )
+   <combo_text> = ( ( nollie_menu_text [ <nollie_key> ] ).text )
   SetScreenElementProps id = nollie_button text = <combo_text>
 endscript
-
-
 script better4_onground_menu {
     close_script = nullscript
   }
@@ -372,7 +322,7 @@ script better4_onground_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_onground_vmenu event_handlers = [
-      { pad_back better4_onground_back Params = { close_script = <close_script> } }
+      { pad_back better4_onground_back params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
@@ -383,7 +333,7 @@ script better4_onground_menu {
   view_powerslide_binds
   view_nollie_binds
   view_jumptrick
-  ForEachIn better4_onground_items do = better4_menu_item Params = <...>
+  ForEachIn better4_onground_items do = better4_menu_item params = <...>
   make_text_sub_menu_item text = "Back" scale = 0.85 id = onground_back_option pad_choose_script = better4_onground_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
@@ -393,12 +343,6 @@ script better4_onground_back {
   DestroyScreenElement id = current_menu_anchor
   better4_menu_options close_script = <close_script>
 endscript
-
-
-
-
-
-
 script better4_inair_menu {
     close_script = nullscript
   }
@@ -414,7 +358,7 @@ script better4_inair_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_inair_vmenu event_handlers = [
-      { pad_back better4_inair_back Params = { close_script = <close_script> } }
+      { pad_back better4_inair_back params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
@@ -432,16 +376,6 @@ script better4_inair_back {
   DestroyScreenElement id = current_menu_anchor
   better4_menu_options close_script = <close_script>
 endscript
-
-
-
-
-
-
-
-
-
-
 script better4_onrail_menu {
     close_script = nullscript
   }
@@ -457,7 +391,7 @@ script better4_onrail_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_onrail_vmenu event_handlers = [
-      { pad_back better4_onrail_back Params = { close_script = <close_script> } }
+      { pad_back better4_onrail_back params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
@@ -465,7 +399,7 @@ script better4_onrail_menu {
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
   view_dropdown_binds
-  ForEachIn better4_onrail_items do = better4_menu_item Params = <...>
+  ForEachIn better4_onrail_items do = better4_menu_item params = <...>
   make_text_sub_menu_item text = "Back" scale = 0.85 id = onrail_back_option pad_choose_script = better4_onrail_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
@@ -490,14 +424,14 @@ script better4_wallride_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_wallride_vmenu event_handlers = [
-      { pad_back better4_wallride_back Params = { close_script = <close_script> } }
+      { pad_back better4_wallride_back params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-  ForEachIn better4_wallride_items do = better4_menu_item Params = <...>
+  ForEachIn better4_wallride_items do = better4_menu_item params = <...>
   make_text_sub_menu_item text = "Back" scale = 0.85 id = wallride_back_option pad_choose_script = better4_wallride_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
@@ -544,7 +478,7 @@ script better4_main_menu_watermark
   FormatText TextName = better4_watermark "Better4 %s" s = better4_version
   CreateScreenElement {
     parent = current_menu_anchor
-    Type = TextElement
+    type = TextElement
     text = <better4_watermark>
     font = newtrickfont
     pos = (320, 380)
