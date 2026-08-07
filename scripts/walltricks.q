@@ -1,5 +1,10 @@
-
+off = 0
+on = 1
 script WallRide
+  get_toggle key = "WallSpin" fallback = on
+  if ( <key_value> = off )
+    RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
+  endif
   ClearExceptions
   SetException Ex = Landed Scr = Land params = { NoBlend }
   SetException Ex = Ollied Scr = Wallie
@@ -17,7 +22,8 @@ script WallRide
     Goto DoingTrickBail
   endif
   BailOff
-  if GetGlobalFlag flag = WALLPLANT_INPUT_FLAG
+  get_toggle key = "1TapBoostplant" fallback = off
+  if ( <key_value> = on )
     SetQueueTricks WallRideTricks_Single
   else
     SetQueueTricks WallRideTricks
