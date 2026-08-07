@@ -34,7 +34,7 @@ Trick_BloodyEddie = { Scr = GrabTrick params = { name = 'Bloody Eddie' Score = 1
 Trick_Sunbathin = { Scr = GrabTrick params = { name = 'Sunbathing' Score = 1000 skater = JENNA Anim = Sunbathin_Init Idle = Sunbathin_Idle BackwardsAnim = Sunbathin_Init speed = 1.0 IsSpecial } }
 Trick_Flamingo = { Scr = GrabTrick params = { name = 'Flamingo' Score = 1000 skater = Vallely Anim = Flamingo_Init Idle = Flamingo_Idle OutAnim = Flamingo_Out speed = 1.2 IsSpecial } }
 Trick_StageDive = { Scr = GrabTrick params = { name = 'Stage Dive!' Score = 1000 skater = eddie Anim = StageDive_Init Idle = StageDive_Idle OutAnim = StageDive_Out Stream = StageDive speed = 1.0 IsSpecial } }
-Trick_JumpJets = { Scr = GrabTrick params = { name = 'Jango Jump Jet' Score = 500 OnlyWith skater = JANGO Anim = JangoJumpJet_init Idle = JangoJumpJet_idle BackwardsAnim = JangoJumpJet_init ForceInit JumpJets Stream = JangoJetpack Emitscript = Jango_Jumpjet_emit IsSpecial speed = 1.0 } }
+Trick_JumpJets = { Scr = GrabTrick params = { name = 'Jango Jump Jet' Score = 500 Anim = JangoJumpJet_init Idle = JangoJumpJet_idle BackwardsAnim = JangoJumpJet_init ForceInit JumpJets Stream = JangoJetpack Emitscript = Jango_Jumpjet_emit IsSpecial speed = 1.0 } }
 Trick_GrappleGrab = { Scr = GrabTrick params = { name = 'Grapple Grab' Score = 1200 skater = JANGO Anim = GrappleGrab_init Idle = GrappleGrab_idle OutAnim = GrappleGrab_Out ForceInit IsSpecial speed = 1.5 Stream = GrappleGrab SpecialItem_details = GrappleHook_details } }
 Trick_SambaFlip = { Scr = GrabTrick params = { name = 'Samba Flip' Score = 1400 Anim = SambaFlip Idle = Indy_Idle BackwardsAnim = Indy ForceInit IsSpecial speed = 1.2 } }
 Trick_360VarialMcTwist = { Scr = FlipTrick params = { name = '360 Varial McTwist' Score = 5000 Anim = _360VarialMcTwist BoardRotate IsSpecial RevertBS NoSpin trickslack = 10 RotateAfter speed = 1.0 MaxSpeed = 1.1 Spinslack = 20 } }
@@ -65,6 +65,19 @@ Trick_HeelFlipHandflip = { Scr = FlipTrick params = { name = 'Heelflip Handflip'
 Trick_540TailWhip = { Scr = FlipTrick params = { name = '540 TailWhip' Score = 2000 Anim = _540TailWhip IsSpecial BoardRotate speed = 1.1 MaxSpeed = 1.2 trickslack = 15 } }
 Trick_Gazelle = { Scr = FlipTrick params = { name = 'Gazelle Underflip' Score = 3500 Anim = GazelleUnderflip IsSpecial BoardRotate trickslack = 20 NoSpin } }
 HIGHSPEED = 1.0
+Trick_Layout = { Scr = FlipTrick params = { name = 'Handspring Layout' Score = 3000 Anim = Maul IsSpecial speed = 1.0 trickslack = 30 Spinslack = 25 } }
+Trick_MaulForceGrab = { Scr = GrabTrick params = { name = 'Force Grab' Score = 1300 Anim = MaulForceGrab_Init Idle = MaulForceGrab_Idle OutAnim = MaulForceGrab_Out IsSpecial ForceInit } }
+Trick_RodeoClown = { Scr = GrabTrick params = { name = 'Rodeo Clown' Score = 1500 Anim = RodeoClown_Init Idle = RodeoClown_Idle OutAnim = RodeoClown_Out NoSpin IsSpecial ForceInit Rotate x = -360 duration = 1 } }
+Trick_SuperHandClap = { Scr = GrabTrick params = { name = 'Super Hand Clap' Score = 1000 Anim = Eyeball_Init Idle = Eyeball_Idle IsSpecial ForceInit } }
+Trick_WorkForFood = { Scr = GrabTrick params = { name = 'Panhandling' Score = 2000 Anim = WorkForFood_Init Idle = WorkForFood_Idle IsSpecial ForceInit } }
+Trick_ACAir = { Scr = GrabTrick params = { name = 'AC Air' Score = 666 Anim = ACAir_Init Idle = ACAir_Idle OutAnim = ACAir_Out IsSpecial ForceInit } }
+Trick_PizzaGuy = { Scr = GrabTrick params = { name = 'Pizza Guy' Score = 1500 Anim = PizzaGuy_Init Idle = PizzaGuy_Idle OutAnim = PizzaGuy_Out IsSpecial ForceInit BoardRotate speed = 1.0 trickslack = 20 } }
+Trick_Berzerker = { Scr = FlipTrick params = { name = 'The Berzerker' Score = 2500 Anim = Berzerker IsSpecial speed = 1.1 trickslack = 50 grindslack = 50 } }
+Trick_ClawPunch = { Scr = FlipTrick params = { name = 'Claw Punch' Score = 3000 Anim = ClawPunch IsSpecial speed = 1.0 trickslack = 20 } }
+Trick_Roastbeef = { Scr = GrabTrick params = { name = 'RoastBeef' Score = 300 Anim = Roastbeef Idle = Roastbeef_Idle } }
+Trick_Varial = { Scr = FlipTrick params = { name = 'Varial' Score = 900 Anim = BigVarial BoardRotate } }
+Trick_VarialKickflip2 = { Scr = FlipTrick params = { name = 'Varial Kickflip' Score = 300 Anim = VarialKickflip BoardRotate Nollie = NollieVarialKickflip ExtraTricks = Extra_VarialKickflip2 TreNollieFix } }
+Extra_VarialKickflip2 = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip (Nollie Fix)' Score = 500 Anim = _360Flip Nollie = Nollie360Flip IsExtra UseCurrent TreNollieFix } } ]
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
 Trick_FingerFlipAirWalk = { Scr = FlipTrick params = { name = 'Fingerflip Airwalk' Score = 1500 Anim = FingerFlipAirWalk IsSpecial BoardRotate speed = 1.15 trickslack = 30 } }
 Trick_Jackass = { Scr = FlipTrick params = { name = 'The Jackass' Score = 1500 Anim = Jackass IsSpecial speed = 1 MaxSpeed = 1.2 trickslack = 20 Bloodframe = 1 } }
@@ -77,7 +90,7 @@ Trick_HardFlipBackFootFlip = { Scr = FlipTrick params = { name = 'Hardflip Late 
 Trick_KickFlipUnderFlip = { Scr = FlipTrick params = { name = 'Kickflip Underflip' Score = 1000 Anim = KickFlipUnderFlip IsSpecial trickslack = 10 MaxSpeed = 1.3 speed = 1.0 } }
 Trick_QuadrupleHeelFlip = { Scr = FlipTrick params = { name = 'Quad Heelflip' Score = 1200 Anim = QuadrupleHeelFlip IsSpecial speed = 1.0 } }
 Trick_VarialKickflip = { Scr = FlipTrick params = { name = 'Varial Kickflip' Score = 300 Anim = VarialKickflip BoardRotate Nollie = NollieVarialKickflip ExtraTricks = Extra_VarialKickflip } }
-Extra_VarialKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip' Score = 500 Anim = _360Flip Nollie = Nollie360Flip IsExtra UseCurrent } } ]
+Extra_VarialKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip' Score = 500 Anim = _360Flip IsExtra UseCurrent } } ]
 Trick_VarialHeelflip = { Scr = FlipTrick params = { name = 'Varial Heelflip' Score = 300 Anim = VarialHeelflip BoardRotate Nollie = NollieVarialHeelflip ExtraTricks = Extra_VarialHeelflip } }
 Extra_VarialHeelflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Heelflip' Score = 500 Anim = laserflip speed = 1.3 trickslack = 20 IsExtra UseCurrent } } ]
 Trick_Hardflip = { Scr = FlipTrick params = { name = 'Hardflip' Score = 300 Anim = Hardflip BoardRotate Nollie = NollieHardflip ExtraTricks = Extra_360Hardflip } }
@@ -87,12 +100,12 @@ Extra_360InwardHeelflip = [ { Trigger_Extra_Flip params = { name = '360 Inward H
 Trick_Impossible = { Scr = FlipTrick params = { name = 'Impossible' Score = 100 Anim = Impossible Nollie = NollieImpossible ExtraTricks = DoubleImpossible } }
 DoubleImpossible = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Impossible' Score = 500 Anim = DoubleImpossible ExtraTricks = TripleImpossible trickslack = 15 speed = 1.2 IsExtra UseCurrent } } ]
 TripleImpossible = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Triple Impossible' Score = 1000 Anim = TripleImpossible IsExtra UseCurrent speed = 1.2 trickslack = 15 } } ]
-Trick_PopShoveIt = { Scr = FlipTrick params = { name = 'Pop Shove-It' Score = 100 Anim = PopShoveIt BoardRotate Nollie = NollieBSShoveIt ExtraTricks = Extra360ShoveIt SnapFix } }
-Extra360ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Shove-It' Score = 500 Anim = _360ShoveIt Nollie = Nollie360ShoveIt ExtraTricks = Extra540ShoveIt IsExtra UseCurrent SnapFix } } ]
-Extra540ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '540 Shove-It' Score = 1000 Anim = _540ShoveIt Nollie = Nollie360ShoveIt IsExtra BoardRotate UseCurrent SnapFix } } ]
-Trick_FSShoveIt = { Scr = FlipTrick params = { name = 'FS Shove-It' Score = 100 Anim = PopShoveItBS Nollie = NollieFSShoveIt BoardRotate ExtraTricks = ExtraFS360ShoveIt SnapFix } }
-ExtraFS360ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 FS Shove-It' Score = 500 Anim = FS360ShoveIt ExtraTricks = ExtraFS540ShoveIt IsExtra UseCurrent SnapFix } } ]
-ExtraFS540ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '540 FS Shove-It' Score = 1000 Anim = FS540ShoveIt IsExtra BoardRotate UseCurrent SnapFix } } ]
+Trick_PopShoveIt = { Scr = FlipTrick params = { name = 'Pop Shove-It' Score = 100 Anim = PopShoveIt BoardRotate Nollie = NollieBSShoveIt ExtraTricks = Extra360ShoveIt } }
+Extra360ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Shove-It' Score = 500 Anim = _360ShoveIt Nollie = Nollie360ShoveIt ExtraTricks = Extra540ShoveIt IsExtra UseCurrent } } ]
+Extra540ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '540 Shove-It' Score = 1000 Anim = _540ShoveIt Nollie = Nollie360ShoveIt IsExtra BoardRotate UseCurrent } } ]
+Trick_FSShoveIt = { Scr = FlipTrick params = { name = 'FS Shove-It' Score = 100 Anim = PopShoveItBS Nollie = NollieFSShoveIt BoardRotate ExtraTricks = ExtraFS360ShoveIt } }
+ExtraFS360ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 FS Shove-It' Score = 500 Anim = FS360ShoveIt ExtraTricks = ExtraFS540ShoveIt IsExtra UseCurrent } } ]
+ExtraFS540ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '540 FS Shove-It' Score = 1000 Anim = FS540ShoveIt IsExtra BoardRotate UseCurrent } } ]
 Trick_BackfootKickflip = { Scr = FlipTrick params = { name = 'Back Foot Kickflip' Score = 150 Anim = NollieKickflip Nollie = Kickflip ExtraTricks = Extra_DBackfootKickflip } }
 Extra_DBackfootKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Back Foot Flip' Score = 500 Anim = DoubleNollieKickflip IsExtra UseCurrent } } ]
 Trick_BackfootHeelflip = { Scr = FlipTrick params = { name = 'Back Foot Heelflip' Score = 150 Anim = NollieHeelflip Nollie = Heelflip ExtraTricks = Extra_DBackfootHeelflip } }
@@ -221,15 +234,8 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   endif
   if InNollie
     if GotParam Nollie
-      if not GetGlobalFlag flag = NOLLIE_360_FLAG
+      if not GotParam TreNollieFix
         NollieOff
-      endif
-      if InNollie
-        if GotParam Nollie
-          if GotParam SnapFix
-            NollieOff
-          endif
-        endif
       endif
       PlayAnim Anim = <Nollie> BlendPeriod = 0.3 speed = <speed>
     else
@@ -259,6 +265,9 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     SetExtraTricks tricks = <ExtraTricks> duration = 15
   endif
   Wait 15 frames
+  if GotParam TreNollieFix
+    name = '360 Flip'
+  endif
   SetTrickName <name>
   SetTrickScore <Score>
   Display
@@ -310,7 +319,7 @@ script CalledOllie
     ClearException Ollied
   endif
 endscript
-script GrabTrick speed = 1.0 X = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIUM WaitPercent = 60
+script GrabTrick speed = 1.0 x = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIUM WaitPercent = 60
   ClearTricksFrom Jumptricks Jumptricks0 Jumptricks
   CheckForOllie
   KillExtraTricks
