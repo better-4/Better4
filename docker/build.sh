@@ -57,6 +57,9 @@ dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${SRC}/scripts" "${OUT}/data/scripts"
 echo "==> Copying qdir.txt"
 cp "${SRC}/scripts/qdir.txt" "${OUT}/data/scripts/qdir.txt"
 
+echo "==> Copying models"
+cp -r "${SRC}/models" "${OUT}/data/models"
+
 echo "==> Configuring + building thps4-server-browser"
 cmake -G Ninja -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
   -S "${SRC}/src/thps4-server-browser" -B "${BUILD_ROOT}/serverbrowser"

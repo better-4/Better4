@@ -375,7 +375,9 @@ board = [
     desc_id = Banana
     frontend_desc = 'Banana'
     mesh = "models/skater_m/board_banana.skin"
+	wheel_color_string = 'Board Color'
     no_griptape
+	no_deck
   }
   {
     desc_id = Hover
@@ -389,16 +391,22 @@ board = [
     desc_id = #"Old School"
     frontend_desc = 'Old School'
     mesh = "models/skater_m/board_oldschool.skin"
+	wheel_color_string = 'Board Color'
+    no_griptape
   }
   {
     desc_id = Ollie
     frontend_desc = 'Ollie'
     mesh = "models/skater_m/board_ollie.skin"
+	wheel_color_string = 'Board Color'
+    no_griptape
+	no_deck
   }
   {
     desc_id = Long
     frontend_desc = 'Long'
     mesh = "models/skater_m/board_long.skin"
+	wheel_color_string = 'Board Color'
   }
 ]
 skater_m_head = [
@@ -1623,9 +1631,14 @@ skater_m_legs = [
     no_color
   }
   {
-    desc_id = #"Gathered Cargos"
-    frontend_desc = 'Gathered Cargos'
+    desc_id = #"Gathered Cargos Camo"
+    frontend_desc = 'Camo Cargos'
     mesh = "models/skater_m/pant_gatheredcargo.skin"
+  }
+  {
+    desc_id = #"Gathered Cargos"
+    frontend_desc = 'Bunched Cargos'
+    mesh = "models/better4/skater_m/pant_gatheredcargo.skin"
   }
   {
     desc_id = #"Baggy Pants"

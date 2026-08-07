@@ -116,6 +116,11 @@ script boardshop_create_main_menu
   }
   AssignAlias id = boardshop_vmenu alias = current_menu
   create_helper_text generic_helper_text
+  get_current_skater_deck_menu_enabled
+  if ( <decks_menu_enabled> = 0 )
+     <deck_menu_not_focusable> = not_focusable
+     <deck_menu_rgba> = [ 60 60 60 85 ]
+  endif
   GetCurrentSkaterProfileIndex
   edit_tricks_menu_add_item {
     first_item
@@ -125,6 +130,8 @@ script boardshop_create_main_menu
     text_pos = (90, -5)
     bg_scale = (60, 6)
     dims = (256, 24)
+    not_focusable = <deck_menu_not_focusable>
+    rgba = <deck_menu_rgba>
     focus_params = { highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) }
   }
   get_current_skater_griptape_menu_enabled
@@ -143,6 +150,11 @@ script boardshop_create_main_menu
     rgba = <griptape_menu_rgba>
     focus_params = { highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) }
   }
+  get_current_skater_wheel_menu_enabled
+  if ( <wheels_menu_enabled> = 0 )
+     <wheel_menu_not_focusable> = not_focusable
+     <wheel_menu_rgba> = [ 60 60 60 85 ]
+  endif
   get_current_skater_wheel_color_menu_name
   edit_tricks_menu_add_item {
     text = <wheel_color_menu_name>
@@ -150,6 +162,16 @@ script boardshop_create_main_menu
     bg_scale = (60, 6)
     dims = (256, 24)
     pad_choose_script = boardshop_create_wheel_color_menu
+    not_focusable = <wheel_menu_not_focusable>
+    rgba = <wheel_menu_rgba>
+    focus_params = { highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) }
+  }
+   edit_tricks_menu_add_item {
+    text = "Boards"
+    text_pos = (90, -5)
+    bg_scale = (60, 6)
+    dims = (256, 24)
+    pad_choose_script = boardshop_create_board_menu
     focus_params = { highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) }
   }
   edit_tricks_menu_add_item {
@@ -497,7 +519,7 @@ script boardshop_create_griptape_menu
   endif
   FireEvent type = focus target = boardshop_griptape_menu
 endscript
-script boardshop_create_wheel_color_menu
+script boardshop_create_board_menu
   TRG_Deck_Main:Unhide
   get_current_skater_use_jets
   if ( <use_jets> = 1 )
@@ -507,6 +529,58 @@ script boardshop_create_wheel_color_menu
     TRG_Deck_MainTrucks:Unhide
     TRG_Deck_MainJets:Hide
   endif
+  boardshop_sync_to_skater_graphic
+  boardshop_sync_to_skater_griptape
+  TRG_Deck_Main:boardshop_reset_main_board
+  GetArraySize board
+  if not GotParam index
+     <index> = 0
+  endif
+  SetScreenElementLock id = current_menu_anchor off
+    boardshop_add_griptape_wheel_menu {
+    title = "Board"
+    internal_just = [ left top ]
+  }
+  create_helper_text { helper_text_elements = [ { text = "\b7/\b4 = Select" }
+      { text = "\m1 = Back" }
+      { text = "\m0 = Accept" }
+    ]
+  }
+  SetScreenElementLock id = boardshop_griptape_menu on
+  SetScreenElementLock id = boardshop_griptape_menu off
+  GetStackedScreenElementPos y id = boardshop_griptape_menu
+  begin
+    if ( <index> = 6 )
+       <last_item> = last_item
+    endif
+  edit_tricks_menu_add_item {
+      text = ( ( board [ <index> ] ).frontend_desc )
+      text_pos = (128, 5)
+      text_just = [ center top ]
+      bg_pos = (0, 0)
+      bg_scale = (60, 6)
+      dims = (256, 24)
+      text_scale = 0.7
+      pad_choose_script = boardshop_menu_choose_board
+      pad_choose_params = { desc_id = ( ( board [ <index> ].desc_id ) ) }
+      focus_script = boardshop_griptape_focus
+      focus_params = { dest = ( ( board [ <index> ] ).with ) highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (2, 2) }
+     <last_item>
+   }
+   <index> = ( <index> + 1 )
+   repeat 6
+   FireEvent type = focus target = boardshop_griptape_menu
+endscript
+script boardshop_create_wheel_color_menu
+  // TRG_Deck_Main:Unhide
+  // get_current_skater_use_jets
+  // if ( <use_jets> = 1 )
+    // TRG_Deck_MainTrucks:Hide
+    // TRG_Deck_MainJets:Unhide
+  // else
+    // TRG_Deck_MainTrucks:Unhide
+    // TRG_Deck_MainJets:Hide
+  // endif
   boardshop_sync_to_skater_graphic
   boardshop_sync_to_skater_griptape
   TRG_Deck_Main:boardshop_reset_main_board
@@ -1051,6 +1125,20 @@ script boardshop_menu_choose_deck
 endscript
 script boardshop_menu_choose_griptape
   cas_add_item part = griptape desc_id = <desc_id>
+endscript
+script boardshop_menu_choose_board
+  cas_add_item part = board desc_id = <desc_id>
+  get_current_skater_use_jets
+  if ( <use_jets> = 1 )
+    TRG_Deck_MainTrucks:Hide
+    TRG_Deck_MainJets:Unhide
+  else
+    TRG_Deck_MainTrucks:Unhide
+    TRG_Deck_MainJets:Hide
+  endif
+  TRG_Deck_Main:Hide
+  TRG_Deck_Main:Unhide
+ 
 endscript
 script boardshop_sync_to_skater_graphic
   GetCurrentSkaterProfileIndex
