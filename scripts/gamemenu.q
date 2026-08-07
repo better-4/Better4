@@ -731,7 +731,6 @@ script create_pause_menu
     endif
   else
     if not GoalManager_HasActiveGoals count_all
-      if not skater:PlayerInputIsDisabled
         make_sprite_menu_item text = "Set Cust Restart" id = menu_set_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = set_custom_restart }
         make_text_sprite texture = PA_set_cust parent = menu_set_custom
         if skater:SetCustomRestart
