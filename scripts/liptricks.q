@@ -1,42 +1,45 @@
+
 LIPTRICK_DISPLAY_WAIT = 15
-DefaultLipTrick = { name = 'Nose Stall' score = 300 CopingHit = 1 initanim = NoseTailStall_init Anim = NoseTailStall_range OutAnim = NoseTailStall_out BoardRotate RotateOnOllie FlipOnOllie ReleaseFrame = 20 ComboLip Extratricks = LipTrickExtras }
-Trick_Blunt = { Scr = LipMacro2 Params = { name = 'Blunt to Fakie' CopingHit = 5 score = 500 initanim = BluntToFakie_init Anim = BluntToFakie_range OutAnim = BluntToFakie_out BoardRotate Extratricks = LipTrickExtras } }
-Trick_MuteInvert = { Scr = LipMacro2 Params = { name = 'Invert' score = 500 initanim = MuteInvert_init Anim = MuteInvert_range OutAnim = MuteInvert_out NoOllie BoardRotate Extratricks = InvertExtras } }
-Trick_Eggplant = { Scr = LipMacro2 Params = { name = 'Eggplant' score = 550 initanim = EggPlant_init Anim = EggPlant_range OutAnim = EggPlant_out NoOllie FlipAfter RevertBS Extratricks = InvertExtras } }
-Trick_GymnastPlant = { Scr = LipMacro2 Params = { name = 'Gymnast Plant' score = 575 initanim = GymnastPlant_init Anim = GymnastPlant_range OutAnim = GymnastPlant_out NoOllie FlipAfter RevertBS Extratricks = InvertExtras } }
-Trick_RockToFakie = { Scr = LipMacro2 Params = { name = 'Rock to Fakie' score = 500 CopingHit = 1 initanim = FakieRockAndRoll_init Anim = FakieRockAndRoll_range OutAnim = FakieRockAndRoll_out BoardRotate Extratricks = LipTrickExtras } }
-Trick_Disaster = { Scr = LipMacro2 Params = { name = 'Disaster' score = 600 CopingHit = 20 initanim = Disaster_init Anim = Disaster_range OutAnim = Disaster_out FlipAfter RotateOnOllie Extratricks = LipTrickExtras } }
-Trick_Invert = { Scr = LipMacro2 Params = { name = 'Varial Invert to Fakie' score = 450 initanim = Invert_init Anim = Invert_range OutAnim = Invert_out NoOllie BoardRotate RevertBS Extratricks = InvertExtras } }
-Trick_OneFootInvert = { Scr = LipMacro2 Params = { name = 'One Foot Invert' score = 500 initanim = OneFootInvert_init Anim = OneFootInvert_range OutAnim = OneFootInvert_out NoOllie BoardRotate ReleaseFrame = 30 RevertBS Extratricks = InvertExtras } }
-Trick_BSFootplant = { Scr = LipMacro2 Params = { name = 'BS Boneless' score = 550 initanim = BSFootplant_init Anim = BSFootplant_range OutAnim = BSFootplant_out OllieOutAnim = BSFootplant_OllieOut FlipAfter UseBoneless ReleaseFrame = 20 BailScript = Facesmash RevertBS Extratricks = LipTrickExtras } }
-Trick_AxleStall = { Scr = LipMacro2 Params = { name = 'Axle Stall' score = 400 CopingHit = 8 initanim = AxleStall_init Anim = AxleStall_range OutAnim = AxleStall_out OllieOutAnim = AxleStall_OllieOut FlipAfter Extratricks = LipTrickExtras } }
-Trick_Nosepick = { Scr = LipMacro2 Params = { name = 'FS Nosepick' score = 550 CopingHit = 15 initanim = FSIndyNosepick_init Anim = FSIndyNosepick_range OutAnim = FSIndyNosepick_out FlipAfter RotateOnOllie Extratricks = LipTrickExtras } }
-Trick_Noseblunt = { Scr = LipMacro2 Params = { name = 'FS Noseblunt' score = 550 CopingHit = 20 initanim = FS180Noseblunt_init Anim = FS180Noseblunt_range OutAnim = FS180Noseblunt_out FlipAfter RotateOnOllie Extratricks = LipTrickExtras } }
-Trick_AndrectInvert = { Scr = LipMacro2 Params = { name = 'Andrecht Invert' score = 550 initanim = AndrectInvert_init Anim = AndrectInvert_range OutAnim = AndrectInvert_out NoOllie FlipAfter BoardRotate Extratricks = InvertExtras ReleaseFrame = 20 } }
-Trick_Switcheroo = { Scr = LipMacro2 Params = { name = 'The Switcheroo' score = 600 initanim = Switcheroo_Init Anim = Switcheroo_range OutAnim = Switcheroo_Out NoOllie BoardRotate FlipAfter Extratricks = InvertExtras ReleaseFrame = 30 } }
-Trick_BSNoseComply = { Scr = LipMacro2 Params = { name = 'BS Nose Comply' score = 3000 CopingHit = 50 initanim = BSNoseComply_init Anim = BSNoseComply_range OutAnim = BSNoseComply_out RotateOnOllie FlipOnOllie IsSpecial RevertBS Extratricks = LipTrickExtras } }
-Trick_DarkDisaster = { Scr = LipMacro2 Params = { name = 'Dark Disaster' score = 3000 initanim = DarkDisaster_init Anim = DarkDisaster_range OutAnim = DarkDisaster_out FlipAfter RotateOnOllie IsSpecial RevertBS Extratricks = LipTrickExtras } }
-Trick_BigSpinFliptoTail = { Scr = LipMacro2 Params = { name = 'Bigspin Flip to Tail' CopingHit = 40 score = 3500 initanim = BigSpinFliptoTail_init Anim = BigSpinFliptoTail_range OutAnim = BigSpinFliptoTail_out FlipAfter RotateOnOllie IsSpecial RevertBS Extratricks = LipTrickExtras } }
-Trick_OneFootBlunt = { Scr = LipMacro2 Params = { name = 'One Foot Blunt' score = 3000 CopingHit = 1 initanim = OneFootBluntKickFlip_init Anim = OneFootBluntKickFlip_range OutAnim = OneFootBluntKickFlip_out BoardRotate Extratricks = LipTrickExtras IsSpecial ReleaseFrame = 15 } }
-Trick_Russian = { Scr = LipMacro2 Params = { name = 'Russian Boneless' score = 3000 initanim = BSFootplant_init PingPong Anim = Russian_Idle OutAnim = Russian_out OllieOutAnim = Russian_OllieOut FlipAfter UseBoneless ReleaseFrame = 20 BailScript = Facesmash RevertBS Extratricks = LipTrickExtras IsSpecial } }
-Trick_HoHoSadplant = { Scr = LipMacro2 Params = { name = 'Ho Ho Sad Plant' score = 3500 initanim = HoHoSadPlant_Init PingPong Anim = HoHoSadPlant_Idle OutAnim = HoHoSadPlant_Out IsSpecial NoOllie } }
-Trick_Burntwist = { Scr = LipMacro2 Params = { name = 'Burntwist' score = 3000 initanim = Burntwist_Init OutAnim = Burntwist NoOllie NoBalance RevertBS ReleaseFrame = 40 Extratricks = InvertExtras IsSpecial } }
-Trick_HeelflipFSInvert = { Scr = LipMacro2 Params = { name = 'Heelflip FS Invert' score = 3200 initanim = HeelflipFSInvert_init Anim = HeelflipFSInvert_range OutAnim = HeelflipFSInvert_out NoOllie IsSpecial FlipAfter RevertBS Extratricks = InvertExtras } }
+DefaultLipTrick = { Name = 'Nose Stall' Score = 300 CopingHit = 1 InitAnim = NoseTailStall_init Anim = NoseTailStall_range OutAnim = NoseTailStall_out BoardRotate RotateOnOllie FlipOnOllie ReleaseFrame = 20 ComboLip ExtraTricks = LipTrickExtras }
+Trick_Blunt = { Scr = LipMacro2 Params = { Name = 'Blunt to Fakie' CopingHit = 5 Score = 500 InitAnim = BluntToFakie_init Anim = BluntToFakie_range OutAnim = BluntToFakie_out BoardRotate ExtraTricks = LipTrickExtras } }
+Trick_MuteInvert = { Scr = LipMacro2 Params = { Name = 'Invert' Score = 500 InitAnim = MuteInvert_init Anim = MuteInvert_range OutAnim = MuteInvert_out NoOllie BoardRotate ExtraTricks = InvertExtras } }
+Trick_Eggplant = { Scr = LipMacro2 Params = { Name = 'Eggplant' Score = 550 InitAnim = EggPlant_init Anim = EggPlant_range OutAnim = EggPlant_out NoOllie FlipAfter RevertBS ExtraTricks = InvertExtras } }
+Trick_GymnastPlant = { Scr = LipMacro2 Params = { Name = 'Gymnast Plant' Score = 575 InitAnim = GymnastPlant_init Anim = GymnastPlant_range OutAnim = GymnastPlant_out NoOllie FlipAfter RevertBS ExtraTricks = InvertExtras } }
+Trick_RockToFakie = { Scr = LipMacro2 Params = { Name = 'Rock to Fakie' Score = 500 CopingHit = 1 InitAnim = FakieRockAndRoll_init Anim = FakieRockAndRoll_range OutAnim = FakieRockAndRoll_out BoardRotate ExtraTricks = LipTrickExtras } }
+Trick_Disaster = { Scr = LipMacro2 Params = { Name = 'Disaster' Score = 600 CopingHit = 20 InitAnim = Disaster_init Anim = Disaster_range OutAnim = Disaster_out FlipAfter RotateOnOllie ExtraTricks = LipTrickExtras } }
+Trick_Invert = { Scr = LipMacro2 Params = { Name = 'Varial Invert to Fakie' Score = 450 InitAnim = Invert_init Anim = Invert_range OutAnim = Invert_out NoOllie BoardRotate RevertBS ExtraTricks = InvertExtras } }
+Trick_OneFootInvert = { Scr = LipMacro2 Params = { Name = 'One Foot Invert' Score = 500 InitAnim = OneFootInvert_init Anim = OneFootInvert_range OutAnim = OneFootInvert_out NoOllie BoardRotate ReleaseFrame = 30 RevertBS ExtraTricks = InvertExtras } }
+Trick_BSFootplant = { Scr = LipMacro2 Params = { Name = 'BS Boneless' Score = 550 InitAnim = BSFootplant_init Anim = BSFootplant_range OutAnim = BSFootplant_out OllieOutAnim = BSFootplant_OllieOut FlipAfter UseBoneless ReleaseFrame = 20 BailScript = FaceSmash RevertBS ExtraTricks = LipTrickExtras } }
+Trick_AxleStall = { Scr = LipMacro2 Params = { Name = 'Axle Stall' Score = 400 CopingHit = 8 InitAnim = AxleStall_init Anim = AxleStall_range OutAnim = AxleStall_out OllieOutAnim = AxleStall_OllieOut FlipAfter ExtraTricks = LipTrickExtras } }
+Trick_Nosepick = { Scr = LipMacro2 Params = { Name = 'FS Nosepick' Score = 550 CopingHit = 15 InitAnim = FSIndyNosepick_init Anim = FSIndyNosepick_range OutAnim = FSIndyNosepick_out FlipAfter RotateOnOllie ExtraTricks = LipTrickExtras } }
+Trick_Noseblunt = { Scr = LipMacro2 Params = { Name = 'FS Noseblunt' Score = 550 CopingHit = 20 InitAnim = FS180Noseblunt_init Anim = FS180Noseblunt_range OutAnim = FS180Noseblunt_out FlipAfter RotateOnOllie ExtraTricks = LipTrickExtras } }
+Trick_AndrectInvert = { Scr = LipMacro2 Params = { Name = 'Andrecht Invert' Score = 550 InitAnim = AndrectInvert_init Anim = AndrectInvert_range OutAnim = AndrectInvert_out NoOllie FlipAfter BoardRotate ExtraTricks = InvertExtras ReleaseFrame = 20 } }
+Trick_Switcheroo = { Scr = LipMacro2 Params = { Name = 'The Switcheroo' Score = 600 InitAnim = Switcheroo_Init Anim = Switcheroo_range OutAnim = Switcheroo_Out NoOllie BoardRotate FlipAfter ExtraTricks = InvertExtras ReleaseFrame = 30 } }
+Trick_BSNoseComply = { Scr = LipMacro2 Params = { Name = 'BS Nose Comply' Score = 3000 CopingHit = 50 InitAnim = BSNoseComply_init Anim = BSNoseComply_range OutAnim = BSNoseComply_out RotateOnOllie FlipOnOllie IsSpecial RevertBS ExtraTricks = LipTrickExtras } }
+Trick_DarkDisaster = { Scr = LipMacro2 Params = { Name = 'Dark Disaster' Score = 3000 InitAnim = DarkDisaster_init Anim = DarkDisaster_range OutAnim = DarkDisaster_out FlipAfter RotateOnOllie IsSpecial RevertBS ExtraTricks = LipTrickExtras } }
+Trick_BigSpinFliptoTail = { Scr = LipMacro2 Params = { Name = 'Bigspin Flip to Tail' CopingHit = 40 Score = 3500 InitAnim = BigSpinFliptoTail_init Anim = BigSpinFliptoTail_range OutAnim = BigSpinFliptoTail_out FlipAfter RotateOnOllie IsSpecial RevertBS ExtraTricks = LipTrickExtras } }
+Trick_OneFootBlunt = { Scr = LipMacro2 Params = { Name = 'One Foot Blunt' Score = 3000 CopingHit = 1 InitAnim = OneFootBluntKickFlip_init Anim = OneFootBluntKickFlip_range OutAnim = OneFootBluntKickFlip_out BoardRotate ExtraTricks = LipTrickExtras IsSpecial ReleaseFrame = 15 } }
+Trick_Russian = { Scr = LipMacro2 Params = { Name = 'Russian Boneless' Score = 3000 InitAnim = BSFootplant_init pingpong Anim = Russian_Idle OutAnim = Russian_out OllieOutAnim = Russian_OllieOut FlipAfter UseBoneless ReleaseFrame = 20 BailScript = FaceSmash RevertBS ExtraTricks = LipTrickExtras IsSpecial } }
+Trick_HoHoSadplant = { Scr = LipMacro2 Params = { Name = 'Ho Ho Sad Plant' Score = 3500 InitAnim = HoHoSadPlant_Init pingpong Anim = HoHoSadPlant_Idle OutAnim = HoHoSadPlant_Out IsSpecial NoOllie } }
+Trick_Burntwist = { Scr = LipMacro2 Params = { Name = 'Burntwist' Score = 3000 InitAnim = Burntwist_Init OutAnim = Burntwist NoOllie NoBalance RevertBS ReleaseFrame = 40 ExtraTricks = InvertExtras IsSpecial } }
+Trick_HeelflipFSInvert = { Scr = LipMacro2 Params = { Name = 'Heelflip FS Invert' Score = 3200 InitAnim = HeelflipFSInvert_init Anim = HeelflipFSInvert_range OutAnim = HeelflipFSInvert_out NoOllie IsSpecial FlipAfter RevertBS ExtraTricks = InvertExtras } }
+Trick_HTeethSweeper = { Scr = LipMacro2 Params = { Name = 'The H Teeth Sweeper' Score = 4000 InitAnim = HTeethSweeper_Init Anim = HTeethSweeper_Range OutAnim = HTeethSweeper_Out NoOllie IsSpecial BloodFrame = 10 } }
+Trick_Summoner = { Scr = LipMacro2 Params = { Name = 'The Summoner' Score = 5000 InitAnim = Summoner_Init Idle Anim = Summoner_Idle OutAnim = Summoner_out IsSpecial NoOllie } }
 SpecialLipTricks =
 [
-  { Trigger = { TripleInOrder , up , Right , Triangle , 1000 } TrickSlot = SpLip_U_R_Triangle }
-  { Trigger = { TripleInOrder , up , down , Triangle , 1000 } TrickSlot = SpLip_U_D_Triangle }
-  { Trigger = { TripleInOrder , up , Left , Triangle , 1000 } TrickSlot = SpLip_U_L_Triangle }
-  { Trigger = { TripleInOrder , Right , up , Triangle , 1000 } TrickSlot = SpLip_R_U_Triangle }
-  { Trigger = { TripleInOrder , Right , down , Triangle , 1000 } TrickSlot = SpLip_R_D_Triangle }
+  { Trigger = { TripleInOrder , Up , Right , Triangle , 1000 } TrickSlot = SpLip_U_R_Triangle }
+  { Trigger = { TripleInOrder , Up , Down , Triangle , 1000 } TrickSlot = SpLip_U_D_Triangle }
+  { Trigger = { TripleInOrder , Up , Left , Triangle , 1000 } TrickSlot = SpLip_U_L_Triangle }
+  { Trigger = { TripleInOrder , Right , Up , Triangle , 1000 } TrickSlot = SpLip_R_U_Triangle }
+  { Trigger = { TripleInOrder , Right , Down , Triangle , 1000 } TrickSlot = SpLip_R_D_Triangle }
   { Trigger = { TripleInOrder , Right , Left , Triangle , 1000 } TrickSlot = SpLip_R_L_Triangle }
-  { Trigger = { TripleInOrder , down , up , Triangle , 1000 } TrickSlot = SpLip_D_U_Triangle }
-  { Trigger = { TripleInOrder , down , Right , Triangle , 1000 } TrickSlot = SpLip_D_R_Triangle }
-  { Trigger = { TripleInOrder , down , Left , Triangle , 1000 } TrickSlot = SpLip_D_L_Triangle }
-  { Trigger = { TripleInOrder , Left , up , Triangle , 1000 } TrickSlot = SpLip_L_U_Triangle }
+  { Trigger = { TripleInOrder , Down , Up , Triangle , 1000 } TrickSlot = SpLip_D_U_Triangle }
+  { Trigger = { TripleInOrder , Down , Right , Triangle , 1000 } TrickSlot = SpLip_D_R_Triangle }
+  { Trigger = { TripleInOrder , Down , Left , Triangle , 1000 } TrickSlot = SpLip_D_L_Triangle }
+  { Trigger = { TripleInOrder , Left , Up , Triangle , 1000 } TrickSlot = SpLip_L_U_Triangle }
   { Trigger = { TripleInOrder , Left , Right , Triangle , 1000 } TrickSlot = SpLip_L_R_Triangle }
-  { Trigger = { TripleInOrder , Left , down , Triangle , 1000 } TrickSlot = SpLip_L_D_Triangle }
-  { Trigger = { TripleInOrder , up , up , Triangle , 1000 } TrickSlot = SpLip_U_U_Triangle }
+  { Trigger = { TripleInOrder , Left , Down , Triangle , 1000 } TrickSlot = SpLip_L_D_Triangle }
+  { Trigger = { TripleInOrder , Up , Up , Triangle , 1000 } TrickSlot = SpLip_U_U_Triangle }
 ]
 LipTricks =
 [
@@ -46,8 +49,8 @@ LipTricks =
   { Trigger = { Press , DownRight , 500 } TrickSlot = Lip_TriangleDR }
   { Trigger = { Press , Left , 500 } TrickSlot = Lip_TriangleL }
   { Trigger = { Press , Right , 500 } TrickSlot = Lip_TriangleR }
-  { Trigger = { Press , down , 500 } TrickSlot = Lip_TriangleD }
-  { Trigger = { Press , up , 500 } TrickSlot = Lip_TriangleU }
+  { Trigger = { Press , Down , 500 } TrickSlot = Lip_TriangleD }
+  { Trigger = { Press , Up , 500 } TrickSlot = Lip_TriangleU }
   { Trigger = { Press , Triangle , 1000 } Scr = LipMacro2 Params = DefaultLipTrick }
 ]
 ComboLipTricks =
@@ -58,27 +61,27 @@ ComboLipTricks =
   { Trigger = { Press , DownRight , 500 } TrickSlot = Lip_TriangleDR }
   { Trigger = { Press , Left , 500 } TrickSlot = Lip_TriangleL }
   { Trigger = { Press , Right , 500 } TrickSlot = Lip_TriangleR }
-  { Trigger = { Press , down , 500 } TrickSlot = Lip_TriangleD }
-  { Trigger = { Press , up , 500 } TrickSlot = Lip_TriangleU }
+  { Trigger = { Press , Down , 500 } TrickSlot = Lip_TriangleD }
+  { Trigger = { Press , Up , 500 } TrickSlot = Lip_TriangleU }
   { Trigger = { Press , Triangle , 500 } DefaultLipTrick }
 ]
 LipTrickExtras =
 [
   { Trigger = { InOrder , Circle , Circle , 300 } Trick_AxleStall }
-  { Trigger = { InOrder , Circle , square , 300 } Trick_BSFootplant }
-  { Trigger = { InOrder , square , square , 300 } Trick_Disaster }
-  { Trigger = { InOrder , square , Circle , 300 } Trick_RockToFakie }
+  { Trigger = { InOrder , Circle , Square , 300 } Trick_BSFootplant }
+  { Trigger = { InOrder , Square , Square , 300 } Trick_Disaster }
+  { Trigger = { InOrder , Square , Circle , 300 } Trick_RockToFakie }
   { Trigger = { InOrder , Triangle , Triangle , 300 } Trick_Noseblunt }
-  { Trigger = { InOrder , Triangle , square , 300 } Trick_Nosepick }
+  { Trigger = { InOrder , Triangle , Square , 300 } Trick_Nosepick }
   { Trigger = { InOrder , Triangle , Circle , 300 } Trick_Blunt }
 ]
 InvertExtras =
 [
-  { Trigger = { InOrder , square , square , 300 } Trick_OneFootInvert }
+  { Trigger = { InOrder , Square , Square , 300 } Trick_OneFootInvert }
   { Trigger = { InOrder , Triangle , Triangle , 300 } Trick_MuteInvert }
   { Trigger = { InOrder , Circle , Circle , 300 } Trick_GymnastPlant }
-  { Trigger = { InOrder , Circle , square , 300 } Trick_Invert }
-  { Trigger = { InOrder , square , Circle , 300 } Trick_Eggplant }
+  { Trigger = { InOrder , Circle , Square , 300 } Trick_Invert }
+  { Trigger = { InOrder , Square , Circle , 300 } Trick_Eggplant }
   { Trigger = { InOrder , Triangle , Circle , 300 } Trick_AndrectInvert }
 ]
 AndrectExtras =
@@ -111,7 +114,7 @@ script LipMacro2
     endif
   endif
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
-  SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBail_Called CallInsteadofGoto
+  SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBail_Called CallInsteadOfGoto
   SetQueueTricks NoTricks
   if GotParam NoOllie
     SetException Ex = Ollied Scr = LipOut Params = { <...> }
@@ -122,8 +125,8 @@ script LipMacro2
   if GotParam CopingHit
     Obj_SpawnScript CopingHit Params = { <...> }
   endif
-  SetTrickName <name>
-  SetTrickScore <score>
+  SetTrickName <Name>
+  SetTrickScore <Score>
   if GotParam BloodFrame
     Obj_SpawnScript LipBlood Params = { <...> }
   endif
@@ -132,7 +135,7 @@ script LipMacro2
       Flip
       BoardRotate
     endif
-    DoBalanceTrick ButtonA = Right ButtonB = Left type = Lip PlayRangeAnimBackwards
+    DoBalanceTrick ButtonA = Right ButtonB = Left Type = Lip PlayRangeAnimBackwards
     if GotParam NoOllie
       if GotParam IsExtra
         LaunchExtraMessage
@@ -140,16 +143,16 @@ script LipMacro2
         PlayLipBalancingAnim <...>
         Wait 40 frames
       else
-        if GotParam initanim
-          PlayAnim Anim = <initanim>
-          waitanimfinished
+        if GotParam InitAnim
+          PlayAnim Anim = <InitAnim>
+          WaitAnimFinished
         endif
       endif
     else
       if GotParam IsExtra
         LaunchExtraMessage
-        PlayAnim Anim = <initanim>
-        waitanimfinished
+        PlayAnim Anim = <InitAnim>
+        WaitAnimFinished
       else
         BlendPeriodOut 0.0
         PlayLipBalancingAnim <...>
@@ -165,17 +168,17 @@ script LipMacro2
         Display Blockspin
         Wait 40 frames
       else
-        PlayAnim Anim = <initanim>
+        PlayAnim Anim = <InitAnim>
         Display Blockspin
-        waitanimfinished
+        WaitAnimFinished
         PlayLipBalancingAnim <...>
       endif
     else
-      if GotParam initanim
-        PlayAnim Anim = <initanim>
+      if GotParam InitAnim
+        PlayAnim Anim = <InitAnim>
         Wait LIPTRICK_DISPLAY_WAIT frames
         Display Blockspin
-        waitanimfinished
+        WaitAnimFinished
       endif
       PlayLipBalancingAnim <...>
     endif
@@ -189,8 +192,8 @@ script LipMacro2
   if GotParam RevertBS
     Obj_SetFlag FLAG_SKATER_REVERTBS
   endif
-  if GotParam Extratricks
-    SetExtraTricks tricks = <Extratricks> ignore = <name>
+  if GotParam ExtraTricks
+    SetExtraTricks tricks = <ExtraTricks> ignore = <Name>
   endif
   if not GotParam NoBalance
     begin
@@ -203,11 +206,11 @@ script LipMacro2
 endscript
 script PlayLipBalancingAnim
   if not GotParam NoBalance
-    DoBalanceTrick ButtonA = Right ButtonB = Left type = Lip PlayRangeAnimBackwards
-    if GotParam PingPong
-      PlayAnim Anim = <Anim> PingPong
+    DoBalanceTrick ButtonA = Right ButtonB = Left Type = Lip PlayRangeAnimBackwards
+    if GotParam pingpong
+      PlayAnim Anim = <Anim> pingpong
     else
-      PlayAnim Anim = <Anim> Wobble From = end To = Start
+      PlayAnim Anim = <Anim> wobble from = end To = Start
     endif
     if GotParam Idle
       PlayAnim Anim = <Anim> Cycle
@@ -226,7 +229,7 @@ endscript
 script LipBlood
   Wait <BloodFrame> frames
   PlaySound bitchslap2 pitch = 60
-  BloodParticlesOn name = "breath.png" start_col = -1 end_col = 587202559 num = 2 emit_w = 2.0 emit_h = 2.0 angle = 50 size = 4.0 bone = head growth = 2 time = 0.5 Speed = 250 grav = -1000 life = 0.5
+  BloodParticlesOn Name = "breath.png" start_col = -1 end_col = 587202559 num = 2 emit_w = 2.0 emit_h = 2.0 angle = 50 size = 4.0 bone = head growth = 2 time = 0.5 speed = 250 grav = -1000 life = 0.5
   Obj_SpawnScript BloodSuperTiny
   Wait 1 frame
   PlaySound headsmackB
@@ -235,8 +238,8 @@ script FlameUp
   Obj_AttachFrame bone = "right_knee"
   Obj_AttachFrame bone = "left_knee"
   Obj_AttachFrame bone = "pelvis"
-  BloodParticlesOn name = "breath.png" start_col = 1426128895 end_col = 153 blend_mode = 72 num = 40 emit_w = 1.0 emit_h = 1.0 angle = 10 size = 60.0 bone = right_knee growth = 0 time = 1 Speed = 40 grav = 0 life = 1
-  BloodParticlesOn name = "breath.png" start_col = 1429221424 end_col = 4671303 num = 50 emit_w = 2.0 emit_h = 2.0 angle = 20 size = 20.0 bone = pelvis growth = 1.5 time = 2 Speed = 50 grav = 0 life = 1
+  BloodParticlesOn Name = "breath.png" start_col = 1426128895 end_col = 153 blend_mode = 72 num = 40 emit_w = 1.0 emit_h = 1.0 angle = 10 size = 60.0 bone = right_knee growth = 0 time = 1 speed = 40 grav = 0 life = 1
+  BloodParticlesOn Name = "breath.png" start_col = 1429221424 end_col = 4671303 num = 50 emit_w = 2.0 emit_h = 2.0 angle = 20 size = 20.0 bone = pelvis growth = 1.5 time = 2 speed = 50 grav = 0 life = 1
 endscript
 script LipOut y = 1
   ClearException Ollied
@@ -249,8 +252,8 @@ script LipOut y = 1
     PlayAnim Anim = <OutAnim> Blendperiod = 0.0
     BlendPeriodOut 0.3
   else
-    if GotParam initanim
-      PlayAnim Anim = <initanim> backwards
+    if GotParam InitAnim
+      PlayAnim Anim = <InitAnim> backwards
     else
     endif
   endif
@@ -279,7 +282,7 @@ script LipOut y = 1
   InAirExceptions
   SetException Ex = Landed Scr = LipLand Params = { <...> }
   BlendPeriodOut 0
-  waitanimfinished
+  WaitAnimFinished
   SetException Ex = GroundGone Scr = GroundGone
   if OnGround
     ClearGapTricks
@@ -300,7 +303,7 @@ script LipOut y = 1
     CheckGapTricks
     ClearGapTricks
     ClearPanel_Landed
-    Goto OnGroundAI
+    Goto OnGroundAi
   endif
 endscript
 script ClearLipCombos
@@ -319,8 +322,8 @@ script LipLand
   else
     FlipAfter
   endif
-  revert_key_check_misc
-  waitanimfinished
+  SetExtraTricks tricks = Reverts duration = 20
+  WaitAnimFinished
   SetLandedFromVert
   Goto Land
 endscript
@@ -338,7 +341,7 @@ script LipBail
   if GotParam BailScript
     Goto <BailScript>
   else
-    GotoRandomScript [ Facesmash NoseManualBail ManualBail ]
+    GotoRandomScript [ FaceSmash NoseManualBail ManualBail ]
   endif
 endscript
 script OllieLipOut
@@ -358,8 +361,8 @@ script OllieLipOut
     RotateAfter
   endif
   SetLandedFromVert
-  Rotate X = 90
-  Rotate X = -45
+  Rotate x = 90
+  Rotate x = -45
   if HandleLipOllieDirection
     ClearLipCombos
     AllowRailTricks

@@ -1,4 +1,5 @@
-
+off = 0
+on = 1
 script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
   GetTags
   StopBalanceTrick
@@ -140,6 +141,10 @@ Extra_NoseGrinds_BS = Extra_BS_Grinds
 Extra_TailGrinds_FS = Extra_FS_Grinds
 Extra_TailGrinds_BS = Extra_BS_Grinds
 script Grind GrindTweak = 7 boardscuff = 0
+  get_toggle key = "RailSpin" fallback = on
+  if ( <key_value> = off )
+    RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
+  endif
   KillExtraTricks
   SetTags state = skater_onrail OutAnim = <OutAnim> initanim = <initanim> Anim = <Anim>
   SetTrickName ""

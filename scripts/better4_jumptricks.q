@@ -23,15 +23,7 @@ JumptricksTable =
 ]
 
 script get_jumptricks
-  GetIniInteger section = "In Game Controls" key = "Jumptrick" ValueName = jumptrick
-  if ( <jumptrick> > 3 )
-    SetIniInteger section = "In Game Controls" key = "Jumptrick" value = 0
-    Printf "Invalid jumptrick! Reset to vanilla (0)"
-  endif
-  if ( <jumptrick> < 0 )
-   SetIniInteger section = "In Game Controls" key = "Jumptrick" value = 0
-   Printf "Invalid jumptrick! Reset to vanilla (0)"
-  endif
-  return jumptrick = <jumptrick>
+  get_key key = "Jumptrick" max = 3
+  return jumptrick = <key_value>
 endscript
 

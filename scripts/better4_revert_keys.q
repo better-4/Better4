@@ -46,24 +46,13 @@ RevertKeyTable =
 ]
 
 script revert_key_check_air
-  verify_revert_key
-  SetExtraTricks tricks = ( ( RevertKeyTable [ <revert_key> ] ).table ) Duration = 5
+  get_key key = "RevertKey" max = 7
+  SetExtraTricks tricks = ( ( RevertKeyTable [ <key_value> ] ).table ) Duration = 5
 endscript
 
 script revert_key_check_misc
-  verify_revert_key
-  SetExtraTricks tricks = ( ( RevertKeyTable [ <revert_key> ] ).table ) Duration = 20
+  get_key key = "RevertKey" max = 7
+  SetExtraTricks tricks = ( ( RevertKeyTable [ <key_value> ] ).table ) Duration = 20
 endscript
 
-script verify_revert_key
-  GetIniInteger section = "In Game Controls" key = "RevertKey" ValueName = revert_key
-  if ( <revert_key> > 7 )
-    SetIniInteger section = "In Game Controls" key = "RevertKey" value = 0
-    Printf "Invalid revert binding! Reset to vanilla (0)"
-  endif
-  if ( <revert_key> < 0 )
-   SetIniInteger section = "In Game Controls" key = "RevertKey" value = 0
-   Printf "Invalid revert binding! Reset to vanilla (0)"
-  endif
-  return revert_key = <revert_key>
-endscript
+

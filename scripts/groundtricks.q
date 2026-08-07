@@ -1,4 +1,5 @@
-
+off = 0
+on =1
 TRICK_PRELOAD_TIME = 160
 Jumptricks0 =
 [ { Trigger = { TapOnceRelease Up X 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } } ]
@@ -61,6 +62,10 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   BlendPeriodOut 0.0
   Wait 0.1 seconds
   SetException Ex = Ollied Scr = Ollie
+  get_toggle key = "DoubleRevert" fallback = on
+  if ( <key_value> = off )
+     ResetLandedFromVert
+  endif
   WaitAnimFinished
   SetRollingFriction #"default"
   DoNextManualTrick FromAir

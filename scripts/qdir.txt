@@ -203,4 +203,5 @@ better4_revert_keys.qb
 better4_powerslide_keys.qb
 better4_groundtricks.qb
 better4_jumptricks.qb
-better4_nolliestance_keys.qb
+better4_togglenollie_keys.qb
+better4_ini_helpers.qb

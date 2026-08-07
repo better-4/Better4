@@ -46,28 +46,15 @@ GrindReleaseKeyTable =
 ]
 
 script dropdown_key_check
-  verify_dropdown_key 
-  SetExtraTricks ( ( GrindReleaseKeyTable [ <dropdown_key> ] ).table )
+  get_key key = "DropdownKey" max = 7
+  SetExtraTricks ( ( GrindReleaseKeyTable [ <key_value> ] ).table )
 endscript
 
 script dropdown_key_check_extra_tricks
-  verify_dropdown_key 
+  get_key key = "DropdownKey" max = 7
   if GotParam Extratricks
-    SetExtraTricks <Extratricks> ignore = <Name> ( ( GrindReleaseKeyTable [ <dropdown_key> ] ).table )
+    SetExtraTricks <Extratricks> ignore = <Name> ( ( GrindReleaseKeyTable [ <key_value> ] ).table )
   else
-    SetExtraTricks ( ( GrindReleaseKeyTable [ <dropdown_key> ] ).table )
+    SetExtraTricks ( ( GrindReleaseKeyTable [ <key_value> ] ).table )
   endif
-endscript
-
-script verify_dropdown_key
-  GetIniInteger section = "In Game Controls" key = "DropdownKey" ValueName = dropdown_key
-  if ( <dropdown_key> > 7 )
-    SetIniInteger section = "In Game Controls" key = "DropdownKey" value = 0
-    Printf "Invalid dd binding! Reset to vanilla (0)"
-  endif
-  if ( <dropdown_key> < 0 )
-   SetIniInteger section = "In Game Controls" key = "DropdownKey" value = 0
-   Printf "Invalid dd binding! Reset to vanilla (0)"
-  endif
-  return dropdown_key = <dropdown_key>
 endscript

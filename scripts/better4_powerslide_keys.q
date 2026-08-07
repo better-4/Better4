@@ -44,15 +44,7 @@ PowerSlideKeyTable =
 ]
 
 script get_powerslide_key
-  GetIniInteger section = "In Game Controls" key = "PowerSlideKey" ValueName = powerslide_key
-  if ( <powerslide_key> > 7 )
-    SetIniInteger section = "In Game Controls" key = "PowerSlideKey" value = 0
-    Printf "Invalid powerslide binding! Reset to vanilla (0)"
-  endif
-  if ( <powerslide_key> < 0 )
-   SetIniInteger section = "In Game Controls" key = "PowerSlideKey" value = 0
-   Printf "Invalid powerslide binding! Reset to vanilla (0)"
-  endif
-  return powerslide_key = <powerslide_key>
+  get_key key = "PowerSlideKey" max = 7
+  return powerslide_key = <key_value>
 endscript
 
