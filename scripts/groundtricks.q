@@ -62,8 +62,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   BlendPeriodOut 0.0
   Wait 0.1 seconds
   SetException Ex = Ollied Scr = Ollie
-  get_toggle key = "DoubleRevert" fallback = on
-  if ( <key_value> = off )
+  if ( better4_control_doublerevert_value = off )
      ResetLandedFromVert
   endif
   WaitAnimFinished
@@ -149,7 +148,7 @@ script ToggleSwitchRegular
     PlayCessSound
   endif
   WaitAnim 65 Percent
-  check_ground_and_jump_keys
+  SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
   FlipAfter
   BoardRotateAfter
   BlendPeriodOut 0.0
@@ -196,7 +195,7 @@ script ToggleNollieRegular
   OnGroundExceptions
   SetException Ex = Ollied Scr = Nollie Params = { NoDoNextTrick }
   ClearTrickQueues
-  check_ground_keys
+  SetQueueTricks better4_control_powerslide_value GroundTricks better4_control_stancechange_value
   if InNollie
     Printf "in Nollie mode ---------------------------"
     NollieOff
@@ -367,8 +366,7 @@ script Fastplant
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
-script Boneless Anim = Boneless Name = 'Boneless' Score = 250
-  GetIniInteger section = "In Game Controls" key = "Jumptrick" ValueName = jumptrick
+script Boneless Anim = Boneless Name = 'Boneless' Score = 250 Speed = 1.0
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump" BonelessHeight
@@ -391,7 +389,7 @@ script Boneless Anim = Boneless Name = 'Boneless' Score = 250
     FlipAfter
     BlendPeriodOut 0
   else
-        PlayAnim Anim = <Anim> BlendPeriod = 0.2
+        PlayAnim Anim = <Anim> BlendPeriod = 0.2 Speed = <Speed>
   endif
   endif
   Display

@@ -121,8 +121,7 @@ script Manual BlendPeriod = 0.3
   ClearExceptions
   ResetLandedFromVert
   KillExtraTricks
-  get_toggle key = "ManualFloats" fallback = off
-  if ( <key_value> = off )
+  if ( better4_control_manualfloat_value = off )
     ClearTrickQueues
   endif
   SetException Ex = GroundGone Scr = GroundGone params = { NoBoneless }
@@ -328,9 +327,8 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
   if GotParam Anim
     PlayAnim Anim = <Anim> BlendPeriod = 0.3 speed = <speed>
   endif
-  get_toggle key = "ModernManuals" fallback = off
   if GotParam RotateLeftY
-    if ( <key_value> = on )
+    if ( better4_control_manualspin_value = on )
       RotateDisplay Y duration = 0.75 seconds StartAngle = 0.0 EndAngle = 360.0 SinePower = 0 RotationOffset = (0, 30, 0)
       SetExtraTricks <ExtraTricks2> <ExtraTricks> ignore = <name>
       Wait 0.7 seconds
@@ -338,7 +336,7 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
     endif
   endif
   if GotParam RotateRightY
-    if ( <key_value> = on )
+    if ( better4_control_manualspin_value = on )
       RotateDisplay Y duration = 0.75 seconds StartAngle = 0.0 EndAngle = -360.0 SinePower = 0 RotationOffset = (0, 30, 0)
       SetExtraTricks <ExtraTricks2> <ExtraTricks> ignore = <name>
       Wait 0.7 seconds

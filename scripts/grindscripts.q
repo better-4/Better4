@@ -23,7 +23,7 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
       ClearException GroundGone
       SetQueueTricks NoTricks
       SetManualTricks NoTricks
-      revert_key_check_misc
+      SetExtraTricks tricks = better4_control_revert_value Duration = 20
       if GotParam OutAnim
         PlayAnim Anim = <OutAnim> Blendperiod = 0.3
       else
@@ -55,7 +55,7 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
       ClearException GroundGone
       SetQueueTricks NoTricks
       SetManualTricks NoTricks
-      revert_key_check_misc
+      SetExtraTricks tricks = better4_control_revert_value Duration = 20
       if GotParam OutAnim
         PlayAnim Anim = <OutAnim> Blendperiod = 0.3
       else
@@ -141,8 +141,7 @@ Extra_NoseGrinds_BS = Extra_BS_Grinds
 Extra_TailGrinds_FS = Extra_FS_Grinds
 Extra_TailGrinds_BS = Extra_BS_Grinds
 script Grind GrindTweak = 7 boardscuff = 0
-  get_toggle key = "RailSpin" fallback = on
-  if ( <key_value> = off )
+  if ( better4_control_railspin_value = off )
     RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
   endif
   KillExtraTricks
@@ -231,7 +230,7 @@ script Grind GrindTweak = 7 boardscuff = 0
   endif
   DoBalanceTrick ButtonA = Right ButtonB = Left type = <type> DoFlipCheck
   Wait 10 frames
-  dropdown_key_check
+  SetExtraTricks better4_control_dropdown_value
   if GotParam IsSpecial
     LaunchSpecialMessage text = "Special Grind"
   endif
@@ -254,7 +253,11 @@ script Grind GrindTweak = 7 boardscuff = 0
   if AnimEquals [ FiftyFifty_Range NoseGrind_Range TailGrind_Range ]
     Wait 0.25 seconds
   endif
-  dropdown_key_check_extra_tricks Extratricks = <Extratricks> name = <name>
+  if GotParam Extratricks
+    SetExtraTricks <Extratricks> ignore = <name> better4_control_dropdown_value
+  else
+    SetExtraTricks better4_control_dropdown_value
+  endif
   if GotParam ScreenShake
     Grind_ScreenShake ScreenShake = <ScreenShake>
   endif

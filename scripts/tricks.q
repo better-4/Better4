@@ -136,7 +136,7 @@ script OnGroundExceptions
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = Skitched Scr = Skitch
   SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBail
-  check_ground_and_jump_keys
+  SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
   SetManualTricks special = SpecialManualTricks GroundManualTricks
   SetTags state = skater_onground
@@ -667,7 +667,7 @@ script OnGroundNollieAI
   ClearExceptions
   OnGroundExceptions
   SetException Ex = Ollied Scr = Nollie
-  check_ground_and_jump_keys
+  SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
   SetManualTricks special = SpecialManualTricks GroundManualTricks
   NollieOn
   begin
@@ -816,7 +816,7 @@ endscript
 script GroundGone
   InAirExceptions
   SetException Ex = Ollied Scr = Ollie
-  clear_ground_keys
+  ClearTricksFrom better4_control_powerslide_value GroundTricks better4_control_stancechange_value
   if GotParam NoBoneless
     SetQueueTricks special = SpecialTricks AirTricks
   else
@@ -933,7 +933,7 @@ script Land2 RevertTime = 5
   if LandedFromVert
     OverrideCancelGround
     Obj_ClearFlag FLAG_SKATER_MANUALCHEESE
-    revert_key_check_air
+    SetExtraTricks tricks = better4_control_revert_value Duration = 5
   else
     if backwards
       FlipAndRotate

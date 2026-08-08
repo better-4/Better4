@@ -1,5 +1,3 @@
-off = 0
-on = 1
 lock_framerate = 0
 display_framerate_box = 1
 DEMO_BUILD = 0
@@ -10,15 +8,8 @@ script load_permanent_prefiles
     LoadPreFile "gcmemicons.pre"
   endif
 endscript
-script check_lip_toggle
-  get_toggle key = "LipTricks" fallback = on
-  if ( <key_value> = off )
-    Change LipAllowAngle = 360
-    Change LipAllowAngle_Override = 360
-  endif
-endscript
 script load_permanent_assets
-  check_lip_toggle
+  // better4_controls_init
   SetDefaultPermanent 1
   SetReferenceChecksum 0
   LoadPreFile "anims.pre"

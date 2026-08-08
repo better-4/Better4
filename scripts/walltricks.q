@@ -1,8 +1,7 @@
 off = 0
 on = 1
 script WallRide
-  get_toggle key = "WallSpin" fallback = on
-  if ( <key_value> = off )
+  if ( better4_control_wallspin_value = off )
     RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
   endif
   ClearExceptions
@@ -22,12 +21,7 @@ script WallRide
     Goto DoingTrickBail
   endif
   BailOff
-  get_toggle key = "1TapBoostplant" fallback = off
-  if ( <key_value> = on )
-    SetQueueTricks WallRideTricks_Single
-  else
-    SetQueueTricks WallRideTricks
-  endif
+  SetQueueTricks better4_control_wallieplant_value
   NollieOff
   SetTrickScore 200
   PlayCessSound
@@ -78,15 +72,11 @@ script Wallie
   WaitAnimWhilstChecking
   Goto Airborne StretchTime = 10 BlendPeriod = 0
 endscript
-WallRideTricks =
-[ { Trigger = { TapTwiceRelease Up X 500 } Scr = Trick_WallPlant } ]
-WallRideTricks_Single =
-[ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
 script Trick_WallPlant
   InAirExceptions
   Vibrate actuator = 1 percent = 50 duration = 0.1
   PlayAnim Anim = Boneless BlendPeriod = 0.0
-  SetTrickName "Wallplant"
+  SetTrickName "Wallieplant"
   SetTrickScore 500
   Display
   #"Jump" BonelessHeight
