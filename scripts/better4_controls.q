@@ -295,6 +295,19 @@ better4_misc_boardscuff = {
     { text = "On" value = on }
   ]
 }
+better4_misc_cambtn_behavior_index = 1
+better4_misc_cambtn_behavior_value = on
+better4_misc_cambtn_behavior = {
+  id = better4_misc_cambtn_behavior_id
+  index_name = better4_misc_cambtn_behavior_index
+  value_name = better4_misc_cambtn_behavior_value
+  text = "Camera Button Behavior"
+  ini_key = "CamBtnBehavior"
+  options = [
+    { text = "Free Cam" value = off }
+    { text = "Camera Toggle" value = on }
+  ]
+}
 script better4_controls_init
   Printf "Initializing Better4 Controls"
   better4_control_init better4_control_spinkeys
@@ -314,6 +327,7 @@ script better4_controls_init
   better4_control_init better4_control_wallridebail
   // misc section
   better4_control_init better4_misc_boardscuff
+  better4_control_init better4_misc_cambtn_behavior
 endscript
 script better4_control_init
    <index> = <index_name>
