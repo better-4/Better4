@@ -723,7 +723,7 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
   SetScreenElementProps {
     id = <anchor_id>
     event_handlers = [ { pad_choose <pad_choose_script> params = <pad_choose_params> }
-	  { pad_square <pad_square_script> params = <pad_choose_params> }
+	  { pad_space <pad_square_script> params = <pad_choose_params> }
       { pad_start <pad_choose_script> params = <pad_choose_params> }
       { pad_choose generic_menu_pad_choose_sound }
     ]
@@ -783,7 +783,7 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     event_handlers = [ { focus edit_tricks_menu_focus params = { highlight_bar_pos = (-5, 0) highlight_bar_scale = <highlight_bar_scale> first_item last_item no_arrows } }
       { unfocus edit_tricks_menu_unfocus params = { rgba = [ 90 90 90 100 ] } }
       { pad_choose <pad_choose_script> params = { highlight_script = edit_tricks_menu_focus highlight_bar_scale = (0.18, 1.3) index = <index> } }
-	  { pad_square <pad_square_script> params = { highlight_script = edit_tricks_menu_focus highlight_bar_scale = (0.18, 1.3) index = <index> } }
+	  { pad_space <pad_square_script> params = { highlight_script = edit_tricks_menu_focus highlight_bar_scale = (0.18, 1.3) index = <index> } }
       { pad_start <pad_choose_script> params = { highlight_script = edit_tricks_menu_focus highlight_bar_scale = (0.18, 1.3) index = <index> } }
       { pad_choose generic_menu_pad_choose_sound }
     ]
