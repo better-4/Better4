@@ -67,7 +67,7 @@ generic_helper_text = { helper_text_elements = [ { text = "\b7/\b4 = Select" }
 generic_helper_text_unassign = { helper_text_elements = [ { text = "\b7/\b4 = Select" }
     { text = "\m1 = Back" }
     { text = "\m0 = Accept" }
-    { text = "\b1 = Unassign Trick" }
+    { text = "\b0 = Unassign Trick" }
   ]
 }
 generic_helper_text_better4 = { helper_text_elements = [ { text = "\b7/\b4=Select" }
