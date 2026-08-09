@@ -115,7 +115,7 @@ script Trick_WallPlant
   InAirExceptions
   Vibrate actuator = 1 percent = 50 duration = 0.1
   PlayAnim Anim = Boneless BlendPeriod = 0.0
-  SetTrickName "Wallieplant"
+  SetTrickName "WalliePlant"
   SetTrickScore 500
   Display
   #"Jump" BonelessHeight
