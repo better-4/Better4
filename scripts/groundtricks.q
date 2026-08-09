@@ -1,30 +1,24 @@
-
+off = 0
+on = 1
 TRICK_PRELOAD_TIME = 160
 Jumptricks0 =
-[ { Trigger = { TapOnceRelease , Up , X , 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } } ]
+[ { Trigger = { TapOnceRelease Up X 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } } ]
 Jumptricks =
-[ { Trigger = { TapTwiceRelease , Up , X , 500 } TrickSlot = JumpSlot } ]
+[ { Trigger = { TapTwiceRelease Up X 500 } TrickSlot = JumpSlot } ]
 Trick_Boneless = { Scr = Boneless Params = { Name = 'Boneless' Anim = Boneless Score = 250 } }
 Trick_Fastplant = { Scr = Boneless Params = { Name = 'Fastplant' Anim = Fastplant Score = 250 } }
 Trick_Beanplant = { Scr = Boneless Params = { Name = 'Beanplant' Anim = Beanplant Score = 250 } }
 GroundTricks =
 [
-  { Trigger = { Press , R2 , 20 } Scr = ToggleSwitchRegular }
-  { Trigger = { Press , L2 , 20 } Scr = ToggleNollieRegular }
-  { Trigger = { HoldThree , R1 , L1 , Down } Scr = ToggleSwitchRegular Params = { PowerSlide } }
-  { Trigger = { TapOnceRelease , Up , X , 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } }
-  { Trigger = { HoldTwoAndPress , R1 , L1 , Triangle , 500 } Scr = Props Params = { string_id = props_string } }
-  { Trigger = { HoldTwoAndPress , R1 , L1 , Square , 500 } Scr = Taunt Params = { Anim = Taunt1 string_id = your_daddy_string } }
-  { Trigger = { HoldTwoAndPress , R1 , L1 , Circle , 500 } Scr = Taunt Params = { Anim = Taunt2 string_id = no_way_string } }
-  { Trigger = { HoldTwoAndPress , R1 , L1 , X , 500 } Scr = Taunt Params = { Anim = Taunt3 string_id = get_some_string } }
+  { Trigger = { Press R2 20 } Scr = ToggleSwitchRegular }
+  { Trigger = { TapOnceRelease Up X 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } }
+  { Trigger = { HoldTwoAndPress R1 L1 Triangle 500 } Scr = Props Params = { string_id = props_string } }
+  { Trigger = { HoldTwoAndPress R1 L1 Square 500 } Scr = Taunt Params = { Anim = Taunt1 string_id = your_daddy_string } }
+  { Trigger = { HoldTwoAndPress R1 L1 Circle 500 } Scr = Taunt Params = { Anim = Taunt2 string_id = no_way_string } }
+  { Trigger = { HoldTwoAndPress R1 L1 X 500 } Scr = Taunt Params = { Anim = Taunt3 string_id = get_some_string } }
 ]
 NoTricks =
 [
-]
-Reverts =
-[
-  { Trigger = { Press , R2 , 200 } TrickSlot = ExtraSlot1 }
-  { Trigger = { Press , L2 , 200 } TrickSlot = ExtraSlot2 }
 ]
 script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim = RevertBS
   ClearLipCombos
@@ -38,7 +32,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
     Vibrate Actuator = 1 Percent = 80 Duration = 0.1
   endif
   ClearException Ollied
-  SetSpecialFriction [ 0 , 10 , 15 , 20 , 30 , 50 ]
+  SetSpecialFriction [ 0 10 15 20 30 50 ]
   SetQueueTricks NoTricks
   SetManualTricks Special = SpecialManualTricks ManualTricks
   NollieOff
@@ -67,14 +61,16 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   BlendPeriodOut 0.0
   Wait 0.1 seconds
   SetException Ex = Ollied Scr = Ollie
-  ResetLandedFromVert
+  if ( better4_control_doublerevert_value = off )
+    ResetLandedFromVert
+  endif
   WaitAnimFinished
   SetRollingFriction #"default"
   DoNextManualTrick FromAir
   OnGroundExceptions
   CheckGapTricks
   ClearPanel_Landed
-  OverrideCancelGround Off
+  OverrideCancelGround off
   ClearEventBuffer
   ClearManualTrick
   if Crouched
@@ -151,7 +147,7 @@ script ToggleSwitchRegular
     PlayCessSound
   endif
   WaitAnim 65 Percent
-  SetQueueTricks Jumptricks GroundTricks
+  SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
   FlipAfter
   BoardRotateAfter
   BlendPeriodOut 0.0
@@ -198,7 +194,7 @@ script ToggleNollieRegular
   OnGroundExceptions
   SetException Ex = Ollied Scr = Nollie Params = { NoDoNextTrick }
   ClearTrickQueues
-  SetQueueTricks GroundTricks
+  SetQueueTricks better4_control_powerslide_value GroundTricks better4_control_stancechange_value
   if InNollie
     Printf "in Nollie mode ---------------------------"
     NollieOff
@@ -378,14 +374,32 @@ script Boneless Anim = Boneless Name = 'Boneless' Score = 250
   PlaySound boneless09 pitch = 85
   SetTrickName <Name>
   SetTrickScore <Score>
-  if not SkaterIsNamed vallely
-    PlayAnim Anim = <Anim> BlendPeriod = 0.2
-  else
+  if SkaterIsNamed vallely
     PlayAnim Anim = _540Boneless BlendPeriod = 0.1 Speed = 1.25 from = 10
     SetTrickScore 300
     SetTrickName "MikeV Boneless"
     FlipAfter
     BlendPeriodOut 0
+  else
+  if ( better4_control_jumptrick_index = 3 )
+    PlayAnim Anim = _540Boneless BlendPeriod = 0.1 Speed = 1.25 from = 10
+    SetTrickScore 300
+    SetTrickName "MikeV Boneless"
+    FlipAfter
+    BlendPeriodOut 0
+  else
+  if ( better4_control_jumptrick_index = 2 )
+    PlayAnim Anim = Fastplant BlendPeriod = 0.2
+    SetTrickName "Fastplant"
+  else
+  if ( better4_control_jumptrick_index = 1 )
+    PlayAnim Anim = Beanplant BlendPeriod = 0.2
+    SetTrickName "Beanplant"
+  else
+    PlayAnim Anim = <Anim> BlendPeriod = 0.2
+  endif
+  endif
+  endif
   endif
   Display
   BailOff

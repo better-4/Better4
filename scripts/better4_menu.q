@@ -1,25 +1,10 @@
-better4_menu_items = [
-  { text = "1-Tap Boostplant" id = wallplant_toggle flag = WALLPLANT_INPUT_FLAG }
-  { text = "Lip Tricks" id = lip_toggle flag = LIP_TRICK_FLAG set_script = better4_toggle_lip_set unset_script = better4_toggle_lip_unset }
-  { text = "Modern Manuals" id = mm_toggle flag = MODERN_MANUAL_FLAG }
-  { text = "Manual Floats" id = mf_toggle flag = MANUAL_FLOAT_FLAG }
-  { text = "Nollie 360 Flip" id = nollie_360_toggle flag = NOLLIE_360_FLAG }
-]
-
 script better4_menu_options {
-  close_script = nullscript
-}
+    close_script = nullscript
+  }
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
-
-  if not GetGlobalFlag flag = MOD_INI_FLAG
-    SetGlobalFlag flag = MOD_INI_FLAG
-    SetGlobalFlag flag = LIP_TRICK_FLAG
-  endif
-
   pulse_blur
-
   make_new_menu {
     menu_id = better4_menu
     vmenu_id = better4_vmenu
@@ -27,85 +12,167 @@ script better4_menu_options {
     helper_text = generic_helper_text
     pos = (223, 59)
   }
-
   kill_start_key_binding
   SetScreenElementProps { id = better4_vmenu event_handlers = [
-      { pad_back skateshop_transition params = { new_menu_script = <close_script> } }
+      { pad_back skateshop_transition Params = { new_menu_script = <close_script> } }
     ]
   }
-
   set_sub_bg pos = (326, 65)
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
-
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
-
   make_text_sub_menu_item text = "" not_focusable
-  ForEachIn better4_menu_items do = better4_menu_item params = <...>
-  make_text_sub_menu_item text = "Close" scale = 0.8 id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
-
+  make_text_sub_menu_item text = "In Air" scale = 0.85 id = inair_option pad_choose_script = better4_inair_menu pad_choose_params = { close_script = <close_script> }
+  make_text_sub_menu_item text = "On Ground" scale = 0.85 id = onground_option pad_choose_script = better4_onground_menu pad_choose_params = { close_script = <close_script> }
+  make_text_sub_menu_item text = "On Rail" scale = 0.85 id = onrail_option pad_choose_script = better4_onrail_menu pad_choose_params = { close_script = <close_script> }
+  make_text_sub_menu_item text = "Wallrides" scale = 0.85 id = wallride_option pad_choose_script = better4_wallride_menu pad_choose_params = { close_script = <close_script> }
+  make_text_sub_menu_item text = "Close" scale = 0.85 id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
-script better4_menu_item { // requires: <id>, <text>, <flag>
-  text = ""
-  scale = 0.8
-  set_script = nullscript
-  unset_script = nullscript
-}
-  Printf "making menu item %s" s = <text>
-  make_toggle_menu_item id = <id> text = <text> scale = <scale> pad_choose_script = better4_toggle_item pad_choose_params = <...>
-
-  SetScreenElementProps { id = <id> event_handlers = [
-      { pad_left better4_toggle_item params = <...> }
-      { pad_right better4_toggle_item params = <...> }
+script better4_onground_menu {
+    close_script = nullscript
+  }
+  if ObjectExists id = current_menu_anchor
+    DestroyScreenElement id = current_menu_anchor
+  endif
+  pulse_blur
+  make_new_menu {
+    menu_id = better4_onground_menu_id
+    vmenu_id = better4_onground_vmenu
+    menu_title = "ON GROUND"
+    helper_text = generic_helper_text
+    pos = (223, 59)
+  }
+  SetScreenElementProps { id = better4_onground_vmenu event_handlers = [
+      { pad_back better4_onground_back Params = { close_script = <close_script> } }
     ]
   }
-  RunScriptOnScreenElement id = <id> better4_check_item params = <...>
+  set_sub_bg pos = (326, 65)
+  create_icon pos = (176, 65) id = better4_icon texture = PA_options
+  draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
+  make_text_sub_menu_item text = "" not_focusable
+  better4_control_menu_item better4_control_revert
+  better4_control_menu_item better4_control_powerslide
+  better4_control_menu_item better4_control_stancechange
+  better4_control_menu_item better4_control_jumptrick
+  better4_control_menu_item better4_control_manualspin
+  better4_control_menu_item better4_control_manualfloat
+  better4_control_menu_item better4_control_doublerevert
+  make_text_sub_menu_item text = "Back" scale = 0.85 id = onground_back_option pad_choose_script = better4_onground_back pad_choose_params = { close_script = <close_script> }
+  RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
-script better4_toggle_item // requires: <id>, <flag>
-  if GetGlobalFlag flag = <flag>
-    UnSetGlobalFlag flag = <flag>
-    toggle_menu_item_off id = <id>
-  else
-    SetGlobalFlag flag = <flag>
-    toggle_menu_item_on id = <id>
+script better4_onground_back {
+    close_script = nullscript
+  }
+  DestroyScreenElement id = current_menu_anchor
+  better4_menu_options close_script = <close_script>
+endscript
+script better4_inair_menu {
+    close_script = nullscript
+  }
+  if ObjectExists id = current_menu_anchor
+    DestroyScreenElement id = current_menu_anchor
   endif
+  pulse_blur
+  make_new_menu {
+    menu_id = better4_inair_menu_id
+    vmenu_id = better4_inair_vmenu
+    menu_title = "IN AIR"
+    helper_text = generic_helper_text
+    pos = (223, 59)
+  }
+  SetScreenElementProps { id = better4_inair_vmenu event_handlers = [
+      { pad_back better4_inair_back Params = { close_script = <close_script> } }
+    ]
+  }
+  set_sub_bg pos = (326, 65)
+  create_icon pos = (176, 65) id = better4_icon texture = PA_options
+  draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
+  make_text_sub_menu_item text = "" not_focusable
+  better4_control_menu_item better4_control_spinkeys
+  better4_control_menu_item better4_control_spinetransfer
+  make_text_sub_menu_item text = "Back" scale = 0.85 id = inair_back_option pad_choose_script = better4_inair_back pad_choose_params = { close_script = <close_script> }
+  RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
-script better4_check_item { // requires: <id>, <flag>
-  set_script = nullscript
-  unset_script = nullscript
-}
-  if GetGlobalFlag flag = <flag>
-    toggle_menu_item_on id = <id>
-    if GotParam set_script
-      <set_script>
-    endif
-  else
-    toggle_menu_item_off id = <id>
-    if GotParam unset_script
-      <unset_script>
-    endif
+script better4_inair_back {
+    close_script = nullscript
+  }
+  DestroyScreenElement id = current_menu_anchor
+  better4_menu_options close_script = <close_script>
+endscript
+script better4_onrail_menu {
+    close_script = nullscript
+  }
+  if ObjectExists id = current_menu_anchor
+    DestroyScreenElement id = current_menu_anchor
   endif
+  pulse_blur
+  make_new_menu {
+    menu_id = better4_onrail_menu_id
+    vmenu_id = better4_onrail_vmenu
+    menu_title = "ON RAIL"
+    helper_text = generic_helper_text
+    pos = (223, 59)
+  }
+  SetScreenElementProps { id = better4_onrail_vmenu event_handlers = [
+      { pad_back better4_onrail_back Params = { close_script = <close_script> } }
+    ]
+  }
+  set_sub_bg pos = (326, 65)
+  create_icon pos = (176, 65) id = better4_icon texture = PA_options
+  draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
+  make_text_sub_menu_item text = "" not_focusable
+  better4_control_menu_item better4_control_dropdown
+  better4_control_menu_item better4_control_liptricks
+  better4_control_menu_item better4_control_railspin
+  make_text_sub_menu_item text = "Back" scale = 0.85 id = onrail_back_option pad_choose_script = better4_onrail_back pad_choose_params = { close_script = <close_script> }
+  RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
-script better4_toggle_lip_unset
-  Change LipAllowAngle = 15
-  Change LipAllowAngle_Override = 60
+script better4_onrail_back {
+    close_script = nullscript
+  }
+  DestroyScreenElement id = current_menu_anchor
+  better4_menu_options close_script = <close_script>
 endscript
-
-script better4_toggle_lip_set
-  Change LipAllowAngle = 360
-  Change LipAllowAngle_Override = 360
+script better4_wallride_menu {
+    close_script = nullscript
+  }
+  if ObjectExists id = current_menu_anchor
+    DestroyScreenElement id = current_menu_anchor
+  endif
+  pulse_blur
+  make_new_menu {
+    menu_id = better4_wallride_menu_id
+    vmenu_id = better4_wallride_vmenu
+    menu_title = "WALLRIDES"
+    helper_text = generic_helper_text
+    pos = (223, 59)
+  }
+  SetScreenElementProps { id = better4_wallride_vmenu event_handlers = [
+      { pad_back better4_wallride_back Params = { close_script = <close_script> } }
+    ]
+  }
+  set_sub_bg pos = (326, 65)
+  create_icon pos = (176, 65) id = better4_icon texture = PA_options
+  draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
+  make_text_sub_menu_item text = "" not_focusable
+  better4_control_menu_item better4_control_wallieplant
+  better4_control_menu_item better4_control_wallspin
+  better4_control_menu_item better4_control_wallridebail
+  make_text_sub_menu_item text = "Back" scale = 0.85 id = wallride_back_option pad_choose_script = better4_wallride_back pad_choose_params = { close_script = <close_script> }
+  RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
+script better4_wallride_back {
+    close_script = nullscript
+  }
+  DestroyScreenElement id = current_menu_anchor
+  better4_menu_options close_script = <close_script>
+endscript
 script better4_main_menu_watermark
-  // better4_ini_demo
+  better4_controls_init
   FormatText TextName = better4_watermark "Better4 %s" s = better4_version
   CreateScreenElement {
     parent = current_menu_anchor
-    type = TextElement
+    Type = TextElement
     text = <better4_watermark>
     font = newtrickfont
     pos = (320, 380)
@@ -115,26 +182,4 @@ script better4_main_menu_watermark
     z_priority = 9999
     not_focusable
   }
-endscript
-
-script better4_ini_demo
-  if GetIniBool section = "Miscellaneous" key = "Debug"
-    Printf "debug is on"
-  else
-    Printf "debug is off"
-  endif
-
-  // Stores ini["Graphics.ResolutionX"] in <resolution_x>
-  GetIniInteger section = "Graphics" key = "ResolutionX" ValueName = resolution_x
-  GetIniInteger section = "Graphics" key = "ResolutionY" ValueName = resolution_y
-  Printf "Resolution is %x by %y" x = <resolution_x> y = <resolution_y>
-
-  // Sets ini["Testing.X"] to <resolution_x>
-  SetIniInteger section = "Testing" key = "X" value = <resolution_x>
-  SetIniInteger section = "Testing" key = "Y" value = <resolution_y>
-
-  // Technically equivalent to SetIniInteger with 0/1, but will coerce any non-zero value to 1
-  SetIniBool section = "Testing" key = "False" value = 0
-  SetIniBool section = "Testing" key = "True" value = 1
-
 endscript
