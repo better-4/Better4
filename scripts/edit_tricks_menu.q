@@ -185,7 +185,7 @@ script create_edit_tricks_sub_menu
     pos = (320, 240)
   }
   AssignAlias id = edit_tricks_sub_menu_anchor alias = current_menu_anchor
-  create_helper_text generic_helper_text
+  create_helper_text generic_helper_text_unassign
    <root_pos> = (40, 20)
   CreateScreenElement {
     type = SpriteElement

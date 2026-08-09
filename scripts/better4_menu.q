@@ -39,7 +39,7 @@ script better4_onground_menu {
     menu_id = better4_onground_menu_id
     vmenu_id = better4_onground_vmenu
     menu_title = "ON GROUND"
-    helper_text = generic_helper_text
+    helper_text = generic_helper_text_better4
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_onground_vmenu event_handlers = [
@@ -77,7 +77,7 @@ script better4_inair_menu {
     menu_id = better4_inair_menu_id
     vmenu_id = better4_inair_vmenu
     menu_title = "IN AIR"
-    helper_text = generic_helper_text
+    helper_text = generic_helper_text_better4
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_inair_vmenu event_handlers = [
@@ -110,7 +110,7 @@ script better4_onrail_menu {
     menu_id = better4_onrail_menu_id
     vmenu_id = better4_onrail_vmenu
     menu_title = "ON RAIL"
-    helper_text = generic_helper_text
+    helper_text = generic_helper_text_better4
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_onrail_vmenu event_handlers = [
@@ -144,7 +144,7 @@ script better4_wallride_menu {
     menu_id = better4_wallride_menu_id
     vmenu_id = better4_wallride_vmenu
     menu_title = "WALLRIDES"
-    helper_text = generic_helper_text
+    helper_text = generic_helper_text_better4
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_wallride_vmenu event_handlers = [
