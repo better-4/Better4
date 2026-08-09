@@ -689,6 +689,7 @@ script edit_tricks_menu_add_item { parent = current_menu
   endif
 endscript
 script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu_goto_trick_list
+    pad_square_script = edit_tricks_menu_unassign_trick
     highlight_bar_scale = (0.38, 1.2)
     parent = edit_tricks_menu_1
   }
@@ -722,6 +723,7 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
   SetScreenElementProps {
     id = <anchor_id>
     event_handlers = [ { pad_choose <pad_choose_script> params = <pad_choose_params> }
+	  { pad_square <pad_square_script> params = <pad_choose_params> }
       { pad_start <pad_choose_script> params = <pad_choose_params> }
       { pad_choose generic_menu_pad_choose_sound }
     ]
@@ -768,6 +770,7 @@ script edit_tricks_sub_menu_add_trick pad_choose_script = edit_tricks_menu_bind_
   }
 endscript
 script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_goto_trick_list
+    pad_square_script = special_tricks_menu_unassign_trick
     highlight_bar_scale = (2, 1.3)
   }
   if GoalManager_HasActiveGoals
@@ -780,6 +783,7 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     event_handlers = [ { focus edit_tricks_menu_focus params = { highlight_bar_pos = (-5, 0) highlight_bar_scale = <highlight_bar_scale> first_item last_item no_arrows } }
       { unfocus edit_tricks_menu_unfocus params = { rgba = [ 90 90 90 100 ] } }
       { pad_choose <pad_choose_script> params = { highlight_script = edit_tricks_menu_focus highlight_bar_scale = (0.18, 1.3) index = <index> } }
+	  { pad_square <pad_square_script> params = { highlight_script = edit_tricks_menu_focus highlight_bar_scale = (0.18, 1.3) index = <index> } }
       { pad_start <pad_choose_script> params = { highlight_script = edit_tricks_menu_focus highlight_bar_scale = (0.18, 1.3) index = <index> } }
       { pad_choose generic_menu_pad_choose_sound }
     ]
@@ -907,6 +911,44 @@ script special_tricks_menu_add_type
     not_focusable
   }
 endscript
+SCRIPT special_tricks_menu_unassign_trick 
+	edit_tricks_menu_1_index = <index> 
+	BindTrickToKeyCombo { 
+		special 
+		index = ( <index> - 1 ) 
+		key_combo = Unassigned 
+		trick = Unassigned 
+		update_mappings = 1 
+	} 
+	GetCurrentSkaterProfileIndex 
+	IF InSplitScreenGame 
+		printf "in a split screen game" 
+	ELSE 
+		UpdateTrickMappings Skater = <currentSkaterProfileIndex> 
+	ENDIF 
+	GoalManager_ReplaceTrickText all 
+	edit_tricks_menu_back_from_trick_list 
+ENDSCRIPT
+
+SCRIPT edit_tricks_menu_unassign_trick 
+	edit_tricks_menu_1_index = <index> 
+	IF GotParam highlight_script 
+		RunScriptOnScreenElement id = <id> <highlight_script> params = { highlight_bar_scale = <highlight_bar_scale> } 
+	ENDIF 
+	BindTrickToKeyCombo { 
+		key_combo = <key_combo> 
+		trick = Unassigned 
+		update_mappings = 1 
+	} 
+	GetCurrentSkaterProfileIndex 
+	IF InSplitScreenGame 
+		printf "in a split screen game" 
+	ELSE 
+		UpdateTrickMappings Skater = <currentSkaterProfileIndex> 
+	ENDIF 
+	GoalManager_ReplaceTrickText all 
+	edit_tricks_menu_back_from_trick_list 
+ENDSCRIPT
 script special_tricks_menu_add_trick
   if GotParam first_item
     focus_params = { first_item }
