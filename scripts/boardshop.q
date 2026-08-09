@@ -520,18 +520,6 @@ script boardshop_create_griptape_menu
   FireEvent type = focus target = boardshop_griptape_menu
 endscript
 script boardshop_create_board_menu
-  TRG_Deck_Main:Unhide
-  get_current_skater_use_jets
-  if ( <use_jets> = 1 )
-    TRG_Deck_MainTrucks:Hide
-    TRG_Deck_MainJets:Unhide
-  else
-    TRG_Deck_MainTrucks:Unhide
-    TRG_Deck_MainJets:Hide
-  endif
-  boardshop_sync_to_skater_graphic
-  boardshop_sync_to_skater_griptape
-  TRG_Deck_Main:boardshop_reset_main_board
   GetArraySize board
   if not GotParam index
      <index> = 0
@@ -572,15 +560,6 @@ script boardshop_create_board_menu
    FireEvent type = focus target = boardshop_griptape_menu
 endscript
 script boardshop_create_wheel_color_menu
-  // TRG_Deck_Main:Unhide
-  // get_current_skater_use_jets
-  // if ( <use_jets> = 1 )
-    // TRG_Deck_MainTrucks:Hide
-    // TRG_Deck_MainJets:Unhide
-  // else
-    // TRG_Deck_MainTrucks:Unhide
-    // TRG_Deck_MainJets:Hide
-  // endif
   boardshop_sync_to_skater_graphic
   boardshop_sync_to_skater_griptape
   TRG_Deck_Main:boardshop_reset_main_board
