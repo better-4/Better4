@@ -1,6 +1,10 @@
 off = 0
 on = 1
+
 better4_controls_ini_section = "Controls"
+
+// In Air
+
 better4_control_spinkeys_index = 0
 better4_control_spinkeys = {
   id = better4_control_spinkeys_id
@@ -15,9 +19,11 @@ better4_control_spinkeys = {
   ]
   change_script = better4_control_spinkeys_change
 }
+
 script better4_control_spinkeys_change
   SetSpinKeysControl index = better4_control_spinkeys_index
 endscript
+
 better4_control_spinetransfer_index = 0
 better4_control_spinetransfer = {
   id = better4_control_spinetransfer_id
@@ -36,13 +42,16 @@ better4_control_spinetransfer = {
   ]
   change_script = better4_control_spinetransfer_change
 }
+
 script better4_control_spinetransfer_change
   SetSpineTransferControl index = better4_control_spinetransfer_index
 endscript
+
 RevertVanilla = [
   { Trigger = { Press R2 200 } TrickSlot = ExtraSlot1 }
   { Trigger = { Press L2 200 } TrickSlot = ExtraSlot2 }
 ]
+
 RevertOnlyR2 = [ { Trigger = { Press R2 200 } TrickSlot = ExtraSlot1 } ]
 RevertOnlyL2 = [ { Trigger = { Press L2 200 } TrickSlot = ExtraSlot2 } ]
 RevertR2andL2 = [ { Trigger = { HoldThree L2 R2 L2 } TrickSlot = ExtraSlot1 } ]
@@ -53,6 +62,7 @@ RevertR1orL1 = [
   { Trigger = { Press R1 200 } TrickSlot = ExtraSlot1 }
   { Trigger = { Press L1 200 } TrickSlot = ExtraSlot2 }
 ]
+
 better4_control_revert_index = 0
 better4_control_revert_value = RevertVanilla
 better4_control_revert = {
@@ -72,6 +82,9 @@ better4_control_revert = {
     { text = "R1+L1" value = RevertR1orL1 }
   ]
 }
+
+// On Ground
+
 PowerslideVanilla = [ { Trigger = { HoldThree R1 L1 Down } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
 PowerslideDownR2L2 = [ { Trigger = { HoldThree R2 L2 Down } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
 PowerslideDownR2 = [ { Trigger = { HoldThree Down R2 R2 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
@@ -80,6 +93,7 @@ PowerslideR2 = [ { Trigger = { HoldThree R2 R2 R2 } Scr = ToggleSwitchRegular pa
 PowerslideL2 = [ { Trigger = { HoldThree L2 L2 L2 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
 PowerslideR1 = [ { Trigger = { HoldThree R1 R1 R1 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
 PowerslideL1 = [ { Trigger = { HoldThree L1 L1 L1 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
+
 better4_control_powerslide_index = 0
 better4_control_powerslide_value = PowerslideVanilla
 better4_control_powerslide = {
@@ -99,7 +113,9 @@ better4_control_powerslide = {
     { text = "L1" value = PowerslideL1 }
   ]
 }
+
 NollieL2 = [ { Trigger = { Press L2 20 } Scr = ToggleNollieRegular } ]
+
 better4_control_stancechange_index = 0
 better4_control_stancechange_value = NollieL2
 better4_control_stancechange = {
@@ -113,10 +129,12 @@ better4_control_stancechange = {
     { text = "Off" value = NoTricks }
   ]
 }
+
 JumptrickBoneless = [ { Trigger = { TapTwiceRelease Up X 500 } Scr = Boneless params = { Name = 'Boneless' Anim = Boneless Score = 250 } } ]
 JumptrickFastplant = [ { Trigger = { TapTwiceRelease Up X 500 } Scr = Boneless params = { Name = 'Fastplant' Anim = Fastplant Score = 250 } } ]
 JumptrickBeanplant = [ { Trigger = { TapTwiceRelease Up X 500 } Scr = Boneless params = { Name = 'Beanplant' Anim = Beanplant Score = 250 } } ]
 JumptrickMikeVBoneless = [ { Trigger = { TapTwiceRelease Up X 500 } Scr = Boneless params = { Name = "MikeV Boneless" Anim = _540Boneless Score = 300 Speed = 1.25 } } ]
+
 better4_control_jumptrick_index = 0
 better4_control_jumptrick_value = JumptrickBoneless
 better4_control_jumptrick = {
@@ -132,6 +150,7 @@ better4_control_jumptrick = {
     { text = "MikeV" value = JumptrickMikeVBoneless }
   ]
 }
+
 better4_control_manualspin_index = 0
 better4_control_manualspin_value = off
 better4_control_manualspin = {
@@ -145,6 +164,7 @@ better4_control_manualspin = {
     { text = "R2/L2" value = on }
   ]
 }
+
 better4_control_manualfloat_index = 0
 better4_control_manualfloat_value = off
 better4_control_manualfloat = {
@@ -158,6 +178,7 @@ better4_control_manualfloat = {
     { text = "On" value = on }
   ]
 }
+
 better4_control_doublerevert_index = 1
 better4_control_doublerevert_value = on
 better4_control_doublerevert = {
@@ -171,6 +192,9 @@ better4_control_doublerevert = {
     { text = "On" value = on }
   ]
 }
+
+// On Rails
+
 DropdownVanilla = [
   { Trigger = { Press L2 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 movey = 5 } }
   { Trigger = { Press R2 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 movey = 5 } }
@@ -185,6 +209,7 @@ DropdownR1orL1 = [
   { Trigger = { Press L1 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 movey = 5 } }
   { Trigger = { Press R1 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 movey = 5 } }
 ]
+
 better4_control_dropdown_index = 1
 better4_control_dropdown_value = DropdownOnlyR2
 better4_control_dropdown = {
@@ -204,6 +229,7 @@ better4_control_dropdown = {
     { text = "R1+L1" value = DropdownR1andL1 }
   ]
 }
+
 better4_control_liptricks_index = 1
 better4_control_liptricks_value = on
 better4_control_liptricks = {
@@ -218,6 +244,7 @@ better4_control_liptricks = {
   ]
   change_script = better4_control_liptricks_change
 }
+
 script better4_control_liptricks_change
   switch better4_control_liptricks_value
   case off
@@ -228,6 +255,7 @@ script better4_control_liptricks_change
     Change LipAllowAngle_Override = 60
   endswitch
 endscript
+
 better4_control_railspin_index = 1
 better4_control_railspin_value = on
 better4_control_railspin = {
@@ -241,8 +269,12 @@ better4_control_railspin = {
     { text = "On" value = on }
   ]
 }
+
+// Wallrides
+
 WallieplantTricks = [ { Trigger = { TapTwiceRelease Up X 500 } Scr = Trick_WallPlant } ]
 WallieplantTricks_Single = [ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
+
 better4_control_wallieplant_index = 0
 better4_control_wallieplant_value = WallieplantTricks
 better4_control_wallieplant = {
@@ -256,6 +288,7 @@ better4_control_wallieplant = {
     { text = "U+X" value = WallieplantTricks_Single }
   ]
 }
+
 better4_control_wallspin_index = 1
 better4_control_wallspin_value = on
 better4_control_wallspin = {
@@ -269,6 +302,7 @@ better4_control_wallspin = {
     { text = "On" value = on }
   ]
 }
+
 better4_control_wallridebail_index = 1
 better4_control_wallridebail_value = on
 better4_control_wallridebail = {
@@ -282,8 +316,10 @@ better4_control_wallridebail = {
     { text = "On" value = on }
   ]
 }
+
 script better4_controls_init
   Printf "Initializing Better4 Controls"
+  // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
   better4_control_init better4_control_spinetransfer
   better4_control_init better4_control_revert
@@ -300,8 +336,9 @@ script better4_controls_init
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
 endscript
+
 script better4_control_init
-   <index> = <index_name>
+  <index> = <index_name>
   GetIniInteger {
     section = better4_controls_ini_section
     key = <ini_key>
@@ -311,10 +348,10 @@ script better4_control_init
   GetArraySize <options>
   if ( <new_index> < 0 )
     Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
-     <new_index> = 0
+    <new_index> = 0
   else
     if not ( <array_size> > <new_index> )
-       <new_index> = ( <array_size> - 1 )
+      <new_index> = ( <array_size> - 1 )
       Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
     endif
   endif
@@ -324,21 +361,23 @@ script better4_control_init
     better4_control_change <...>
   endif
 endscript
+
 script better4_control_cycle
-   <index> = <index_name>
-   <new_index> = ( <index> + <delta> )
+  <index> = <index_name>
+  <new_index> = ( <index> + <delta> )
   GetArraySize <options>
   if ( <new_index> < 0 )
-     <new_index> = ( <new_index> + <array_size> )
+    <new_index> = ( <new_index> + <array_size> )
     Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
   else
     if not ( <array_size> > <new_index> )
-       <new_index> = ( <new_index> - <array_size> )
+      <new_index> = ( <new_index> - <array_size> )
       Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
     endif
   endif
   better4_control_change needs_write <...>
 endscript
+
 script better4_control_change
   CastToInteger new_index
   Printf "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
@@ -353,6 +392,7 @@ script better4_control_change
     SpawnScript <change_script>
   endif
 endscript
+
 script better4_control_menu_item {
     font = small
     child_pos = { (210, 0) relative }
@@ -366,7 +406,7 @@ script better4_control_menu_item {
     unfocus_script = do_scale_down
     pad_choose_script = item_chosen
   }
-   <index> = <index_name>
+  <index> = <index_name>
   CreateScreenElement {
     Type = TextElement
     parent = current_menu
@@ -385,7 +425,7 @@ script better4_control_menu_item {
     ]
   }
   CastToInteger index
-   <value_text> = ( ( <options> [ <index> ] ).text )
+  <value_text> = ( ( <options> [ <index> ] ).text )
   CreateScreenElement {
     Type = TextElement
     parent = <id>
@@ -397,18 +437,21 @@ script better4_control_menu_item {
     scale = <child_scale>
   }
 endscript
+
 script better4_control_menu_cycle
   better4_control_cycle <...>
   CastToInteger index
-   <value_text> = ( ( <options> [ <index> ] ).text )
+  <value_text> = ( ( <options> [ <index> ] ).text )
   SetScreenElementProps {
     id = { <id> child = 0 }
     text = <value_text>
   }
 endscript
+
 script better4_control_menu_cycle_right
   better4_control_menu_cycle <...> delta = 1
 endscript
+
 script better4_control_menu_cycle_left
   better4_control_menu_cycle <...> delta = -1
 endscript
