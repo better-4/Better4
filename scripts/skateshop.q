@@ -4037,6 +4037,33 @@ script get_current_skater_griptape_menu_enabled
   endif
   return griptape_menu_enabled = <retVal>
 endscript
+
+
+script get_current_skater_wheel_menu_enabled
+   <retVal> = 1
+  GetCurrentSkaterProfileIndex
+  if GetPlayerAppearancePart player = <currentSkaterProfileIndex> part = board
+    GetActualCASOptionStruct part = board desc_id = <desc_id>
+    if GotParam no_wheels
+       <retVal> = 0
+    endif
+  endif
+  return wheels_menu_enabled = <retVal>
+endscript
+
+script get_current_skater_deck_menu_enabled
+   <retVal> = 1
+  GetCurrentSkaterProfileIndex
+  if GetPlayerAppearancePart player = <currentSkaterProfileIndex> part = board
+    GetActualCASOptionStruct part = board desc_id = <desc_id>
+    if GotParam no_deck
+       <retVal> = 0
+    endif
+  endif
+  return decks_menu_enabled = <retVal>
+endscript
+
+
 script get_current_skater_use_jets
    <retVal> = 0
   GetCurrentSkaterProfileIndex
