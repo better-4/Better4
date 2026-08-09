@@ -24,68 +24,68 @@ Trick_HoHoSadplant = { Scr = LipMacro2 Params = { Name = 'Ho Ho Sad Plant' Score
 Trick_Burntwist = { Scr = LipMacro2 Params = { Name = 'Burntwist' Score = 3000 InitAnim = Burntwist_Init OutAnim = Burntwist NoOllie NoBalance RevertBS ReleaseFrame = 40 ExtraTricks = InvertExtras IsSpecial } }
 Trick_HeelflipFSInvert = { Scr = LipMacro2 Params = { Name = 'Heelflip FS Invert' Score = 3200 InitAnim = HeelflipFSInvert_init Anim = HeelflipFSInvert_range OutAnim = HeelflipFSInvert_out NoOllie IsSpecial FlipAfter RevertBS ExtraTricks = InvertExtras } }
 Trick_HTeethSweeper = { Scr = LipMacro2 Params = { Name = 'The H Teeth Sweeper' Score = 4000 InitAnim = HTeethSweeper_Init Anim = HTeethSweeper_Range OutAnim = HTeethSweeper_Out NoOllie IsSpecial BloodFrame = 10 } }
-Trick_Summoner = { Scr = LipMacro2 Params = { Name = 'The Summoner' Score = 5000 InitAnim = Summoner_Init Idle Anim = Summoner_Idle OutAnim = Summoner_out IsSpecial NoOllie } }
+Trick_Summoner = { Scr = LipMacro2 Params = { Name = 'The Summoner' Score = 5000 InitAnim = Summoner_Init Anim = Summoner_Idle OutAnim = Summoner_out IsSpecial NoOllie } }
 SpecialLipTricks =
 [
-  { Trigger = { TripleInOrder , Up , Right , Triangle , 1000 } TrickSlot = SpLip_U_R_Triangle }
-  { Trigger = { TripleInOrder , Up , Down , Triangle , 1000 } TrickSlot = SpLip_U_D_Triangle }
-  { Trigger = { TripleInOrder , Up , Left , Triangle , 1000 } TrickSlot = SpLip_U_L_Triangle }
-  { Trigger = { TripleInOrder , Right , Up , Triangle , 1000 } TrickSlot = SpLip_R_U_Triangle }
-  { Trigger = { TripleInOrder , Right , Down , Triangle , 1000 } TrickSlot = SpLip_R_D_Triangle }
-  { Trigger = { TripleInOrder , Right , Left , Triangle , 1000 } TrickSlot = SpLip_R_L_Triangle }
-  { Trigger = { TripleInOrder , Down , Up , Triangle , 1000 } TrickSlot = SpLip_D_U_Triangle }
-  { Trigger = { TripleInOrder , Down , Right , Triangle , 1000 } TrickSlot = SpLip_D_R_Triangle }
-  { Trigger = { TripleInOrder , Down , Left , Triangle , 1000 } TrickSlot = SpLip_D_L_Triangle }
-  { Trigger = { TripleInOrder , Left , Up , Triangle , 1000 } TrickSlot = SpLip_L_U_Triangle }
-  { Trigger = { TripleInOrder , Left , Right , Triangle , 1000 } TrickSlot = SpLip_L_R_Triangle }
-  { Trigger = { TripleInOrder , Left , Down , Triangle , 1000 } TrickSlot = SpLip_L_D_Triangle }
-  { Trigger = { TripleInOrder , Up , Up , Triangle , 1000 } TrickSlot = SpLip_U_U_Triangle }
+  { Trigger = { TripleInOrder Up Right Triangle 1000 } TrickSlot = SpLip_U_R_Triangle }
+  { Trigger = { TripleInOrder Up Down Triangle 1000 } TrickSlot = SpLip_U_D_Triangle }
+  { Trigger = { TripleInOrder Up Left Triangle 1000 } TrickSlot = SpLip_U_L_Triangle }
+  { Trigger = { TripleInOrder Right Up Triangle 1000 } TrickSlot = SpLip_R_U_Triangle }
+  { Trigger = { TripleInOrder Right Down Triangle 1000 } TrickSlot = SpLip_R_D_Triangle }
+  { Trigger = { TripleInOrder Right Left Triangle 1000 } TrickSlot = SpLip_R_L_Triangle }
+  { Trigger = { TripleInOrder Down Up Triangle 1000 } TrickSlot = SpLip_D_U_Triangle }
+  { Trigger = { TripleInOrder Down Right Triangle 1000 } TrickSlot = SpLip_D_R_Triangle }
+  { Trigger = { TripleInOrder Down Left Triangle 1000 } TrickSlot = SpLip_D_L_Triangle }
+  { Trigger = { TripleInOrder Left Up Triangle 1000 } TrickSlot = SpLip_L_U_Triangle }
+  { Trigger = { TripleInOrder Left Right Triangle 1000 } TrickSlot = SpLip_L_R_Triangle }
+  { Trigger = { TripleInOrder Left Down Triangle 1000 } TrickSlot = SpLip_L_D_Triangle }
+  { Trigger = { TripleInOrder Up Up Triangle 1000 } TrickSlot = SpLip_U_U_Triangle }
 ]
 LipTricks =
 [
-  { Trigger = { Press , UpLeft , 500 } TrickSlot = Lip_TriangleUL }
-  { Trigger = { Press , UpRight , 500 } TrickSlot = Lip_TriangleUR }
-  { Trigger = { Press , DownLeft , 500 } TrickSlot = Lip_TriangleDL }
-  { Trigger = { Press , DownRight , 500 } TrickSlot = Lip_TriangleDR }
-  { Trigger = { Press , Left , 500 } TrickSlot = Lip_TriangleL }
-  { Trigger = { Press , Right , 500 } TrickSlot = Lip_TriangleR }
-  { Trigger = { Press , Down , 500 } TrickSlot = Lip_TriangleD }
-  { Trigger = { Press , Up , 500 } TrickSlot = Lip_TriangleU }
-  { Trigger = { Press , Triangle , 1000 } Scr = LipMacro2 Params = DefaultLipTrick }
+  { Trigger = { Press UpLeft 500 } TrickSlot = Lip_TriangleUL }
+  { Trigger = { Press Upright 500 } TrickSlot = Lip_TriangleUR }
+  { Trigger = { Press DownLeft 500 } TrickSlot = Lip_TriangleDL }
+  { Trigger = { Press DownRight 500 } TrickSlot = Lip_TriangleDR }
+  { Trigger = { Press Left 500 } TrickSlot = Lip_TriangleL }
+  { Trigger = { Press Right 500 } TrickSlot = Lip_TriangleR }
+  { Trigger = { Press Down 500 } TrickSlot = Lip_TriangleD }
+  { Trigger = { Press Up 500 } TrickSlot = Lip_TriangleU }
+  { Trigger = { Press Triangle 1000 } Scr = LipMacro2 Params = DefaultLipTrick }
 ]
 ComboLipTricks =
 [
-  { Trigger = { Press , UpLeft , 500 } TrickSlot = Lip_TriangleUL }
-  { Trigger = { Press , UpRight , 500 } TrickSlot = Lip_TriangleUR }
-  { Trigger = { Press , DownLeft , 500 } TrickSlot = Lip_TriangleDL }
-  { Trigger = { Press , DownRight , 500 } TrickSlot = Lip_TriangleDR }
-  { Trigger = { Press , Left , 500 } TrickSlot = Lip_TriangleL }
-  { Trigger = { Press , Right , 500 } TrickSlot = Lip_TriangleR }
-  { Trigger = { Press , Down , 500 } TrickSlot = Lip_TriangleD }
-  { Trigger = { Press , Up , 500 } TrickSlot = Lip_TriangleU }
-  { Trigger = { Press , Triangle , 500 } DefaultLipTrick }
+  { Trigger = { Press UpLeft 500 } TrickSlot = Lip_TriangleUL }
+  { Trigger = { Press Upright 500 } TrickSlot = Lip_TriangleUR }
+  { Trigger = { Press DownLeft 500 } TrickSlot = Lip_TriangleDL }
+  { Trigger = { Press DownRight 500 } TrickSlot = Lip_TriangleDR }
+  { Trigger = { Press Left 500 } TrickSlot = Lip_TriangleL }
+  { Trigger = { Press Right 500 } TrickSlot = Lip_TriangleR }
+  { Trigger = { Press Down 500 } TrickSlot = Lip_TriangleD }
+  { Trigger = { Press Up 500 } TrickSlot = Lip_TriangleU }
+  { Trigger = { Press Triangle 500 } DefaultLipTrick }
 ]
 LipTrickExtras =
 [
-  { Trigger = { InOrder , Circle , Circle , 300 } Trick_AxleStall }
-  { Trigger = { InOrder , Circle , Square , 300 } Trick_BSFootplant }
-  { Trigger = { InOrder , Square , Square , 300 } Trick_Disaster }
-  { Trigger = { InOrder , Square , Circle , 300 } Trick_RockToFakie }
-  { Trigger = { InOrder , Triangle , Triangle , 300 } Trick_Noseblunt }
-  { Trigger = { InOrder , Triangle , Square , 300 } Trick_Nosepick }
-  { Trigger = { InOrder , Triangle , Circle , 300 } Trick_Blunt }
+  { Trigger = { InOrder Circle Circle 300 } Trick_AxleStall }
+  { Trigger = { InOrder Circle Square 300 } Trick_BSFootplant }
+  { Trigger = { InOrder Square Square 300 } Trick_Disaster }
+  { Trigger = { InOrder Square Circle 300 } Trick_RockToFakie }
+  { Trigger = { InOrder Triangle Triangle 300 } Trick_Noseblunt }
+  { Trigger = { InOrder Triangle Square 300 } Trick_Nosepick }
+  { Trigger = { InOrder Triangle Circle 300 } Trick_Blunt }
 ]
 InvertExtras =
 [
-  { Trigger = { InOrder , Square , Square , 300 } Trick_OneFootInvert }
-  { Trigger = { InOrder , Triangle , Triangle , 300 } Trick_MuteInvert }
-  { Trigger = { InOrder , Circle , Circle , 300 } Trick_GymnastPlant }
-  { Trigger = { InOrder , Circle , Square , 300 } Trick_Invert }
-  { Trigger = { InOrder , Square , Circle , 300 } Trick_Eggplant }
-  { Trigger = { InOrder , Triangle , Circle , 300 } Trick_AndrectInvert }
+  { Trigger = { InOrder Square Square 300 } Trick_OneFootInvert }
+  { Trigger = { InOrder Triangle Triangle 300 } Trick_MuteInvert }
+  { Trigger = { InOrder Circle Circle 300 } Trick_GymnastPlant }
+  { Trigger = { InOrder Circle Square 300 } Trick_Invert }
+  { Trigger = { InOrder Square Circle 300 } Trick_Eggplant }
+  { Trigger = { InOrder Triangle Circle 300 } Trick_AndrectInvert }
 ]
 AndrectExtras =
-{ Trigger = { InOrder , Triangle , Triangle , 500 } Trick_Switcheroo }
+{ Trigger = { InOrder Triangle Triangle 500 } Trick_Switcheroo }
 script LipMacro2
   SetSkaterCamLerpReductionTimer time = 10
   if BailIsOn
@@ -229,7 +229,7 @@ endscript
 script LipBlood
   Wait <BloodFrame> frames
   PlaySound bitchslap2 pitch = 60
-  BloodParticlesOn Name = "breath.png" start_col = -1 end_col = 587202559 num = 2 emit_w = 2.0 emit_h = 2.0 angle = 50 size = 4.0 bone = head growth = 2 time = 0.5 speed = 250 grav = -1000 life = 0.5
+  BloodParticlesOn Name = "breath.png" start_col = -1 end_col = 587202559 num = 2 emit_w = 2.0 emit_h = 2.0 angle = 50 size = 4.0 bone = head growth = 2 time = 0.5 Speed = 250 grav = -1000 life = 0.5
   Obj_SpawnScript BloodSuperTiny
   Wait 1 frame
   PlaySound headsmackB
@@ -238,8 +238,8 @@ script FlameUp
   Obj_AttachFrame bone = "right_knee"
   Obj_AttachFrame bone = "left_knee"
   Obj_AttachFrame bone = "pelvis"
-  BloodParticlesOn Name = "breath.png" start_col = 1426128895 end_col = 153 blend_mode = 72 num = 40 emit_w = 1.0 emit_h = 1.0 angle = 10 size = 60.0 bone = right_knee growth = 0 time = 1 speed = 40 grav = 0 life = 1
-  BloodParticlesOn Name = "breath.png" start_col = 1429221424 end_col = 4671303 num = 50 emit_w = 2.0 emit_h = 2.0 angle = 20 size = 20.0 bone = pelvis growth = 1.5 time = 2 speed = 50 grav = 0 life = 1
+  BloodParticlesOn Name = "breath.png" start_col = 1426128895 end_col = 153 blend_mode = 72 num = 40 emit_w = 1.0 emit_h = 1.0 angle = 10 size = 60.0 bone = right_knee growth = 0 time = 1 Speed = 40 grav = 0 life = 1
+  BloodParticlesOn Name = "breath.png" start_col = 1429221424 end_col = 4671303 num = 50 emit_w = 2.0 emit_h = 2.0 angle = 20 size = 20.0 bone = pelvis growth = 1.5 time = 2 Speed = 50 grav = 0 life = 1
 endscript
 script LipOut y = 1
   ClearException Ollied
@@ -249,7 +249,7 @@ script LipOut y = 1
   SetSkaterCamLerpReductionTimer time = 0
   SetException Ex = Landed Scr = LipLand Params = { <...> }
   if GotParam OutAnim
-    PlayAnim Anim = <OutAnim> Blendperiod = 0.0
+    PlayAnim Anim = <OutAnim> BlendPeriod = 0.0
     BlendPeriodOut 0.3
   else
     if GotParam InitAnim
@@ -303,7 +303,7 @@ script LipOut y = 1
     CheckGapTricks
     ClearGapTricks
     ClearPanel_Landed
-    Goto OnGroundAi
+    Goto OnGroundAI
   endif
 endscript
 script ClearLipCombos
@@ -322,7 +322,7 @@ script LipLand
   else
     FlipAfter
   endif
-  SetExtraTricks tricks = Reverts duration = 20
+  SetExtraTricks tricks = Reverts Duration = 20
   WaitAnimFinished
   SetLandedFromVert
   Goto Land
@@ -361,8 +361,8 @@ script OllieLipOut
     RotateAfter
   endif
   SetLandedFromVert
-  Rotate x = 90
-  Rotate x = -45
+  Rotate X = 90
+  Rotate X = -45
   if HandleLipOllieDirection
     ClearLipCombos
     AllowRailTricks
@@ -394,9 +394,9 @@ script LipTrick
   ClearTrickQueue
   KillExtraTricks
   if Obj_FlagSet FLAG_SKATER_LIPCOMBO
-    SetQueueTricks special = SpecialLipTricks ComboLipTricks
+    SetQueueTricks Special = SpecialLipTricks ComboLipTricks
   else
-    SetQueueTricks special = SpecialLipTricks LipTricks
+    SetQueueTricks Special = SpecialLipTricks LipTricks
   endif
   UseGrindEvents
   Wait 1 Gameframe

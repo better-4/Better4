@@ -4,7 +4,6 @@ script better4_menu_options {
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
-
   pulse_blur
   make_new_menu {
     menu_id = better4_menu
@@ -15,7 +14,7 @@ script better4_menu_options {
   }
   kill_start_key_binding
   SetScreenElementProps { id = better4_vmenu event_handlers = [
-      { pad_back skateshop_transition params = { new_menu_script = <close_script> } }
+      { pad_back skateshop_transition Params = { new_menu_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
@@ -29,7 +28,6 @@ script better4_menu_options {
   make_text_sub_menu_item text = "Close" scale = 0.85 id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
 script better4_onground_menu {
     close_script = nullscript
   }
@@ -45,14 +43,13 @@ script better4_onground_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_onground_vmenu event_handlers = [
-      { pad_back better4_onground_back params = { close_script = <close_script> } }
+      { pad_back better4_onground_back Params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-
   better4_control_menu_item better4_control_revert
   better4_control_menu_item better4_control_powerslide
   better4_control_menu_item better4_control_stancechange
@@ -60,18 +57,15 @@ script better4_onground_menu {
   better4_control_menu_item better4_control_manualspin
   better4_control_menu_item better4_control_manualfloat
   better4_control_menu_item better4_control_doublerevert
-
   make_text_sub_menu_item text = "Back" scale = 0.85 id = onground_back_option pad_choose_script = better4_onground_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
 script better4_onground_back {
     close_script = nullscript
   }
   DestroyScreenElement id = current_menu_anchor
   better4_menu_options close_script = <close_script>
 endscript
-
 script better4_inair_menu {
     close_script = nullscript
   }
@@ -87,7 +81,7 @@ script better4_inair_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_inair_vmenu event_handlers = [
-      { pad_back better4_inair_back params = { close_script = <close_script> } }
+      { pad_back better4_inair_back Params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
@@ -99,14 +93,12 @@ script better4_inair_menu {
   make_text_sub_menu_item text = "Back" scale = 0.85 id = inair_back_option pad_choose_script = better4_inair_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
 script better4_inair_back {
     close_script = nullscript
   }
   DestroyScreenElement id = current_menu_anchor
   better4_menu_options close_script = <close_script>
 endscript
-
 script better4_onrail_menu {
     close_script = nullscript
   }
@@ -122,29 +114,25 @@ script better4_onrail_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_onrail_vmenu event_handlers = [
-      { pad_back better4_onrail_back params = { close_script = <close_script> } }
+      { pad_back better4_onrail_back Params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-
   better4_control_menu_item better4_control_dropdown
   better4_control_menu_item better4_control_liptricks
   better4_control_menu_item better4_control_railspin
-
   make_text_sub_menu_item text = "Back" scale = 0.85 id = onrail_back_option pad_choose_script = better4_onrail_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
 script better4_onrail_back {
     close_script = nullscript
   }
   DestroyScreenElement id = current_menu_anchor
   better4_menu_options close_script = <close_script>
 endscript
-
 script better4_wallride_menu {
     close_script = nullscript
   }
@@ -160,34 +148,31 @@ script better4_wallride_menu {
     pos = (223, 59)
   }
   SetScreenElementProps { id = better4_wallride_vmenu event_handlers = [
-      { pad_back better4_wallride_back params = { close_script = <close_script> } }
+      { pad_back better4_wallride_back Params = { close_script = <close_script> } }
     ]
   }
   set_sub_bg pos = (326, 65)
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-
   better4_control_menu_item better4_control_wallieplant
   better4_control_menu_item better4_control_wallspin
-
+  better4_control_menu_item better4_control_wallridebail
   make_text_sub_menu_item text = "Back" scale = 0.85 id = wallride_back_option pad_choose_script = better4_wallride_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
-
 script better4_wallride_back {
     close_script = nullscript
   }
   DestroyScreenElement id = current_menu_anchor
   better4_menu_options close_script = <close_script>
 endscript
-
 script better4_main_menu_watermark
   better4_controls_init
   FormatText TextName = better4_watermark "Better4 %s" s = better4_version
   CreateScreenElement {
     parent = current_menu_anchor
-    type = TextElement
+    Type = TextElement
     text = <better4_watermark>
     font = newtrickfont
     pos = (320, 380)

@@ -1,5 +1,5 @@
 off = 0
-on =1
+on = 1
 TRICK_PRELOAD_TIME = 160
 Jumptricks0 =
 [ { Trigger = { TapOnceRelease Up X 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } } ]
@@ -20,7 +20,6 @@ GroundTricks =
 NoTricks =
 [
 ]
-
 script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim = RevertBS
   ClearLipCombos
   KillExtraTricks
@@ -63,7 +62,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   Wait 0.1 seconds
   SetException Ex = Ollied Scr = Ollie
   if ( better4_control_doublerevert_value = off )
-     ResetLandedFromVert
+    ResetLandedFromVert
   endif
   WaitAnimFinished
   SetRollingFriction #"default"
@@ -71,7 +70,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   OnGroundExceptions
   CheckGapTricks
   ClearPanel_Landed
-  OverrideCancelGround Off
+  OverrideCancelGround off
   ClearEventBuffer
   ClearManualTrick
   if Crouched
@@ -366,7 +365,7 @@ script Fastplant
   WaitAnimWhilstChecking
   Goto Airborne
 endscript
-script Boneless Anim = Boneless Name = 'Boneless' Score = 250 Speed = 1.0
+script Boneless Anim = Boneless Name = 'Boneless' Score = 250
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump" BonelessHeight
@@ -382,14 +381,24 @@ script Boneless Anim = Boneless Name = 'Boneless' Score = 250 Speed = 1.0
     FlipAfter
     BlendPeriodOut 0
   else
-  if ( <jumptrick> = 3)
+  if ( better4_control_jumptrick_index = 3 )
     PlayAnim Anim = _540Boneless BlendPeriod = 0.1 Speed = 1.25 from = 10
     SetTrickScore 300
     SetTrickName "MikeV Boneless"
     FlipAfter
     BlendPeriodOut 0
   else
-        PlayAnim Anim = <Anim> BlendPeriod = 0.2 Speed = <Speed>
+  if ( better4_control_jumptrick_index = 2 )
+    PlayAnim Anim = Fastplant BlendPeriod = 0.2
+    SetTrickName "Fastplant"
+  else
+  if ( better4_control_jumptrick_index = 1 )
+    PlayAnim Anim = Beanplant BlendPeriod = 0.2
+    SetTrickName "Beanplant"
+  else
+    PlayAnim Anim = <Anim> BlendPeriod = 0.2
+  endif
+  endif
   endif
   endif
   Display
