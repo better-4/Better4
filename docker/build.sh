@@ -66,9 +66,6 @@ cmake -G Ninja -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
 cmake --build "${BUILD_ROOT}/serverbrowser" --target thps4-server-browser
 cp "${BUILD_ROOT}/serverbrowser/thps4-server-browser.exe" "${OUT}/"
 
-echo "==> Copying gslist"
-cp -r "${SRC}/vendor/gslist" "${OUT}/gslist"
-
 echo "==> Copying installer"
 cp "${SRC}/installer/install.bat" "${OUT}/"
 
