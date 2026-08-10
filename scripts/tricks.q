@@ -70,7 +70,7 @@ script SkaterInit
   if SkaterIsNamed jenna
     SwitchOffAtomic shoes
   endif
-  SetSkaterCamOverride heading = 0 tilt = 0 time = 0.0 zoom = 1
+  SetSkaterCamOverride heading = 0 tilt = 0 time = 0.000001 zoom = 1
   Wait 1 game frame
   ClearSkaterCamOverride
   ClearPanel_Landed
@@ -1393,7 +1393,7 @@ script DropIn DropInAnim = DropIn
   ResetSkaterParticleSystems
   PausePhysics
   RestartSkaterExceptions
-  SetSkaterCamOverride heading = 0 tilt = -0.75 time = 0.0 zoom = 5
+  SetSkaterCamOverride heading = 0 tilt = -0.75 time = 0.000001 zoom = 5
   SetRollingFriction 10000
   DisablePlayerInput
   PlayAnim Anim = <DropInAnim> Blendperiod = 0.0
