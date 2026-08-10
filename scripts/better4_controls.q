@@ -363,6 +363,7 @@ script better4_control_init
 endscript
 
 script better4_control_cycle
+  GetServerList
   <index> = <index_name>
   <new_index> = ( <index> + <delta> )
   GetArraySize <options>

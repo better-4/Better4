@@ -139,7 +139,6 @@ script quit_network_game
   level_select_change_level level = load_skateshop no_levelUnload
 endscript
 script spawned_chosen_host_game
-  Printf "!! spawned_chosen_host_game"
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
     Wait 1 frame
@@ -147,59 +146,38 @@ script spawned_chosen_host_game
   remove_host_options_sub_menu_textures_from_vram
   Cleanup preserve_skaters
   if IsXBOX
-    Printf "!! xbox loading screen"
-    DisplayLoadingScreen "loadscrn_Online"
-    // DisplayLoadingScreen "loadscrn_system_link_x"
+    DisplayLoadingScreen "loadscrn_system_link_x"
   else
-    Printf "!! online loading screen"
     DisplayLoadingScreen "loadscrn_Online"
   endif
-  Printf "!! FreeServerList"
   FreeServerList
-  Printf "!! LeaveServer"
   LeaveServer
-  Printf "!! SetGameType NetLobby"
   SetGameType NetLobby
-  Printf "!! SetCurrentGameType"
   SetCurrentGameType
-  Printf "!! InitSkaterHeaps"
   InitSkaterHeaps
-  Printf "!! SetServerMode"
   SetServerMode
-  Printf "!! StartServer"
   StartServer
-  Printf "!! SetJoinMode"
   SetJoinMode JOIN_MODE_PLAY
-  Printf "!! JoinServer"
   JoinServer
   begin
-    Printf "!! JoinServerComplete"
     if JoinServerComplete
       break
     else
       Wait 1
     endif
   repeat
-    Printf "!! ChangeLevel"
   ChangeLevel level = use_preferences
-  Printf "!! leave_front_end"
   leave_front_end
-  Printf "!! exit_pause_menu"
   exit_pause_menu
 endscript
 script chosen_host_game
-  Printf "!! chosen_host_game"
   if InNetGame
-    Printf "!! if InNetGame"
     network_start_selected
   else
-    Printf "!! else"
     if InSplitScreenGame
-      Printf "!! if InSplitScreenGame"
       ApplySplitScreenOptions
       chosen_start_game
     else
-      Printf "!! else spawned_chosen_host_game"
       SpawnScript spawned_chosen_host_game NotSessionSpecific = 1
     endif
   endif
@@ -451,7 +429,10 @@ script chose_xbox_online
 endscript
 script chose_internet
   SetNetworkMode INTERNET_MODE
-  create_internet_options
+  if ObjectExists id = current_menu_anchor
+    DestroyScreenElement id = current_menu_anchor
+  endif
+  create_network_select_games_menu
 endscript
 script confirm_observe
   dialog_box_exit
@@ -472,7 +453,6 @@ script launch_network_select_lan_games_menu
   launch_network_select_games_menu
 endscript
 script launch_network_host_options_menu
-  Printf "!!launch_network_host_options_menu"
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
@@ -486,7 +466,6 @@ script host_chosen
   launch_network_host_options_menu
 endscript
 script host_net_chosen
-  Printf "!! host_net_chosen"
   console_hide
   GSEnableNet
   StopServerList
@@ -635,7 +614,14 @@ endscript
 script create_internet_options
   dialog_box_exit
   add_ss_menu_textures_to_vram
+  GetPreferenceChecksum pref_type = network profile_warning_shown
+  if ( <checksum> = boolean_false )
+    set_preferences_from_ui prefs = network field = "profile_warning_shown" checksum = boolean_true string = "Yes"
+    create_profile_warning_dialog
+    return
+  endif
   Change in_net_lobby = 0
+  dialog_box_exit
   if not English
     make_new_menu menu_id = internet_options_menu vmenu_id = internet_options_vmenu menu_title = "" dims = (420, 100) pos = (220, 109)
   else
@@ -680,10 +666,12 @@ script create_internet_options
     highlight_bar_scale = (1.1, 1.3)
   endif
   main_menu_add_item text = "Play Online" id = menu_play_online pad_choose_script = spawn_lobby_list highlight_bar_scale = <highlight_bar_scale>
-  if IsTrue Demo_Build
-    main_menu_add_item text = "Login/Create Profile" id = menu_create_profile highlight_bar_scale = <highlight_bar_scale> not_focusable = not_focusable
-  else
-    main_menu_add_item text = "Login/Create Profile" id = menu_create_profile pad_choose_script = launch_profile_menu highlight_bar_scale = <highlight_bar_scale>
+  if not ProfileLoggedIn
+    if IsTrue Demo_Build
+      main_menu_add_item text = "Login/Create Profile" id = menu_create_profile highlight_bar_scale = <highlight_bar_scale> not_focusable = not_focusable
+    else
+      main_menu_add_item text = "Login/Create Profile" id = menu_create_profile pad_choose_script = launch_profile_menu highlight_bar_scale = <highlight_bar_scale>
+    endif
   endif
   if IsTrue Demo_Build
     main_menu_add_item text = "Upload Parks" id = menu_upload highlight_bar_scale = <highlight_bar_scale> not_focusable = not_focusable
@@ -830,10 +818,9 @@ script spawn_lobby_list
   endif
   dialog_box_exit
   create_dialog_box { title = net_status_msg
-    text = "Connecting to OpenSpy..."
+    text = "Connecting to GameSpy..."
   }
-  launch_lobby_list
-  // LobbyConnect
+  LobbyConnect
 endscript
 script back_from_internet_menu
   console_destroy
@@ -853,13 +840,8 @@ script back_from_internet_host_options
   endif
 endscript
 script launch_lobby_list
-  printf "in launch lobby list"
-  // DestroyScreenElement id = current_menu_anchor
-  printf "starting lobby list"
+  DestroyScreenElement id = current_menu_anchor
   StartLobbyList
-
-  printf "create network select games menu"
-  create_network_select_games_menu play_cam
 endscript
 script back_from_network_select_menu
   SetNetworkMode
@@ -941,324 +923,191 @@ script network_select_menu_exit
    <callback>
 endscript
 script make_server_list_menu
-  Printf "a1"
+  Printf "1"
   create_console
-  Printf "a2"
   console_unhide
-  Printf "a3"
+  Printf "2"
   add_network_menu_textures_to_vram
-  SetScreenElementLock id = root_window off
+  SetScreenElementLock id = root_window Off
   Change in_net_lobby = 1
-  Printf "a4"
+  Printf "3"
   CreateScreenElement {
     type = ContainerElement
     parent = root_window
     id = server_list_anchor
     pos = (320, 224)
-    just = [ center center ]
+    just = [ CENTER CENTER ]
     scale = 0
-    dims = (640, 448)
+    Dims = (640, 448)
     focusable_child = actions_menu
   }
-  Printf "a5"
-  if ( ( French ) or ( German ) or 1 )
-    CreateScreenElement {
-      type = ContainerElement
-      parent = server_list_anchor
-      id = actions_menu_anchor
-      pos = (345, 320)
-      dims = (640, 480)
-    }
-    Printf "a6"
-  else
-    CreateScreenElement {
-      type = ContainerElement
-      parent = server_list_anchor
-      id = actions_menu_anchor
-      pos = (340, 300)
-      dims = (640, 480)
-    }
-    Printf "a7"
-  endif
-  Printf "a8"
-  if ( ( French ) or ( German ) or 1 )
-    CreateScreenElement {
-      type = VMenu
-      parent = actions_menu_anchor
-      id = actions_menu
-      font = small
-      just = [ left top ]
-      pos = (65, 44)
-      dims = (222, 170)
-      internal_just = [ center top ]
-      event_handlers = [ { pad_up generic_menu_up_or_down_sound params = { Up } }
-        { pad_down generic_menu_up_or_down_sound params = { Down } }
-        { pad_back generic_menu_pad_back_sound }
-      ]
-    }
-    Printf "a9"
-  else
-    CreateScreenElement {
-      type = VMenu
-      parent = actions_menu_anchor
-      id = actions_menu
-      font = small
-      just = [ left top ]
-      pos = (20, 24)
-      dims = (222, 170)
-      internal_just = [ center top ]
-      event_handlers = [ { pad_up generic_menu_up_or_down_sound params = { Up } }
-        { pad_down generic_menu_up_or_down_sound params = { Down } }
-        { pad_back generic_menu_pad_back_sound }
-      ]
-    }
-    Printf "a10"
-  endif
-  if ( ( French ) or ( German ) or 1 )
-    CreateScreenElement {
-      type = TextElement
-      parent = actions_menu_anchor
-      font = testtitle
-      text = "ACTIONS"
-      scale = 1.45
-      pos = (41, 4)
-      just = [ left top ]
-      rgba = [ 128 128 128 105 ]
-      not_focusable
-    }
-    Printf "a11"
-  else
-    CreateScreenElement {
-      type = TextElement
-      parent = actions_menu_anchor
-      font = testtitle
-      text = "ACTIONS"
-      scale = 1.45
-      pos = (60, 4)
-      just = [ left top ]
-      rgba = [ 128 128 128 105 ]
-      not_focusable
-    }
-    Printf "a12"
-  endif
-  if ( ( French ) or ( German ) or 1 )
-    net_menu_add_bg {
-      parent = actions_menu_anchor
-      anchor_id = actions_menu_bg_anchor
-      anchor_pos = (-130, -115)
-      bg_scale = (1.54, 1)
-      bg_repeat = 7
-      box_right_scale = (0.7, 0.56)
-    }
-    Printf "a13"
-  else
-    net_menu_add_bg {
-      parent = actions_menu_anchor
-      anchor_id = actions_menu_bg_anchor
-      anchor_pos = (-178, -115)
-      bg_scale = (0.8, 1)
-      bg_repeat = 7
-      box_right_scale = (0.7, 0.56)
-    }
-    Printf "a14"
-  endif
-  if ( ( French ) or ( German ) or 1 )
-    CreateScreenElement {
-      type = SpriteElement
-      parent = actions_menu_anchor
-      id = actions_blue_bar
-      texture = stats_notch
-      pos = (70, 153)
-      rgba = [ 42 48 77 50 ]
-      scale = (14.5, 0.2)
-      just = [ center top ]
-    }
-    Printf "a15"
-    set_sub_bg pos = (115, 0) parent = actions_menu_anchor
-    Printf "a16"
-    create_icon pos = (-20, 0) parent = actions_menu_anchor texture = PA_network
-    Printf "a17"
-  else
-    CreateScreenElement {
-      type = SpriteElement
-      parent = actions_menu_anchor
-      id = actions_blue_bar
-      texture = stats_notch
-      pos = (131, 153)
-      rgba = [ 42 48 77 50 ]
-      scale = (11.5, 0.2)
-      just = [ center top ]
-    }
-    Printf "a18"
-    set_sub_bg pos = (158, 0) parent = actions_menu_anchor
-    Printf "a19"
-    create_icon pos = (8, 0) parent = actions_menu_anchor texture = PA_network
-    Printf "a20"
-  endif
-  if ( ( French ) or ( German ) or 1 )
-  else
-    GetStackedScreenElementPos X id = <id> offset = (178, 50)
-    Printf "a21"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = actions_menu_bg_anchor
-      texture = black
-      rgba = [ 0 0 0 128 ]
-      pos = <pos>
-      just = [ left top ]
-      scale = (35, 1.5)
-    }
-    Printf "a22"
-  endif
+  CreateScreenElement {
+    type = ContainerElement
+    parent = server_list_anchor
+    id = actions_menu_anchor
+    pos = (340, 300)
+    Dims = (640, 480)
+  }
+  CreateScreenElement {
+    type = VMenu
+    parent = actions_menu_anchor
+    id = actions_menu
+    font = Small
+    just = [ left top ]
+    pos = (23, 24)
+    Dims = (222, 170)
+    internal_just = [ CENTER top ]
+    event_handlers = [ { pad_up generic_menu_up_or_down_sound Params = { Up } }
+      { pad_down generic_menu_up_or_down_sound Params = { Down } }
+      { pad_back generic_menu_pad_back_sound }
+    ]
+  }
+  CreateScreenElement {
+    type = TextElement
+    parent = actions_menu_anchor
+    font = TestTitle
+    text = "ACTIONS"
+    scale = 1.45
+    pos = (60, 4)
+    just = [ left top ]
+    rgba = [ 128 128 128 105 ]
+    not_focusable
+  }
+  net_menu_add_bg {
+    parent = actions_menu_anchor
+    anchor_id = actions_menu_bg_anchor
+    anchor_pos = (-178, -115)
+    bg_scale = (0.8, 1)
+    bg_repeat = 7
+    box_right_scale = (0.7, 0.56)
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = actions_menu_anchor
+    id = actions_blue_bar
+    texture = stats_notch
+    pos = (131, 153)
+    rgba = [ 42 48 77 50 ]
+    scale = (11.5, 0.2)
+    just = [ CENTER top ]
+  }
+  set_sub_bg pos = (158, 0) parent = actions_menu_anchor
+  create_icon pos = (8, 0) parent = actions_menu_anchor texture = PA_network
+  GetStackedScreenElementpos x id = <id> offset = (178, 50)
+  Printf "4"
+  CreateScreenElement {
+    type = SpriteElement
+    parent = actions_menu_bg_anchor
+    texture = black
+    rgba = [ 0 0 0 128 ]
+    pos = <pos>
+    just = [ left top ]
+    scale = (35, 1.5)
+  }
   CreateScreenElement {
     type = TextElement
     parent = actions_menu
     text = ""
-    font = small
+    font = Small
     scale = 0.9
     not_focusable
   }
-  Printf "a23"
-  if ( ( French ) or ( German ) or 1 )
-    CreateScreenElement {
-      type = ContainerElement
-      parent = server_list_anchor
-      id = game_list_menu_anchor
-      dims = (640, 480)
-      pos = (383, 320)
-    }
-  Printf "a24"
-  else
-    CreateScreenElement {
-      type = ContainerElement
-      parent = server_list_anchor
-      id = game_list_menu_anchor
-      dims = (640, 480)
-      pos = (350, 300)
-    }
-    Printf "a25"
-  endif
-  if ( ( French ) or ( German ) or 1 )
-    CreateScreenElement {
-      type = VScrollingMenu
-      parent = game_list_menu_anchor
-      id = server_list_scrolling_menu
-      just = [ left top ]
-      pos = (373, 80)
-      dims = (440, 90)
-      internal_just = [ left top ]
-    }
-    Printf "a26"
-  else
-    CreateScreenElement {
-      type = VScrollingMenu
-      parent = game_list_menu_anchor
-      id = server_list_scrolling_menu
-      just = [ left top ]
-      pos = (383, 80)
-      dims = (440, 90)
-      internal_just = [ left top ]
-    }
-    Printf "a27"
-  endif
+  CreateScreenElement {
+    type = ContainerElement
+    parent = server_list_anchor
+    id = game_list_menu_anchor
+    Dims = (640, 480)
+    pos = (350, 300)
+  }
+  CreateScreenElement {
+    type = vscrollingmenu
+    parent = game_list_menu_anchor
+    id = server_list_scrolling_menu
+    just = [ left top ]
+    pos = (373, 80)
+    Dims = (440, 90)
+    internal_just = [ left top ]
+  }
   CreateScreenElement {
     type = VMenu
     parent = server_list_scrolling_menu
     id = server_list_menu
-    font = small
+    font = Small
     scale = 0.9
     just = [ left top ]
-    pos = (10, 0)
-    dims = (440, 200)
+    pos = (0, 0)
+    Dims = (440, 200)
     internal_just = [ left top ]
     event_handlers = [
       { pad_up server_blink_up_arrow }
       { pad_down server_blink_down_arrow }
-      { pad_up generic_menu_up_or_down_sound params = { Up } }
-      { pad_down generic_menu_up_or_down_sound params = { Down } }
+      { pad_up generic_menu_up_or_down_sound Params = { Up } }
+      { pad_down generic_menu_up_or_down_sound Params = { Down } }
       { pad_back generic_menu_pad_back_sound }
     ]
     dont_allow_wrap
   }
-  Printf "a28"
   CreateScreenElement {
     type = TextElement
     parent = game_list_menu_anchor
     id = lobby_game_list_title
     font = dialog
-    text = "LAN Games: 0"
+    text = "Games: 0"
     scale = 0.95
-    pos = (395, 27)
+    pos = (410, 27)
     just = [ left top ]
     rgba = [ 46 105 57 128 ]
     not_focusable
   }
-  Printf "a29"
+  Printf "5"
   CreateScreenElement {
     type = SpriteElement
     parent = game_list_menu_anchor
     id = game_list_up_arrow
     texture = up_arrow
     just = [ left top ]
-    pos = (445, 48)
+    pos = (455, 48)
     not_focusable
     scale = 0
   }
-  Printf "a30"
   CreateScreenElement {
     type = SpriteElement
     parent = game_list_menu_anchor
     id = game_list_down_arrow
     texture = down_arrow
     just = [ left top ]
-    pos = (445, 155)
+    pos = (455, 155)
     not_focusable
     scale = 0
   }
-  Printf "a31"
-  if ( ( French ) or ( German ) or 1 )
-    net_menu_add_bg {
-      parent = game_list_menu_anchor
-      anchor_id = server_list_menu_bg_anchor
-      anchor_pos = (151, -115)
-      bg_scale = (1.15, 1)
-      bg_repeat = 7
-      box_right_scale = (0.7, 0.56)
-    }
-    Printf "a32"
-  else
-    net_menu_add_bg {
-      parent = game_list_menu_anchor
-      anchor_id = server_list_menu_bg_anchor
-      anchor_pos = (151, -115)
-      bg_scale = (0.85, 1)
-      bg_repeat = 7
-      box_right_scale = (0.7, 0.56)
-    }
-    Printf "a33"
-  endif
+  net_menu_add_bg {
+    parent = game_list_menu_anchor
+    anchor_id = server_list_menu_bg_anchor
+    anchor_pos = (151, -115)
+    bg_scale = (0.85, 1)
+    bg_repeat = 7
+    box_right_scale = (0.7, 0.56)
+  }
   CreateScreenElement {
     type = ContainerElement
     parent = server_list_anchor
     id = server_desc_menu_anchor
     scale = 0
     pos = (320, 300)
-    dims = (640, 480)
+    Dims = (640, 480)
   }
-  Printf "a34"
   CreateScreenElement {
     type = VMenu
     parent = server_desc_menu_anchor
     id = server_desc_menu
-    font = small
+    font = Small
     scale = 0.9
     just = [ left top ]
     pos = (60, 30)
-    dims = (200, 170)
+    Dims = (200, 170)
     internal_just = [ left top ]
     not_focusable
   }
-  Printf "a35"
   net_menu_add_bg {
     parent = server_desc_menu_anchor
     anchor_id = server_desc_menu_bg_anchor
@@ -1267,13 +1116,10 @@ script make_server_list_menu
     bg_repeat = 17
     box_right_scale = (0.7, 1.18)
   }
-  Printf "a36"
   set_sub_bg pos = (170, 0) parent = server_desc_menu_anchor
-  Printf "a37"
   create_icon pos = (15, 0) parent = server_desc_menu_anchor texture = PA_network
-  Printf "a38"
-  GetStackedScreenElementPos X id = <id> offset = (-7, 58)
-  Printf "a39"
+  GetStackedScreenElementpos x id = <id> offset = (-7, 58)
+  Printf "5.1"
   CreateScreenElement {
     type = SpriteElement
     parent = server_desc_menu_bg_anchor
@@ -1283,210 +1129,184 @@ script make_server_list_menu
     just = [ left top ]
     scale = (15, 1.5)
   }
-  Printf "a40"
+  Printf "5.2"
   CreateScreenElement {
     type = TextElement
     parent = server_desc_menu_anchor
     id = server_desc_title
-    font = testtitle
+    font = TestTitle
     text = "GAME INFO"
-    pos = (65, 5)
+    pos = (65, 0)
     scale = 1.35
     just = [ left top ]
     rgba = [ 128 128 128 85 ]
     not_focusable
   }
-  Printf "a41"
-  if InInternetMode
-    Printf "a41.5"
-    // CreateScreenElement {
-    //   type = SpriteElement
-    //   parent = game_list_menu_anchor
-    //   pos = (455, 10)
-    //   texture = gslogo scale = 1.1
-    // }
-    Printf "a42"
-    GetStackedScreenElementPos X id = server_list_anchor offset = (50, 20)
-    Printf "a43"
-    CreateScreenElement {
-      type = ContainerElement
-      parent = server_list_anchor
-      id = player_list_anchor
-      dims = (640, 480)
-      pos = <pos>
-    }
-    Printf "a44"
-    CreateScreenElement {
-      type = VScrollingMenu
-      parent = player_list_anchor
-      id = player_list_scrolling_menu
-      just = [ left top ]
-      pos = (365, 296)
-      dims = (200, 80)
-      internal_just = [ left top ]
-    }
-    Printf "a45"
-    CreateScreenElement {
-      type = VMenu
-      parent = player_list_scrolling_menu
-      id = lobby_player_list_menu
-      font = small
-      just = [ left top ]
-      pos = (0, 0)
-      dims = (200, 100)
-      internal_just = [ left top ]
-      scale = 0.8
-      event_handlers = [
-        { pad_up user_blink_up_arrow }
-        { pad_down user_blink_down_arrow }
-        { pad_up generic_menu_up_or_down_sound params = { Up } }
-        { pad_down generic_menu_up_or_down_sound params = { Down } }
-        { pad_back generic_menu_pad_back_sound }
-      ]
-      dont_allow_wrap
-    }
-    Printf "a45"
-    if French
-      item_pos = (365, 242)
-    else
-      item_pos = (400, 242)
-    endif
-    CreateScreenElement {
-      type = TextElement
-      parent = player_list_anchor
-      id = lobby_player_list_title
-      font = dialog
-      text = "Users: 0"
-      scale = 0.95
-      pos = <item_pos>
-      just = [ left top ]
-      rgba = [ 46 105 57 128 ]
-      not_focusable
-    }
-    Printf "a46"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = player_list_anchor
-      id = user_list_up_arrow
-      texture = up_arrow
-      just = [ left top ]
-      pos = (430, 263)
-      not_focusable
-      scale = 0
-    }
-    Printf "a47"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = player_list_anchor
-      id = user_list_down_arrow
-      texture = down_arrow
-      just = [ left top ]
-      pos = (430, 370)
-      not_focusable
-      scale = 0
-    }
-    Printf "a48"
-    net_menu_add_bg {
-      parent = player_list_anchor
-      anchor_id = lobby_player_list_bg
-      anchor_pos = (132, 100)
-      bg_scale = (0.85, 1)
-      bg_repeat = 7
-      box_right_scale = (0.7, 0.56)
-    }
-    Printf "a49"
-    GetStackedScreenElementPos X id = <id> offset = (-114, 100)
-    Printf "a50"
-    CreateScreenElement {
-      type = ContainerElement
-      parent = server_list_anchor
-      id = buddy_list_anchor
-      dims = (640, 480)
-      pos = <pos>
-      scale = 0
-    }
-    Printf "a51"
-    GetStackedScreenElementPos X id = server_list_anchor offset = (-135, 21)
-    Printf "a52"
-    CreateScreenElement {
-      type = ContainerElement
-      parent = server_list_anchor
-      id = chat_box_anchor
-      dims = (640, 480)
-      pos = <pos>
-    }
-    Printf "a53"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = chat_box_anchor
-      texture = black
-      rgba = [ 0 0 0 128 ]
-      pos = <pos>
-      just = [ left top ]
-      scale = (84, 1.5)
-    }
-    Printf "a54"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = chat_box_anchor
-      texture = black
-      rgba = [ 0 0 0 128 ]
-      pos = ( <pos> + (0, 8) )
-      just = [ left top ]
-      scale = (84, 0.5)
-    }
-    Printf "a55"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = chat_box_anchor
-      texture = black
-      rgba = [ 40 40 70 50 ]
-      pos = <pos>
-      just = [ left top ]
-      scale = (84, 34.5)
-      z_priority = 0
-    }
-    Printf "a56"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = chat_box_anchor
-      texture = black
-      rgba = [ 0 0 0 128 ]
-      pos = ( <pos> + (0, 137) )
-      just = [ left top ]
-      scale = (84, 1.5)
-    }
-    Printf "a57"
-    CreateScreenElement {
-      type = SpriteElement
-      parent = chat_box_anchor
-      texture = black
-      rgba = [ 0 0 0 128 ]
-      pos = ( <pos> + (0, 133) )
-      just = [ left top ]
-      scale = (84, 0.5)
-    }
+  Printf "5.3"
+  // CreateScreenElement {
+  //   type = SpriteElement
+  //   parent = game_list_menu_anchor
+  //   id = gslogo
+  //   pos = (455, 10)
+  //   texture = gslogo
+  //   scale = 1.1
+  // }
+  Printf "5.4"
+  GetStackedScreenElementpos x id = server_list_anchor offset = (50, 20)
+  Printf "5.5"
+  CreateScreenElement {
+    type = ContainerElement
+    parent = server_list_anchor
+    id = player_list_anchor
+    Dims = (640, 480)
+    pos = <pos>
+  }
+  Printf "5.6"
+  CreateScreenElement {
+    type = vscrollingmenu
+    parent = player_list_anchor
+    id = player_list_scrolling_menu
+    just = [ left top ]
+    pos = (365, 296)
+    Dims = (200, 80)
+    internal_just = [ left top ]
+  }
+  Printf "5.7"
+  CreateScreenElement {
+    type = VMenu
+    parent = player_list_scrolling_menu
+    id = lobby_player_list_menu
+    font = Small
+    just = [ left top ]
+    pos = (0, 0)
+    Dims = (200, 100)
+    internal_just = [ left top ]
+    scale = 0.8
+    event_handlers = [
+      { pad_up user_blink_up_arrow }
+      { pad_down user_blink_down_arrow }
+      { pad_up generic_menu_up_or_down_sound Params = { Up } }
+      { pad_down generic_menu_up_or_down_sound Params = { Down } }
+      { pad_back generic_menu_pad_back_sound }
+    ]
+    dont_allow_wrap
+  }
+  Printf "5.8"
+  Printf "6"
+  if French
+    item_pos = (365, 242)
+  else
+    item_pos = (400, 242)
   endif
-
-  Printf "a58"
-  if InInternetMode
-    Printf "a59"
-    DoScreenElementMorph id = player_list_anchor time = 0 scale = 1
-    Printf "a60"
-    // FillPlayerList
-    Printf "a61"
-    FireEvent type = unfocus target = lobby_player_list_menu
-    Printf "a62"
-    DoScreenElementMorph id = chat_box_anchor time = 0 scale = 1
-    Printf "a63"
-    DoScreenElementMorph id = buddy_list_anchor time = 0 scale = 0
-    Printf "a64"
-  endif
-  Printf "a65"
+  CreateScreenElement {
+    type = TextElement
+    parent = player_list_anchor
+    id = lobby_player_list_title
+    font = dialog
+    text = "Users: 0"
+    scale = 0.95
+    pos = <item_pos>
+    just = [ left top ]
+    rgba = [ 46 105 57 128 ]
+    not_focusable
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = player_list_anchor
+    id = user_list_up_arrow
+    texture = up_arrow
+    just = [ left top ]
+    pos = (435, 263)
+    not_focusable
+    scale = 0
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = player_list_anchor
+    id = user_list_down_arrow
+    texture = down_arrow
+    just = [ left top ]
+    pos = (435, 370)
+    not_focusable
+    scale = 0
+  }
+  net_menu_add_bg {
+    parent = player_list_anchor
+    anchor_id = lobby_player_list_bg
+    anchor_pos = (132, 100)
+    bg_scale = (0.85, 1)
+    bg_repeat = 7
+    box_right_scale = (0.7, 0.56)
+  }
+  GetStackedScreenElementpos x id = <id> offset = (-114, 100)
+  CreateScreenElement {
+    type = ContainerElement
+    parent = server_list_anchor
+    id = buddy_list_anchor
+    Dims = (640, 480)
+    pos = <pos>
+    scale = 0
+  }
+  GetStackedScreenElementpos x id = server_list_anchor offset = (-135, 21)
+  CreateScreenElement {
+    type = ContainerElement
+    parent = server_list_anchor
+    id = chat_box_anchor
+    Dims = (640, 480)
+    pos = <pos>
+  }
+  Printf "7"
+  CreateScreenElement {
+    type = SpriteElement
+    parent = chat_box_anchor
+    texture = black
+    rgba = [ 0 0 0 128 ]
+    pos = <pos>
+    just = [ left top ]
+    scale = (84, 1.5)
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = chat_box_anchor
+    texture = black
+    rgba = [ 0 0 0 128 ]
+    pos = ( <pos> + (0, 8) )
+    just = [ left top ]
+    scale = (84, 0.5)
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = chat_box_anchor
+    texture = black
+    rgba = [ 40 40 70 50 ]
+    pos = <pos>
+    just = [ left top ]
+    scale = (84, 34.5)
+    z_priority = 0
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = chat_box_anchor
+    texture = black
+    rgba = [ 0 0 0 128 ]
+    pos = ( <pos> + (0, 137) )
+    just = [ left top ]
+    scale = (84, 1.5)
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = chat_box_anchor
+    texture = black
+    rgba = [ 0 0 0 128 ]
+    pos = ( <pos> + (0, 133) )
+    just = [ left top ]
+    scale = (84, 0.5)
+  }
+  Printf "8"
+  DoScreenElementMorph id = player_list_anchor Time = 0 Scale = 1
+  FireEvent Type = unfocus target = lobby_player_list_menu
   AssignAlias id = server_list_anchor alias = current_menu_anchor
-  Printf "a66"
   AssignAlias id = actions_menu alias = current_menu
-  Printf "a67"
 endscript
 current_lobby_focus = 0
 script server_list_menu_add_item
@@ -1830,118 +1650,70 @@ script create_network_menu_exit
    <new_menu_script> <...>
 endscript
 script create_network_select_games_menu
-  Printf "1"
   if GotParam play_cam
     KillSkaterCamAnim all
     PlaySkaterCamAnim name = SS_MenuCam play_hold
   endif
   dialog_box_exit
-  Printf "2"
+  SetNetworkMode LAN_MODE
   if IsInternetGameHost
     host_net_chosen
   else
-    Printf "3"
+    SetNetworkMode LAN_MODE
     make_server_list_menu
     create_helper_text generic_helper_text pos = (0, 0)
-    if InInternetMode
-      SetScreenElementProps { id = actions_menu event_handlers = [
-          { pad_back back_from_internet_menu }
-        ]
-      }
-      SetScreenElementProps { id = lobby_player_list_menu event_handlers = [
-          { pad_back back_from_user_list }
-        ]
-      }
-      if ObjectExists id = lobby_buddy_list_menu
-        SetScreenElementProps { id = lobby_buddy_list_menu event_handlers = [
-            { pad_back back_from_buddy_list }
-          ]
-        }
-      endif
-    else
-      if OnXbox
-        SetScreenElementProps { id = actions_menu event_handlers = [
-            { pad_back back_from_multiplayer_menu }
-          ]
-        }
-      else
-        SetScreenElementProps { id = actions_menu event_handlers = [
-            { pad_back back_from_network_menu }
-          ]
-        }
-      endif
+    if OnXbox
+      SetNetworkMode LAN_MODE
     endif
-    Printf "5"
+    SetScreenElementProps { id = actions_menu event_handlers = [
+        { pad_back back_from_internet_menu }
+      ]
+    }
+    SetScreenElementProps { id = lobby_player_list_menu event_handlers = [
+        { pad_back back_from_user_list }
+      ]
+    }
+    if ObjectExists id = lobby_buddy_list_menu
+      SetScreenElementProps { id = lobby_buddy_list_menu event_handlers = [
+          { pad_back back_from_buddy_list }
+        ]
+      }
+    endif
     SetScreenElementProps { id = server_list_menu event_handlers = [
         { pad_back back_from_game_list }
       ]
     }
-    if ( ( French ) or ( German ) or 1 )
-      main_menu_add_item text = "Host LAN Game" parent = actions_menu id = menu_network_select_host pad_choose_script = host_chosen highlight_bar_scale = (1.43, 1.3)
-      main_menu_add_item text = "Host GameSpy Arcade Game" parent = actions_menu id = menu_network_select_net_host pad_choose_script = host_net_chosen highlight_bar_scale = (1.43, 1.3)
-      main_menu_add_item text = "Join LAN Game" parent = actions_menu id = menu_network_select_join pad_choose_script = join_chosen highlight_bar_scale = (1.43, 1.3)
-      main_menu_add_item { text = 'Join IP'
-        id = menu_network_select_join_ip
-        highlight_bar_scale = (1.43, 1.3)
-        pad_choose_script = create_network_menu_exit
-        pad_choose_params = { new_menu_script = create_onscreen_keyboard
-          text = ""
-          keyboard_title = "ENTER IP"
-          min_length = 1
-          max_length = 15
-          keyboard_done_script = check_ip_from_keyboard
-          keyboard_cancel_script = check_ip_from_keyboard
-          keyboard_cancel_params = { cancel }
-          allow_cancel }
-      }
-      if InInternetMode
-        main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
-      endif
-      main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen highlight_bar_scale = (1.43, 1.3)
-      if InInternetMode
-        main_menu_add_item text = "User List" parent = actions_menu id = menu_network_select_user_list pad_choose_script = user_list_chosen highlight_bar_scale = (1.43, 1.3)
-        main_menu_add_item text = "Homie List" parent = actions_menu id = menu_network_select_buddy_list pad_choose_script = launch_shell_buddy_list pad_choose_params = { from_lobby } highlight_bar_scale = (1.43, 1.3)
-        main_menu_add_item text = "Enter Message" parent = actions_menu id = menu_network_select_chat pad_choose_script = create_lobby_onscreen_kb highlight_bar_scale = (1.43, 1.3)
-      endif
-      add_no_servers_found_message refocus
-    else
-      main_menu_add_item text = "Host LAN Game" parent = actions_menu id = menu_network_select_host pad_choose_script = host_chosen highlight_bar_scale = (0.73, 1.3)
-      main_menu_add_item text = "Host GameSpy Arcade Game" parent = actions_menu id = menu_network_select_net_host pad_choose_script = host_net_chosen highlight_bar_scale = (0.73, 1.3)
-      main_menu_add_item text = "Join LAN Game" parent = actions_menu id = menu_network_select_join pad_choose_script = join_chosen highlight_bar_scale = (0.73, 1.3)
-      main_menu_add_item { text = 'Join IP'
-        id = menu_network_select_join_ip
-        highlight_bar_scale = (0.73, 1.3)
-        pad_choose_script = create_network_menu_exit
-        pad_choose_params = { new_menu_script = create_onscreen_keyboard
-          text = ""
-          keyboard_title = "ENTER IP"
-          min_length = 1
-          max_length = 15
-          keyboard_done_script = check_ip_from_keyboard
-          keyboard_cancel_script = check_ip_from_keyboard
-          keyboard_cancel_params = { cancel }
-          allow_cancel }
-      }
-      if InInternetMode
-        main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (0.73, 1.3)
-      endif
-      main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen highlight_bar_scale = (0.73, 1.3)
-      if InInternetMode
-        main_menu_add_item text = "User List" parent = actions_menu id = menu_network_select_user_list pad_choose_script = user_list_chosen highlight_bar_scale = (0.73, 1.3)
-        main_menu_add_item text = "Homie List" parent = actions_menu id = menu_network_select_buddy_list pad_choose_script = launch_shell_buddy_list pad_choose_params = { from_lobby } highlight_bar_scale = (0.73, 1.3)
-        main_menu_add_item text = "Enter Message" parent = actions_menu id = menu_network_select_chat pad_choose_script = create_lobby_onscreen_kb highlight_bar_scale = (0.73, 1.3)
-      endif
-      add_no_servers_found_message refocus
-    endif
+    main_menu_add_item text = "Host LAN Game" parent = actions_menu id = menu_network_select_host pad_choose_script = host_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Host GameSpy Arcade Game" parent = actions_menu id = menu_network_select_net_host pad_choose_script = host_net_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Join LAN Game" parent = actions_menu id = menu_network_select_join pad_choose_script = join_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item { text = 'Join IP'
+      id = menu_network_select_join_ip
+      highlight_bar_scale = (1.43, 1.3)
+      pad_choose_script = create_network_menu_exit
+      pad_choose_params = { new_menu_script = create_onscreen_keyboard
+        text = ""
+        keyboard_title = "ENTER IP"
+        min_length = 1
+        max_length = 15
+        keyboard_done_script = check_ip_from_keyboard
+        keyboard_cancel_script = check_ip_from_keyboard
+        keyboard_cancel_params = { cancel }
+        allow_cancel }
+    }
+    main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "User List" parent = actions_menu id = menu_network_select_user_list pad_choose_script = user_list_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Homie List" parent = actions_menu id = menu_network_select_buddy_list pad_choose_script = launch_shell_buddy_list pad_choose_params = { from_lobby } highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Enter Message" parent = actions_menu id = menu_network_select_chat pad_choose_script = create_lobby_onscreen_kb highlight_bar_scale = (1.43, 1.3)
+    add_no_servers_found_message refocus
     RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
     FireEvent type = unfocus target = server_list_menu
     FireEvent type = unfocus target = server_desc_menu
-    if InInternetMode
-      FireEvent type = unfocus target = lobby_player_list_menu
-    endif
+    FireEvent type = unfocus target = lobby_player_list_menu
     FireEvent type = focus target = actions_menu
     Change current_lobby_focus = 0
     AssignAlias id = actions_menu alias = current_menu
+
     if IsJoiningInternetGame
       check_join_internet_ip
     else
@@ -2826,7 +2598,6 @@ script set_game_options_ready_focus
   FireEvent type = focus target = host_options_vmenu data = { child_id = menu_network_host_options_ready }
 endscript
 script create_network_host_options_menu
-  Printf "!!create_network_host_options_menu"
   remove_pause_menu_textures_from_vram
   add_host_options_sub_menu_textures_to_vram
   if OnXbox
