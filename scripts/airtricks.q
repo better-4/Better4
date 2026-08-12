@@ -77,7 +77,7 @@ Trick_ClawPunch = { Scr = FlipTrick params = { name = 'Claw Punch' Score = 3000 
 Trick_Roastbeef = { Scr = GrabTrick params = { name = 'RoastBeef' Score = 300 Anim = Roastbeef Idle = Roastbeef_Idle } }
 Trick_Varial = { Scr = FlipTrick params = { name = 'Varial' Score = 900 Anim = BigVarial BoardRotate } }
 Trick_VarialKickflip2 = { Scr = FlipTrick params = { name = 'Varial Kickflip' Score = 300 Anim = VarialKickflip BoardRotate Nollie = NollieVarialKickflip ExtraTricks = Extra_VarialKickflip2 TreNollieFix } }
-Extra_VarialKickflip2 = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip (Nollie Fix)' Score = 500 Anim = _360Flip Nollie = Nollie360Flip IsExtra UseCurrent TreNollieFix } } ]
+Extra_VarialKickflip2 = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip (Nollie Fix)' Score = 500 Anim = _360Flip Nollie = Nollie360Flip IsExtra UseCurrent TreNollieFix Rename360Flip } } ]
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
 Trick_FingerFlipAirWalk = { Scr = FlipTrick params = { name = 'Fingerflip Airwalk' Score = 1500 Anim = FingerFlipAirWalk IsSpecial BoardRotate speed = 1.15 trickslack = 30 } }
 Trick_Jackass = { Scr = FlipTrick params = { name = 'The Jackass' Score = 1500 Anim = Jackass IsSpecial speed = 1 MaxSpeed = 1.2 trickslack = 20 Bloodframe = 1 } }
@@ -265,7 +265,7 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     SetExtraTricks tricks = <ExtraTricks> duration = 15
   endif
   Wait 15 frames
-  if GotParam TreNollieFix
+  if GotParam Rename360Flip
     name = '360 Flip'
   endif
   SetTrickName <name>

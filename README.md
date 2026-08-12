@@ -1,26 +1,39 @@
 # Better4
 
-Better4 is a modpack that includes modern gameplay and QOL features while maintaining the spirit of THPS4.
+Better4 is a THPS4 modpack that includes modern gameplay and QOL features while maintaining the spirit of the original game.
 
 > [!WARNING]
 > Better4 is actively in development, and as such may be buggy. See [Known Issues](#known-issues).
+
+## Installation
+
+Download the latest GitHub release and drag your `Skate4.exe` onto `install.bat`. If your THPS4 install directory is not writable (e.g. program files), you will be prompted to re-run as admin (always check source code!).
 
 ## Features
 
 ### Gameplay
 
-All new gameplay features are togglable unless otherwise specified.
+Better4 ships with THPS4 default controls, but can be configured to your liking.
 
-* Left-side dropdown (not toggleable yet)
-* Restored unused animations (beni flip, nollie 360 flip, kickflip to indy, kickflip to crail)
-* Modern manuals (left and right spin)
-* PS2-exclusive manual tech (MFG, MQT, MSC, MBP)
-* Disable lip tricks
-* Single-tap wallieplants
+* Left and right dropdown
+* Left and right manual spin
+* PS2-exclusive manual float glitches (MFG, MQT, etc.)
+* Single-tap WalliePlants
+* Boneless tricks (beanplant, fastplant, MikeV)
+* Disabling:
+  * Double revert after dropdown
+  * Lip tricks
+  * Rail spin
+  * Wall spin
+  * Wallride bail (enables THUG1 BP)
+  * Stance change
+
+Better4 also restores unused animations from THPS3, such as beni flip,
+nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 
 ### Online
 
-* Added external server browser
+* Added in-game server browser
 * Added "exit observe" and "sit out" observe options
 
 ### CAS
@@ -29,15 +42,13 @@ All new gameplay features are togglable unless otherwise specified.
 * Added X + Y + Z + XYZ sliders for all scales
 * Widened min/max scales (0-200)
 * Unlocked full RGB range
-* Restored CAS item selections for pros, secret skaters, and neversoft devs
-
-## Installation
-
-Download the latest GitHub release and drag your `Skate4.exe` onto `install.bat`. If your THPS4 install directory is not writable (e.g. program files), you will be prompted to re-run as admin (always check source code!).
+* Restored hidden CAS items for pros, secret skaters, and neversoft devs
+* Added custom boards (banana, hoverboard, old school, ollie)
+* Added bunched cargos
+* Unassign trick in "Edit Tricks" menu
 
 ## Known Issues
 
-* Online lobbies must be joined using the provided `thps4-server-browser.exe`, which launches `THPS4.exe` with a command-line argument for the server IP.
 * Quitting observe mode is sometimes buggy
 * KOTH crashes :(
 

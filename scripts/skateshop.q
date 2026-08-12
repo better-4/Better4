@@ -867,9 +867,7 @@ script create_main_menu
         main_menu_add_item { text = 'Network Play'
           id = mm_multi_play
           pad_choose_script = main_menu_exit
-          pad_choose_params = { new_menu_script = select_xbox_multiplayer
-            change_gamemode = change_gamemode_net
-          }
+          pad_choose_params = { new_menu_script = start_internet_game }
           mark_first_input
           focus_params = { attract_timer }
         }
@@ -932,7 +930,7 @@ script create_main_menu
     focus_params = { attract_timer }
   }
   main_menu_add_item { text = better4_options_text
-    pad_choose_script = better4_menu_options
+    pad_choose_script = better4_options_menu
     pad_choose_params = { close_script = create_main_menu }
   }
   main_menu_add_item { text = 'Quit'
@@ -1967,19 +1965,11 @@ script create_ss_menu
     endif
   else
     if GameModeEquals is_net
-      if IsXBOX
-        main_menu_add_item { text = 'Ready'
-          id = ss_play_level
-          pad_choose_script = ss_menu_exit
-          pad_choose_params = { new_menu_script = create_network_select_games_menu play_cam }
-        }
-      else
-        main_menu_add_item { text = 'Ready'
-          id = ss_play_level
-          pad_choose_script = ss_menu_exit
-          pad_choose_params = { new_menu_script = create_network_select_menu }
-        }
-      endif
+      main_menu_add_item { text = 'Ready'
+        id = ss_play_level
+        pad_choose_script = ss_menu_exit
+        pad_choose_params = { new_menu_script = create_network_select_menu }
+      }
     else
       main_menu_add_item { text = 'Play Level'
         id = ss_play_level
