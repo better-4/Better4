@@ -15,9 +15,9 @@ Download the latest GitHub release and drag your `Skate4.exe` onto `install.bat`
 
 Better4 ships with THPS4 default controls, but can be configured to your liking.
 
-* Two-side dropdown
+* Left and right dropdown
 * Left and right manual spin
-* PS2-exclusive manual float tech (MFG, MQT, MSC, etc.)
+* PS2-exclusive manual float glitches (MFG, MQT, etc.)
 * Single-tap WalliePlants
 * Boneless tricks (beanplant, fastplant, MikeV)
 * Disabling:
@@ -33,7 +33,7 @@ nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 
 ### Online
 
-* Added external server browser
+* Added in-game server browser
 * Added "exit observe" and "sit out" observe options
 
 ### CAS
@@ -49,7 +49,6 @@ nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 
 ## Known Issues
 
-* Online lobbies must be joined using the provided `thps4-server-browser.exe`, which launches `THPS4.exe` with a command-line argument for the server IP.
 * Quitting observe mode is sometimes buggy
 * KOTH crashes :(
 
