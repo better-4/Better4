@@ -42,7 +42,7 @@ script better4_options_menu {
   make_text_sub_menu_item text = "On Ground" scale = 0.85 id = onground_option pad_choose_script = better4_onground_menu pad_choose_params = { close_script = <close_script> }
   make_text_sub_menu_item text = "On Rail" scale = 0.85 id = onrail_option pad_choose_script = better4_onrail_menu pad_choose_params = { close_script = <close_script> }
   make_text_sub_menu_item text = "Wallrides" scale = 0.85 id = wallride_option pad_choose_script = better4_wallride_menu pad_choose_params = { close_script = <close_script> }
-  make_text_sub_menu_item text = "Misc" scale = 0.85 id = wallride_option pad_choose_script = better4_misc_menu pad_choose_params = { close_script = <close_script> }
+  make_text_sub_menu_item text = "Misc" scale = 0.85 id = misc_option pad_choose_script = better4_misc_menu pad_choose_params = { close_script = <close_script> }
   make_text_sub_menu_item text = "Close" scale = 0.85 id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
@@ -225,5 +225,5 @@ script better4_misc_back {
     close_script = nullscript
   }
   DestroyScreenElement id = current_menu_anchor
-  better4_menu_options close_script = <close_script>
+  better4_options_menu close_script = <close_script>
 endscript

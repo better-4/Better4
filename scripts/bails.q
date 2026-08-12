@@ -405,6 +405,8 @@ script DoBoardScuff
   default
   endswitch
   Printf "Ready to scuff >>>>>>>>>>>>>>>>>>>>>>>>"
+  else
+    Printf "i cant get scuffed"
  endif
 endscript
 script BailBoardControl BoardOffFrame = 5
