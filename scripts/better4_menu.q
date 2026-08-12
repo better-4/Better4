@@ -46,20 +46,6 @@ script better4_options_menu {
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 
-script better4_network_menu {
-    close_script = nullscript
-  }
-  if ObjectExists id = current_menu_anchor
-    DestroyScreenElement id = current_menu_anchor
-  endif
-  Printf "making server list menu..."
-  create_network_select_games_menu
-endscript
-
-script better4_network_menu_focus
-  do_scale_up
-endscript
-
 script better4_onground_menu {
     close_script = nullscript
   }
