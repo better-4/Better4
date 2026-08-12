@@ -867,9 +867,7 @@ script create_main_menu
         main_menu_add_item { text = 'Network Play'
           id = mm_multi_play
           pad_choose_script = main_menu_exit
-          pad_choose_params = { new_menu_script = select_xbox_multiplayer
-            change_gamemode = change_gamemode_net
-          }
+          pad_choose_params = { new_menu_script = start_internet_game }
           mark_first_input
           focus_params = { attract_timer }
         }

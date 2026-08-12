@@ -60,12 +60,6 @@ cp "${SRC}/scripts/qdir.txt" "${OUT}/data/scripts/qdir.txt"
 echo "==> Copying models"
 cp -r "${SRC}/models" "${OUT}/data/models"
 
-echo "==> Configuring + building thps4-server-browser"
-cmake -G Ninja -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
-  -S "${SRC}/src/thps4-server-browser" -B "${BUILD_ROOT}/serverbrowser"
-cmake --build "${BUILD_ROOT}/serverbrowser" --target thps4-server-browser
-cp "${BUILD_ROOT}/serverbrowser/thps4-server-browser.exe" "${OUT}/"
-
 echo "==> Copying installer"
 cp "${SRC}/installer/install.bat" "${OUT}/"
 
