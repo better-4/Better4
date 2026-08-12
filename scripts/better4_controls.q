@@ -317,6 +317,22 @@ better4_control_wallridebail = {
   ]
 }
 
+//     MISC
+
+better4_misc_boardscuff_index = 1
+better4_misc_boardscuff_value = on
+better4_misc_boardscuff = {
+  id = better4_misc_boardscuff_id
+  index_name = better4_misc_boardscuff_index
+  value_name = better4_misc_boardscuff_value
+  text = "Board Scuff"
+  ini_key = "BoardScuff"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 script better4_controls_init
   Printf "Initializing Better4 Controls"
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
@@ -335,6 +351,9 @@ script better4_controls_init
   better4_control_init better4_control_wallieplant
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
+  
+  // misc section
+  better4_control_init better4_misc_boardscuff
 endscript
 
 script better4_control_init
