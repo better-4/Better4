@@ -512,19 +512,20 @@ script join_chosen_new
   endif
 endscript
 script join_chosen
-  // if FoundServers
-  //   StopServerList
-  //   SetJoinMode JOIN_MODE_PLAY
-  //   actions_menu_anchor:DoMorph scale = 0
-  //   DoScreenElementMorph id = game_list_up_arrow time = 0 scale = 1
-  //   DoScreenElementMorph id = game_list_down_arrow time = 0 scale = 1
-  //   hide_internet_only_menus
-  //   server_desc_menu_anchor:DoMorph scale = 1
-  //   FireEvent type = unfocus target = actions_menu
-  //   FireEvent type = focus target = server_list_menu
-  //   Change current_lobby_focus = 1
-  //   AssignAlias id = server_list_menu alias = current_menu
-  // endif
+  Printf "join chosen"
+  if FoundServers
+    StopServerList
+    SetJoinMode JOIN_MODE_PLAY
+    actions_menu_anchor:DoMorph scale = 0
+    DoScreenElementMorph id = game_list_up_arrow time = 0 scale = 1
+    DoScreenElementMorph id = game_list_down_arrow time = 0 scale = 1
+    hide_internet_only_menus
+    server_desc_menu_anchor:DoMorph scale = 1
+    FireEvent type = unfocus target = actions_menu
+    FireEvent type = focus target = server_list_menu
+    Change current_lobby_focus = 1
+    AssignAlias id = server_list_menu alias = current_menu
+  endif
 endscript
 script observe_chosen
   if FoundServers
@@ -1638,53 +1639,40 @@ endscript
 script join_ip {
   failure_script = check_ip_from_keyboard_failure
 }
-  if not GotParam cancel
-    console_hide
-    if ObjectExists id = current_menu_anchor
-      DestroyScreenElement id = current_menu_anchor
-    endif
-
-    if GotParam ip
-      Printf "Joining server IP %a:%p" a = <ip> p = <port>
- 
-      // net_chosen_join_server <ip> <port>
-      TryJoinServerIP string = <ip>
-      // entered_network_game
-      create_snazzy_dialog_box { title = 'Checking...'
-        text = 'Checking for server...'
-        pad_back_script = check_ip_from_keyboard_cancel
-        buttons = [
-          { font = small text = 'Cancel' pad_choose_script = check_ip_from_keyboard_cancel }
-        ]
-      }
-
-      ResetTimer
-      begin
-        if TimeGreaterThan 5
-          break
-        endif
-        if TryJoinServerIPSuccess
-          break
-        endif
-        Wait 1 gameframe
-      repeat
-    endif
+  if ObjectExists id = current_menu_anchor
+    DestroyScreenElement id = current_menu_anchor
   endif
 
-  if GotParam cancel
-    create_network_select_games_menu
-  else
-    if not TryJoinServerIPSuccess
-      if ScreenElementExists id = dialog_box_anchor
-        dialog_box_exit
-        <failure_script>
-        // check_ip_from_keyboard_failure
-      endif
-    else
-      dialog_box_exit
-      add_pause_menu_textures_to_vram
-      create_network_select_games_menu play_cam
+  Printf "ip: %s" s = <ip>
+  TryJoinServerIP string = <ip>
+  ResetTimer
+  create_snazzy_dialog_box { title = 'Checking...'
+    text = 'Checking for server...'
+    pad_back_script = check_ip_from_keyboard_cancel
+    buttons = [
+      { font = small text = 'Cancel' pad_choose_script = check_ip_from_keyboard_cancel }
+    ]
+  }
+
+  begin
+    if TimeGreaterThan 5
+      break
     endif
+    if TryJoinServerIPSuccess
+      break
+    endif
+    Wait 1 gameframe
+  repeat
+
+  if not TryJoinServerIPSuccess
+    if ScreenElementExists id = dialog_box_anchor
+      dialog_box_exit
+      check_ip_from_keyboard_failure
+    endif
+  else
+    dialog_box_exit
+    add_pause_menu_textures_to_vram
+    create_network_select_games_menu play_cam
   endif
 endscript
 script check_join_internet_ip
@@ -1773,11 +1761,11 @@ script create_network_select_games_menu
         { pad_back back_from_game_list }
       ]
     }
-    main_menu_add_item text = "Host Game" parent = actions_menu id = menu_network_select_net_host pad_choose_script = host_net_chosen highlight_bar_scale = (1.43, 1.3)
-    main_menu_add_item text = "Join Game" parent = actions_menu id = menu_network_select_join pad_choose_script = join_chosen_new highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Host Game" parent = actions_menu id = menu_network_select_net_host pad_choose_script = host_net_chosen highlight_bar_scale = (0.73, 1.3)
+    main_menu_add_item text = "Join Game" parent = actions_menu id = menu_network_select_join pad_choose_script = join_chosen_new highlight_bar_scale = (0.73, 1.3)
     main_menu_add_item { text = 'Join IP'
       id = menu_network_select_join_ip
-      highlight_bar_scale = (1.43, 1.3)
+      highlight_bar_scale = (0.73, 1.3)
       pad_choose_script = create_network_menu_exit
       pad_choose_params = { new_menu_script = create_onscreen_keyboard
         text = ""
@@ -1789,8 +1777,8 @@ script create_network_select_games_menu
         keyboard_cancel_params = { cancel }
         allow_cancel }
     }
-    main_menu_add_item not_focusable text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
-    main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen_new highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item not_focusable text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (0.73, 1.3)
+    main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen_new highlight_bar_scale = (0.73, 1.3)
     // main_menu_add_item not_focusable text = "User List" parent = actions_menu id = menu_network_select_user_list pad_choose_script = user_list_chosen highlight_bar_scale = (1.43, 1.3)
     // main_menu_add_item text = "Homie List" parent = actions_menu id = menu_network_select_buddy_list pad_choose_script = launch_shell_buddy_list pad_choose_params = { from_lobby } highlight_bar_scale = (1.43, 1.3)
     // main_menu_add_item not_focusable text = "Enter Message" parent = actions_menu id = menu_network_select_chat pad_choose_script = create_lobby_onscreen_kb highlight_bar_scale = (1.43, 1.3)
@@ -1802,7 +1790,6 @@ script create_network_select_games_menu
     Change current_lobby_focus = 0
     AssignAlias id = actions_menu alias = current_menu
 
-
     if IsJoiningInternetGame
       Printf "create_network_select_games_menu: IsJoiningInternetGame"
       check_join_internet_ip
@@ -1810,6 +1797,7 @@ script create_network_select_games_menu
       if not TryJoinServerIPSuccess
         Printf "create_network_select_games_menu: not TryJoinServerIPSuccess"
         // RefreshServerList force_refresh
+        hide_internet_only_menus
         refresh_chosen_new
       endif
       Change check_for_unplugged_controllers = 1
@@ -1821,6 +1809,7 @@ script create_network_select_games_menu
         Wait 3 gameframe
         Printf "force refresh"
         ForceServerListRefresh
+        Printf "force refresh"
         join_chosen
       endif
     endif
@@ -2135,8 +2124,8 @@ script choose_selected_server
     join_ip <...>
   else
     ChooseServer <...>
+    DestroyScreenElement id = current_menu_anchor
   endif
-  DestroyScreenElement id = current_menu_anchor
 endscript
 script describe_selected_server
   main_menu_focus
