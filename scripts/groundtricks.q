@@ -73,11 +73,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   OverrideCancelGround off
   ClearEventBuffer
   ClearManualTrick
-  if Crouched
-    PlayAnim Anim = CrouchIdle BlendPeriod = 0.3
-  else
-    PlayAnim Anim = CrouchIdle BlendPeriod = 0.3
-  endif
+  PlayAnim Anim = CrouchIdle BlendPeriod = 0.3 speed = 1.9
   WaitAnimWhilstChecking AndManuals
   Goto OnGroundAI
 endscript
