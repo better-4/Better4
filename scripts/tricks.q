@@ -70,7 +70,7 @@ script SkaterInit
   if SkaterIsNamed jenna
     SwitchOffAtomic shoes
   endif
-  SetSkaterCamOverride heading = 0 tilt = 0 time = 0.000001 zoom = 1
+  SetSkaterCamOverride heading = 0 tilt = 0 time = 0.0 zoom = 1
   Wait 1 game frame
   ClearSkaterCamOverride
   ClearPanel_Landed
@@ -165,8 +165,8 @@ endscript
 script InAirExceptions
   ClearExceptions
   SetException Ex = Landed Scr = Land
-  SetException Ex = WallRideLeft Scr = WallRide Params = { Left }
-  SetException Ex = WallRideRight Scr = WallRide Params = { Right }
+  SetException Ex = WallRideLeft Scr = WallRide params = { Left }
+  SetException Ex = WallRideRight Scr = WallRide params = { Right }
   SetException Ex = WallRideBail Scr = WallRideBail
   SetException Ex = CarPlant Scr = CarPlant CallInsteadofGoto
   SetException Ex = CarBail Scr = CarBail
@@ -918,7 +918,7 @@ script Land
       Goto Land2
     else
       if AirTimeLessThan 0.2 seconds
-        Goto Land2 Params = { LittleAir }
+        Goto Land2 params = { LittleAir }
       else
         GotoPreserveParams Land2
       endif
@@ -1082,7 +1082,7 @@ script AwardPerfect
     SetTrickName ''
     SetTrickScore 1000
     Display Blockspin NoDegrade
-    Obj_SpawnScript PlayPerfectSound Params = { sound = ExtraTrick Wait = 0.2 pitch = 80 }
+    Obj_SpawnScript PlayPerfectSound params = { sound = ExtraTrick Wait = 0.2 pitch = 80 }
   endif
 endscript
 script AwardSloppy
@@ -1098,7 +1098,7 @@ script AwardSloppy
       SetTrickName ''
       SetTrickScore -500
       Display Blockspin NoDegrade
-      Obj_SpawnScript PlayPerfectSound Params = { sound = HUDtrickslopC pitch = 150 Wait = 0.12 }
+      Obj_SpawnScript PlayPerfectSound params = { sound = HUDtrickslopC pitch = 150 Wait = 0.12 }
     endif
   endif
 endscript
@@ -1229,7 +1229,9 @@ script EndOfRun
       else
         if not GotParam FromTaxiGuy
           if not GameModeEquals is_goal_attack
-            Create_Panel_Message id = goal_message text = "Waiting for other players to finish their runs..." style = panel_message_generic_loss
+            if not IsBetterObserving
+              ObserveAfter0
+            endif
           endif
         endif
       endif
@@ -1259,7 +1261,7 @@ script Goal_EndOfRun
       else
         if not GotParam FromTaxiGuy
           if not GameModeEquals is_goal_attack
-            Create_Panel_Message id = goal_message text = "Waiting for other players to finish their runs..." style = panel_message_generic_loss
+          Create_Panel_Message id = goal_message text = "Waiting for other players to finish their runs..." style = panel_message_generic_loss
           endif
         endif
       endif
@@ -1385,7 +1387,7 @@ script DropIn DropInAnim = DropIn
   if GameModeEquals is_horse
     ResetLookAround
     GetCurrentSkaterID
-    if not IsCurrentHorseSkater <objId>
+    if not IsCurrentHorseSkater <ObjId>
       return
     endif
   endif
@@ -1393,7 +1395,7 @@ script DropIn DropInAnim = DropIn
   ResetSkaterParticleSystems
   PausePhysics
   RestartSkaterExceptions
-  SetSkaterCamOverride heading = 0 tilt = -0.75 time = 0.000001 zoom = 5
+  SetSkaterCamOverride heading = 0 tilt = -0.75 time = 0.0 zoom = 5
   SetRollingFriction 10000
   DisablePlayerInput
   PlayAnim Anim = <DropInAnim> Blendperiod = 0.0
@@ -1412,10 +1414,10 @@ script DropIn DropInAnim = DropIn
   Goto Land
 endscript
 script ZoomIn
-  Skater:SetSkaterCamOverride heading = 0 time = 0.00001 zoom = 1.04
+  skater:SetSkaterCamOverride heading = 0 time = 0.00001 zoom = 1.04
 endscript
 script ZoomOut
-  Skater:ClearSkaterCamOverride
+  skater:ClearSkaterCamOverride
 endscript
 script StartSkating1
   RestartSkaterExceptions
@@ -1557,16 +1559,16 @@ script SkaterPushPed
     Goto FlailHitWall
   endif
   if AnimEquals [ runout runoutquick Smackwallupright ]
-    Goto Bailsmack Params = { SmackAnim = Smackwallupright }
+    Goto Bailsmack params = { SmackAnim = Smackwallupright }
   endif
   if InAir
     Goto Airborne
   else
     if IsInBail
       if AnimEquals [ Smackwallfeet NutterFallBackward FiftyFiftyFallBackward BackwardsTest BackwardFaceSlam Smackwallfeet SlipBackwards ]
-        Goto Bailsmack Params = { SmackAnim = Smackwallfeet }
+        Goto Bailsmack params = { SmackAnim = Smackwallfeet }
       else
-        Goto Bailsmack Params = { <...> }
+        Goto Bailsmack params = { <...> }
       endif
     endif
     Goto OnGroundAI
@@ -1597,16 +1599,16 @@ script SkaterBreakGlass
     Goto FlailHitWall
   endif
   if AnimEquals [ runout runoutquick Smackwallupright ]
-    Goto Bailsmack Params = { SmackAnim = Smackwallupright }
+    Goto Bailsmack params = { SmackAnim = Smackwallupright }
   endif
   if InAir
     Goto Airborne
   else
     if IsInBail
       if AnimEquals [ Smackwallfeet NutterFallBackward FiftyFiftyFallBackward BackwardsTest BackwardFaceSlam Smackwallfeet SlipBackwards ]
-        Goto Bailsmack Params = { SmackAnim = Smackwallfeet }
+        Goto Bailsmack params = { SmackAnim = Smackwallfeet }
       else
-        Goto Bailsmack Params = { <...> }
+        Goto Bailsmack params = { <...> }
       endif
     endif
     Goto OnGroundAI
