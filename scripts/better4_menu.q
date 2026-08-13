@@ -76,6 +76,7 @@ script better4_onground_menu {
   better4_control_menu_item better4_control_manualspin
   better4_control_menu_item better4_control_manualfloat
   better4_control_menu_item better4_control_doublerevert
+  better4_control_menu_item better4_control_revertrecovery
   make_text_sub_menu_item text = "Back" scale = 0.85 id = onground_back_option pad_choose_script = better4_onground_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
