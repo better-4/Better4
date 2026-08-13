@@ -260,7 +260,7 @@ script make_new_menu { menu_title = "Paused"
         rgba = [ 128 128 128 98 ]
         not_focusable
       }
-      GetStackedScreenElementPos Y id = <id> offset = <scrolling_menu_offset>
+      GetStackedScreenElementPos y id = <id> offset = <scrolling_menu_offset>
     endif
     CreateScreenElement {
       type = VScrollingMenu
@@ -385,7 +385,7 @@ script set_menu_bg parent = current_menu_anchor
     just = [ left top ]
     rgba = [ 118 118 128 120 ]
   }
-  GetStackedScreenElementPos X id = <id> offset = (-8, 0)
+  GetStackedScreenElementPos x id = <id> offset = (-8, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = <parent>
@@ -421,7 +421,7 @@ script set_menu_bg parent = current_menu_anchor
     endif
      <last_slice> = ( <last_slice> + 1 )
     FormatText ChecksumName = texture_name "SlicePause_%i" i = <last_slice>
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = <parent>
@@ -462,7 +462,7 @@ script set_sub_bg_goal goal_mid_scale = (14.8, 1.33) pos = (250, 23) goal_end_sc
     rgba = [ 128 128 128 128 ]
     z_priority = 0
   }
-  GetStackedScreenElementPos Y id = <id> offset = (5, -36)
+  GetStackedScreenElementPos y id = <id> offset = (5, -36)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -474,7 +474,7 @@ script set_sub_bg_goal goal_mid_scale = (14.8, 1.33) pos = (250, 23) goal_end_sc
     rgba = [ 56 60 71 118 ]
     z_priority = 0
   }
-  GetStackedScreenElementPos X id = <id>
+  GetStackedScreenElementPos x id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -486,7 +486,7 @@ script set_sub_bg_goal goal_mid_scale = (14.8, 1.33) pos = (250, 23) goal_end_sc
     rgba = [ 56 60 71 118 ]
     z_priority = 0
   }
-  GetStackedScreenElementPos X id = <id>
+  GetStackedScreenElementPos x id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -572,7 +572,7 @@ script create_pause_menu
     create_helper_text generic_helper_text_no_back
   endif
   kill_start_key_binding
-  if GameModeEquals Is_SingleSession
+  if GameModeEquals is_singlesession
     if GoalManager_GoalIsActive name = TrickAttack
       make_sprite_menu_item text = "Continue" id = menu_continue pad_choose_script = handle_start_pressed
       make_text_sprite texture = PA_continue parent = menu_continue
@@ -583,22 +583,22 @@ script create_pause_menu
   else
     if not GotParam no_exit
       make_sprite_menu_item text = "Continue" id = menu_continue pad_choose_script = handle_start_pressed
-      if InNetGame 
-        if not IsObserving
-            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe
+      if InNetGame
+        if not IsBetterObserving
+          make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = EnterBetterObserve
         else
-           if not GoalManager_HasActiveGoals
-               make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = quit_observing
-           else
-               make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = quit_observing
-           endif
+          if not GoalManager_HasActiveGoals
+            make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+          else
+            make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+          endif
         endif
-      endif  
+      endif
       make_text_sprite texture = PA_continue parent = menu_continue
     endif
   endif
   if GameModeEquals is_goal_attack
-    if not IsObserving
+    if not IsBetterObserving
       if GoalManager_CanRetryGoal
         if GoalManager_GetLastGoalId
           if not GoalManager_HasWonGoal name = <goal_id>
@@ -632,7 +632,7 @@ script create_pause_menu
     make_sprite_menu_item text = "View Goals" id = menu_view_goals pad_choose_script = create_view_goals_menu
     make_text_sprite texture = PA_view parent = menu_view_goals
   else
-    if GameModeEquals Is_SingleSession
+    if GameModeEquals is_singlesession
       make_sprite_menu_item text = "Retry High Score" id = menu_retry_high_score pad_choose_script = change_gamemode_singlesession_menu
       make_text_sprite texture = PA_rescore parent = menu_retry_high_score
     endif
@@ -640,7 +640,7 @@ script create_pause_menu
   if InNetGame
     if OnServer
       if OnXbox
-        if not IsObserving
+        if not IsBetterObserving
           make_sprite_menu_item text = "Sit Out" id = menu_network_sit_select pad_choose_script = launch_network_sit_out_menu
         endif
         make_sprite_menu_item text = "Host Options" id = menu_network_server_opts_select pad_choose_script = network_options_selected
@@ -700,22 +700,22 @@ script create_pause_menu
     make_text_sprite texture = PA_movie parent = menu_view_replay
     make_sprite_menu_item text = "Options" id = menu_options pad_choose_script = create_options_menu
     make_text_sprite texture = PA_options parent = menu_options
-    if not IsTrue Demo_Build
+    if not IsTrue DEMO_BUILD
       if not CD
         make_sprite_menu_item text = "Goto Restart" id = menu_skip_to_restart pad_choose_script = launch_restart_menu
         make_text_sprite texture = PA_restart parent = menu_skip_to_restart
         make_sprite_menu_item text = "Debug Menu" id = debug_menu pad_choose_script = create_debug_menu
-        make_text_sprite texture = PA_model parent = debug_menu
+        make_text_sprite texture = PA_Model parent = debug_menu
       endif
     endif
-    if not LevelIs load_Sk4Ed_gameplay
+    if not LevelIs Load_Sk4Ed_gameplay
       make_sprite_menu_item text = "View Gaps" id = menu_skip_to_gap pad_choose_script = launch_gap_menu
       make_text_sprite texture = PA_gap parent = menu_skip_to_gap
     endif
   endif
   if InNetGame
     if GameModeEquals is_lobby
-      if not IsObserving
+      if not IsBetterObserving
         make_sprite_menu_item {
           text = "Set Cust Restart"
           id = menu_set_custom
@@ -731,19 +731,19 @@ script create_pause_menu
     endif
   else
     if not GoalManager_HasActiveGoals count_all
-        make_sprite_menu_item text = "Set Cust Restart" id = menu_set_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = set_custom_restart }
-        make_text_sprite texture = PA_set_cust parent = menu_set_custom
-        if skater:SetCustomRestart
-          make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
-          make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
-        endif
+      make_sprite_menu_item text = "Set Cust Restart" id = menu_set_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = set_custom_restart }
+      make_text_sprite texture = PA_set_cust parent = menu_set_custom
+      if skater:SetCustomRestart
+        make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
+        make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
+      endif
     endif
   endif
   if InNetGame
     make_sprite_menu_item text = "Chat Message" id = menu_chat pad_choose_script = launch_chat_keyboard
     make_text_sprite texture = PA_taunt parent = menu_chat
     if not OnServer
-      if not IsObserving
+      if not IsBetterObserving
         if InInternetMode
           if IsTrue bootstrap_build
             make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe not_focusable = not_focusable
@@ -813,7 +813,7 @@ script create_mp_pause_menu
   RunScriptOnScreenElement id = pause_menu menu_onscreen
 endscript
 script exit_pause_menu menu_id = current_menu_anchor
-  Debounce X time = 0.3
+  Debounce x time = 0.3
   if InNetGame
     if LocalSkaterExists
       skater:NetEnablePlayerInput
@@ -964,7 +964,7 @@ script create_gap_menu
     just = [ left top ]
     scale = 1.35
   }
-  GetStackedScreenElementPos Y id = <id> offset = (-19, -4)
+  GetStackedScreenElementPos y id = <id> offset = (-19, -4)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -987,7 +987,7 @@ script create_gap_menu
     just = [ left top ]
     z_priority = 3
   }
-  GetStackedScreenElementPos X id = <id> offset = (15, 0)
+  GetStackedScreenElementPos x id = <id> offset = (15, 0)
   CreateScreenElement {
     type = TextElement
     parent = current_menu_anchor
@@ -999,7 +999,7 @@ script create_gap_menu
     scale = 0.9
     z_priority = 3
   }
-  GetStackedScreenElementPos X id = <id> offset = (115, 0)
+  GetStackedScreenElementPos x id = <id> offset = (115, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -1010,7 +1010,7 @@ script create_gap_menu
     just = [ left top ]
     z_priority = 3
   }
-  GetStackedScreenElementPos X id = <id> offset = (168, 0)
+  GetStackedScreenElementPos x id = <id> offset = (168, 0)
   CreateScreenElement {
     type = TextElement
     parent = current_menu_anchor
@@ -1022,7 +1022,7 @@ script create_gap_menu
     scale = 0.9
     z_priority = 3
   }
-  GetStackedScreenElementPos Y id = view_gaps_menu_top_bar offset = (60, 0)
+  GetStackedScreenElementPos y id = view_gaps_menu_top_bar offset = (60, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -1032,7 +1032,7 @@ script create_gap_menu
     just = [ left top ]
     rgba = [ 0 0 0 80 ]
   }
-  GetStackedScreenElementPos X id = <id> offset = (355, 0)
+  GetStackedScreenElementPos x id = <id> offset = (355, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -1042,7 +1042,7 @@ script create_gap_menu
     just = [ left top ]
     rgba = [ 0 0 0 80 ]
   }
-  GetStackedScreenElementPos Y id = view_gaps_menu_top_bar offset = (0, 287)
+  GetStackedScreenElementPos y id = view_gaps_menu_top_bar offset = (0, 287)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -1053,7 +1053,7 @@ script create_gap_menu
     just = [ left top ]
     z_priority = 2
   }
-  GetStackedScreenElementPos Y id = view_gaps_menu_up_arrow offset = (0, 300)
+  GetStackedScreenElementPos y id = view_gaps_menu_up_arrow offset = (0, 300)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -1064,7 +1064,7 @@ script create_gap_menu
     just = [ left top ]
     z_priority = 3
   }
-  GetStackedScreenElementPos Y id = view_gaps_menu_top_bar offset = (20, 5)
+  GetStackedScreenElementPos y id = view_gaps_menu_top_bar offset = (20, 5)
   CreateScreenElement {
     type = VScrollingMenu
     parent = current_menu_anchor
@@ -1481,7 +1481,7 @@ script create_view_models_menu
   }
   add_view_models_to_menu
   set_sub_bg
-  create_icon texture = PA_model
+  create_icon texture = PA_Model
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script view_model
@@ -1522,7 +1522,7 @@ script create_set_pro_skater_menu
   endif
   add_set_pro_skater_to_menu
   set_sub_bg
-  create_icon texture = PA_model
+  create_icon texture = PA_Model
   RunScriptOnScreenElement id = current_menu_anchor animate_in params = { final_pos = (320, 134) }
 endscript
 script set_pro_skater
@@ -1549,7 +1549,7 @@ script create_change_skater_appearance_menu
   }
   add_change_skater_appearance_to_menu
   set_sub_bg
-  create_icon texture = PA_model
+  create_icon texture = PA_Model
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script change_skater_appearance
@@ -1602,7 +1602,7 @@ script create_debug_menu
   make_text_sub_menu_item text = "Secrets test" pad_choose_script = create_secrets_menu
   make_text_sub_menu_item text = "Done" id = menu_done pad_choose_script = create_pause_menu
   set_sub_bg
-  create_icon texture = PA_model
+  create_icon texture = PA_Model
   RunScriptOnScreenElement id = current_menu_anchor animate_in params = { final_pos = (320, 134) }
 endscript
 script screensaver
@@ -1700,7 +1700,7 @@ script create_level_select_menu pad_back_script = level_select_menu_exit
     scale = (1, 1)
   }
   level_select_create_menu_block pad_back_script = <pad_back_script> <...>
-  if IsTrue Demo_Build
+  if IsTrue DEMO_BUILD
     ForEachIn e3_level_select_menu_level_info do = level_select_menu_add_item params = <...>
   else
     RemoveParameter text
@@ -1748,7 +1748,7 @@ script level_select_create_top_bar scale = (1.14, 1) text = "" parent = level_se
     scale = <scale>
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = select_skater_mainbar
+  GetStackedScreenElementPos x id = select_skater_mainbar
   CreateScreenElement {
     type = SpriteElement
     parent = level_select_anchor_top
@@ -1776,7 +1776,7 @@ script level_select_create_menu_block
     dims = (640, 480)
     pos = (320, 240)
   }
-  GetStackedScreenElementPos Y id = select_skater_mainbar
+  GetStackedScreenElementPos y id = select_skater_mainbar
   CreateScreenElement {
     type = SpriteElement
     parent = level_select_anchor_middle
@@ -1787,7 +1787,7 @@ script level_select_create_menu_block
     pos = <pos>
     just = [ left top ]
   }
-  GetStackedScreenElementPos Y id = level_select_menu_top_sprite offset = (28, 5)
+  GetStackedScreenElementPos y id = level_select_menu_top_sprite offset = (28, 5)
   CreateScreenElement {
     type = VMenu
     parent = level_select_anchor_middle
@@ -1809,7 +1809,7 @@ script level_select_create_menu_block
   else
     goals_title_rgba = [ 0 0 0 0 ]
   endif
-  GetStackedScreenElementPos Y id = level_select_menu_top_sprite offset = (196, -13)
+  GetStackedScreenElementPos y id = level_select_menu_top_sprite offset = (196, -13)
   CreateScreenElement {
     type = TextElement
     parent = level_select_anchor_middle
@@ -1823,7 +1823,7 @@ script level_select_create_menu_block
   }
    <id> = level_select_menu_top_sprite
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = level_select_anchor_middle
@@ -1839,7 +1839,7 @@ script level_select_create_menu_block
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
   if GotParam is_secret
     bottom_cap_rgba = [ 128 128 128 0 ]
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = level_select_anchor_middle
@@ -1849,7 +1849,7 @@ script level_select_create_menu_block
       scale = (1.04, 1)
       rgba = [ 128 128 128 90 ]
     }
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
      <lower_piece_pos> = <pos>
     CreateScreenElement {
       type = SpriteElement
@@ -1864,7 +1864,7 @@ script level_select_create_menu_block
   else
     if not GameModeEquals is_career
       bottom_cap_rgba = [ 128 128 128 0 ]
-      GetStackedScreenElementPos Y id = <id>
+      GetStackedScreenElementPos y id = <id>
       CreateScreenElement {
         type = SpriteElement
         parent = level_select_anchor_middle
@@ -1874,7 +1874,7 @@ script level_select_create_menu_block
         scale = (1.04, 1)
         rgba = [ 128 128 128 90 ]
       }
-      GetStackedScreenElementPos Y id = <id>
+      GetStackedScreenElementPos y id = <id>
        <lower_piece_pos> = <pos>
       CreateScreenElement {
         type = SpriteElement
@@ -1888,7 +1888,7 @@ script level_select_create_menu_block
       }
     endif
   endif
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
    <lower_piece_pos> = <pos>
   CreateScreenElement {
     type = SpriteElement
@@ -1900,7 +1900,7 @@ script level_select_create_menu_block
     rgba = <bottom_cap_rgba>
     just = [ left top ]
   }
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = level_select_anchor_middle
@@ -1936,7 +1936,7 @@ script level_select_create_menu_block
       dims = (340, 0)
       allow_expansion
     }
-    GetStackedScreenElementPos X id = <id> offset = (-285, 5)
+    GetStackedScreenElementPos x id = <id> offset = (-285, 5)
     CreateScreenElement {
       type = SpriteElement
       parent = level_select_anchor_middle
@@ -2017,7 +2017,7 @@ script level_select_create_menu_block
           alpha = 1
         }
         if GoalManager_SkaterHasBeatenProSpecificChallenge skater = <name>
-          GetStackedScreenElementPos X id = pro_specific_challenge_icon offset = (5, 3)
+          GetStackedScreenElementPos x id = pro_specific_challenge_icon offset = (5, 3)
           GetScreenElementDims id = pro_specific_challenge_text
           CreateScreenElement {
             type = SpriteElement
@@ -2148,7 +2148,7 @@ script level_select_create_info_box
     pos = <pos>
     dims = (640, 480)
   }
-  GetStackedScreenElementPos X id = level_select_menu_bottom_cap offset = (10, 0)
+  GetStackedScreenElementPos x id = level_select_menu_bottom_cap offset = (10, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = level_select_anchor_info
@@ -2157,7 +2157,7 @@ script level_select_create_info_box
     pos = <pos>
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = <id>
+  GetStackedScreenElementPos x id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = level_select_anchor_info
@@ -2167,7 +2167,7 @@ script level_select_create_info_box
     just = [ left top ]
     scale = (14, 1)
   }
-  GetStackedScreenElementPos X id = <id>
+  GetStackedScreenElementPos x id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = level_select_anchor_info
@@ -2177,7 +2177,7 @@ script level_select_create_info_box
     just = [ left top ]
     z_priority = 10
   }
-  GetStackedScreenElementPos X id = level_select_info_box_left offset = (0, 10)
+  GetStackedScreenElementPos x id = level_select_info_box_left offset = (0, 10)
   GetScreenElementDims id = level_select_info_box_middle
   CreateScreenElement {
     type = TextBlockElement
@@ -2201,7 +2201,7 @@ script level_select_menu_add_item
   endif
    <can_afford_level> = 0
    <in_locked_group> = 0
-  if IntegerEquals a = all_levels_unlocked b = 1
+  if IntegerEquals a = All_Levels_Unlocked b = 1
      <rgba> = [ 88 105 112 128 ]
     if ( <level_num> = 10 )
        <pad_choose_script> = level_select_created_park_menu
@@ -2516,7 +2516,7 @@ script level_select_created_park_menu
     just = [ center top ]
   }
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = current_menu_anchor
@@ -2527,7 +2527,7 @@ script level_select_created_park_menu
       just = [ left top ]
     }
   repeat 6
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -2537,7 +2537,7 @@ script level_select_created_park_menu
     scale = (0.96, 1)
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = main_menu_box_top offset = (-20, 0)
+  GetStackedScreenElementPos x id = main_menu_box_top offset = (-20, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -2650,16 +2650,16 @@ endscript
 script created_park_launch
   if GotParam from_server_options
     level_select_created_park_menu_exit from_server_options
-    level = load_Sk4Ed_gameplay
+    level = Load_Sk4Ed_gameplay
     string = "Created Park"
     level_select_menu_exit from_server_options net_pad_back = 0 <...>
   else
     level_select_created_park_menu_exit
     if ( created_park_warning = 1 )
       Change created_park_warning = 0
-      level_select_change_level level = load_Sk4Ed_gameplay <...> show_warning
+      level_select_change_level level = Load_Sk4Ed_gameplay <...> show_warning
     else
-      level_select_change_level level = load_Sk4Ed_gameplay <...>
+      level_select_change_level level = Load_Sk4Ed_gameplay <...>
     endif
   endif
 endscript
@@ -2813,7 +2813,7 @@ script level_select_created_park_list
     just = [ center top ]
   }
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = current_menu_anchor
@@ -2824,7 +2824,7 @@ script level_select_created_park_list
       just = [ left top ]
     }
   repeat 15
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -2834,7 +2834,7 @@ script level_select_created_park_list
     scale = (0.96, 1)
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = main_menu_box_top offset = (-20, 0)
+  GetStackedScreenElementPos x id = main_menu_box_top offset = (-20, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -2988,7 +2988,7 @@ script level_select_change_level
 endscript
 script level_select_invalid_choice
 endscript
-script level_select_spend_points_dialog level_name = "Zoo" level = load_zoo
+script level_select_spend_points_dialog level_name = "Zoo" level = Load_Zoo
   RunScriptOnScreenElement id = current_menu_anchor hide_main_menu_anchor
   if ( <points_to_unlock> = 1 )
     FormatText { TextName = prompt
@@ -3082,31 +3082,31 @@ script remove_level_select_menu_textures_from_vram
 endscript
 e3_level_select_menu_level_info = [
   { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_id = Cab_sign_1_College }
-  { text = "Zoo" level_num = 7 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = load_zoo taxi_id = Cab_sign_7_Zoo }
+  { text = "Zoo" level_num = 7 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = Load_Zoo taxi_id = Cab_sign_7_Zoo }
 ]
 level_select_menu_level_info = [
   { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_id = Cab_sign_1_College }
-  { text = "San Francisco" level_num = 2 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SF2 level = load_sf2 taxi_id = Cab_sign_2_San_Fran }
-  { text = "Alcatraz" level_num = 3 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ALC level = load_alc taxi_id = Cab_sign_3_Alcatraz }
-  { text = "Kona" level_num = 4 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_KON level = load_kon taxi_id = Cab_sign_4_Kona PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
-  { text = "Shipyard" level_num = 5 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_JNK level = load_jnk taxi_id = Cab_sign_5_Shipyard PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
-  { text = "London" level_num = 6 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_LON level = load_lon taxi_id = Cab_sign_6_London PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
-  { text = "Zoo" level_num = 7 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = load_zoo taxi_id = Cab_sign_7_Zoo PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
-  { text = "Carnival" level_num = 8 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_CNV level = load_cnv taxi_id = Cab_sign_8_Carnival }
-  { text = "Chicago" level_num = 9 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_HOF level = load_hof taxi_id = Cab_sign_9_Chicago }
-  { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_CPK level = load_Sk4Ed_gameplay taxi_id = Cab_sign_10_Custom }
+  { text = "San Francisco" level_num = 2 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SF2 level = Load_SF2 taxi_id = Cab_sign_2_San_Fran }
+  { text = "Alcatraz" level_num = 3 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ALC level = Load_Alc taxi_id = Cab_sign_3_Alcatraz }
+  { text = "Kona" level_num = 4 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_KON level = Load_Kon taxi_id = Cab_sign_4_Kona PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
+  { text = "Shipyard" level_num = 5 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_JNK level = Load_Jnk taxi_id = Cab_sign_5_Shipyard PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
+  { text = "London" level_num = 6 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_LON level = Load_Lon taxi_id = Cab_sign_6_London PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
+  { text = "Zoo" level_num = 7 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = Load_Zoo taxi_id = Cab_sign_7_Zoo PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
+  { text = "Carnival" level_num = 8 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_CNV level = Load_Cnv taxi_id = Cab_sign_8_Carnival }
+  { text = "Chicago" level_num = 9 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_HOF level = Load_Hof taxi_id = Cab_sign_9_Chicago }
+  { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_CPK level = Load_Sk4Ed_gameplay taxi_id = Cab_sign_10_Custom }
 ]
 level_select_menu_level_info_unlock = [
   { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_id = Cab_sign_1_College }
-  { text = "San Francisco" level_num = 2 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sf2 taxi_id = Cab_sign_2_San_Fran }
-  { text = "Alcatraz" level_num = 3 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_alc taxi_id = Cab_sign_3_Alcatraz }
-  { text = "Kona" level_num = 4 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_kon taxi_id = Cab_sign_4_Kona }
-  { text = "Shipyard" level_num = 5 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_jnk taxi_id = Cab_sign_5_Shipyard }
-  { text = "London" level_num = 6 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_lon taxi_id = Cab_sign_6_London }
-  { text = "Zoo" level_num = 7 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_zoo taxi_id = Cab_sign_7_Zoo }
-  { text = "Carnival" level_num = 8 points_to_unlock = 0 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_SCH level = load_cnv taxi_id = Cab_sign_8_Carnival }
-  { text = "Chicago" level_num = 9 points_to_unlock = 0 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_SCH level = load_hof taxi_id = Cab_sign_9_Chicago }
-  { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = load_Sk4Ed_gameplay taxi_id = Cab_sign_10_Custom }
+  { text = "San Francisco" level_num = 2 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = Load_SF2 taxi_id = Cab_sign_2_San_Fran }
+  { text = "Alcatraz" level_num = 3 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = Load_Alc taxi_id = Cab_sign_3_Alcatraz }
+  { text = "Kona" level_num = 4 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = Load_Kon taxi_id = Cab_sign_4_Kona }
+  { text = "Shipyard" level_num = 5 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = Load_Jnk taxi_id = Cab_sign_5_Shipyard }
+  { text = "London" level_num = 6 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = Load_Lon taxi_id = Cab_sign_6_London }
+  { text = "Zoo" level_num = 7 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = Load_Zoo taxi_id = Cab_sign_7_Zoo }
+  { text = "Carnival" level_num = 8 points_to_unlock = 0 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_SCH level = Load_Cnv taxi_id = Cab_sign_8_Carnival }
+  { text = "Chicago" level_num = 9 points_to_unlock = 0 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_SCH level = Load_Hof taxi_id = Cab_sign_9_Chicago }
+  { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_Sk4Ed_gameplay taxi_id = Cab_sign_10_Custom }
 ]
 level_select_pro_challenge_info = {
   Hawk = { text = "In the College" }
@@ -3186,7 +3186,7 @@ script create_options_menu
     ]
   }
   if GameModeEquals is_career
-    if not IsTrue Demo_Build
+    if not IsTrue DEMO_BUILD
       make_text_sub_menu_item text = "Game Progress" id = menu_game_progress pad_choose_script = game_progress_menu_create
       make_text_sub_menu_item text = "Change Skater" id = menu_skater pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = menu_confirm_goto_secret_shop change_skater }
       if IsDemo
@@ -3244,7 +3244,7 @@ script create_options_menu
         }
       endif
     endif
-    if not ( ( IsTrue bootstrap_build ) or ( IsTrue Demo_Build ) )
+    if not ( ( IsTrue bootstrap_build ) or ( IsTrue DEMO_BUILD ) )
       if not CD
         make_text_sub_menu_item text = "Cheats: DO NOT TEST" id = menu_cheats pad_choose_script = launch_cheats_menu
       endif
@@ -3255,7 +3255,7 @@ script create_options_menu
       endif
     endif
   else
-    if not IsObserving
+    if not IsBetterObserving
       if not InSplitScreenGame
         if GoalManager_HasActiveGoals
           make_text_sub_menu_item {
@@ -3292,7 +3292,7 @@ script create_options_menu
           }
         endif
       endif
-      if not ( ( IsTrue bootstrap_build ) or ( IsTrue Demo_Build ) )
+      if not ( ( IsTrue bootstrap_build ) or ( IsTrue DEMO_BUILD ) )
         if not CD
           make_text_sub_menu_item text = "Cheats: DO NOT TEST" id = menu_cheats pad_choose_script = launch_cheats_menu
         endif
@@ -3917,7 +3917,7 @@ script cheats_menu_check_flag
 endscript
 script cheats_menu_check_level_lock
   GetTags
-  if IntegerEquals a = all_levels_unlocked b = 1
+  if IntegerEquals a = All_Levels_Unlocked b = 1
     toggle_menu_item_on id = <id>
   else
     toggle_menu_item_off id = <id>
@@ -3925,13 +3925,13 @@ script cheats_menu_check_level_lock
 endscript
 script cheats_menu_change_level_lock
   GetTags
-  if IntegerEquals a = all_levels_unlocked b = 1
+  if IntegerEquals a = All_Levels_Unlocked b = 1
     toggle_menu_item_off id = <id>
-    Change all_levels_unlocked = 0
+    Change All_Levels_Unlocked = 0
   else
-    if IntegerEquals a = all_levels_unlocked b = 0
+    if IntegerEquals a = All_Levels_Unlocked b = 0
       toggle_menu_item_on id = <id>
-      Change all_levels_unlocked = 1
+      Change All_Levels_Unlocked = 1
     endif
   endif
   pulse_item
@@ -4030,7 +4030,7 @@ script create_sound_options_menu
     blue_bar_pos = ( (230, 259) + <delta_pos> )
     goal_right_scale = (0.8, 0.68)
   endif
-  GetStackedScreenElementPos X id = current_menu_anchor
+  GetStackedScreenElementPos x id = current_menu_anchor
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4043,7 +4043,7 @@ script create_sound_options_menu
     rgba = [ 128 128 128 128 ]
     z_priority = 2
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4055,7 +4055,7 @@ script create_sound_options_menu
     just = [ center top ]
     z_priority = 5
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4066,7 +4066,7 @@ script create_sound_options_menu
     scale = (14, 0.2)
     just = [ center top ]
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4078,7 +4078,7 @@ script create_sound_options_menu
     just = [ center top ]
   }
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = current_menu_anchor
@@ -4089,7 +4089,7 @@ script create_sound_options_menu
       just = [ left top ]
     }
   repeat <middle_repeat>
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4099,7 +4099,7 @@ script create_sound_options_menu
     scale = (0.96, 1)
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = main_menu_box_top offset = (-20, 0)
+  GetStackedScreenElementPos x id = main_menu_box_top offset = (-20, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4109,7 +4109,7 @@ script create_sound_options_menu
     pos = <pos>
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   create_icon texture = PA_sound pos = ( (80, 88) + <delta_pos> )
   CreateScreenElement {
     type = SpriteElement
@@ -4377,7 +4377,7 @@ script create_sound_options_mini_menu
     }
   endif
   delta_pos = (100, 30)
-  GetStackedScreenElementPos X id = current_menu_anchor
+  GetStackedScreenElementPos x id = current_menu_anchor
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4390,7 +4390,7 @@ script create_sound_options_mini_menu
     rgba = [ 128 128 128 128 ]
     z_priority = 3
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4401,7 +4401,7 @@ script create_sound_options_mini_menu
     scale = (14, 0.2)
     just = [ center top ]
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4413,7 +4413,7 @@ script create_sound_options_mini_menu
     just = [ center top ]
   }
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = current_menu_anchor
@@ -4424,7 +4424,7 @@ script create_sound_options_mini_menu
       just = [ left top ]
     }
   repeat 4
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4434,7 +4434,7 @@ script create_sound_options_mini_menu
     scale = (0.96, 0.6)
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = main_menu_box_top offset = (-20, 0)
+  GetStackedScreenElementPos x id = main_menu_box_top offset = (-20, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4444,7 +4444,7 @@ script create_sound_options_mini_menu
     pos = <pos>
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   create_icon texture = PA_sound pos = ( (80, 85) + <delta_pos> )
   CreateScreenElement {
     type = SpriteElement
@@ -4540,7 +4540,7 @@ script toggle_song_order
 endscript
 script create_playlist_menu
   if not CD
-    if not ( testmusicfromhost = 1 )
+    if not ( TestMusicFromHost = 1 )
       return
     endif
   endif
@@ -4580,7 +4580,7 @@ script create_playlist_menu
     just = [ left top ]
     scale = 1.35
   }
-  GetStackedScreenElementPos Y id = <id> offset = (-15, -4)
+  GetStackedScreenElementPos y id = <id> offset = (-15, -4)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4592,7 +4592,7 @@ script create_playlist_menu
     just = [ left top ]
     z_priority = 2
   }
-  GetStackedScreenElementPos X id = view_gaps_menu_top_bar offset = (-260, 5)
+  GetStackedScreenElementPos x id = view_gaps_menu_top_bar offset = (-260, 5)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4603,7 +4603,7 @@ script create_playlist_menu
     just = [ left top ]
     z_priority = 3
   }
-  GetStackedScreenElementPos X id = view_gaps_menu_top_bar offset = (-60, 0)
+  GetStackedScreenElementPos x id = view_gaps_menu_top_bar offset = (-60, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4614,7 +4614,7 @@ script create_playlist_menu
     rgba = [ 0 0 0 80 ]
     z_priority = 5
   }
-  GetStackedScreenElementPos Y id = view_gaps_menu_top_bar offset = (0, 285)
+  GetStackedScreenElementPos y id = view_gaps_menu_top_bar offset = (0, 285)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4625,7 +4625,7 @@ script create_playlist_menu
     just = [ left top ]
     z_priority = 2
   }
-  GetStackedScreenElementPos Y id = view_gaps_menu_up_arrow offset = (0, 300)
+  GetStackedScreenElementPos y id = view_gaps_menu_up_arrow offset = (0, 300)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4636,7 +4636,7 @@ script create_playlist_menu
     just = [ left top ]
     z_priority = 3
   }
-  GetStackedScreenElementPos Y id = view_gaps_menu_top_bar offset = (20, 5)
+  GetStackedScreenElementPos y id = view_gaps_menu_top_bar offset = (20, 5)
   CreateScreenElement {
     type = VScrollingMenu
     parent = current_menu_anchor
@@ -4781,7 +4781,7 @@ script create_soundtrack_menu
     }
   endif
   delta_pos = (100, 0)
-  GetStackedScreenElementPos X id = current_menu_anchor
+  GetStackedScreenElementPos x id = current_menu_anchor
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4794,7 +4794,7 @@ script create_soundtrack_menu
     rgba = [ 128 128 128 128 ]
     z_priority = 3
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4806,7 +4806,7 @@ script create_soundtrack_menu
     just = [ center top ]
   }
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = current_menu_anchor
@@ -4817,7 +4817,7 @@ script create_soundtrack_menu
       just = [ left top ]
     }
   repeat <middle_repeat>
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -4827,7 +4827,7 @@ script create_soundtrack_menu
     scale = (1.7, 0.6)
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = main_menu_box_top offset = (-25, 0)
+  GetStackedScreenElementPos x id = main_menu_box_top offset = (-25, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5266,7 +5266,7 @@ script create_controller_config_menu
       box_right_scale = (0.8, 0.375)
     endif
   endif
-  GetStackedScreenElementPos X id = current_menu_anchor
+  GetStackedScreenElementPos x id = current_menu_anchor
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5279,7 +5279,7 @@ script create_controller_config_menu
     rgba = [ 128 128 128 128 ]
     z_priority = 2
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5291,7 +5291,7 @@ script create_controller_config_menu
     just = [ center top ]
   }
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = current_menu_anchor
@@ -5302,7 +5302,7 @@ script create_controller_config_menu
       just = [ left top ]
     }
   repeat <middle_repeat>
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5312,7 +5312,7 @@ script create_controller_config_menu
     scale = (0.96, 1)
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = main_menu_box_top offset = (-20, 0)
+  GetStackedScreenElementPos x id = main_menu_box_top offset = (-20, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5322,7 +5322,7 @@ script create_controller_config_menu
     pos = <pos>
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = sound_options_bg
+  GetStackedScreenElementPos x id = sound_options_bg
   create_icon texture = PA_controls pos = ( (80, 88) + <delta_pos> )
   CreateScreenElement {
     type = SpriteElement
@@ -5628,7 +5628,7 @@ script create_movies_menu
     rgba = [ 128 128 128 98 ]
     not_focusable
   }
-  GetStackedScreenElementPos X id = current_menu_anchor
+  GetStackedScreenElementPos x id = current_menu_anchor
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5661,7 +5661,7 @@ script create_movies_menu
     rgba = [ 128 128 128 128 ]
     z_priority = 4
   }
-  GetStackedScreenElementPos X id = movies_bg
+  GetStackedScreenElementPos x id = movies_bg
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5673,7 +5673,7 @@ script create_movies_menu
     just = [ center top ]
   }
   begin
-    GetStackedScreenElementPos Y id = <id>
+    GetStackedScreenElementPos y id = <id>
     CreateScreenElement {
       type = SpriteElement
       parent = current_menu_anchor
@@ -5684,7 +5684,7 @@ script create_movies_menu
       just = [ left top ]
     }
   repeat <middle_repeat>
-  GetStackedScreenElementPos Y id = <id>
+  GetStackedScreenElementPos y id = <id>
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5694,7 +5694,7 @@ script create_movies_menu
     scale = (0.96, 1)
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = main_menu_box_top offset = (-20, 0)
+  GetStackedScreenElementPos x id = main_menu_box_top offset = (-20, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -5704,7 +5704,7 @@ script create_movies_menu
     pos = <pos>
     just = [ left top ]
   }
-  GetStackedScreenElementPos X id = movies_bg
+  GetStackedScreenElementPos x id = movies_bg
   create_icon texture = PA_movie pos = ( (80, 88) + <delta_pos> ) z_priority = 4
   SetScreenElementProps { id = movies_menu
     event_handlers = [
@@ -6264,7 +6264,7 @@ script create_stats_menu root_pos = (115, 35)
     ]
     replace_handlers
   }
-  GetStackedScreenElementPos X id = stats_menu_icon offset = (-33, 0)
+  GetStackedScreenElementPos x id = stats_menu_icon offset = (-33, 0)
   set_sub_bg pos = <pos> just = [ left top ]
   GetArraySize stat_names
    <index> = 0
@@ -6301,7 +6301,7 @@ script create_stats_menu root_pos = (115, 35)
     text = "Done"
     scale = 0.85
   }
-  GetStackedScreenElementPos X id = stats_menu_icon offset = (116, 268)
+  GetStackedScreenElementPos x id = stats_menu_icon offset = (116, 268)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -6313,7 +6313,7 @@ script create_stats_menu root_pos = (115, 35)
     just = [ left top ]
     rgba = [ 0 0 0 90 ]
   }
-  GetStackedScreenElementPos X id = done_bg_box offset = (0, 0)
+  GetStackedScreenElementPos x id = done_bg_box offset = (0, 0)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -6324,7 +6324,7 @@ script create_stats_menu root_pos = (115, 35)
     just = [ center top ]
     rgba = [ 0 0 0 90 ]
   }
-  GetStackedScreenElementPos X id = done_bg_box offset = (-35, 3)
+  GetStackedScreenElementPos x id = done_bg_box offset = (-35, 3)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -6337,7 +6337,7 @@ script create_stats_menu root_pos = (115, 35)
   GetCurrentSkaterProfileIndex
   GetNumStatPointsAvailable player = <currentSkaterProfileIndex>
   FormatText TextName = points_text "Points Available: %i" i = <points_available>
-  GetStackedScreenElementPos X id = done_bg_box offset = (-30, 40)
+  GetStackedScreenElementPos x id = done_bg_box offset = (-30, 40)
   CreateScreenElement {
     type = TextElement
     id = stat_points_available
@@ -6349,7 +6349,7 @@ script create_stats_menu root_pos = (115, 35)
     scale = 0.8
     not_focusable
   }
-  GetStackedScreenElementPos X id = done_bg_box offset = (-35, 29)
+  GetStackedScreenElementPos x id = done_bg_box offset = (-35, 29)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -6359,7 +6359,7 @@ script create_stats_menu root_pos = (115, 35)
     just = [ center top ]
     rgba = [ 100 100 100 30 ]
   }
-  GetStackedScreenElementPos X id = stats_menu_icon offset = (333, 24)
+  GetStackedScreenElementPos x id = stats_menu_icon offset = (333, 24)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -6370,7 +6370,7 @@ script create_stats_menu root_pos = (115, 35)
     just = [ center top ]
     rgba = [ 128 128 128 90 ]
   }
-  GetStackedScreenElementPos X id = done_bg_box offset = (-35, 25)
+  GetStackedScreenElementPos x id = done_bg_box offset = (-35, 25)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -6381,7 +6381,7 @@ script create_stats_menu root_pos = (115, 35)
     just = [ center top ]
     rgba = [ 0 0 0 98 ]
   }
-  GetStackedScreenElementPos X id = done_bg_box offset = (115, 25)
+  GetStackedScreenElementPos x id = done_bg_box offset = (115, 25)
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -6392,7 +6392,7 @@ script create_stats_menu root_pos = (115, 35)
     just = [ center top ]
     rgba = [ 128 128 128 90 ]
   }
-  GetStackedScreenElementPos Y id = done_bg_box offset = (40, 25)
+  GetStackedScreenElementPos y id = done_bg_box offset = (40, 25)
   CreateScreenElement {
     type = TextBlockElement
     parent = current_menu_anchor
@@ -6899,7 +6899,7 @@ script statistics_menu_add_item
       scale = (1, 1)
       rgba = [ 128 128 128 90 ]
     }
-    GetStackedScreenElementPos X id = <id>
+    GetStackedScreenElementPos x id = <id>
   repeat 57
 endscript
 script statistics_menu_exit

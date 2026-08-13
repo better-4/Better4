@@ -5,4 +5,4 @@
 [submodule "vendor/partymod-thps4"]
 	path = vendor/partymod-thps4
 	url = git@github.com:better-4/partymod-thps4.git
-	branch = spine-spin-ini
+	branch = main
