@@ -47,6 +47,51 @@ script better4_options_menu {
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 
+script better4_create_menu_item {
+    font = small
+    child_pos = { (210, 0) relative }
+    rgba = [ 88 105 112 128 ]
+    child_rgba = [ 88 105 112 128 ]
+    just = [ Right top ]
+    child_just = [ left top ]
+    scale = 0.85
+    child_scale = 0.85
+    focus_script = do_scale_up
+    unfocus_script = do_scale_down
+    pad_choose_script = item_chosen
+  }
+  <index> = <index_name>
+  CreateScreenElement {
+    Type = TextElement
+    parent = current_menu
+    id = <id>
+    font = <font>
+    pos = <pos>
+    rgba = <rgba>
+    just = <just>
+    text = <text>
+    scale = <scale>
+    event_handlers = [
+      { focus <focus_script> params = <focus_params> }
+      { unfocus <unfocus_script> params = <unfocus_params> }
+      { pad_left better4_menu_cycle_control_left params = <...> }
+      { pad_right better4_menu_cycle_control_right params = <...> }
+    ]
+  }
+  CastToInteger index
+  <value_text> = ( ( <options> [ <index> ] ).text )
+  CreateScreenElement {
+    Type = TextElement
+    parent = <id>
+    font = <font>
+    pos = <child_pos>
+    rgba = <child_rgba>
+    just = <child_just>
+    text = <value_text>
+    scale = <child_scale>
+  }
+endscript
+
 script better4_onground_menu {
     close_script = nullscript
   }
@@ -110,8 +155,8 @@ script better4_inair_menu {
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-  better4_control_menu_item better4_control_spinkeys
-  better4_control_menu_item better4_control_spinetransfer
+  better4_create_menu_item better4_control_spinkeys
+  better4_create_menu_item better4_control_spinetransfer
   make_text_sub_menu_item text = "Back" scale = 0.85 id = inair_back_option pad_choose_script = better4_inair_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
@@ -145,9 +190,9 @@ script better4_onrail_menu {
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-  better4_control_menu_item better4_control_dropdown
-  better4_control_menu_item better4_control_liptricks
-  better4_control_menu_item better4_control_railspin
+  better4_create_menu_item better4_control_dropdown
+  better4_create_menu_item better4_control_liptricks
+  better4_create_menu_item better4_control_railspin
   make_text_sub_menu_item text = "Back" scale = 0.85 id = onrail_back_option pad_choose_script = better4_onrail_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
@@ -181,9 +226,9 @@ script better4_wallride_menu {
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-  better4_control_menu_item better4_control_wallieplant
-  better4_control_menu_item better4_control_wallspin
-  better4_control_menu_item better4_control_wallridebail
+  better4_create_menu_item better4_control_wallieplant
+  better4_create_menu_item better4_control_wallspin
+  better4_create_menu_item better4_control_wallridebail
   make_text_sub_menu_item text = "Back" scale = 0.85 id = wallride_back_option pad_choose_script = better4_wallride_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
@@ -217,7 +262,8 @@ script better4_misc_menu {
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-  better4_control_menu_item better4_misc_boardscuff
+  better4_create_menu_item better4_control_boardscuff
+  better4_create_menu_item better4_control_pauseonunfocus
   make_text_sub_menu_item text = "Back" scale = 0.85 id = misc_back_option pad_choose_script = better4_misc_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript

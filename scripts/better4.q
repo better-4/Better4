@@ -1,29 +1,20 @@
 better4_version = "v0.5"
 better4_options_text = 'Better4 Options'
 better4_orange = [ 164 95 26 100 ]
-
-script quit_observing
-  if not GoalManager_HasActiveGoals
-    RequestExitObserverMode
-    if IsHost
-      exit_pause_menu
-      Wait 60 gameframe
-      ToggleOurPendingPlayersFlag
-      LoadPendingPlayers
-      Wait 120 gameframe
-      ToggleOurPendingPlayersFlag
-    endif
+script EnterBetterObserve
+  BetterObserve
+  exit_pause_menu
+  if IsBetterObserving
+    DisableLocalPlayerInput
+  else
+    Create_Panel_Message id = goal_message text = "No players available to observe!" style = panel_message_generic_loss
   endif
 endscript
-
-script host_process_remote_exit_observer
-  Wait 60 gameframe
-  ToggleOurPendingPlayersFlag
-  LoadPendingPlayers
-  Wait 120 gameframe
-  ToggleOurPendingPlayersFlag
+script QuitBetterObservivng
+  ObserveSelf
+  exit_pause_menu
+  EnableLocalPlayerInput
 endscript
-
 script destroy_mod_menu
   ClearEventBuffer
   SetQueueTricks Ground
