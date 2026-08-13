@@ -193,6 +193,20 @@ better4_control_doublerevert = {
   ]
 }
 
+better4_control_revertrecovery_index = 0
+better4_control_revertrecovery_value = off
+better4_control_revertrecovery = {
+  id = better4_control_revertrecovery_id
+  index_name = better4_control_revertrecovery_index
+  value_name = better4_control_revertrecovery_value
+  text = "Revert Recovery"
+  ini_key = "RevertRecovery"
+  options = [
+    { text = "Vanilla" value = off }
+    { text = "Fast" value = on }
+  ]
+}
+
 // On Rails
 
 DropdownVanilla = [
@@ -368,6 +382,8 @@ script better4_controls_init
   better4_control_init better4_control_wallieplant
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
+  better4_control_init better4_control_revertrecovery
+  
   // misc section
   better4_control_init better4_control_boardscuff
   better4_control_init better4_control_pauseonunfocus

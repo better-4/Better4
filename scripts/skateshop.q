@@ -193,9 +193,16 @@ script SkateshopAI stopskateshopstreams = 1
       endif
        ) stream_freq = randomrange(0, 10)
     case Mullen
-      random( @ ) 
-      PlayAnim Anim = Idle_MullenCasper
-      stream_freq = randomrange(0, 10)
+      // random( @ ) 
+      // PlayAnim Anim = Idle_MullenCasper
+      // stream_freq = randomrange(0, 10)
+		PlayAnim Anim = Idle_MullenCasper
+		WaitAnimFinished
+		PlayAnim Anim = Idle_MullenCasperToHandStand
+		WaitAnimFinished
+		PlayAnim Anim = Idle_MullenHandStand
+		WaitAnimFinished
+		PlayAnim Anim = Idle_MullenHandStandToCasper
     case Muska
       random( @ ) 
       PlayAnim Anim = Idle_MuskaJive
