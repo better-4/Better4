@@ -114,14 +114,14 @@ script better4_onground_menu {
   create_icon pos = (176, 65) id = better4_icon texture = PA_options
   draw_menu_box delta_pos = (92, -20) middle_repeat = 13 box_right_scale = (0.8, 1)
   make_text_sub_menu_item text = "" not_focusable
-  better4_control_menu_item better4_control_revert
-  better4_control_menu_item better4_control_powerslide
-  better4_control_menu_item better4_control_stancechange
-  better4_control_menu_item better4_control_jumptrick
-  better4_control_menu_item better4_control_manualspin
-  better4_control_menu_item better4_control_manualfloat
-  better4_control_menu_item better4_control_doublerevert
-  better4_control_menu_item better4_control_revertrecovery
+  better4_create_menu_item better4_control_revert
+  better4_create_menu_item better4_control_powerslide
+  better4_create_menu_item better4_control_stancechange
+  better4_create_menu_item better4_control_jumptrick
+  better4_create_menu_item better4_control_manualspin
+  better4_create_menu_item better4_control_manualfloat
+  better4_create_menu_item better4_control_doublerevert
+  better4_create_menu_item better4_control_revertrecovery
   make_text_sub_menu_item text = "Back" scale = 0.85 id = onground_back_option pad_choose_script = better4_onground_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
