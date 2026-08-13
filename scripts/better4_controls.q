@@ -317,14 +317,14 @@ better4_control_wallridebail = {
   ]
 }
 
-//     MISC
+// MISC
 
-better4_misc_boardscuff_index = 1
-better4_misc_boardscuff_value = on
-better4_misc_boardscuff = {
-  id = better4_misc_boardscuff_id
-  index_name = better4_misc_boardscuff_index
-  value_name = better4_misc_boardscuff_value
+better4_control_boardscuff_index = 1
+better4_control_boardscuff_value = on
+better4_control_boardscuff = {
+  id = better4_control_boardscuff_id
+  index_name = better4_control_boardscuff_index
+  value_name = better4_control_boardscuff_value
   text = "Board Scuff"
   ini_key = "BoardScuff"
   options = [
@@ -332,6 +332,23 @@ better4_misc_boardscuff = {
     { text = "On" value = on }
   ]
 }
+
+better4_control_pauseonunfocus_index = 0
+better4_control_pauseonunfocus = {
+  id = better4_control_pauseonunfocus_id
+  index_name = better4_control_pauseonunfocus_index
+  text = "Pause On Unfocus"
+  ini_key = "PauseOnUnfocus"
+  options = [
+    { text = "Off" }
+    { text = "On" }
+  ]
+  change_script = better4_control_pauseonunfocus_change
+}
+
+script better4_control_pauseonunfocus_change
+  SetPauseOnUnfocus index = better4_control_pauseonunfocus_index
+endscript
 
 script better4_controls_init
   Printf "Initializing Better4 Controls"
@@ -351,9 +368,9 @@ script better4_controls_init
   better4_control_init better4_control_wallieplant
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
-  
   // misc section
-  better4_control_init better4_misc_boardscuff
+  better4_control_init better4_control_boardscuff
+  better4_control_init better4_control_pauseonunfocus
 endscript
 
 script better4_control_init
@@ -412,52 +429,8 @@ script better4_control_change
   endif
 endscript
 
-script better4_control_menu_item {
-    font = small
-    child_pos = { (210, 0) relative }
-    rgba = [ 88 105 112 128 ]
-    child_rgba = [ 88 105 112 128 ]
-    just = [ Right top ]
-    child_just = [ left top ]
-    scale = 0.85
-    child_scale = 0.85
-    focus_script = do_scale_up
-    unfocus_script = do_scale_down
-    pad_choose_script = item_chosen
-  }
-  <index> = <index_name>
-  CreateScreenElement {
-    Type = TextElement
-    parent = current_menu
-    id = <id>
-    font = <font>
-    pos = <pos>
-    rgba = <rgba>
-    just = <just>
-    text = <text>
-    scale = <scale>
-    event_handlers = [
-      { focus <focus_script> params = <focus_params> }
-      { unfocus <unfocus_script> params = <unfocus_params> }
-      { pad_left better4_control_menu_cycle_left params = <...> }
-      { pad_right better4_control_menu_cycle_right params = <...> }
-    ]
-  }
-  CastToInteger index
-  <value_text> = ( ( <options> [ <index> ] ).text )
-  CreateScreenElement {
-    Type = TextElement
-    parent = <id>
-    font = <font>
-    pos = <child_pos>
-    rgba = <child_rgba>
-    just = <child_just>
-    text = <value_text>
-    scale = <child_scale>
-  }
-endscript
 
-script better4_control_menu_cycle
+script better4_menu_cycle_control
   better4_control_cycle <...>
   CastToInteger index
   <value_text> = ( ( <options> [ <index> ] ).text )
@@ -467,10 +440,10 @@ script better4_control_menu_cycle
   }
 endscript
 
-script better4_control_menu_cycle_right
-  better4_control_menu_cycle <...> delta = 1
+script better4_menu_cycle_control_right
+  better4_menu_cycle_control <...> delta = 1
 endscript
 
-script better4_control_menu_cycle_left
-  better4_control_menu_cycle <...> delta = -1
+script better4_menu_cycle_control_left
+  better4_menu_cycle_control <...> delta = -1
 endscript
