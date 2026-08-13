@@ -82,7 +82,7 @@ Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 An
 Trick_FingerFlipAirWalk = { Scr = FlipTrick params = { name = 'Fingerflip Airwalk' Score = 1500 Anim = FingerFlipAirWalk IsSpecial BoardRotate speed = 1.15 trickslack = 30 } }
 Trick_Jackass = { Scr = FlipTrick params = { name = 'The Jackass' Score = 1500 Anim = Jackass IsSpecial speed = 1 MaxSpeed = 1.2 trickslack = 20 Bloodframe = 1 } }
 Trick_1234 = { Scr = FlipTrick params = { name = '1-2-3-4' Score = 1400 Anim = _1234 IsSpecial speed = 0.8 trickslack = 20 } }
-Trick_DoubleKFindy = { Scr = FlipTrick params = { name = 'Double Kickflip Varial Indy' Score = 1100 Anim = DoubleKFVarialIndy MaxSpeed = 1.2 trickslack = 20 IsSpecial BoardRotate } }
+Trick_DoubleKFindy = { Scr = FlipTrick params = { name = 'Double Kickflip Varial Indy' Score = 1100 Anim = DoubleKFVarialIndy MaxSpeed = 1.2 trickslack = 20 IsSpecial BoardRotate HoldFrame = 15 } }
 Trick_540Flip = { Scr = FlipTrick params = { name = '540 Flip' Score = 1450 Anim = _540flip BoardRotate IsSpecial speed = 1.1 MaxSpeed = 1.2 trickslack = 20 } }
 Trick_BetweenLegsSlam = { Scr = FlipTrick params = { name = 'Slamma Jamma' Score = 1750 Anim = BetweenLegsSlam IsSpecial trickslack = 20 speed = 1.0 } }
 Trick_NollieFlipUnderflip = { Scr = FlipTrick params = { name = 'Nollie Flip Underflip' Score = 1050 Anim = NollieFlipUnderFlip IsSpecial trickslack = 10 speed = 1.0 MaxSpeed = 1.3 } }
@@ -120,7 +120,7 @@ Trick_KFIndy = { Scr = FlipGrabBlendFS params = { name = 'Kickflip to Indy' Scor
 Trick_KFMelon = { Scr = FlipGrabBlendBS params = { name = 'Kickflip to Melon' Score = 750 Anim = Heelflip IsExtra } }
 Trick_OllieAirwalk = { Scr = FlipTrick params = { name = 'Ollie Airwalk' Score = 500 speed = 1.0 Anim = OllieAirwalk ExtraTricks = Extra_OllieAirwalk } }
 Extra_OllieAirwalk = [ { Trigger_Extra_Flip params = { name = 'Ollie Airwalk Late Shove-it' Score = 1000 Anim = OllieAirWalkShoveIt BoardRotate speed = 1.0 IsExtra UseCurrent } } ]
-Trick_OllieNorth = { Scr = FlipTrick params = { name = 'Ollie North' Score = 500 Anim = OllieNorth speed = 1.0 trickslack = 15 ExtraTricks = Extra_OllieNorth } }
+Trick_OllieNorth = { Scr = FlipTrick params = { name = 'Ollie North' Score = 500 Anim = OllieNorth speed = 1.0 trickslack = 15 ExtraTricks = Extra_OllieNorth HoldFrame = 15 } }
 Extra_OllieNorth = [ { Trigger_Extra_Flip params = { name = 'Ollie North Back Foot Flip' Score = 1000 Anim = OllieNorthBackFootFlip speed = 1.0 IsExtra UseCurrent } } ]
 Trick_FFImpossible = { Scr = FlipTrick params = { name = 'Front Foot Impossible' Score = 400 Anim = FrontFootImposs trickslack = 25 speed = 1.2 ExtraTricks = Extra_FFImpossible } }
 Extra_FFImpossible = [ { Trigger_Extra_Flip params = { name = 'Dbl. FF Impossible' Score = 800 Anim = doublefrontfootimposs UseCurrent speed = 1.2 trickslack = 25 IsExtra } } ]
@@ -249,17 +249,19 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
       PlayAnim Anim = <Anim> BlendPeriod = 0.3 speed = <speed>
     endif
   endif
-  if GotParam BoardRotate
-    BlendPeriodOut 0
-    BoardRotateAfter
-  endif
-  if GotParam RotateAfter
-    BlendPeriodOut 0
-    RotateAfter
-  endif
-  if GotParam FlipAfter
-    BlendPeriodOut 0
-    FlipAfter
+ if not GotParam HoldFrame
+     if GotParam BoardRotate
+       BlendPeriodOut 0
+       BoardRotateAfter
+     endif
+     if GotParam RotateAfter
+       BlendPeriodOut 0
+       RotateAfter
+     endif
+     if GotParam FlipAfter
+       BlendPeriodOut 0
+       FlipAfter
+     endif
   endif
   if GotParam ExtraTricks
     SetExtraTricks tricks = <ExtraTricks> duration = 15
@@ -293,6 +295,9 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     WaitAnim <Spinslack> frames fromend
     CanSpin
   endif
+  if GotParam HoldFrame 
+		HoldAbleFlipTrick <...> 
+  endif 
   if GotParam grindslack
     WaitAnim <grindslack> frames fromend
   endif
@@ -306,6 +311,34 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   WaitAnimFinished
   Goto Airborne
 endscript
+
+SCRIPT HoldAbleFlipTrick 
+	WaitAnim <HoldFrame> Frames fromend 
+	BEGIN 
+		IF Released Circle 
+			IF Released Square 
+				BREAK 
+			ENDIF 
+		ENDIF 
+		PlayAnim Anim = <Anim> From = Current To = Current BlendPeriod = 0.00000000000 
+		WaitOneGameFrame 
+		TweakTrick GRABTWEAK_MEDIUM 
+	REPEAT 
+	PlayAnim Anim = <Anim> From = Current 
+	IF GotParam boardrotate 
+		BlendperiodOut 0 
+		BoardRotateAfter 
+	ENDIF 
+	IF GotParam RotateAfter 
+		BlendperiodOut 0 
+		RotateAfter 
+	ENDIF 
+	IF GotParam FlipAfter 
+		BlendperiodOut 0 
+		FlipAfter 
+	ENDIF 
+ENDSCRIPT
+
 script CheckForOllie
   if GotException Ollied
     SetException Ex = Ollied Scr = CalledOllie CallInsteadOfGoto

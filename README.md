@@ -49,7 +49,6 @@ nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 
 ## Known Issues
 
-* Quitting observe mode is sometimes buggy
 * KOTH crashes :(
 
 ## Credits
