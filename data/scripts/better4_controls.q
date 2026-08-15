@@ -426,6 +426,7 @@ script better4_control_init
     fallback = <index>
     ValueName = new_index
   }
+  Printf "2"
   GetArraySize <options>
   if ( <new_index> < 0 )
     Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>

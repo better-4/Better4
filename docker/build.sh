@@ -27,6 +27,13 @@ common_flags=(
   -DSDL2_DIR="${SDL2_DIR}"
 )
 
+echo "==> Configuring + building better4"
+cmake "${common_flags[@]}" \
+  -DCMAKE_C_FLAGS_RELEASE="/MD /Od /Ob0 /DNDEBUG" \
+  -B "${BUILD_ROOT}/better4"
+cmake --build "${BUILD_ROOT}/better4" --target better4
+cp "${BUILD_ROOT}/better4/better4.dll" "${OUT}/"
+
 echo "==> Configuring + building partypatcher (console)"
 cmake "${common_flags[@]}" -S "${PM}" -B "${BUILD_ROOT}/patcher"
 cmake --build "${BUILD_ROOT}/patcher" --target partypatcher
@@ -37,16 +44,23 @@ cmake "${common_flags[@]}" \
   -S "${PM}" -B "${BUILD_ROOT}/config"
 cmake --build "${BUILD_ROOT}/config" --target partyconfig
 
-echo "==> Configuring + building partymod (DLL, optimisation disabled)"
+# echo "==> Configuring + building partymod (DLL, optimisation disabled)"
+# cmake "${common_flags[@]}" \
+#   -DCMAKE_C_FLAGS_RELEASE="/MD /Od /Ob0 /DNDEBUG" \
+#   -S "${PM}" -B "${BUILD_ROOT}/mod"
+# cmake --build "${BUILD_ROOT}/mod" --target partymod
+
+echo "==> Configuring + building better4"
 cmake "${common_flags[@]}" \
   -DCMAKE_C_FLAGS_RELEASE="/MD /Od /Ob0 /DNDEBUG" \
-  -S "${PM}" -B "${BUILD_ROOT}/mod"
-cmake --build "${BUILD_ROOT}/mod" --target partymod
+  -B "${BUILD_ROOT}/better4"
+cmake --build "${BUILD_ROOT}/better4" --target better4
 
 echo "==> Collecting PARTYMOD artifacts"
 cp "${BUILD_ROOT}/patcher/partypatcher.exe" "${OUT}/"
 cp "${BUILD_ROOT}/config/partyconfig.exe" "${OUT}/"
-cp "${BUILD_ROOT}/mod/partymod.dll" "${OUT}/"
+# cp "${BUILD_ROOT}/mod/partymod.dll" "${OUT}/"
+cp "${BUILD_ROOT}/better4/better4.dll" "${OUT}/partymod.dll"
 cp "${PM}/partymod.ini" "${OUT}/" 2>/dev/null || true
 cp "${PM}/gamecontrollerdb.txt" "${OUT}/" 2>/dev/null || true
 find /opt/sdl2 -path '*/lib/x86/SDL2.dll' -exec cp {} "${OUT}/" \;
