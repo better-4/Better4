@@ -1090,7 +1090,7 @@ script make_server_list_menu
     scale = 0.95
     pos = (410, 27)
     just = [ left top ]
-    rgba = [ 46 105 57 128 ]
+    rgba = [ 20 81 105 128 ]
     not_focusable
   }
   CreateScreenElement {
@@ -1173,15 +1173,14 @@ script make_server_list_menu
     rgba = [ 128 128 128 85 ]
     not_focusable
   }
-  // XXX (ellie): why is logo crashing the game??
-  // CreateScreenElement {
-  //   type = SpriteElement
-  //   parent = game_list_menu_anchor
-  //   id = gslogo
-  //   pos = (455, 10)
-  //   texture = gslogo
-  //   scale = 1.1
-  // }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = game_list_menu_anchor
+    id = openspy
+    pos = (455, 10)
+    texture = openspy
+    scale = 0.275
+  }
   GetStackedScreenElementpos x id = server_list_anchor offset = (50, 20)
   CreateScreenElement {
     type = ContainerElement

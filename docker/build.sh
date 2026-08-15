@@ -52,16 +52,19 @@ cp "${PM}/gamecontrollerdb.txt" "${OUT}/" 2>/dev/null || true
 find /opt/sdl2 -path '*/lib/x86/SDL2.dll' -exec cp {} "${OUT}/" \;
 
 echo "==> Compiling QScript sources (.q -> .qb)"
-dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${SRC}/scripts" "${OUT}/data/scripts"
+dotnet "${QSCRIPTED}/ThpsQScriptEd.dll" "${SRC}/data/scripts" "${OUT}/data/scripts"
 
 echo "==> Copying qdir.txt"
-cp "${SRC}/scripts/qdir.txt" "${OUT}/data/scripts/qdir.txt"
+cp "${SRC}/data/scripts/qdir.txt" "${OUT}/data/scripts/qdir.txt"
 
 echo "==> Copying models"
-cp -r "${SRC}/models" "${OUT}/data/models"
+cp -r "${SRC}/data/models" "${OUT}/data/models"
 
 echo "==> Copying fonts"
-cp -r "${SRC}/fonts" "${OUT}/data/fonts"
+cp -r "${SRC}/data/fonts" "${OUT}/data/fonts"
+
+echo "==> Copying images"
+cp -r "${SRC}/data/images" "${OUT}/data/images"
 
 echo "==> Copying installer"
 cp "${SRC}/installer/install.bat" "${OUT}/"
