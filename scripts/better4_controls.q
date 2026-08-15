@@ -384,8 +384,6 @@ better4_control_buttonsfont = {
     // { text = "NGC" value = ButtonsFontNGC }
   ]
   change_script = better4_control_buttonsfont_change
-  // hack: force buttonsfont reload when we init
-  init_script = better4_control_buttonsfont_change
 }
 
 prev_buttonsfont = better4_control_buttonsfont_value
@@ -442,9 +440,6 @@ script better4_control_init
     better4_control_change needs_write <...>
   else
     better4_control_change <...>
-  endif
-  if GotParam init_script
-    <init_script>
   endif
 endscript
 
