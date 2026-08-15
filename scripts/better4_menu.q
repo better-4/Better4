@@ -264,6 +264,7 @@ script better4_misc_menu {
   make_text_sub_menu_item text = "" not_focusable
   better4_create_menu_item better4_control_boardscuff
   better4_create_menu_item better4_control_pauseonunfocus
+  better4_create_menu_item better4_control_buttonsfont
   make_text_sub_menu_item text = "Back" scale = 0.85 id = misc_back_option pad_choose_script = better4_misc_back pad_choose_params = { close_script = <close_script> }
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript

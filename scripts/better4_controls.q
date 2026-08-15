@@ -12,10 +12,10 @@ better4_control_spinkeys = {
   text = "Spin Keys"
   ini_key = "SpinKeys"
   options = [
-    { text = "L1/R1" }
-    { text = "L2/R2" }
-    { text = "R1/R2" }
-    { text = "L1/L2" }
+    { text = "\be/\bf" } // L1/R1
+    { text = "\bg/\bh" } // L2/R2
+    { text = "\bf/\bh" } // R1/R2
+    { text = "\ce/\cg" } // L1/L2
   ]
   change_script = better4_control_spinkeys_change
 }
@@ -31,14 +31,14 @@ better4_control_spinetransfer = {
   text = "Spine Transfer"
   ini_key = "SpineTransfer"
   options = [
-    { text = "L2/R2" }
-    { text = "R2" }
-    { text = "L2" }
-    { text = "L2+R2" }
-    { text = "L1/R1" }
-    { text = "R1" }
-    { text = "L1" }
-    { text = "L1+R1" }
+    { text = "\bg/\bh" } // L2/R2
+    { text = "\bh" } // R2
+    { text = "\bg" } // L2
+    { text = "\bg+\bh" } // L2+R2
+    { text = "\be/\bf" } // L1/R1
+    { text = "\bf" } // R1
+    { text = "\be" } // L1
+    { text = "\be+\bf" } // L1+R1
   ]
   change_script = better4_control_spinetransfer_change
 }
@@ -72,14 +72,14 @@ better4_control_revert = {
   text = "Revert"
   ini_key = "Revert"
   options = [
-    { text = "R2/L2" value = RevertVanilla }
-    { text = "R2" value = RevertOnlyR2 }
-    { text = "L2" value = RevertOnlyL2 }
-    { text = "R2+L2" value = RevertR2andL2 }
-    { text = "R1/L1" value = RevertOnlyR1 }
-    { text = "R1" value = RevertOnlyL1 }
-    { text = "L1" value = RevertR1andL1 }
-    { text = "R1+L1" value = RevertR1orL1 }
+    { text = "\bh/\bg" value = RevertVanilla } // R2/L2
+    { text = "\bh" value = RevertOnlyR2 } // R2
+    { text = "\bg" value = RevertOnlyL2 } // L2
+    { text = "\bh+\bg" value = RevertR2andL2 } // R2+L2
+    { text = "\bf/\be" value = RevertR1orL1 } // R1/L1
+    { text = "\bf" value = RevertOnlyR1 } // R1
+    { text = "\be" value = RevertOnlyL1 } // L1
+    { text = "\bf+\be" value = RevertR1andL1 } // R1+L1
   ]
 }
 
@@ -103,14 +103,14 @@ better4_control_powerslide = {
   text = "Powerslide"
   ini_key = "Powerslide"
   options = [
-    { text = "D+R1+L1" value = PowerslideVanilla }
-    { text = "D+R2+L2" value = PowerslideDownR2L2 }
-    { text = "D+R2" value = PowerslideDownR2 }
-    { text = "D+R1" value = PowerslideDownR1 }
-    { text = "R2" value = PowerslideR2 }
-    { text = "L2" value = PowerslideL2 }
-    { text = "R1" value = PowerslideR1 }
-    { text = "L1" value = PowerslideL1 }
+    { text = "\b4+\bf+\be" value = PowerslideVanilla } // Down+R1+L1
+    { text = "\b4+\bh+\bg" value = PowerslideDownR2L2 } // Down+R2+L2
+    { text = "\b4+\bh" value = PowerslideDownR2 } // Down+R2
+    { text = "\b4+\bf" value = PowerslideDownR1 } // Down+R1
+    { text = "\bh" value = PowerslideR2 } // R2
+    { text = "\bg" value = PowerslideL2 } // L2
+    { text = "\bf" value = PowerslideR1 } // R1
+    { text = "\be" value = PowerslideL1 } // L1
   ]
 }
 
@@ -125,7 +125,7 @@ better4_control_stancechange = {
   text = "Stance Change"
   ini_key = "StanceChange"
   options = [
-    { text = "L2" value = NollieL2 }
+    { text = "\bg" value = NollieL2 } // L2
     { text = "Off" value = NoTricks }
   ]
 }
@@ -160,8 +160,8 @@ better4_control_manualspin = {
   text = "Manual Spin"
   ini_key = "ManualSpin"
   options = [
-    { text = "R2" value = off }
-    { text = "R2/L2" value = on }
+    { text = "\bh" value = off } // R2
+    { text = "\bh/\bg" value = on } // R2/L2
   ]
 }
 
@@ -233,14 +233,14 @@ better4_control_dropdown = {
   text = "Dropdown"
   ini_key = "Dropdown"
   options = [
-    { text = "R2/L2" value = DropdownVanilla }
-    { text = "R2" value = DropdownOnlyR2 }
-    { text = "L2" value = DropdownOnlyL2 }
-    { text = "R2+L2" value = DropdownR2andL2 }
-    { text = "R1/L1" value = DropdownR1orL1 }
-    { text = "R1" value = DropdownOnlyR1 }
-    { text = "L1" value = DropdownOnlyL1 }
-    { text = "R1+L1" value = DropdownR1andL1 }
+    { text = "\bh/\bg" value = DropdownVanilla } // R2/L2
+    { text = "\bh" value = DropdownOnlyR2 } // R2
+    { text = "\bg" value = DropdownOnlyL2 } // L2
+    { text = "\bh+\bg" value = DropdownR2andL2 } // R2+L2
+    { text = "\bf/\be" value = DropdownR1orL1 } // R1/L1
+    { text = "\bf" value = DropdownOnlyR1 } // R1
+    { text = "\be" value = DropdownOnlyL1 } // L1
+    { text = "\bf+\be" value = DropdownR1andL1 } // R1+L1
   ]
 }
 
@@ -298,8 +298,8 @@ better4_control_wallieplant = {
   text = "Wallieplant"
   ini_key = "Wallieplant"
   options = [
-    { text = "U+U+X" value = WallieplantTricks }
-    { text = "U+X" value = WallieplantTricks_Single }
+    { text = "\b7+\b7+\b3" value = WallieplantTricks } // Up+Up+X
+    { text = "\b7+\b3" value = WallieplantTricks_Single } // Up+X
   ]
 }
 
@@ -364,6 +364,36 @@ script better4_control_pauseonunfocus_change
   SetPauseOnUnfocus index = better4_control_pauseonunfocus_index
 endscript
 
+ButtonsFontPC = "ButtonsPC"
+ButtonsFontPS2 = "ButtonsPS2"
+ButtonsFontXbox = "ButtonsXbox"
+// ButtonsFontNGC = "ButtonsNGC"
+
+better4_control_buttonsfont_index = 0
+better4_control_buttonsfont_value = ButtonsFontPC
+better4_control_buttonsfont = {
+  id = better4_control_buttonsfont_id
+  index_name = better4_control_buttonsfont_index
+  value_name = better4_control_buttonsfont_value
+  text = "Buttons Font"
+  ini_key = "ButtonsFont"
+  options = [
+    { text = "PC" value = ButtonsFontPC }
+    { text = "PS2" value = ButtonsFontPS2 }
+    { text = "Xbox" value = ButtonsFontXbox }
+    // { text = "NGC" value = ButtonsFontNGC }
+  ]
+  change_script = better4_control_buttonsfont_change
+}
+
+prev_buttonsfont = better4_control_buttonsfont_value
+script better4_control_buttonsfont_change
+  Printf "Changing buttonfont from %p to %n"
+  UnloadFont prev_buttonsfont
+  LoadFont better4_control_buttonsfont_value buttons_font
+  Change prev_buttonsfont = better4_control_buttonsfont_value
+endscript
+
 script better4_controls_init
   Printf "Initializing Better4 Controls"
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
@@ -383,10 +413,9 @@ script better4_controls_init
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
   better4_control_init better4_control_revertrecovery
-  
-  // misc section
   better4_control_init better4_control_boardscuff
   better4_control_init better4_control_pauseonunfocus
+  better4_control_init better4_control_buttonsfont
 endscript
 
 script better4_control_init
@@ -441,7 +470,7 @@ script better4_control_change
     ChangeGlobal Name = <value_name> value = ( ( <options> [ <new_index> ] ).value )
   endif
   if GotParam change_script
-    SpawnScript <change_script>
+    <change_script>
   endif
 endscript
 

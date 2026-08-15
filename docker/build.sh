@@ -60,6 +60,9 @@ cp "${SRC}/scripts/qdir.txt" "${OUT}/data/scripts/qdir.txt"
 echo "==> Copying models"
 cp -r "${SRC}/models" "${OUT}/data/models"
 
+echo "==> Copying fonts"
+cp -r "${SRC}/fonts" "${OUT}/data/fonts"
+
 echo "==> Copying installer"
 cp "${SRC}/installer/install.bat" "${OUT}/"
 
