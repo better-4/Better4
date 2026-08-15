@@ -131,7 +131,7 @@ script new_screen_element_test
   LoadFont "small" char_spacing = 1.5 space_spacing = 9 color_tab = smallfont_colors
   LoadFont "newtimerfont" char_spacing = -1
   LoadFont "dialog" char_spacing = 0 space_spacing = 10 color_tab = dialogfont_colors
-  LoadFont buttons_font
+  LoadFont better4_control_buttonsfont_value buttons_font
   load_textures_to_main_memory
   load_permanent_textures
   create_panel_stuff
