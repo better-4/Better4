@@ -367,7 +367,7 @@ endscript
 ButtonsFontPC = "ButtonsPC"
 ButtonsFontPS2 = "ButtonsPS2"
 ButtonsFontXbox = "ButtonsXbox"
-// { text = "NGC" value = ButtonsFontNGC }
+// ButtonsFontNGC = "ButtonsNGC"
 
 better4_control_buttonsfont_index = 0
 better4_control_buttonsfont_value = ButtonsFontPC
