@@ -587,7 +587,7 @@ script create_pause_menu
         if not IsBetterObserving
           make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = EnterBetterObserve
         else
-          if not GoalManager_HasActiveGoals
+          if IsVoluntaryObserving
             make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
           else
             make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
