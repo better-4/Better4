@@ -646,9 +646,9 @@ script skateshop_transition2
     PlaySkaterCamAnim skater = 0 name = <cam_anim>
   endif
   if GotParam came_from_main_menu
-     <new_menu_script> came_from_main_menu
+     <new_menu_script> came_from_main_menu <new_menu_params>
   else
-     <new_menu_script>
+     <new_menu_script> <new_menu_params>
   endif
 endscript
 script launch_main_menu
@@ -4771,7 +4771,15 @@ script menu_vert_blink_arrow menu_id = current_menu
     RunScriptOnScreenElement id = <id> menu_blink_arrow
   endif
 endscript
-script draw_menu_box delta_pos = (100, 30) middle_repeat = 7 scale = (1, 1) box_right_scale = (0.8, 0.625) box_bottom_scale = (0.96, 1) box_right_offset = (-20, 0) current_menu_anchor = current_menu_anchor
+script draw_menu_box {
+  delta_pos = (100, 30)
+  middle_repeat = 7
+  scale = (1, 1)
+  box_right_scale = (0.8, 0.625)
+  box_bottom_scale = (0.96, 1)
+  box_right_offset = (-20, 0)
+  current_menu_anchor = current_menu_anchor
+}
   GetStackedScreenElementPos X id = <current_menu_anchor>
   CreateScreenElement {
     type = SpriteElement
