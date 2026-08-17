@@ -6,8 +6,9 @@
 #include <windows.h>
 
 // TODO (ellie): move these cfuncs to better4 src
-#include <partymod-thps4/src/input.h>
+// #include <partymod-thps4/src/input.h>
 
+#include <input.h>
 #include <online.h>
 #include <qb.h>
 

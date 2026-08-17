@@ -4,6 +4,7 @@
 
 #include <cfuncs.h>
 #include <log.h>
+#include <input.h>
 
 void patchIykyk() {
 	patchJmp((void*)0x0048224e, (void*)0x00482394);
@@ -21,6 +22,8 @@ void patchBetter4() {
 	patchScriptPrintf();
 	patchButtonsFont();
 	patchCFuncs();
+	patchSpinKeys();
+	patchSpineTransfers();
 }
 
 __declspec(dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {

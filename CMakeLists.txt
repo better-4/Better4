@@ -10,6 +10,8 @@ add_subdirectory("${VENDOR}/partymod-thps4")
 add_library(better4 SHARED
     "${SRC}/cfuncs.c"
     "${SRC}/cfuncs.h"
+    "${SRC}/input.c"
+    "${SRC}/input.h"
     "${SRC}/log.c"
     "${SRC}/log.h"
     "${SRC}/main.c"
