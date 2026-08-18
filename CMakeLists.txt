@@ -5,8 +5,6 @@ project(better4)
 set(SRC "${PROJECT_SOURCE_DIR}/src")
 set(VENDOR "${PROJECT_SOURCE_DIR}/vendor")
 
-add_subdirectory("${VENDOR}/partymod-thps4")
-
 add_library(better4 SHARED
     "${SRC}/cfuncs.c"
     "${SRC}/cfuncs.h"
@@ -26,4 +24,7 @@ target_include_directories(better4 PUBLIC
     ${VENDOR}
 )
 
-target_link_libraries(better4 PRIVATE partymod)
+add_subdirectory("${VENDOR}/partymod-thps4")
+add_subdirectory("${VENDOR}/gslist")
+
+target_link_libraries(better4 PRIVATE partymod gslist)
