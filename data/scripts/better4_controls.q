@@ -15,7 +15,7 @@ better4_control_spinkeys = {
     { text = "\be/\bf" } // L1/R1
     { text = "\bg/\bh" } // L2/R2
     { text = "\bf/\bh" } // R1/R2
-    { text = "\ce/\cg" } // L1/L2
+    { text = "\be/\bg" } // L1/L2
   ]
   change_script = better4_control_spinkeys_change
 }

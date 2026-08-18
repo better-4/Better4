@@ -24,7 +24,6 @@ mkdir "${OUT}"
 
 echo "==> Building better4config.exe (windowed, int main entry)"
 cmake "${common_flags[@]}" \
-  -DCMAKE_EXE_LINKER_FLAGS="/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup" \
   -S "${PM}" -B "${BUILD_ROOT}/config"
 cmake --build "${BUILD_ROOT}/config" --target partyconfig
 cp "${BUILD_ROOT}/config/partyconfig.exe" "${OUT}/better4config.exe"
