@@ -22,9 +22,8 @@ common_flags=(
 
 mkdir "${OUT}"
 
-echo "==> Building better4config.exe (windowed, int main entry)"
-cmake "${common_flags[@]}" \
-  -S "${PM}" -B "${BUILD_ROOT}/config"
+echo "==> Building better4config.exe"
+cmake "${common_flags[@]}" -S "${PM}" -B "${BUILD_ROOT}/config"
 cmake --build "${BUILD_ROOT}/config" --target partyconfig
 cp "${BUILD_ROOT}/config/partyconfig.exe" "${OUT}/better4config.exe"
 
