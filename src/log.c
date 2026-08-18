@@ -7,16 +7,18 @@
 FILE* fp_log = NULL;
 
 
-void initializeLogging() {
-    AllocConsole();
-    SetConsoleTitle("Better4 Debug Console");
+void initializeLogging(int isDebug) {
+	if (isDebug) {
+		AllocConsole();
+		SetConsoleTitle("Better4 Debug Console");
+
+		FILE *f_dummy;
+		freopen_s(&f_dummy, "CONIN$", "r", stdin);
+		freopen_s(&f_dummy, "CONOUT$", "w", stderr);
+		freopen_s(&f_dummy, "CONOUT$", "w", stdout);
+	}
 
     fopen_s(&fp_log, "better4.log", "w");
-
-    FILE *f_dummy;
-    freopen_s(&f_dummy, "CONIN$", "r", stdin);
-    freopen_s(&f_dummy, "CONOUT$", "w", stderr);
-    freopen_s(&f_dummy, "CONOUT$", "w", stdout);
 }
 
 int printLog(const char* fmt, ...) {

@@ -61,11 +61,11 @@ void printCFuncs() {
         printLog("WARNING: registered %d cfuncs, expected %d\n", cfunc_index, NUM_CFUNCS);
     }
 
-    printLog("printing cfuncs we own\n");
-    for (int i = 0; i < NUM_CFUNCS; i++) {
-        CFunc cfunc = cfuncs[i];
-        printLog("%s: 0x%p\n", cfunc.name, cfunc.func);
-    }
+    // printLog("printing cfuncs we own\n");
+    // for (int i = 0; i < NUM_CFUNCS; i++) {
+    //     CFunc cfunc = cfuncs[i];
+    //     printLog("%s: 0x%p\n", cfunc.name, cfunc.func);
+    // }
 }
 
 void patchCFuncs() {

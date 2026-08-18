@@ -7,7 +7,7 @@ rem
 rem Usage: drag your Skate4.exe onto this script (or run it with the exe's
 rem path as the first argument). It copies every Better4 release file that
 rem sits alongside this script into the game's install directory, then runs
-rem partypatcher.exe there to produce Better4.exe.
+rem better4patcher.exe there to produce Better4.exe.
 
 if "%~1"=="" (
     echo Drag your Skate4.exe onto this script to install Better4.
@@ -46,8 +46,8 @@ echo Installing Better4 to "%TARGET_DIR%"...
 
 for %%F in ("%SCRIPT_DIR%*") do (
     if /I not "%%~fF"=="%~f0" (
-        if /I "%%~nxF"=="partymod.ini" (
-            if exist "%TARGET_DIR%partymod.ini" (
+        if /I "%%~nxF"=="better4.ini" (
+            if exist "%TARGET_DIR%better4.ini" (
                 echo   %%~nxF ^(already exists, skipping^)
             ) else (
                 echo   %%~nxF
@@ -66,20 +66,19 @@ for /D %%D in ("%SCRIPT_DIR%*") do (
 )
 
 echo.
-echo Running partypatcher...
-pushd "%TARGET_DIR%"
-move "%TARGET_DIR%Better4.exe" "%TARGET_DIR%Better4.exe.bak" 2>&1 >nul
-.\partypatcher.exe
-popd
+echo Running better4patcher...
 
-echo.
-if exist "%TARGET_DIR%Better4.exe" (
-    echo Better4 installed successfully! Run Better4.exe to play.
-    del "%TARGET_DIR%Better4.exe.bak" 2>&1 >nul
+pushd "%TARGET_DIR%"
+move "Better4.exe" "Better4.exe.bak" 2>&1 >nul
+
+.\better4patcher.exe
+
+if exist "Better4.exe" (
+    del "Better4.exe.bak" 2>&1 >nul
 ) else (
-    echo Something went wrong - Better4.exe was not created.
-    move "%TARGET_DIR%Better4.exe" "%TARGET_DIR%Better4.exe.bak" 2>&1 >nul
+    move "Better4.exe" "Better4.exe.bak" 2>&1 >nul
 )
 
-pause
+popd
+
 endlocal

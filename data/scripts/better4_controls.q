@@ -364,9 +364,9 @@ script better4_control_pauseonunfocus_change
   SetPauseOnUnfocus index = better4_control_pauseonunfocus_index
 endscript
 
-ButtonsFontPC = "ButtonsPC"
-ButtonsFontPS2 = "ButtonsPS2"
-ButtonsFontXbox = "ButtonsXbox"
+ButtonsFontPC = "better4/ButtonsPC"
+ButtonsFontPS2 = "better4/ButtonsPS2"
+ButtonsFontXbox = "better4/ButtonsXbox"
 // ButtonsFontNGC = "ButtonsNGC"
 
 better4_control_buttonsfont_index = 0
@@ -395,7 +395,6 @@ script better4_control_buttonsfont_change
 endscript
 
 script better4_controls_init
-  Printf "Initializing Better4 Controls"
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
   better4_control_init better4_control_spinetransfer
