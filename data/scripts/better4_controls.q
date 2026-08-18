@@ -15,7 +15,7 @@ better4_control_spinkeys = {
     { text = "\be/\bf" } // L1/R1
     { text = "\bg/\bh" } // L2/R2
     { text = "\bf/\bh" } // R1/R2
-    { text = "\ce/\cg" } // L1/L2
+    { text = "\be/\bg" } // L1/L2
   ]
   change_script = better4_control_spinkeys_change
 }
@@ -364,9 +364,9 @@ script better4_control_pauseonunfocus_change
   SetPauseOnUnfocus index = better4_control_pauseonunfocus_index
 endscript
 
-ButtonsFontPC = "ButtonsPC"
-ButtonsFontPS2 = "ButtonsPS2"
-ButtonsFontXbox = "ButtonsXbox"
+ButtonsFontPC = "better4/ButtonsPC"
+ButtonsFontPS2 = "better4/ButtonsPS2"
+ButtonsFontXbox = "better4/ButtonsXbox"
 // ButtonsFontNGC = "ButtonsNGC"
 
 better4_control_buttonsfont_index = 0
@@ -395,7 +395,6 @@ script better4_control_buttonsfont_change
 endscript
 
 script better4_controls_init
-  Printf "Initializing Better4 Controls"
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
   better4_control_init better4_control_spinetransfer
@@ -426,6 +425,7 @@ script better4_control_init
     fallback = <index>
     ValueName = new_index
   }
+  Printf "2"
   GetArraySize <options>
   if ( <new_index> < 0 )
     Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>

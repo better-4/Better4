@@ -97,7 +97,7 @@ COPY --from=dotnet /opt/dotnet /opt/dotnet
 
 ENV DOTNET_ROOT=/opt/dotnet \
     PATH=/opt/msvc/bin/x86:/opt/dotnet:${PATH} \
-    SDL2_DIR=/opt/sdl2/SDL2-${SDL2_VERSION}/cmake \
+    SDL2_DIR=/opt/sdl2/SDL2-${SDL2_VERSION} \
     DOTNET_CLI_TELEMETRY_OPTOUT=1 \
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 \
     DOTNET_NOLOGO=1
