@@ -9,7 +9,6 @@ script load_permanent_prefiles
   endif
 endscript
 script load_permanent_assets
-  // better4_controls_init
   SetDefaultPermanent 1
   SetReferenceChecksum 0
   LoadPreFile "anims.pre"
@@ -213,6 +212,7 @@ script create_startup_menu
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
   SetMemThreadSafe off
+  better4_controls_init
   make_new_skateshop_menu {
     pos = (205, 109)
     internal_just = [ center center ]

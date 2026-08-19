@@ -97,20 +97,17 @@ int __cdecl CFunc_GetIniBool(CStruct *params) {
 }
 
 int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script) {
-	printLog("1\n");
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
 		printLog("GetIniInteger missing param \"section\" (0xd28c8510)\n");
 		return 0;
 	}
-	printLog("2\n");
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
 		printLog("GetIniInteger missing param \"key\" (0x756f5456)\n");
 		return 0;
 	}
-	printLog("3\n");
 
 	uint32_t value_name_checksum = 0;
 	if (!CStruct_GetChecksum(params, 0xbf4212ef, &value_name_checksum, 0)) {
@@ -119,19 +116,13 @@ int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script) {
 		return 0;
 	}
 
-	printLog("4\n");
-
 	float def_f = 0;
 	CStruct_GetFloat(params, 0xcee685bd, &def_f, 0); // "fallback" (0xcee685bd)
-	printLog("5\n");
 	int def = (int)def_f;
 	int ini_value = GetPrivateProfileInt(section, key, def, configFile);
-	printLog("6\n");
 
 	CStruct *out = CScript_GetParams(script);
-	printLog("7\n");
 	CStruct_AddInteger(out, value_name_checksum, ini_value);
-	printLog("8\n");
 
 	return 1;
 }

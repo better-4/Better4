@@ -2191,17 +2191,12 @@ script net_chosen_join_server
   LeaveServer
   SetServerMode off
   JoinServer <...>
-  Printf "1"
   PlaySkaterCamAnim name = SS_MenuCam play_hold
-  Printf "2"
   kill_start_key_binding
-  Printf "3"
   leave_front_end
-  Printf "4"
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
-  Printf "5"
   Change check_for_unplugged_controllers = 0
 endscript
 script net_chosen_join_server_ip

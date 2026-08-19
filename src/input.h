@@ -3,9 +3,9 @@
 
 #include <qb.h>
 
-int CFunc_SetSpinKeysControl(CStruct *params);
-int CFunc_SetSpineTransferControl(CStruct *params);
-int CFunc_SetPauseOnUnfocus(CStruct *params);
+int __cdecl CFunc_SetSpinKeysControl(CStruct *params);
+int __cdecl CFunc_SetSpineTransferControl(CStruct *params);
+int __cdecl CFunc_SetPauseOnUnfocus(CStruct *params);
 
 void patchSpinKeys();
 void patchSpineTransfers();
