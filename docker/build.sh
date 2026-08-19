@@ -70,6 +70,10 @@ echo "==> Copying images"
 mkdir -p "${OUT}/data/images"
 cp -r "${SRC}/data/images" "${OUT}/data/images/better4"
 
+echo "==> Copying sounds"
+mkdir -p "${OUT}/data/sounds/Wav/better4"
+cp -r "${SRC}/data/sounds/Wav" "${OUT}/data/sounds/Wav/better4/ExtraTrick"
+
 echo "==> Copying installer"
 cp "${SRC}/installer/install.bat" "${OUT}/"
 

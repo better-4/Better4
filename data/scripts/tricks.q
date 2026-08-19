@@ -1513,7 +1513,13 @@ script KillSpecial
   SetSlomo 1
 endscript
 script LaunchExtraMessage text = "Hidden Combo!"
-  PlaySound ExtraTrick vol = 100
+  switch better4_control_extratrick_sound_value
+  case Original
+     PlaySound ExtraTrick vol = 100
+  case Test
+     PlaySound extratrick_thug vol = 100
+  case Off
+  endswitch
 endscript
 script PedKnockDown
   if ObjectExists id = speech_box_anchor

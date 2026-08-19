@@ -139,7 +139,7 @@ object.qb
 optionsmenu.qb
 panel.qb
 panelmessage.qb
-panelstuff.qb
+better4/panelstuff.qb
 ParkEdMenu.qb
 park_ed.qb
 ped.qb
@@ -174,7 +174,7 @@ skater_misc.qb
 skater_particlesys.qb
 skater_procanim.qb
 skater_profile.qb
-skater_sfx.qb
+better4/skater_sfx.qb
 skater_shoppingcart.qb
 better4/skateshop.qb
 skeleton.qb
