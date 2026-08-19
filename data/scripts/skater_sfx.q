@@ -69,7 +69,7 @@ script LoadPermSFX
   LoadSound "Skater\clap01" FLAG_PERM
   LoadSound "Skater\clap02" FLAG_PERM
   LoadSound "Skater\clap03" FLAG_PERM
-  LoadSound "Skater\extratrick_alt" FLAG_PERM
+  LoadSound "better4\ExtraTrick\extratrick_thug" FLAG_PERM
   UnloadPreFile "skater_sounds.pre"
 endscript
 script LoadPermSongs

@@ -1517,10 +1517,9 @@ script LaunchExtraMessage text = "Hidden Combo!"
   case Original
      PlaySound ExtraTrick vol = 100
   case Test
-     PlaySound extratrick_alt vol = 100
+     PlaySound extratrick_thug vol = 100
   case Off
   endswitch
-  // PlaySound better4_control_extratrick_sound_value vol = 100
 endscript
 script PedKnockDown
   if ObjectExists id = speech_box_anchor

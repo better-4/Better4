@@ -139,7 +139,7 @@ object.qb
 optionsmenu.qb
 panel.qb
 panelmessage.qb
-panelstuff.qb
+better4/panelstuff.qb
 ParkEdMenu.qb
 park_ed.qb
 ped.qb
