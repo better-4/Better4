@@ -6952,6 +6952,7 @@ script make_text_sub_menu_item { focus_script = do_scale_up
     parent_menu_id = current_menu
     scale = 1
     rgba = [ 88 105 112 128 ]
+    dims = (200, 20)
   }
   if GotParam not_focusable
      <nofocus_rgba> = [ 60 60 60 75 ]
@@ -6963,6 +6964,7 @@ script make_text_sub_menu_item { focus_script = do_scale_up
       font = <font_face>
       rgba = <nofocus_rgba>
       scale = <scale>
+      dims = <dims>
       event_handlers = [
         { focus <focus_script> params = <focus_params> }
         { unfocus <unfocus_script> params = <unfocus_params> }
@@ -6981,6 +6983,7 @@ script make_text_sub_menu_item { focus_script = do_scale_up
         font = <font_face>
         rgba = <rgba>
         scale = <scale>
+        dims = <dims>
         event_handlers = [
           { focus <focus_script> params = <focus_params> }
           { unfocus <unfocus_script> params = <unfocus_params> }
@@ -6997,6 +7000,7 @@ script make_text_sub_menu_item { focus_script = do_scale_up
         font = <font_face>
         rgba = <rgba>
         scale = <scale>
+        dims = <dims>
         event_handlers = [
           { focus <focus_script> params = <focus_params> }
           { unfocus <unfocus_script> params = <unfocus_params> }
@@ -7208,6 +7212,7 @@ script load_textures_to_main_memory
   LoadTexture no_vram_alloc "PanelSprites/PA_save"
   LoadTexture no_vram_alloc "PanelSprites/PA_Load"
   LoadTexture no_vram_alloc "PanelSprites/PA_options"
+  LoadTexture no_vram_alloc "PanelSprites/PA_nuke"
   LoadTexture no_vram_alloc "PanelSprites/PA_shop"
   LoadTexture no_vram_alloc "PanelSprites/PA_fonts"
   LoadTexture no_vram_alloc "PanelSprites/PA_set_cust"
