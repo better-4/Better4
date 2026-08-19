@@ -151,6 +151,9 @@ script better4_misc_menu
   better4_create_menu_control better4_control_boardscuff
   better4_create_menu_control better4_control_pauseonunfocus
   better4_create_menu_control better4_control_buttonsfont
+  better4_create_menu_control better4_trick_string
+  better4_create_menu_control better4_control_special_meter
+  better4_create_menu_control better4_control_extratrick_sound
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
