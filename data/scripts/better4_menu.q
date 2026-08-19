@@ -1,5 +1,4 @@
 script better4_main_menu_watermark
-  better4_controls_init
   FormatText TextName = better4_watermark "Better4 %s" s = better4_version
   CreateScreenElement {
     parent = current_menu_anchor

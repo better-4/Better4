@@ -67,25 +67,25 @@ typedef struct {
 
 // CStruct
 CStruct *CStruct_New();
-void CStruct_Free(CStruct *this_);
-void CStruct_AddArray(CStruct *this_, uint32_t checksum, CArray *value);
+void CStruct_Free(CStruct *this);
+void CStruct_AddArray(CStruct *this, uint32_t checksum, CArray *value);
 void CStruct_AddChecksum(CStruct *this, uint32_t checksum, uint32_t value);
-void CStruct_AddFloat(CStruct *this_, uint32_t checksum, float value);
-void CStruct_AddInteger(CStruct *this_, uint32_t checksum, int value);
-void CStruct_AddString(CStruct *this_, uint32_t checksum, char *value);
-int CStruct_GetChecksum(CStruct *this_, uint32_t checksum, uint32_t *ret, int assert);
-int CStruct_GetFloat(CStruct *this_, uint32_t checksum, float *ret, int assert);
-int CStruct_GetInteger(CStruct *this_, uint32_t checksum, int *ret, int assert);
-int CStruct_GetString(CStruct *this_, uint32_t checksum, const char **ret, int assert);
-void CStruct_RemoveComponent(CStruct *this_, uint32_t checksum);
+void CStruct_AddFloat(CStruct *this, uint32_t checksum, float value);
+void CStruct_AddInteger(CStruct *this, uint32_t checksum, int value);
+void CStruct_AddString(CStruct *this, uint32_t checksum, char *value);
+int CStruct_GetChecksum(CStruct *this, uint32_t checksum, uint32_t *ret, int assert);
+int CStruct_GetFloat(CStruct *this, uint32_t checksum, float *ret, int assert);
+int CStruct_GetInteger(CStruct *this, uint32_t checksum, int *ret, int assert);
+int CStruct_GetString(CStruct *this, uint32_t checksum, const char **ret, int assert);
+void CStruct_RemoveComponent(CStruct *this, uint32_t checksum);
 
 // CArray
 CArray *CArray_New();
-void CArray_Free(CArray *this_);
-void CArray_SetStructure(CArray *this_, uint32_t index, CStruct *value);
-void CArray_SetSizeAndType(CArray *this_, uint32_t size, uint32_t type);
+void CArray_Free(CArray *this);
+void CArray_SetStructure(CArray *this, uint32_t index, CStruct *value);
+void CArray_SetSizeAndType(CArray *this, uint32_t size, uint32_t type);
 
 // CScript
-CStruct *CScript_GetParams(CScript *this_);
+CStruct *CScript_GetParams(CScript *this);
 
 #endif

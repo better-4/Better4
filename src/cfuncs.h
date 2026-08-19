@@ -10,10 +10,10 @@ typedef struct {
 
 void patchCFuncs();
 
-int CFunc_GetIniBool(CStruct *params);
-int CFunc_GetIniInteger(CStruct *params, CScript *script);
-int CFunc_SetIniBool(CStruct *params, CScript *script);
-int CFunc_SetIniInteger(CStruct *params, CScript *script);
-int CFunc_ChangeGlobal(CStruct *params, CScript *script);
+int __cdecl CFunc_GetIniBool(CStruct *params);
+int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script);
+int __cdecl CFunc_SetIniBool(CStruct *params, CScript *script);
+int __cdecl CFunc_SetIniInteger(CStruct *params, CScript *script);
+int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script);
 
 #endif
