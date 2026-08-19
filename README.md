@@ -7,7 +7,11 @@ Better4 is a THPS4 modpack that includes modern gameplay and QOL features while 
 
 ## Installation
 
-Download the latest GitHub release and drag your `Skate4.exe` onto `install.bat`. If your THPS4 install directory is not writable (e.g. program files), you will be prompted to re-run as admin (always check source code!).
+Download the latest GitHub release and drag your `Skate4.exe` onto `install.bat`. If your THPS4 install directory is not writable (e.g. program files), you will be prompted to re-run as admin (always read source code!).
+
+Better4 does not modify any vanilla game files. Any game data created by the installer is contained in `**/better4/**` subdirectories, which are only referenced when `better4.exe` is run.
+
+If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
 
 ## Features
 
@@ -47,9 +51,19 @@ nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 * Added bunched cargos
 * Unassign trick in "Edit Tricks" menu
 
+### Misc
+
+* Disable pause on unfocus
+* Disable board scuff
+* Configure buttons font (PS3, Xbox, PC)
+
 ## Known Issues
 
+* Disabling pause on unfocus sometimes crashes
 * KOTH crashes :(
+* Entering a message and typing letters A/D while in obs changes players
+* Unable to quit obs mid-game
+* Unable to use KB in menus while in-game
 
 ## Credits
 
@@ -58,6 +72,7 @@ A special thank you to the following people, without whom this project would not
 * [@zedthps](https://github.com/zedthps), [@voss10](https://github.com/voss10), and [@1borgy](https://github.com/1borgy) for their contributions
 * [@PARTYMANX](https://github.com/PARTYMANX) for their work on [partymod-thps4](https://github.com/PARTYMANX/partymod-thps4)
 * [@DCxDemo](https://github.com/DCxDemo) for their work on [THPSQScriptEd](https://github.com/DCxDemo/LegacyTHPS/)
+* [PunishedFiddle](https://www.moddb.com/members/punishedfiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
 
 ## For Developers
 
@@ -79,44 +94,3 @@ docker build -f docker/Dockerfile --target export -o build/out .
 ```
 
 Build artifacts will be exported to the `build/out` directory.
-
-### Building natively
-
-If you prefer to build natively on Windows, you'll need to install quite a few dependencies.
-
-#### Install VS Build Tools and .NET SDK
-
-VS Build Tools are required to build PARTYMOD, whereas the .NET SDK is required to build the QB script (de)compiler.
-
-```powershell
-winget install -e --id Microsoft.VisualStudio.2022.BuildTools
-winget install -e --id Microsoft.DotNet.SDK.10
-```
-
-#### Install vcpkg / sdl2:x86-windows
-
-```powershell
-git clone https://github.com/microsoft/vcpkg.git
-cd vcpkg
-.\bootstrap-vcpkg.bat
-.\vcpkg.exe install sdl2:x86-windows
-```
-
-#### Build QScriptEd CLI
-
-```
-cd vendor/LegacyTHPS/editors/ThpsQScriptEd
-dotnet build -p:configuration=release
-```
-
-#### Build PARTYMOD
-
-```
-cd vendor/partymod-thps4
-mkdir build
-cd build
-cmake .. -A win32 -DCMAKE_TOOLCHAIN_FILE=C:/[vcpkg directory]/scripts/buildsystems/vcpkg.cmake
-msbuild .\partypatcher.vcxproj /p:configuration=release
-msbuild .\partyconfig.vcxproj /p:configuration=release
-msbuild .\partymod.vcxproj /p:configuration=release /p:optimize=false
-```
