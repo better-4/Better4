@@ -17,7 +17,6 @@ common_flags=(
   -G Ninja
   -DCMAKE_SYSTEM_NAME=Windows
   -DCMAKE_BUILD_TYPE=Release
-  # -DCMAKE_BUILD_TYPE=Debug
   -DSDL2_DIR="${SDL2_DIR}/cmake"
 )
 

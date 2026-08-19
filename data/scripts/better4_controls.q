@@ -436,9 +436,6 @@ script better4_control_init
     endif
   endif
 
-  CastToInteger index
-  CastToInteger new_index
-
   if not IntegerEquals a = <index> b = <new_index>
     better4_control_change needs_write <...>
   else
