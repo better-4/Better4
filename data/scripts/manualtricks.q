@@ -57,6 +57,7 @@ Trick_Gturn2 = { Scr = ManualLink params = { name = 'Pivot' Score = 250 Anim = G
 Trick_HalfCabImpossible = { Scr = ManualLink params = { name = 'Half Cab Impossible' Score = 450 Anim = HalfCabImpossible BalanceAnim = Manual FlipAfter BoardFlipAfter BalanceAnim = Manual_Range trickslack = 0 extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = ManualBranches TimeAdd = 0 SpeedMult = 1.0 OffMeterTop = ManualBail IsExtra OffMeterBottom = ManualLand } }
 Trick_360FlipNoseManual = { Scr = ManualLink params = { name = '360 Fingerflip' Score = 450 Anim = _360FlipNosemanual BalanceAnim = Nosemanual BalanceAnim = NoseManual_Range trickslack = 0 extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = NoseManualBranches TimeAdd = 0 SpeedMult = 1.0 OffMeterTop = ManualLand OffMeterBottom = NoseManualBail } }
 Trick_PogoFlip = { Scr = ManualLink params = { name = 'Wrap Around' Score = 500 Anim = Pogo_Kickfoot BalanceIdle = Pogo_Bounce speed = 1.5 OutAnim = Pogo_Out OutSpeed = 1.5 ExtraTricks = FlatLandBranches ExtraTricks2 = PogoBranches parent = 'Pogo' extrapercent = 100 trickslack = 0 IsExtra } }
+Trick_Spacewalk = { Scr = Manual Params = { Name = 'Spacewalk' Score = 1200 InitAnim = Manual FromAirAnim = ManualFromAir balanceIdle = RevertBS OffMeterTop = ManualLand OffMeterBottom = ManualBail ExtraTricks2 = ManualBranches ExtraTricks = FlatLandBranches ExtraSpeedBoost = 250 } }
 SwitchFootPogo_Branches =
 [ { Trigger = TRIGGER_MANUAL_BRANCHFLIP Scr = ManualLink params = { name = 'Half Wrap Truck Transfer' Score = 500 Anim = TruckRunFlip BalanceIdle = TruckRun ExtraTricks = FlatLandBranches ExtraTricks2 = SwitchFootPogo_Branches parent = 'Switch Foot Pogo' BoardFlipAfter extrapercent = 100 trickslack = 0 IsExtra } }
   { Trigger = { Press R2 ROTATEY_TRIGGER_TIME } Scr = ManualLink params = { name = 'Switch Foot Pogo Spin' Score = 10 RotateRightY BalanceAnim = TruckRun OutAnim = Truckrun_Out ExtraTricks = FlatLandBranches ExtraTricks2 = SwitchFootPogo_Branches parent = 'Switch Foot Pogo' trickslack = 0 IsExtra } }
@@ -93,6 +94,7 @@ FlatLandBranches =
   { Trigger = { inorder Circle Square 300 } Trick_ToRail }
   { Trigger = { inorder Circle Triangle 300 } Trick_OneFootManual }
   { Trigger = { inorder Circle Triangle 300 } Trick_OneFootNosemanual }
+  { Trigger = { TripleInOrder , Left , Right , Square , 500 } Trick_Spacewalk }
   { Trigger = { inorder Triangle Triangle 300 } Trick_Pogo }
   { Trigger = { inorder Triangle Circle 300 } Trick_SwitchFootPogo }
   { Trigger = { inorder Triangle Square 300 } Trick_Truckstand }
@@ -235,6 +237,9 @@ script Manual BlendPeriod = 0.3
     BlendPeriodOut 0
     FlipAfter
   endif
+  if GotParam ExtraSpeedBoost 
+	SpacewalkBoost ExtraSpeedBoost = <ExtraSpeedBoost> 
+  endif
   if GotParam NoBlend
     BlendPeriodOut 0
   endif
@@ -252,6 +257,15 @@ script Manual BlendPeriod = 0.3
     Obj_SpawnScript <SpawnScript>
   endif
 endscript
+
+script SpacewalkBoost ExtraSpeedBoost = 200 
+ GetSpeed 
+ if ( <Speed> < <ExtraSpeedBoost> ) 
+	SetSpeed <ExtraSpeedBoost> 
+ endif 
+ printf "Speed=%s" s = <Speed> 
+endscript
+
 script CheckForNewTrick_ManualOut
   Printf "give the events back!!!!!!!"
   RestoreExtraTrickEvents 100
