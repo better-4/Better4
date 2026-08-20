@@ -6928,7 +6928,6 @@ script make_text_sub_menu_item { focus_script = do_scale_up
     parent_menu_id = current_menu
     scale = 1
     rgba = [ 88 105 112 128 ]
-    dims = (200, 20)
   }
   if GotParam not_focusable
      <nofocus_rgba> = [ 60 60 60 75 ]
