@@ -394,52 +394,49 @@ script better4_control_buttonsfont_change
   Change prev_buttonsfont = better4_control_buttonsfont_value
 endscript
 
-better4_trick_string_index = 1
-better4_trick_string_value = on
-better4_trick_string = {
-  id = better4_trick_string_id
-  index_name = better4_trick_string_index
-  value_name = better4_trick_string_value
-  text = "Trick String"
-  ini_key = "TrickString"
-  options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }	
-  ]
-}
+// better4_trick_string_index = 1
+// better4_trick_string_value = on
+// better4_trick_string = {
+  // id = better4_trick_string_id
+  // index_name = better4_trick_string_index
+  // value_name = better4_trick_string_value
+  // text = "Trick String"
+  // ini_key = "TrickString"
+  // options = [
+    // { text = "Off" value = off }
+    // { text = "On" value = on }	
+  // ]
+// }
 
-better4_control_special_meter_index = 1
-better4_control_special_meter_value = on
-better4_control_special_meter = {
-  id = better4_control_special_meter_id
-  index_name = better4_control_special_meter_index
-  value_name = better4_control_special_meter_value
-  text = "Special Meter"
-  ini_key = "SpecialMeter"
-  options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
-  ]
-  change_script = better4_hud_option_change
-}
-script better4_hud_option_change
-  switch better4_control_special_meter_value
-  case off
-    if ScreenElementExists id = the_score_pot_text
-      DoScreenElementMorph id = the_score_pot_text scale = 0 relative
-    endif
-  case on
-    if ScreenElementExists id = the_score_pot_text
-      DoScreenElementMorph id = the_score_pot_text scale = 1 relative
-    endif
-  endswitch
-endscript
-
-Original = ExtraTrick
-Test = extratrick_alt
+// better4_control_special_meter_index = 1
+// better4_control_special_meter_value = on
+// better4_control_special_meter = {
+  // id = better4_control_special_meter_id
+  // index_name = better4_control_special_meter_index
+  // value_name = better4_control_special_meter_value
+  // text = "Special Meter"
+  // ini_key = "SpecialMeter"
+  // options = [
+    // { text = "Off" value = off }
+    // { text = "On" value = on }
+  // ]
+  // change_script = better4_hud_option_change
+// }
+// script better4_hud_option_change
+  // switch better4_control_special_meter_value
+  // case off
+    // if ScreenElementExists id = the_score
+      // SetScreenElementProps id = the_score alpha = 0.0 remember_alpha
+    // endif
+  // case on
+    // if ScreenElementExists id = the_score
+      // SetScreenElementProps id = the_score restore_alpha
+    // endif
+  // endswitch
+// endscript
 
 better4_control_extratrick_sound_index = 0
-better4_control_extratrick_sound_value = Original
+better4_control_extratrick_sound_value = THPS4
 better4_control_extratrick_sound = {
   id = better4_control_extratrick_sound_id
   index_name = better4_control_extratrick_sound_index
@@ -447,8 +444,8 @@ better4_control_extratrick_sound = {
   text = "Extra Trick Sound"
   ini_key = "ExtraTrickSound"
   options = [
-    { text = "Original" value = Original }
-    { text = "Test" value = Test }
+    { text = "THPS4" value = THPS4 }
+    { text = "THUG" value = THUG }
     { text = "Off" value = off }	
   ]
 }
@@ -474,8 +471,8 @@ script better4_controls_init
   better4_control_init better4_control_boardscuff
   better4_control_init better4_control_pauseonunfocus
   better4_control_init better4_control_buttonsfont
-  better4_control_init better4_trick_string
-  better4_control_init better4_control_special_meter
+  // better4_control_init better4_trick_string
+  // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
 endscript
 

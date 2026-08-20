@@ -1514,9 +1514,9 @@ script KillSpecial
 endscript
 script LaunchExtraMessage text = "Hidden Combo!"
   switch better4_control_extratrick_sound_value
-  case Original
+  case THPS4
      PlaySound ExtraTrick vol = 100
-  case Test
+  case THUG
      PlaySound extratrick_thug vol = 100
   case Off
   endswitch
