@@ -53,11 +53,7 @@ script create_edit_tricks_menu
     rgba = [ 127 102 0 128 ]
     z_priority = 5
   }
-  if GoalManager_HasActiveGoals
-     <title> = "VIEW TRICKS"
-  else
-     <title> = "EDIT TRICKS"
-  endif
+  <title> = "EDIT TRICKS"
   GetStackedScreenElementPos x id = <id>
   CreateScreenElement {
     type = TextElement
@@ -693,9 +689,6 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
     highlight_bar_scale = (0.38, 1.2)
     parent = edit_tricks_menu_1
   }
-  if GoalManager_HasActiveGoals
-    pad_choose_script = nullscript
-  endif
   if not GotParam focus_params
     focus_params = { highlight_bar_scale = <highlight_bar_scale> }
   endif
@@ -773,9 +766,6 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     pad_square_script = special_tricks_menu_unassign_trick
     highlight_bar_scale = (2, 1.3)
   }
-  if GoalManager_HasActiveGoals
-    pad_choose_script = nullscript
-  endif
   CreateScreenElement {
     type = ContainerElement
     parent = edit_tricks_menu_1

@@ -3212,21 +3212,11 @@ script create_options_menu
       make_text_sub_menu_item text = <camera_text> id = menu_camera pad_choose_script = toggle_camera_angle pad_choose_params = { }
     endif
     make_text_sub_menu_item text = "Edit Stats" id = menu_edit_stats pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = create_stats_menu }
-    if not InSplitScreenGame
-      if GoalManager_HasActiveGoals
-        make_text_sub_menu_item {
-          text = "View Tricks"
-          id = menu_edit_tricks
-          pad_choose_script = create_edit_tricks_menu
-        }
-      else
         make_text_sub_menu_item {
           text = "Edit Tricks"
           id = menu_edit_tricks
           pad_choose_script = create_edit_tricks_menu
         }
-      endif
-    endif
     if GameModeEquals is_career
       if GoalManager_HasActiveGoals count_all
         make_text_sub_menu_item {
@@ -3255,25 +3245,11 @@ script create_options_menu
       endif
     endif
   else
-    if not IsBetterObserving
-      if not InSplitScreenGame
-        if GoalManager_HasActiveGoals
-          make_text_sub_menu_item {
-            not_focusable
-            rgba = [ 50 50 50 90 ]
-            text = "Edit Tricks"
-            id = menu_edit_tricks
-            pad_choose_script = create_edit_tricks_menu
-          }
-        else
           make_text_sub_menu_item {
             text = "Edit Tricks"
             id = menu_edit_tricks
             pad_choose_script = create_edit_tricks_menu
           }
-        endif
-      endif
-    endif
     if InNetGame
       if GameModeEquals is_lobby
         if GoalManager_HasActiveGoals count_all
