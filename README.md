@@ -59,11 +59,8 @@ nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 
 ## Known Issues
 
-* Disabling pause on unfocus sometimes crashes
 * KOTH crashes :(
-* Entering a message and typing letters A/D while in obs changes players
 * Unable to quit obs mid-game
-* Unable to use KB in menus while in-game
 
 ## Credits
 
