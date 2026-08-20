@@ -394,19 +394,19 @@ script better4_control_buttonsfont_change
   Change prev_buttonsfont = better4_control_buttonsfont_value
 endscript
 
-better4_trick_string_index = 1
-better4_trick_string_value = on
-better4_trick_string = {
-  id = better4_trick_string_id
-  index_name = better4_trick_string_index
-  value_name = better4_trick_string_value
-  text = "Trick String"
-  ini_key = "TrickString"
-  options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }	
-  ]
-}
+// better4_trick_string_index = 1
+// better4_trick_string_value = on
+// better4_trick_string = {
+  // id = better4_trick_string_id
+  // index_name = better4_trick_string_index
+  // value_name = better4_trick_string_value
+  // text = "Trick String"
+  // ini_key = "TrickString"
+  // options = [
+    // { text = "Off" value = off }
+    // { text = "On" value = on }	
+  // ]
+// }
 
 better4_control_special_meter_index = 1
 better4_control_special_meter_value = on
@@ -474,7 +474,7 @@ script better4_controls_init
   better4_control_init better4_control_boardscuff
   better4_control_init better4_control_pauseonunfocus
   better4_control_init better4_control_buttonsfont
-  better4_control_init better4_trick_string
+  // better4_control_init better4_trick_string
   better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
 endscript
