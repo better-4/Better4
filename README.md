@@ -60,7 +60,6 @@ nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 ## Known Issues
 
 * KOTH crashes :(
-* Unable to quit obs mid-game
 
 ## Credits
 
