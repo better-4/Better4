@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 #
-# `docker build -f docker/Dockerfile --target export -o build/out .`
+# `docker build -f Dockerfile --target export -o build/out .`
 ########################################
 ARG BASE_IMAGE=ubuntu:24.04
 FROM ${BASE_IMAGE} AS base
@@ -151,6 +151,7 @@ RUN --mount=type=cache,target=/build \
 COPY vendor/partymod-thps4/partymod.ini /out/better4.ini
 COPY vendor/partymod-thps4/gamecontrollerdb.txt /out
 COPY vendor/partymod-thps4/readme-partymod.txt /out
+COPY installer/install.bat /out
 RUN cp ${SDL2_DIR}/lib/x86/SDL2.dll /out
 RUN cp ${SDL2_DIR}/README.txt /out/README-SDL.txt
 COPY README.md /out/readme-better4.txt
@@ -164,7 +165,7 @@ RUN mkdir -p "/out/data/scripts/better4" \
     && dotnet "/opt/qscripted/ThpsQScriptEd.dll" "data/scripts" "/out/data/scripts/better4"
 
 ########################################
-FROM toolchain AS build-artifacts
+FROM toolchain AS build-data
 
 COPY data/scripts/qdir.txt /out/data/scripts/better4/qdir.txt
 COPY data/fonts /out/data/fonts/better4
@@ -179,4 +180,4 @@ COPY --from=build-config /out /
 COPY --from=build-patcher /out /
 COPY --from=build-better4 /out /
 COPY --from=build-qscripts /out /
-COPY --from=build-artifacts /out /
+COPY --from=build-data /out /
