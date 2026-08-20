@@ -70,6 +70,11 @@ int __cdecl CFunc_ObserveSelf(CStruct* params) {
     return 1;
 }
 
+int __cdecl CFunc_QueueObserveSelf(CStruct* params) {
+	voluntary_observing = 0;
+	return 1;
+}
+
 int __cdecl CFunc_IsBetterObserving(CStruct* params) {
     return local_observing;
 }

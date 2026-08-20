@@ -17,7 +17,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 16
+#define BETTER4_NUM_CFUNCS 17
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -38,6 +38,7 @@ void addCFunc(const char *name, void *func) {
 
 void addCFuncs() {
 	addCFunc("ObserveSelf", (void *)CFunc_ObserveSelf);
+	addCFunc("QueueObserveSelf", (void*)CFunc_QueueObserveSelf);
 	addCFunc("IsBetterObserving", (void *)CFunc_IsBetterObserving);
 	addCFunc("ObserveAfter0", (void*)CFunc_ObserveAfter0);
 	addCFunc("BetterObserve", (void *)CFunc_BetterObserve);
