@@ -87,7 +87,7 @@ Using Docker is the easiest way to build Better4, as it automates the process of
 Install [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/), then verify the Docker Engine is running and run:
 
 ```
-docker build -f docker/Dockerfile --target export -o build/out .
+docker build -f Dockerfile --target export -o build/out .
 ```
 
 Build artifacts will be exported to the `build/out` directory.
