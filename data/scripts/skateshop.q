@@ -5147,18 +5147,32 @@ edit_skater_torso_options = [
     is_enabled_params = { parts = [ skater_m_backpack skater_f_backpack ] }
   }
   {
-    text = 'Accessories'
-    submenu = accessories_menu
+    text = 'L. Accessories'
+    submenu = accessoriesL_menu
     is_visible_script = check_if_group_editable
-    is_visible_params = { group = accessories_items }
+    is_visible_params = { group = accessoriesL_items }
   }
   {
-    text = 'Accessories Color'
+    text = 'L. Accessories Color'
+    submenu = accessoriesL_color_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesL_items }
+    is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ accessoriesL ] }
+  }
+  {
+    text = 'R. Accessories'
+    submenu = accessoriesR_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesR_items }
+  }
+  {
+    text = 'R. Accessories Color'
     submenu = accessories_color_menu
     is_visible_script = check_if_group_editable
-    is_visible_params = { group = accessories_items }
+    is_visible_params = { group = accessoriesR_items }
     is_enabled_script = check_if_part_colorable
-    is_enabled_params = { parts = [ accessories ] }
+    is_enabled_params = { parts = [ accessoriesR ] }
   }
 ]
 edit_skater_leg_options = [

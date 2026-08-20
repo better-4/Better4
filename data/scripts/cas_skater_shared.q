@@ -513,51 +513,29 @@ Helmet = [
     only_with = [ caballero ]
   }
 ]
-accessories = [
+
+accessoriesL = [
   {
     desc_id = None
     frontend_desc = 'None'
     no_color
   }
   {
-    desc_id = #"Wrist Band R"
-    frontend_desc = 'Wrist Band R'
-    mesh = "models/skater_m/extra_wristbandR.skin"
-  }
-  {
     desc_id = #"Wrist Band L"
-    frontend_desc = 'Wrist Band L'
+    frontend_desc = 'Wrist Band'
     mesh = "models/skater_m/extra_wristbandL.skin"
   }
   {
-    desc_id = #"Wrist Bands"
-    frontend_desc = 'Wrist Bands'
-    mesh = "models/skater_m/extra_wristbandL.skin"
-    mesh1 = "models/skater_m/extra_wristbandR.skin"
-  }
-  {
-    desc_id = #"Koston band"
+    desc_id = #"Koston band L"
     frontend_desc = 'Koston band'
     mesh = "models/skater_m/extra_wristbandL.skin"
     replace = "CS_NN_extra_Wristband01.png"
     with = "textures/skater_m/CS_NH_koston_extras"
   }
   {
-    desc_id = #"Wrist Watch R"
-    frontend_desc = 'Wrist Watch R'
-    mesh = "models/skater_m/extra_watch.skin"
-  }
-  {
     desc_id = #"Wrist Watch L"
-    frontend_desc = 'Wrist Watch L'
+    frontend_desc = 'Wrist Watch'
     mesh = "models/skater_m/extra_watchL.skin"
-  }
-  {
-    desc_id = #"Gold Watch R"
-    frontend_desc = 'Gold Watch R'
-    mesh = "models/skater_m/extra_watch.skin"
-    replace = "CS_NN_Watch.png"
-    with = "textures/skater_m/CS_NN_Watch04"
   }
   {
     desc_id = #"Gold Watch L"
@@ -567,9 +545,48 @@ accessories = [
     with = "textures/skater_m/CS_NN_Watch04"
   }
   {
-    desc_id = #"Rocker Watch"
+    desc_id = #"Rocker Watch L"
     frontend_desc = 'Rocker Watch'
     mesh = "models/skater_m/extra_wristbandL.skin"
+    replace = "CS_NN_extra_Wristband01.png"
+    with = "textures/skater_m/CS_NN_extra_rockerwatch"
+  }
+]
+
+accessoriesR = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+    no_color
+  }
+  {
+    desc_id = #"Wrist Band R"
+    frontend_desc = 'Wrist Band'
+    mesh = "models/skater_m/extra_wristbandR.skin"
+  }
+  {
+    desc_id = #"Koston band R"
+    frontend_desc = 'Koston band'
+    mesh = "models/skater_m/extra_wristbandR.skin"
+    replace = "CS_NN_extra_Wristband01.png"
+    with = "textures/skater_m/CS_NH_koston_extras"
+  }
+  {
+    desc_id = #"Wrist Watch R"
+    frontend_desc = 'Wrist Watch'
+    mesh = "models/skater_m/extra_watch.skin"
+  }
+  {
+    desc_id = #"Gold Watch R"
+    frontend_desc = 'Gold Watch'
+    mesh = "models/skater_m/extra_watch.skin"
+    replace = "CS_NN_Watch.png"
+    with = "textures/skater_m/CS_NN_Watch04"
+  }
+  {
+    desc_id = #"Rocker Watch R"
+    frontend_desc = 'Rocker Watch'
+    mesh = "models/skater_m/extra_wristbandR.skin"
     replace = "CS_NN_extra_Wristband01.png"
     with = "textures/skater_m/CS_NN_extra_rockerwatch"
   }
@@ -600,11 +617,21 @@ accessories = [
     mesh = "models/skater_m/extra_bracelet.skin"
   }
   {
-    desc_id = #"Wrist Tape"
+    desc_id = #"Wrist Tape R"
     frontend_desc = 'Wrist Tape'
     mesh = "models/skater_m/extra_wristape_R.skin"
   }
 ]
+
+// accessories = [
+  // {
+    // desc_id = #"Wrist Tape"
+    // frontend_desc = 'Wrist Tape'
+    // mesh = "models/skater_m/extra_wristape_R.skin"
+	// hidden
+  // }
+// ]
+
 shoes = [
   {
     desc_id = #"Hawk Shoe"

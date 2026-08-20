@@ -67,7 +67,7 @@ appearance_koston =
   skater_m_head = { desc_id = Koston }
   hat = { desc_id = #"Koston Cap" }
   body = { desc_id = MaleBody3 }
-  accessories = { desc_id = #"koston band" }
+  accessoriesL = { desc_id = #"Koston band L" }
   board = { desc_id = #"Default" }
   deck_graphic = { desc_id = #"Koston 1" }
   griptape = { desc_id = #"Koston 1" }
@@ -201,7 +201,7 @@ appearance_vallely =
   left_bicep_tattoo = { desc_id = #"Tattoo 10" }
   right_bicep_tattoo = { desc_id = #"Tattoo 9" }
   shoes = { desc_id = #"Vallely Shoe" }
-  accessories = { desc_id = #"Wrist Tape" }
+  accessoriesR = { desc_id = #"Wrist Tape R" }
 }
 appearance_jenna =
 {
@@ -222,7 +222,7 @@ appearance_custom_skater_male =
   skater_m_legs = { desc_id = #"Cargo Pants" h = 30 s = 20 v = 30 use_default_hsv = 0 }
   skater_m_socks = { desc_id = Medium }
   shoes = { desc_id = #"Koston Shoe" }
-  accessories = { desc_id = #"rocker watch" }
+  accessoriesL = { desc_id = #"Rocker Watch L" }
   right_forearm_tattoo = { desc_id = #"Tattoo 9" }
   board = { desc_id = #"Default" }
   deck_graphic = { desc_id = #"CAS 1" }
@@ -240,7 +240,7 @@ appearance_custom_skater_female =
   right_bicep_tattoo = { desc_id = #"Tattoo 3" }
   chest_tattoo = { desc_id = #"Tattoo 13" }
   skater_f_torso = { desc_id = #"Tanktop short" }
-  accessories = { desc_id = #"bracelet 4" }
+  accessoriesR = { desc_id = #"bracelet 4" }
   skater_f_legs = { desc_id = #"Ankle Pants" }
   skater_f_socks = { desc_id = Ankle }
   shoes = { desc_id = #"Burnquist Shoe" }
