@@ -19,6 +19,7 @@
 #include <winsock.h>
 
 #define PARTY_ADDR_GAMENET_MANAGER 0x00ab5394
+#define PARTY_ADDR_SKATE_MANAGER 0x00ab5b48
 
 extern char configFile[1024];
 static void* local_observe_target = 0;
@@ -30,8 +31,10 @@ static uint32_t(__fastcall* IsObserving_)(void*) = (void*)0x00491560;
 
 typedef void* (__fastcall* FirstPlayerInfo_t)(void* gameNetManager, int unused, void* searchCtx, char flag);
 typedef void* (__fastcall* NextPlayerInfo_t)(void* searchCtx);
+typedef void* (__fastcall* GetSkaterByNum_t)(void* skateManager, int unused, uint32_t num);
 static FirstPlayerInfo_t FirstPlayerInfo = (FirstPlayerInfo_t)0x00489730;
 static NextPlayerInfo_t  NextPlayerInfo = (NextPlayerInfo_t)0x00432b10;
+static GetSkaterByNum_t GetSkaterByNum = (GetSkaterByNum_t)0x004fa2b0; 
 
 typedef uint32_t(__fastcall* IsLocalPlayer_t)(void*);
 static IsLocalPlayer_t IsLocalPlayer_ = (IsLocalPlayer_t)0x00491540;
@@ -45,6 +48,32 @@ static SetCamSkater_t SetCamSkater = (SetCamSkater_t)0x004dc310;
 typedef void* (__fastcall* GetCamSkater_t)(void* cameraComponent);
 static GetCamSkater_t GetCamSkater = (GetCamSkater_t)0x004dc320;
 
+int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script) {
+    printf("I am running!\n");
+    void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
+    void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
+    if (!self) { printLog("CFunc_GetLocalSkaterIndex: no local player\n"); return 0; }
+
+    void* mySkater = *(void**)((uint8_t*)self + 0x14);
+    if (!mySkater) { printLog("CFunc_GetLocalSkaterIndex: no skater\n"); return 0; }
+
+    void* skateManager = *(void**)PARTY_ADDR_SKATE_MANAGER;
+    if (!skateManager) { printLog("CFunc_GetLocalSkaterIndex: no skate manager\n"); return 0; }
+
+    for (int i = 0; i < 8; i++) 
+    {
+      void* candidate = GetSkaterByNum(skateManager, 0, i);
+      if (candidate == mySkater)
+      {
+        CStruct* out = CScript_GetParams(script);
+        CStruct_AddInteger(out, 0x7F8C98FE, (int)i); // index = 0x7F8C98FE (JAMCRC)
+        return 1;
+      }
+    }
+
+    printLog("CFunc_GetLocalSkaterIndex: couldn't find own skater in skater list\n");
+    return 0;
+}
 
 static void* GetCameraComponent(void* self, void** outSkater) {
 	void* skater = *(void**)((uint8_t*)self + 0x14);

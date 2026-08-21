@@ -3,6 +3,7 @@
 
 #include <qb.h>
 
+int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script);
 int __cdecl CFunc_ObserveSelf(CStruct* params);
 int __cdecl CFunc_QueueObserveSelf(CStruct* params);
 int __cdecl CFunc_IsBetterObserving(CStruct* params);

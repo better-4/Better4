@@ -585,10 +585,12 @@ script create_pause_menu
       make_sprite_menu_item text = "Continue" id = menu_continue pad_choose_script = handle_start_pressed
       if InNetGame
         if not IsBetterObserving
-          make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = EnterBetterObserve
+          if not IsObserving
+            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = EnterBetterObserve
+          endif
         else
           if IsVoluntaryObserving
-	    if not GoalManager_HasActiveGoals
+            if not GoalManager_HasActiveGoals
               make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
             else
               make_text_sub_menu_item text = "Rejoin Next Game" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
@@ -645,7 +647,9 @@ script create_pause_menu
     if OnServer
       if OnXbox
         if not IsBetterObserving
+          if not IsObserving
           make_sprite_menu_item text = "Sit Out" id = menu_network_sit_select pad_choose_script = launch_network_sit_out_menu
+        endif
         endif
         make_sprite_menu_item text = "Host Options" id = menu_network_server_opts_select pad_choose_script = network_options_selected
       else
@@ -720,16 +724,18 @@ script create_pause_menu
   if InNetGame
     if GameModeEquals is_lobby
       if not IsBetterObserving
-        make_sprite_menu_item {
-          text = "Set Cust Restart"
-          id = menu_set_custom
-          pad_choose_script = menu_select
-          pad_choose_params = { menu_select_script = set_custom_restart }
-        }
-        make_text_sprite texture = PA_set_cust parent = menu_set_custom
-        if skater:SetCustomRestart
-          make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
-          make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
+        if not IsObserving
+          make_sprite_menu_item {
+            text = "Set Cust Restart"
+            id = menu_set_custom
+            pad_choose_script = menu_select
+            pad_choose_params = { menu_select_script = set_custom_restart }
+          }
+          make_text_sprite texture = PA_set_cust parent = menu_set_custom
+          if skater:SetCustomRestart
+            make_sprite_menu_item text = "Goto Cust Restart" id = menu_skip_to_custom pad_choose_script = menu_select pad_choose_params = { menu_select_script = skip_to_custom_restart }
+            make_text_sprite texture = PA_skip_cust parent = menu_skip_to_custom
+          endif
         endif
       endif
     endif
