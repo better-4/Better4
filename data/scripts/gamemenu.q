@@ -743,6 +743,8 @@ script create_pause_menu
       endif
     endif
   endif
+  make_sprite_menu_item text = "Anim Debug" id = menu_anim_debug pad_choose_script = better4_anim_debug
+  make_text_sprite texture = PA_options parent = menu_anim_debug
   if InNetGame
     make_sprite_menu_item text = "Chat Message" id = menu_chat pad_choose_script = launch_chat_keyboard
     make_text_sprite texture = PA_taunt parent = menu_chat
