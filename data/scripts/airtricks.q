@@ -471,15 +471,11 @@ script JumpJets
   Obj_GetId
   MangleChecksums a = skatersplash b = <objId>
   if not Obj_FlagSet FLAG_SKATER_JUMPJETSON
-    if not InNetGame
-      if not GameModeEquals Is_SingleSession
-        begin
-          #"Jump"
-          Wait 1 game frame
-        repeat 2
-        Obj_SpawnScript JumpJetTracker params = { <...> }
-      endif
-    endif
+    begin
+      #"Jump"
+      Wait 1 game frame
+    repeat 2
+    Obj_SpawnScript JumpJetTracker params = { <...> }
   endif
   EmptyParticleSystem name = <mangled_id>
   SetScript name = <mangled_id> Emitscript = emit_jumpjets

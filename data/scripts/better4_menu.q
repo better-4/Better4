@@ -154,6 +154,15 @@ script better4_misc_menu
   // better4_create_menu_control better4_trick_string
   // better4_create_menu_control better4_control_special_meter
   better4_create_menu_control better4_control_extratrick_sound
+  if not IsBetterObserving
+    if not IsObserving
+      make_text_sub_menu_item text = "Change CAS" scale = better4_menu_item_scale pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
+    else
+      make_text_sub_menu_item text = "Change CAS" not_focusable scale = better4_menu_item_scale pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
+    endif
+  else
+    make_text_sub_menu_item text = "Change CAS" not_focusable scale = better4_menu_item_scale pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
+  endif
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript

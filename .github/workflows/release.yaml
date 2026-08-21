@@ -45,7 +45,7 @@ jobs:
 
       - name: Build export image
         run: |
-          docker buildx build -f docker/Dockerfile --target export -o build/out . \
+          docker buildx build -f Dockerfile --target export -o build/out . \
             --cache-from type=registry,ref=${{ steps.vars.outputs.cache_ref }} \
             --cache-to type=registry,ref=${{ steps.vars.outputs.cache_ref }},mode=max
 
