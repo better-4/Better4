@@ -90,11 +90,11 @@ script GameFlow_Startup
         endif
         client_enter_free_skate
       endif
-      if InInternetMode
-        if OnServer
-          PostGame
-        endif
-      endif
+      // if InInternetMode
+      //   if OnServer
+      //     PostGame
+      //   endif
+      // endif
     endif
   endif
   if not InNetGame

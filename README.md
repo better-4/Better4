@@ -69,6 +69,8 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 ## Known Issues
 
 * Can't navigate pause menu in online games with arrow keys
+* Games that are "not ready" are not filtered out of server browser
+* Games sometimes remain in the server browser after host quits
 
 ## Credits
 
@@ -77,6 +79,7 @@ A special thank you to the following people, without whom this project would not
 * [@zedthps](https://github.com/zedthps), [@voss10](https://github.com/voss10), and [@1borgy](https://github.com/1borgy) for their contributions
 * [@PARTYMANX](https://github.com/PARTYMANX) for their work on [partymod-thps4](https://github.com/PARTYMANX/partymod-thps4)
 * [@DCxDemo](https://github.com/DCxDemo) for their work on [THPSQScriptEd](https://github.com/DCxDemo/LegacyTHPS/)
+* The folks at [@GameProgressive](https://github.com/GameProgressive) for their work on [UniSpySDK](https://github.com/GameProgressive/UniSpySDK)
 * [PunishedFiddle](https://www.moddb.com/members/punishedfiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
 
 ## For Developers

@@ -21,12 +21,9 @@ void initializeLogging(int isDebug) {
     fopen_s(&fp_log, "better4.log", "w");
 }
 
-int printLog(const char* fmt, ...) {
-	va_list va;
-	va_start(va, fmt);
+int vprintLog(const char* fmt, va_list args) {
 	char rendered[1024];
-    int ret = vsnprintf(rendered, 1024, fmt, va);
-	va_end(va);
+    int ret = vsnprintf(rendered, 1024, fmt, args);
 
     printf(rendered);
 
@@ -35,6 +32,14 @@ int printLog(const char* fmt, ...) {
         fflush(fp_log);
     }
 
+    return ret;
+}
+
+int printLog(const char* fmt, ...) {
+	va_list args;
+	va_start(args, fmt);
+	int ret = vprintLog(fmt, args);
+	va_end(args);
     return ret;
 }
 

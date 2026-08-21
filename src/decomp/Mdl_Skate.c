@@ -1,7 +1,6 @@
 #include "decomp/Mdl_Skate.h"
 #include "decomp/common.h"
 
-
 Mdl_Skate *Mdl_Skate_Instance() {
     return *(Mdl_Skate **)0x00ab5b48;
 }

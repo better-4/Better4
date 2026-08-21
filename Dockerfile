@@ -145,6 +145,7 @@ RUN --mount=type=cache,target=/build \
     && cmake -B "/build/better4" -G Ninja \
        -DSDL2_DIR="${SDL2_DIR}/cmake" -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
        -DCMAKE_C_FLAGS_RELEASE="/MD /Od /Ob0 /DNDEBUG" \
+       -DUNISPY_DOMAIN_NAME=openspy.net \
     && cmake --build "/build/better4" --target better4 \
     && cp "/build/better4/better4.dll" "/out/better4.dll"
 

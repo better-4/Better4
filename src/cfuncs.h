@@ -4,6 +4,18 @@
 #include "decomp/CStruct.h"
 #include "decomp/CScript.h"
 
+// A CFunc is a function that can be called from q scripts.
+// All CFuncs are __cdecl, take two parameters: `CStruct *params, CScript *script`,
+// and return 0 on failure or 1 on success, unlike common C convention.
+//
+// For example, in the following q script,
+// ```qscript
+// if GetIniInteger <...>
+//   <callback>
+// endif
+// ```
+// The <callback> would only be called if `GetIniInteger` returned 1.
+
 typedef struct {
     char* name;
     void* func;

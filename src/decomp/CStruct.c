@@ -1,90 +1,71 @@
 #include "decomp/CStruct.h"
 #include "decomp/common.h"
 
-
-typedef void(__fastcall* _CStruct_New_t)(CStruct *this);
-_CStruct_New_t _CStruct_New = (_CStruct_New_t)0x00415710;
-
 CStruct *CStruct_New() {
+    static void(__fastcall* _New)(CStruct *) = (void *)0x00415710;
+
 	CStruct *this = (CStruct *)malloc(sizeof(CStruct));
-    _CStruct_New(this);
+    _New(this);
     return this;
 }
 
-typedef void(__fastcall* _CStruct_Clear_t)(CStruct *this);
-_CStruct_Clear_t _CStruct_Clear = (_CStruct_Clear_t)0x004159e0;
-
 void CStruct_Free(CStruct *this) {
-    _CStruct_Clear(this);
+    static void(__fastcall* _Clear)(CStruct *) = (void *)0x004159e0;
+    _Clear(this);
     free(this);
 }
 
-typedef void(__fastcall* _CStruct_AddArray_t)(CStruct *this, unused_t, uint32_t checksum, struct CArray *value);
-_CStruct_AddArray_t _CStruct_AddArray = (_CStruct_AddArray_t)0x004171e0;
-
 void CStruct_AddArray(CStruct *this, uint32_t checksum, struct CArray *value) {
-    _CStruct_AddArray(this, UNUSED, checksum, value);
+    static void(__fastcall* _AddArray)(CStruct *, unused_t, uint32_t, struct CArray *) = (void *)0x004171e0;
+    _AddArray(this, UNUSED, checksum, value);
 }
-
-typedef void(__fastcall* _CStruct_AddChecksum_t)(CStruct *this, unused_t, uint32_t checksum, uint32_t value);
-_CStruct_AddChecksum_t _CStruct_AddChecksum = (_CStruct_AddChecksum_t)0x00416a00;
 
 void CStruct_AddChecksum(CStruct *this, uint32_t checksum, uint32_t value) {
-    _CStruct_AddChecksum(this, UNUSED, checksum, value);
+    static void(__fastcall* _AddChecksum)(CStruct *, unused_t, uint32_t, uint32_t) = (void *)0x00416a00;
+    _AddChecksum(this, UNUSED, checksum, value);
 }
-
-typedef void(__fastcall* _CStruct_AddFloat_t)(CStruct *this, unused_t, uint32_t checksum, float value);
-_CStruct_AddFloat_t _CStruct_AddFloat = (_CStruct_AddFloat_t)0x00416830;
 
 void CStruct_AddFloat(CStruct *this, uint32_t checksum, float value) {
-    _CStruct_AddFloat(this, UNUSED, checksum, value);
+    static void(__fastcall* _AddFloat)(CStruct *, unused_t, uint32_t, float) = (void *)0x00416830;
+    _AddFloat(this, UNUSED, checksum, value);
 }
-
-typedef void(__fastcall* _CStruct_AddInteger_t)(CStruct *this, unused_t, uint32_t checksum, int value);
-_CStruct_AddInteger_t _CStruct_AddInteger = (_CStruct_AddInteger_t)0x00416660;
 
 void CStruct_AddInteger(CStruct *this, uint32_t checksum, int value) {
-    _CStruct_AddInteger(this, UNUSED, checksum, value);
+    static void(__fastcall* _AddInteger)(CStruct *, unused_t, uint32_t, int) = (void *)0x00416660;
+    _AddInteger(this, UNUSED, checksum, value);
 }
-
-typedef void(__fastcall* _CStruct_AddString_t)(CStruct *this, unused_t, uint32_t checksum, char *value);
-_CStruct_AddString_t _CStruct_AddString = (_CStruct_AddString_t)0x004162f0;
 
 void CStruct_AddString(CStruct *this, uint32_t checksum, char *value) {
-    _CStruct_AddString(this, UNUSED, checksum, value);
+    static void(__fastcall* _AddString)(CStruct *, unused_t, uint32_t, char *) = (void *)0x004162f0;
+    _AddString(this, UNUSED, checksum, value);
 }
 
-typedef int(__fastcall* _CStruct_GetChecksum_t)(CStruct *this, unused_t, uint32_t checksum, uint32_t *ret, int assert);
-_CStruct_GetChecksum_t _CStruct_GetChecksum = (_CStruct_GetChecksum_t)0x004184b0;
+void CStruct_AddStructure(CStruct *this, uint32_t checksum, CStruct *value) {
+    static void(__fastcall* _AddStructure)(CStruct *, unused_t, uint32_t, CStruct *) = (void *)0x004176d0;
+    _AddStructure(this, UNUSED, checksum, value);
+}
 
 int CStruct_GetChecksum(CStruct *this, uint32_t checksum, uint32_t *ret, int assert) {
-    return _CStruct_GetChecksum(this, UNUSED, checksum, ret, assert);
+    static int(__fastcall* _GetChecksum)(CStruct *, unused_t, uint32_t, uint32_t *, int) = (void *)0x004184b0;
+    return _GetChecksum(this, UNUSED, checksum, ret, assert);
 }
-
-typedef int(__fastcall* _CStruct_GetFloat_t)(CStruct *this, unused_t, uint32_t checksum, float *ret, int assert);
-_CStruct_GetFloat_t _CStruct_GetFloat = (_CStruct_GetFloat_t)0x00418100;
 
 int CStruct_GetFloat(CStruct *this, uint32_t checksum, float *ret, int assert) {
-    return _CStruct_GetFloat(this, UNUSED, checksum, ret, assert);
+    static int(__fastcall* _GetFloat)(CStruct *, unused_t, uint32_t, float *, int) = (void *)0x00418100;
+    return _GetFloat(this, UNUSED, checksum, ret, assert);
 }
-
-typedef int(__fastcall* _CStruct_GetInteger_t)(CStruct *this, unused_t, uint32_t checksum, int *ret, int assert);
-_CStruct_GetInteger_t _CStruct_GetInteger = (_CStruct_GetInteger_t)0x00417ea0;
 
 int CStruct_GetInteger(CStruct *this, uint32_t checksum, int *ret, int assert) {
-    return _CStruct_GetInteger(this, UNUSED, checksum, ret, assert);
+    static int(__fastcall* _GetInteger)(CStruct *, unused_t, uint32_t, int *, int) = (void *)0x00418060;
+    return _GetInteger(this, UNUSED, checksum, ret, assert);
 }
-
-typedef int(__fastcall* _CStruct_GetString_t)(CStruct *this, unused_t, uint32_t checksum, const char **ret, int assert);
-_CStruct_GetString_t _CStruct_GetString = (_CStruct_GetString_t)0x00417ff0;
 
 int CStruct_GetString(CStruct *this, uint32_t checksum, const char **ret, int assert) {
-    return _CStruct_GetString(this, UNUSED, checksum, ret, assert);
+    static int(__fastcall* _GetString)(CStruct *, unused_t, uint32_t, const char **, int) = (void *)0x00417ff0;
+    return _GetString(this, UNUSED, checksum, ret, assert);
 }
 
-typedef void(__fastcall* _CStruct_RemoveComponent_t)(CStruct *this, unused_t, uint32_t checksum);
-_CStruct_RemoveComponent_t _CStruct_RemoveComponent = (_CStruct_RemoveComponent_t)0x00415b20;
-
 void CStruct_RemoveComponent(CStruct *this, uint32_t checksum) {
-    _CStruct_RemoveComponent(this, UNUSED, checksum);
+    static void(__fastcall* _RemoveComponent)(CStruct *, unused_t, uint32_t) = (void *)0x00415b20;
+    _RemoveComponent(this, UNUSED, checksum);
 }

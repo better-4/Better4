@@ -8,7 +8,7 @@ struct Obj_CSkater;
 
 typedef struct Obj_CSkaterCam {
     uint8_t unk[0xc4];
-    struct Obj_CSkater *skater;
+    struct Obj_CSkater *skater; // 0xc4
 } Obj_CSkaterCam;
 
 void Obj_CSkaterCam_SetMode(Obj_CSkaterCam *this, uint32_t mode, float unk);

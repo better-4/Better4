@@ -388,7 +388,7 @@ better4_control_buttonsfont = {
 
 prev_buttonsfont = better4_control_buttonsfont_value
 script better4_control_buttonsfont_change
-  Printf "Changing buttonfont from %p to %n"
+  Printf "Changing buttonfont from %p to %n" p = prev_buttonsfont n = better4_control_buttonsfont_value
   UnloadFont prev_buttonsfont
   LoadFont better4_control_buttonsfont_value buttons_font
   Change prev_buttonsfont = better4_control_buttonsfont_value
