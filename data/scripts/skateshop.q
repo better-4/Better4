@@ -5168,7 +5168,7 @@ edit_skater_torso_options = [
   }
   {
     text = 'R. Accessories Color'
-    submenu = accessories_color_menu
+    submenu = accessoriesR_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesR_items }
     is_enabled_script = check_if_part_colorable
