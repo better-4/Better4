@@ -1,11 +1,18 @@
 script better4_anim_debug
-    MakeSkaterGoto better4_anim_trigger
+    MakeSkaterGoto better4_anim_trigger params = <...>
 endscript
 
 script better4_anim_trigger
     printf "Animation Started"
     SetRollingFriction 100
-    PlayAnim Anim = Boneless cycle
+    switch <index> 
+    case 0
+        PlayAnim Anim = Spacewalk cycle
+    case 1
+        PlayAnim Anim = SpacewalkFromManual cycle
+    case 2
+        PlayAnim Anim = SpacewalkToManual cycle
+    endswitch
     create_panel_message {
         text = "Animation Test"
         id = animtest

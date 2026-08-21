@@ -868,6 +868,9 @@ script animload_human
     LoadAnim name = "anims\skater_basics\SlowDownBrake.ska" descChecksum = SlowDownBrake
     LoadAnim name = "anims\skater_basics\SlowDownBrake_Mongo.ska" descChecksum = SlowDownBrake_Mongo
     LoadAnim name = "anims\skater_basics\SmallLand.ska" descChecksum = SmallLand
+    LoadAnim name = "anims\better4\Spacewalk.ska" descChecksum = #"Spacewalk"
+    LoadAnim name = "anims\better4\SpacewalkFromManual.ska" descChecksum = SpacewalkFromManual
+    LoadAnim name = "anims\better4\SpacewalkToManual.ska" descChecksum = SpacewalkToManual
     LoadAnim name = "anims\skater_basics\SpineTransfer.ska" descChecksum = SpineTransfer
     LoadAnim name = "anims\skater_basics\StartSkating1.ska" descChecksum = StartSkating1
     LoadAnim name = "anims\skater_basics\StartSkatingPush.ska" descChecksum = StartSkatingPush
