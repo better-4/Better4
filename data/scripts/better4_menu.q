@@ -102,6 +102,7 @@ script better4_options_menu
   make_text_sub_menu_item text = "On Rail" scale = better4_menu_item_scale id = onrail_option pad_choose_script = better4_onrail_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "Wallrides" scale = better4_menu_item_scale id = wallride_option pad_choose_script = better4_wallride_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "Misc" scale = better4_menu_item_scale id = misc_option pad_choose_script = better4_misc_menu pad_choose_params = <...>
+  make_text_sub_menu_item text = "TH3 Anim Test" scale = better4_menu_item_scale id = th3_anim_test pad_choose_script = better4_th3_anim_test pad_choose_params = <...>
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Close" scale = better4_menu_item_scale id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
 endscript
@@ -156,4 +157,99 @@ script better4_misc_menu
   better4_create_menu_control better4_control_extratrick_sound
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
+endscript
+
+script better4_th3_anim_test
+  better4_create_menu menu_title = "TH3 ANIM TEST" icon = PA_trick close_script = better4_options_menu close_params = <...>
+  make_text_sub_menu_item text = "Force Grab" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_MaulForceGrab }
+  make_text_sub_menu_item text = "Rodeo Clown" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_RodeoClown }
+  make_text_sub_menu_item text = "Super Hand Clap" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_SuperHandClap }
+  make_text_sub_menu_item text = "Panhandling" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_WorkForFood }
+  make_text_sub_menu_item text = "AC Air" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_ACAir }
+  make_text_sub_menu_item text = "Pizza Guy" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_PizzaGuy }
+  make_text_sub_menu_item text = "The Berzerker" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_Berzerker }
+  make_text_sub_menu_item text = "Claw Punch" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_ClawPunch }
+  make_text_sub_menu_item text = "RoastBeef" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_Roastbeef }
+  make_text_sub_menu_item text = "Varial" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_Varial }
+  make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
+  make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
+endscript
+
+script better4_cycle_anim
+  exit_pause_menu
+  MakeSkaterGoto <anim_script>
+endscript
+
+script anim_MaulForceGrab
+  begin
+    PlayAnim Anim = MaulForceGrab_Init BlendPeriod = 0.3
+    WaitAnimFinished
+    PlayAnim Anim = MaulForceGrab_Idle cycle
+    Wait 2 seconds
+    PlayAnim Anim = MaulForceGrab_Out BlendPeriod = 0.2
+    WaitAnimFinished
+  repeat
+endscript
+
+script anim_RodeoClown
+  begin
+    PlayAnim Anim = RodeoClown_Init BlendPeriod = 0.3
+    WaitAnimFinished
+    PlayAnim Anim = RodeoClown_Idle cycle
+    Wait 2 seconds
+    PlayAnim Anim = RodeoClown_Out BlendPeriod = 0.2
+    WaitAnimFinished
+  repeat
+endscript
+
+script anim_SuperHandClap
+  PlayAnim Anim = Eyeball_Init BlendPeriod = 0.3
+  WaitAnimFinished
+  PlayAnim Anim = Eyeball_Idle cycle
+endscript
+
+script anim_WorkForFood
+  PlayAnim Anim = WorkForFood_Init BlendPeriod = 0.3
+  WaitAnimFinished
+  PlayAnim Anim = WorkForFood_Idle cycle
+endscript
+
+script anim_ACAir
+  begin
+    PlayAnim Anim = ACAir_Init BlendPeriod = 0.3
+    WaitAnimFinished
+    PlayAnim Anim = ACAir_Idle cycle
+    Wait 2 seconds
+    PlayAnim Anim = ACAir_Out BlendPeriod = 0.2
+    WaitAnimFinished
+  repeat
+endscript
+
+script anim_PizzaGuy
+  begin
+    PlayAnim Anim = PizzaGuy_Init BlendPeriod = 0.3
+    WaitAnimFinished
+    PlayAnim Anim = PizzaGuy_Idle cycle
+    Wait 2 seconds
+    PlayAnim Anim = PizzaGuy_Out BlendPeriod = 0.2
+    WaitAnimFinished
+  repeat
+endscript
+
+script anim_Berzerker
+  PlayAnim Anim = Berzerker cycle
+endscript
+
+script anim_ClawPunch
+  PlayAnim Anim = ClawPunch cycle
+endscript
+
+script anim_Roastbeef
+  PlayAnim Anim = Roastbeef BlendPeriod = 0.3
+  WaitAnimFinished
+  PlayAnim Anim = Roastbeef_Idle cycle
+endscript
+
+script anim_Varial
+  PlayAnim Anim = BigVarial cycle
 endscript
