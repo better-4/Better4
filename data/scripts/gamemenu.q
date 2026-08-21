@@ -739,12 +739,12 @@ script create_pause_menu
       endif
     endif
   endif
-  make_sprite_menu_item text = "Anim Debug 1" id = menu_anim_debug pad_choose_script = better4_anim_debug pad_choose_params = { index = 0 }
-  make_text_sprite texture = PA_options parent = menu_anim_debug
-  make_sprite_menu_item text = "Anim Debug 2" id = menu_anim_debug2 pad_choose_script = better4_anim_debug pad_choose_params = { index = 1 }
-  make_text_sprite texture = PA_options parent = menu_anim_debug2
-  make_sprite_menu_item text = "Anim Debug 3" id = menu_anim_debug3 pad_choose_script = better4_anim_debug pad_choose_params = { index = 2 }
-  make_text_sprite texture = PA_options parent = menu_anim_debug3
+  // make_sprite_menu_item text = "Anim Debug 1" id = menu_anim_debug pad_choose_script = better4_anim_debug pad_choose_params = { index = 0 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug
+  // make_sprite_menu_item text = "Anim Debug 2" id = menu_anim_debug2 pad_choose_script = better4_anim_debug pad_choose_params = { index = 1 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug2
+  // make_sprite_menu_item text = "Anim Debug 3" id = menu_anim_debug3 pad_choose_script = better4_anim_debug pad_choose_params = { index = 2 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug3
   if InNetGame
     make_sprite_menu_item text = "Chat Message" id = menu_chat pad_choose_script = launch_chat_keyboard
     make_text_sprite texture = PA_taunt parent = menu_chat

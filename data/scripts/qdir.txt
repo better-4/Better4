@@ -198,5 +198,4 @@ warppoint.qb
 xbox_scripts.qb
 better4/better4.qb
 better4/better4_controls.qb
-better4/better4_debug.qb
 better4/better4_menu.qb
