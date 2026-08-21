@@ -161,6 +161,7 @@ endscript
 
 script better4_th3_anim_test
   better4_create_menu menu_title = "TH3 ANIM TEST" icon = PA_trick close_script = better4_options_menu close_params = <...>
+  make_text_sub_menu_item text = "Handspring Layout" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_Layout }
   make_text_sub_menu_item text = "Force Grab" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_MaulForceGrab }
   make_text_sub_menu_item text = "Rodeo Clown" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_RodeoClown }
   make_text_sub_menu_item text = "Super Hand Clap" scale = better4_menu_item_scale pad_choose_script = better4_cycle_anim pad_choose_params = { anim_script = anim_SuperHandClap }
@@ -178,6 +179,10 @@ endscript
 script better4_cycle_anim
   exit_pause_menu
   MakeSkaterGoto <anim_script>
+endscript
+
+script anim_Layout
+  PlayAnim Anim = Maul cycle
 endscript
 
 script anim_MaulForceGrab
