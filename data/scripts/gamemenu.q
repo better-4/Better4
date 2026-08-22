@@ -583,28 +583,28 @@ script create_pause_menu
   else
     if not GotParam no_exit
       make_sprite_menu_item text = "Continue" id = menu_continue pad_choose_script = handle_start_pressed
+      make_text_sprite texture = PA_continue parent = menu_continue
       if InNetGame
         if not IsBetterObserving
           if not IsObserving
             make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = EnterBetterObserve
           endif
         else
-          if not GoalManager_HasActiveGoals
-            make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
-          else
-            make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
           if IsVoluntaryObserving
             if not GoalManager_HasActiveGoals
               make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
             else
               make_text_sub_menu_item text = "Rejoin Next Game" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
             endif
-	  else
-	    make_text_sub_menu_item text = "Rejoin Next Game" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+          else
+            if not GoalManager_HasActiveGoals
+              make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+            else
+              make_text_sub_menu_item text = "Rejoin Next Game" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+            endif
           endif
         endif
       endif
-      make_text_sprite texture = PA_continue parent = menu_continue
     endif
   endif
   if GameModeEquals is_goal_attack

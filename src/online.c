@@ -21,6 +21,11 @@
 #define PARTY_ADDR_GAMENET_MANAGER 0x00ab5394
 #define PARTY_ADDR_SKATE_MANAGER 0x00ab5b48
 
+#define SKATER_INSTANCE_OFFSET 0x14
+#define SKATER_CAMERA_OFFSET 0x37d4 // pointer to camera
+#define SKATER_CAMERA_CONTROL_FLAG_OFFSET 0x37c4 
+#define SKATER_INPUT_DISABLED_FLAG_OFFSET 0x97a
+
 extern char configFile[1024];
 static void* local_observe_target = 0;
 uint8_t local_observing = 0;
@@ -54,7 +59,7 @@ int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script) {
     void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
     if (!self) { printLog("CFunc_GetLocalSkaterIndex: no local player\n"); return 0; }
 
-    void* mySkater = *(void**)((uint8_t*)self + 0x14);
+    void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
     if (!mySkater) { printLog("CFunc_GetLocalSkaterIndex: no skater\n"); return 0; }
 
     void* skateManager = *(void**)PARTY_ADDR_SKATE_MANAGER;
@@ -76,9 +81,9 @@ int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script) {
 }
 
 static void* GetCameraComponent(void* self, void** outSkater) {
-	void* skater = *(void**)((uint8_t*)self + 0x14);
+	void* skater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
 	if (outSkater) *outSkater = skater;
-	return skater ? *(void**)((uint8_t*)skater + 0x37d4) : 0;
+	return skater ? *(void**)((uint8_t*)skater + SKATER_CAMERA_OFFSET) : 0;
 }
 
 int __cdecl CFunc_ObserveSelf(CStruct* params) {
@@ -126,7 +131,7 @@ void SnapObsCameraBack(void) {
 	void* cam = GetCameraComponent(self, &mySkater);
 	if (!cam || !mySkater) return;
 
-	void* targetSkater = *(void**)((uint8_t*)local_observe_target + 0x14);
+	void* targetSkater = *(void**)((uint8_t*)local_observe_target + SKATER_INSTANCE_OFFSET); 
 	if (!targetSkater) return;
 
 	void* current = GetCamSkater(cam);
@@ -161,7 +166,7 @@ int __cdecl CFunc_BetterObserve(CStruct* params) {
 	}
 	if (!target) { printLog("CFunc_BetterObserve: no other active player found\n"); return 1; }
 
-	void* targetSkater = *(void**)((uint8_t*)target + 0x14);
+	void* targetSkater = *(void**)((uint8_t*)target + SKATER_INSTANCE_OFFSET); 
 	if (!targetSkater) { printLog("CFunc_BetterObserve: target has no skater\n"); return 1; }
 
 	void* mySkater = 0;
@@ -192,7 +197,7 @@ int __cdecl CFunc_ObserveAfter0(CStruct* params) {
 	}
 	if (!target) { printLog("CFunc_BetterObserve: no other active player found\n"); return 1; }
 
-	void* targetSkater = *(void**)((uint8_t*)target + 0x14);
+	void* targetSkater = *(void**)((uint8_t*)target + SKATER_INSTANCE_OFFSET); 
 	if (!targetSkater) { printLog("CFunc_BetterObserve: target has no skater\n"); return 1; }
 
 	void* mySkater = 0;
@@ -244,7 +249,7 @@ int ObserveCamCycle(int direction) {
 	void* target = players[newIndex];
 	bool willBeSelf = (newIndex == 0);
 
-	void* targetSkater = willBeSelf ? mySkater : *(void**)((uint8_t*)target + 0x14);
+	void* targetSkater = willBeSelf ? mySkater : *(void**)((uint8_t*)target + SKATER_INSTANCE_OFFSET); 
 	if (!targetSkater) { printLog("ObserveCamCycle: target has no skater\n"); return 1; }
 
 	SetCamMode(cam, 0, 2, 0.0f);
@@ -254,6 +259,7 @@ int ObserveCamCycle(int direction) {
 	return 1;
 }
 
+// Function writes to specifc camera flag (offset 0xe0) (native enable input sets it)
 typedef void(__fastcall* WriteCamFlagByte_t)(void* cameraComponent, int unused, uint8_t param);
 static WriteCamFlagByte_t WriteCamFlagByte = (WriteCamFlagByte_t)0x004d9b80;
  
@@ -262,10 +268,10 @@ int __cdecl CFunc_DisableLocalPlayerInput(CStruct* params) {
 	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
 	if (!self) { printLog("CFunc_DisableLocalPlayerInput: no local player\n"); return 1; }
  
-	void* mySkater = *(void**)((uint8_t*)self + 0x14);
+	void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
 	if (!mySkater) { printLog("CFunc_DisableLocalPlayerInput: no skater\n"); return 1; }
  
-	*(uint8_t*)((uint8_t*)mySkater + 0x97a) = 1;
+	*(uint8_t*)((uint8_t*)mySkater + SKATER_INPUT_DISABLED_FLAG_OFFSET) = 1; 
 	return 1;
 }
  
@@ -274,13 +280,13 @@ int __cdecl CFunc_EnableLocalPlayerInput(CStruct* params) {
 	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
 	if (!self) { printLog("CFunc_EnableLocalPlayerInput: no local player\n"); return 1; }
  
-	void* mySkater = *(void**)((uint8_t*)self + 0x14);
+	void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET); 
 	if (!mySkater) { printLog("CFunc_EnableLocalPlayerInput: no skater\n"); return 1; }
  
-	*(uint8_t*)((uint8_t*)mySkater + 0x97a) = 0;
+	*(uint8_t*)((uint8_t*)mySkater + SKATER_INPUT_DISABLED_FLAG_OFFSET) = 0; 
  
-	if (*(void**)((uint8_t*)mySkater + 0x37c4) == 0) {
-		void* cam = *(void**)((uint8_t*)mySkater + 0x37d4);
+	if (*(void**)((uint8_t*)mySkater + SKATER_CAMERA_CONTROL_FLAG_OFFSET) == 0) {
+		void* cam = *(void**)((uint8_t*)mySkater + SKATER_CAMERA_OFFSET); 
 		if (cam) WriteCamFlagByte(cam, 0, 1);
 	}
 	return 1;
@@ -293,10 +299,10 @@ void ObsInputDisabled(void) {
 	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
 	if (!self) return;
 
-	void* mySkater = *(void**)((uint8_t*)self + 0x14);
+	void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
 	if (!mySkater) return;
 
-	*(uint8_t*)((uint8_t*)mySkater + 0x97a) = 1;
+	*(uint8_t*)((uint8_t*)mySkater + SKATER_INPUT_DISABLED_FLAG_OFFSET) = 1;
 }
 
 int __cdecl CFunc_GetServerList(CStruct *params, CScript *script) {
