@@ -1,3 +1,5 @@
+#include "online.h"
+
 #include <windows.h>
 #include <d3d9.h>
 
@@ -7,6 +9,13 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 
+#include "decomp/CArray.h"
+#include "decomp/common.h"
+#include "decomp/Mdl_Skate.h"
+#include "decomp/Net_Manager.h"
+#include "decomp/Net_PlayerInfo.h"
+#include "decomp/Obj_CSkater.h"
+#include "decomp/Obj_CSkaterCam.h"
 #include <config.h>
 #include <gfx.h>
 #include <global.h>
@@ -14,94 +23,65 @@
 #include <log.h>
 #include <patch.h>
 #include <script.h>
-#include <qb.h>
 #include <gslist/gslist.h>
 #include <winsock.h>
 
-#define PARTY_ADDR_GAMENET_MANAGER 0x00ab5394
-#define PARTY_ADDR_SKATE_MANAGER 0x00ab5b48
 
-#define SKATER_INSTANCE_OFFSET 0x14
-#define SKATER_CAMERA_OFFSET 0x37d4 // pointer to camera
-#define SKATER_CAMERA_CONTROL_FLAG_OFFSET 0x37c4 
-#define SKATER_INPUT_DISABLED_FLAG_OFFSET 0x97a
-
-extern char configFile[1024];
-static void* local_observe_target = 0;
+static Net_PlayerInfo* local_observe_target = 0;
 uint8_t local_observing = 0;
 uint8_t voluntary_observing = 0;
 
-static void* (__fastcall* GetLocalPlayer)(void*) = (void*)0x00489ac0;
-static uint32_t(__fastcall* IsObserving_)(void*) = (void*)0x00491560;
-
-typedef void* (__fastcall* FirstPlayerInfo_t)(void* gameNetManager, int unused, void* searchCtx, char flag);
-typedef void* (__fastcall* NextPlayerInfo_t)(void* searchCtx);
-typedef void* (__fastcall* GetSkaterByNum_t)(void* skateManager, int unused, uint32_t num);
-static FirstPlayerInfo_t FirstPlayerInfo = (FirstPlayerInfo_t)0x00489730;
-static NextPlayerInfo_t  NextPlayerInfo = (NextPlayerInfo_t)0x00432b10;
-static GetSkaterByNum_t GetSkaterByNum = (GetSkaterByNum_t)0x004fa2b0; 
-
-typedef uint32_t(__fastcall* IsLocalPlayer_t)(void*);
-static IsLocalPlayer_t IsLocalPlayer_ = (IsLocalPlayer_t)0x00491540;
-
-typedef void(__fastcall* SetCamMode_t)(void* cameraComponent, int unused, int mode, float param);
-static SetCamMode_t SetCamMode = (SetCamMode_t)0x004d9bf0;
-
-typedef void(__fastcall* SetCamSkater_t)(void* cameraComponent, int unused, void* skater);
-static SetCamSkater_t SetCamSkater = (SetCamSkater_t)0x004dc310;
-
-typedef void* (__fastcall* GetCamSkater_t)(void* cameraComponent);
-static GetCamSkater_t GetCamSkater = (GetCamSkater_t)0x004dc320;
-
 int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script) {
-    printf("I am running!\n");
-    void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-    void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-    if (!self) { printLog("CFunc_GetLocalSkaterIndex: no local player\n"); return 0; }
+	printLog("CFunc_GetLocalSkaterIndex\n");
 
-    void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
-    if (!mySkater) { printLog("CFunc_GetLocalSkaterIndex: no skater\n"); return 0; }
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("CFunc_GetLocalSkaterIndex: net_manager is null\n"); return 0; }
 
-    void* skateManager = *(void**)PARTY_ADDR_SKATE_MANAGER;
-    if (!skateManager) { printLog("CFunc_GetLocalSkaterIndex: no skate manager\n"); return 0; }
+	Mdl_Skate *skate = Mdl_Skate_Instance();
+	if (!skate) { printLog("CFunc_GetLocalSkaterIndex: skate is null\n"); return 0; }
 
-    for (int i = 0; i < 8; i++) 
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("CFunc_GetLocalSkaterIndex: local_player is null\n"); return 0; }
+
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("CFunc_GetLocalSkaterIndex: local_skater is null\n"); return 0; }
+
+    for (int skater_index = 0; skater_index < 8; skater_index++)
     {
-      void* candidate = GetSkaterByNum(skateManager, 0, i);
-      if (candidate == mySkater)
-      {
-        CStruct* out = CScript_GetParams(script);
-        CStruct_AddInteger(out, 0x7F8C98FE, (int)i); // index = 0x7F8C98FE (JAMCRC)
-        return 1;
-      }
+		Obj_CSkater *skater = Mdl_Skate_GetSkater(skate, skater_index);
+        if (skater == local_skater)
+        {
+            CStruct* out = CScript_GetParams(script);
+            CStruct_AddInteger(out, 0x7F8C98FE/*index*/, (int)skater_index);
+            return 1;
+        }
     }
 
     printLog("CFunc_GetLocalSkaterIndex: couldn't find own skater in skater list\n");
     return 0;
 }
 
-static void* GetCameraComponent(void* self, void** outSkater) {
-	void* skater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
-	if (outSkater) *outSkater = skater;
-	return skater ? *(void**)((uint8_t*)skater + SKATER_CAMERA_OFFSET) : 0;
-}
-
 int __cdecl CFunc_ObserveSelf(CStruct* params) {
-    void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-    void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-    if (!self) { printLog("CFunc_ObserveSelf: no local player\n"); return 1; }
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("CFunc_ObserveSelf: net_manager is null\n"); return 0; }
 
-    void* mySkater = 0;
-    void* cam = GetCameraComponent(self, &mySkater);
-    if (!cam || !mySkater) { printLog("CFunc_ObserveSelf: missing cam or skater\n"); return 1; }
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("CFunc_ObserveSelf: local_player is null\n"); return 0; }
 
-    SetCamMode(cam, 0, 2, 0.0f);
-    SetCamSkater(cam, 0, mySkater);
-    local_observe_target = 0;
-    local_observing = 0;
-    voluntary_observing = 0;
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("CFunc_ObserveSelf: local_skater is null\n"); return 0; }
 
-    return 1;
+	Obj_CSkaterCam *local_camera = local_skater->camera;
+	if (!local_camera) { printLog("CFunc_ObserveSelf: local_camera is null\n"); return 0; }
+
+	Obj_CSkaterCam_SetMode(local_camera, 2, 0.0f);
+	Obj_CSkaterCam_SetSkater(local_camera, local_skater);
+
+	local_observe_target = 0;
+	local_observing = 0;
+	voluntary_observing = 0;
+
+	return 1;
 }
 
 int __cdecl CFunc_QueueObserveSelf(CStruct* params) {
@@ -121,188 +101,238 @@ int __cdecl CFunc_IsVoluntaryObserving(CStruct* params) {
 // Function runs every frame to check who you're observing vs tracked target, snaps back to target if mismatch
 static uint8_t camera_snapped = 0;
 void SnapObsCameraBack(void) {
-	if (!local_observing || !local_observe_target) { camera_snapped = 0; return; }
+	if (!local_observing || !local_observe_target) {
+		camera_snapped = 0;
+		return;
+	}
 
-	void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-	if (!self) return;
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("SnapObsCameraBack: net_manager is null\n"); return 0; }
 
-	void* mySkater = 0;
-	void* cam = GetCameraComponent(self, &mySkater);
-	if (!cam || !mySkater) return;
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("SnapObsCameraBack: local_player is null\n"); return 0; }
 
-	void* targetSkater = *(void**)((uint8_t*)local_observe_target + SKATER_INSTANCE_OFFSET); 
-	if (!targetSkater) return;
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("SnapObsCameraBack: local_skater is null\n"); return 0; }
 
-	void* current = GetCamSkater(cam);
-	if (current == mySkater && current != targetSkater) 
+	Obj_CSkaterCam *local_camera = local_skater->camera;
+	if (!local_camera) { printLog("SnapObsCameraBack: local_camera is null\n"); return 0; }
+
+	Obj_CSkater *target_skater = local_observe_target->skater;
+	Obj_CSkater *current_skater = Obj_CSkaterCam_GetSkater(local_camera);
+
+	if (current_skater == local_skater && current_skater != target_skater)
 	{
-		if (camera_snapped) 
+		if (camera_snapped)
 		{
 			printLog("SnapObsCameraBack: camera was reset to self, reapplying target=%p\n", local_observe_target);
 		}
-		SetCamMode(cam, 0, 2, 0.0f);
-		SetCamSkater(cam, 0, targetSkater);
+
+		Obj_CSkaterCam_SetMode(local_camera, 2, 0.0f);
+		Obj_CSkaterCam_SetSkater(local_camera, target_skater);
 		camera_snapped = 0;
 	}
 	else
 	{
-		camera_snapped = !(current == mySkater);
+		camera_snapped = !(current_skater == local_skater);
 	}
 }
 
 int __cdecl CFunc_BetterObserve(CStruct* params) {
-	void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-	if (!self) { printLog("CFunc_BetterObserve: no local player\n"); return 1; }
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("CFunc_BetterObserve: net_manager is null\n"); return 0; }
 
-	void* target = 0;
-	struct { void* vtable; void* dummy; } searchCtx = { (void*)0x0058aa94, 0 };
-	void* p = FirstPlayerInfo(gamenetManager, 0, &searchCtx, '\x01');
-	while (p != 0)
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("CFunc_BetterObserve: local_player is null\n"); return 0; }
+
+	Lst_Search search = Lst_Search_PlayerInfo();
+	Net_PlayerInfo *current_player = Net_Manager_FirstPlayerInfo(net_manager, &search, 1);
+	Net_PlayerInfo *target_player = 0;
+
+	while (current_player != 0)
 	{
-		if (p != self && !IsLocalPlayer_(p) && !IsObserving_(p)) { target = p; break; }
-		p = NextPlayerInfo(&searchCtx);
+		uint32_t is_local_player = Net_PlayerInfo_IsLocalPlayer(current_player);
+		uint32_t is_observing = Net_PlayerInfo_IsObserving(current_player);
+		if (current_player != local_player && !is_local_player && !is_observing) {
+			target_player = current_player;
+			break;
+		}
+		current_player = Lst_Search_NextItem(&search);
 	}
-	if (!target) { printLog("CFunc_BetterObserve: no other active player found\n"); return 1; }
+	if (!target_player) { printLog("CFunc_BetterObserve: target_player is null\n"); return 0; }
 
-	void* targetSkater = *(void**)((uint8_t*)target + SKATER_INSTANCE_OFFSET); 
-	if (!targetSkater) { printLog("CFunc_BetterObserve: target has no skater\n"); return 1; }
+	Obj_CSkater *target_skater = target_player->skater;
+	if (!target_skater) { printLog("CFunc_BetterObserve: target_skater is null\n"); return 0; }
 
-	void* mySkater = 0;
-	void* cam = GetCameraComponent(self, &mySkater);
-	if (!cam || !mySkater) { printLog("CFunc_BetterObserve: missing cam or own skater\n"); return 1; }
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("CFunc_BetterObserve: local_skater is null\n"); return 0; }
 
-	SetCamMode(cam, 0, 2, 0.0f);
-	SetCamSkater(cam, 0, targetSkater);
+	Obj_CSkaterCam *local_camera = local_skater->camera;
+	if (!local_camera) { printLog("CFunc_BetterObserve: local_camera is null\n"); return 0; }
+
+	Obj_CSkaterCam_SetMode(local_camera, 2, 0.0f);
+	Obj_CSkaterCam_SetSkater(local_camera, target_skater);
+
 	local_observing = 1;
-	local_observe_target = target;
+	local_observe_target = target_player;
 	voluntary_observing = 1;
+
 	return 1;
 }
 
 // Same as CFunc_BetterObserve, but unsets voluntary flag to indicate that we need to leave obs on game end
 int __cdecl CFunc_ObserveAfter0(CStruct* params) {
-	void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-	if (!self) { printLog("CFunc_BetterObserve: no local player\n"); return 1; }
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("CFunc_ObserveAfter0: net_manager is null\n"); return 0; }
 
-	void* target = 0;
-	struct { void* vtable; void* dummy; } searchCtx = { (void*)0x0058aa94, 0 };
-	void* p = FirstPlayerInfo(gamenetManager, 0, &searchCtx, '\x01');
-	while (p != 0)
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("CFunc_ObserveAfter0: local_player is null\n"); return 0; }
+
+	Lst_Search search = Lst_Search_PlayerInfo();
+	Net_PlayerInfo *current_player = Net_Manager_FirstPlayerInfo(net_manager, &search, 1);
+	Net_PlayerInfo *target_player = 0;
+
+	while (current_player != 0)
 	{
-		if (p != self && !IsLocalPlayer_(p) && !IsObserving_(p)) { target = p; break; }
-		p = NextPlayerInfo(&searchCtx);
+		uint32_t is_local_player = Net_PlayerInfo_IsLocalPlayer(current_player);
+		uint32_t is_observing = Net_PlayerInfo_IsObserving(current_player);
+		if (current_player != local_player && !is_local_player && !is_observing) {
+			target_player = current_player;
+			break;
+		}
+		current_player = Lst_Search_NextItem(&search);
 	}
-	if (!target) { printLog("CFunc_BetterObserve: no other active player found\n"); return 1; }
+	if (!target_player) { printLog("CFunc_ObserveAfter0: target_player is null\n"); return 0; }
 
-	void* targetSkater = *(void**)((uint8_t*)target + SKATER_INSTANCE_OFFSET); 
-	if (!targetSkater) { printLog("CFunc_BetterObserve: target has no skater\n"); return 1; }
+	Obj_CSkater *target_skater = target_player->skater;
+	if (!target_skater) { printLog("CFunc_ObserveAfter0: target_skater is null\n"); return 0; }
 
-	void* mySkater = 0;
-	void* cam = GetCameraComponent(self, &mySkater);
-	if (!cam || !mySkater) { printLog("CFunc_BetterObserve: missing cam or own skater\n"); return 1; }
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("CFunc_ObserveAfter0: local_skater is null\n"); return 0; }
 
-	SetCamMode(cam, 0, 2, 0.0f);
-	SetCamSkater(cam, 0, targetSkater);
+	Obj_CSkaterCam *local_camera = local_skater->camera;
+	if (!local_camera) { printLog("CFunc_ObserveAfter0: local_camera is null\n"); return 0; }
+
+	Obj_CSkaterCam_SetMode(local_camera, 2, 0.0f);
+	Obj_CSkaterCam_SetSkater(local_camera, target_skater);
+
 	local_observing = 1;
-	local_observe_target = target;
-	voluntary_observing = 0;
+	local_observe_target = target_player;
+	voluntary_observing = 1;
 
 	return 1;
 }
 
 
 int ObserveCamCycle(int direction) {
-	void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-	if (!self) { printLog("ObserveCamCycle: no local player\n"); return 1; }
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("SnapObsCameraBack: net_manager is null\n"); return 0; }
 
-	void* mySkater = 0;
-	void* cam = GetCameraComponent(self, &mySkater);
-	if (!cam || !mySkater) { printLog("ObserveCamCycle: missing cam or own skater\n"); return 1; }
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("SnapObsCameraBack: local_player is null\n"); return 0; }
 
-	void* players[8];
-	int count = 0;
-	players[count++] = self;
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("SnapObsCameraBack: local_skater is null\n"); return 0; }
 
-	struct { void* vtable; void* dummy; } searchCtx = { (void*)0x0058aa94, 0 };
-	void* p = FirstPlayerInfo(gamenetManager, 0, &searchCtx, '\x01');
-	while (p != 0 && count < 8) 
+	Obj_CSkaterCam *local_camera = local_skater->camera;
+	if (!local_camera) { printLog("SnapObsCameraBack: local_camera is null\n"); return 0; }
+
+	Net_PlayerInfo *players[8];
+	uint32_t num_players = 0;
+	players[num_players++] = local_player;
+
+	Lst_Search search = Lst_Search_PlayerInfo();
+	Net_PlayerInfo *current_player = Net_Manager_FirstPlayerInfo(net_manager, &search, 1);
+
+	while (current_player != 0 && num_players < 8)
 	{
-		if (p != self && !IsLocalPlayer_(p) && !IsObserving_(p)) {players[count++] = p;}
-		p = NextPlayerInfo(&searchCtx);
+		uint32_t is_local_player = Net_PlayerInfo_IsLocalPlayer(current_player);
+		uint32_t is_observing = Net_PlayerInfo_IsObserving(current_player);
+
+		if (current_player != local_player && !is_local_player && !is_observing) {
+			players[num_players++] = current_player;
+		}
+
+		current_player = Lst_Search_NextItem(&search);
 	}
+	if (num_players <= 1) { printLog("ObserveCamCycle: no other active players to cycle to\n"); return 0; }
 
-	if (count <= 1) { printLog("ObserveCamCycle: no other active players to cycle to\n"); return 1; }
-
-	int current = 0;
-	if (local_observe_target) 
+	int current_index = 0;
+	if (local_observe_target)
 	{
-		for (int i = 0; i < count; i++) 
+		for (int player_index = 0; player_index < num_players; player_index++)
 		{
-			if (players[i] == local_observe_target) { current = i; break; }
+			if (players[player_index] == local_observe_target) {
+				current_index = player_index;
+				break;
+			}
 		}
 	}
-	int newIndex = ((current + direction) % count + count) % count;
-	void* target = players[newIndex];
-	bool willBeSelf = (newIndex == 0);
 
-	void* targetSkater = willBeSelf ? mySkater : *(void**)((uint8_t*)target + SKATER_INSTANCE_OFFSET); 
-	if (!targetSkater) { printLog("ObserveCamCycle: target has no skater\n"); return 1; }
+	int target_index = ((current_index + direction) % num_players + num_players) % num_players;
+	Net_PlayerInfo *target_player = players[target_index];
 
-	SetCamMode(cam, 0, 2, 0.0f);
-	SetCamSkater(cam, 0, targetSkater);
-	local_observe_target = willBeSelf ? 0 : target;
+	Obj_CSkater *target_skater = target_player->skater;
+	if (!target_skater) { printLog("ObserveCamCycle: target_skater is null\n"); return 0; }
+
+	Obj_CSkaterCam_SetMode(local_camera, 2, 0.0f);
+	Obj_CSkaterCam_SetSkater(local_camera, target_skater);
+
+	local_observe_target = target_player;
 
 	return 1;
 }
 
-// Function writes to specifc camera flag (offset 0xe0) (native enable input sets it)
-typedef void(__fastcall* WriteCamFlagByte_t)(void* cameraComponent, int unused, uint8_t param);
-static WriteCamFlagByte_t WriteCamFlagByte = (WriteCamFlagByte_t)0x004d9b80;
- 
 int __cdecl CFunc_DisableLocalPlayerInput(CStruct* params) {
-	void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-	if (!self) { printLog("CFunc_DisableLocalPlayerInput: no local player\n"); return 1; }
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("CFunc_DisableLocalPlayerInput: net_manager is null\n"); return 0; }
+
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("CFunc_DisableLocalPlayerInput: local_player is null\n"); return 0; }
+
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("CFunc_DisableLocalPlayerInput: local_skater is null\n"); return 0; }
  
-	void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
-	if (!mySkater) { printLog("CFunc_DisableLocalPlayerInput: no skater\n"); return 1; }
- 
-	*(uint8_t*)((uint8_t*)mySkater + SKATER_INPUT_DISABLED_FLAG_OFFSET) = 1; 
+	local_skater->input_disabled = 1;
+
 	return 1;
 }
  
 int __cdecl CFunc_EnableLocalPlayerInput(CStruct* params) {
-	void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-	if (!self) { printLog("CFunc_EnableLocalPlayerInput: no local player\n"); return 1; }
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("CFunc_EnableLocalPlayerInput: net_manager is null\n"); return 0; }
+
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("CFunc_EnableLocalPlayerInput: local_player is null\n"); return 0; }
  
-	void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET); 
-	if (!mySkater) { printLog("CFunc_EnableLocalPlayerInput: no skater\n"); return 1; }
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("CFunc_EnableLocalPlayerInput: local_skater is null\n"); return 0; }
  
-	*(uint8_t*)((uint8_t*)mySkater + SKATER_INPUT_DISABLED_FLAG_OFFSET) = 0; 
- 
-	if (*(void**)((uint8_t*)mySkater + SKATER_CAMERA_CONTROL_FLAG_OFFSET) == 0) {
-		void* cam = *(void**)((uint8_t*)mySkater + SKATER_CAMERA_OFFSET); 
-		if (cam) WriteCamFlagByte(cam, 0, 1);
+	local_skater->input_disabled = 0;
+
+	if (local_skater->camera_control_flag == 0) {
+		Obj_CSkaterCam *local_camera = local_skater->camera;
+		if (!local_camera) { printLog("CFunc_EnableLocalPlayerInput: local_camera is null\n"); return 0; }
+
+		Obj_CSkaterCam_EnableInputHandler(local_camera, 1);
 	}
+ 
 	return 1;
 }
 
 void ObsInputDisabled(void) {
 	if (!local_observing) return;
 
-	void* gamenetManager = *(void**)PARTY_ADDR_GAMENET_MANAGER;
-	void* self = gamenetManager ? GetLocalPlayer(gamenetManager) : 0;
-	if (!self) return;
+	Net_Manager *net_manager = Net_Manager_Instance();
+	if (!net_manager) { printLog("ObsInputDisabled: net_manager is null\n"); return 0; }
 
-	void* mySkater = *(void**)((uint8_t*)self + SKATER_INSTANCE_OFFSET);
-	if (!mySkater) return;
+	Net_PlayerInfo *local_player = Net_Manager_GetLocalPlayer(net_manager);
+	if (!local_player) { printLog("ObsInputDisabled: local_player is null\n"); return 0; }
 
-	*(uint8_t*)((uint8_t*)mySkater + SKATER_INPUT_DISABLED_FLAG_OFFSET) = 1;
+	Obj_CSkater *local_skater = local_player->skater;
+	if (!local_skater) { printLog("ObsInputDisabled: local_skater is null\n"); return 0; }
+
+	local_skater->input_disabled = 1;
 }
 
 int __cdecl CFunc_GetServerList(CStruct *params, CScript *script) {

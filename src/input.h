@@ -1,7 +1,7 @@
 #ifndef _INPUT_H_
 #define _INPUT_H_
 
-#include <qb.h>
+#include "decomp/CStruct.h"
 
 int __cdecl CFunc_SetSpinKeysControl(CStruct *params);
 int __cdecl CFunc_SetSpineTransferControl(CStruct *params);

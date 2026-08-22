@@ -1,7 +1,8 @@
 #ifndef _ONLINE_H_
 #define _ONLINE_H_
 
-#include <qb.h>
+#include "decomp/CStruct.h"
+#include "decomp/CScript.h"
 
 int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script);
 int __cdecl CFunc_ObserveSelf(CStruct* params);

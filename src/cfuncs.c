@@ -5,12 +5,8 @@
 #include <string.h>
 #include <windows.h>
 
-// TODO (ellie): move these cfuncs to better4 src
-// #include <partymod-thps4/src/input.h>
-
 #include <input.h>
 #include <online.h>
-#include <qb.h>
 
 // #define THPS4_CFUNC_LUT_STOP 0x005ad670
 // #define THPS4_CFUNC_LUT_SIZE 0x22f8

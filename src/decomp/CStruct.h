@@ -1,28 +1,10 @@
-#ifndef _QB_H_
-#define _QB_H_
+#ifndef _CSTRUCT_H_
+#define _CSTRUCT_H_
 
 #include <stdint.h>
 
-// Component types
-#define TYPE_NONE 0x0
-#define TYPE_INTEGER 0x1
-#define TYPE_FLOAT 0x2
-#define TYPE_STRING 0x3
-#define TYPE_LOCALSTRING 0x4
-#define TYPE_PAIR 0x5
-#define TYPE_VECTOR 0x6
-#define TYPE_QSCRIPT 0x7
-#define TYPE_CFUNCTION 0x8
-#define TYPE_MEMBERFUNCTION 0x9
-#define TYPE_STRUCTURE 0xA
-#define TYPE_STRUCTUREPOINTER 0xB
-#define TYPE_ARRAY 0xC
-#define TYPE_NAME 0xD
-#define TYPE_INT8 0xE
-#define TYPE_INT16 0xF
-#define TYPE_UINT8 0x11
-#define TYPE_UINT16 0x12
-#define TYPE_ZEROFLOAT 0x13
+// Forward declarations
+struct CArray;
 
 // A CStruct in THPS4 is a linked list of components, which are akin to key-value pairs.
 // Components are identified by checksum, representing the CRC32 of the component's name.
@@ -41,34 +23,14 @@
 //
 // Here, we only point to the functions which take checksum for performance.
 
-
-typedef struct {
+typedef struct CStruct {
     // TODO (ellie): figure out what these fields are
-    void *data1;
-    void *data2;
+    uint8_t unk[0x8];
 } CStruct;
 
-typedef struct {
-    uint32_t *data;
-    uint32_t type;
-    uint32_t size;
-} CArray;
-
-typedef struct {
-    // TODO (ellie): figure out what these fields are, will likely need to expand struct
-    // if we ever allocate a CScript ourselves but idk how big it is
-    void *data1; // 0x0
-    void *data2; // 0x4
-    void *data3; // 0x8
-    void *data4; // 0xC
-    void *data5; // 0x10
-    CStruct *params; // 0x14
-} CScript;
-
-// CStruct
 CStruct *CStruct_New();
 void CStruct_Free(CStruct *this);
-void CStruct_AddArray(CStruct *this, uint32_t checksum, CArray *value);
+void CStruct_AddArray(CStruct *this, uint32_t checksum, struct CArray *value);
 void CStruct_AddChecksum(CStruct *this, uint32_t checksum, uint32_t value);
 void CStruct_AddFloat(CStruct *this, uint32_t checksum, float value);
 void CStruct_AddInteger(CStruct *this, uint32_t checksum, int value);
@@ -78,14 +40,5 @@ int CStruct_GetFloat(CStruct *this, uint32_t checksum, float *ret, int assert);
 int CStruct_GetInteger(CStruct *this, uint32_t checksum, int *ret, int assert);
 int CStruct_GetString(CStruct *this, uint32_t checksum, const char **ret, int assert);
 void CStruct_RemoveComponent(CStruct *this, uint32_t checksum);
-
-// CArray
-CArray *CArray_New();
-void CArray_Free(CArray *this);
-void CArray_SetStructure(CArray *this, uint32_t index, CStruct *value);
-void CArray_SetSizeAndType(CArray *this, uint32_t size, uint32_t type);
-
-// CScript
-CStruct *CScript_GetParams(CScript *this);
 
 #endif
