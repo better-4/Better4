@@ -14,8 +14,8 @@ If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini`
 Better4 does not modify any vanilla game files. Any game data created by the installer is contained in `**/better4/**` subdirectories, which are only referenced when `better4.exe` is run.
 
 > [!NOTE]
-> If THPS4 is installed to Program Files (or another directory which requires admin access to write files), you may have to run as admin.
-> The installer script will prompt to re-run as admin if needed, but `better4.exe` and `better4config.exe` must be manually run as admin for config changes to save.
+> If THPS4 is installed to Program Files (or another directory which requires admin access to write files), you may have to run as admin for config changes to save.
+> The installer script will prompt to re-run as admin if needed, but `better4.exe` and `better4config.exe` must be manually run as admin.
 > This may be set persistently by right-clicking on the exe and going to `Properties > Compatibility > Change settings for all users > Run this program as an administrator`.
 
 ## Features
