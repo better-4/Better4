@@ -99,7 +99,6 @@ int __cdecl CFunc_IsVoluntaryObserving(CStruct* params) {
 
 // Happens on game starts and ends, which desyncs tracking
 // Function runs every frame to check who you're observing vs tracked target, snaps back to target if mismatch
-static uint8_t camera_snapped = 0;
 void SnapObsCameraBack(void) {
 	if (!local_observing || !local_observe_target) {
 		camera_snapped = 0;
@@ -121,20 +120,11 @@ void SnapObsCameraBack(void) {
 	Obj_CSkater *target_skater = local_observe_target->skater;
 	Obj_CSkater *current_skater = Obj_CSkaterCam_GetSkater(local_camera);
 
-	if (current_skater == local_skater && current_skater != target_skater)
+	if (current_skater != target_skater)
 	{
-		if (camera_snapped)
-		{
-			printLog("SnapObsCameraBack: camera was reset to self, reapplying target=%p\n", local_observe_target);
-		}
-
+		printLog("SnapObsCameraBack: snapping to target_skater=%p\n", target_skater);
 		Obj_CSkaterCam_SetMode(local_camera, 2, 0.0f);
 		Obj_CSkaterCam_SetSkater(local_camera, target_skater);
-		camera_snapped = 0;
-	}
-	else
-	{
-		camera_snapped = !(current_skater == local_skater);
 	}
 }
 
@@ -218,7 +208,7 @@ int __cdecl CFunc_ObserveAfter0(CStruct* params) {
 
 	local_observing = 1;
 	local_observe_target = target_player;
-	voluntary_observing = 1;
+	voluntary_observing = 0;
 
 	return 1;
 }
