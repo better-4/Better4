@@ -3,15 +3,20 @@
 Better4 is a THPS4 modpack that includes modern gameplay and QOL features while maintaining the spirit of the original game.
 
 > [!WARNING]
-> Better4 is actively in development, and as such may be buggy. See [Known Issues](#known-issues).
+> Better4 is beta software and may contain bugs. See [Known Issues](#known-issues).
 
 ## Installation
 
-Download the latest GitHub release and drag your `Skate4.exe` onto `install.bat`. If your THPS4 install directory is not writable (e.g. program files), you will be prompted to re-run as admin (always read source code!).
+First, verify THPS4 is installed. Download the [latest GitHub release](https://github.com/better-4/Better4/releases/latest) and drag `Skate4.exe` from your THPS4 game directory onto `install.bat`.
+
+If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
 
 Better4 does not modify any vanilla game files. Any game data created by the installer is contained in `**/better4/**` subdirectories, which are only referenced when `better4.exe` is run.
 
-If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
+> [!NOTE]
+> If THPS4 is installed to Program Files (or another directory which requires admin access to write files), you may have to run as admin for config changes to save.
+> The installer script will prompt to re-run as admin if needed, but `better4.exe` and `better4config.exe` must be manually run as admin.
+> This may be set persistently by right-clicking on the exe and going to `Properties > Compatibility > Change settings for all users > Run this program as an administrator`.
 
 ## Features
 
@@ -24,21 +29,25 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * PS2-exclusive manual float glitches (MFG, MQT, etc.)
 * Single-tap WalliePlants
 * Boneless tricks (beanplant, fastplant, MikeV)
-* Disabling:
+* Configurable:
   * Double revert after dropdown
   * Lip tricks
   * Rail spin
   * Wall spin
   * Wallride bail (enables THUG1 BP)
   * Stance change
-
-Better4 also restores unused animations from THPS3, such as beni flip,
-nollie 360 flip, kickflip to indy, kickflip to crail and many more.
+* Restored unused animations:
+  * Benihana flip
+  * Nollie 360 flip
+  * Kickflip to indy
+  * Kickflip to crail
+  * THPS3 specials (handspring layout, etc.)
 
 ### Online
 
 * Added in-game server browser
-* Added "exit observe" and "sit out" observe options
+* Added better observe functionality (observe after 0, don't need to leave game)
+* Added "exit observe" and "sit out" options
 
 ### CAS
 
@@ -59,7 +68,7 @@ nollie 360 flip, kickflip to indy, kickflip to crail and many more.
 
 ## Known Issues
 
-* KOTH crashes :(
+* Can't navigate pause menu in online games with arrow keys
 
 ## Credits
 

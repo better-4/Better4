@@ -101,7 +101,6 @@ int __cdecl CFunc_IsVoluntaryObserving(CStruct* params) {
 // Function runs every frame to check who you're observing vs tracked target, snaps back to target if mismatch
 void SnapObsCameraBack(void) {
 	if (!local_observing || !local_observe_target) {
-		camera_snapped = 0;
 		return;
 	}
 
