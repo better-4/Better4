@@ -10,6 +10,5 @@ typedef void Net_Manager;
 Net_Manager *Net_Manager_Instance();
 Net_PlayerInfo *Net_Manager_GetLocalPlayer(Net_Manager *this);
 Net_PlayerInfo *Net_Manager_FirstPlayerInfo(Net_Manager *this, Lst_Search *search_ctx, uint8_t flag);
-Net_PlayerInfo *Net_Manager_NextPlayerInfo(Net_Manager *this, Lst_Search *search_ctx, uint8_t flag);
 
 #endif
