@@ -7,7 +7,7 @@ Better4 is a THPS4 modpack that includes modern gameplay and QOL features while 
 
 ## Installation
 
-First, verify THPS4 is installed. Download the latest GitHub release and drag `Skate4.exe` from your THPS4 game directory onto `install.bat`.
+First, verify THPS4 is installed. Download the [latest GitHub release](https://github.com/better-4/Better4/releases/latest) and drag `Skate4.exe` from your THPS4 game directory onto `install.bat`.
 
 If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
 
