@@ -33,7 +33,7 @@ void addCFunc(const char *name, void *func) {
 }
 
 void addCFuncs() {
-  addCFunc("GetLocalSkaterIndex", (void *)CFunc_GetLocalSkaterIndex);
+    addCFunc("GetLocalSkaterIndex", (void *)CFunc_GetLocalSkaterIndex);
 	addCFunc("ObserveSelf", (void *)CFunc_ObserveSelf);
 	addCFunc("QueueObserveSelf", (void*)CFunc_QueueObserveSelf);
 	addCFunc("IsBetterObserving", (void *)CFunc_IsBetterObserving);
