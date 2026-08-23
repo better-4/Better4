@@ -1,4 +1,5 @@
 InNetOptionsFromNetPlay = 0
+CAME_FROM_LAN = 0
 script launch_viewer
   Printf "launch_viewer is no longer needed ... you can remove it from your startup script"
 endscript
@@ -465,6 +466,7 @@ script host_chosen
   GSDisableNet
   StopServerList
   FreeServerList
+  Change CAME_FROM_LAN = 1
   launch_network_host_options_menu
 endscript
 script host_net_chosen
@@ -472,6 +474,7 @@ script host_net_chosen
   GSEnableNet
   StopServerList
   FreeServerList
+  Change CAME_FROM_LAN = 0
   launch_network_host_options_menu
 endscript
 script fcfs_selected
@@ -873,7 +876,7 @@ script back_from_internet_host_options
   if InNetGame
     create_pause_menu
   else
-    launch_network_select_games_menu
+    back_from_lan_check
   endif
 endscript
 script launch_lobby_list
@@ -924,7 +927,7 @@ script create_network_select_menu
   default
     main_menu_add_item {
       text = "LAN"
-      not_focusable
+      
       id = menu_network_select_lan
       pad_choose_script = network_select_menu_exit
       pad_choose_params = { callback = launch_network_select_lan_games_menu }
@@ -1594,7 +1597,7 @@ script check_ip_from_keyboard_cancel
   dialog_box_exit
   TryJoinServerIPCancel
   add_pause_menu_textures_to_vram
-  create_network_select_games_menu play_cam
+  back_from_lan_check
 endscript
 script check_ip_from_keyboard
   GetTextElementString id = keyboard_current_string
@@ -1621,7 +1624,7 @@ script check_ip_from_keyboard
     repeat
   endif
   if GotParam cancel
-    create_network_select_games_menu
+    back_from_lan_check
   else
     if not TryJoinServerIPSuccess
       if ScreenElementExists id = dialog_box_anchor
@@ -1631,7 +1634,7 @@ script check_ip_from_keyboard
     else
       dialog_box_exit
       add_pause_menu_textures_to_vram
-      create_network_select_games_menu play_cam
+      back_from_lan_check
     endif
   endif
 endscript
@@ -1732,6 +1735,7 @@ script create_network_select_games_menu
     PlaySkaterCamAnim name = SS_MenuCam play_hold
   endif
   dialog_box_exit
+  Change CAME_FROM_LAN = 0
   SetNetworkMode LAN_MODE
   if IsInternetGameHost
     host_net_chosen
@@ -1814,12 +1818,28 @@ script create_network_select_games_menu
     endif
   endif
 endscript
+script back_from_lan_game_list
+  TryJoinServerIPCancel
+  RefreshServerList force_refresh
+  actions_menu_anchor:DoMorph scale = 1
+  server_desc_menu_anchor:DoMorph scale = 0
+  destroy_server_desc_children
+  refocus_actions_menu
+endscript
+script back_from_lan_check
+  if ( CAME_FROM_LAN = 1 )
+    create_network_select_lan_games_menu
+  else
+    launch_network_select_games_menu
+  endif
+endscript
 script create_network_select_lan_games_menu
   if GotParam play_cam
     KillSkaterCamAnim all
     PlaySkaterCamAnim name = SS_MenuCam play_hold
   endif
   dialog_box_exit
+  Change CAME_FROM_LAN = 1
   SetNetworkMode LAN_MODE
   if IsInternetGameHost
     host_net_chosen
@@ -1845,7 +1865,7 @@ script create_network_select_lan_games_menu
       }
     endif
     SetScreenElementProps { id = server_list_menu event_handlers = [
-        { pad_back back_from_game_list }
+        { pad_back back_from_lan_game_list }
       ]
     }
     main_menu_add_item text = "Host LAN Game" parent = actions_menu id = menu_network_select_host pad_choose_script = host_chosen highlight_bar_scale = (1.43, 1.3)
@@ -1864,7 +1884,7 @@ script create_network_select_lan_games_menu
         keyboard_cancel_params = { cancel }
         allow_cancel }
     }
-    main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Observe Game" not_focusable parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
     main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen highlight_bar_scale = (1.43, 1.3)
     RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
     FireEvent type = unfocus target = server_list_menu
