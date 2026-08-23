@@ -1,13 +1,6 @@
-#include "qb.h"
+#include "decomp/CStruct.h"
+#include "decomp/common.h"
 
-#include <string.h>
-
-// We mock __thiscall calling convention by using __fastcall and a dummy second parameter.
-// `this` loaded into `ecx`, `_` loaded into `edx` and safely ignored, rest pushed onto stack.
-#define UNUSED 0
-typedef uint32_t unused_t;
-
-// class CStruct
 
 typedef void(__fastcall* _CStruct_New_t)(CStruct *this);
 _CStruct_New_t _CStruct_New = (_CStruct_New_t)0x00415710;
@@ -26,10 +19,10 @@ void CStruct_Free(CStruct *this) {
     free(this);
 }
 
-typedef void(__fastcall* _CStruct_AddArray_t)(CStruct *this, unused_t, uint32_t checksum, CArray *value);
+typedef void(__fastcall* _CStruct_AddArray_t)(CStruct *this, unused_t, uint32_t checksum, struct CArray *value);
 _CStruct_AddArray_t _CStruct_AddArray = (_CStruct_AddArray_t)0x004171e0;
 
-void CStruct_AddArray(CStruct *this, uint32_t checksum, CArray *value) {
+void CStruct_AddArray(CStruct *this, uint32_t checksum, struct CArray *value) {
     _CStruct_AddArray(this, UNUSED, checksum, value);
 }
 
@@ -95,46 +88,3 @@ _CStruct_RemoveComponent_t _CStruct_RemoveComponent = (_CStruct_RemoveComponent_
 void CStruct_RemoveComponent(CStruct *this, uint32_t checksum) {
     _CStruct_RemoveComponent(this, UNUSED, checksum);
 }
-
-// class CArray
-
-typedef void(__fastcall* _CArray_New_t)(CArray *this);
-_CArray_New_t _CArray_New = (_CArray_New_t)0x004085d0;
-
-CArray *CArray_New() {
-	CArray *this = (CArray *)malloc(sizeof(CArray));
-    _CArray_New(this);
-    return this;
-}
-
-typedef void(__cdecl* _CleanUpArray_t)(CArray *this);
-_CleanUpArray_t _CleanUpArray = (_CleanUpArray_t)0x00414d50;
-
-void CArray_Free(CArray *this) {
-    // NOTE (ellie): Not sure whether Script::CArray::Clear or Script::CleanUpArray is more apt here
-    _CleanUpArray(this);
-    free(this);
-}
-
-typedef void(__fastcall* _CArray_SetStructure_t)(CStruct *this, unused_t, uint32_t index, CArray *value);
-_CArray_SetStructure_t _CArray_SetStructure = (_CArray_SetStructure_t)0x00408770;
-
-void CArray_SetStructure(CArray *this, uint32_t index, CStruct *value) {
-    _CArray_SetStructure(this, UNUSED, index, value);
-}
-
-typedef void(__fastcall* _CArray_SetSizeAndType_t)(CStruct *this, unused_t, uint32_t size, uint32_t type);
-_CArray_SetSizeAndType_t _CArray_SetSizeAndType = (_CArray_SetSizeAndType_t)0x00408660;
-
-void CArray_SetSizeAndType(CArray *this, uint32_t size, uint32_t type) {
-    _CArray_SetSizeAndType(this, UNUSED, size, type);
-}
-
-// class CScript
-
-CStruct *CScript_GetParams(CScript *this) {
-    // inlined during compilation; access member directly
-    return this->params;
-    // return *(CStruct **)(((char *)this) + 0x14);
-}
-

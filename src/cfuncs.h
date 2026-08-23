@@ -1,7 +1,8 @@
 #ifndef _CFUNCS_H_
 #define _CFUNCS_H_
 
-#include <qb.h>
+#include "decomp/CStruct.h"
+#include "decomp/CScript.h"
 
 typedef struct {
     char* name;
