@@ -25,11 +25,7 @@ script GetFileTypeName
   case OptionsAndPros
     return filetype_name = 'CAREER'
   case NetworkSettings
-    if IsXBOX
-      return filetype_name = 'SYSTEM LINK SETTINGS'
-    else
-      return filetype_name = 'NETWORK SETTINGS'
-    endif
+    return filetype_name = 'NETWORK SETTINGS'
   case Cas
     return filetype_name = 'SKATER'
   case Park
@@ -1168,12 +1164,16 @@ script retry_launch_save_network_settings
   memcard_menus_cleanup
   Goto launch_save_network_settings
 endscript
+script exit_net_setting
+  dialog_box_exit
+  launch_ss_menu
+endscript
 script launch_save_network_settings
   destroy_net_settings_menu
   remove_main_menu_textures_from_vram
   Change RetryScript = retry_launch_save_network_settings
-  Change AbortScript = back_to_net_settings_menu
-  Change DoneScript = back_to_net_settings_menu
+  Change AbortScript = exit_net_setting
+  Change DoneScript = exit_net_setting
   Change SavingOrLoading = Saving
   check_card FileType = NetworkSettings Save
   launch_files_menu Save FileType = NetworkSettings
@@ -1367,11 +1367,7 @@ script CreateNew
   case OptionsAndPros
      <filename> = 'Career'
   case NetworkSettings
-    if IsXBOX
-       <filename> = 'Sys Lnk Set'
-    else
-       <filename> = 'Net settings'
-    endif
+   <filename> = 'Net settings'
   case Cas
     GetCurrentProDisplayInfo
      <filename> = <string>
@@ -1680,8 +1676,8 @@ script launch_load_network_settings
   destroy_net_settings_menu
   remove_main_menu_textures_from_vram
   Change RetryScript = retry_launch_load_network_settings
-  Change AbortScript = back_to_net_settings_menu
-  Change DoneScript = back_to_net_settings_menu
+  Change AbortScript = exit_net_setting
+  Change DoneScript = exit_net_setting
   Change SavingOrLoading = Loading
   check_card FileType = NetworkSettings
   launch_files_menu FileType = NetworkSettings

@@ -2070,6 +2070,14 @@ script create_ss_menu
       just = [ left top ]
       z_priority = 4
     }
+    main_menu_add_item { text = 'Load Settings'
+      id = network_option_load
+      pad_choose_script = launch_load_network_settings
+    }
+    main_menu_add_item { text = 'Save Settings'
+      id = network_option_save
+      pad_choose_script = launch_save_network_settings
+    }
   endif
   RunScriptOnScreenElement id = ss_menu animate_in
 endscript

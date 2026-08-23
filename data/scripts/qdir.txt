@@ -131,7 +131,7 @@ movies.qb
 better4/net.qb
 netmenu.qb
 netmessages.qb
-netoptions.qb
+better4/netoptions.qb
 net_vault_menu.qb
 NewScreenElementTest.qb
 NSCustomParks.qb
