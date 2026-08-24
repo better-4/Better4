@@ -13,7 +13,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 18
+#define BETTER4_NUM_CFUNCS 19
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -30,6 +30,13 @@ void addCFunc(const char *name, void *func) {
     CFunc *cfunc = &cfuncs[cfunc_index++];
     cfunc->name = name;
     cfunc->func = func;
+}
+
+float *screenAspectRatio_b4 = 0x00ab4b38;
+int __cdecl CFunc_AutoAspectRatio(CStruct* params) 
+{
+    setAspectRatio (screenAspectRatio_b4);
+    return 1;
 }
 
 void addCFuncs() {
@@ -51,6 +58,7 @@ void addCFuncs() {
 	addCFunc("SetSpineTransferControl", (void *)CFunc_SetSpineTransferControl);
 	addCFunc("GetServerList", (void *)CFunc_GetServerList);
 	addCFunc("SetPauseOnUnfocus", (void *)CFunc_SetPauseOnUnfocus);
+    addCFunc("AutoAspectRatio", (void *)CFunc_AutoAspectRatio);
 }
 
 void printCFuncs() {

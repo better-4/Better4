@@ -16,5 +16,6 @@ int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script);
 int __cdecl CFunc_SetIniBool(CStruct *params, CScript *script);
 int __cdecl CFunc_SetIniInteger(CStruct *params, CScript *script);
 int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script);
+int __cdecl CFunc_AutoAspectRatio(CStruct* params) ;
 
 #endif

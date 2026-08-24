@@ -11,7 +11,7 @@ script SetGameState
   cleanup_before_loading_level
   LaunchGame
 endscript
-script load_requested_level
+script load_requested_level // zed TODO: Look at later for possible trick font and special bar toggle fix
   GetCurrentLevel
   LoadLevel level = <level>
 endscript
@@ -19,7 +19,7 @@ script InitializeGameFlow
   load_requested_level
   StandardGameFlow
 endscript
-script ChangeLevelGameFlow
+script ChangeLevelGameFlow // zed TODO: Look at later for possible trick font and special bar toggle fix
   Change FirstTimeInSplitScreen = 1
   if not IsObserving
     Skater:SetCustomRestart clear

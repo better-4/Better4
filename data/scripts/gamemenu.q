@@ -3296,11 +3296,11 @@ script create_options_menu
     else
     endif
   endif
-  if IsXBOX
-    make_text_sub_menu_item text = "Adjust Gamma" id = menu_gamma pad_choose_script = create_gamma_menu
-  else
-    make_text_sub_menu_item text = "Screen Mode" id = menu_screen pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = create_screen_menu }
-  endif
+  //if IsXBOX
+    //make_text_sub_menu_item text = "Adjust Gamma" id = menu_gamma pad_choose_script = create_gamma_menu
+  //else
+    //make_text_sub_menu_item text = "Screen Mode" id = menu_screen pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = create_screen_menu }
+  //endif
   make_text_sub_menu_item text = "Sound Options" id = menu_sound_options pad_choose_script = launch_sound_options_menu pad_choose_params = { from_options }
   if InNetGame
     if InTeamGame
@@ -3656,7 +3656,7 @@ script create_gamma_menu
   make_new_menu menu_title = "GAMMA" menu_id = gamma_menu vmenu_id = gamma_vmenu
   SetScreenElementProps {
     id = gamma_menu
-    event_handlers = [ { pad_back create_options_menu } ]
+    event_handlers = [ { pad_back better4_display_menu pad_choose_params = <...> } ]
     replace_handlers
   }
   set_sub_bg
@@ -3664,7 +3664,7 @@ script create_gamma_menu
   make_text_sub_menu_item text = "Red: " id = gamma_menu_red
   make_text_sub_menu_item text = "Green: " id = gamma_menu_green
   make_text_sub_menu_item text = "Blue: " id = gamma_menu_blue
-  make_text_sub_menu_item text = "Done" id = gamma_menu_done pad_choose_script = create_options_menu
+  make_text_sub_menu_item text = "Done" id = gamma_menu_done pad_choose_script = better4_display_menu pad_choose_params = <...>
   SetScreenElementProps {
     id = gamma_menu_red
     event_handlers = [ { pad_left gamma_menu_turn_down params = { color = red } }

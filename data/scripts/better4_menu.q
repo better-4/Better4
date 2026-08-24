@@ -101,6 +101,7 @@ script better4_options_menu
   make_text_sub_menu_item text = "On Ground" scale = better4_menu_item_scale id = onground_option pad_choose_script = better4_onground_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "On Rail" scale = better4_menu_item_scale id = onrail_option pad_choose_script = better4_onrail_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "Wallrides" scale = better4_menu_item_scale id = wallride_option pad_choose_script = better4_wallride_menu pad_choose_params = <...>
+  make_text_sub_menu_item text = "Display Options" scale = better4_menu_item_scale id = display_option pad_choose_script = better4_display_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "Misc" scale = better4_menu_item_scale id = misc_option pad_choose_script = better4_misc_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Close" scale = better4_menu_item_scale id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
@@ -163,6 +164,15 @@ script better4_misc_menu
   else
     make_text_sub_menu_item text = "Change CAS" not_focusable scale = better4_menu_item_scale pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
   endif
+  make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
+  make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
+endscript
+
+script better4_display_menu
+  better4_create_menu menu_title = "DISPLAY OPTIONS" icon = PA_trick close_script = better4_options_menu close_params = <...>
+  better4_create_menu_control better4_control_aspect_ratio
+  better4_create_menu_control better4_control_fov
+  make_text_sub_menu_item text = "Adjust Gamma" scale = better4_menu_item_scale pad_choose_script = create_gamma_menu
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript

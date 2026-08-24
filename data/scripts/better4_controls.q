@@ -394,6 +394,109 @@ script better4_control_buttonsfont_change
   Change prev_buttonsfont = better4_control_buttonsfont_value
 endscript
 
+better4_control_fov_index = 28
+better4_control_fov_value = 90
+better4_control_fov = {
+  id = better4_control_fov_id
+  index_name = better4_control_fov_index
+  value_name = better4_control_fov_value
+  text = "FOV"
+  ini_key = "FOV"
+  options = [
+    { text = "60" value = 60 }
+    { text = "61" value = 61 }
+    { text = "62" value = 62 }
+    { text = "63" value = 63 }
+    { text = "64" value = 64 }
+    { text = "65" value = 65 }
+    { text = "66" value = 66 }
+    { text = "67" value = 67 }
+    { text = "68" value = 68 }
+    { text = "69" value = 69 }
+    { text = "70" value = 70 }
+    { text = "71" value = 71 }
+    { text = "72" value = 72 }
+    { text = "73" value = 73 }
+    { text = "74" value = 74 }
+    { text = "75" value = 75 }
+    { text = "76" value = 76 }
+    { text = "77" value = 77 }
+    { text = "78" value = 78 }
+    { text = "79" value = 79 }
+    { text = "80" value = 80 }
+    { text = "81" value = 81 }
+    { text = "82" value = 82 }
+    { text = "83" value = 83 }
+    { text = "84" value = 84 }
+    { text = "85" value = 85 }
+    { text = "86" value = 86 }
+    { text = "87" value = 87 }
+    { text = "88" value = 88 }
+    { text = "89" value = 89 }
+    { text = "90" value = 90 }
+    { text = "91" value = 91 }
+    { text = "92" value = 92 }
+    { text = "93" value = 93 }
+    { text = "94" value = 94 }
+    { text = "95" value = 95 }
+    { text = "96" value = 96 }
+    { text = "97" value = 97 }
+    { text = "98" value = 98 }
+    { text = "99" value = 99 }
+    { text = "100" value = 100 }
+    { text = "101" value = 101 }
+    { text = "102" value = 102 }
+    { text = "103" value = 103 }
+    { text = "104" value = 104 }
+    { text = "105" value = 105 }
+    { text = "106" value = 106 }
+    { text = "107" value = 107 }
+    { text = "108" value = 108 }
+    { text = "109" value = 109 }
+    { text = "110" value = 110 }
+    { text = "111" value = 111 }
+    { text = "112" value = 112 }
+    { text = "113" value = 113 }
+    { text = "114" value = 114 }
+    { text = "115" value = 115 }
+    { text = "116" value = 116 }
+    { text = "117" value = 117 }
+    { text = "118" value = 118 }
+    { text = "119" value = 119 }
+    { text = "120" value = 120 }
+  ]
+  change_script = better4_change_fov
+}
+
+script better4_change_fov
+  SetScreen Angle = better4_control_fov_value
+endscript
+
+better4_control_aspect_ratio_index = 0
+better4_control_aspect_ratio_value = 0
+better4_control_aspect_ratio = {
+  id = better4_control_aspect_ratio_id
+  index_name = better4_control_aspect_ratio_index
+  value_name = better4_control_aspect_ratio_value
+  text = "Aspect Ratio"
+  ini_key = "AspectRatio"
+  options = [
+    { text = "Auto" value = 0 } // Doesn't use value
+    { text = "16:9" value = 1.77778 }
+    { text = "16:10" value = 1.6 }
+    { text = "4:3" value = 1.33333 }
+  ]
+  change_script = better4_change_aspect_ratio
+}
+
+script better4_change_aspect_ratio
+  if (better4_control_aspect_ratio_value = 0)
+    AutoAspectRatio
+  else
+    SetScreen Aspect = better4_control_aspect_ratio_value
+  endif
+endscript
+
 // better4_trick_string_index = 1
 // better4_trick_string_value = on
 // better4_trick_string = {
@@ -471,6 +574,8 @@ script better4_controls_init
   better4_control_init better4_control_boardscuff
   better4_control_init better4_control_pauseonunfocus
   better4_control_init better4_control_buttonsfont
+  better4_control_init better4_control_fov
+  better4_control_init better4_control_aspect_ratio
   // better4_control_init better4_trick_string
   // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
