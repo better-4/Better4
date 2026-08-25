@@ -2041,7 +2041,7 @@ script create_ss_menu
       main_menu_add_item { text = 'Practice'
         id = ss_main_menu
         pad_choose_script = ss_menu_exit
-        pad_choose_params = { new_menu_script = start_practice_run }
+        pad_choose_params = { new_menu_script = start_practice_run } // start_practice_run
       }
     endif
   endif

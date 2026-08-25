@@ -112,7 +112,7 @@ script better4_onground_menu
   better4_create_menu_control better4_control_revert
   better4_create_menu_control better4_control_powerslide
   better4_create_menu_control better4_control_stancechange
-  better4_create_menu_control better4_control_jumptrick
+  //better4_create_menu_control better4_control_jumptrick
   better4_create_menu_control better4_control_manualspin
   better4_create_menu_control better4_control_manualfloat
   better4_create_menu_control better4_control_doublerevert
@@ -175,4 +175,11 @@ script better4_display_menu
   make_text_sub_menu_item text = "Adjust Gamma" scale = better4_menu_item_scale pad_choose_script = create_gamma_menu
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
+endscript
+
+script better4_jumptrick_menu
+better4_create_menu menu_title = "JUMPTRICK" icon = PA_trick close_script = create_edit_tricks_menu close_params = <...>
+better4_create_menu_control better4_control_jumptrick
+  make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
+  make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = create_edit_tricks_menu pad_choose_params = <...>
 endscript

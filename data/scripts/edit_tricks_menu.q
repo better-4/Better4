@@ -31,13 +31,23 @@ script create_edit_tricks_menu
       replace_handlers
     }
   else
-    SetScreenElementProps {
-      id = edit_tricks_menu_anchor
-      event_handlers = [ { pad_back edit_tricks_menu_exit }
-        { pad_back generic_menu_pad_back_sound }
-      ]
-      replace_handlers
-    }
+    if GotParam from_pause_menu
+      SetScreenElementProps {
+        id = edit_tricks_menu_anchor
+        event_handlers = [ { pad_back edit_tricks_menu_exit params = { from_pause_menu } }
+          { pad_back generic_menu_pad_back_sound }
+        ]
+        replace_handlers
+      }
+    else
+      SetScreenElementProps {
+        id = edit_tricks_menu_anchor
+        event_handlers = [ { pad_back edit_tricks_menu_exit }
+          { pad_back generic_menu_pad_back_sound }
+        ]
+        replace_handlers
+      }
+    endif
   endif
   if ( LevelIs load_skateshop )
      <root_pos> = (80, 120)
@@ -87,31 +97,71 @@ script create_edit_tricks_menu
     ]
   }
   AssignAlias id = edit_tricks_vmenu alias = current_menu
-  edit_tricks_menu_add_item {
-    first_item
-    text = "Grab Tricks"
-    pad_choose_script = create_edit_tricks_sub_menu
-    pad_choose_params = { type = grab_tricks }
-    focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
-  }
-  edit_tricks_menu_add_item {
-    text = "Flip Tricks"
-    pad_choose_script = create_edit_tricks_sub_menu
-    pad_choose_params = { type = flip_tricks }
-    focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
-  }
-  edit_tricks_menu_add_item {
-    text = "Lip Tricks"
-    pad_choose_script = create_edit_tricks_sub_menu
-    pad_choose_params = { type = lip_tricks }
-    focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
-  }
-  edit_tricks_menu_add_item {
-    text = "Special Tricks"
-    pad_choose_script = create_edit_tricks_sub_menu
-    pad_choose_params = { type = special_tricks }
-    focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
-  }
+  if GotParam from_pause_menu
+    edit_tricks_menu_add_item {
+      first_item
+      text = "Grab Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = grab_tricks from_pause_menu }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Flip Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = flip_tricks from_pause_menu }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Lip Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = lip_tricks from_pause_menu }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Special Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = special_tricks from_pause_menu }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Jump Tricks"
+      pad_choose_script = better4_jumptrick_menu
+      pad_choose_params = { from_pause_menu }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+  else
+    edit_tricks_menu_add_item {
+      first_item
+      text = "Grab Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = grab_tricks }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Flip Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = flip_tricks }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Lip Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = lip_tricks }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Special Tricks"
+      pad_choose_script = create_edit_tricks_sub_menu
+      pad_choose_params = { type = special_tricks }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+    edit_tricks_menu_add_item {
+      text = "Jump Tricks"
+      pad_choose_script = better4_jumptrick_menu
+      pad_choose_params = { from_pause_menu }
+      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+    }
+  endif
   if GotParam from_ss_menu
     edit_tricks_menu_add_item {
       text = "Done"
@@ -121,18 +171,33 @@ script create_edit_tricks_menu
       last_item
     }
   else
-    edit_tricks_menu_add_item {
-      text = "Done"
-      pad_choose_script = edit_tricks_menu_exit
-      focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
-      last_item
-    }
+    if GotParam from_pause_menu
+      edit_tricks_menu_add_item {
+        text = "Done"
+        pad_choose_script = edit_tricks_menu_exit
+        pad_choose_params = { from_pause_menu }
+        focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+        last_item
+      }
+    else
+      edit_tricks_menu_add_item {
+        text = "Done"
+        pad_choose_script = edit_tricks_menu_exit
+        focus_params = { highlight_bar_scale = (0.98, 1.3) highlight_bar_pos = (-24, -20) }
+        last_item
+      }
+    endif
   endif
   FireEvent type = focus target = current_menu_anchor
   FireEvent type = focus target = current_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script create_edit_tricks_sub_menu
+  if GotParam from_pause_menu
+    <exit_params> = { from_pause_menu }
+  else
+    <exit_params> = {}
+  endif
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
@@ -225,7 +290,7 @@ script create_edit_tricks_sub_menu
     id = edit_tricks_menu_1
     pos = <pos>
     just = [ left top ]
-    event_handlers = [ { pad_back edit_tricks_sub_menu_exit }
+    event_handlers = [ { pad_back edit_tricks_sub_menu_exit params = <exit_params> }
       { pad_up generic_menu_up_or_down_sound params = { up } }
       { pad_down generic_menu_up_or_down_sound params = { down } }
       { pad_back generic_menu_pad_back_sound }
@@ -1478,7 +1543,11 @@ script edit_tricks_menu_exit
   else
     add_pause_menu_textures_to_vram
     restore_start_key_binding
-    create_options_menu
+    if GotParam from_pause_menu
+      create_pause_menu
+    else
+      create_options_menu
+    endif
   endif
 endscript
 script edit_tricks_sub_menu_exit
@@ -1490,7 +1559,11 @@ script edit_tricks_sub_menu_exit
   if not GoalManager_HasActiveGoals
     GoalManager_ShowGoalPoints
   endif
-  create_edit_tricks_menu
+  if GotParam from_pause_menu
+    create_edit_tricks_menu from_pause_menu
+  else
+    create_edit_tricks_menu
+  endif
 endscript
 script add_edit_tricks_menu_textures_to_vram
   AddTextureToVram "PA_trick"
