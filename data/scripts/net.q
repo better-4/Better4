@@ -2971,18 +2971,20 @@ script create_network_host_options_menu
         id = menu_network_host_options_password
         pad_choose_script = create_network_host_options_password_menu
       }
-      network_host_options_menu_add_item {
-        text1 = "Lvl. Objs:"
-        text2 = "Toggle level objects"
-        id = menu_network_host_options_level_objects
-        pad_choose_script = create_pro_trick_objects_menu
-      }
-      network_host_options_menu_add_item {
-        text1 = "Sit Out:"
-        text2 = "Auto Server/FCFS"
-        id = menu_network_host_options_sitout
-        pad_choose_script = launch_network_sit_out_menu
-      }
+      if InNetGame
+        network_host_options_menu_add_item {
+          text1 = "Lvl. Objs:"
+          text2 = "Toggle level objects"
+          id = menu_network_host_options_level_objects
+          pad_choose_script = create_pro_trick_objects_menu
+        }
+        network_host_options_menu_add_item {
+          text1 = "Sit Out:"
+          text2 = "Auto Server/FCFS"
+          id = menu_network_host_options_sitout
+          pad_choose_script = launch_network_sit_out_menu
+        }
+      endif
     endif
     network_host_options_menu_add_item {
       not_focusable = not_focusable
