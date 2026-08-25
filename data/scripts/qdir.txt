@@ -146,7 +146,7 @@ ped.qb
 physics.qb
 profile_ped.qb
 promenu.qb
-proset.qb
+better4/proset.qb
 protricks.qb
 pro_anims.qb
 records.qb

@@ -32,8 +32,15 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
       waitanimwhilstchecking
       Goto SkateInLand
     else
-      Move y = <movey>
-      Move X = <moveright>
+      if ControllerPressed Left
+        Move y = <movey>
+        Move X = <moveleft>
+        Printf "droppin left"
+      else
+        Move y = <movey>
+        Move X = <moveright>
+        Printf "droppin right"
+      endif
       if GotParam GrindBail
         Goto <GrindBail>
       else
@@ -64,8 +71,15 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
       waitanimwhilstchecking
       Goto SkateInLand
     else
-      Move y = <movey>
-      Move X = <moveleft>
+      if ControllerPressed Right
+        Move y = <movey>
+        Move X = <moveright>
+        Printf "droppin right"
+      else
+        Move y = <movey>
+        Move X = <moveleft>
+        Printf "droppin left"
+      endif
       if GotParam GrindBail
         Goto <GrindBail>
       else

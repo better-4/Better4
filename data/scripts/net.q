@@ -1965,7 +1965,7 @@ script create_sit_out_menu
   add_ss_menu_textures_to_vram
   make_new_menu menu_id = sit_out_menu vmenu_id = sit_out_vmenu menu_title = ""
   SetScreenElementProps { id = sit_out_menu event_handlers = [
-      { pad_back create_pause_menu }
+      { pad_back network_options_selected }
     ]
   }
   create_helper_text generic_helper_text
@@ -2970,6 +2970,18 @@ script create_network_host_options_menu
         text2 = <password_string>
         id = menu_network_host_options_password
         pad_choose_script = create_network_host_options_password_menu
+      }
+      network_host_options_menu_add_item {
+        text1 = "Lvl. Objs:"
+        text2 = "Toggle level objects"
+        id = menu_network_host_options_level_objects
+        pad_choose_script = create_pro_trick_objects_menu
+      }
+      network_host_options_menu_add_item {
+        text1 = "Sit Out:"
+        text2 = "Auto Server/FCFS"
+        id = menu_network_host_options_sitout
+        pad_choose_script = launch_network_sit_out_menu
       }
     endif
     network_host_options_menu_add_item {

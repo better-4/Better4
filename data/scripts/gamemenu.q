@@ -584,27 +584,6 @@ script create_pause_menu
     if not GotParam no_exit
       make_sprite_menu_item text = "Continue" id = menu_continue pad_choose_script = handle_start_pressed
       make_text_sprite texture = PA_continue parent = menu_continue
-      if InNetGame
-        if not IsBetterObserving
-          if not IsObserving
-            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = EnterBetterObserve
-          endif
-        else
-          if IsVoluntaryObserving
-            if not GoalManager_HasActiveGoals
-              make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
-            else
-              make_text_sub_menu_item text = "Rejoin Next Game" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
-            endif
-          else
-            if not GoalManager_HasActiveGoals
-              make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
-            else
-              make_text_sub_menu_item text = "Rejoin Next Game" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
-            endif
-          endif
-        endif
-      endif
     endif
   endif
   if GameModeEquals is_goal_attack
@@ -648,19 +627,6 @@ script create_pause_menu
     endif
   endif
   if InNetGame
-    if OnServer
-      if OnXbox
-        if not IsBetterObserving
-          if not IsObserving
-          make_sprite_menu_item text = "Sit Out" id = menu_network_sit_select pad_choose_script = launch_network_sit_out_menu
-        endif
-        endif
-        make_sprite_menu_item text = "Host Options" id = menu_network_server_opts_select pad_choose_script = network_options_selected
-      else
-        make_sprite_menu_item text = "Server Options" id = menu_network_server_opts_select pad_choose_script = network_options_selected
-      endif
-      make_text_sprite texture = PA_network parent = menu_network_server_opts_select
-    endif
     if IsHost
       if GameModeEquals is_lobby
         if not OnServer
@@ -675,8 +641,6 @@ script create_pause_menu
           if not ChangeLevelPending
             make_sprite_menu_item text = "Start Game" id = menu_network_start_select pad_choose_script = network_game_options_selected
             make_text_sprite texture = PA_retry parent = menu_network_start_select
-            make_sprite_menu_item text = "Change level" id = menu_level_select pad_choose_script = launch_level_select_menu pad_choose_params = { show_warning }
-            make_text_sprite texture = PA_level parent = menu_level_select
           endif
         endif
       else
@@ -684,6 +648,49 @@ script create_pause_menu
         make_text_sprite texture = PA_retry parent = menu_network_restart_select
         make_sprite_menu_item text = "End Current Game" id = menu_network_end_select pad_choose_script = network_end_game_selected
         make_text_sprite texture = PA_end parent = menu_network_end_select
+      endif
+    endif
+    if OnServer
+      if OnXbox
+        make_sprite_menu_item text = "Host Options" id = menu_network_server_opts_select pad_choose_script = network_options_selected
+      else
+        make_sprite_menu_item text = "Server Options" id = menu_network_server_opts_select pad_choose_script = network_options_selected
+      endif
+      make_text_sprite texture = PA_network parent = menu_network_server_opts_select
+    endif
+    if IsHost
+      if GameModeEquals is_lobby
+        if not NetworkGamePending
+          if not ChangeLevelPending
+            make_sprite_menu_item text = "Change level" id = menu_level_select pad_choose_script = launch_level_select_menu pad_choose_params = { show_warning }
+            make_text_sprite texture = PA_level parent = menu_level_select
+          endif
+        endif
+      endif
+    endif
+    make_text_sub_menu_item {
+      text = "Edit Tricks"
+      id = menu_edit_tricks
+      pad_choose_script = create_edit_tricks_menu
+      pad_choose_params = { from_pause_menu }
+    }
+    if not IsBetterObserving
+      if not IsObserving
+        make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = EnterBetterObserve
+      endif
+    else
+      if IsVoluntaryObserving
+        if not GoalManager_HasActiveGoals
+          make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+        else
+          make_text_sub_menu_item text = "Rejoin Next Game" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+        endif
+      else
+        if not GoalManager_HasActiveGoals
+          make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+        else
+          make_text_sub_menu_item text = "Rejoin Next Game" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+        endif
       endif
     endif
     make_sprite_menu_item text = "Options" id = menu_options pad_choose_script = create_options_menu
@@ -710,6 +717,12 @@ script create_pause_menu
     endif
     make_sprite_menu_item text = "Instant Replay" id = menu_view_replay pad_choose_script = in_game_view_replay
     make_text_sprite texture = PA_movie parent = menu_view_replay
+    make_text_sub_menu_item {
+      text = "Edit Tricks"
+      id = menu_edit_tricks
+      pad_choose_script = create_edit_tricks_menu
+      pad_choose_params = { from_pause_menu }
+    }
     make_sprite_menu_item text = "Options" id = menu_options pad_choose_script = create_options_menu
     make_text_sprite texture = PA_options parent = menu_options
     if not IsTrue DEMO_BUILD
@@ -760,8 +773,6 @@ script create_pause_menu
   // make_sprite_menu_item text = "Anim Debug 3" id = menu_anim_debug3 pad_choose_script = better4_anim_debug pad_choose_params = { index = 2 }
   // make_text_sprite texture = PA_options parent = menu_anim_debug3
   if InNetGame
-    make_sprite_menu_item text = "Chat Message" id = menu_chat pad_choose_script = launch_chat_keyboard
-    make_text_sprite texture = PA_taunt parent = menu_chat
     if not OnServer
       if not IsBetterObserving
         if InInternetMode
@@ -3232,11 +3243,6 @@ script create_options_menu
       make_text_sub_menu_item text = <camera_text> id = menu_camera pad_choose_script = toggle_camera_angle pad_choose_params = { }
     endif
     make_text_sub_menu_item text = "Edit Stats" id = menu_edit_stats pad_choose_script = generic_menu_pad_choose pad_choose_params = { callback = create_stats_menu }
-        make_text_sub_menu_item {
-          text = "Edit Tricks"
-          id = menu_edit_tricks
-          pad_choose_script = create_edit_tricks_menu
-        }
     if GameModeEquals is_career
       if GoalManager_HasActiveGoals count_all
         make_text_sub_menu_item {
@@ -3247,13 +3253,23 @@ script create_options_menu
           rgba = [ 50 50 50 90 ]
         }
       else
-        make_text_sub_menu_item {
-          text = "Pro Trick Objects"
-          pad_choose_script = generic_menu_pad_choose
-          pad_choose_params = { callback = create_pro_trick_objects_menu }
-        }
+        if not InNetGame
+          make_text_sub_menu_item {
+            text = "Pro Trick Objects"
+            pad_choose_script = generic_menu_pad_choose
+            pad_choose_params = { callback = create_pro_trick_objects_menu }
+          }
+        endif
       endif
     endif
+    if GameModeEquals is_freeskate
+      make_text_sub_menu_item {
+            text = "Pro Trick Objects"
+            pad_choose_script = generic_menu_pad_choose
+            pad_choose_params = { callback = create_pro_trick_objects_menu }
+          }
+    endif
+    
     if not ( ( IsTrue bootstrap_build ) or ( IsTrue DEMO_BUILD ) )
       if not CD
         make_text_sub_menu_item text = "Cheats: DO NOT TEST" id = menu_cheats pad_choose_script = launch_cheats_menu
@@ -3265,27 +3281,10 @@ script create_options_menu
       endif
     endif
   else
-          make_text_sub_menu_item {
-            text = "Edit Tricks"
-            id = menu_edit_tricks
-            pad_choose_script = create_edit_tricks_menu
-          }
     if InNetGame
       if GameModeEquals is_lobby
         if GoalManager_HasActiveGoals count_all
-          make_text_sub_menu_item {
-            text = "Pro Trick Objects"
-            pad_choose_script = generic_menu_pad_choose
-            pad_choose_params = { callback = create_pro_trick_objects_menu }
-            not_focusable
-            rgba = [ 50 50 50 90 ]
-          }
         else
-          make_text_sub_menu_item {
-            text = "Pro Trick Objects"
-            pad_choose_script = generic_menu_pad_choose
-            pad_choose_params = { callback = create_pro_trick_objects_menu }
-          }
         endif
       endif
       if not ( ( IsTrue bootstrap_build ) or ( IsTrue DEMO_BUILD ) )
