@@ -231,6 +231,9 @@ script Manual BlendPeriod = 0.3
   if GotParam IsExtra
     LaunchExtraMessage
   endif
+  if GotParam ExtraSpeedBoost 
+	SpacewalkBoost ExtraSpeedBoost = <ExtraSpeedBoost> 
+  endif
   WaitAnimFinished
   if GotParam FlipGraphic
     BoardRotate
@@ -245,9 +248,6 @@ script Manual BlendPeriod = 0.3
   if GotParam SproingFlip
     BlendPeriodOut 0
     FlipAfter
-  endif
-  if GotParam ExtraSpeedBoost 
-	SpacewalkBoost ExtraSpeedBoost = <ExtraSpeedBoost> 
   endif
   if GotParam NoBlend
     BlendPeriodOut 0
