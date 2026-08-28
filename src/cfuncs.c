@@ -1,19 +1,22 @@
 #include "cfuncs.h"
 
+#include "input.h"
+#include "online.h"
+#include "online/client.h"
+#include "online/server.h"
+#include "version.h"
+
 #include <log.h>
 #include <patch.h>
 #include <string.h>
 #include <windows.h>
-
-#include <input.h>
-#include <online.h>
 
 // #define THPS4_CFUNC_LUT_STOP 0x005ad670
 // #define THPS4_CFUNC_LUT_SIZE 0x22f8
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 19
+#define BETTER4_NUM_CFUNCS 30
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -40,6 +43,7 @@ int __cdecl CFunc_AutoAspectRatio(CStruct* params)
 }
 
 void addCFuncs() {
+    addCFunc("Better4Version", (void *)CFunc_Better4Version);
     addCFunc("GetLocalSkaterIndex", (void *)CFunc_GetLocalSkaterIndex);
 	addCFunc("ObserveSelf", (void *)CFunc_ObserveSelf);
 	addCFunc("QueueObserveSelf", (void*)CFunc_QueueObserveSelf);
@@ -56,9 +60,19 @@ void addCFuncs() {
 	addCFunc("ChangeGlobal", (void *)CFunc_ChangeGlobal);
 	addCFunc("SetSpinKeysControl", (void *)CFunc_SetSpinKeysControl);
 	addCFunc("SetSpineTransferControl", (void *)CFunc_SetSpineTransferControl);
-	addCFunc("GetServerList", (void *)CFunc_GetServerList);
 	addCFunc("SetPauseOnUnfocus", (void *)CFunc_SetPauseOnUnfocus);
     addCFunc("AutoAspectRatio", (void *)CFunc_AutoAspectRatio);
+	addCFunc("StartBetterServerList", (void *)CFunc_StartBetterServerList);
+	addCFunc("RefreshBetterServerList", (void *)CFunc_RefreshBetterServerList);
+	addCFunc("StopBetterServerList", (void *)CFunc_StopBetterServerList);
+	addCFunc("NumBetterServers", (void *)CFunc_NumBetterServers);
+	addCFunc("FoundBetterServers", (void *)CFunc_FoundBetterServers);
+	addCFunc("ChooseBetterServer", (void *)CFunc_ChooseBetterServer);
+	addCFunc("DescribeBetterServer", (void *)CFunc_DescribeBetterServer);
+	addCFunc("StartNatNegotiation", (void *)CFunc_StartNatNegotiation);
+	addCFunc("CancelNatNegotiation", (void *)CFunc_CancelNatNegotiation);
+	addCFunc("SetHosting", (void *)CFunc_SetHosting);
+	addCFunc("NotifyStateChanged", (void *)CFunc_NotifyStateChanged);
 }
 
 void printCFuncs() {
@@ -81,10 +95,6 @@ void patchCFuncs() {
     patchWord(0x00511f40 + 1, NUM_CFUNCS); // Script::GetCFunctionLookupTableSize
     patchDWord(0x00512180 + 1, &cfuncs);  // Script::CFunctionLookupTable
 }
-
-typedef int(__cdecl* CFunc_PrintStruct_t)(CStruct *, int);
-static CFunc_PrintStruct_t CFunc_PrintStruct = (CFunc_PrintStruct_t)0x0041a4c0;
-
 
 int __cdecl CFunc_GetIniBool(CStruct *params) {
 	char *section = "";

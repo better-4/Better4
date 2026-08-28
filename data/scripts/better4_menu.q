@@ -1,6 +1,7 @@
 better4_menu_item_scale = 0.7
 script better4_main_menu_watermark
-  FormatText TextName = better4_watermark "Better4 %s" s = better4_version
+  Better4Version
+  FormatText TextName = better4_watermark "Better4 %s" s = <version>
   CreateScreenElement {
     parent = current_menu_anchor
     Type = TextElement

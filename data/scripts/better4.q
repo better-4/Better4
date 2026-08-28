@@ -1,4 +1,3 @@
-better4_version = "v0.8.2"
 better4_options_text = 'Better4 Options'
 better4_orange = [ 164 95 26 100 ]
 script EnterBetterObserve

@@ -1,22 +1,17 @@
-#include <windows.h>
+#include "input.h"
 
-#include <stdio.h>
-#include <stdint.h>
+#include "config.h"
+#include "global.h"
+#include "patch.h"
+#include "script.h"
 
 #include <SDL2/SDL.h>
 
-#include <config.h>
-#include <global.h>
-#include <patch.h>
-#include <script.h>
-#include <input.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <windows.h>
 
-// 0x810 = L1 held
-// 0x820 = L1 triggered
-// 0x858 = R1 held
-// 0x868 = R1 triggered
-// 0x834 = L2 held
-// 0x87C = R2 held
+
 #define OFFSET_L1_HELD 0x810
 #define OFFSET_L1_TRIGGER 0x820
 #define OFFSET_R1_HELD 0x858
@@ -128,62 +123,60 @@ int __cdecl CFunc_SetSpineTransferControl(void *params) {
 	spine_transfer_control_index = (int)index;
 	printLog("Set spine_transfer_control_index=%d\n", spine_transfer_control_index);
 
-	switch (spine_transfer_control_index)
-	{
-		case 1:
-			offset_spine_1 = OFFSET_R2_HELD;
-			spine_transfer_op = OP_SINGLE;
-			break;
-		case 2:
-			offset_spine_1 = OFFSET_L2_HELD;
-			spine_transfer_op = OP_SINGLE;
-			break;
-		case 3:
-			offset_spine_1 = OFFSET_R2_HELD;
-			offset_spine_2 = OFFSET_L2_HELD;
-			spine_transfer_op = OP_AND;
-			break;
-		case 4:
-			offset_spine_1 = OFFSET_L1_HELD;
-			offset_spine_2 = OFFSET_R1_HELD;
-			spine_transfer_op = OP_OR;
-			break;
-		case 5:
-			offset_spine_1 = OFFSET_R1_HELD;
-			spine_transfer_op = OP_SINGLE;
-			break;
-		case 6:
-			offset_spine_1 = OFFSET_L1_HELD;
-			spine_transfer_op = OP_SINGLE;
-			break;
-		case 7:
-			offset_spine_1 = OFFSET_R1_HELD;
-			offset_spine_2 = OFFSET_L1_HELD;
-			spine_transfer_op = OP_AND;
-			break;
-		case 0:
-		default:
-			offset_spine_1 = OFFSET_R2_HELD;
-			offset_spine_2 = OFFSET_L2_HELD;
-			spine_transfer_op = OP_OR;
-			break;
+	switch (spine_transfer_control_index) {
+	case 1:
+		offset_spine_1 = OFFSET_R2_HELD;
+		spine_transfer_op = OP_SINGLE;
+		break;
+	case 2:
+		offset_spine_1 = OFFSET_L2_HELD;
+		spine_transfer_op = OP_SINGLE;
+		break;
+	case 3:
+		offset_spine_1 = OFFSET_R2_HELD;
+		offset_spine_2 = OFFSET_L2_HELD;
+		spine_transfer_op = OP_AND;
+		break;
+	case 4:
+		offset_spine_1 = OFFSET_L1_HELD;
+		offset_spine_2 = OFFSET_R1_HELD;
+		spine_transfer_op = OP_OR;
+		break;
+	case 5:
+		offset_spine_1 = OFFSET_R1_HELD;
+		spine_transfer_op = OP_SINGLE;
+		break;
+	case 6:
+		offset_spine_1 = OFFSET_L1_HELD;
+		spine_transfer_op = OP_SINGLE;
+		break;
+	case 7:
+		offset_spine_1 = OFFSET_R1_HELD;
+		offset_spine_2 = OFFSET_L1_HELD;
+		spine_transfer_op = OP_AND;
+		break;
+	case 0:
+	default:
+		offset_spine_1 = OFFSET_R2_HELD;
+		offset_spine_2 = OFFSET_L2_HELD;
+		spine_transfer_op = OP_OR;
+		break;
 	}
 
 	return 1;
 }
 
 #define check_spine_buttons(SUCCESS, FAIL) \
-	switch (spine_transfer_op) \
-	{ \
-		case OP_SINGLE: \
-			check_button_asm(SUCCESS, FAIL, offset_spine_1); \
-			break; \
-		case OP_AND: \
-			check_buttons_and_asm(SUCCESS, FAIL, offset_spine_1, offset_spine_2); \
-			break; \
-		case OP_OR: \
-			check_buttons_or_asm(SUCCESS, FAIL, offset_spine_1, offset_spine_2); \
-			break; \
+	switch (spine_transfer_op) { \
+	case OP_SINGLE: \
+		check_button_asm(SUCCESS, FAIL, offset_spine_1); \
+		break; \
+	case OP_AND: \
+		check_buttons_and_asm(SUCCESS, FAIL, offset_spine_1, offset_spine_2); \
+		break; \
+	case OP_OR: \
+		check_buttons_or_asm(SUCCESS, FAIL, offset_spine_1, offset_spine_2); \
+		break; \
 	}
 
 void __stdcall ground_gone(void *comp) {

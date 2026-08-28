@@ -1,16 +1,19 @@
-#include <windows.h>
+#include "cfuncs.h"
+#include "log.h"
+#include "input.h"
 
 #include "partymod-thps4/src/main.h"
 
-#include <cfuncs.h>
-#include <log.h>
-#include <input.h>
+#include <windows.h>
 
 #define CONFIG_FILE_NAME "better4.ini"
 
-
 char executableDirectory[1024];
 char configFile[1024];
+
+// TODO (ellie): find somewhere else to put this
+typedef int(__cdecl* CFunc_PrintStruct_t)(CStruct *, int);
+static CFunc_PrintStruct_t CFunc_PrintStruct = (CFunc_PrintStruct_t)0x0041a4c0;
 
 void initConfigFile() {
 	GetModuleFileName(NULL, &executableDirectory, 1024);
@@ -53,6 +56,7 @@ void patchBetter4() {
 	patchSpinKeys();
 	patchSpineTransfers();
 	patchIykyk();
+	patchGamespyCalls();
 }
 
 void better4Main() {
@@ -67,23 +71,23 @@ void better4Main() {
 
 __declspec(dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 	// Perform actions based on the reason for calling.
-	switch(fdwReason) {
-		case DLL_PROCESS_ATTACH:
-			// Initialize once for each new process.
-			// Return FALSE to fail DLL load.
-			better4Main();
-			break;
+	switch (fdwReason) {
+	case DLL_PROCESS_ATTACH:
+		// Initialize once for each new process.
+		// Return FALSE to fail DLL load.
+		better4Main();
+		break;
 
-		case DLL_THREAD_ATTACH:
-			// Do thread-specific initialization.
-			break;
+	case DLL_THREAD_ATTACH:
+		// Do thread-specific initialization.
+		break;
 
-		case DLL_THREAD_DETACH:
-			// Do thread-specific cleanup.
-			break;
-		case DLL_PROCESS_DETACH:
-			// Perform any necessary cleanup.
-			break;
+	case DLL_THREAD_DETACH:
+		// Do thread-specific cleanup.
+		break;
+	case DLL_PROCESS_DETACH:
+		// Perform any necessary cleanup.
+		break;
 	}
 	return TRUE;
 }

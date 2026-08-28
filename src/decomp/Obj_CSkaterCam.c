@@ -1,7 +1,6 @@
 #include "decomp/Obj_CSkaterCam.h"
 #include "decomp/common.h"
 
-
 void Obj_CSkaterCam_SetMode(Obj_CSkaterCam *this, uint32_t mode, float unk) {
     static void (__fastcall* _SetMode)(Obj_CSkaterCam *, unused_t, uint32_t, float) = (void *)0x004d9bf0;
     _SetMode(this, UNUSED, mode, unk);
