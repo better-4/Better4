@@ -40,6 +40,7 @@ static void gs_natneg_complete_callback(NegotiateResult result, SOCKET gamesocke
 		printLog("gs_natneg_complete_callback: joining server %s:%d, join mode %d\n", inet_ntoa(remoteaddr->sin_addr), port, join_mode);
 
 		GameNet_Manager_JoinServer(gamenet_manager, join_mode, ip, port, 0);
+		gs_peer_shutdown();
 
 		break;
 	case nr_deadbeatpartner:
@@ -56,6 +57,7 @@ static void gs_natneg_complete_callback(NegotiateResult result, SOCKET gamesocke
 	}
 
 	gs_nat_negotiating = 0;
+	NNFreeNegotiateList();
 
 	if (result != nr_success) {
 		Script_RunScript(0x3a9fb574/*show_nat_timeout*/, 0, 0, 0, 0);
