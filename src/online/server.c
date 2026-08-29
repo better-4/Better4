@@ -85,6 +85,15 @@ int __cdecl CFunc_SetHosting(CStruct *params) {
 	return 1;
 }
 
+int __cdecl CFunc_IsHosting(CStruct *params) {
+	return gs_is_hosting;
+}
+
+int __cdecl CFunc_StopReporting(CStruct *params) {
+	gs_peer_shutdown();
+	return 1;
+}
+
 int __cdecl CFunc_NotifyStateChanged(CStruct *params) {
 	if (gs_peer) {
 		printLog("NotifyStateChanged: sending state changed\n");

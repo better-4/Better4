@@ -4,6 +4,7 @@
 #include "online.h"
 #include "online/client.h"
 #include "online/server.h"
+#include "online/server_list.h"
 #include "version.h"
 
 #include <log.h>
@@ -16,7 +17,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 30
+#define BETTER4_NUM_CFUNCS 33
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -69,10 +70,13 @@ void addCFuncs() {
 	addCFunc("FoundBetterServers", (void *)CFunc_FoundBetterServers);
 	addCFunc("ChooseBetterServer", (void *)CFunc_ChooseBetterServer);
 	addCFunc("DescribeBetterServer", (void *)CFunc_DescribeBetterServer);
+	addCFunc("StopDescribingBetterServer", (void *)CFunc_StopDescribingBetterServer);
 	addCFunc("StartNatNegotiation", (void *)CFunc_StartNatNegotiation);
 	addCFunc("CancelNatNegotiation", (void *)CFunc_CancelNatNegotiation);
 	addCFunc("SetHosting", (void *)CFunc_SetHosting);
+	addCFunc("IsHosting", (void *)CFunc_IsHosting);
 	addCFunc("NotifyStateChanged", (void *)CFunc_NotifyStateChanged);
+	addCFunc("StopReporting", (void *)CFunc_StopReporting);
 }
 
 void printCFuncs() {

@@ -100,6 +100,9 @@ script create_big_black_hiding_box
   }
 endscript
 script quit_network_game
+  if IsHosting
+    StopReporting
+  endif
   if OnXbox
     DisplayLoadingScreen "loadscrn_generic" 17
   else
@@ -146,11 +149,7 @@ script spawned_chosen_host_game
   endif
   remove_host_options_sub_menu_textures_from_vram
   Cleanup preserve_skaters
-  if IsXBOX
-    DisplayLoadingScreen "loadscrn_system_link_x"
-  else
-    DisplayLoadingScreen "loadscrn_Online"
-  endif
+  DisplayLoadingScreen "loadscrn_Online"
   FreeServerList
   LeaveServer
   SetGameType NetLobby
@@ -519,7 +518,7 @@ script join_chosen
 endscript
 script better_join_chosen
   if FoundBetterServers
-    StopBetterServerList
+    // StopBetterServerList
     SetJoinMode JOIN_MODE_PLAY
     actions_menu_anchor:DoMorph scale = 0
     DoScreenElementMorph id = game_list_up_arrow time = 0 scale = 1
@@ -547,7 +546,7 @@ script observe_chosen
 endscript
 script better_observe_chosen
   if FoundBetterServers
-    StopBetterServerList
+    // StopBetterServerList
     SetJoinMode JOIN_MODE_OBSERVE
     actions_menu_anchor:DoMorph scale = 0
     hide_internet_only_menus
@@ -1349,7 +1348,18 @@ script better_server_list_menu_add_item
     <highlight_bar_pos> = (96, -6)
     <focus_script> = server_list_focus
     main_menu_add_item <...> max_width = 220
-    update_lobby_server_list
+  endif
+endscript
+script better_server_list_menu_update_item
+  if ObjectExists id = <id>
+    SetScreenElementProps id = { <id> child = 0 } text = <text>
+  endif
+endscript
+script better_server_list_menu_focus_item
+  if ObjectExists id = <id>
+    FireEvent type = focus target = <id>
+  else
+    back_from_better_server_list
   endif
 endscript
 script player_list_add_item
@@ -1379,13 +1389,22 @@ script update_lobby_server_list
   if ScreenElementExists id = server_list_menu
     if not ( current_lobby_focus = 1 )
       if ScreenElementExists id = lobby_game_list_title
-        // TODO (ellie): Internet / LAN / Join IP compatibility
         NumBetterServers
         FormatText TextName = title_text "Games: %n" n = <num_servers>
         SetScreenElementProps id = lobby_game_list_title text = <title_text>
       endif
       SetScreenElementProps id = server_list_scrolling_menu reset_window
     endif
+  endif
+endscript
+script update_better_server_count
+  if ScreenElementExists id = server_list_menu
+    if ScreenElementExists id = lobby_game_list_title
+      NumBetterServers
+      FormatText TextName = title_text "Games: %n" n = <num_servers>
+      SetScreenElementProps id = lobby_game_list_title text = <title_text>
+    endif
+    SetScreenElementProps id = server_list_scrolling_menu reset_window
   endif
 endscript
 script return_current_lobby_focus
@@ -1542,6 +1561,7 @@ script back_from_game_list
   refocus_actions_menu
 endscript
 script back_from_better_server_list
+  StopDescribingBetterServer
   StartBetterServerList
   actions_menu_anchor:DoMorph scale = 1
   server_desc_menu_anchor:DoMorph scale = 0
@@ -2144,6 +2164,7 @@ script net_chosen_join_server
     endif
     show_nat_start_dialog
     PrintStruct <...>
+    StopBetterServerList
     if not StartNatNegotiation <...>
       create_join_failed_dialog
     endif
