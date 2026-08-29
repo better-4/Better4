@@ -70,13 +70,13 @@ mp_game_type_info = [
 num_observers_info = [
   { name = "No Observers" checksum = num_0 }
   { name = "1 Observer" checksum = num_1 broadband_only }
-  { name = "2 Observer" checksum = num_2 broadband_only }
-  { name = "3 Observer" checksum = num_3 broadband_only }
-  { name = "4 Observer" checksum = num_4 broadband_only }
-  { name = "5 Observer" checksum = num_5 broadband_only }
-  { name = "6 Observer" checksum = num_6 broadband_only }
-  { name = "7 Observer" checksum = num_7 broadband_only }
-  { name = "8 Observer" checksum = num_8 broadband_only }
+  { name = "2 Observers" checksum = num_2 broadband_only }
+  { name = "3 Observers" checksum = num_3 broadband_only }
+  { name = "4 Observers" checksum = num_4 broadband_only }
+  { name = "5 Observers" checksum = num_5 broadband_only }
+  { name = "6 Observers" checksum = num_6 broadband_only }
+  { name = "7 Observers" checksum = num_7 broadband_only }
+  { name = "8 Observers" checksum = num_8 broadband_only }
 ]
 skill_level_info = [
   { name = "1: Baby Steps    " checksum = num_1 }
