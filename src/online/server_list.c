@@ -194,6 +194,7 @@ static void gs_server_list_init() {
 	printLog("gs_server_list_init\n");
 	if (!gs_peer) {
 		num_servers = 0;
+		currently_described_server = 0;
 		gs_peer_initialize();
 		peerStartListingGames(gs_peer, GS_FIELDS, NUM_GS_FIELDS, "", gs_listing_games_callback, 0);
 	}
@@ -203,7 +204,9 @@ static void gs_server_list_shutdown() {
 	printLog("gs_server_list_shutdown\n");
 	if (gs_peer) {
 		peerStopListingGames(gs_peer);
-		gs_peer_shutdown(gs_peer);
+		gs_peer_shutdown();
+		num_servers = 0;
+		currently_described_server = 0;
 	}
 }
 
@@ -216,6 +219,7 @@ static int refresh_server_list() {
 	if (gs_peer) {
 		peerStopListingGames(gs_peer);
 		num_servers = 0;
+		currently_described_server = 0;
 		update_server_menu();
 		peerStartListingGames(gs_peer, GS_FIELDS, NUM_GS_FIELDS, "", gs_listing_games_callback, 0);
 	}
