@@ -54,6 +54,8 @@ add_library(better4 SHARED
     "${SRC}/online/peer.h"
     "${SRC}/online/server.c"
     "${SRC}/online/server.h"
+    "${SRC}/online/server_list.c"
+    "${SRC}/online/server_list.h"
 
 )
 target_include_directories(better4 PUBLIC

@@ -24,7 +24,8 @@ static int gs_count_callback(PEER peer, qr2_key_type type, void *param) {
 	case key_server:
 		return 11;
 	case key_player:
-		return 1;
+		GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
+		return GameNet_Manager_GetNumPlayers(gamenet_manager);
 	default:
 		return 0;
 	}
@@ -150,8 +151,7 @@ static void gs_player_key_callback(PEER peer, int key, int index, qr2_buffer_t b
 		GameNet_PlayerInfo *target_player = 0;
 
 		int i = 0;
-		while (current_player != 0)
-		{
+		while (current_player != 0) {
 			if (index == i && !GameNet_PlayerInfo_IsObserving(current_player)) {
 				target_player = current_player;
 				break;
@@ -316,7 +316,12 @@ void gs_peer_initialize() {
 
 void gs_peer_shutdown() {
 	if (gs_peer) {
-		printLog("gs_peer_shutdown: shutting down peer\n");
+		printLog("gs_peer_shutdown: peerStopGame\n");
+		peerStopGame(gs_peer);
+		piStopReporting(gs_peer);
+		printLog("gs_peer_shutdown: peerClearTitle\n");
+		peerClearTitle(gs_peer);
+		printLog("gs_peer_shutdown: peerShutdown\n");
 		peerShutdown(gs_peer);
 		gs_peer = 0;
 	}
