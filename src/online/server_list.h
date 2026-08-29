@@ -3,6 +3,7 @@
 
 #include "decomp/CStruct.h"
 #include "decomp/CScript.h"
+#include "online/common.h"
 
 #include <UniSpySDK/serverbrowsing/sb_serverbrowsing.h>
 
@@ -11,7 +12,7 @@
 #define SERVER_INFO_STRLEN 32
 
 typedef struct PlayerInfo {
-    char name[16];
+    char name[PLAYER_NAME_STRLEN];
 } PlayerInfo;
 
 typedef struct ServerInfo {
@@ -34,6 +35,7 @@ typedef struct ServerInfo {
 
 int __cdecl CFunc_StartBetterServerList(CStruct *params);
 int __cdecl CFunc_RefreshBetterServerList(CStruct *params);
+int __cdecl CFunc_UpdateBetterServerList(CStruct *params);
 int __cdecl CFunc_StopBetterServerList(CStruct *params);
 
 int __cdecl CFunc_NumBetterServers(CStruct *params, CScript *script);

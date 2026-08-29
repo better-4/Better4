@@ -48,6 +48,8 @@ add_library(better4 SHARED
     "${SRC}/decomp/Prefs_Preferences.h"
     "${SRC}/online/client.c"
     "${SRC}/online/client.h"
+    "${SRC}/online/lobby_list.c"
+    "${SRC}/online/lobby_list.h"
     "${SRC}/online/patches.c"
     "${SRC}/online/patches.h"
     "${SRC}/online/peer.c"

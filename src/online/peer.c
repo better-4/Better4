@@ -5,6 +5,7 @@
 #include "decomp/GameNet_Manager.h"
 #include "decomp/Net_App.h"
 #include "decomp/Prefs_Preferences.h"
+#include "online/lobby_list.h"
 #include "log.h"
 #include "version.h"
 
@@ -263,6 +264,51 @@ void foreign_packet_handler(uint8_t *packet, int len, struct sockaddr *sender) {
 	}
 }
 
+void create_console_message(char *message) {
+	CStruct *params = CStruct_New();
+	CStruct_AddString(params, 0xc4745838/*text*/, message);
+	Script_RunScript(0xccb19938/*create_console_message*/, params, 0, 0, 0);
+
+	CStruct_Free(params);
+}
+
+void gs_player_joined_callback(PEER peer, RoomType room_type, char *nick, void *param) {
+	printLog("gs_player_joined_callback: room_type=%d, nick=%s\n", room_type, nick);
+
+	static char text[256];
+	sprintf_s(text, sizeof(text), "\\c4%s joined the room", nick);
+
+	lobby_add_player(nick);
+	create_console_message(text);
+}
+
+void gs_player_left_callback(PEER peer, RoomType room_type, char *nick, char *reason, void *param) {
+	printLog("gs_player_left_callback: room_type=%d, nick=%s, reason=%s\n", room_type, nick, reason);
+
+	static char text[256];
+	sprintf_s(text, sizeof(text), "\\c2%s left the room", nick);
+
+	lobby_remove_player(nick);
+	create_console_message(text);
+}
+
+void gs_new_player_list_callback(PEER peer, RoomType room_type, void *param) {
+	printLog("gs_new_player_list_callback: room_type=%d\n", room_type);
+}
+
+void gs_room_key_changed_callback(PEER peer, RoomType room_type, char *nick, char *key, char *value, void *param) {
+	printLog("gs_room_key_changed_callback: room_type=%d, nick=%s, key=%s, value=%s\n", room_type, nick, key, value);
+}
+
+void gs_room_message_callback(PEER peer, RoomType room_type, char *nick, char *message, MessageType message_type, void *param) {
+	printLog("gs_room_message_callback: room_type=%d, nick=%s, message=%s, message_type=%d\n", room_type, nick, message, message_type);
+
+	static char text[256];
+	sprintf_s(text, sizeof(text), "%s: %s", nick, message);
+
+	create_console_message(text);
+}
+
 void gs_peer_initialize() {
 	if (!gs_peer) {
 		// TODO (ellie): maybe tune these down if logs get too large?
@@ -282,14 +328,12 @@ void gs_peer_initialize() {
 		// TODO (ellie): handle server disconnect ("lost connection to openspy")
 		// callbacks.disconnected = ...;
 
-		// TODO (ellie): handle peerchat / lobby list
-		// callbacks.roomMessage = ...;
-		// callbacks.playerMessage = ...;
-		// callbacks.playerJoined = ...;
-		// callbacks.playerLeft = ...;
-		// callbacks.playerInfo = ...;
-		// callbacks.newPlayerList = ...;
-		// callbacks.roomKeyChanged = ...;
+		callbacks.roomMessage = gs_room_message_callback;
+		callbacks.playerJoined = gs_player_joined_callback;
+		callbacks.playerLeft = gs_player_left_callback;
+		// callbacks.playerInfo = gs_player_info_callback;
+		callbacks.newPlayerList = gs_new_player_list_callback;
+		callbacks.roomKeyChanged = gs_room_key_changed_callback;
 
 		callbacks.qrKeyList = gs_key_list_callback;
 		callbacks.qrServerKey = gs_server_key_callback;

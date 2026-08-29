@@ -441,6 +441,7 @@ script chose_internet
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
+  StartBetterPlayerList
   create_network_select_games_menu
 endscript
 script confirm_observe
@@ -474,6 +475,7 @@ endscript
 script host_net_chosen
   console_hide
   StopBetterServerList
+  StopBetterPlayerList
   // FreeServerList
   Change CAME_FROM_LAN = 0
   launch_network_host_options_menu
@@ -854,6 +856,7 @@ script spawn_lobby_list
 endscript
 script back_from_internet_menu
   StopBetterServerList
+  StopBetterPlayerList
   console_destroy
   DestroyScreenElement id = current_menu_anchor
   create_network_select_menu
@@ -873,7 +876,7 @@ script back_from_internet_host_options
 endscript
 script launch_lobby_list
   DestroyScreenElement id = current_menu_anchor
-  StartLobbyList
+  StartPlayerList
 endscript
 script back_from_network_select_menu
   SetNetworkMode
@@ -1362,15 +1365,45 @@ script better_server_list_menu_focus_item
     back_from_better_server_list
   endif
 endscript
+script player_list_menu_lock
+  if ObjectExists id = lobby_player_list_menu
+    SetScreenElementLock id = lobby_player_list_menu on
+  endif
+endscript
+script player_list_menu_unlock
+  if ObjectExists id = lobby_player_list_menu
+    SetScreenElementLock id = lobby_player_list_menu off
+  endif
+endscript
+script destroy_player_list_menu_children
+  if ObjectExists id = lobby_player_list_menu
+    SetScreenElementLock id = lobby_player_list_menu off
+    DestroyScreenElement id = lobby_player_list_menu recurse preserve_parent
+  endif
+endscript
+script update_better_player_list_count
+  if ObjectExists id = lobby_player_list_menu
+    if ScreenElementExists id = lobby_player_list_title
+      NumBetterPlayersInLobby
+      FormatText TextName = title_text "Users: %n" n = <num_players>
+      SetScreenElementProps id = lobby_player_list_title text = <title_text>
+    endif
+    SetScreenElementProps id = player_list_scrolling_menu reset_window
+  endif
+endscript
+script better_server_list_menu_focus_item
+  if ObjectExists id = <id>
+    FireEvent type = focus target = <id>
+  else
+    back_from_better_server_list
+  endif
+endscript
 script player_list_add_item
   if ObjectExists id = <id>
     return
   endif
   if ObjectExists id = lobby_player_list_menu
-    SetScreenElementLock id = lobby_player_list_menu off
     main_menu_add_item { parent = lobby_player_list_menu highlight_bar_scale = (0.975, 1.2) highlight_bar_pos = (94, -6) focus_script = player_list_focus <...> }
-    SetScreenElementLock id = lobby_player_list_menu on
-    update_lobby_player_list
   endif
 endscript
 script update_lobby_player_list
@@ -1565,12 +1598,16 @@ script back_from_better_server_list
   StartBetterServerList
   actions_menu_anchor:DoMorph scale = 1
   server_desc_menu_anchor:DoMorph scale = 0
+  game_list_up_arrow:DoMorph scale = 0
+  game_list_down_arrow:DoMorph scale = 0
   destroy_server_desc_children
   refocus_actions_menu
   restore_internet_only_menus
 endscript
 script back_from_user_list
   actions_menu_anchor:DoMorph scale = 1
+  user_list_up_arrow:DoMorph scale = 0
+  user_list_down_arrow:DoMorph scale = 0
   refocus_actions_menu
 endscript
 script back_from_buddy_list
@@ -1748,9 +1785,9 @@ script create_network_select_games_menu
     main_menu_add_item text = "Join Game" parent = actions_menu id = menu_network_select_join pad_choose_script = better_join_chosen highlight_bar_scale = (0.73, 1.3)
     main_menu_add_item not_focusable text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = better_observe_chosen highlight_bar_scale = (0.73, 1.3)
     main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = better_refresh_chosen highlight_bar_scale = (0.73, 1.3)
-    main_menu_add_item not_focusable text = "User List" parent = actions_menu id = menu_network_select_user_list pad_choose_script = user_list_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "User List" parent = actions_menu id = menu_network_select_user_list pad_choose_script = user_list_chosen highlight_bar_scale = (0.73, 1.3)
     // main_menu_add_item text = "Homie List" parent = actions_menu id = menu_network_select_buddy_list pad_choose_script = launch_shell_buddy_list pad_choose_params = { from_lobby } highlight_bar_scale = (1.43, 1.3)
-    main_menu_add_item not_focusable text = "Enter Message" parent = actions_menu id = menu_network_select_chat pad_choose_script = create_lobby_onscreen_kb highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Enter Message" parent = actions_menu id = menu_network_select_chat pad_choose_script = create_lobby_onscreen_kb highlight_bar_scale = (0.73, 1.3)
     RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
     FireEvent type = unfocus target = server_list_menu
     FireEvent type = unfocus target = server_desc_menu
@@ -2165,6 +2202,7 @@ script net_chosen_join_server
     show_nat_start_dialog
     PrintStruct <...>
     StopBetterServerList
+    StopBetterPlayerList
     if not StartNatNegotiation <...>
       create_join_failed_dialog
     endif
@@ -3621,13 +3659,13 @@ script CreateNotPostedDialog
     z_priority = 50
   }
 endscript
-script CreateGettingLobbyListDialog
+script CreateGettingPlayerListDialog
   dialog_box_exit
   create_dialog_box { title = net_status_msg
     text = net_status_getting_lobbies
   }
 endscript
-script CreateFailedLobbyListDialog
+script CreateFailedPlayerListDialog
   LobbyDisconnect
   dialog_box_exit
   create_dialog_box { title = net_status_msg
@@ -3771,23 +3809,35 @@ script cancel_keyboard
   RemoveTextureFromVram "key_middle" no_assert
   RemoveTextureFromVram "key_right" no_assert
   RemoveTextureFromVram "goal_left" no_assert
+  actions_menu_anchor:DoMorph scale = 1
+  game_list_menu_anchor:DoMorph scale = 1
+  DoScreenElementMorph id = player_list_anchor time = 0 scale = 1
+  DoScreenElementMorph id = chat_box_anchor time = 0 scale = 1
   if ObjectExists id = console_message_vmenu
-    DoScreenElementMorph id = console_message_vmenu alpha = 1
+    DoScreenElementMorph id = console_message_vmenu time = 0 scale = 1
   endif
-  create_network_select_games_menu <...>
+  AssignAlias id = actions_menu alias = current_menu
+  AssignAlias id = server_list_anchor alias = current_menu_anchor
+  FireEvent type = focus target = actions_menu
+  if GotParam focus_on_enter_message
+    RunScriptOnScreenElement id = current_menu_anchor set_enter_message_focus
+  endif
+  create_helper_text generic_helper_text pos = (0, 0)
 endscript
 script enter_kb_chat_message
   GetTextElementString id = keyboard_current_string
   cancel_keyboard focus_on_enter_message
-  SendMessage text = <string>
+  SendBetterMessage text = <string>
 endscript
 script create_lobby_onscreen_kb
+  actions_menu_anchor:DoMorph scale = 0
+  game_list_menu_anchor:DoMorph scale = 0
+  DoScreenElementMorph id = player_list_anchor time = 0 scale = 0
+  DoScreenElementMorph id = chat_box_anchor time = 0 scale = 0
   if ObjectExists id = console_message_vmenu
-    DoScreenElementMorph id = console_message_vmenu alpha = 0
+    DoScreenElementMorph id = console_message_vmenu time = 0 scale = 0
   endif
-  if ObjectExists id = current_menu_anchor
-    DestroyScreenElement id = current_menu_anchor
-  endif
+  FireEvent type = unfocus target = actions_menu
   create_onscreen_keyboard allow_cancel keyboard_cancel_script = cancel_keyboard keyboard_done_script = enter_kb_chat_message keyboard_title = "ENTER CHAT MESSAGE" min_length = 1
 endscript
 script add_multiplayer_mode_goals
