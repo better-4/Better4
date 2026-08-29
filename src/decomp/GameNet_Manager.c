@@ -36,12 +36,12 @@ char *GameNet_Manager_GetLevelName(GameNet_Manager *this, char unk) {
 }
 
 int GameNet_Manager_GetNumObservers(GameNet_Manager *this) {
-    static int (__fastcall* _GetNumObservers)(GameNet_Manager *) = (void *)0x004862e0;
+    static int (__fastcall* _GetNumObservers)(GameNet_Manager *) = (void *)0x004878b0;
     return _GetNumObservers(this);
 }
 
 int GameNet_Manager_GetMaxObservers(GameNet_Manager *this) {
-    static int (__fastcall* _GetMaxObservers)(GameNet_Manager *) = (void *)0x004878b0;
+    static int (__fastcall* _GetMaxObservers)(GameNet_Manager *) = (void *)0x004862e0;
     return _GetMaxObservers(this);
 }
 

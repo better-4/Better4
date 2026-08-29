@@ -70,6 +70,13 @@ mp_game_type_info = [
 num_observers_info = [
   { name = "No Observers" checksum = num_0 }
   { name = "1 Observer" checksum = num_1 broadband_only }
+  { name = "2 Observer" checksum = num_2 broadband_only }
+  { name = "3 Observer" checksum = num_3 broadband_only }
+  { name = "4 Observer" checksum = num_4 broadband_only }
+  { name = "5 Observer" checksum = num_5 broadband_only }
+  { name = "6 Observer" checksum = num_6 broadband_only }
+  { name = "7 Observer" checksum = num_7 broadband_only }
+  { name = "8 Observer" checksum = num_8 broadband_only }
 ]
 skill_level_info = [
   { name = "1: Baby Steps    " checksum = num_1 }
@@ -1746,7 +1753,7 @@ script create_network_select_games_menu
     }
     main_menu_add_item text = "Host Game" parent = actions_menu id = menu_network_select_net_host pad_choose_script = host_net_chosen highlight_bar_scale = (0.73, 1.3)
     main_menu_add_item text = "Join Game" parent = actions_menu id = menu_network_select_join pad_choose_script = better_join_chosen highlight_bar_scale = (0.73, 1.3)
-    main_menu_add_item not_focusable text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = better_observe_chosen highlight_bar_scale = (0.73, 1.3)
+    main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = better_observe_chosen highlight_bar_scale = (0.73, 1.3)
     main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = better_refresh_chosen highlight_bar_scale = (0.73, 1.3)
     main_menu_add_item not_focusable text = "User List" parent = actions_menu id = menu_network_select_user_list pad_choose_script = user_list_chosen highlight_bar_scale = (1.43, 1.3)
     // main_menu_add_item text = "Homie List" parent = actions_menu id = menu_network_select_buddy_list pad_choose_script = launch_shell_buddy_list pad_choose_params = { from_lobby } highlight_bar_scale = (1.43, 1.3)
@@ -1847,7 +1854,7 @@ script create_network_select_lan_games_menu
         keyboard_cancel_params = { cancel }
         allow_cancel }
     }
-    main_menu_add_item text = "Observe Game" not_focusable parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
     main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen highlight_bar_scale = (1.43, 1.3)
     RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
     FireEvent type = unfocus target = server_list_menu
@@ -2888,7 +2895,6 @@ script create_network_host_options_menu
         pad_choose_params = { sub_menu_script = create_network_host_options_max_players_menu }
       }
     endif
-    if InInternetMode
       GetPreferenceString pref_type = network num_observers
       network_host_options_menu_add_item {
         text1 = "Observers:"
@@ -2897,7 +2903,6 @@ script create_network_host_options_menu
         pad_choose_script = launch_network_host_options_sub_menu
         pad_choose_params = { sub_menu_script = create_network_host_options_max_observers_menu }
       }
-    endif
   endif
   if not InNetGame
     GetPreferenceString pref_type = network team_mode
