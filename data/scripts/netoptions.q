@@ -60,7 +60,7 @@ default_taunt_preferences =
 default_network_preferences = {
   game_type = { ui_string = "Trick Attack" checksum = nettrickattack }
   num_players = { ui_string = "8 Players" checksum = num_8 value = 8 }
-  num_observers = { ui_string = "No Observers" checksum = num_0 value = 0 }
+  num_observers = { ui_string = "8 Observer" checksum = num_8 broadband_only value = 8 }
   player_collision = { ui_string = "Off" checksum = boolean_false }
   team_mode = { ui_string = "None" checksum = teams_none }
   password = { ui_string = "" }
