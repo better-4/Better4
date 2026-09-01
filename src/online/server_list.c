@@ -64,7 +64,7 @@ static void update_server_info(ServerInfo *server_info, SBServer server) {
 
     for (int i = 0; i < server_info->num_players; i++) {
         PlayerInfo *player_info = &server_info->players[i];
-        strcpy_s(player_info->name, 16, SBServerGetPlayerStringValue(server, i, "player", "..."));
+        strcpy_s(player_info->name, PLAYER_NAME_STRLEN, SBServerGetPlayerStringValue(server, i, "player", "..."));
         printLog("  player %d: %s\n", i, player_info->name);
     }
 }
@@ -196,18 +196,17 @@ static void gs_server_list_init() {
 		num_servers = 0;
 		currently_described_server = 0;
 		gs_peer_initialize();
-		peerStartListingGames(gs_peer, GS_FIELDS, NUM_GS_FIELDS, "", gs_listing_games_callback, 0);
 	}
+	peerStartListingGames(gs_peer, GS_FIELDS, NUM_GS_FIELDS, "", gs_listing_games_callback, 0);
 }
 
 static void gs_server_list_shutdown() {
 	printLog("gs_server_list_shutdown\n");
 	if (gs_peer) {
 		peerStopListingGames(gs_peer);
-		gs_peer_shutdown();
-		num_servers = 0;
-		currently_described_server = 0;
 	}
+	num_servers = 0;
+	currently_described_server = 0;
 }
 
 static int start_server_list() {
@@ -235,8 +234,8 @@ static void update_server_menu() {
 	Script_RunScript(0xbcdfbd0b/*server_list_menu_unlock*/, 0, 0, 0, 0);
 	Script_RunScript(0x152aad5d/*destroy_server_menu_children*/, 0, 0, 0, 0);
 
-	for (int server_index = 0; server_index < num_servers; server_index++) {
-		ServerInfo *server_info = &servers[server_index];
+	for (int i = 0; i < num_servers; i++) {
+		ServerInfo *server_info = &servers[i];
 		add_server_to_menu(server_info);
 	}
 
