@@ -3,7 +3,6 @@
 
 #include "decomp/CScript.h"
 #include "decomp/CStruct.h"
-#include "decomp/GameNet_PlayerInfo.h"
 
 int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script);
 int __cdecl CFunc_ObserveSelf(CStruct* params);
@@ -16,5 +15,5 @@ int __cdecl CFunc_ObserveNext(CStruct* params);
 int __cdecl CFunc_ObservePrev(CStruct* params);
 int __cdecl CFunc_GetObsPlayerName(CStruct *params, CScript *script);
 int __cdecl CFunc_SnapObsCameraBack(CStruct* params);
-GameNet_PlayerInfo* GetLocalPlayerFast ();
+
 #endif
