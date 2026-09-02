@@ -33,7 +33,7 @@ combo_mambo.qb
 compmenu.qb
 compress.qb
 Comp_Scripts.qb
-consolemessage.qb
+better4/consolemessage.qb
 CPF_Scripts.qb
 credits.qb
 ctf.qb

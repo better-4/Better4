@@ -553,6 +553,44 @@ better4_control_extratrick_sound = {
   ]
 }
 
+better4_control_chat_size_index = 0
+better4_control_chat_size_value = 0
+better4_control_chat_size = {
+  id = better4_control_chat_size_id
+  index_name = better4_control_chat_size_index
+  value_name = better4_control_chat_size_value
+  text = "Chat Size"
+  ini_key = "ChatSize"
+  options = [
+    { text = "Default" value = 0 }
+    { text = "Small" value = 1 }
+    { text = "Big" value = 2 }
+    { text = "Extra Big" value = 3 }
+  ]
+  change_script = better4_change_chat_size
+}
+
+script better4_change_chat_size
+  switch better4_control_chat_size_value
+  case 0
+      change better4_chat_scale = 0.7
+	  change better4_padding = 0.65
+	  printf "default"
+  case 1
+      change better4_chat_scale = 0.5
+	  change better4_padding = 0.45
+	  printf "small"
+  case 2
+      change better4_chat_scale = 1.0
+	  change better4_padding = 0.85
+	  printf "big"
+  case 3
+      change better4_chat_scale = 1.2
+	  change better4_padding = 1.0
+	  printf "extra big"
+  endswitch
+endscript
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -576,6 +614,7 @@ script better4_controls_init
   better4_control_init better4_control_buttonsfont
   better4_control_init better4_control_fov
   better4_control_init better4_control_aspect_ratio
+  better4_control_init better4_control_chat_size
   // better4_control_init better4_trick_string
   // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
