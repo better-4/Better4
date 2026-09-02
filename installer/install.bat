@@ -31,13 +31,13 @@ if not exist "%TARGET_DIR%Skate4.exe" (
     exit /b 1
 )
 
-if not "%~2"=="ELEVATED" (
+if not "%~3"=="ELEVATED" (
     (echo test>"%TARGET_DIR%write_test.tmp") 2>nul
     if exist "%TARGET_DIR%write_test.tmp" (
         del "%TARGET_DIR%write_test.tmp"
     ) else (
         echo "%TARGET_DIR%" is not writable, requesting administrator privileges...
-        powershell -Command "Start-Process -FilePath 'cmd.exe' -ArgumentList '/c \"\"%~f0\" \"%~1\" ELEVATED\"' -Verb RunAs"
+        powershell -Command "Start-Process -FilePath 'cmd.exe' -ArgumentList '/c \"\"%~f0\" \"%~1\" \"%~2\" ELEVATED\"' -Verb RunAs"
         exit /b 0
     )
 )
@@ -77,6 +77,15 @@ if exist "Better4.exe" (
     del "Better4.exe.bak" 2>&1 >nul
 ) else (
     move "Better4.exe" "Better4.exe.bak" 2>&1 >nul
+)
+
+if /I "%~2"=="SILENT" (
+    if exist "Better4.exe" (
+        start "" "Better4.exe"
+    )
+) else (
+    echo.
+    pause
 )
 
 popd
