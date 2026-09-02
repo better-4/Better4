@@ -74,6 +74,11 @@ script SkaterInit
   Wait 1 game frame
   ClearSkaterCamOverride
   ClearPanel_Landed
+  if IsBetterObserving
+    create_observer_ui
+    skater:PausePhysics
+    skater:NetDisablePlayerInput
+  endif
   if not GotParam ReturnControl
     Goto OnGroundAI
   endif
@@ -519,7 +524,9 @@ script BigBrake
 endscript
 script NetBrake
   if InBail
-    SkaterInit ReturnControl NoAnims
+    if not IsBetterObserving
+      SkaterInit ReturnControl NoAnims
+    endif
   endif
   StopBalanceTrick
   SetRollingFriction 20
@@ -1230,7 +1237,10 @@ script EndOfRun
         if not GotParam FromTaxiGuy
           if not GameModeEquals is_goal_attack
             if not IsBetterObserving
-              ObserveAfter0
+              if not ObjectExists id = dialog_box_anchor
+                create_net_panel_message text = "Press \b3 to observe" style = generic_net_panel_message
+                set_observe_prompt_event
+              endif
             endif
           endif
         endif

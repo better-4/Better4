@@ -335,7 +335,11 @@ script get_prev_array_index curr = 0
 endscript
 script load_pro_skater
   SelectCurrentSkater name = <name>
-  GetCurrentSkaterProfileIndex
-  GetLocalSkaterIndex
-  RefreshSkaterModel profile = <currentSkaterProfileIndex> skater = <index>
+  if InNetGame
+    GetLocalSkaterIndex
+    RefreshSkaterModel profile = <currentSkaterProfileIndex> skater = <index>
+  else
+    GetCurrentSkaterProfileIndex
+    RefreshSkaterModel profile = <currentSkaterProfileIndex> skater = <index>
+  endif
 endscript

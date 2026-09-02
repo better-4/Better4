@@ -59,6 +59,105 @@ script helper_text_update_element
     not_focusable
   }
 endscript
+script create_helper_text_observe { anchor_id = helper_text_anchor
+    parent = current_menu_anchor
+    helper_text_anchor = <helper_text_anchor>
+    helper_pos = (320, 437)
+    bg_rgba = [ 0 0 0 60 ]
+  }
+  if ObjectExists id = <anchor_id>
+    DestroyScreenElement id = <anchor_id>
+  endif
+  CreateScreenElement {
+    type = ContainerElement
+    parent = <parent>
+    id = <anchor_id>
+    pos = (320, 229)
+    dims = (640, 480)
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = <anchor_id>
+    texture = highlight_bar
+    pos = <helper_pos>
+    just = [ center bottom ]
+    rgba = <bg_rgba>
+    scale = (5.5, 1.75)
+  }
+  CreateScreenElement {
+    type = HMenu
+    parent = <anchor_id>
+    pos = ( <helper_pos> - (0, 3) )
+    just = [ center bottom ]
+    internal_just = [ center center ]
+    padding_scale = 0.9
+    spacing_between = 3
+  }
+   <menu_id> = <id>
+  if GotParam helper_text_elements
+    ForEachIn <helper_text_elements> do = helper_text_update_element_observe params = { menu_id = <menu_id> }
+  endif
+endscript
+script helper_text_update_element_observe
+  if GotParam id
+    if ObjectExists <id>
+      SetScreenElementProps {
+        id = <id>
+        text = <text>
+      }
+      return
+    endif
+  endif
+  CreateScreenElement {
+    type = TextElement
+    parent = <menu_id>
+    id = <id>
+    font = dialog
+    text = <text>
+    rgba = [ 70 70 70 108 ]
+    scale = 0.70
+    not_focusable
+  }
+endscript
+script create_helper_text_no_bg { anchor_id = helper_text_anchor
+    parent = current_menu_anchor
+    helper_text_anchor = <helper_text_anchor>
+    helper_pos = (320, 437)
+    bg_rgba = [ 0 0 0 0 ]
+  }
+  if ObjectExists id = <anchor_id>
+    DestroyScreenElement id = <anchor_id>
+  endif
+  CreateScreenElement {
+    type = ContainerElement
+    parent = <parent>
+    id = <anchor_id>
+    pos = (320, 229)
+    dims = (640, 480)
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = <anchor_id>
+    texture = highlight_bar
+    pos = <helper_pos>
+    just = [ center bottom ]
+    rgba = <bg_rgba>
+    scale = (5.5, 1.75)
+  }
+  CreateScreenElement {
+    type = HMenu
+    parent = <anchor_id>
+    pos = ( <helper_pos> - (0, 3) )
+    just = [ center bottom ]
+    internal_just = [ center center ]
+    padding_scale = 0.9
+    spacing_between = 3
+  }
+   <menu_id> = <id>
+  if GotParam helper_text_elements
+    ForEachIn <helper_text_elements> do = helper_text_update_element_observe params = { menu_id = <menu_id> }
+  endif
+endscript
 generic_helper_text = { helper_text_elements = [ { text = "\b7/\b4 = Select" }
     { text = "\m1 = Back" }
     { text = "\m0 = Accept" }
