@@ -22,14 +22,15 @@ Better4 does not modify any vanilla game files. Any game data created by the ins
 
 ### Gameplay
 
-Better4 ships with THPS4 default controls, but can be configured to your liking.
+Better4 ships with THPS4 default controls, but can be configured to your liking. Here is a brief overview of all gameplay features added:
 
-* Left and right dropdown
-* Left and right manual spin
-* PS2-exclusive manual float glitches (MFG, MQT, etc.)
-* Single-tap WalliePlants
-* Boneless tricks (beanplant, fastplant, MikeV)
-* Configurable:
+* Added left and right dropdown
+* Added left and right manual spin
+* Added PS2-exclusive manual float glitches (MFG, MQT, etc.)
+* Added spacewalk
+* Added single-tap WalliePlants
+* Added configuration for boneless trick (beanplant, fastplant, MikeV)
+* Added toggles for:
   * Double revert after dropdown
   * Lip tricks
   * Rail spin
@@ -45,9 +46,11 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 
 ### Online
 
-* Added in-game server browser
+* Added NAT negotiation when connecting to servers (no more port forwarding!)
+* Added server browser
+* Added lobby player list and peerchat
 * Added better observe functionality (observe after 0, don't need to leave game)
-* Added "exit observe" and "sit out" options
+* Added observe UI
 
 ### CAS
 
@@ -58,19 +61,20 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Restored hidden CAS items for pros, secret skaters, and neversoft devs
 * Added custom boards (banana, hoverboard, old school, ollie)
 * Added bunched cargos
-* Unassign trick in "Edit Tricks" menu
+* Added button to unassign trick in "Edit Tricks" menu
+* Added option to change CAS during gameplay (local-only)
 
 ### Misc
 
-* Disable pause on unfocus
-* Disable board scuff
-* Configure buttons font (PS3, Xbox, PC)
+* Added toggle for pause-on-unfocus
+* Added toggle for board scuff
+* Added configuration for buttons font (PS3, Xbox, PC)
+* Added FOV configuration
+* Added aspect ratio configuration
 
 ## Known Issues
 
 * Can't navigate pause menu in online games with arrow keys
-* Games that are "not ready" are not filtered out of server browser
-* Games sometimes remain in the server browser after host quits
 
 ## Credits
 
