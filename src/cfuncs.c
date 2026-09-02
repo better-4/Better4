@@ -17,7 +17,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 33
+#define BETTER4_NUM_CFUNCS 35
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -51,9 +51,11 @@ void addCFuncs() {
 	addCFunc("IsBetterObserving", (void *)CFunc_IsBetterObserving);
 	addCFunc("ObserveAfter0", (void*)CFunc_ObserveAfter0);
 	addCFunc("BetterObserve", (void *)CFunc_BetterObserve);
+    addCFunc("ObserveNext", (void *)CFunc_ObserveNext);
+    addCFunc("ObservePrev", (void *)CFunc_ObservePrev);
 	addCFunc("IsVoluntaryObserving", (void*)CFunc_IsVoluntaryObserving);
-	addCFunc("DisableLocalPlayerInput", (void *)CFunc_DisableLocalPlayerInput);
-	addCFunc("EnableLocalPlayerInput", (void *)CFunc_EnableLocalPlayerInput);
+    addCFunc("GetObsPlayerName", (void*)CFunc_GetObsPlayerName);
+    addCFunc("SnapObsCameraBack", (void*)CFunc_SnapObsCameraBack);
 	addCFunc("GetIniBool", (void *)CFunc_GetIniBool);
 	addCFunc("GetIniInteger", (void *)CFunc_GetIniInteger);
 	addCFunc("SetIniBool", (void *)CFunc_SetIniBool);

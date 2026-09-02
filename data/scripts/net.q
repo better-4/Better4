@@ -107,6 +107,10 @@ script create_big_black_hiding_box
   }
 endscript
 script quit_network_game
+  ObserveSelf
+  destroy_observer_ui
+  EnablePlayerNames
+  EnableHUD
   if IsHosting
     StopReporting
   endif
@@ -282,6 +286,8 @@ script launch_fcfs_notification
   destroy_onscreen_keyboard
   force_close_rankings
   exit_pause_menu
+  destroy_observer_ui
+  EnableHUD
   create_error_box { title = "Host Notification"
     text = "This server is in First Come First Serve mode.  You are the designated host.  You may change options and start games."
     buttons = [ { text = "ok" pad_choose_script = exit_async_dialog }
@@ -926,7 +932,6 @@ script create_network_select_menu
   default
     main_menu_add_item {
       text = "LAN"
-      
       id = menu_network_select_lan
       pad_choose_script = network_select_menu_exit
       pad_choose_params = { callback = launch_network_select_lan_games_menu }
@@ -2983,12 +2988,16 @@ script create_network_host_options_menu
           id = menu_network_host_options_level_objects
           pad_choose_script = create_pro_trick_objects_menu
         }
-        network_host_options_menu_add_item {
-          text1 = "Sit Out:"
-          text2 = "Auto Server/FCFS"
-          id = menu_network_host_options_sitout
-          pad_choose_script = launch_network_sit_out_menu
-        }
+        if not GoalManager_HasActiveGoals
+          if not IsBetterObserving
+            network_host_options_menu_add_item {
+              text1 = "Sit Out:"
+              text2 = "Auto Server/FCFS"
+              id = menu_network_host_options_sitout
+              pad_choose_script = launch_network_sit_out_menu
+            }
+          endif
+        endif
       endif
     endif
     network_host_options_menu_add_item {
@@ -3306,6 +3315,8 @@ script CreateServerQuitDialog
     destroy_onscreen_keyboard
     force_close_rankings dont_retry
     exit_pause_menu
+    destroy_observer_ui
+    EnableHUD
     HideLoadingScreen
     if not IsObserving
       skater:Vibrate off
@@ -3327,6 +3338,8 @@ script create_game_ended_dialog
     destroy_onscreen_keyboard
     force_close_rankings
     exit_pause_menu
+    destroy_observer_ui
+    EnableHUD
     create_error_box { title = "Notice"
       text = "The server has terminated the current game.  Select OK to go back to freeskate."
       buttons = [ { text = "ok" pad_choose_script = end_network_game }
@@ -3346,6 +3359,8 @@ endscript
 script CreateLostConnectionDialog
   HideLoadingScreen
   exit_pause_menu
+  destroy_observer_ui
+  EnableHUD
   destroy_onscreen_keyboard
   force_close_rankings dont_retry
   if InNetGame
@@ -3513,6 +3528,8 @@ script CreateWaitForPlayersDialog
   if ObjectExists id = pause_menu
     exit_pause_menu
   endif
+  destroy_observer_ui
+  EnableHUD
   destroy_onscreen_keyboard
   create_error_box { title = net_status_msg
     text = net_message_waiting_for_players

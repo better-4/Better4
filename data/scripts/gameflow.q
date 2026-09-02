@@ -68,6 +68,19 @@ script unpause_game_flow
   UnpauseGameFlow
 endscript
 script GameFlow_Startup
+  if InNetGame
+    if not IsVoluntaryObserving
+      Wait 1 gameframe // Prevents null local player read from ObserveSelf when joining game
+      destroy_observer_ui // Needed on game start/emd regardless if obsing to clear enter obs event
+      ObserveSelf
+      EnablePlayerNames
+      EnableHUD
+    else
+      create_observer_ui
+      skater:PausePhysics
+      skater:NetDisablePlayerInput
+    endif
+  endif
   DisablePause
   begin
     Wait 1 gameframe
@@ -160,6 +173,9 @@ script GameFlow_StartRun
   TogglePanel 1
   DisablePause
   ResetSkaters
+  if IsBetterObserving
+    SnapObsCameraBack
+  endif
   if IsCareerMode
     UnSetGlobalFlag flag = PROMPT_FOR_SAVE
   endif
@@ -372,9 +388,6 @@ script GameFlow_End
 endscript
 script StandardGameFlow
   Printf "starting standard gameflow"
-  if not IsVoluntaryObserving
-    ObserveSelf
-  endif
   GameFlow_Startup
   StandardGameFlowBody
 endscript

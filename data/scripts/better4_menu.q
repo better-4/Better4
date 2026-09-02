@@ -1,4 +1,7 @@
+better4_options_text = 'Better4 Options'
+better4_orange = [ 164 95 26 100 ]
 better4_menu_item_scale = 0.7
+
 script better4_main_menu_watermark
   Better4Version
   FormatText TextName = better4_watermark "Better4 %s" s = <version>

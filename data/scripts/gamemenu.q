@@ -524,6 +524,9 @@ script make_text_sprite pos = (-27, 10) just = [ center center ] rgba = [ 128 12
   }
 endscript
 script create_pause_menu
+  if IsBetterObserving
+    destroy_observer_ui
+  endif
   if CustomParkMode editing
     SetParkEditorPauseMode pause
   endif
@@ -844,10 +847,15 @@ script create_mp_pause_menu
   RunScriptOnScreenElement id = pause_menu menu_onscreen
 endscript
 script exit_pause_menu menu_id = current_menu_anchor
+  if IsBetterObserving
+    create_observer_ui
+  endif
   Debounce x time = 0.3
   if InNetGame
     if LocalSkaterExists
-      skater:NetEnablePlayerInput
+      if not IsBetterObserving
+        skater:NetEnablePlayerInput
+      endif
     endif
   endif
   if not RunningReplay

@@ -52,7 +52,7 @@ game.qb
 gamecube.qb
 better4/gameflow.qb
 better4/gamemenu.qb
-gamemode.qb
+better4/gamemode.qb
 gameoptions.qb
 better4/game_progress_menu.qb
 better4/global_flags.qb
@@ -196,6 +196,6 @@ Tutorials.qb
 better4/walltricks.qb
 warppoint.qb
 xbox_scripts.qb
-better4/better4.qb
+better4/better4_observe.qb
 better4/better4_controls.qb
 better4/better4_menu.qb
