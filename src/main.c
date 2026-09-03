@@ -1,6 +1,7 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
+#include "updater.h"
 
 #include "partymod-thps4/src/main.h"
 
@@ -64,6 +65,8 @@ void better4Main() {
 
 	int isDebug = getIniBool("Miscellaneous", "Debug", 0, configFile);
 	initializeLogging(isDebug);
+
+	checkForUpdate();
 
 	patchBetter4();
 	partyMain(configFile);
