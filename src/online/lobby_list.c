@@ -37,11 +37,13 @@ void gs_nick_error_callback(PEER peer, int type, char* nick, int num_suggestions
 		new_nick[PLAYER_NAME_STRLEN - 2] = nick_suffix;
 	}
 
-	// XXX (ellie): technically this will only work up to 10 times... but if you log in 10 times you probably deserve to crash
 	nick_suffix = nick_suffix + 1;
 
-	if (gs_peer) {
+	if (nick_suffix <= '9') {
 		peerRetryWithNick(gs_peer, new_nick);
+	} else {
+		printLog("gs_nick_error_callback: exhausted name retries\n");
+		nick_suffix = '0';
 	}
 }
 
@@ -119,8 +121,8 @@ void gs_join_room_callback(PEER peer, PEERBool success, PEERJoinResult result, R
 void gs_connect_callback(PEER peer, PEERBool success, int failure_reason, void *param) {
 	printLog("gs_connect_callback: success=%d, failure_reason=%s\n", success, failure_reason);
 	if (success) {
-		peerJoinTitleRoom(gs_peer, 0, gs_join_room_callback, 0, gsi_false);
 		nick_suffix = '0';
+		peerJoinTitleRoom(gs_peer, 0, gs_join_room_callback, 0, gsi_false);
 	}
 }
 
@@ -130,17 +132,45 @@ void lobby_list_initialize() {
 		gs_peer_initialize();
 		num_players = 0;
 		currently_focused_player = 0;
+		nick_suffix = '0';
 	}
 
 	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
     Prefs_Preferences *net_preferences = GameNet_Manager_GetNetworkPreferences(gamenet_manager);
     CStruct *network_id = Prefs_Preferences_GetPreference(net_preferences, 0xcbed746e/*network_id*/);
+
     char *ui_string = "";
     if (!CStruct_GetString(network_id, 0x96875c0f/*ui_string*/, &ui_string, 0)) {
         printLog("StartBetterPlayerList: could not get network_id's ui_string\n");
     }
 
-    peerConnect(gs_peer, ui_string, 0, gs_nick_error_callback, gs_connect_callback, 0, gsi_false);
+	// sanitize player name
+	char player_name[PLAYER_NAME_STRLEN] = { '\0' };
+	for (int i = 0; i < PLAYER_NAME_STRLEN - 1; i++) {
+		char c = ui_string[i];
+		printLog("lobby_list_initialize: c=%x\n", c);
+		if (c == '\0') {
+			break;
+		} else if (c == ' '
+		    || c == '!'
+		    || c == '@'
+			|| c == '+'
+			|| c == '\\'
+			|| c == '?'
+			|| c == '>'
+			|| c == '<'
+			|| c == ':'
+			|| c == '='
+			|| c < 0 // foreign chars
+		) {
+			player_name[i] = '_';
+		} else {
+			player_name[i] = c;
+		}
+	}
+	printLog("lobby_list_initialize: sanitized name=%s\n", player_name);
+
+    peerConnect(gs_peer, player_name, 0, gs_nick_error_callback, gs_connect_callback, 0, gsi_false);
 }
 
 void lobby_list_disconnect() {
