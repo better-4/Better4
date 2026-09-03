@@ -169,13 +169,19 @@ script destroy_observer_ui
   destroy_obs_player_name
 endscript
 
-script restore_rank_screen_choose
+script restart_game_rank_screen
+  close_rankings
+  chosen_host_game
+endscript
+
+// destroying obs events destroys rank screen events so i just restore manually
+script restore_rank_screen_events
   SetScreenElementProps {
     id = root_window
     event_handlers = [
       { pad_left    null_script }
       { pad_right   null_script }
-      { pad_square  null_script }
+      { pad_square  restart_game_rank_screen }
       { pad_space  null_script }
       { pad_choose  close_rankings }
     ]
