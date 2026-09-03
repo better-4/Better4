@@ -2,6 +2,7 @@
 #include "log.h"
 #include "input.h"
 #include "updater.h"
+#include "security.h"
 
 #include "partymod-thps4/src/main.h"
 
@@ -58,6 +59,7 @@ void patchBetter4() {
 	patchSpineTransfers();
 	patchIykyk();
 	patchGamespyCalls();
+	patchStrcpy();
 }
 
 void better4Main() {

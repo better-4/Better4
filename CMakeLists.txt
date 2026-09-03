@@ -22,6 +22,8 @@ add_library(better4 SHARED
     "${SRC}/main.c"
     "${SRC}/online.c"
     "${SRC}/online.h"
+    "${SRC}/security.c"
+    "${SRC}/security.h"
     "${SRC}/updater.c"
     "${SRC}/updater.h"
     "${SRC}/version.c"
