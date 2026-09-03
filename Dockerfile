@@ -8,7 +8,8 @@ FROM ${BASE_IMAGE} AS base
 ENV DEBIAN_FRONTEND=noninteractive \
     WINEPREFIX=/opt/wineprefix \
     WINEDEBUG=-all \
-    WINEDLLOVERRIDES="mscoree=d;mshtml=d"
+    WINEDLLOVERRIDES="mscoree=d;mshtml=d" \
+    SDL2_VERSION=2.30.9
 
 # wine + wine64   - wine64 has the 64-bit Wine binaries; the `wine` package
 #                   provides the /usr/bin/{wine,wine64,wineboot,wineserver}
@@ -19,11 +20,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # cmake/ninja     - the generator we use instead of the Windows-only VS generator
 # procps          - pgrep, used to wait for wineserver during prefix init
 # libicu74        - .NET runtime dependency (ICU 74 on Ubuntu 24.04)
-# zip             - required by vcpkg's bootstrap-vcpkg.sh (unzip alone isn't enough)
-# build-essential - vcpkg needs a native (x64-linux) compiler for its own
-#                   host-tool ports (vcpkg-cmake, vcpkg-cmake-config), which
-#                   run on the build machine rather than being cross-compiled
-# pkg-config      - the vcpkg sdl2 port fixes up a .pc file post-build
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \
     apt-get update \
@@ -31,8 +27,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         wine wine64 winbind \
         python3 msitools \
         cmake ninja-build \
-        git curl zip unzip xz-utils ca-certificates procps \
-        libicu74 build-essential pkg-config \
+        git curl unzip xz-utils ca-certificates procps \
+        libicu74 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN $(command -v wine64 || command -v wine) wineboot --init \
@@ -58,34 +54,17 @@ RUN --mount=type=cache,target=/opt/msvc-cache \
     && rm -rf /opt/msvc-wine
 
 ########################################
-FROM base AS vcpkg
+FROM base AS sdl2
 
-RUN git clone https://github.com/microsoft/vcpkg.git /opt/vcpkg \
-    && /opt/vcpkg/bootstrap-vcpkg.sh -disableMetrics
-
-########################################
-FROM vcpkg AS deps-vcpkg
-
-ENV PATH=/opt/msvc/bin/x86:${PATH}
-
-COPY --from=msvc /opt/msvc /opt/msvc
-COPY --from=vcpkg /opt/vcpkg /opt/vcpkg
-COPY cmake /opt/cmake
-
-RUN --mount=type=cache,target=/opt/vcpkg/buildtrees \
-    --mount=type=cache,target=/opt/vcpkg/downloads \
-    echo "==> Installing SDL2 via vcpkg" \
-    && /opt/vcpkg/vcpkg install \
-        sdl2:x86-windows-msvcwine \
-        --overlay-triplets=/opt/cmake/triplets
-
-RUN mkdir -p /opt/vcpkg/installed/x86-windows-msvcwine/tools/sdl2 \
-    && cp /opt/vcpkg/installed/x86-windows-msvcwine/bin/SDL2.dll \
-          /opt/vcpkg/installed/x86-windows-msvcwine/tools/sdl2/SDL2.dll
-
-ENV VCPKG_ROOT=/opt/vcpkg \
-    VCPKG_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake \
-    VCPKG_OVERLAY_TRIPLETS=/opt/cmake/triplets
+# The VC dev package lays headers flat in include/ (include/SDL.h), but the
+# source uses the vcpkg-style #include <SDL2/SDL.h>. A self-referential symlink
+# (include/SDL2 -> .) makes SDL2/SDL.h resolve to include/SDL.h.
+RUN curl -fsSL -o /tmp/sdl2.zip \
+      "https://github.com/libsdl-org/SDL/releases/download/release-${SDL2_VERSION}/SDL2-devel-${SDL2_VERSION}-VC.zip" \
+    && mkdir -p /opt/sdl2 \
+    && unzip -q /tmp/sdl2.zip -d /opt/sdl2 \
+    && ln -s . "/opt/sdl2/SDL2-${SDL2_VERSION}/include/SDL2" \
+    && rm /tmp/sdl2.zip
 
 ########################################
 FROM base AS dotnet
@@ -114,16 +93,12 @@ ENV PATH=/opt/dotnet:${PATH} \
 FROM toolchain AS toolchain-msvc
 
 COPY --from=msvc /opt/msvc /opt/msvc
-COPY --from=deps-vcpkg /opt/cmake /opt/cmake
-COPY --from=deps-vcpkg /opt/vcpkg /opt/vcpkg
+COPY --from=sdl2 /opt/sdl2 /opt/sdl2
 
-ENV PATH=/opt/msvc/bin/x86:${PATH}
+ENV PATH=/opt/msvc/bin/x86:${PATH} \
+    SDL2_DIR=/opt/sdl2/SDL2-${SDL2_VERSION}
 ENV CC=cl
 ENV CXX=cl
-
-ENV VCPKG_ROOT=/opt/vcpkg \
-    VCPKG_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake \
-    VCPKG_OVERLAY_TRIPLETS=/opt/cmake/triplets
 
 ########################################
 FROM toolchain-dotnet AS build-qscripted
@@ -143,9 +118,7 @@ COPY vendor/partymod-thps4 vendor/partymod-thps4
 RUN --mount=type=cache,target=/build \
     echo "==> Building better4patcher.exe" \
     && cmake -S "vendor/partymod-thps4" -B "/build/better4patcher" -G Ninja \
-       -DCMAKE_TOOLCHAIN_FILE="${VCPKG_TOOLCHAIN_FILE}" -DVCPKG_TARGET_TRIPLET=x86-windows-msvcwine \
-       -DVCPKG_OVERLAY_TRIPLETS="${VCPKG_OVERLAY_TRIPLETS}" \
-       -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
+       -DSDL2_DIR="${SDL2_DIR}/cmake" -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
     && cmake --build "/build/better4patcher" --target partypatcher \
     && cp "/build/better4patcher/partypatcher.exe" "/out/better4patcher.exe"
 
@@ -156,9 +129,7 @@ COPY vendor/partymod-thps4 vendor/partymod-thps4
 RUN --mount=type=cache,target=/build \
     echo "==> Building better4config.exe" \
     && cmake -S "vendor/partymod-thps4" -B "/build/better4config" -G Ninja \
-       -DCMAKE_TOOLCHAIN_FILE="${VCPKG_TOOLCHAIN_FILE}" -DVCPKG_TARGET_TRIPLET=x86-windows-msvcwine \
-       -DVCPKG_OVERLAY_TRIPLETS="${VCPKG_OVERLAY_TRIPLETS}" \
-       -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
+       -DSDL2_DIR="${SDL2_DIR}/cmake" -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
     && cmake --build "/build/better4config" --target partyconfig \
     && cp "/build/better4config/partyconfig.exe" "/out/better4config.exe"
 
@@ -172,9 +143,7 @@ COPY CMakeLists.txt .
 RUN --mount=type=cache,target=/build \
     echo "==> Building better4.dll" \
     && cmake -B "/build/better4" -G Ninja \
-       -DCMAKE_TOOLCHAIN_FILE="${VCPKG_TOOLCHAIN_FILE}" -DVCPKG_TARGET_TRIPLET=x86-windows-msvcwine \
-       -DVCPKG_OVERLAY_TRIPLETS="${VCPKG_OVERLAY_TRIPLETS}" \
-       -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
+       -DSDL2_DIR="${SDL2_DIR}/cmake" -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_BUILD_TYPE=Release \
        -DCMAKE_C_FLAGS_RELEASE="/MD /Od /Ob0 /DNDEBUG" \
        -DUNISPY_DOMAIN_NAME=openspy.net \
     && cmake --build "/build/better4" --target better4 \
@@ -185,8 +154,8 @@ COPY vendor/partymod-thps4/gamecontrollerdb.txt /out
 COPY vendor/partymod-thps4/readme-partymod.txt /out
 COPY installer/install.bat /out
 COPY installer/updater.ps1 /out/better4updater.ps1
-RUN cp /opt/vcpkg/installed/x86-windows-msvcwine/bin/SDL2.dll /out
-RUN cp /opt/vcpkg/installed/x86-windows-msvcwine/share/sdl2/copyright /out/README-SDL.txt
+RUN cp ${SDL2_DIR}/lib/x86/SDL2.dll /out
+RUN cp ${SDL2_DIR}/README.txt /out/README-SDL.txt
 COPY README.md /out/readme-better4.txt
 
 ########################################

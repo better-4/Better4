@@ -1,5 +1,3 @@
-# Better4 self-updater. Pretty slopped.
-
 [CmdletBinding()]
 param(
     [string]$CurrentVersion,
@@ -90,10 +88,6 @@ function Show-DownloadingWindow {
     $label.Height = 20
     $form.Controls.Add($label)
 
-    # A plain two-stage bar (0% while downloading, jumped to 50% once
-    # extraction starts) rather than a real percentage - Invoke-WebRequest
-    # doesn't expose byte-level progress without switching to a lower-level
-    # download API, and a smooth/animated bar isn't worth it here.
     $progressBar = New-Object System.Windows.Forms.ProgressBar
     $progressBar.Minimum = 0
     $progressBar.Maximum = 100
@@ -190,9 +184,6 @@ function Wait-ForKeyAndExit {
     exit $Code
 }
 
-# ---------------------------------------------------------------------------
-# Phase 2: detached, waits for the caller to exit, then finishes the install.
-# ---------------------------------------------------------------------------
 if ($Phase2) {
     if ($WaitPid -gt 0) {
         Write-Host "Waiting for Better4 (PID $WaitPid) to close..."
@@ -232,10 +223,6 @@ if ($Phase2) {
     exit 0
 }
 
-# ---------------------------------------------------------------------------
-# Phase 1: check, prompt, download+extract, hand off to phase 2 if installing.
-# ---------------------------------------------------------------------------
-
 $checkEnabled = Get-IniValue -Path $IniPath -Section "Updater" -Key "CheckForUpdates" -Default "1"
 if ($checkEnabled -eq "0") {
     exit $EXIT_CONTINUE
@@ -250,7 +237,6 @@ try {
             -Headers @{ "User-Agent" = "better4-updater"; "Accept" = "application/vnd.github+json" } `
             -TimeoutSec 5
     } catch {
-        # Fail open - a broken network must never block the game from starting.
         exit $EXIT_CONTINUE
     }
 
@@ -314,8 +300,6 @@ switch ($choice) {
                 }
                 Expand-Archive -Path $zipPath -DestinationPath $extractDir -Force
             } catch {
-                # Download/extract failed - fail open rather than leave the
-                # game unable to start.
                 exit $EXIT_CONTINUE
             }
         } finally {
@@ -331,8 +315,6 @@ switch ($choice) {
         exit $EXIT_UPDATING
     }
     default {
-        # Dialog dismissed/cancelled - don't persist anything, ask again
-        # next launch.
         exit $EXIT_CONTINUE
     }
 }

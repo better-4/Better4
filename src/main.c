@@ -66,8 +66,6 @@ void better4Main() {
 	int isDebug = getIniBool("Miscellaneous", "Debug", 0, configFile);
 	initializeLogging(isDebug);
 
-	// Runs before any patching so that if the user installs an update, we
-	// exit cleanly before touching game state.
 	checkForUpdate();
 
 	patchBetter4();
