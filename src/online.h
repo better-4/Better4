@@ -15,5 +15,6 @@ int __cdecl CFunc_ObserveNext(CStruct* params);
 int __cdecl CFunc_ObservePrev(CStruct* params);
 int __cdecl CFunc_GetObsPlayerName(CStruct *params, CScript *script);
 int __cdecl CFunc_SnapObsCameraBack(CStruct* params);
+int ObserveCamCycle (int direction);
 
 #endif

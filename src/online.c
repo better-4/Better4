@@ -148,66 +148,17 @@ int __cdecl CFunc_ObserveAfter0(CStruct* params) {
 
 
 int __cdecl CFunc_ObserveNext(CStruct* params) {
-	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
-	if (!gamenet_manager) { printLog("SnapObsCameraBack: gamenet_manager is null\n"); return 0; }
-
-	GameNet_PlayerInfo *local_player = GameNet_Manager_GetLocalPlayer(gamenet_manager);
-	if (!local_player) { printLog("SnapObsCameraBack: local_player is null\n"); return 0; }
-
-	Obj_CSkater *local_skater = local_player->skater;
-	if (!local_skater) { printLog("SnapObsCameraBack: local_skater is null\n"); return 0; }
-
-	Obj_CSkaterCam *local_camera = local_skater->camera;
-	if (!local_camera) { printLog("SnapObsCameraBack: local_camera is null\n"); return 0; }
-
-	GameNet_PlayerInfo *players[8];
-	uint32_t num_players = 0;
-	players[num_players++] = local_player;
-
-	Lst_Search search = Lst_Search_PlayerInfo();
-	GameNet_PlayerInfo *current_player = GameNet_Manager_FirstPlayerInfo(gamenet_manager, &search, 1);
-
-	while (current_player != 0 && num_players < 8)
-	{
-		uint32_t is_local_player = GameNet_PlayerInfo_IsLocalPlayer(current_player);
-		uint32_t is_observing = GameNet_PlayerInfo_IsObserving(current_player);
-
-		if (current_player != local_player && !is_local_player && !is_observing) {
-			players[num_players++] = current_player;
-		}
-
-		current_player = Lst_Search_NextItem(&search);
-	}
-	if (num_players <= 1) { printLog("ObserveCamCycle: no other active players to cycle to\n"); return 0; }
-
-	uint32_t current_index = 0;
-	if (local_observe_target)
-	{
-		for (uint32_t player_index = 0; player_index < num_players; player_index++)
-		{
-			if (players[player_index] == local_observe_target) {
-				current_index = player_index;
-				break;
-			}
-		}
-	}
-
-	uint32_t target_index = ((current_index + 1) % num_players + num_players) % num_players;
-	GameNet_PlayerInfo *target_player = players[target_index];
-
-	Obj_CSkater *target_skater = target_player->skater;
-	if (!target_skater) { printLog("ObserveCamCycle: target_skater is null\n"); return 0; }
-
-	Obj_CSkaterCam_SetMode(local_camera, 2, 0.0f);
-	Obj_CSkaterCam_SetSkater(local_camera, target_skater);
-
-	local_observe_target = target_player;
-
-	return 1;
+	ObserveCamCycle(1);
+    return 1;
 }
 
 int __cdecl CFunc_ObservePrev(CStruct* params) {
-	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
+	ObserveCamCycle(-1);
+    return 1;
+}
+
+int ObserveCamCycle (int direction) {
+    GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
 	if (!gamenet_manager) { printLog("SnapObsCameraBack: gamenet_manager is null\n"); return 0; }
 
 	GameNet_PlayerInfo *local_player = GameNet_Manager_GetLocalPlayer(gamenet_manager);
@@ -220,7 +171,7 @@ int __cdecl CFunc_ObservePrev(CStruct* params) {
 	if (!local_camera) { printLog("SnapObsCameraBack: local_camera is null\n"); return 0; }
 
 	GameNet_PlayerInfo *players[8];
-	uint32_t num_players = 0;
+	uint8_t num_players = 0;
 	players[num_players++] = local_player;
 
 	Lst_Search search = Lst_Search_PlayerInfo();
@@ -228,8 +179,8 @@ int __cdecl CFunc_ObservePrev(CStruct* params) {
 
 	while (current_player != 0 && num_players < 8)
 	{
-		uint32_t is_local_player = GameNet_PlayerInfo_IsLocalPlayer(current_player);
-		uint32_t is_observing = GameNet_PlayerInfo_IsObserving(current_player);
+		uint8_t is_local_player = GameNet_PlayerInfo_IsLocalPlayer(current_player);
+		uint8_t is_observing = GameNet_PlayerInfo_IsObserving(current_player);
 
 		if (current_player != local_player && !is_local_player && !is_observing) {
 			players[num_players++] = current_player;
@@ -239,10 +190,10 @@ int __cdecl CFunc_ObservePrev(CStruct* params) {
 	}
 	if (num_players <= 1) { printLog("ObserveCamCycle: no other active players to cycle to\n"); return 0; }
 
-	uint32_t current_index = 0;
+	uint8_t current_index = 0;
 	if (local_observe_target)
 	{
-		for (uint32_t player_index = 0; player_index < num_players; player_index++)
+		for (uint8_t player_index = 0; player_index < num_players; player_index++)
 		{
 			if (players[player_index] == local_observe_target) {
 				current_index = player_index;
@@ -251,7 +202,7 @@ int __cdecl CFunc_ObservePrev(CStruct* params) {
 		}
 	}
 
-	uint32_t target_index = ((current_index + 1) % num_players + num_players) % num_players;
+	uint8_t target_index = ((current_index + direction) % num_players + num_players) % num_players;
 	GameNet_PlayerInfo *target_player = players[target_index];
 
 	Obj_CSkater *target_skater = target_player->skater;
