@@ -265,3 +265,8 @@ generic_helper_text_toggle = { helper_text_elements = [ { text = "\b7/\b4 = Sele
     { text = "\m0 = Toggle" }
   ]
 }
+rank_screen_helper_text = { helper_text_elements = [ 
+  { text = "\b3 = Accept" } 
+  { text = "\b1 = Restart Game" } 
+  ] 
+}
