@@ -477,7 +477,6 @@ script entered_chat_message
       endif
     endif
   endif
-  Wait 30 gameframe
   destroy_onscreen_keyboard
 endscript
 script menu_entered_chat_message
