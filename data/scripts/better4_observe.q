@@ -6,10 +6,8 @@ script EnterBetterObserve
   create_observer_ui
   Wait 15 gameframes
   restore_start_key_binding
-  if IsBetterObserving
-    skater:NetDisablePlayerInput
-    skater:PausePhysics
-  endif
+  skater:NetDisablePlayerInput
+  skater:PausePhysics
 endscript
 
 script QuitBetterObservivng
