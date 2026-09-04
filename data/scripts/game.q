@@ -468,10 +468,25 @@ script entered_chat_message
         if ( <string> = "/clear")
           console_clear
         else
-          if ( <string> = "/warp")
-            create_net_panel_message text = "Coming soon..." style = generic_net_panel_message
-          else
-            SendChatMessage string = <string>
+          if ( <string> = "7set")
+            if not GoalManager_HasActiveGoals count_all
+              set_custom_restart
+            endif
+		  else
+            if ( <string> = "7goto")
+              if not GoalManager_HasActiveGoals count_all
+                if skater:SetCustomRestart
+                 skip_to_custom_restart
+                endif
+              endif
+			else
+              if ( <string> = "/warp")
+                create_net_panel_message text = "Coming soon..." style = generic_net_panel_message
+              else
+                SendChatMessage string = <string>
+			  endif
+		    endif
+		   endif
           endif
         endif
       endif
