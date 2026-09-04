@@ -553,8 +553,8 @@ better4_control_extratrick_sound = {
   ]
 }
 
-better4_control_chat_size_index = 0
-better4_control_chat_size_value = 0
+better4_control_chat_size_index = 2
+better4_control_chat_size_value = 2
 better4_control_chat_size = {
   id = better4_control_chat_size_id
   index_name = better4_control_chat_size_index
@@ -562,10 +562,11 @@ better4_control_chat_size = {
   text = "Chat Size"
   ini_key = "ChatSize"
   options = [
-    { text = "Default" value = 0 }
+    { text = "Extra Small" value = 0 }
     { text = "Small" value = 1 }
-    { text = "Big" value = 2 }
-    { text = "Extra Big" value = 3 }
+	{ text = "Default" value = 2 }
+    { text = "Big" value = 3 }
+    { text = "Extra Big" value = 4 }
   ]
   change_script = better4_change_chat_size
 }
@@ -573,21 +574,30 @@ better4_control_chat_size = {
 script better4_change_chat_size
   switch better4_control_chat_size_value
   case 0
-      change better4_chat_scale = 0.7
-	  change better4_padding = 0.65
-	  printf "default"
+       console_destroy
+	  change better4_padding = 0.25
+      change better4_chat_scale = 0.3
+	  printf "ex. small"
   case 1
+      console_destroy
+ 	  change better4_padding = 0.45
       change better4_chat_scale = 0.5
-	  change better4_padding = 0.45
 	  printf "small"
   case 2
-      change better4_chat_scale = 1.0
-	  change better4_padding = 0.85
-	  printf "big"
+      console_destroy
+	  change better4_padding = 0.65
+      change better4_chat_scale = 0.7
+	  printf "default"
   case 3
-      change better4_chat_scale = 1.2
+      console_destroy
+	  change better4_padding = 0.85
+      change better4_chat_scale = 1.0
+	  printf "big"
+  case 4
+      console_destroy
 	  change better4_padding = 1.0
-	  printf "extra big"
+      change better4_chat_scale = 1.2
+	  printf "ex. big"
   endswitch
 endscript
 
