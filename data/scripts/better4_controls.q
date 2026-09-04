@@ -564,7 +564,7 @@ better4_control_chat_size = {
   options = [
     { text = "Extra Small" value = 0 }
     { text = "Small" value = 1 }
-	{ text = "Default" value = 2 }
+    { text = "Default" value = 2 }
     { text = "Big" value = 3 }
     { text = "Extra Big" value = 4 }
   ]
@@ -600,6 +600,24 @@ script better4_change_chat_size
 	  printf "ex. big"
   endswitch
 endscript
+
+better4_control_chat_duration_index = 5
+better4_control_chat_duration_value = 30
+better4_control_chat_duration = {
+  id = better4_control_chat_duration_id
+  index_name = better4_control_chat_duration_index
+  value_name = better4_control_chat_duration_value
+  text = "Chat Duration"
+  ini_key = "ChatDuration"
+  options = [
+    { text = "5 Seconds" value = 5 }
+    { text = "10 Seconds" value = 10 }
+    { text = "15 Seconds" value = 15 }
+    { text = "20 Seconds" value = 20 }
+    { text = "25 Seconds" value = 25 }
+    { text = "30 Seconds" value = 30 }
+  ]
+}
 
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names

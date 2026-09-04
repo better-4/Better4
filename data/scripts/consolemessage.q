@@ -132,7 +132,7 @@ script console_destroy
   endif
 endscript
 script console_message_wait_and_die
-  Wait 30 seconds
+  Wait better4_control_chat_duration_value seconds
   DoMorph time = 0.5 alpha = 0
   Die
 endscript
