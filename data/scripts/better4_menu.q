@@ -155,11 +155,9 @@ script better4_misc_menu
   better4_create_menu menu_title = "MISC" icon = PA_trick close_script = better4_options_menu close_params = <...>
   better4_create_menu_control better4_control_boardscuff
   better4_create_menu_control better4_control_pauseonunfocus
-  better4_create_menu_control better4_control_buttonsfont
   // better4_create_menu_control better4_trick_string
   // better4_create_menu_control better4_control_special_meter
   better4_create_menu_control better4_control_extratrick_sound
-  better4_create_menu_control better4_control_chat_size
   if not IsBetterObserving
     if not IsObserving
       make_text_sub_menu_item text = "Change CAS" scale = better4_menu_item_scale pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
@@ -175,9 +173,10 @@ endscript
 
 script better4_display_menu
   better4_create_menu menu_title = "DISPLAY OPTIONS" icon = PA_trick close_script = better4_options_menu close_params = <...>
-  better4_create_menu_control better4_control_aspect_ratio
-  better4_create_menu_control better4_control_fov
+  make_text_sub_menu_item text = "Camera Options" scale = better4_menu_item_scale id = camera_option pad_choose_script = better4_camera_menu pad_choose_params = <...>
+  make_text_sub_menu_item text = "Chat Options" scale = better4_menu_item_scale id = chat_option pad_choose_script = better4_chat_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "Adjust Gamma" scale = better4_menu_item_scale pad_choose_script = create_gamma_menu pad_choose_params = <...>
+  better4_create_menu_control better4_control_buttonsfont
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
@@ -187,4 +186,20 @@ script better4_jumptrick_menu
   better4_create_menu_control better4_control_jumptrick
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = create_edit_tricks_menu pad_choose_params = <...>
+endscript
+
+script better4_camera_menu
+  better4_create_menu menu_title = "CAMERA OPTIONS" icon = PA_trick close_script = better4_display_menu close_params = <...>
+  better4_create_menu_control better4_control_aspect_ratio
+  better4_create_menu_control better4_control_fov
+  make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
+  make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_display_menu pad_choose_params = <...>
+endscript
+
+script better4_chat_menu
+  better4_create_menu menu_title = "CHAT OPTIONS" icon = PA_trick close_script = better4_display_menu close_params = <...>
+  better4_create_menu_control better4_control_chat_size
+  better4_create_menu_control better4_control_chat_duration
+  make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
+  make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_display_menu pad_choose_params = <...>
 endscript
