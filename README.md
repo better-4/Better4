@@ -27,9 +27,10 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Added left and right dropdown
 * Added left and right manual spin
 * Added PS2-exclusive manual float glitches (MFG, MQT, etc.)
-* Added spacewalk
+* Added Spacewalk
 * Added single-tap WalliePlants
 * Added configuration for boneless trick (beanplant, fastplant, MikeV)
+* Added Holdable flip trick functionality from later Tony Hawk games (only applicable to Ollie North and Double Kickflip Varial Indy)
 * Added toggles for:
   * Double revert after dropdown
   * Lip tricks
@@ -38,11 +39,11 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
   * Wallride bail (enables THUG1 BP)
   * Stance change
 * Restored unused animations:
-  * Benihana flip
-  * Nollie 360 flip
-  * Kickflip to indy
-  * Kickflip to crail
-  * THPS3 specials (handspring layout, etc.)
+  * Beni Fingerflip
+  * Nollie 360 Flip
+  * Kickflip to Indy
+  * Kickflip to Crail
+  * THPS3 specials (Handspring Layout, etc.)
 
 ### Online
 
