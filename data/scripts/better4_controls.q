@@ -643,6 +643,7 @@ script better4_controls_init
   better4_control_init better4_control_fov
   better4_control_init better4_control_aspect_ratio
   better4_control_init better4_control_chat_size
+  better4_control_init better4_control_chat_duration
   // better4_control_init better4_trick_string
   // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
