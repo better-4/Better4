@@ -159,6 +159,7 @@ script better4_misc_menu
   // better4_create_menu_control better4_trick_string
   // better4_create_menu_control better4_control_special_meter
   better4_create_menu_control better4_control_extratrick_sound
+  better4_create_menu_control better4_control_chat_size
   if not IsBetterObserving
     if not IsObserving
       make_text_sub_menu_item text = "Change CAS" scale = better4_menu_item_scale pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
