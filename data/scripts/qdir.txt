@@ -48,7 +48,7 @@ EventLog.qb
 flags.qb
 FrontEnd.qb
 FrontEndCamAnims.qb
-game.qb
+better4/game.qb
 gamecube.qb
 better4/gameflow.qb
 better4/gamemenu.qb
