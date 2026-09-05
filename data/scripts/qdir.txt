@@ -196,6 +196,7 @@ Tutorials.qb
 better4/walltricks.qb
 warppoint.qb
 xbox_scripts.qb
-better4/better4_observe.qb
+better4/better4_anims.qb
 better4/better4_controls.qb
+better4/better4_observe.qb
 better4/better4_menu.qb

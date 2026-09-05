@@ -868,9 +868,6 @@ script animload_human
     LoadAnim name = "anims\skater_basics\SlowDownBrake.ska" descChecksum = SlowDownBrake
     LoadAnim name = "anims\skater_basics\SlowDownBrake_Mongo.ska" descChecksum = SlowDownBrake_Mongo
     LoadAnim name = "anims\skater_basics\SmallLand.ska" descChecksum = SmallLand
-    LoadAnim name = "anims\better4\Spacewalk.ska" descChecksum = #"Spacewalk"
-    LoadAnim name = "anims\better4\SpacewalkFromManual.ska" descChecksum = SpacewalkFromManual
-    LoadAnim name = "anims\better4\SpacewalkToManual.ska" descChecksum = SpacewalkToManual
     LoadAnim name = "anims\skater_basics\SpineTransfer.ska" descChecksum = SpineTransfer
     LoadAnim name = "anims\skater_basics\StartSkating1.ska" descChecksum = StartSkating1
     LoadAnim name = "anims\skater_basics\StartSkatingPush.ska" descChecksum = StartSkatingPush
@@ -1475,6 +1472,7 @@ script animload_human
     LoadAnim name = "anims\skater_specials\Summoner_Init.ska" descChecksum = Summoner_Init
     LoadAnim name = "anims\skater_specials\Summoner_Idle.ska" descChecksum = Summoner_Idle
     LoadAnim name = "anims\skater_specials\Summoner_Out.ska" descChecksum = Summoner_Out
+    better4_load_anims
   endif
   SetReferenceChecksum 0
 endscript

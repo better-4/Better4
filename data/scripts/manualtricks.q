@@ -41,8 +41,8 @@ GroundManualTricks =
   { Trigger = { inorder Up Down 220 } Trick_Manual }
   { Trigger = { inorder Down Up 220 } Trick_NoseManual }
 ]
-Trick_Manual = { Scr = Manual params = { name = 'Manual' Score = 100 InitAnim = Manual FromAirAnim = ManualFromAir BalanceAnim = Manual_Range BalanceAnim2 = Manual_Range2 OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 = ManualBranches ExtraTricks = FlatLandBranches CheckCheese } }
-Trick_NoseManual = { Scr = Manual params = { name = 'Nose Manual' Score = 100 InitAnim = Nosemanual FromAirAnim = NoseManualFromAir BalanceAnim = NoseManual_Range BalanceAnim2 = NoseManual_Range2 Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail ExtraTricks2 = NoseManualBranches ExtraTricks = FlatLandBranches CheckCheese } }
+Trick_Manual = { Scr = Manual params = { name = 'Manual' Score = 100 InitAnim = Manual FromAirAnim = ManualFromAir BalanceAnim = Manual_Range BalanceAnim2 = Manual_Range2 OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 = ManualBranches ExtraTricks = FlatLandBranches CheckCheese AllowWallpush } }
+Trick_NoseManual = { Scr = Manual params = { name = 'Nose Manual' Score = 100 InitAnim = Nosemanual FromAirAnim = NoseManualFromAir BalanceAnim = NoseManual_Range BalanceAnim2 = NoseManual_Range2 Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail ExtraTricks2 = NoseManualBranches ExtraTricks = FlatLandBranches CheckCheese AllowWallpush } }
 Trick_OneFootNosemanual = { Scr = Manual params = { name = 'One Foot Nose Manual' Score = 200 InitAnim = OneFootNosemanual_Init FromAirAnim = OneFootNosemanual_Init BalanceAnim = OneFootNoseManual_Range Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail IsExtra ExtraTricks = NoseManualBranches ExtraTricks2 = FlatLandBranches } }
 Trick_OneFootManual = { Scr = Manual params = { name = 'One Foot Manual' Score = 200 InitAnim = OneFootManual_init FromAirAnim = OneFootManual_init BalanceAnim = OneFootManual_Range OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks = ManualBranches ExtraTricks2 = FlatLandBranches IsExtra } }
 Trick_Handstand = { Scr = Manual params = { name = 'HandStand' Score = 250 InitAnim = HandstandHandFlip_Init FromAirAnim = HandstandHandFlip_Init BalanceAnim = HandstandHandFlip_Range OutAnim = HandstandHandFlip_out OffMeterTop = NoseManualBail OffMeterBottom = ManualBail Friction = 0.5 ExtraTricks = FlatLandBranches ExtraTricks2 = HandstandBranches } }
@@ -52,12 +52,12 @@ Trick_Truckstand = { Scr = Manual params = { RotateRightY RotateLeftY name = 'Tr
 Trick_SwitchFootPogo = { Scr = Manual params = { RotateRightY RotateLeftY name = 'Switch Foot Pogo' Score = 300 InitAnim = Truckrun_Init FromAirAnim = Truckrun_Init BalanceIdle = TruckRun OutAnim = Truckrun_Out OffMeterTop = NoseManualBail OffMeterBottom = ManualBail Friction = 1 ExtraTricks = FlatLandBranches ExtraTricks2 = SwitchFootPogo_Branches } }
 Trick_Pogo = { Scr = Manual params = { RotateRightY RotateLeftY name = 'Pogo' Score = 250 InitAnim = Pogo_Init FromAirAnim = Pogo_Init BalanceIdle = Pogo_Bounce OutAnim = Pogo_Out OutSpeed = 1.5 OffMeterTop = NoseManualBail OffMeterBottom = ManualBail Friction = 2 ExtraTricks = FlatLandBranches BoardRotate ExtraTricks2 = PogoBranches BounceBoobs } }
 Trick_ToRail = { Scr = Manual params = { name = 'To Rail' Score = 500 InitAnim = Primo_Init FromAirAnim = Primo_Init BalanceAnim = Primo_Range OutAnim = Primo_out OffMeterTop = NoseManualBail OffMeterBottom = ManualBail Friction = 1.0 ExtraTricks = FlatLandBranches ExtraTricks2 = ToRail_Branches IsExtra } }
-Trick_Gturn = { Scr = ManualLink params = { name = 'Nose Pivot' Score = 250 Anim = GTurn BalanceAnim = Manual FlipAfter BalanceAnim = Manual_Range trickslack = 0 PlayCessSound extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = ManualBranches TimeAdd = 2 SpeedMult = 1.2 OffMeterTop = ManualBail OffMeterBottom = ManualLand } }
-Trick_Gturn2 = { Scr = ManualLink params = { name = 'Pivot' Score = 250 Anim = GTurn2 BalanceAnim = Manual FlipAfter BalanceAnim = NoseManual_Range trickslack = 0 PlayCessSound extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = NoseManualBranches Nollie TimeAdd = 2 SpeedMult = 1.2 OffMeterTop = ManualLand OffMeterBottom = NoseManualBail } }
+Trick_Gturn = { Scr = ManualLink params = { name = 'Nose Pivot' Score = 250 Anim = GTurn BalanceAnim = Manual FlipAfter BalanceAnim = Manual_Range trickslack = 0 PlayCessSound extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = ManualBranches TimeAdd = 2 SpeedMult = 1.2 OffMeterTop = ManualBail OffMeterBottom = ManualLand AllowWallpush } }
+Trick_Gturn2 = { Scr = ManualLink params = { name = 'Pivot' Score = 250 Anim = GTurn2 BalanceAnim = Manual FlipAfter BalanceAnim = NoseManual_Range trickslack = 0 PlayCessSound extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = NoseManualBranches Nollie TimeAdd = 2 SpeedMult = 1.2 OffMeterTop = ManualLand OffMeterBottom = NoseManualBail AllowWallpush } }
 Trick_HalfCabImpossible = { Scr = ManualLink params = { name = 'Half Cab Impossible' Score = 450 Anim = HalfCabImpossible BalanceAnim = Manual FlipAfter BoardFlipAfter BalanceAnim = Manual_Range trickslack = 0 extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = ManualBranches TimeAdd = 0 SpeedMult = 1.0 OffMeterTop = ManualBail IsExtra OffMeterBottom = ManualLand } }
 Trick_360FlipNoseManual = { Scr = ManualLink params = { name = '360 Fingerflip' Score = 450 Anim = _360FlipNosemanual BalanceAnim = Nosemanual BalanceAnim = NoseManual_Range trickslack = 0 extrapercent = 100 ExtraTricks = FlatLandBranches ExtraTricks2 = NoseManualBranches TimeAdd = 0 SpeedMult = 1.0 OffMeterTop = ManualLand OffMeterBottom = NoseManualBail } }
 Trick_PogoFlip = { Scr = ManualLink params = { name = 'Wrap Around' Score = 500 Anim = Pogo_Kickfoot BalanceIdle = Pogo_Bounce speed = 1.5 OutAnim = Pogo_Out OutSpeed = 1.5 ExtraTricks = FlatLandBranches ExtraTricks2 = PogoBranches parent = 'Pogo' extrapercent = 100 trickslack = 0 IsExtra } }
-Trick_Spacewalk = { Scr = Manual Params = { Name = 'Spacewalk' Score = 1200 InitAnim = SpacewalkFromManual FromAirAnim = SpacewalkFromManual balanceIdle = Spacewalk OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks3 = SpacewalkBranch ExtraTricks2 = ManualBranches ExtraTricks = FlatLandBranches ExtraSpeedBoost = 250 } }
+Trick_Spacewalk = { Scr = Manual Params = { Name = 'Spacewalk' Score = 1200 InitAnim = SpacewalkFromManual FromAirAnim = SpacewalkFromManual balanceIdle = Spacewalk OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks3 = SpacewalkBranch ExtraTricks2 = ManualBranches ExtraTricks = FlatLandBranches ExtraSpeedBoost = 250 AllowWallpush } }
 SwitchFootPogo_Branches =
 [ { Trigger = TRIGGER_MANUAL_BRANCHFLIP Scr = ManualLink params = { name = 'Half Wrap Truck Transfer' Score = 500 Anim = TruckRunFlip BalanceIdle = TruckRun ExtraTricks = FlatLandBranches ExtraTricks2 = SwitchFootPogo_Branches parent = 'Switch Foot Pogo' BoardFlipAfter extrapercent = 100 trickslack = 0 IsExtra } }
   { Trigger = { Press R2 ROTATEY_TRIGGER_TIME } Scr = ManualLink params = { name = 'Switch Foot Pogo Spin' Score = 10 RotateRightY BalanceAnim = TruckRun OutAnim = Truckrun_Out ExtraTricks = FlatLandBranches ExtraTricks2 = SwitchFootPogo_Branches parent = 'Switch Foot Pogo' trickslack = 0 IsExtra } }
@@ -94,7 +94,7 @@ FlatLandBranches =
   { Trigger = { inorder Circle Square 300 } Trick_ToRail }
   { Trigger = { inorder Circle Triangle 300 } Trick_OneFootManual }
   { Trigger = { inorder Circle Triangle 300 } Trick_OneFootNosemanual }
-  { Trigger = { TripleInOrder , Left , Right , Square , 500 } Trick_Spacewalk }
+  // { Trigger = { TripleInOrder , Left , Right , Square , 500 } Trick_Spacewalk }
   { Trigger = { inorder Triangle Triangle 300 } Trick_Pogo }
   { Trigger = { inorder Triangle Circle 300 } Trick_SwitchFootPogo }
   { Trigger = { inorder Triangle Square 300 } Trick_Truckstand }
@@ -138,7 +138,7 @@ script Manual BlendPeriod = 0.3
   else
     NollieOff
     SetException Ex = Ollied Scr = Ollie params = { <...> }
-  endif	 
+  endif
   SetException Ex = FlailHitWall Scr = FlailHitWall
   SetException Ex = FlailLeft Scr = FlailLeft
   SetException Ex = FlailRight Scr = FlailRight
@@ -148,9 +148,23 @@ script Manual BlendPeriod = 0.3
   SetException Ex = CarBail Scr = CarBail
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = Skitched Scr = Skitch
+
+  if ( better4_control_wallpush_value = on )
+    if GotParam AllowWallpush
+      if GotParam Nollie
+        SetException Ex = Wallpush Scr = Manual_Wallpush
+      else
+        SetException Ex = Wallpush Scr = Manual_Wallpush Params = { ToNoseManual }
+      endif
+    else
+      SetException Ex = Wallpush Scr = Manual_CancelWallpushEvent
+    endif
+  endif
+
   OnExceptionRun CheckForNewTrick_ManualOut
   SetTags state = skater_inmanual
   SetQueueTricks NoTricks
+
   SpawnClothingLandScriptHalfMax
   if GotParam IsSpecial
     SetManualTricks NoTricks
@@ -267,12 +281,12 @@ script Manual BlendPeriod = 0.3
   endif
 endscript
 
-script SpacewalkBoost ExtraSpeedBoost = 200 
- GetSpeed 
- if ( <Speed> < <ExtraSpeedBoost> ) 
-	SetSpeed <ExtraSpeedBoost> 
- endif 
- printf "Speed=%s" s = <Speed> 
+script SpacewalkBoost ExtraSpeedBoost = 200
+  GetSpeed
+  if ( <Speed> < <ExtraSpeedBoost> )
+    SetSpeed <ExtraSpeedBoost>
+  endif
+  printf "Speed=%s" s = <Speed>
 endscript
 
 script CheckForNewTrick_ManualOut
@@ -319,17 +333,19 @@ script ManualLand
 endscript
 script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 0 SpeedMult = 1 speed = 1.0
   SpawnClothingLandScriptHalfMax
-  GetManualName
-  if ( <ManualName> = <name> )
-    Printf "TRYING TO DO THE SAME MANUAL TWICE IN A ROW!!!!"
-    AdjustBalance TimeAdd = 2 SpeedMult = 1.25
-  endif
+  // GetManualName
+  // if ( <ManualName> = <name> )
+  //   Printf "TRYING TO DO THE SAME MANUAL TWICE IN A ROW!!!!"
+  //   Printf "ManualName=%a name=%b" a = <ManualName> b = <name>
+  //   AdjustBalance TimeAdd = 2 SpeedMult = 1.25
+  // endif
   if GotParam RodneyOnly
     if ProfileEquals is_named = Mullen
     else
       Goto ManualLink params = { name = 'Truck Spin' Score = 1000 Anim = Truckstand_Init BalanceAnim = Truckstand_Range OutAnim = Truckstand_Out ExtraTricks = FlatLandBranches ExtraTricks2 = TruckstandBranches trickslack = 0 IsExtra }
     endif
   endif
+
   if GotParam Nollie
     NollieOn
     SetException Ex = Ollied Scr = NollieNoDisplay
@@ -337,10 +353,24 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
     NollieOff
     SetException Ex = Ollied Scr = Ollie params = { Anim = <Anim> OutAnim = <OutAnim> BoardRotate = <BoardRotate> BoardFlipAfter = <BoardFlipAfter> FlipAfter = <FlipAfter> NoBlend = <NoBlend> }
   endif
+
   if GotParam OffMeterTop
     SetException Ex = OffMeterTop Scr = <OffMeterTop> params = { <...> }
     SetException Ex = OffMeterBottom Scr = <OffMeterBottom> params = { <...> }
   endif
+
+  if ( better4_control_wallpush_value = on )
+    if GotParam AllowWallpush
+      if GotParam Nollie
+        SetException Ex = Wallpush Scr = Manual_Wallpush
+      else
+        SetException Ex = Wallpush Scr = Manual_Wallpush Params = { ToNoseManual }
+      endif
+    else
+      SetException Ex = Wallpush Scr = Manual_CancelWallpushEvent
+    endif
+  endif
+
   KillExtraTricks
   OnExceptionRun ManualOut
   BailOn
@@ -362,21 +392,17 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
     if ( better4_control_manualspin_value = on )
       RotateDisplay Y duration = 0.75 seconds StartAngle = 0.0 EndAngle = -360.0 SinePower = 0 RotationOffset = (0, 30, 0)
       SetExtraTricks <ExtraTricks2> <ExtraTricks> ignore = <name>
-      Wait 0.7 seconds
-      PlayManualBalanceAnim <...>
     else
       if Flipped
         RotateDisplay Y duration = 0.75 seconds StartAngle = 0.0 EndAngle = -360.0 SinePower = 0 RotationOffset = (0, 30, 0)
         SetExtraTricks <ExtraTricks2> <ExtraTricks> ignore = <name>
-        Wait 0.7 seconds
-        PlayManualBalanceAnim <...>
       else
         RotateDisplay Y duration = 0.75 seconds StartAngle = 0.0 EndAngle = 360.0 SinePower = 0 RotationOffset = (0, 30, 0)
         SetExtraTricks <ExtraTricks2> <ExtraTricks> ignore = <name>
-        Wait 0.7 seconds
-        PlayManualBalanceAnim <...>
       endif
     endif
+    Wait 0.7 seconds
+    PlayManualBalanceAnim <...>
   endif
   if GotParam Anim
     Wait 5 frames

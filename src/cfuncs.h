@@ -29,5 +29,7 @@ int __cdecl CFunc_SetIniBool(CStruct *params, CScript *script);
 int __cdecl CFunc_SetIniInteger(CStruct *params, CScript *script);
 int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script);
 int __cdecl CFunc_AutoAspectRatio(CStruct* params) ;
+int __cdecl CFunc_GetStartTime(CStruct* params, CScript *script);
+int __cdecl CFunc_GetElapsedTime(CStruct* params, CScript *script);
 
 #endif
