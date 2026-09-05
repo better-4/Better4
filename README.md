@@ -27,10 +27,10 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Added left and right dropdown
 * Added left and right manual spin
 * Added PS2-exclusive manual float glitches (MFG, MQT, etc.)
-* Added Spacewalk
+* Added spacewalk
+* Added wallpush
 * Added single-tap WalliePlants
 * Added configuration for boneless trick (beanplant, fastplant, MikeV)
-* Added Holdable flip trick functionality from later Tony Hawk games (only applicable to Ollie North and Double Kickflip Varial Indy)
 * Added toggles for:
   * Double revert after dropdown
   * Lip tricks
@@ -44,6 +44,9 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
   * Kickflip to Indy
   * Kickflip to Crail
   * THPS3 specials (Handspring Layout, etc.)
+* Made some tricks holdable:
+  * Ollie North
+  * Double Kickflip Varial Indy
 
 ### Online
 
@@ -52,6 +55,9 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Added lobby player list and peerchat
 * Added better observe functionality (observe after 0, don't need to leave game)
 * Added observe UI
+* Added "Restart Game" option to game ranking screen
+* Added chat size and duration configuration
+* Added chat commands (/obs, /set, /goto)
 
 ### CAS
 
@@ -75,7 +81,7 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 
 ## Known Issues
 
-* Can't navigate pause menu in online games with arrow keys
+None ATM?
 
 ## Credits
 

@@ -1,7 +1,7 @@
 #ifndef _VERSION_H_
 #define _VERSION_H_
 
-#define BETTER4_VERSION "0.11.1"
+#define BETTER4_VERSION "0.12.0"
 
 #include "decomp/CStruct.h"
 
