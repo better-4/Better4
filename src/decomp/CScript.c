@@ -16,3 +16,8 @@ char *Script_GetLocalString(char *name) {
     static char *(__cdecl* _GetLocalString)(char *name) = (void *)0x00419ba0;
     return _GetLocalString(name);
 }
+
+float Script_GetFloat(uint32_t checksum) {
+    static float (__cdecl* _GetFloat)(uint32_t checksum) = (void *)0x00419610;
+    return _GetFloat(checksum);
+}

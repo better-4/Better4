@@ -120,6 +120,7 @@ Exceptions =
   WonGame
   LostGame
   Skitched
+  Wallpush
 ]
 script OnGroundExceptions
   if GotParam NoClear
@@ -141,6 +142,7 @@ script OnGroundExceptions
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = Skitched Scr = Skitch
   SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBail
+  SetException Ex = Wallpush Scr = Ground_Wallpush
   SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
   SetManualTricks special = SpecialManualTricks GroundManualTricks

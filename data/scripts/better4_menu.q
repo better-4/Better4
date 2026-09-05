@@ -99,6 +99,24 @@ script better4_create_menu_control {
   }
 endscript
 
+script better4_menu_cycle_control
+  better4_control_cycle <...>
+  CastToInteger index
+  <value_text> = ( ( <options> [ <index> ] ).text )
+  SetScreenElementProps {
+    id = { <id> child = 0 }
+    text = <value_text>
+  }
+endscript
+
+script better4_menu_cycle_control_right
+  better4_menu_cycle_control <...> delta = 1
+endscript
+
+script better4_menu_cycle_control_left
+  better4_menu_cycle_control <...> delta = -1
+endscript
+
 script better4_options_menu
   better4_create_menu menu_title = "BETTER4 OPTIONS" icon = PA_nuke <...>
   make_text_sub_menu_item text = "In Air" scale = better4_menu_item_scale id = inair_option pad_choose_script = better4_inair_menu pad_choose_params = <...>
@@ -118,6 +136,8 @@ script better4_onground_menu
   better4_create_menu_control better4_control_stancechange
   //better4_create_menu_control better4_control_jumptrick
   better4_create_menu_control better4_control_manualspin
+  better4_create_menu_control better4_control_wallpush
+  better4_create_menu_control better4_control_spacewalk
   better4_create_menu_control better4_control_manualfloat
   better4_create_menu_control better4_control_doublerevert
   better4_create_menu_control better4_control_revertrecovery

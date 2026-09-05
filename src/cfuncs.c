@@ -1,5 +1,6 @@
 #include "cfuncs.h"
 
+#include "decomp/Tmr.h"
 #include "input.h"
 #include "online.h"
 #include "online/client.h"
@@ -7,6 +8,7 @@
 #include "online/server_list.h"
 #include "online/lobby_list.h"
 #include "version.h"
+#include "wallpush.h"
 
 #include <log.h>
 #include <patch.h>
@@ -18,7 +20,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 39
+#define BETTER4_NUM_CFUNCS 43
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -84,6 +86,10 @@ void addCFuncs() {
 	addCFunc("StopBetterPlayerList", (void *)CFunc_StopBetterPlayerList);
 	addCFunc("NumBetterPlayersInLobby", (void *)CFunc_NumBetterPlayersInLobby);
 	addCFunc("SendBetterMessage", (void *)CFunc_SendBetterMessage);
+	addCFunc("GetStartTime", (void *)CFunc_GetStartTime);
+	addCFunc("GetElapsedTime", (void *)CFunc_GetElapsedTime);
+	addCFunc("SetWallpushEnabled", (void *)CFunc_SetWallpushEnabled);
+	addCFunc("CancelWallpush", (void *)CFunc_CancelWallpush);
 }
 
 void printCFuncs() {
@@ -244,6 +250,25 @@ int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script) {
 	}
 
 	CFunc_Change(params);
+
+	return 1;
+}
+
+int __cdecl CFunc_GetStartTime(CStruct* params, CScript *script) {
+    CStruct *out = CScript_GetParams(script);
+    CStruct_AddInteger(out, 0xd16b61e6/*StartTime*/, Tmr_GetTime());
+    return 1;
+}
+
+int __cdecl CFunc_GetElapsedTime(CStruct* params, CScript *script) {
+	int start_time;
+    if (!CStruct_GetInteger(params, 0xd16b61e6, &start_time, 0)) {
+		printLog("GetElapsedTime missing param \"StartTime\" (0xd16b61e6)\n");
+		return 0;
+	}
+
+    CStruct *out = CScript_GetParams(script);
+    CStruct_AddInteger(out, 0x3eb3566b/*ElapsedTime*/, Tmr_ElapsedTime(start_time));
 
 	return 1;
 }

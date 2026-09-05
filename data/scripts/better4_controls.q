@@ -165,6 +165,73 @@ better4_control_manualspin = {
   ]
 }
 
+better4_control_wallpush_index = 0
+better4_control_wallpush_value = off
+better4_control_wallpush = {
+  id = better4_control_wallpush_id
+  index_name = better4_control_wallpush_index
+  value_name = better4_control_wallpush_value
+  text = "Wallpush"
+  ini_key = "Wallpush"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+  change_script = better4_control_wallpush_change
+}
+
+script better4_control_wallpush_change
+  SetWallpushEnabled enabled = better4_control_wallpush_value
+endscript
+
+flatland_branches_spacewalk_on = [
+  { Trigger = { inorder Square Circle 300 } Trick_AntiCasper }
+  { Trigger = { inorder Square Triangle 300 } Trick_Casper }
+  { Trigger = { inorder Circle Circle 300 } Trick_Handstand }
+  { Trigger = { inorder Circle Square 300 } Trick_ToRail }
+  { Trigger = { inorder Circle Triangle 300 } Trick_OneFootManual }
+  { Trigger = { inorder Circle Triangle 300 } Trick_OneFootNosemanual }
+  { Trigger = { TripleInOrder , Left , Right , Square , 500 } Trick_Spacewalk }
+  { Trigger = { inorder Triangle Triangle 300 } Trick_Pogo }
+  { Trigger = { inorder Triangle Circle 300 } Trick_SwitchFootPogo }
+  { Trigger = { inorder Triangle Square 300 } Trick_Truckstand }
+]
+flatland_branches_spacewalk_off = [
+  { Trigger = { inorder Square Circle 300 } Trick_AntiCasper }
+  { Trigger = { inorder Square Triangle 300 } Trick_Casper }
+  { Trigger = { inorder Circle Circle 300 } Trick_Handstand }
+  { Trigger = { inorder Circle Square 300 } Trick_ToRail }
+  { Trigger = { inorder Circle Triangle 300 } Trick_OneFootManual }
+  { Trigger = { inorder Circle Triangle 300 } Trick_OneFootNosemanual }
+  { Trigger = { inorder Triangle Triangle 300 } Trick_Pogo }
+  { Trigger = { inorder Triangle Circle 300 } Trick_SwitchFootPogo }
+  { Trigger = { inorder Triangle Square 300 } Trick_Truckstand }
+]
+
+better4_control_spacewalk_index = 0
+better4_control_spacewalk_value = off
+better4_control_spacewalk = {
+  id = better4_control_spacewalk_id
+  index_name = better4_control_spacewalk_index
+  value_name = better4_control_spacewalk_value
+  text = "Spacewalk"
+  ini_key = "Spacewalk"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+  change_script = better4_control_spacewalk_change
+}
+
+script better4_control_spacewalk_change
+  switch better4_control_spacewalk_value
+  case off
+    Change FlatLandBranches = flatland_branches_spacewalk_off
+  case on
+    Change FlatLandBranches = flatland_branches_spacewalk_on
+  endswitch
+endscript
+
 better4_control_manualfloat_index = 0
 better4_control_manualfloat_value = off
 better4_control_manualfloat = {
@@ -628,6 +695,8 @@ script better4_controls_init
   better4_control_init better4_control_stancechange
   better4_control_init better4_control_jumptrick
   better4_control_init better4_control_manualspin
+  better4_control_init better4_control_wallpush
+  better4_control_init better4_control_spacewalk
   better4_control_init better4_control_manualfloat
   better4_control_init better4_control_doublerevert
   better4_control_init better4_control_dropdown
@@ -704,23 +773,4 @@ script better4_control_change
   if GotParam change_script
     <change_script>
   endif
-endscript
-
-
-script better4_menu_cycle_control
-  better4_control_cycle <...>
-  CastToInteger index
-  <value_text> = ( ( <options> [ <index> ] ).text )
-  SetScreenElementProps {
-    id = { <id> child = 0 }
-    text = <value_text>
-  }
-endscript
-
-script better4_menu_cycle_control_right
-  better4_menu_cycle_control <...> delta = 1
-endscript
-
-script better4_menu_cycle_control_left
-  better4_menu_cycle_control <...> delta = -1
 endscript

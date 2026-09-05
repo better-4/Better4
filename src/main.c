@@ -1,8 +1,9 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
-#include "updater.h"
 #include "security.h"
+#include "updater.h"
+#include "wallpush.h"
 
 #include "partymod-thps4/src/main.h"
 
@@ -60,6 +61,7 @@ void patchBetter4() {
 	patchIykyk();
 	patchGamespyCalls();
 	patchStrcpy();
+	patchWallpush();
 }
 
 void better4Main() {

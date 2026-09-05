@@ -122,3 +122,95 @@ script Trick_WallPlant
   WaitAnimWhilstChecking
   Goto Airborne StretchTime = 10 BlendPeriod = 0
 endscript
+
+Wall_Bounce_Dont_Slow_Angle = 30
+Physics_Disallow_Rewallpush_Duration = 800
+Physics_Wallpush_Speed_Loss = 200
+Physics_Wallpush_Min_Exit_Speed = 100
+Physics_Wallpush_Vertical_Exit_Speed = 400
+
+script LandSkaterTricks
+	if currentscorepotgreaterthan 1500
+		SpawnScript LandPointsSound
+	endif
+	CheckGapTricks
+	ClearGapTricks NotInSameFrame
+	ClearPanel_Landed
+	ClearManualTrick
+	OverrideCancelGround Off
+	ResetSpin
+	Obj_ClearFlag FLAG_SKATER_REVERTCHEESE
+endscript
+
+script WaitWhilstChecking
+  GetStartTime
+  begin
+    DoNextTrick
+    if GotParam AndManuals
+      DoNextManualTrick
+    endif
+    Wait 1 GameFrame
+    GetElapsedTime StartTime = <StartTime>
+    if (<ElapsedTime> > <Duration>)
+      break
+    endif
+  repeat
+endscript
+
+script Ground_Wallpush
+  Printf "@@ GROUND_WALLPUSH"
+  Init_Wallpush
+
+  if Crouched
+    PlayAnim Anim = Wallpush_Crouched BlendPeriod = 0
+  else
+    PlayAnim Anim = Wallpush_Standing BlendPeriod = 0
+  endif
+
+  BlendPeriodOut 0
+  BoardRotateAfter
+  FlipAfter
+
+  SetTrickName 'Wallpush'
+  SetTrickScore 10
+  Display BlockSpin
+
+  WaitWhilstChecking AndManuals Duration = Physics_Disallow_Rewallpush_Duration
+
+  LandSkaterTricks
+  WaitAnimWhilstChecking AndManuals
+
+  if AnimEquals Wallpush_Standing
+    if Crouched
+      PlayAnim Anim = Idle
+      DoNextTrick
+      DoNextManualTrick
+      Wait 1 GameFrame
+    endif
+  endif
+
+  Goto OnGroundAi
+endscript
+
+script Manual_CancelWallpushEvent
+  CancelWallpush
+endscript
+
+Wallpush_Trick = { Name = "Wallpush" Score = 10 NoBlend FlipAfter Anim = Wallpush_NoseManual BalanceAnim = Manual_Range BalanceAnim2 = Manual_Range2 OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 = ManualBranches ExtraTricks = FlatlandBranches AllowWallpush }
+NoseWallpush_Trick = { Name = "Wallpush" Score = 10 NoBlend FlipAfter Anim = Wallpush_Manual BalanceAnim = NoseManual_Range BalanceAnim2 = NoseManual_Range2 Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail ExtraTricks2 = NoseManualBranches ExtraTricks = FlatlandBranches AllowWallpush }
+
+script Manual_Wallpush
+  Printf "@@ MANUAL_WALLPUSH"
+  Init_Wallpush
+  BlendPeriodOut 0
+  if GotParam ToNoseManual
+    Goto ManualLink Params = { NoseWallpush_Trick }
+  else
+    Goto ManualLink Params = { Wallpush_Trick }
+  endif
+endscript
+
+script Init_Wallpush
+  // BroadcastEvent Type = SkaterWallpush
+  Vibrate Actuator = 1 Percent = 50 Duration = 0.15
+endscript

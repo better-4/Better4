@@ -14,7 +14,9 @@ typedef struct CScript {
 // CScript
 struct CStruct *CScript_GetParams(CScript *this);
 
+// TODO (ellie): maybe move these to separate `Script_` header?
 void Script_RunScript(uint32_t checksum, struct CStruct *params, void *unk, uint8_t unk2, char *unk3);
 char *Script_GetLocalString(char *name);
+float Script_GetFloat(uint32_t checksum);
 
 #endif
