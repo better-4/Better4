@@ -1,13 +1,17 @@
 script EnterBetterObserve
-  exit_pause_menu
-  skater:SkaterInit ReturnControl
-  BetterObserve
-  kill_start_key_binding
-  create_observer_ui
-  Wait 15 gameframes
-  restore_start_key_binding
-  skater:NetDisablePlayerInput
-  skater:PausePhysics
+  if not IsBetterObserving
+    exit_pause_menu
+    skater:SkaterInit ReturnControl
+    BetterObserve
+    kill_start_key_binding
+    create_observer_ui
+    Wait 15 gameframes
+    restore_start_key_binding
+    skater:NetDisablePlayerInput
+    skater:PausePhysics
+  else
+    QuitBetterObservivng
+  endif
 endscript
 
 script QuitBetterObservivng
