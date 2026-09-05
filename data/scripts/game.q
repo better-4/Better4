@@ -1,4 +1,17 @@
+chat_commands = 
+[
+  { command_text = "/obs" command_scr = EnterBetterObserve }
+  { command_text = "/set" command_scr = set_cust_command }
+  { command_text = "/goto" command_scr = goto_cust_command }
+  { command_text = "/clear" command_scr = console_clear}
+  { command_text = "/warp" command_scr = create_net_panel_message params = { text = "Coming soon..." style = generic_net_panel_message } }
 
+  { command_text = "7obs" command_scr = EnterBetterObserve }
+  { command_text = "7set" command_scr = set_cust_command }
+  { command_text = "7goto" command_scr = goto_cust_command }
+  { command_text = "7clear" command_scr = console_clear}
+  { command_text = "7warp" command_scr = create_net_panel_message params = { text = "Coming soon..." style = generic_net_panel_message } }
+]
 load_icon_properties = {
   x = 50.0
   y = 50.0
@@ -444,54 +457,43 @@ script change_airtricks3
   Change Airtricks = Airtricks3
   Change JumpTricks = Jumptricks3
 endscript
-script entered_chat_message
-  GetTextElementString id = keyboard_current_string
-  if ( <string> = "/obs")
-    if not IsBetterObserving
-      EnterBetterObserve
-    else
-      QuitBetterObservivng
-    endif
-  else
-    if ( <string> = "/set")
+script set_cust_command
+  if not IsBetterObserving
+    if not IsObserving
       if not GoalManager_HasActiveGoals count_all
         set_custom_restart
       endif
-    else
-      if ( <string> = "/goto")
-        if not GoalManager_HasActiveGoals count_all
-          if skater:SetCustomRestart
-            skip_to_custom_restart
-          endif
-        endif
-      else
-        if ( <string> = "/clear")
-          console_clear
-        else
-          if ( <string> = "7set")
-            if not GoalManager_HasActiveGoals count_all
-              set_custom_restart
-            endif
-		  else
-            if ( <string> = "7goto")
-              if not GoalManager_HasActiveGoals count_all
-                if skater:SetCustomRestart
-                 skip_to_custom_restart
-                endif
-              endif
-			else
-              if ( <string> = "/warp")
-                create_net_panel_message text = "Coming soon..." style = generic_net_panel_message
-              else
-                SendChatMessage string = <string>
-			  endif
-		    endif
-		   endif
-          endif
-        endif
-      endif
     endif
   endif
+endscript
+script goto_cust_command
+  if not IsBetterObserving
+    if not IsObserving
+      if not GoalManager_HasActiveGoals count_all
+        if skater:SetCustomRestart
+          skip_to_custom_restart
+        endif
+      endif   
+    endif
+  endif
+endscript
+script entered_chat_message
+  GetTextElementString id = keyboard_current_string
+  <message> = <string>
+  GetArraySize chat_commands
+  <index> = 0
+  begin
+    if ( <index> = <array_size> )
+      SendChatMessage string = <message>
+      break
+    endif
+    AddParams ( chat_commands [ <index> ] )
+    if ( <message> = <command_text> )
+      <command_scr> <params>
+      break
+    endif
+     <index> = ( <index> + 1 )
+  repeat
   destroy_onscreen_keyboard
 endscript
 script menu_entered_chat_message
