@@ -492,7 +492,7 @@ script entered_chat_message
       <command_scr> <params>
       break
     endif
-     <index> = ( <index> + 1 )
+    <index> = ( <index> + 1 )
   repeat
   destroy_onscreen_keyboard
 endscript
