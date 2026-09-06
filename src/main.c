@@ -62,7 +62,6 @@ void patchBetter4() {
 	patchGamespyCalls();
 	patchStrcpy();
 	patchWallpush();
-	patchLoad();
 }
 
 void better4Main() {

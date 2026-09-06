@@ -17,8 +17,6 @@ add_library(better4 SHARED
     "${SRC}/cfuncs.h"
     "${SRC}/input.c"
     "${SRC}/input.h"
-    "${SRC}/load.c"
-    "${SRC}/load.h"
     "${SRC}/log.c"
     "${SRC}/log.h"
     "${SRC}/main.c"
