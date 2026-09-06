@@ -172,6 +172,7 @@ FROM toolchain AS build-data
 COPY data/scripts/qdir.txt /out/data/scripts/better4/qdir.txt
 COPY data/fonts /out/data/fonts/better4
 COPY data/images /out/data/images/better4
+COPY data/levels /out/data/levels/better4
 COPY data/models /out/data/models/better4
 COPY data/sounds /out/data/sounds/Wav/better4
 COPY data/anims /out/data/anims/better4
