@@ -111,9 +111,9 @@ Trick_FSShoveIt = { Scr = FlipTrick params = { name = 'FS Shove-It' Score = 100 
 ExtraFS360ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 FS Shove-It' Score = 500 Anim = FS360ShoveIt ExtraTricks = ExtraFS540ShoveIt IsExtra UseCurrent } } ]
 ExtraFS540ShoveIt = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '540 FS Shove-It' Score = 1000 Anim = FS540ShoveIt IsExtra BoardRotate UseCurrent } } ]
 Trick_BackfootKickflip = { Scr = FlipTrick params = { name = 'Back Foot Kickflip' Score = 150 Anim = NollieKickflip Nollie = Kickflip ExtraTricks = Extra_DBackfootKickflip } }
-Extra_DBackfootKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Back Foot Flip' Score = 500 Anim = DoubleNollieKickflip IsExtra UseCurrent } } ]
+Extra_DBackfootKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double B.F. Kickflip' displayname = 'Double Back Foot Flip' Score = 500 Anim = DoubleNollieKickflip IsExtra UseCurrent } } ]
 Trick_BackfootHeelflip = { Scr = FlipTrick params = { name = 'Back Foot Heelflip' Score = 150 Anim = NollieHeelflip Nollie = Heelflip ExtraTricks = Extra_DBackfootHeelflip } }
-Extra_DBackfootHeelflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Back Foot H.flip' displayname = 'Double Back Foot Heelflip' Score = 500 Anim = DoubleNollieHeelflip IsExtra UseCurrent } } ]
+Extra_DBackfootHeelflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double B.F. Heelflip' displayname = 'Double Back Foot Heelflip' Score = 500 Anim = DoubleNollieHeelflip IsExtra UseCurrent } } ]
 Trick_Kickflip = { Scr = FlipTrick params = { name = 'Kickflip' Score = 100 Anim = Kickflip Nollie = NollieKickflip ExtraTricks = KickflipExtras } }
 DoubleKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Kickflip' Score = 500 Anim = DoubleKickflip ExtraTricks = TripleKickflip IsExtra trickslack = 15 UseCurrent } } ]
 TripleKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Triple Kickflip' Score = 1000 Anim = TripleKickflip IsExtra speed = 1 UseCurrent } } ]
