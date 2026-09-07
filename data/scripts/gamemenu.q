@@ -3134,6 +3134,8 @@ level_select_menu_level_info = [
   { text = "Carnival" level_num = 8 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_CNV level = Load_Cnv taxi_id = Cab_sign_8_Carnival }
   { text = "Chicago" level_num = 9 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_HOF level = Load_Hof taxi_id = Cab_sign_9_Chicago }
   { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_CPK level = Load_Sk4Ed_gameplay taxi_id = Cab_sign_10_Custom }
+  { text = "Los Angeles" level_num = 11 points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_LA taxi_id = Cab_sign_10_Custom }
+  { text = "MotoX" level_num = 12 points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_Motox taxi_id = Cab_sign_10_Custom }
 ]
 level_select_menu_level_info_unlock = [
   { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_id = Cab_sign_1_College }
