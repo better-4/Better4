@@ -31,6 +31,11 @@ Trick_ReemoSlide = { Scr = Manual params = { name = 'Reemo Slide' Score = 1300 I
 Trick_PrimoSlide = { Scr = Manual params = { name = 'Primo' Score = 1200 InitAnim = Primo_Init FromAirAnim = Primo_Init BalanceAnim = Primo_Range OutAnim = Primo_out OffMeterTop = NoseManualBail OffMeterBottom = ManualBail Friction = 0.5 IsSpecial ExtraTricks = FlatLandBranches ExtraTricks2 ToRailBullShit } }
 Trick_OneFootOneWheel = { Scr = Manual params = { name = 'One Wheel Nosemanual' Score = 1400 InitAnim = OneFootOneWheel_Init FromAirAnim = OneFootOneWheel_Init BalanceAnim = OneFootOneWheel_Range OutAnim = OneFootOneWheel_Init OffMeterTop = ManualLand OffMeterBottom = NoseManualBail Friction = 0.5 IsSpecial Nollie ExtraTricks2 NosePivotBullShit ExtraTricks = FlatLandBranches PutDownAnim = PutDownOneWheel } }
 Trick_DanceParty = { Scr = Manual params = { name = 'Ahhh yeahhh!' Score = 1400 InitAnim = DanceParty_Init FromAirAnim = DanceParty_Init BalanceIdle = DanceParty_Idle OffMeterTop = ManualBail OffMeterBottom = NoseManualBail Friction = 20 IsSpecial ExtraTricks = FlatLandBranches } }
+Trick_DuckDive = { Scr = Manual Params = { Name = 'Duck Dive Shark Attack' Score = 1400 InitAnim = DuckDive_Init FromAirAnim = DuckDive_Init BalanceIdle = DuckDive_Idle OutAnim = DuckDive_Out OffMeterTop = ManualBail OffMeterBottom = NoseManualBail IsSpecial WaitOnOlliePercent = 0 ExtraTricks = FlatlandBranches } }
+Trick_CYSAD = { Scr = Manual Params = { Name = 'Can Ya Spare a Dime?' Score = 1500 InitAnim = WorkForFood_Init FromAirAnim = WorkForFood_Init BalanceIdle = WorkForFood_Idle OffMeterTop = ManualBail OffMeterBottom = NoseManualBail Friction = 0.5 IsSpecial ExtraTricks = FlatlandBranches } }
+Trick_FallingDown = { Scr = Manual Params = { Name = 'Falling Down' Score = 1000 InitAnim = XBonePile_Init FromAirAnim = XBonePile_Init BalanceIdle = XBonePile_Idle OutAnim = XBonePile_Out OffMeterTop = ManualBail OffMeterBottom = NoseManualBail IsSpecial ExtraTricks = FlatlandBranches } }
+Trick_ClawDrag = { Scr = Manual Params = { Name = 'The Claw Drag' Score = 1000 InitAnim = ClawDrag_Init FromAirAnim = ClawDrag_Init BalanceIdle = ClawDrag_Idle OffMeterTop = ManualBail OffMeterBottom = NoseManualBail IsSpecial ExtraTricks = FlatlandBranches } } //voss: trick untriggerable its entry in alltricks.q has been removed
+Trick_MaulNinjaManual = { Scr = Manual Params = { Name = 'Sith Saber Spin' Score = 1400 InitAnim = MaulNinjaManual_Init FromAirAnim = MaulNinjaManual_Init BalanceIdle = MaulNinjaManual_Idle OffMeterTop = ManualBail OffMeterBottom = NoseManualBail Friction = 0.5 IsSpecial BlendPeriod = 0.0 ExtraTricks = FlatlandBranches } } //voss: trick untriggerable its entry in alltricks.q has been removed
 ManualTricks =
 [
   { Trigger = { inorder Up Down 400 } duration = 700 Trick_Manual }
@@ -616,6 +621,12 @@ script PlayManualBalanceAnim
   else
     PlayAnim Anim = <BalanceAnim> wobble
   endif
+  if GotParam Sparks
+    begin
+      ClawSparks
+      Wait 0.5 frames
+    repeat
+  endif
   if AnimEquals LazyAss_Idle
     begin
       if FrameIs 20
@@ -624,6 +635,12 @@ script PlayManualBalanceAnim
       WaitOneGameFrame
     repeat
   endif
+endscript
+script ClawSparks
+    Obj_AttachFrame bone = "left_fingers_base"
+    Obj_AttachFrame bone = "right_fingers_base"
+    BloodParticlesOn Name = "Grass_1.png" start_col = -16711681 end_col = -2013265665 blend_mode = 68 num = 10 emit_w = 2.0 emit_h = 2.1 angle = -50 size = 1.0 bone = "left_fingers" growth = 3 time = 0.25 speed = 150 grav = 0 life = 0.25
+    BloodParticlesOn Name = "Grass_1.png" start_col = -16711681 end_col = -2013265665 blend_mode = 68 num = 10 emit_w = 2.0 emit_h = 2.1 angle = -50 size = 1.0 bone = "right_fingers" growth = 3 time = 0.25 speed = 150 grav = 0 life = 0.25
 endscript
 script SetManualExtraTricks parent = 'none'
   if GotParam ExtraTricks2

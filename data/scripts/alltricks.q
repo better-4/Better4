@@ -3,9 +3,11 @@ ConfigurableTricks = [
   Trick_180Varial
   Trick_2KickMadonnaFlip
   Trick_360FlipNoseManual
+  Trick_360GhettoBird
   Trick_360Varial
   Trick_360VarialMcTwist
   Trick_4thofJuly
+  Trick_540BoardVarial
   Trick_50FingerFlip
   Trick_540Flip
   Trick_540TailWhip
@@ -33,6 +35,7 @@ ConfigurableTricks = [
   Trick_Bodywrap540
   Trick_Boneless
   Trick_BoomBox
+  Trick_Breakdance
   Trick_BSFootplant
   Trick_BSNoseComply
   Trick_Burntwist
@@ -48,6 +51,7 @@ ConfigurableTricks = [
   Trick_CrookedBigSpinFlip
   Trick_CrookedCop
   Trick_Crossbone
+  Trick_CYSAD
   Trick_DaffyBrokenGrind
   Trick_DanceParty
   Trick_DarkDisaster
@@ -56,9 +60,11 @@ ConfigurableTricks = [
   Trick_Disaster
   Trick_DoubleBluntSlide
   Trick_DoubleKFindy
+  Trick_DuckDive
   Trick_Eggplant
   Trick_ElbowSmash
   Trick_FalconSlide
+  Trick_FallingDown
   Trick_Fandangle
   Trick_Fastplant
   Trick_FeebleLayback
@@ -102,12 +108,14 @@ ConfigurableTricks = [
   Trick_Indy
   Trick_Indy900
   Trick_IndyNosebone
+  Trick_IndyNosebone2
   Trick_Invert
   Trick_InwardHeelflip
   Trick_Jackass
   Trick_Japan
   Trick_Judo
   Trick_JudoMadonna
+  Trick_Juggle
   Trick_JumpJets
   Trick_KFBackflip
   Trick_KFIndy
@@ -116,6 +124,7 @@ ConfigurableTricks = [
   Trick_Kickflip
   Trick_KickFlipOneFootTail
   Trick_KickFlipUnderFlip
+  Trick_LayoutFlip
   Trick_LazyAss
   Trick_Madonna
   Trick_Manual
@@ -199,9 +208,7 @@ ConfigurableTricks = [
   Trick_ClawPunch
   Trick_Roastbeef
   Trick_ZZZZManual
-  Trick_DuckDive
   Trick_VisitingHome
-  Trick_WorkForFoodManual
   Trick_Drunkgrind
   Trick_MaulRollGrind
   Trick_PaddleGrind
