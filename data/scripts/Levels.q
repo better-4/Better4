@@ -90,13 +90,15 @@ LevelNum_Zoo = 7
 LevelNum_Cnv = 8
 LevelNum_Hof = 9
 LevelNum_Sk4ed = 10
+LevelNum_LA = 11
+LevelNum_Motox = 12
 LevelNum_Airport = 1
 LevelNum_Canada = 2
 LevelNum_Rio = 3
 LevelNum_Suburbia = 4
 LevelNum_Foundry = 5
 LevelNum_SkaterIsland = 6
-LevelNum_LA = 7
+// LevelNum_LA = 7
 LevelNum_Tokyo = 8
 LevelNum_Ship = 9
 LevelNum_Oil = 10
@@ -121,6 +123,7 @@ script set_level_lights
   SetDynamicLightModulationFactor directional = 1 value = <mod_factor_1>
 endscript
 script load_level level_number = 0
+  Printf "@@ LOAD_LEVEL CALLED"
   RememberLevelStructureNameForReplays level_structure_name = <structure_name>
   if ( ( CD ) or ( IsTrue TestMusicFromHost ) )
     if GotParam ambient_track
@@ -174,16 +177,22 @@ script load_level level_number = 0
       DisplayLoadingScreen "loadscrn_generic"
     endif
   endif
+  Printf "1"
   CareerStartLevel level = <level_number>
+  Printf "2"
   ResetLevelFlags
+  Printf "3"
   if ( <level_number> = LevelNum_Skateshop )
   endif
+  Printf "3"
   if GotParam scnpre
     LoadLevelPreFile <scnpre>
   endif
+  Printf "4"
   if GotParam sky
     LoadScene scene = <sky>
   endif
+  Printf "5"
   if GotParam park_editor
     if IsNGC
       Ngc_ReduceColors 0
@@ -198,19 +207,23 @@ script load_level level_number = 0
   else
     LoadScene scene = <level>
   endif
+  Printf "6"
   if GotParam level_name
     SetLevelName <level_name>
   else
     SetLevelName <level>
   endif
+  Printf "7"
   if GotParam scnpre
     UnloadPreFile <scnpre> dont_assert
   endif
+  Printf "8"
   if not IsPS2
     if GotParam pre
       LoadLevelPreFile <pre>
     endif
   endif
+  Printf "9"
   if GotParam qb
     if GotParam park_editor
       LoadNodeArray <qb> park_editor
@@ -218,19 +231,24 @@ script load_level level_number = 0
       LoadNodeArray <qb>
     endif
   endif
+  Printf "10"
   if IsPS2
     if GotParam pre
       LoadLevelPreFile <pre>
     endif
   endif
+  Printf "11"
   if GotParam park_editor
   else
     PreloadModels
   endif
+  Printf "12"
   if GotParam level_qb
     LoadQB <level_qb> LevelSpecific
   endif
+  Printf "13"
   preselect_random_parts <...>
+  Printf "14"
   if GotParam park_editor
     LoadSound "Shared\Hits\FallPungee_11"
     LoadSound "Shared\Water\FallWater"
@@ -238,11 +256,13 @@ script load_level level_number = 0
   else
     LoadTerrain
   endif
+  Printf "15"
   if IsTrue UseLevelOverrideStats
     if GotParam default_stats
       SetAllStats value = <default_stats>
     endif
   endif
+  Printf "16"
   if GotParam temp_script
      <temp_script> <...>
     if GotParam extranetanimsscript
@@ -254,47 +274,58 @@ script load_level level_number = 0
       endif
     endif
   endif
+  Printf "17"
   if GotParam park_editor
   else
     if GotParam startup_script
        <startup_script>
     endif
   endif
+  Printf "18"
   if GotParam pre
     UnloadPreFile <pre> dont_assert
   endif
+  Printf "19"
   if not InNetGame
     if GotParam pedpre
       LoadPreFile <pedpre> dont_assert
     endif
   endif
+  Printf "20"
   if not InNetGame
     if not GotParam park_editor
       PreloadPedestrians
     endif
   endif
+  Printf "21"
   if not InNetGame
     if InMultiplayerGame
       PreloadModel name = "crown"
     endif
   endif
+  Printf "22"
   if not InNetGame
     if GotParam pedpre
       UnloadPreFile <pedpre> dont_assert
     endif
   endif
+  Printf "23"
   if ( <level_number> = LevelNum_Skateshop )
     if not IsTrue cas_artist
       LoadPreFile "skaterparts.pre"
     endif
   endif
+  Printf "24"
   PushMemProfile "Level Collision decompressed PIP + Supersectors"
+  Printf "25"
   if IsTrue UsePreFilesForLevelLoading
     if GotParam colpre
       LoadPipPre <colpre> heap = topdown
     endif
   endif
+  Printf "26"
   LoadCollision scene = <level>
+  Printf "27"
   if GotParam park_editor
     if GotParam outer_shell
       if IsTrue UsePreFilesForLevelLoading
@@ -304,7 +335,9 @@ script load_level level_number = 0
       LoadCollision scene = <outer_shell>
     endif
   endif
+  Printf "28"
   PopMemProfile
+  Printf "29"
   if GotParam park_editor
     if GotParam startup_script
        <startup_script>
@@ -312,24 +345,32 @@ script load_level level_number = 0
   else
     ParseNodeArray
   endif
+  Printf "30"
   if GotParam goals_script
      <goals_script>
   endif
+  Printf "31"
   if GameModeEquals is_singlesession
     AddGoal_TrickAttack
   endif
+  Printf "32"
   if GameModeEquals is_career
     if not ( <level_number> = 0 )
       SetGlobalFlag flag = CAREER_STARTED
       Printf "CAREER_STARTED"
     endif
   endif
+  Printf "33"
   init_goal_manager
+  Printf "34"
   initialize_cash_icons
+  Printf "35"
   if GotParam setup_script
      <setup_script>
   endif
+  Printf "36"
   UnPauseGame
+  Printf "37"
 endscript
 script LoadTerrain_parked
   SetTerrainDefault
@@ -795,6 +836,48 @@ level_hof = {
   level_number = LevelNum_Hof
   temp_script = load_cameras_and_terrains
   extranetanimsscript = load_level_anims
+  ambient_red = 72
+  ambient_green = 72
+  ambient_blue = 72
+  ambient_mod_factor = 0.5
+  heading_0 = 90.0
+  pitch_0 = -60.0
+  red_0 = 75
+  green_0 = 75
+  blue_0 = 75
+  mod_factor_0 = 0.7
+  heading_1 = 0.0
+  pitch_1 = -90.0
+  red_1 = 0
+  green_1 = 0
+  blue_1 = 0
+  mod_factor_1 = 1.0
+}
+script Load_LA
+  load_level level_la
+endscript
+level_la = {
+  structure_name = level_la
+  load_script = Load_LA
+  name = "LA"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  loading_time = 8
+  pre = "la.pre"
+  scnpre = "lascn.pre"
+  level = "LA"
+  sky = "Alc_Sky"
+  qb = "levels\la\la.qb"
+  // level_qb = "levels\la\la_scripts.qb"
+  colpre = "lacol.pre"
+  pedpre = "laped.pre"
+  // startup_script = la_Startup
+  // goals_script = la_goals
+  // setup_script = la_setup
+  default_stats = 5
+  level_number = LevelNum_LA
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
   ambient_red = 72
   ambient_green = 72
   ambient_blue = 72

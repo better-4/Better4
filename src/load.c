@@ -1,5 +1,7 @@
 #include "load.h"
 
+#include "decomp/common.h"
+
 #include <partymod-thps4/src/hash.h>
 #include <partymod-thps4/src/patch.h>
 
@@ -15,6 +17,7 @@ void *__cdecl Pip_Load(char *path) {
 
 	void *ret;
 	char *override = map_get(override_map, path, strlen(path));
+	printLog("Pip::Load: loading \"%s\"\n", path);
 
 	if (override) {
 		printLog("Pip::Load: Override load of \"%s\" with \"%s\"\n", path, override);
@@ -42,6 +45,12 @@ void *__cdecl Pip_Unload(char *path) {
 	return ret;
 }
 
+void __fastcall Obj_CSkaterCareer_StartLevel(void *career, unused_t _, int level_num) {
+    static void (__fastcall* _StartLevel)(void *, unused_t, int) = (void *)0x004dc760;
+	printLog("Obj::CSkaterCareer::StartLevel: level_num=%d\n", level_num);
+	_StartLevel(career, UNUSED, level_num);
+}
+
 void patchLoad() {
 	static int num_overrides = 1;
 	override_map = map_alloc(num_overrides, NULL, NULL);
@@ -59,4 +68,6 @@ void patchLoad() {
 	patchCall(0x0046be14, (void *)Pip_Unload); // ??
 	patchCall(0x0046bef5, (void *)Pip_Unload); // ??
 	patchCall(0x005120ac, (void *)Pip_Unload); // SkateScript::LoadAllStartupQBFiles
+
+	patchCall(0x0051ab13, (void *)Obj_CSkaterCareer_StartLevel);
 }
