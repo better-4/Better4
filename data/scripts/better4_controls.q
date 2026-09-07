@@ -152,7 +152,7 @@ better4_control_jumptrick = {
 }
 
 better4_control_manualspin_index = 0
-better4_control_manualspin_value = off
+better4_control_manualspin_value = 0
 better4_control_manualspin = {
   id = better4_control_manualspin_id
   index_name = better4_control_manualspin_index
@@ -160,8 +160,9 @@ better4_control_manualspin = {
   text = "Manual Spin"
   ini_key = "ManualSpin"
   options = [
-    { text = "\bh" value = off } // R2
-    { text = "\bh/\bg" value = on } // R2/L2
+    { text = "\bh" value = 0 } // R2
+    { text = "\bh/\bg" value = 1 } // R2/L2
+    { text = "\bf/\be" value = 2 } // R1/L1
   ]
 }
 
