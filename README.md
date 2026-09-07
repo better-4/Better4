@@ -86,6 +86,8 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 ## Known Issues
 
 * Server list / player list disappears after hosting a game too quickly. Fixed by re-opening the internet menu.
+* Being in OBS can cause games to not end after 0
+* Sometimes skater is frozen after leaving OBS
 
 ## Credits
 
