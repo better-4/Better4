@@ -120,6 +120,7 @@ endscript
 script better4_options_menu
   better4_create_menu menu_title = "BETTER4 OPTIONS" icon = PA_nuke <...>
   make_text_sub_menu_item text = "In Air" scale = better4_menu_item_scale id = inair_option pad_choose_script = better4_inair_menu pad_choose_params = <...>
+  make_text_sub_menu_item text = "In Manual" scale = better4_menu_item_scale id = inmanual_option pad_choose_script = better4_inmanual_menu pad_choose_params = <...> 
   make_text_sub_menu_item text = "On Ground" scale = better4_menu_item_scale id = onground_option pad_choose_script = better4_onground_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "On Rail" scale = better4_menu_item_scale id = onrail_option pad_choose_script = better4_onrail_menu pad_choose_params = <...>
   make_text_sub_menu_item text = "On Wall" scale = better4_menu_item_scale id = onwall_option pad_choose_script = better4_onwall_menu pad_choose_params = <...>
@@ -137,7 +138,6 @@ script better4_onground_menu
   //better4_create_menu_control better4_control_jumptrick
   better4_create_menu_control better4_control_doublerevert
   better4_create_menu_control better4_control_revertrecovery
-  make_text_sub_menu_item text = "In Manual" scale = better4_menu_item_scale id = inmanual_option pad_choose_script = better4_inmanual_menu pad_choose_params = <...> 
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
@@ -223,10 +223,10 @@ script better4_chat_menu
 endscript
 
 script better4_inmanual_menu
-  better4_create_menu menu_title = "IN MANUAL" icon = PA_trick close_script = better4_onground_menu close_params = <...>
+  better4_create_menu menu_title = "IN MANUAL" icon = PA_trick close_script = better4_options_menu close_params = <...>
   better4_create_menu_control better4_control_manualspin
-  better4_create_menu_control better4_control_spacewalk
   better4_create_menu_control better4_control_manualfloat
+  better4_create_menu_control better4_control_spacewalk
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_onground_menu pad_choose_params = <...>
 endscript
