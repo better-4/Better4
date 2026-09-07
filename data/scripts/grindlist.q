@@ -55,6 +55,8 @@ Trick_Drunkgrind = { Params = { Name = 'S.U.I. Grind' IsSpecial } Template = Tem
 Trick_MaulRollGrind = { Params = { Name = 'Dark Jedi Grind' IsSpecial } Template = Template1 Prefix = "Trick_MaulRollGrind" }
 Trick_PaddleGrind = { Params = { Name = 'Paddle Out Grind' IsSpecial } Template = Template1 Prefix = "Trick_PaddleGrind" }
 Trick_Sobriety = { Params = { Name = 'Sobriety Grind' IsSpecial } Template = Template1 Prefix = "Trick_Sobriety" }
+Trick_Breakdance = { Params = { Name = 'Break it Down' IsSpecial } Template = Template1 Prefix = "Trick_Breakdance2" }
+Trick_Juggle = { Params = { Name = 'Juggle Bone Slide' IsSpecial } Template = Template1 Prefix = "Trick_Juggle2" }
 GrindTricks =
 [
   { Trigger = { TripleInOrder Up Up Triangle 400 } duration = 1000 Template = Template1 Prefix = "Trick_Nosebluntslide" }

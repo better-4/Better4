@@ -195,6 +195,9 @@ script Grind GrindTweak = 7 boardscuff = 0
     DoBoardScuff boardscuff = <boardscuff>
     SparksOff
   endif
+  if gotparam sparkless
+    SparksOff
+  endif
   ClearExceptions
   if GotParam Nollie
     SetException Ex = Ollied Scr = NollieNoDisplay
@@ -1140,6 +1143,34 @@ endscript
 script Trick_OneFootSmith_BS_180
   FlipAndRotate
   Goto Trick_OneFootSmith_FS Params = { NoBlend = yes }
+endscript
+script Trick_Juggle2_BS
+  Grind { Name = 'Juggle Bone Slide' Score = 500 InitAnim = XJuggle_Init Anim = XJuggle_Idle Idle OutAnim = XJuggle_Out Type = Grind NoBlend = <NoBlend> GrindBail = FiftyFiftyFall OutAnimOnOllie sparkless IsSpecial }
+endscript
+script Trick_Juggle2_FS
+  Goto Trick_Juggle2_BS Params = { NoBlend = yes }
+endscript
+script Trick_Juggle2_BS_180
+  Rotate
+  BoardRotateAfter
+  Goto Trick_Juggle2_BS Params = { NoBlend = yes }
+endscript
+script Trick_Juggle2_FS_180
+  Goto Trick_Juggle2_BS_180
+endscript
+script Trick_Breakdance2_BS
+  Grind { Name = 'Break it Down' Score = 500 InitAnim = XSpin_Init Anim = XSpin_Idle Idle OutAnim = Xspin_Out Type = Grind NoBlend = <NoBlend> GrindBail = NoseManualBail2 OutAnimOnOllie IsSpecial }
+endscript
+script Trick_Breakdance2_FS
+  Goto Trick_Breakdance2_BS Params = { NoBlend = yes }
+endscript
+script Trick_Breakdance2_BS_180
+  Rotate
+  BoardRotateAfter
+  Goto Trick_Breakdance2_BS Params = { NoBlend = yes }
+endscript
+script Trick_Breakdance2_FS_180
+  Goto Trick_Breakdance2_BS_180
 endscript
 script BackwardsGrind
   Rotate

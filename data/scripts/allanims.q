@@ -1430,6 +1430,8 @@ script animload_human
     LoadAnim name = "anims\skater_specials\MaulForceGrab_Init.ska" descChecksum = MaulForceGrab_Init
     LoadAnim name = "anims\skater_specials\MaulForceGrab_Idle.ska" descChecksum = MaulForceGrab_Idle
     LoadAnim name = "anims\skater_specials\MaulForceGrab_Out.ska" descChecksum = MaulForceGrab_Out
+    LoadAnim name = "anims\skater_specials\MaulNinjaManual_Init.ska" descChecksum = MaulNinjaManual_Init
+    LoadAnim name = "anims\skater_specials\MaulNinjaManual_Idle.ska" descChecksum =MaulNinjaManual_Idle
     LoadAnim name = "anims\skater_specials\RodeoClown_Init.ska" descChecksum = RodeoClown_Init
     LoadAnim name = "anims\skater_specials\RodeoClown_Idle.ska" descChecksum = RodeoClown_Idle
     LoadAnim name = "anims\skater_specials\RodeoClown_Out.ska" descChecksum = RodeoClown_Out
@@ -1472,6 +1474,23 @@ script animload_human
     LoadAnim name = "anims\skater_specials\Summoner_Init.ska" descChecksum = Summoner_Init
     LoadAnim name = "anims\skater_specials\Summoner_Idle.ska" descChecksum = Summoner_Idle
     LoadAnim name = "anims\skater_specials\Summoner_Out.ska" descChecksum = Summoner_Out
+    LoadAnim name = "anims\skater_specials\XBonePile_Init.ska" descChecksum = XBonePile_Init
+    LoadAnim name = "anims\skater_specials\XBonePile_Idle.ska" descChecksum = XBonePile_Idle
+    LoadAnim name = "anims\skater_specials\XBonePile_Out.ska" descChecksum = XBonePile_Out
+    LoadAnim name = "anims\skater_specials\XSpin_Init.ska" descChecksum = XSpin_Init
+    LoadAnim name = "anims\skater_specials\XSpin_Idle.ska" descChecksum = XSpin_Idle
+    LoadAnim name = "anims\skater_specials\XSpin_Out.ska" descChecksum = XSpin_Out
+	LoadAnim name = "anims\skater_specials\XJuggle_Init.ska" descChecksum = XJuggle_Init
+    LoadAnim name = "anims\skater_specials\XJuggle_Idle.ska" descChecksum = XJuggle_Idle
+    LoadAnim name = "anims\skater_specials\XJuggle_Out.ska" descChecksum = XJuggle_Out
+    LoadAnim name = "anims\skater_specials\XHeart_Init.ska" descChecksum = XHeart_Init
+    LoadAnim name = "anims\skater_specials\XHeart_Idle.ska" descChecksum = XHeart_Idle
+    LoadAnim name = "anims\skater_specials\XHeart_Out.ska" descChecksum = XHeart_Out
+    LoadAnim name = "anims\skater_specials\XArm_Init.ska" descChecksum = XArm_Init
+    LoadAnim name = "anims\skater_specials\XArm_Range.ska" descChecksum = XArm_Range
+    LoadAnim name = "anims\skater_specials\XArm_Out.ska" descChecksum = XArm_Out
+	LoadAnim name = "anims\skater_specials\ClawDrag_Init.ska" descChecksum = ClawDrag_Init
+    LoadAnim name = "anims\skater_specials\ClawDrag_Idle.ska" descChecksum = ClawDrag_Idle
     better4_load_anims
   endif
   SetReferenceChecksum 0
