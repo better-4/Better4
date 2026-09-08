@@ -1,14 +1,15 @@
 script EnterBetterObserve
+  exit_pause_menu
   if not IsBetterObserving
-    exit_pause_menu
-    skater:SkaterInit ReturnControl
+    MakeSkaterGoto SkaterInit
+    skater:NetDisablePlayerInput
     BetterObserve
     kill_start_key_binding
     create_observer_ui
     Wait 15 gameframes
     restore_start_key_binding
-    skater:NetDisablePlayerInput
-    skater:PausePhysics
+    create_observer_ui // have to re-set events here because restore start key overrides
+    skater:SetRollingFriction 20
   else
     QuitBetterObservivng
   endif
@@ -21,11 +22,12 @@ script QuitBetterObservivng
   else
     exit_pause_menu
     ObserveSelf
-    skater:UnPausePhysics
+    skater:SetRollingFriction #"default"
     skater:NetEnablePlayerInput
     destroy_observer_ui
     EnablePlayerNames
     EnableHUD
+    MakeSkaterGoto SkaterInit
   endif
 endscript
 

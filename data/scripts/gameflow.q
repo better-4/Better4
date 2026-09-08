@@ -77,7 +77,7 @@ script GameFlow_Startup
       EnableHUD
     else
       create_observer_ui
-      skater:PausePhysics
+      skater:SetRollingFriction 20
       skater:NetDisablePlayerInput
     endif
   endif

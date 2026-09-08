@@ -76,7 +76,7 @@ script SkaterInit
   ClearPanel_Landed
   if IsBetterObserving
     create_observer_ui
-    skater:PausePhysics
+    skater:SetRollingFriction 20
     skater:NetDisablePlayerInput
   endif
   if not GotParam ReturnControl
@@ -152,7 +152,9 @@ script OnGroundExceptions
   EnablePlayerInput
   BailOff
   BashOff
-  SetRollingFriction #"default"
+  if not IsBetterObserving
+    SetRollingFriction #"default"
+  endif
   CanSpin
   AllowRailTricks
   SetSkaterCamLerpReductionTimer time = 0
@@ -187,7 +189,9 @@ script InAirExceptions
   EnablePlayerInput
   BailOff
   BashOff
-  SetRollingFriction #"default"
+  if not IsBetterObserving
+    SetRollingFriction #"default"
+  endif
   SetState Air
   CanSpin
   OverrideCancelGround Off
@@ -202,7 +206,9 @@ script OnGroundAI Coasting = 0 Pushes = 0
     SetState ground
   endif
   OnGroundExceptions
-  SetRollingFriction #"default"
+  if not IsBetterObserving
+    SetRollingFriction #"default"
+  endif
   EnablePlayerInput
   NollieOff
   begin
@@ -557,7 +563,9 @@ script NetBrake
       endif
     endif
   repeat
-  SetRollingFriction #"default"
+  if not IsBetterObserving
+    SetRollingFriction #"default"
+  endif
   if SpeedLessThan 5
     Goto HandBrake
   else
@@ -569,7 +577,9 @@ script NetBrake
   endif
 endscript
 script NetBrake_out
+if not IsBetterObserving
   SetRollingFriction #"default"
+endif
 endscript
 script HandBrake
   ClearEventBuffer
@@ -637,7 +647,9 @@ script HandBrake
   repeat
   PlayAnim Anim = NewBrakeIdleToIdle
   Wait 0.25 seconds
-  SetRollingFriction #"default"
+  if not IsBetterObserving
+    SetRollingFriction #"default"
+  endif
   waitanimwhilstchecking
   if InNollie
     Goto OnGroundNollieAI
@@ -668,7 +680,9 @@ script PlayBrakeIdle
   @Anim = NewBrakeIdle ) 
 endscript
 script BrakeDone
-  SetRollingFriction #"default"
+  if not IsBetterObserving
+    SetRollingFriction #"default"
+  endif
 endscript
 script OnGroundNollieAI
   SetState ground
@@ -1396,34 +1410,41 @@ script FlailingFall
   PlayAnim Anim = FlailingFall Cycle
 endscript
 script DropIn DropInAnim = DropIn
-  if GameModeEquals is_horse
-    ResetLookAround
-    GetCurrentSkaterID
-    if not IsCurrentHorseSkater <ObjId>
-      return
+  if not IsBetterObserving
+    if GameModeEquals is_horse
+      ResetLookAround
+      GetCurrentSkaterID
+      if not IsCurrentHorseSkater <ObjId>
+        return
+      endif
     endif
+    SetTags state = skater_dropin
+    ResetSkaterParticleSystems
+    PausePhysics
+    RestartSkaterExceptions
+    SetSkaterCamOverride heading = 0 tilt = -0.75 time = 0.000001 zoom = 5
+    SetRollingFriction 10000
+    DisablePlayerInput
+    PlayAnim Anim = <DropInAnim> Blendperiod = 0.0
+    WaitAnim 60 Percent
+    ClearSkaterCamOverride
+    WaitAnim 85 Percent
+    UnPausePhysics
+    SetState ground
+    SetTags state = skater_onground
+    SetRollingFriction 0
+    waitanimfinished
+    EnablePlayerInput
+    OnGroundExceptions
+    waitonegameframe
+    SetLandedFromVert
+    Goto Land
+  else
+    MakeSkaterGoto SkaterInit
+    skater:NetDisablePlayerInput
+    skater:SetRollingFriction 20
+    create_observer_ui
   endif
-  SetTags state = skater_dropin
-  ResetSkaterParticleSystems
-  PausePhysics
-  RestartSkaterExceptions
-  SetSkaterCamOverride heading = 0 tilt = -0.75 time = 0.000001 zoom = 5
-  SetRollingFriction 10000
-  DisablePlayerInput
-  PlayAnim Anim = <DropInAnim> Blendperiod = 0.0
-  WaitAnim 60 Percent
-  ClearSkaterCamOverride
-  WaitAnim 85 Percent
-  UnPausePhysics
-  SetState ground
-  SetTags state = skater_onground
-  SetRollingFriction 0
-  waitanimfinished
-  EnablePlayerInput
-  OnGroundExceptions
-  waitonegameframe
-  SetLandedFromVert
-  Goto Land
 endscript
 script ZoomIn
   skater:SetSkaterCamOverride heading = 0 time = 0.00001 zoom = 1.04
@@ -1433,7 +1454,9 @@ script ZoomOut
 endscript
 script StartSkating1
   RestartSkaterExceptions
-  SetRollingFriction #"default"
+  if not IsBetterObserving
+    SetRollingFriction #"default"
+  endif
   DisablePlayerInput AllowCameraControl
   if ProfileEquals is_named = mullen
     SetRollingFriction 10000
@@ -1443,7 +1466,9 @@ script StartSkating1
     PlayBonkSound
     BlendPeriodOut 0
     WaitAnim 60 Percent
-    SetRollingFriction #"default"
+    if not IsBetterObserving
+      SetRollingFriction #"default"
+    endif
   else
     if not Flipped
       Flip
