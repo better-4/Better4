@@ -8,7 +8,7 @@ script EnterBetterObserve
     create_observer_ui
     Wait 15 gameframes
     restore_start_key_binding
-    create_observer_ui // have to re-set events here because restore start key overrides
+    //create_observer_ui 
     skater:SetRollingFriction 20
   else
     QuitBetterObservivng
