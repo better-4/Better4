@@ -1,7 +1,7 @@
 script EnterBetterObserve
   exit_pause_menu
   if not IsBetterObserving
-    MakeSkaterGoto SkaterInit
+    skater:SkaterInit ReturnControl
     skater:NetDisablePlayerInput
     BetterObserve
     kill_start_key_binding
