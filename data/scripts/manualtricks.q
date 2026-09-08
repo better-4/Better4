@@ -20,7 +20,7 @@ SpecialManualTricks =
 ]
 Trick_HoHoStreetPlant = { Scr = Manual params = { name = 'Ho Ho Street Plant' Score = 1500 skater = Vallely InitAnim = HoHoStreetPlant_init FromAirAnim = HoHoStreetPlant_init BalanceIdle = HoHoStreetPlant_idle OutAnim = HoHoStreetPlant_out OutAnimOnOllie OffMeterTop = NoseManualBail OffMeterBottom = NoseManualBail ExtraTricks = FlatLandBranches IsSpecial FlipAfter NoBlend } }
 Trick_SplitsManual = { Scr = Manual params = { name = 'Banana Board Splits' Score = 1500 skater = JENNA InitAnim = SplitsManual_init FromAirAnim = SplitsManual_init BalanceIdle = SplitsManual_idle OutAnim = SplitsManual_out OutAnimOnOllie OffMeterTop = NoseManualBail OffMeterBottom = ManualBail ExtraTricks = FlatLandBranches IsSpecial } }
-Trick_NoComplyLate360 = { Scr = Manual params = { name = 'No Comply 360 Shove-It' Score = 1500 InitAnim = NoComplyLate360 FromAirAnim = NoComplyLate360 BalanceAnim = Manual_Range OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks PivotBullShit IsSpecial NoBlend ExtraTricks = FlatLandBranches ExtraWaitPercent = 40 } }
+Trick_NoComplyLate360 = { Scr = Manual params = { name = 'No Comply 360 Shove-It' Score = 1500 InitAnim = NoComplyLate360 FromAirAnim = NoComplyLate360 BalanceAnim = Manual_Range OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 PivotBullShit IsSpecial NoBlend ExtraTricks = FlatLandBranches ExtraWaitPercent = 40 } }
 Trick_4thofJuly = { Scr = Manual params = { name = 'One Wheel Fireworks Show' Score = 1500 InitAnim = _4thofJuly_init FromAirAnim = _4thofJuly_init BalanceIdle = _4thofJuly_idle OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 PivotBullShit ExtraTricks = FlatLandBranches IsSpecial CheckCheese SpawnScript = Fireworks } }
 Trick_RustySlide = { Scr = Manual params = { name = 'Rusty Slide Manual' Score = 1400 InitAnim = RustySlide_Init FromAirAnim = RustySlide_Init BalanceAnim = Primo_Range OutAnim = RustySlide_out OffMeterTop = NoseManualBail OffMeterBottom = ManualBail Friction = 0.5 IsSpecial BoardRotate ExtraTricks = FlatLandBranches ExtraTricks2 ToRailBullShit FlipGraphic NoBlend } }
 Trick_Sproing = { Scr = Manual params = { name = 'Sproing' Score = 1500 InitAnim = Sproing FromAirAnim = Sproing BalanceAnim = Manual_Range OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 PivotBullShit ExtraTricks = FlatLandBranches IsSpecial SproingFlip ExtraWaitPercent = 40 } }
@@ -48,8 +48,8 @@ GroundManualTricks =
 ]
 Trick_Manual = { Scr = Manual params = { name = 'Manual' Score = 100 InitAnim = Manual FromAirAnim = ManualFromAir BalanceAnim = Manual_Range BalanceAnim2 = Manual_Range2 OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 PivotBullShit ExtraTricks = FlatLandBranches CheckCheese AllowWallpush } }
 Trick_NoseManual = { Scr = Manual params = { name = 'Nose Manual' Score = 100 InitAnim = Nosemanual FromAirAnim = NoseManualFromAir BalanceAnim = NoseManual_Range BalanceAnim2 = NoseManual_Range2 Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail ExtraTricks2 NosePivotBullShit ExtraTricks = FlatLandBranches CheckCheese AllowWallpush } }
-Trick_OneFootNosemanual = { Scr = Manual params = { name = 'One Foot Nose Manual' Score = 200 InitAnim = OneFootNosemanual_Init FromAirAnim = OneFootNosemanual_Init BalanceAnim = OneFootNoseManual_Range Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail IsExtra ExtraTricks NosePivotBullShit ExtraTricks2 = FlatLandBranches } }
-Trick_OneFootManual = { Scr = Manual params = { name = 'One Foot Manual' Score = 200 InitAnim = OneFootManual_init FromAirAnim = OneFootManual_init BalanceAnim = OneFootManual_Range OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks PivotBullShit ExtraTricks2 = FlatLandBranches IsExtra } }
+Trick_OneFootNosemanual = { Scr = Manual params = { name = 'One Foot Nose Manual' Score = 200 InitAnim = OneFootNosemanual_Init FromAirAnim = OneFootNosemanual_Init BalanceAnim = OneFootNoseManual_Range Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail IsExtra ExtraTricks2 NosePivotBullShit ExtraTricks = FlatLandBranches } }
+Trick_OneFootManual = { Scr = Manual params = { name = 'One Foot Manual' Score = 200 InitAnim = OneFootManual_init FromAirAnim = OneFootManual_init BalanceAnim = OneFootManual_Range OffMeterTop = ManualBail OffMeterBottom = ManualLand ExtraTricks2 PivotBullShit ExtraTricks = FlatLandBranches IsExtra } }
 Trick_Handstand = { Scr = Manual params = { name = 'HandStand' Score = 250 InitAnim = HandstandHandFlip_Init FromAirAnim = HandstandHandFlip_Init BalanceAnim = HandstandHandFlip_Range OutAnim = HandstandHandFlip_out OffMeterTop = NoseManualBail OffMeterBottom = ManualBail Friction = 0.5 ExtraTricks = FlatLandBranches ExtraTricks2 = HandstandBranches } }
 Trick_Casper = { Scr = Manual params = { name = 'Casper' Score = 350 InitAnim = Casper_Init FromAirAnim = Casper_Init BalanceAnim = Casper_Range OutAnim = Casper_out OffMeterTop = ManualBail OffMeterBottom = NoseManualBail Friction = 0.5 BoardRotate ExtraTricks = FlatLandBranches ExtraTricks2 = CasperBranches } }
 Trick_AntiCasper = { Scr = Manual params = { name = 'Anti Casper' Score = 350 InitAnim = AntiCasper_Init FromAirAnim = AntiCasper_Init BalanceAnim = AntiCasper_Range OutAnim = AntiCasper_out OffMeterTop = ManualBail OffMeterBottom = NoseManualBail Friction = 0.5 BoardRotate Nollie ExtraTricks = FlatLandBranches ExtraTricks2 = AntiCasperBranches } }
@@ -275,8 +275,12 @@ script Manual BlendPeriod = 0.3
     Obj_SetFlag FLAG_SKATER_MANUALCHEESE
     SetTags ManualCheese = 0
   endif
-  if GotParam ExtraTricks3
-    SetExtraTricks <ExtraTricks3> <ExtraTricks2> <ExtraTricks> ignore = <name>
+ if GotParam ExtraTricks3
+    if not ( better4_control_manualspin_value = 2 )
+      SetExtraTricks <ExtraTricks3> ManualBranchR2 <ExtraTricks> ignore = <name>
+    else
+      SetExtraTricks <ExtraTricks3> ManualBranchR1 <ExtraTricks> ignore = <name>
+    endif
   else
     if GotParam ExtraTricks2
       if GotParam PivotBullShit
