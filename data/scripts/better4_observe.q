@@ -7,8 +7,10 @@ script EnterBetterObserve
       BetterObserve
       kill_start_key_binding
       create_observer_ui
+      Wait 15 gameframes
+      restore_start_key_binding
       ResetTimer
-      begin
+      begin // wait for bail to finish before setting roll friction
         skater:GetTags
         if TimeGreaterThan 5
           break
@@ -19,7 +21,6 @@ script EnterBetterObserve
         Wait 1 gameframe
       repeat
       skater:SetRollingFriction 20
-      restore_start_key_binding
     else
       skater:SkaterInit ReturnControl
       skater:NetDisablePlayerInput
