@@ -1,15 +1,35 @@
 script EnterBetterObserve
   exit_pause_menu
+  skater:GetTags
   if not IsBetterObserving
-    skater:SkaterInit ReturnControl
-    skater:NetDisablePlayerInput
-    BetterObserve
-    kill_start_key_binding
-    create_observer_ui
-    Wait 15 gameframes
-    restore_start_key_binding
-    //create_observer_ui 
-    skater:SetRollingFriction 20
+    if ( <state> = skater_inbail )
+      skater:NetDisablePlayerInput
+      BetterObserve
+      kill_start_key_binding
+      create_observer_ui
+      ResetTimer
+      begin
+        skater:GetTags
+        if TimeGreaterThan 5
+          break
+        endif
+        if not ( <state> = skater_inbail )
+          break
+        endif
+        Wait 1 gameframe
+      repeat
+      skater:SetRollingFriction 20
+      restore_start_key_binding
+    else
+      skater:SkaterInit ReturnControl
+      skater:NetDisablePlayerInput
+      skater:SetRollingFriction 20
+      BetterObserve
+      kill_start_key_binding
+      create_observer_ui
+      Wait 15 gameframes
+      restore_start_key_binding
+    endif
   else
     QuitBetterObservivng
   endif
