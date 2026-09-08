@@ -1042,7 +1042,11 @@ script create_rankings score_title_text = "SCORE"
     dims = (640, 480)
   }
   AssignAlias id = rankings_anchor alias = current_menu_anchor
-  create_helper_text rank_screen_helper_text
+  if IsHost
+    create_helper_text rank_screen_helper_text
+  else
+    create_helper_text generic_dialog_helper_text
+  endif
   CreateScreenElement {
     type = ContainerElement
     parent = rankings_anchor
