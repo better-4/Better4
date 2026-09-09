@@ -1640,7 +1640,7 @@ script SkaterBreakGlass
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   FlailVibrate
   NollieOff 
-	PressureOff
+  PressureOff
   StopBalanceTrick
   if AnimEquals [ CrouchIdle SkateIdle Land MongoPushCycle PushCycle ]
     Goto FlailHitWall
