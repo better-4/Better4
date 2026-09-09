@@ -7,6 +7,8 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\Wallpush_Manual.ska" descChecksum = Wallpush_Manual
   LoadAnim name = "anims\better4\Wallpush_NoseManual.ska" descChecksum = Wallpush_NoseManual
   LoadAnim name = "anims\better4\Wallpush_Standing.ska" descChecksum = Wallpush_Standing
+  
+  LoadAnim name = "anims\better4\BS180PressureFlip.ska" descChecksum = BS180PressureFlip
 endscript
 
 script better4_load_anims_th3

@@ -228,6 +228,10 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   CheckForOllie
   KillExtraTricks
   BailOn
+  if ( in_pressure = 1 )
+    PressureOff
+    SetSkaterAirTricks
+  endif
   if GotParam NoSpin
     NoSpin
   endif

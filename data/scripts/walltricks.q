@@ -25,6 +25,7 @@ script WallRide
   BailOff
   SetQueueTricks better4_control_wallieplant_value
   NollieOff
+  PressureOff
   SetTrickScore 200
   PlayCessSound
   if GotParam left

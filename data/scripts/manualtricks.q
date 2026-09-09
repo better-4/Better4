@@ -381,6 +381,7 @@ script Manual BlendPeriod = 0.3
     Obj_KillSpawnedScript name = <SpawnScript>
     Obj_SpawnScript <SpawnScript>
   endif
+  WaitWhilstChecking_ForPressure <...> 
 endscript
 
 script SpacewalkBoost ExtraSpeedBoost = 200
@@ -618,6 +619,7 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
   WaitAnim <trickslack> frames fromend
   WaitAnimFinished
   PlayManualBalanceAnim <...>
+  WaitWhilstChecking_ForPressure <...> 
 endscript
 script PlayManualBalanceAnim
   if GotParam BalanceIdle

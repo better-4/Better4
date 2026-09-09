@@ -19,6 +19,8 @@ script SkaterInit
   UnPausePhysics
   NotInBail
   BashOff
+  NollieOff 
+  PressureOff
   NotifyBailDone
   Obj_KillSpawnedScript name = BailBoardControl
   SwitchOnBoard
@@ -181,7 +183,7 @@ script InAirExceptions
   SetException Ex = CarBail Scr = CarBail
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBailAir CallInsteadofGoto
-  SetQueueTricks special = SpecialTricks AirTricks
+  SetSkaterAirTricks
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
   SetManualTricks special = SpecialManualTricks ManualTricks
   SetTags state = skater_inair
@@ -841,9 +843,9 @@ script GroundGone
   SetException Ex = Ollied Scr = Ollie
   ClearTricksFrom better4_control_powerslide_value GroundTricks better4_control_stancechange_value
   if GotParam NoBoneless
-    SetQueueTricks special = SpecialTricks AirTricks
+    SetSkaterAirTricks
   else
-    SetQueueTricks special = SpecialTricks AirTricks Jumptricks JumpTricks0
+    SetSkaterAirTricks set_jumptricks
   endif
   if Crouched
     PlayAnim Anim = Crouch2InAir
@@ -853,7 +855,7 @@ script GroundGone
   begin
     if AirTimeGreaterThan Skater_Late_Jump_Slop
       ClearException Ollied
-      SetQueueTricks special = SpecialTricks AirTricks
+      SetSkaterAirTricks
     endif
     DoNextTrick
     if GotParam AndManuals
@@ -951,7 +953,8 @@ endscript
 script Land2 RevertTime = 5
   DoPerfectCheck
   AllowRailTricks
-  NollieOff
+  NollieOff 
+  PressureOff
   ClearLipCombos
   if LandedFromVert
     OverrideCancelGround
@@ -1636,7 +1639,8 @@ script SkaterBreakGlass
   SetException Ex = CarBail Scr = CarBail
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   FlailVibrate
-  NollieOff
+  NollieOff 
+	PressureOff
   StopBalanceTrick
   if AnimEquals [ CrouchIdle SkateIdle Land MongoPushCycle PushCycle ]
     Goto FlailHitWall

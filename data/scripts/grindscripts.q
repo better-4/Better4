@@ -97,6 +97,7 @@ endscript
 script SkateInLand
   OnExceptionRun SkateInLandOut
   NollieOff
+  PressureOff
   Vibrate Actuator = 1 Percent = 80 Duration = 0.1
   if Crouched
     PlayAnim Anim = CrouchedLand Blendperiod = 0.1
@@ -210,6 +211,7 @@ script Grind GrindTweak = 7 boardscuff = 0
     endif
     NollieOff
   endif
+  PressureOff
   SetException Ex = OffRail Scr = OffRail Params = { initanim = <initanim> OutAnim = <OutAnim> BoardRotate = <BoardRotate> }
   SetException Ex = Landed Scr = Land
   SetException Ex = OffMeterTop Scr = SkateInOrBail Params = { <...> FallingLeft }
@@ -278,6 +280,7 @@ script Grind GrindTweak = 7 boardscuff = 0
   if GotParam ScreenShake
     Grind_ScreenShake ScreenShake = <ScreenShake>
   endif
+  WaitWhilstChecking_ForPressure <...>
 endscript
 script GetBoardScuff ManualName = 'none'
   GetTags

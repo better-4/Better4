@@ -35,7 +35,8 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   SetSpecialFriction [ 0 10 15 20 30 50 ]
   SetQueueTricks NoTricks
   SetManualTricks Special = SpecialManualTricks ManualTricks
-  NollieOff
+  NollieOff 
+  PressureOff
   if Obj_FlagSet FLAG_SKATER_REVERTFS
     Obj_ClearFlag FLAG_SKATER_REVERTFS
     PlayAnim Anim = <FSAnim>
@@ -190,21 +191,27 @@ script CessTrail repeat_times = 20
     repeat <repeat_times>
   endif
 endscript
-script ToggleNollieRegular
+script ToggleNollieRegular // pressure piggbacks off nollie system
   OnGroundExceptions
-  SetException Ex = Ollied Scr = Nollie Params = { NoDoNextTrick }
+  //SetException Ex = Ollied Scr = Nollie Params = { NoDoNextTrick }
   ClearTrickQueues
-  SetQueueTricks better4_control_powerslide_value GroundTricks better4_control_stancechange_value
-  if InNollie
-    Printf "in Nollie mode ---------------------------"
-    NollieOff
-    if Crouched
-      PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1 backwards
-    else
-      PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1 backwards
+  //SetQueueTricks better4_control_powerslide_value GroundTricks better4_control_stancechange_value
+  ApplyStanceToggle
+  if not InNollie
+    if ( in_pressure = 0 ) // regular stance branch
+      if Crouched
+        PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1 backwards
+      else
+        PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1 backwards
+      endif
+    else // pressure stance branch
+      if Crouched
+        PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1 // need to change to pressure animation
+      else
+        PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1 // need to change to pressure animation
+      endif
     endif
-  else
-    NollieOn
+  else // nollie stance branch
     if Crouched
       PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1
     else
@@ -282,9 +289,15 @@ script Ollie OutSpeed = 1
   else
     DoNextTrick
   endif
-  SetTrickName 'Ollie'
-  SetTrickScore 100
-  Display Deferred
+  if ( in_pressure = 1 )
+    SetTrickName 'Pressure'
+    SetTrickScore 200
+    Display
+  else
+    SetTrickName 'Ollie'
+    SetTrickScore 100
+    Display Deferred
+  endif
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump"
@@ -327,6 +340,10 @@ script NoComply
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump"
+  if (better4_control_pressure_value = 1) // vanilla doesn't clear stance, gated on whether pressure is enabled or not
+    NollieOff 
+	  PressureOff 
+  endif
   InAirExceptions
   Vibrate Actuator = 1 Percent = 80 Duration = 0.05
   SetTrickName <Name>
@@ -369,6 +386,10 @@ script Boneless Anim = Boneless Name = 'Boneless' Score = 250
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump" BonelessHeight
+  if (better4_control_pressure_value = 1) // vanilla doesn't clear stance, gated on whether pressure is enabled or not
+    NollieOff 
+	  PressureOff 
+  endif
   InAirExceptions
   Vibrate Actuator = 1 Percent = 80 Duration = 0.1
   PlaySound boneless09 pitch = 85
