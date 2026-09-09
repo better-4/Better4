@@ -1,6 +1,5 @@
 // from thug's `pressuretricks.qb'
 // seems like there are some unused test pressure flips (uses 360 flip animation)
-// Animations to add: bs 180, bs toe, bs 360, fs 360, CrouchToNollie, SkatingToNollie
 
 in_pressure = 0
 PressureTricks2 = [ 
@@ -33,9 +32,14 @@ script ApplyStanceToggle
     if ( in_pressure = 1 ) 
       PressureOff 
       NollieOn 
-    else 
-      PressureOn
-      NollieOff  
+    else
+      if ( better4_control_pressure_value = 1 ) 
+        PressureOn
+        NollieOff
+      else
+        PressureOff
+        NollieOn
+      endif
     endif 
   endif 
 endscript
@@ -61,32 +65,34 @@ script Toggle_Nollie_Pressure_States
 endscript
 
 script WaitWhilstChecking_ForPressure 
-	if not IsNGC 
-		Button = L2 
-	else 
-		Button = L1 
-	endif 
-	begin 
-		if held <Button> 
-			if GotParam Nollie 
-				Toggle_Nollie_Pressure_States Nollie 
-			else 
-				Toggle_Nollie_Pressure_States 
-			endif 
-			begin 
-				if released <Button> 
-					break 
-				endif 
-				DoNextTrick 
-				Wait 1 game frame 
-			repeat 
-		endif 
-		DoNextTrick 
-		Wait 1 game frame 
-	repeat 
+  if ( better4_control_pressure_value = 1 )
+    if not IsNGC 
+      Button = L2 
+    else 
+      Button = L1 
+    endif 
+    begin 
+      if held <Button> 
+        if GotParam Nollie 
+          Toggle_Nollie_Pressure_States Nollie 
+        else 
+          Toggle_Nollie_Pressure_States 
+        endif 
+        begin 
+          if released <Button> 
+            break 
+          endif 
+          DoNextTrick 
+          Wait 1 game frame 
+        repeat 
+      endif 
+      DoNextTrick 
+      Wait 1 game frame 
+    repeat 
+  endif
 endscript
 
-SCRIPT SetSkaterAirTricks // heavily modified from thug (doesn't need wallplant or off board branches)
+script SetSkaterAirTricks // heavily modified from thug (doesn't need wallplant or off board branches)
   if GotParam set_jumptricks
     if ( in_pressure = 1 ) 
       SetQueueTricks special = SpecialTricks PressureTricks2 AirTricks Jumptricks JumpTricks0
@@ -100,4 +106,4 @@ SCRIPT SetSkaterAirTricks // heavily modified from thug (doesn't need wallplant 
       SetQueueTricks special = SpecialTricks AirTricks 
     endif
   endif
-ENDSCRIPT
+endscript

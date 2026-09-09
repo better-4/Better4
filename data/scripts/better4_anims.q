@@ -9,6 +9,11 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\Wallpush_Standing.ska" descChecksum = Wallpush_Standing
   
   LoadAnim name = "anims\better4\BS180PressureFlip.ska" descChecksum = BS180PressureFlip
+  LoadAnim name = "anims\better4\BSToeFlip.ska" descChecksum = BSToeFlip
+  LoadAnim name = "anims\better4\BS360PressureFlip.ska" descChecksum = BS360PressureFlip
+  LoadAnim name = "anims\better4\FS360PressureFlip.ska" descChecksum = FS360PressureFlip
+  LoadAnim name = "anims\better4\CrouchToPressure.ska" descChecksum = CrouchToPressure
+  LoadAnim name = "anims\better4\SkateToPressure.ska" descChecksum = SkateToPressure
 endscript
 
 script better4_load_anims_th3

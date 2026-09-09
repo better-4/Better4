@@ -206,9 +206,9 @@ script ToggleNollieRegular // pressure piggbacks off nollie system
       endif
     else // pressure stance branch
       if Crouched
-        PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1 // need to change to pressure animation
+        PlayAnim Anim = CrouchToPressure BlendPeriod = 0.1
       else
-        PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1 // need to change to pressure animation
+        PlayAnim Anim = SkateToPressure BlendPeriod = 0.1
       endif
     endif
   else // nollie stance branch

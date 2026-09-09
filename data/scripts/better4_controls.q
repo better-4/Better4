@@ -352,6 +352,21 @@ better4_control_railspin = {
   ]
 }
 
+// just using 0/1 since thats what i did checks with
+better4_control_pressure_index = 0
+better4_control_pressure_value = 0
+better4_control_pressure = {
+  id = better4_control_pressure_id
+  index_name = better4_control_pressure_index
+  value_name = better4_control_pressure_value
+  text = "Pressure Stance"
+  ini_key = "PressureStance"
+  options = [
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
+  ]
+}
+
 // Wallrides
 
 WallieplantTricks = [ { Trigger = { TapTwiceRelease Up X 500 } Scr = Trick_WallPlant } ]
@@ -714,6 +729,7 @@ script better4_controls_init
   better4_control_init better4_control_aspect_ratio
   better4_control_init better4_control_chat_size
   better4_control_init better4_control_chat_duration
+  better4_control_init better4_control_pressure
   // better4_control_init better4_trick_string
   // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound

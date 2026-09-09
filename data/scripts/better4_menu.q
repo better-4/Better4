@@ -138,6 +138,7 @@ script better4_onground_menu
   //better4_create_menu_control better4_control_jumptrick
   better4_create_menu_control better4_control_doublerevert
   better4_create_menu_control better4_control_revertrecovery
+  better4_create_menu_control better4_control_pressure
   make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
   make_text_sub_menu_item text = "Back" scale = better4_menu_item_scale pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
