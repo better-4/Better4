@@ -342,7 +342,7 @@ script NoComply
   #"Jump"
   if (better4_control_pressure_value = 1) // vanilla doesn't clear stance, gated on whether pressure is enabled or not
     NollieOff 
-	  PressureOff 
+    PressureOff 
   endif
   InAirExceptions
   Vibrate Actuator = 1 Percent = 80 Duration = 0.05
