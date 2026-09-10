@@ -66,29 +66,31 @@ endscript
 
 script WaitWhilstChecking_ForPressure 
   if ( better4_control_pressure_value = on )
-    if not IsNGC 
-      Button = L2 
-    else 
-      Button = L1 
-    endif 
-    begin 
-      if held <Button> 
-        if GotParam Nollie 
-          Toggle_Nollie_Pressure_States Nollie 
-        else 
-          Toggle_Nollie_Pressure_States 
-        endif 
-        begin 
-          if released <Button> 
-            break 
-          endif 
-          //DoNextTrick 
-          Wait 1 game frame 
-        repeat 
+    if not ( better4_control_stancechange_index = 1 ) // not off
+      if ( better4_control_stancechange_index = 0 ) // L2
+        Button = L2 
+      else 
+        Button = L1 
       endif 
-      //DoNextTrick 
-      Wait 1 game frame 
-    repeat 
+      begin 
+        if held <Button> 
+          if GotParam Nollie 
+            Toggle_Nollie_Pressure_States Nollie 
+          else 
+            Toggle_Nollie_Pressure_States 
+          endif 
+          begin 
+            if released <Button> 
+              break 
+            endif 
+            //DoNextTrick 
+            Wait 1 game frame 
+          repeat 
+        endif 
+        //DoNextTrick 
+        Wait 1 game frame 
+      repeat
+    endif
   endif
 endscript
 

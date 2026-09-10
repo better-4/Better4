@@ -114,10 +114,11 @@ better4_control_powerslide = {
   ]
 }
 
-NollieL2 = [ { Trigger = { Press L2 20 } Scr = ToggleNollieRegular } ]
+StanceChangeL2 = [ { Trigger = { Press L2 20 } Scr = ToggleNollieRegular } ]
+StanceChangeL1 = [ { Trigger = { Press L1 20 } Scr = ToggleNollieRegular } ]
 
 better4_control_stancechange_index = 0
-better4_control_stancechange_value = NollieL2
+better4_control_stancechange_value = StanceChangeL2
 better4_control_stancechange = {
   id = better4_control_stancechange_id
   index_name = better4_control_stancechange_index
@@ -125,8 +126,9 @@ better4_control_stancechange = {
   text = "Stance Change"
   ini_key = "StanceChange"
   options = [
-    { text = "\bg" value = NollieL2 } // L2
+    { text = "\bg" value = StanceChangeL2 } // L2
     { text = "Off" value = NoTricks }
+    { text = "\be" value = StanceChangeL1 } // L1
   ]
 }
 
