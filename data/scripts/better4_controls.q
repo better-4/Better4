@@ -352,9 +352,8 @@ better4_control_railspin = {
   ]
 }
 
-// just using 0/1 since thats what i did checks with
 better4_control_pressure_index = 0
-better4_control_pressure_value = 0
+better4_control_pressure_value = off
 better4_control_pressure = {
   id = better4_control_pressure_id
   index_name = better4_control_pressure_index
@@ -362,8 +361,8 @@ better4_control_pressure = {
   text = "Pressure Stance"
   ini_key = "PressureStance"
   options = [
-    { text = "Off" value = 0 }
-    { text = "On" value = 1 }
+    { text = "Off" value = off }
+    { text = "On" value = on }
   ]
 }
 

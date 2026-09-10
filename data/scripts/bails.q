@@ -181,7 +181,7 @@ script NutterBackward
     GroundGoneBail = GroundGoneBail AnimFall1 = HeadFirstFall AnimFall2 = HeadFirstSplat AnimFall3 = GetUpBackwards }
 endscript
 script GeneralBail Friction = 18 Friction2 = 20 HeavyFriction = 100
-  if (better4_control_pressure_value = 1) // vanilla doesn't clear stance, gated on whether pressure is enabled or not
+  if (better4_control_pressure_value = on) // vanilla 4 doesn't clear stance
     NollieOff 
     PressureOff 
   endif

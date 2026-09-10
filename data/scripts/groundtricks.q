@@ -340,7 +340,7 @@ script NoComply
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump"
-  if (better4_control_pressure_value = 1) // vanilla doesn't clear stance, gated on whether pressure is enabled or not
+  if (better4_control_pressure_value = on) // vanilla 4 doesn't clear stance
     NollieOff 
     PressureOff 
   endif
@@ -386,7 +386,7 @@ script Boneless Anim = Boneless Name = 'Boneless' Score = 250
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump" BonelessHeight
-  if (better4_control_pressure_value = 1) // vanilla doesn't clear stance, gated on whether pressure is enabled or not
+  if (better4_control_pressure_value = on) // vanilla 4 doesn't clear stance
     NollieOff 
     PressureOff 
   endif

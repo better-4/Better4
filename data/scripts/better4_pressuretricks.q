@@ -33,7 +33,7 @@ script ApplyStanceToggle
       PressureOff 
       NollieOn 
     else
-      if ( better4_control_pressure_value = 1 ) 
+      if ( better4_control_pressure_value = on ) 
         PressureOn
         NollieOff
       else
@@ -65,7 +65,7 @@ script Toggle_Nollie_Pressure_States
 endscript
 
 script WaitWhilstChecking_ForPressure 
-  if ( better4_control_pressure_value = 1 )
+  if ( better4_control_pressure_value = on )
     if not IsNGC 
       Button = L2 
     else 
@@ -92,7 +92,7 @@ script WaitWhilstChecking_ForPressure
   endif
 endscript
 
-script SetSkaterAirTricks // heavily modified from thug (doesn't need wallplant or off board branches)
+script SetSkaterAirTricks // modified from thug (doesn't need wallplant or off board branches)
   if GotParam set_jumptricks
     if ( in_pressure = 1 ) 
       SetQueueTricks special = SpecialTricks PressureTricks2 AirTricks Jumptricks JumpTricks0
