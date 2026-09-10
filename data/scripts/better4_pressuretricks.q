@@ -82,11 +82,11 @@ script WaitWhilstChecking_ForPressure
           if released <Button> 
             break 
           endif 
-          DoNextTrick 
+          //DoNextTrick 
           Wait 1 game frame 
         repeat 
       endif 
-      DoNextTrick 
+      //DoNextTrick 
       Wait 1 game frame 
     repeat 
   endif

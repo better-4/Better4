@@ -356,7 +356,7 @@ script Manual BlendPeriod = 0.3
   endif
   if GotParam IsSpecial
   else
-    if GotParam IsExtra
+    if GotParam IsExtraFw
     else
       DoNextManualTrick
     endif
