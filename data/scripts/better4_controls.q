@@ -114,15 +114,15 @@ better4_control_powerslide = {
   ]
 }
 
-StanceChangeL2 = [ { Trigger = { Press L2 20 } Scr = ToggleNollieRegular } ]
-StanceChangeL1 = [ { Trigger = { Press L1 20 } Scr = ToggleNollieRegular } ]
+StanceChangeL2 = [ { Trigger = { Press L2 20 } Scr = ToggleNollieRegular  Params = { Toggle } } ]
+StanceChangeL1 = [ { Trigger = { Press L1 20 } Scr = ToggleNollieRegular  Params = { Toggle } } ]
 StanceChangeL1Held = [
  { Trigger = { Press L1 20 } Scr = ToggleNollieRegular }
- { Trigger = { Release L1 20 } Scr = ToggleNollieRegular Params = { Nollie = 1 } } 
+ { Trigger = { Release L1 20 } Scr = ToggleNollieRegular Params = { Released } } 
 ]
 StanceChangeL2Held = [ 
 { Trigger = { Press L2 20 } Scr = ToggleNollieRegular }
-{ Trigger = { Release L2 20 } Scr = ToggleNollieRegular Params = { Nollie = 1 } }
+{ Trigger = { Release L2 20 } Scr = ToggleNollieRegular Params = { Released } }
 ]
 
 better4_control_stancechange_index = 0
@@ -135,10 +135,10 @@ better4_control_stancechange = {
   ini_key = "StanceChange"
   options = [
     { text = "\bg" value = StanceChangeL2 } // L2
-	{ text = "\bg (H&R)" value = StanceChangeL2Held }
     { text = "Off" value = NoTricks }
     { text = "\be" value = StanceChangeL1 } // L1
-	{ text = "\be (H&R)" value = StanceChangeL1Held }
+    { text = "\bg (H&R)" value = StanceChangeL2Held }
+    { text = "\be (H&R)" value = StanceChangeL1Held }
   ]
 }
 

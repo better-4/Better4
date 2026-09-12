@@ -25,32 +25,48 @@ script PressureOff
 endscript
 
 script ApplyStanceToggle 
-  if InNollie
-    if GotParam Nollie  
+  if GotParam Toggle
+    if InNollie 
       PressureOff 
-      NollieOff
-    endif	  
-  else 
-    if ( in_pressure = 1 ) 
-      PressureOff 
-      NollieOn 
-    else
-      if ( better4_control_pressure_value = on ) 
-        PressureOn
-        NollieOff
+      NollieOff 
+    else 
+      if ( in_pressure = 1 ) 
+        PressureOff 
+        NollieOn 
       else
-	    if GotParam Nollie
+        if ( better4_control_pressure_value = on ) 
+          PressureOn
+          NollieOff
+        else
           PressureOff
           NollieOn
-		endif
+        endif
+      endif 
+    endif
+  else // cycle logic for held l2/l1
+    if GotParam Released
+      if skater:InNollie
+        PressureOff 
+        NollieOff
+      else
+        PressureOff 
+        NollieOn
       endif
-    endif 
-  endif 
-  IF OnGround 
-	IF CurrentScorePotGreaterThan 0 
-		LandSkaterTricks 
-	ENDIF 
-  ENDIF
+    else
+      if skater:InNollie
+        PressureOff 
+        NollieOn
+        return DontDoAnimation = 1
+      else
+        if ( better4_control_pressure_value = on ) 
+          PressureOn
+          NollieOff
+        else
+          return DontDoAnimation = 1
+        endif
+      endif
+    endif
+  endif
 endscript
 
 script Toggle_Nollie_Pressure_States 
@@ -76,11 +92,18 @@ endscript
 script WaitWhilstChecking_ForPressure 
   if ( better4_control_pressure_value = on )
     if not ( better4_control_stancechange_index = 1 ) // not off
-      if ( better4_control_stancechange_index = 0 ) // L2
-        Button = L2 
-      else 
-        Button = L1 
-      endif 
+      switch better4_control_stancechange_index
+        case 0 
+          Button = L2 
+        case 2
+          Button = L1 
+        case 3
+          Button = L2
+          ToggleOnRelease = 1
+        case 4
+          Button = L1
+          ToggleOnRelease = 1
+      endswitch
       begin 
         if held <Button> 
           if GotParam Nollie 
@@ -90,13 +113,18 @@ script WaitWhilstChecking_ForPressure
           endif 
           begin 
             if released <Button> 
+              if ( <ToggleOnRelease> = 1 )
+                if GotParam Nollie 
+                  Toggle_Nollie_Pressure_States Nollie 
+                else 
+                  Toggle_Nollie_Pressure_States 
+                endif
+              endif
               break 
             endif 
-            //DoNextTrick 
             Wait 1 game frame 
           repeat 
         endif 
-        //DoNextTrick 
         Wait 1 game frame 
       repeat
     endif
