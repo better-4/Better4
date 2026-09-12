@@ -665,7 +665,7 @@ script create_pause_menu
       if GameModeEquals is_lobby
         if not NetworkGamePending
           if not ChangeLevelPending
-            make_sprite_menu_item text = "Change level" id = menu_level_select pad_choose_script = launch_level_select_menu pad_choose_params = { show_warning }
+            make_sprite_menu_item text = "Change Level" id = menu_level_select pad_choose_script = launch_level_select_menu pad_choose_params = { show_warning }
             make_text_sprite texture = PA_level parent = menu_level_select
           endif
         endif
@@ -713,7 +713,7 @@ script create_pause_menu
     endif
   else
     if not IsTrue bootstrap_build
-      make_sprite_menu_item text = "Change level" id = menu_level_select pad_choose_script = launch_level_select_menu
+      make_sprite_menu_item text = "Change Level" id = menu_level_select pad_choose_script = launch_level_select_menu
       make_text_sprite texture = PA_level parent = menu_level_select
       make_sprite_menu_item text = "Save Game" id = menu_save_game pad_choose_script = launch_pause_menu_save_game_sequence
       make_text_sprite texture = PA_save parent = menu_save_game
@@ -3663,7 +3663,7 @@ script create_gamma_menu
   make_new_menu menu_title = "GAMMA" menu_id = gamma_menu vmenu_id = gamma_vmenu
   SetScreenElementProps {
     id = gamma_menu
-    event_handlers = [ { pad_back better4_display_menu pad_choose_params = <...> } ]
+    event_handlers = [ { pad_back better4_hud_menu pad_choose_params = <...> } ]
     replace_handlers
   }
   set_sub_bg
