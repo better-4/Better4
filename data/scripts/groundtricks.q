@@ -196,7 +196,7 @@ script ToggleNollieRegular // pressure piggbacks off nollie system
   //SetException Ex = Ollied Scr = Nollie Params = { NoDoNextTrick }
   ClearTrickQueues
   //SetQueueTricks better4_control_powerslide_value GroundTricks better4_control_stancechange_value
-  ApplyStanceToggle
+  ApplyStanceToggle Nollie = <Nollie>
   if not InNollie
     if ( in_pressure = 0 ) // regular stance branch
       if Crouched

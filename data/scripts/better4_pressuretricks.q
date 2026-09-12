@@ -25,9 +25,11 @@ script PressureOff
 endscript
 
 script ApplyStanceToggle 
-  if InNollie 
-    PressureOff 
-    NollieOff 
+  if InNollie
+    if GotParam Nollie  
+      PressureOff 
+      NollieOff
+    endif	  
   else 
     if ( in_pressure = 1 ) 
       PressureOff 
@@ -37,11 +39,18 @@ script ApplyStanceToggle
         PressureOn
         NollieOff
       else
-        PressureOff
-        NollieOn
+	    if GotParam Nollie
+          PressureOff
+          NollieOn
+		endif
       endif
     endif 
   endif 
+  IF OnGround 
+	IF CurrentScorePotGreaterThan 0 
+		LandSkaterTricks 
+	ENDIF 
+  ENDIF
 endscript
 
 script Toggle_Nollie_Pressure_States 
