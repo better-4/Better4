@@ -102,6 +102,11 @@ glasses = [
     mesh = "models/skater_m/specs_hounddog.skin"
     unlock_flag = CAS_UNLOCK_10
   }
+  {
+    desc_id = #"Zoom!"
+    frontend_desc = 'Zoom! (THPS3)'
+    mesh = "models/better4/shared/glasses/glasses_zoom_thps3.skin"
+  }
 ]
 hat = [
   {
@@ -448,6 +453,18 @@ hat = [
     only_with = [ glifberg ]
     null_item
   }
+  
+  // {
+    // desc_id = #"Russian Hat thug"
+    // frontend_desc = 'Russian Hat (THUG1)'
+    // mesh = "models/better4/shared/hats/hat_russian_thug1.skin"
+    // script disqualify_script
+      // cas_temp_disq_remove_long_hair
+    // endscript
+  // }
+  
+  // commented due to possibility of running out of memory
+  
   {
     desc_id = #"Paper Bag"
     frontend_desc = 'Paper Bag'
@@ -458,8 +475,8 @@ hat = [
       ClearPart part = skater_m_hair
       ClearPart part = skater_f_hair
       ClearPart part = skater_m_jaw
-      ClearPart part = glasses
-      cas_temp_disq_remove_head
+      // ClearPart part = glasses
+      // cas_temp_disq_remove_head
     endscript
     unlock_flag = CAS_UNLOCK_09
     is_weird_hat
@@ -514,6 +531,14 @@ Helmet = [
   }
 ]
 
+// accessoriesM = [
+  // {
+    // desc_id = None
+    // frontend_desc = 'None'
+    // no_color
+  // }
+// ]
+
 accessoriesL = [
   {
     desc_id = None
@@ -550,6 +575,11 @@ accessoriesL = [
     mesh = "models/skater_m/extra_wristbandL.skin"
     replace = "CS_NN_extra_Wristband01.png"
     with = "textures/skater_m/CS_NN_extra_rockerwatch"
+  }
+  {
+    desc_id = #"Wrist Tape L"
+    frontend_desc = 'Wrist Tape'
+    mesh = "models/better4/shared/accessories/extra_wristape_L.skin"
   }
 ]
 

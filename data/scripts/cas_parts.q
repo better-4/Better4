@@ -34,7 +34,7 @@ master_editable_list = [
   { part = helmet text = "HELMET" male = 1 female = 1 submenu = helmet_menu preview_menu = 1 colormenu = helmet_color_menu }
   { part = accessoriesL text = "ACCESSORIES LEFT" male = 1 female = 1 submenu = accessoriesL_menu colormenu = accessoriesL_color_menu }
   { part = accessoriesR text = "ACCESSORIES RIGHT" male = 1 female = 1 submenu = accessoriesR_menu colormenu = accessoriesR_color_menu }
-  // { part = accessories text = "ACCESSORIES RIGHT 2" male = 1 female = 1 submenu = accessories_menu colormenu = accessoriesR_color_menu }
+  { part = accessoriesM text = "ACCESSORIES MISC" male = 1 female = 1 submenu = accessoriesM_menu colormenu = accessoriesM_color_menu }
   { part = hat_logo text = "HAT LOGO" male = 1 female = 1 submenu = hat_logo_menu preview_menu = 1 }
   { part = helmet_logo text = "HELMET LOGO" male = 1 female = 1 submenu = helmet_logo_menu preview_menu = 1 }
   { part = board text = "BOARD" male = 1 female = 1 submenu = board_menu }
