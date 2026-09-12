@@ -29,6 +29,7 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Added PS2-exclusive manual float glitches (MFG, MQT, etc.)
 * Added spacewalk
 * Added wallpush
+* Added pressure flips
 * Added single-tap WalliePlants
 * Added configuration for boneless trick (beanplant, fastplant, MikeV)
 * Added toggles for:
