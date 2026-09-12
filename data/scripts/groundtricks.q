@@ -196,26 +196,28 @@ script ToggleNollieRegular // pressure piggbacks off nollie system
   //SetException Ex = Ollied Scr = Nollie Params = { NoDoNextTrick }
   ClearTrickQueues
   //SetQueueTricks better4_control_powerslide_value GroundTricks better4_control_stancechange_value
-  ApplyStanceToggle
-  if not InNollie
-    if ( in_pressure = 0 ) // regular stance branch
-      if Crouched
-        PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1 backwards
-      else
-        PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1 backwards
+  ApplyStanceToggle <...>
+  if not GotParam DontDoAnimation // prevents re-doing animation you are already in
+    if not InNollie
+      if ( in_pressure = 0 ) // regular stance branch
+        if Crouched
+          PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1 backwards
+        else
+          PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1 backwards
+        endif
+      else // pressure stance branch
+        if Crouched
+          PlayAnim Anim = CrouchToPressure BlendPeriod = 0.1
+        else
+          PlayAnim Anim = SkateToPressure BlendPeriod = 0.1
+        endif
       endif
-    else // pressure stance branch
+    else // nollie stance branch
       if Crouched
-        PlayAnim Anim = CrouchToPressure BlendPeriod = 0.1
+        PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1
       else
-        PlayAnim Anim = SkateToPressure BlendPeriod = 0.1
+        PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1
       endif
-    endif
-  else // nollie stance branch
-    if Crouched
-      PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1
-    else
-      PlayAnim Anim = SkatingToNollie BlendPeriod = 0.1
     endif
   endif
   WaitAnimWhilstChecking AndManuals
