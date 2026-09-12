@@ -202,3 +202,5 @@ better4/better4_observe.qb
 better4/better4_menu.qb
 better4/better4_pressuretricks.qb
 better4/looptricks.qb
+better4/better4_levels.qb
+better4/better4_level_menu.qb
