@@ -21,7 +21,6 @@ script better4_create_level_select_menu_game
     pos = (320, 240)
   }
 
-  // GetStackedScreenElementPos y id = select_skater_mainbar offset = (28, 5)
   GetStackedScreenElementPos y id = select_skater_mainbar offset = (128, 27)
   CreateScreenElement {
     type = TextElement
@@ -66,9 +65,7 @@ script better4_level_menu_left
   generic_menu_up_or_down_sound Down
   RunScriptOnScreenElement id = level_select_game_right menu_blink_arrow
   if not ( game_index = 0 )
-    Printf "before game_index=%i" i = game_index>
     Change game_index = 0
-    Printf "after game_index=%i" i = game_index>
     SetScreenElementProps {
       id = level_select_game_text
       text = "THPS3"
