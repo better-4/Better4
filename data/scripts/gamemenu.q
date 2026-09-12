@@ -1690,6 +1690,7 @@ script launch_level_select_menu
     use_as_first
   ]
   create_level_select_menu <...>
+  // better4_create_level_menu <...>
 endscript
 script create_level_select_menu pad_back_script = level_select_menu_exit
   SetScreenElementLock id = root_window off
@@ -1739,6 +1740,7 @@ script create_level_select_menu pad_back_script = level_select_menu_exit
     scale = (1, 1)
   }
   level_select_create_menu_block pad_back_script = <pad_back_script> <...>
+  better4_create_level_select_menu_game <...>
   if IsTrue DEMO_BUILD
     ForEachIn e3_level_select_menu_level_info do = level_select_menu_add_item params = <...>
   else
@@ -1747,12 +1749,14 @@ script create_level_select_menu pad_back_script = level_select_menu_exit
     if AllLevelsUnlockedBeenox
       ForEachIn level_select_menu_level_info_unlock do = level_select_menu_add_item params = <...>
     else
-      ForEachIn level_select_menu_level_info do = level_select_menu_add_item params = <...>
+      better4_level_menu_list levels = level_select_menu_level_info <...>
+      // ForEachIn level_select_menu_level_info do = level_select_menu_add_item params = <...>
     endif
   endif
   level_select_create_info_box
   RunScriptOnScreenElement id = level_select_anchor_top select_skater_menu_animate_top
   RunScriptOnScreenElement id = level_select_anchor_middle select_skater_menu_animate_stats
+  RunScriptOnScreenElement id = level_select_anchor_game select_skater_menu_animate_stats
   FireEvent type = focus target = level_select_vmenu
   SetButtonEventMappings block_menu_input
   WaitForEvent type = select_skater_menu_animate_stats_done
@@ -3134,8 +3138,7 @@ level_select_menu_level_info = [
   { text = "Carnival" level_num = 8 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_CNV level = Load_Cnv taxi_id = Cab_sign_8_Carnival }
   { text = "Chicago" level_num = 9 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_HOF level = Load_Hof taxi_id = Cab_sign_9_Chicago }
   { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_CPK level = Load_Sk4Ed_gameplay taxi_id = Cab_sign_10_Custom }
-  { text = "Los Angeles" level_num = 11 points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_LA taxi_id = Cab_sign_10_Custom }
-  { text = "MotoX" level_num = 12 points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_Motox taxi_id = Cab_sign_10_Custom }
+  // { text = "MotoX" level_num = 11 points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_Motox taxi_id = Cab_sign_10_Custom }
 ]
 level_select_menu_level_info_unlock = [
   { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_id = Cab_sign_1_College }
