@@ -1,42 +1,4 @@
-script better4_level_menu_left
-  SetScreenElementProps {
-    id = level_select_menu_top_sprite
-    z_priority = 9998
-  }
-  SetScreenElementProps {
-    id = level_select_menu_top_text
-    z_priority = 9999
-  }
-  SetScreenElementProps {
-    id = level_select_menu_top_sprite2
-    z_priority = 9996
-  }
-  SetScreenElementProps {
-    id = level_select_menu_top_text2
-    rgba = [ 128 128 128 40 ]
-    z_priority = 9997
-  }
-endscript
-
-script better4_level_menu_right
-  SetScreenElementProps {
-    id = level_select_menu_top_sprite
-    z_priority = 9996
-  }
-  SetScreenElementProps {
-    id = level_select_menu_top_text
-    z_priority = 9997
-  }
-  SetScreenElementProps {
-    id = level_select_menu_top_sprite2
-    z_priority = 9998
-  }
-  SetScreenElementProps {
-    id = level_select_menu_top_text2
-    rgba = [ 128 128 128 100 ]
-    z_priority = 9999
-  }
-endscript
+game_index = 1
 
 script better4_create_level_select_menu_game
   if ObjectExists id = level_select_anchor_game
@@ -101,39 +63,47 @@ endscript
 
 // XXX (ellie): make this cycle properly to add more levels at some point. maybe HMenu?
 script better4_level_menu_left
-  SetScreenElementProps {
-    id = level_select_game_text
-    text = "THPS3"
-  }
-  SetScreenElementProps {
-    id = level_select_game_left
-    rgba = [ 128 128 128 0 ]
-  }
-  SetScreenElementProps {
-    id = level_select_game_right
-    rgba = [ 128 128 128 100 ]
-  }
   generic_menu_up_or_down_sound Down
   RunScriptOnScreenElement id = level_select_game_right menu_blink_arrow
-  better4_level_menu_list levels = thps3_level_info
+  if not ( game_index = 0 )
+    Printf "before game_index=%i" i = game_index>
+    Change game_index = 0
+    Printf "after game_index=%i" i = game_index>
+    SetScreenElementProps {
+      id = level_select_game_text
+      text = "THPS3"
+    }
+    SetScreenElementProps {
+      id = level_select_game_left
+      rgba = [ 128 128 128 0 ]
+    }
+    SetScreenElementProps {
+      id = level_select_game_right
+      rgba = [ 128 128 128 100 ]
+    }
+    better4_level_menu_list levels = thps3_level_info
+  endif
 endscript
 
 script better4_level_menu_right
-  SetScreenElementProps {
-    id = level_select_game_text
-    text = "THPS4"
-  }
-  SetScreenElementProps {
-    id = level_select_game_left
-    rgba = [ 128 128 128 100 ]
-  }
-  SetScreenElementProps {
-    id = level_select_game_right
-    rgba = [ 128 128 128 0 ]
-  }
   generic_menu_up_or_down_sound Up
   RunScriptOnScreenElement id = level_select_game_left menu_blink_arrow
-  better4_level_menu_list levels = level_select_menu_level_info
+  if not ( game_index = 1 )
+    Change game_index = 1
+    SetScreenElementProps {
+      id = level_select_game_text
+      text = "THPS4"
+    }
+    SetScreenElementProps {
+      id = level_select_game_left
+      rgba = [ 128 128 128 100 ]
+    }
+    SetScreenElementProps {
+      id = level_select_game_right
+      rgba = [ 128 128 128 0 ]
+    }
+    better4_level_menu_list levels = level_select_menu_level_info
+  endif
 endscript
 
 script better4_level_menu_list
