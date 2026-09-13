@@ -74,6 +74,18 @@ RUN curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh \
     && rm /tmp/dotnet-install.sh
 
 ########################################
+FROM rust:1.98 AS build-nx-tools
+
+WORKDIR /src
+COPY vendor/nx-tools vendor/nx-tools
+WORKDIR /src/vendor/nx-tools
+
+RUN mkdir -p /opt/nx-tools
+RUN --mount=type=cache,target=/usr/local/cargo/registry \
+    cargo build --release --package nx-cli \
+    && cp ./target/release/nx-cli /opt/nx-tools/nx-cli
+
+########################################
 FROM base AS toolchain
 WORKDIR /src
 RUN mkdir /out
@@ -160,11 +172,24 @@ COPY README.md /out/readme-better4.txt
 
 ########################################
 FROM toolchain-dotnet AS build-qscripts
-COPY --from=build-qscripted   /opt/qscripted   /opt/qscripted
+COPY --from=build-qscripted /opt/qscripted /opt/qscripted
 
 COPY data/scripts data/scripts
 RUN mkdir -p "/out/data/scripts/better4" \
     && dotnet "/opt/qscripted/ThpsQScriptEd.dll" "data/scripts" "/out/data/scripts/better4"
+
+########################################
+FROM toolchain AS build-anims
+COPY --from=build-nx-tools /opt/nx-tools /opt/nx-tools
+
+COPY data/anims data/anims
+COPY vendor/nx-tools/assets vendor/nx-tools/assets
+RUN mkdir -p "/out/data/anims/better4" \
+    && /opt/nx-tools/nx-cli anim convert-bulk \
+         --input-dir ./data/anims/thug --output-dir /out/data/anims/better4 \
+         --in-game thug --out-game thps4 \
+         --qkeys vendor/nx-tools/assets/stdkey/thug/standardkeyQ.bin \
+         --tkeys vendor/nx-tools/assets/stdkey/thug/standardkeyT.bin
 
 ########################################
 FROM toolchain AS build-data
@@ -175,7 +200,6 @@ COPY data/images /out/data/images/better4
 COPY data/levels /out/data/levels/better4
 COPY data/models /out/data/models/better4
 COPY data/sounds /out/data/sounds/Wav/better4
-COPY data/anims /out/data/anims/better4
 
 ########################################
 FROM scratch AS export
@@ -184,4 +208,5 @@ COPY --from=build-config /out /
 COPY --from=build-patcher /out /
 COPY --from=build-better4 /out /
 COPY --from=build-qscripts /out /
+COPY --from=build-anims /out /
 COPY --from=build-data /out /
