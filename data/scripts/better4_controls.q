@@ -591,47 +591,6 @@ script better4_change_aspect_ratio
   endif
 endscript
 
-// better4_trick_string_index = 1
-// better4_trick_string_value = on
-// better4_trick_string = {
-  // id = better4_trick_string_id
-  // index_name = better4_trick_string_index
-  // value_name = better4_trick_string_value
-  // text = "Trick String"
-  // ini_key = "TrickString"
-  // options = [
-    // { text = "Off" value = off }
-    // { text = "On" value = on }	
-  // ]
-// }
-
-// better4_control_special_meter_index = 1
-// better4_control_special_meter_value = on
-// better4_control_special_meter = {
-  // id = better4_control_special_meter_id
-  // index_name = better4_control_special_meter_index
-  // value_name = better4_control_special_meter_value
-  // text = "Special Meter"
-  // ini_key = "SpecialMeter"
-  // options = [
-    // { text = "Off" value = off }
-    // { text = "On" value = on }
-  // ]
-  // change_script = better4_hud_option_change
-// }
-// script better4_hud_option_change
-  // switch better4_control_special_meter_value
-  // case off
-    // if ScreenElementExists id = the_score
-      // SetScreenElementProps id = the_score alpha = 0.0 remember_alpha
-    // endif
-  // case on
-    // if ScreenElementExists id = the_score
-      // SetScreenElementProps id = the_score restore_alpha
-    // endif
-  // endswitch
-// endscript
-
 better4_control_extratrick_sound_index = 0
 better4_control_extratrick_sound_value = THPS4
 better4_control_extratrick_sound = {
@@ -668,29 +627,29 @@ better4_control_chat_size = {
 script better4_change_chat_size
   switch better4_control_chat_size_value
   case 0
-       console_destroy
+    console_destroy
 	  change better4_padding = 0.25
-      change better4_chat_scale = 0.3
+    change better4_chat_scale = 0.3
 	  printf "ex. small"
   case 1
-      console_destroy
- 	  change better4_padding = 0.45
-      change better4_chat_scale = 0.5
+    console_destroy
+    change better4_padding = 0.45
+    change better4_chat_scale = 0.5
 	  printf "small"
   case 2
-      console_destroy
+    console_destroy
 	  change better4_padding = 0.65
-      change better4_chat_scale = 0.7
+    change better4_chat_scale = 0.7
 	  printf "default"
   case 3
-      console_destroy
+    console_destroy
 	  change better4_padding = 0.85
-      change better4_chat_scale = 1.0
+    change better4_chat_scale = 1.0
 	  printf "big"
   case 4
-      console_destroy
+    console_destroy
 	  change better4_padding = 1.0
-      change better4_chat_scale = 1.2
+    change better4_chat_scale = 1.2
 	  printf "ex. big"
   endswitch
 endscript
@@ -712,6 +671,193 @@ better4_control_chat_duration = {
     { text = "30 Seconds" value = 30 }
   ]
 }
+
+better4_control_trickstring_index = 3
+better4_control_trickstring_value = 1.0
+better4_control_trickstring = {
+  id = better4_control_trickstring_id
+  index_name = better4_control_trickstring_index
+  value_name = better4_control_trickstring_value
+  text = "Trick String"
+  ini_key = "TrickString"
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_trickstring
+}
+
+better4_trickstring_shadow_offs_small = (0.33, 0.33)
+better4_trickstring_shadow_offs_medium = (0.67, 0.67)
+better4_trickstring_shadow_offs_large = (1, 1)
+
+better4_trickstring_shadow_offs = better4_trickstring_shadow_offs_large
+better4_trickstring_internal_scale = 0.7
+
+script better4_change_trickstring
+  switch better4_control_trickstring_index
+  case 0
+    Change better4_trickstring_shadow_offs = better4_trickstring_shadow_offs_large
+    Change better4_trickstring_internal_scale = 0.7
+  case 1
+    Change better4_trickstring_shadow_offs = better4_trickstring_shadow_offs_small
+    Change better4_trickstring_internal_scale = 0.23331 // 0.7 * 0.3333
+  case 2
+    Change better4_trickstring_shadow_offs = better4_trickstring_shadow_offs_medium
+    Change better4_trickstring_internal_scale = 0.46669 // 0.7 * 0.6667
+  case 3
+    Change better4_trickstring_shadow_offs = better4_trickstring_shadow_offs_large
+    Change better4_trickstring_internal_scale = 0.7
+  endswitch
+  Printf "@@ changed trickstring_shadow_offs=%s trickstring_internal_scale=%i" s = better4_trickstring_shadow_offs i = better4_trickstring_internal_scale
+  // Player 1
+  if ScreenElementExists id = the_trick_text
+    SetScreenElementProps {
+      id = the_trick_text
+      internal_scale = better4_trickstring_internal_scale
+      shadow_offs = better4_trickstring_shadow_offs
+    }
+  endif
+  // Player 2
+  if ScreenElementExists id = ( the_trick_text + 1 )
+    SetScreenElementProps {
+      id = ( the_trick_text + 1 )
+      internal_scale = better4_trickstring_internal_scale
+      shadow_offs = better4_trickstring_shadow_offs
+    }
+  endif
+endscript
+
+better4_control_scorepot_index = 3
+better4_control_scorepot_value = 1.0
+better4_control_scorepot = {
+  id = better4_control_scorepot_id
+  index_name = better4_control_scorepot_index
+  value_name = better4_control_scorepot_value
+  text = "Score Pot"
+  ini_key = "ScorePot"
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_scorepot
+}
+
+better4_scorepot_pos_small = (287, -2)
+better4_scorepot_pos_medium = (287, 0)
+better4_scorepot_pos_large = (287, 2)
+better4_scorepot_pos = better4_scorepot_pos_large
+
+script better4_change_scorepot
+  switch better4_control_trickstring_index
+  case 0
+    Change better4_scorepot_pos = better4_scorepot_pos_large
+  case 1
+    Change better4_scorepot_pos = better4_scorepot_pos_small
+  case 2
+    Change better4_scorepot_pos = better4_scorepot_pos_medium
+  case 3
+    Change better4_scorepot_pos = better4_scorepot_pos_large
+  endswitch
+  Printf "@@ changed scorepot_pos=%p" p = better4_scorepot_pos
+  // Player 1
+  if ScreenElementExists id = the_score_pot_text
+    DoScreenElementMorph {
+      id = the_score_pot_text
+      scale = better4_control_scorepot_value
+      pos = better4_scorepot_pos
+    }
+  endif
+  // Player 2
+  if ScreenElementExists id = ( the_score_pot_text + 1 )
+    DoScreenElementMorph {
+      id = ( the_score_pot_text + 1 )
+      scale = better4_control_scorepot_value
+      pos = better4_scorepot_pos
+    }
+  endif
+endscript
+
+better4_control_specialmeter_index = 3
+better4_control_specialmeter_value = 1.0
+better4_control_specialmeter = {
+  id = better4_control_specialmeter_id
+  index_name = better4_control_specialmeter_index
+  value_name = better4_control_specialmeter_value
+  text = "Special Meter"
+  ini_key = "SpecialMeter"
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_specialmeter
+}
+
+script better4_change_specialmeter
+  // Player 1
+  if ScreenElementExists id = the_score
+    DoScreenElementMorph {
+      id = the_score
+      scale = better4_control_specialmeter_value
+    }
+  endif
+  // Player 2
+  if ScreenElementExists id = ( the_score + 1 )
+    DoScreenElementMorph {
+      id = ( the_score + 1 )
+      scale = better4_control_specialmeter_value
+    }
+  endif
+endscript
+
+better4_control_perfectlanding_index = 3
+better4_control_perfectlanding_value = 1.0
+better4_control_perfectlanding = {
+  id = better4_control_perfectlanding_id
+  index_name = better4_control_perfectlanding_index
+  value_name = better4_control_perfectlanding_value
+  text = "Perfect Landing"
+  ini_key = "PerfectLanding"
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_perfectlanding
+}
+
+better4_perfectlanding_pos_small = (110, 350)
+better4_perfectlanding_pos_medium = (110, 355)
+better4_perfectlanding_pos_large = (110, 360)
+better4_perfectlanding_pos = better4_perfectlanding_pos_large
+
+script better4_change_perfectlanding
+  // Scale is set by `perfect_style` and `sloppy_style` scripts; only need to set pos
+  switch better4_control_perfectlanding_index
+  case 0
+    Change better4_perfectlanding_pos = better4_perfectlanding_pos_large
+  case 1
+    Change better4_perfectlanding_pos = better4_perfectlanding_pos_small
+  case 2
+    Change better4_perfectlanding_pos = better4_perfectlanding_pos_medium
+  case 3
+    Change better4_perfectlanding_pos = better4_perfectlanding_pos_large
+  endswitch
+  // perfect2 is the second line, we move it up to account for smaller text
+  if ScreenElementExists id = perfect2
+    DoScreenElementMorph {
+      id = perfect2
+      pos = better4_perfectlanding_pos
+    }
+  endif
+endscript
 
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
@@ -741,9 +887,11 @@ script better4_controls_init
   better4_control_init better4_control_chat_size
   better4_control_init better4_control_chat_duration
   better4_control_init better4_control_pressure
-  // better4_control_init better4_trick_string
-  // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
+  better4_control_init better4_control_trickstring
+  better4_control_init better4_control_scorepot
+  better4_control_init better4_control_specialmeter
+  better4_control_init better4_control_perfectlanding
 endscript
 
 script better4_control_init

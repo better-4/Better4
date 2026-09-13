@@ -266,7 +266,7 @@ script create_panel_stuff
     parent = player1_panel_container
     font = small
     text = "0"
-    scale = 1.0
+    scale = better4_control_specialmeter_value
     pos = (126, 27)
     just = [ left top ]
     rgba = [ 120 100 19 128 ]
@@ -331,11 +331,13 @@ script create_panel_stuff
     internal_just = [ center top ]
     font = newtrickfont
     text = " "
-    internal_scale = 0.7
+    // internal_scale = 0.7
+    internal_scale = better4_trickstring_internal_scale
     alpha = 1.0
     tags = { tag_state = inactive }
     shadow
-    shadow_offs = (1, 1)
+    // shadow_offs = (1, 1)
+    shadow_offs = better4_trickstring_shadow_offs
     shadow_rgba = [ 30 30 30 75 ]
     z_priority = 0
   }
@@ -343,7 +345,7 @@ script create_panel_stuff
     id = the_score_pot_text
     type = textelement
     parent = trick_text_container
-    scale = 1.0
+    scale = better4_control_scorepot_value
     pos = { (0.5, 0) proportional }
     just = [ center bottom ]
     font = small
@@ -443,11 +445,13 @@ script create_panel_stuff
       internal_just = [ center top ]
       font = newtrickfont
       text = " "
-      internal_scale = 0.7
+      // internal_scale = 0.7
+      internal_scale = better4_trickstring_internal_scale
       alpha = 1.0
       tags = { tag_state = inactive }
       shadow
-      shadow_offs = (1, 1)
+      // shadow_offs = (1, 1)
+      shadow_offs = better4_trickstring_shadow_offs
       shadow_rgba = [ 30 30 30 75 ]
       z_priority = 0
     }
@@ -490,6 +494,12 @@ script create_panel_stuff
     endif
     create_score_menu
   endif
+  if ( better4_control_trickstring_value = off )
+    pause_trick_text
+  endif
+  if ( better4_control_scorepot_value = off )
+    pause_trick_text
+  endif
 endscript
 newtrickfont_colors = [
   [ 0 128 230 60 ]
@@ -498,6 +508,7 @@ newtrickfont_colors = [
   [ 128 0 0 60 ]
 ]
 script pause_trick_text
+  Printf "@@ PAUSING TRICK TEXT"
   DoScreenElementMorph id = the_trick_text alpha = 0.0 remember_alpha
   SetScreenElementProps id = the_trick_text override_encoded_rgba remember_override_rgba_state
   DoScreenElementMorph id = the_score_pot_text alpha = 0.0 remember_alpha
@@ -512,19 +523,29 @@ script pause_trick_text
   endif
 endscript
 script unpause_trick_text
-  DoScreenElementMorph id = the_trick_text restore_alpha
-  DoScreenElementMorph id = the_score_pot_text restore_alpha
-  SetScreenElementProps id = the_trick_text restore_override_rgba_state
+  Printf "@@ UNPAUSING TRICK TEXT"
+  if not ( better4_control_trickstring_value = off )
+    DoScreenElementMorph id = the_trick_text restore_alpha
+    SetScreenElementProps id = the_trick_text restore_override_rgba_state
+  endif
+  if not ( better4_control_scorepot_value = off )
+    DoScreenElementMorph id = the_score_pot_text restore_alpha
+  endif
   if InSplitScreenGame
-    if ScreenElementExists id = ( the_trick_text + 1 )
-      DoScreenElementMorph id = ( the_trick_text + 1 ) restore_alpha
+    if not ( better4_control_trickstring_value = off )
+      if ScreenElementExists id = ( the_trick_text + 1 )
+        DoScreenElementMorph id = ( the_trick_text + 1 ) restore_alpha
+      endif
     endif
-    if ScreenElementExists id = ( the_score_pot_text + 1 )
-      DoScreenElementMorph id = ( the_score_pot_text + 1 ) restore_alpha
+    if not ( better4_control_scorepot_value = off )
+        if ScreenElementExists id = ( the_score_pot_text + 1 )
+        DoScreenElementMorph id = ( the_score_pot_text + 1 ) restore_alpha
+      endif
     endif
   endif
 endscript
 script trick_text_pulse
+  Printf "@@ TRICK_TEXT_PULSE"
   TerminateObjectsScripts id = <trick_text_container_id>
   TerminateObjectsScripts id = <the_trick_text_id>
   TerminateObjectsScripts id = <the_score_pot_text_id> script_name = do_score_pot_text_landed
@@ -591,34 +612,34 @@ script do_score_pot_text_landed
     ScriptGetScreenMode
     if ( <screen_mode> = split_vertical )
       DoMorph scale = 0 time = 0
-      DoMorph scale = 0.8 time = 0.2
-      DoMorph scale = 0.5 time = 0.08
-      DoMorph scale = 1.0 time = 0.05
-      DoMorph scale = 0.8 time = 0.04
-      DoMorph scale = 0.95 time = 0.04
+      DoMorph scale = ( 0.8 * better4_control_scorepot_value ) time = 0.2
+      DoMorph scale = ( 0.5 * better4_control_scorepot_value ) time = 0.08
+      DoMorph scale = ( 1.0 * better4_control_scorepot_value ) time = 0.05
+      DoMorph scale = ( 0.8 * better4_control_scorepot_value ) time = 0.04
+      DoMorph scale = ( 0.95 * better4_control_scorepot_value ) time = 0.04
     else
-      DoMorph scale = 0 time = 0.05
-      DoMorph scale = 1.8 time = 0.12
-      DoMorph scale = 0.8 time = 0.1
-      DoMorph scale = 1.5 time = 0.07
-      DoMorph scale = 0.9 time = 0.07
-      DoMorph scale = 1.3 time = 0.05
-      DoMorph scale = 1.0 time = 0.05
-      DoMorph scale = 1.25 time = 0.04
-      DoMorph scale = 1.1 time = 0.03
-      DoMorph scale = 1.2 time = 0.02
+      DoMorph scale = ( 0 time * better4_control_scorepot_value ) = 0.05
+      DoMorph scale = ( 1.8 * better4_control_scorepot_value ) time = 0.12
+      DoMorph scale = ( 0.8 * better4_control_scorepot_value ) time = 0.1
+      DoMorph scale = ( 1.5 * better4_control_scorepot_value ) time = 0.07
+      DoMorph scale = ( 0.9 * better4_control_scorepot_value ) time = 0.07
+      DoMorph scale = ( 1.3 * better4_control_scorepot_value ) time = 0.05
+      DoMorph scale = ( 1.0 * better4_control_scorepot_value ) time = 0.05
+      DoMorph scale = ( 1.25 * better4_control_scorepot_value ) time = 0.04
+      DoMorph scale = ( 1.1 * better4_control_scorepot_value ) time = 0.03
+      DoMorph scale = ( 1.2 * better4_control_scorepot_value ) time = 0.02
     endif
   else
     DoMorph scale = 0 time = 0.05
-    DoMorph scale = 1.8 time = 0.12
-    DoMorph scale = 0.8 time = 0.1
-    DoMorph scale = 1.5 time = 0.07
-    DoMorph scale = 0.9 time = 0.07
-    DoMorph scale = 1.3 time = 0.05
-    DoMorph scale = 1.0 time = 0.05
-    DoMorph scale = 1.25 time = 0.04
-    DoMorph scale = 1.1 time = 0.03
-    DoMorph scale = 1.2 time = 0.02
+    DoMorph scale = ( 1.8 * better4_control_scorepot_value ) time = 0.12
+    DoMorph scale = ( 0.8 * better4_control_scorepot_value ) time = 0.1
+    DoMorph scale = ( 1.5 * better4_control_scorepot_value ) time = 0.07
+    DoMorph scale = ( 0.9 * better4_control_scorepot_value ) time = 0.07
+    DoMorph scale = ( 1.3 * better4_control_scorepot_value ) time = 0.05
+    DoMorph scale = ( 1.0 * better4_control_scorepot_value ) time = 0.05
+    DoMorph scale = ( 1.25 * better4_control_scorepot_value ) time = 0.04
+    DoMorph scale = ( 1.1 * better4_control_scorepot_value ) time = 0.03
+    DoMorph scale = ( 1.2 * better4_control_scorepot_value ) time = 0.02
   endif
 endscript
 script trick_text_countdown
@@ -627,6 +648,7 @@ script trick_text_countdown
   RunScriptOnScreenElement id = <the_trick_text_id> do_trick_text_countdown params = { <...> }
 endscript
 script do_trick_text_countdown
+  Printf "@@ DO_TRICK_TEXT_COUNTDOWN"
   reset_just_trick_text_appearance <...>
   DoMorph scale = 0.0 time = 0.5
   DoMorph alpha = 0.0
@@ -638,9 +660,13 @@ script trick_text_bail
 endscript
 script do_trick_text_bail
   reset_trick_text_appearance <...>
-  SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 32 32 80 ]
-  SetScreenElementProps id = <the_trick_text_id> override_encoded_rgba
-  SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 128 32 32 80 ]
+  if not ( better4_control_trickstring_value = off )
+    SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 32 32 80 ]
+    SetScreenElementProps id = <the_trick_text_id> override_encoded_rgba
+  endif
+  if not ( better4_control_scorepot_value = off )
+    SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 128 32 32 80 ]
+  endif
   Wait 0.05 seconds
   if InSplitScreenGame
     ScriptGetScreenMode
@@ -701,11 +727,15 @@ script do_trick_text_bail
   @runtwoscripts script_text = bail4 script_score = bail4 <...>
   @runtwoscripts script_text = bail5 script_score = bail5 <...>
   @runtwoscripts script_text = bail2 script_score = bail1 <...>
-   ) 
+  ) 
 endscript
 script runtwoscripts
-  RunScriptOnScreenElement id = <the_trick_text_id> <script_text>
-  RunScriptOnScreenElement id = <the_score_pot_text_id> <script_score>
+  if not ( better4_control_trickstring_value = off )
+    RunScriptOnScreenElement id = <the_trick_text_id> <script_text>
+  endif
+  if not ( better4_control_scorepot_value = off )
+    RunScriptOnScreenElement id = <the_score_pot_text_id> <script_score>
+  endif
 endscript
 script bail1
   DoMorph pos = { (0, 0) relative } time = 0.3 scale = 2.0 alpha = 0 fast_in
@@ -778,17 +808,20 @@ script reset_just_trick_text_appearance
       just = [ center top ]
       scale = <text_scale>
     }
-    DoScreenElementMorph {
-      id = <the_trick_text_id>
-      scale = <text_scale>
-      pos = { (0.5, 0) proportional }
-      just = [ center top ]
-      internal_just = [ center top ]
-      internal_scale = 0.7
-      alpha = 1.0
-    }
-    SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
-    SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    if not ( better4_control_trickstring_value = off )
+      DoScreenElementMorph {
+        id = <the_trick_text_id>
+        scale = <text_scale>
+        pos = { (0.5, 0) proportional }
+        just = [ center top ]
+        internal_just = [ center top ]
+        // internal_scale = 0.7
+        internal_scale = better4_trickstring_internal_scale
+        alpha = 1.0
+      }
+      SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
+      SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    endif
   else
     DoScreenElementMorph {
       id = <trick_text_container_id>
@@ -796,17 +829,20 @@ script reset_just_trick_text_appearance
       pos = (320, 410)
       scale = 1.0
     }
-    DoScreenElementMorph {
-      id = <the_trick_text_id>
-      scale = 1.0
-      pos = { (0.5, 0) proportional }
-      just = [ center top ]
-      internal_just = [ center top ]
-      internal_scale = 0.7
-      alpha = 1.0
-    }
-    SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
-    SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    if not ( better4_control_trickstring_value = off )
+      DoScreenElementMorph {
+        id = <the_trick_text_id>
+        scale = 1.0
+        pos = { (0.5, 0) proportional }
+        just = [ center top ]
+        internal_just = [ center top ]
+        // internal_scale = 0.7
+        internal_scale = better4_trickstring_internal_scale
+        alpha = 1.0
+      }
+      SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
+      SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    endif
   endif
 endscript
 script reset_trick_text_appearance
@@ -823,47 +859,51 @@ script reset_trick_text_appearance
   TerminateObjectsScripts id = <the_score_pot_text_id> script_name = bail5
   TerminateObjectsScripts id = <the_score_pot_text_id> script_name = bail6
   reset_just_trick_text_appearance <...>
-  SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 127 102 0 85 ]
-  SetScreenElementProps id = <the_score_pot_text_id> dont_override_encoded_rgba
-  if InSplitScreenGame
-    if GameModeEquals is_horse
+
+  if not ( better4_control_scorepot_value = off )
+    SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 127 102 0 85 ]
+    SetScreenElementProps id = <the_score_pot_text_id> dont_override_encoded_rgba
+
+    if InSplitScreenGame
+      if GameModeEquals is_horse
+        DoScreenElementMorph {
+          id = <the_score_pot_text_id>
+          scale = better4_control_scorepot_value
+          pos = better4_scorepot_pos
+          just = [ center bottom ]
+          alpha = 1.0
+        }
+      else
+        ScriptGetScreenMode
+        switch <screen_mode>
+        case split_vertical
+        case one_camera
+          DoScreenElementMorph {
+            id = <the_score_pot_text_id>
+            scale = better4_control_scorepot_value
+            pos = (120, 2)
+            just = [ center bottom ]
+            alpha = 1.0
+          }
+        case split_horizontal
+          DoScreenElementMorph {
+            id = <the_score_pot_text_id>
+            scale = better4_control_scorepot_value
+            pos = better4_scorepot_pos
+            just = [ center bottom ]
+            alpha = 1.0
+          }
+        endswitch
+      endif
+    else
       DoScreenElementMorph {
         id = <the_score_pot_text_id>
-        scale = 1.0
-        pos = (287, 2)
+        scale = better4_control_scorepot_value
+        pos = better4_scorepot_pos
         just = [ center bottom ]
         alpha = 1.0
       }
-    else
-      ScriptGetScreenMode
-      switch <screen_mode>
-      case split_vertical
-      case one_camera
-        DoScreenElementMorph {
-          id = <the_score_pot_text_id>
-          scale = 1.0
-          pos = (120, 2)
-          just = [ center bottom ]
-          alpha = 1.0
-        }
-      case split_horizontal
-        DoScreenElementMorph {
-          id = <the_score_pot_text_id>
-          scale = 1.0
-          pos = (287, 2)
-          just = [ center bottom ]
-          alpha = 1.0
-        }
-      endswitch
     endif
-  else
-    DoScreenElementMorph {
-      id = <the_score_pot_text_id>
-      scale = 1.0
-      pos = (287, 2)
-      just = [ center bottom ]
-      alpha = 1.0
-    }
   endif
 endscript
 script hide_clock
