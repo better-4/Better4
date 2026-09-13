@@ -1100,8 +1100,9 @@ script AwardPerfect
   GetSpin
   if ( <spin> > 359.0 )
     if not InSplitScreenGame
-      Create_Panel_Message text = "Perfect Landing!" id = perfect rgba = [ 50 150 50 128 ] pos = (110, 340) style = perfect_style
-      Create_Panel_Message text = "+1000 Points" id = perfect2 rgba = [ 40 140 40 100 ] pos = (110, 360) style = perfect_style
+      Create_Panel_Message text = "Perfect Landing!" id = perfect rgba = [ 50 150 50 128 ] pos = (110, 340) style = perfect_style scale = better4_control_perfectlanding_value
+      // Create_Panel_Message text = "+1000 Points" id = perfect2 rgba = [ 40 140 40 100 ] pos = (110, 360) style = perfect_style scale = better4_control_perfectlanding_value
+      Create_Panel_Message text = "+1000 Points" id = perfect2 rgba = [ 40 140 40 100 ] pos = better4_perfectlanding_pos style = perfect_style scale = better4_control_perfectlanding_value
     else
       PerfectSloppy_2p text = "Perfect!" rgb = [ 50 150 50 128 ]
     endif
@@ -1116,8 +1117,9 @@ script AwardSloppy
     GetSpin
     if ( <spin> > 359.0 )
       if not InSplitScreenGame
-        Create_Panel_Message text = "Sloppy Landing" id = perfect rgba = [ 200 50 50 128 ] pos = (110, 340) style = sloppy_style
-        Create_Panel_Message text = "-500 Points" id = perfect2 rgba = [ 107 51 27 100 ] pos = (110, 360) style = sloppy_style
+        Create_Panel_Message text = "Sloppy Landing" id = perfect rgba = [ 200 50 50 128 ] pos = (110, 340) style = sloppy_style scale = better4_control_perfectlanding_value
+        // Create_Panel_Message text = "-500 Points" id = perfect2 rgba = [ 107 51 27 100 ] pos = (110, 360) style = sloppy_style scale = better4_control_perfectlanding_value
+        Create_Panel_Message text = "-500 Points" id = perfect2 rgba = [ 107 51 27 100 ] pos = better4_perfectlanding_pos style = sloppy_style scale = better4_control_perfectlanding_value
       else
         PerfectSloppy_2p text = "Sloppy!" rgb = [ 200 50 50 128 ]
       endif
@@ -1139,24 +1141,28 @@ script PerfectSloppy_2p
   case split_vertical
     switch <skaternumber>
     case 0
-      Create_Panel_Message text = <text> id = perfect rgba = <rgb> pos = (70, 340) style = perfect_style
+      Create_Panel_Message text = <text> id = perfect rgba = <rgb> pos = (70, 340) style = perfect_style scale = better4_control_perfectlanding_value
     case 1
-      Create_Panel_Message text = <text> id = perfect_p2 rgba = <rgb> pos = (370, 340) style = perfect_style
+      Create_Panel_Message text = <text> id = perfect_p2 rgba = <rgb> pos = (370, 340) style = perfect_style scale = better4_control_perfectlanding_value
     endswitch
   case split_horizontal
     switch <skaternumber>
     case 0
-      Create_Panel_Message text = <text> id = perfect rgba = <rgb> pos = (70, 154) style = perfect_style
+      Create_Panel_Message text = <text> id = perfect rgba = <rgb> pos = (70, 154) style = perfect_style scale = better4_control_perfectlanding_value
     case 1
-      Create_Panel_Message text = <text> id = perfect_p2 rgba = <rgb> pos = (70, 375) style = perfect_style
+      Create_Panel_Message text = <text> id = perfect_p2 rgba = <rgb> pos = (70, 375) style = perfect_style scale = better4_control_perfectlanding_value
     endswitch
   endswitch
 endscript
 script perfect_style
-  DoMorph time = 0 scale = (0, 0)
-  DoMorph time = 0.1 scale = (0.95, 0.95)
-  DoMorph time = 0.1 scale = (0.75, 0.75)
-  DoMorph time = 0.1 scale = (0.8, 0.8)
+  // DoMorph time = 0 scale = (0, 0)
+  // DoMorph time = 0.1 scale = (0.95, 0.95)
+  // DoMorph time = 0.1 scale = (0.75, 0.75)
+  // DoMorph time = 0.1 scale = (0.8, 0.8)
+  DoMorph time = 0 scale = 0
+  DoMorph time = 0.1 scale = ( 0.95 * better4_control_perfectlanding_value )
+  DoMorph time = 0.1 scale = ( 0.75 * better4_control_perfectlanding_value )
+  DoMorph time = 0.1 scale = ( 0.8 * better4_control_perfectlanding_value )
   DoMorph time = 0.05 alpha = 0
   DoMorph time = 0.05 alpha = 1
   DoMorph time = 0.05 alpha = 0
@@ -1168,7 +1174,7 @@ script perfect_style
 endscript
 script sloppy_style
   DoMorph time = 0 scale = (0, 0)
-  DoMorph time = 0.1 scale = (0.8, 0.8)
+  DoMorph time = 0.1 scale = ( 0.8 * better4_control_perfectlanding_value )
   DoMorph time = 0.02 alpha = 0
   DoMorph time = 0.05 alpha = 1
   DoMorph time = 0.05 alpha = 0

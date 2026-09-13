@@ -314,7 +314,9 @@ script better4_hud_menu
   better4_create_menu_item text = "Adjust Gamma" pad_choose_script = create_gamma_menu pad_choose_params = <...>
   better4_create_menu_control better4_control_buttonsfont
   better4_create_menu_control better4_control_trickstring
-  better4_create_menu_control better4_control_basescore
+  better4_create_menu_control better4_control_scorepot
+  better4_create_menu_control better4_control_specialmeter
+  better4_create_menu_control better4_control_perfectlanding
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
