@@ -100,7 +100,7 @@ better4_control_powerslide = {
   id = better4_control_powerslide_id
   index_name = better4_control_powerslide_index
   value_name = better4_control_powerslide_value
-  text = "Powerslide"
+  text = "Quickturn"
   ini_key = "Powerslide"
   options = [
     { text = "\b4+\bf+\be" value = PowerslideVanilla } // Down+R1+L1
