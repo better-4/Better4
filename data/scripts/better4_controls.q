@@ -591,19 +591,6 @@ script better4_change_aspect_ratio
   endif
 endscript
 
-// better4_trick_string_index = 1
-// better4_trick_string_value = on
-// better4_trick_string = {
-  // id = better4_trick_string_id
-  // index_name = better4_trick_string_index
-  // value_name = better4_trick_string_value
-  // text = "Trick String"
-  // ini_key = "TrickString"
-  // options = [
-    // { text = "Off" value = off }
-    // { text = "On" value = on }	
-  // ]
-// }
 
 // better4_control_special_meter_index = 1
 // better4_control_special_meter_value = on
@@ -741,6 +728,34 @@ script better4_change_trickstring
   endif
 endscript
 
+better4_control_basescore_index = 1
+better4_control_basescore_value = on
+better4_control_basescore = {
+  id = better4_control_basescore_id
+  index_name = better4_control_basescore_index
+  value_name = better4_control_basescore_value
+  text = "Base Score"
+  ini_key = "BaseScore"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+  change_script = better4_change_basescore
+}
+
+script better4_change_basescore
+  if ScreenElementExists id = the_score_pot_text
+    switch better4_control_basescore_value
+    case off
+      Printf "SETTING BASESCORE OFF"
+      pause_trick_text
+    case on
+      Printf "SETTING BASESCORE ON"
+      unpause_trick_text
+    endswitch
+  endif
+endscript
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -769,10 +784,10 @@ script better4_controls_init
   better4_control_init better4_control_chat_size
   better4_control_init better4_control_chat_duration
   better4_control_init better4_control_pressure
-  // better4_control_init better4_trick_string
   // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
-  better4_control_init better4_control_trickstring
+  better4_control_init better4_control_trickstring  
+  better4_control_init better4_control_basescore
 endscript
 
 script better4_control_init

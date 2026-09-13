@@ -493,6 +493,9 @@ script create_panel_stuff
   if ( better4_control_trickstring_value = off )
     pause_trick_text
   endif
+  if ( better4_control_basescore_value = off )
+    pause_trick_text
+  endif
 endscript
 newtrickfont_colors = [
   [ 0 128 230 60 ]
@@ -521,16 +524,20 @@ script unpause_trick_text
     DoScreenElementMorph id = the_trick_text restore_alpha
     SetScreenElementProps id = the_trick_text restore_override_rgba_state
   endif
-  DoScreenElementMorph id = the_score_pot_text restore_alpha
+  if ( better4_control_basescore_value = on )
+    DoScreenElementMorph id = the_score_pot_text restore_alpha
+  endif
   if InSplitScreenGame
     if ( better4_control_trickstring_value = on )
       if ScreenElementExists id = ( the_trick_text + 1 )
         DoScreenElementMorph id = ( the_trick_text + 1 ) restore_alpha
       endif
     endif
-    if ScreenElementExists id = ( the_score_pot_text + 1 )
-      DoScreenElementMorph id = ( the_score_pot_text + 1 ) restore_alpha
-    endif
+	if ( better4_control_basescore_value = on )
+      if ScreenElementExists id = ( the_score_pot_text + 1 )
+        DoScreenElementMorph id = ( the_score_pot_text + 1 ) restore_alpha
+      endif
+	endif
   endif
 endscript
 script trick_text_pulse
@@ -653,7 +660,9 @@ script do_trick_text_bail
     SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 32 32 80 ]
     SetScreenElementProps id = <the_trick_text_id> override_encoded_rgba
   endif
-  SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 128 32 32 80 ]
+  if ( better4_control_basescore_value = on )
+    SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 128 32 32 80 ]
+  endif
   Wait 0.05 seconds
   if InSplitScreenGame
     ScriptGetScreenMode
@@ -720,7 +729,9 @@ script runtwoscripts
   if ( better4_control_trickstring_value = on )
     RunScriptOnScreenElement id = <the_trick_text_id> <script_text>
   endif
-  RunScriptOnScreenElement id = <the_score_pot_text_id> <script_score>
+  if ( better4_control_basescore_value = on )
+    RunScriptOnScreenElement id = <the_score_pot_text_id> <script_score>
+  endif
 endscript
 script bail1
   DoMorph pos = { (0, 0) relative } time = 0.3 scale = 2.0 alpha = 0 fast_in
@@ -842,8 +853,10 @@ script reset_trick_text_appearance
   TerminateObjectsScripts id = <the_score_pot_text_id> script_name = bail5
   TerminateObjectsScripts id = <the_score_pot_text_id> script_name = bail6
   reset_just_trick_text_appearance <...>
-  SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 127 102 0 85 ]
-  SetScreenElementProps id = <the_score_pot_text_id> dont_override_encoded_rgba
+  if ( better4_control_basescore_value = on )
+    SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 127 102 0 85 ]
+    SetScreenElementProps id = <the_score_pot_text_id> dont_override_encoded_rgba
+  endif
   if InSplitScreenGame
     if GameModeEquals is_horse
       DoScreenElementMorph {
@@ -876,13 +889,15 @@ script reset_trick_text_appearance
       endswitch
     endif
   else
-    DoScreenElementMorph {
-      id = <the_score_pot_text_id>
-      scale = 1.0
-      pos = (287, 2)
-      just = [ center bottom ]
-      alpha = 1.0
-    }
+    if ( better4_control_basescore_value = on )
+      DoScreenElementMorph {
+        id = <the_score_pot_text_id>
+        scale = 1.0
+        pos = (287, 2)
+        just = [ center bottom ]
+        alpha = 1.0
+      }
+    endif
   endif
 endscript
 script hide_clock
