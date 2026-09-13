@@ -340,7 +340,7 @@ script better4_chat_menu
   better4_create_menu_control better4_control_chat_size
   better4_create_menu_control better4_control_chat_duration
   better4_menu_spacer
-  better4_create_menu_item text = "Back" pad_choose_script = better4_display_menu pad_choose_params = <...>
+  better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
 
 script better4_misc_menu
