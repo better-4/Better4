@@ -490,6 +490,9 @@ script create_panel_stuff
     endif
     create_score_menu
   endif
+  if ( better4_control_trickstring_value = off )
+    pause_trick_text
+  endif
 endscript
 newtrickfont_colors = [
   [ 0 128 230 60 ]
@@ -498,6 +501,7 @@ newtrickfont_colors = [
   [ 128 0 0 60 ]
 ]
 script pause_trick_text
+  Printf "@@ PAUSING TRICK TEXT"
   DoScreenElementMorph id = the_trick_text alpha = 0.0 remember_alpha
   SetScreenElementProps id = the_trick_text override_encoded_rgba remember_override_rgba_state
   DoScreenElementMorph id = the_score_pot_text alpha = 0.0 remember_alpha
@@ -512,12 +516,17 @@ script pause_trick_text
   endif
 endscript
 script unpause_trick_text
-  DoScreenElementMorph id = the_trick_text restore_alpha
+  Printf "@@ UNPAUSING TRICK TEXT"
+  if ( better4_control_trickstring_value = on )
+    DoScreenElementMorph id = the_trick_text restore_alpha
+    SetScreenElementProps id = the_trick_text restore_override_rgba_state
+  endif
   DoScreenElementMorph id = the_score_pot_text restore_alpha
-  SetScreenElementProps id = the_trick_text restore_override_rgba_state
   if InSplitScreenGame
-    if ScreenElementExists id = ( the_trick_text + 1 )
-      DoScreenElementMorph id = ( the_trick_text + 1 ) restore_alpha
+    if ( better4_control_trickstring_value = on )
+      if ScreenElementExists id = ( the_trick_text + 1 )
+        DoScreenElementMorph id = ( the_trick_text + 1 ) restore_alpha
+      endif
     endif
     if ScreenElementExists id = ( the_score_pot_text + 1 )
       DoScreenElementMorph id = ( the_score_pot_text + 1 ) restore_alpha
@@ -525,6 +534,7 @@ script unpause_trick_text
   endif
 endscript
 script trick_text_pulse
+  Printf "@@ TRICK_TEXT_PULSE"
   TerminateObjectsScripts id = <trick_text_container_id>
   TerminateObjectsScripts id = <the_trick_text_id>
   TerminateObjectsScripts id = <the_score_pot_text_id> script_name = do_score_pot_text_landed
@@ -627,6 +637,7 @@ script trick_text_countdown
   RunScriptOnScreenElement id = <the_trick_text_id> do_trick_text_countdown params = { <...> }
 endscript
 script do_trick_text_countdown
+  Printf "@@ DO_TRICK_TEXT_COUNTDOWN"
   reset_just_trick_text_appearance <...>
   DoMorph scale = 0.0 time = 0.5
   DoMorph alpha = 0.0
@@ -638,8 +649,10 @@ script trick_text_bail
 endscript
 script do_trick_text_bail
   reset_trick_text_appearance <...>
-  SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 32 32 80 ]
-  SetScreenElementProps id = <the_trick_text_id> override_encoded_rgba
+  if ( better4_control_trickstring_value = on )
+    SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 32 32 80 ]
+    SetScreenElementProps id = <the_trick_text_id> override_encoded_rgba
+  endif
   SetScreenElementProps id = <the_score_pot_text_id> rgba = [ 128 32 32 80 ]
   Wait 0.05 seconds
   if InSplitScreenGame
@@ -701,10 +714,12 @@ script do_trick_text_bail
   @runtwoscripts script_text = bail4 script_score = bail4 <...>
   @runtwoscripts script_text = bail5 script_score = bail5 <...>
   @runtwoscripts script_text = bail2 script_score = bail1 <...>
-   ) 
+  ) 
 endscript
 script runtwoscripts
-  RunScriptOnScreenElement id = <the_trick_text_id> <script_text>
+  if ( better4_control_trickstring_value = on )
+    RunScriptOnScreenElement id = <the_trick_text_id> <script_text>
+  endif
   RunScriptOnScreenElement id = <the_score_pot_text_id> <script_score>
 endscript
 script bail1
@@ -787,8 +802,10 @@ script reset_just_trick_text_appearance
       internal_scale = 0.7
       alpha = 1.0
     }
-    SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
-    SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    if ( better4_control_trickstring_value = on )
+      SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
+      SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    endif
   else
     DoScreenElementMorph {
       id = <trick_text_container_id>
@@ -796,17 +813,19 @@ script reset_just_trick_text_appearance
       pos = (320, 410)
       scale = 1.0
     }
-    DoScreenElementMorph {
-      id = <the_trick_text_id>
-      scale = 1.0
-      pos = { (0.5, 0) proportional }
-      just = [ center top ]
-      internal_just = [ center top ]
-      internal_scale = 0.7
-      alpha = 1.0
-    }
-    SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
-    SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    if ( better4_control_trickstring_value = on )
+      DoScreenElementMorph {
+        id = <the_trick_text_id>
+        scale = 1.0
+        pos = { (0.5, 0) proportional }
+        just = [ center top ]
+        internal_just = [ center top ]
+        internal_scale = 0.7
+        alpha = 1.0
+      }
+      SetScreenElementProps id = <the_trick_text_id> dont_override_encoded_rgba
+      SetScreenElementProps id = <the_trick_text_id> rgba = [ 128 128 128 80 ]
+    endif
   endif
 endscript
 script reset_trick_text_appearance

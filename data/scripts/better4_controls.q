@@ -668,29 +668,29 @@ better4_control_chat_size = {
 script better4_change_chat_size
   switch better4_control_chat_size_value
   case 0
-       console_destroy
+    console_destroy
 	  change better4_padding = 0.25
-      change better4_chat_scale = 0.3
+    change better4_chat_scale = 0.3
 	  printf "ex. small"
   case 1
-      console_destroy
- 	  change better4_padding = 0.45
-      change better4_chat_scale = 0.5
+    console_destroy
+    change better4_padding = 0.45
+    change better4_chat_scale = 0.5
 	  printf "small"
   case 2
-      console_destroy
+    console_destroy
 	  change better4_padding = 0.65
-      change better4_chat_scale = 0.7
+    change better4_chat_scale = 0.7
 	  printf "default"
   case 3
-      console_destroy
+    console_destroy
 	  change better4_padding = 0.85
-      change better4_chat_scale = 1.0
+    change better4_chat_scale = 1.0
 	  printf "big"
   case 4
-      console_destroy
+    console_destroy
 	  change better4_padding = 1.0
-      change better4_chat_scale = 1.2
+    change better4_chat_scale = 1.2
 	  printf "ex. big"
   endswitch
 endscript
@@ -712,6 +712,34 @@ better4_control_chat_duration = {
     { text = "30 Seconds" value = 30 }
   ]
 }
+
+better4_control_trickstring_index = 1
+better4_control_trickstring_value = on
+better4_control_trickstring = {
+  id = better4_control_trickstring_id
+  index_name = better4_control_trickstring_index
+  value_name = better4_control_trickstring_value
+  text = "Trick String"
+  ini_key = "TrickString"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+  change_script = better4_change_trickstring
+}
+
+script better4_change_trickstring
+  if ScreenElementExists id = the_trick_text
+    switch better4_control_trickstring_value
+    case off
+      Printf "SETTING TRICKSTRING OFF"
+      pause_trick_text
+    case on
+      Printf "SETTING TRICKSTRING ON"
+      unpause_trick_text
+    endswitch
+  endif
+endscript
 
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
@@ -744,6 +772,7 @@ script better4_controls_init
   // better4_control_init better4_trick_string
   // better4_control_init better4_control_special_meter
   better4_control_init better4_control_extratrick_sound
+  better4_control_init better4_control_trickstring
 endscript
 
 script better4_control_init

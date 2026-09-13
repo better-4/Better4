@@ -313,6 +313,7 @@ script better4_hud_menu
   better4_menu_spacer
   better4_create_menu_item text = "Adjust Gamma" pad_choose_script = create_gamma_menu pad_choose_params = <...>
   better4_create_menu_control better4_control_buttonsfont
+  better4_create_menu_control better4_control_trickstring
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
@@ -343,6 +344,18 @@ script better4_chat_menu
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
 
+panel_enabled = 1
+script better4_panel_test
+  switch panel_enabled
+  case 0
+    Change panel_enabled = 1
+    show_panel_stuff
+  case 1
+    Change panel_enabled = 0
+    hide_panel_stuff
+  endswitch
+endscript
+
 script better4_misc_menu
   better4_create_menu menu_title = "MISC" icon = PA_trick close_script = better4_options_menu close_params = <...>
   better4_menu_spacer
@@ -351,6 +364,7 @@ script better4_misc_menu
   // better4_create_menu_control better4_trick_string
   // better4_create_menu_control better4_control_special_meter
   better4_create_menu_control better4_control_extratrick_sound
+  better4_create_menu_item text = "Panel Test" pad_choose_script = better4_panel_test pad_choose_params = <...>
   if not IsBetterObserving
     if not IsObserving
       better4_create_menu_item text = "Change CAS" pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
