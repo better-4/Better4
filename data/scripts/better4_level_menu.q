@@ -4,12 +4,13 @@ script better4_create_level_select_menu_game
   if ObjectExists id = level_select_anchor_game
     DestroyScreenElement id = level_select_anchor_game
   endif
+  Change game_index = 1
 
   SetScreenElementProps {
     id = level_select_vmenu
     event_handlers = [
-      { pad_left better4_level_menu_left }
-      { pad_right better4_level_menu_right }
+      { pad_left better4_level_menu_left params = <...> }
+      { pad_right better4_level_menu_right params = <...> }
     ]
   }
 
@@ -78,7 +79,7 @@ script better4_level_menu_left
       id = level_select_game_right
       rgba = [ 128 128 128 100 ]
     }
-    better4_level_menu_list levels = thps3_level_info
+    better4_level_menu_list levels = thps3_level_info <...>
   endif
 endscript
 
@@ -99,7 +100,7 @@ script better4_level_menu_right
       id = level_select_game_right
       rgba = [ 128 128 128 0 ]
     }
-    better4_level_menu_list levels = level_select_menu_level_info
+    better4_level_menu_list levels = level_select_menu_level_info <...>
   endif
 endscript
 
