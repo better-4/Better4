@@ -3663,7 +3663,7 @@ script create_gamma_menu
   make_new_menu menu_title = "GAMMA" menu_id = gamma_menu vmenu_id = gamma_vmenu
   SetScreenElementProps {
     id = gamma_menu
-    event_handlers = [ { pad_back better4_hud_menu pad_choose_params = <...> } ]
+    event_handlers = [ { pad_back better4_hud_menu params = <...> } ]
     replace_handlers
   }
   set_sub_bg
@@ -3671,7 +3671,7 @@ script create_gamma_menu
   make_text_sub_menu_item text = "Red: " id = gamma_menu_red
   make_text_sub_menu_item text = "Green: " id = gamma_menu_green
   make_text_sub_menu_item text = "Blue: " id = gamma_menu_blue
-  make_text_sub_menu_item text = "Done" id = gamma_menu_done pad_choose_script = better4_display_menu pad_choose_params = <...>
+  make_text_sub_menu_item text = "Done" id = gamma_menu_done pad_choose_script = better4_hud_menu pad_choose_params = <...>
   SetScreenElementProps {
     id = gamma_menu_red
     event_handlers = [ { pad_left gamma_menu_turn_down params = { color = red } }
