@@ -14,6 +14,9 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\FS360PressureFlip.ska" descChecksum = FS360PressureFlip
   LoadAnim name = "anims\better4\CrouchToPressure.ska" descChecksum = CrouchToPressure
   LoadAnim name = "anims\better4\SkateToPressure.ska" descChecksum = SkateToPressure
+
+  LoadAnim name = "anims\better4\defaultthug1.ska" descChecksum = defaultthug1
+  LoadAnim name = "anims\better4\Boneless.ska" descChecksum = Boneless
 endscript
 
 script better4_load_anims_th3
@@ -93,7 +96,7 @@ script better4_anim_trigger
     SetRollingFriction 100
     switch <index> 
     case 0
-        PlayAnim Anim = Wallpush_Crouched cycle
+        PlayAnim Anim = defaultthug1 cycle
     case 1
         PlayAnim Anim = Wallpush_Manual cycle
     case 2

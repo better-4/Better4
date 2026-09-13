@@ -738,7 +738,7 @@ script animload_human
     LoadAnim name = "anims\skater_basics\AirTurnRight.ska" descChecksum = AirTurnRight
     LoadAnim name = "anims\skater_basics\Beanplant.ska" descChecksum = Beanplant
     LoadAnim name = "anims\skater_basics\BoardShop1.ska" descChecksum = BoardShop1
-    LoadAnim name = "anims\skater_basics\Boneless.ska" descChecksum = Boneless
+    // LoadAnim name = "anims\skater_basics\Boneless.ska" descChecksum = Boneless
     LoadAnim name = "anims\skater_basics\Brake.ska" descChecksum = Brake
     LoadAnim name = "anims\skater_basics\BrakeDefeat.ska" descChecksum = BrakeDefeat
     LoadAnim name = "anims\skater_basics\BrakeIdle.ska" descChecksum = BrakeIdle

@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.7
+# syntax=docker/dockerfile:1.7-labs
 #
 # `docker build -f Dockerfile --target export -o build/out .`
 ########################################
@@ -74,16 +74,52 @@ RUN curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh \
     && rm /tmp/dotnet-install.sh
 
 ########################################
-FROM rust:1.98 AS build-nx-tools
+# FROM rust:1.98 AS build-nx-tools
+#
+# WORKDIR /src
+#
+# COPY vendor/nx-tools/Cargo.toml vendor/nx-tools/Cargo.toml
+# COPY vendor/nx-tools/Cargo.lock vendor/nx-tools/Cargo.lock
+# RUN mkdir -p vendor/nx-tools/crates/nx-cli
+# COPY --parents vendor/nx-tools/crates/*/Cargo.toml .
+#
+# WORKDIR /src/vendor/nx-tools
+# RUN mkdir -p crates/nx-anim/src && touch crates/nx-anim/src/lib.rs \
+#     && mkdir -p crates/nx-blender/src && touch crates/nx-blender/src/lib.rs \
+#     && mkdir -p crates/nx-common/src && touch crates/nx-common/src/lib.rs \
+#     && mkdir -p crates/nx-crc/src && touch crates/nx-crc/src/lib.rs \
+#     && mkdir -p crates/nx-qb/src && touch crates/nx-qb/src/lib.rs \
+#     && mkdir -p crates/nx-skel/src && touch crates/nx-skel/src/lib.rs \
+#     && mkdir -p crates/nx-stdkey/src && touch crates/nx-stdkey/src/lib.rs \
+#     && mkdir -p crates/nx-test/src && touch crates/nx-test/src/lib.rs \
+#     && mkdir -p crates/nx-cli/src && echo "fn main() {}" > crates/nx-cli/src/main.rs
+# # RUN pwd && ls -la vendor/nx-tools/crates/nx-anim && exit 1
+#
+# RUN --mount=type=cache,target=/usr/local/cargo/registry \
+#     --mount=type=cache,target=target \
+#     cargo build --release
+#
+# COPY vendor/nx-tools vendor/nx-tools
+# RUN mkdir -p /opt/nx-tools
+# RUN --mount=type=cache,target=/usr/local/cargo/registry \
+#     --mount=type=cache,target=target \
+#     cargo build --release --package nx-cli \
+#     && cp ./target/release/nx-cli /opt/nx-tools/nx-cli
 
-WORKDIR /src
-COPY vendor/nx-tools vendor/nx-tools
+FROM lukemathwalker/cargo-chef:latest-rust-1 AS chef-nx-tools
+RUN mkdir -p /src/vendor/nx-tools
 WORKDIR /src/vendor/nx-tools
 
-RUN mkdir -p /opt/nx-tools
-RUN --mount=type=cache,target=/usr/local/cargo/registry \
-    cargo build --release --package nx-cli \
-    && cp ./target/release/nx-cli /opt/nx-tools/nx-cli
+FROM chef-nx-tools AS plan-nx-tools
+COPY vendor/nx-tools .
+RUN cargo chef prepare --recipe-path recipe.json
+
+FROM chef-nx-tools AS build-nx-tools
+COPY --from=plan-nx-tools /src/vendor/nx-tools/recipe.json recipe.json
+RUN cargo chef cook --release --recipe-path recipe.json
+COPY vendor/nx-tools .
+RUN cargo build --release --bin nx-cli \
+    && mkdir -p /opt/nx-tools && cp ./target/release/nx-cli /opt/nx-tools/nx-cli
 
 ########################################
 FROM base AS toolchain
@@ -184,9 +220,10 @@ COPY --from=build-nx-tools /opt/nx-tools /opt/nx-tools
 
 COPY data/anims data/anims
 COPY vendor/nx-tools/assets vendor/nx-tools/assets
+
 RUN mkdir -p "/out/data/anims/better4" \
     && /opt/nx-tools/nx-cli anim convert-bulk \
-         --input-dir ./data/anims/thug --output-dir /out/data/anims/better4 \
+         --input-dir data/anims/thug --output-dir /out/data/anims/better4 \
          --in-game thug --out-game thps4 \
          --qkeys vendor/nx-tools/assets/stdkey/thug/standardkeyQ.bin \
          --tkeys vendor/nx-tools/assets/stdkey/thug/standardkeyT.bin
