@@ -31,6 +31,8 @@ level_info = [
   { name = "Carnival" checksum = load_cnv }
   { name = "Chicago" checksum = load_hof }
   { name = "Created Park" checksum = load_Sk4Ed_gameplay }
+  { name = "MotoX" checksum = Load_Motox }
+  { name = "Los Angeles" checksum = Load_LA }
 ]
 num_players_info = [
   { name = "2 Players" checksum = num_2 }
