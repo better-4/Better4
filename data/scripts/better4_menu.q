@@ -367,7 +367,7 @@ script better4_misc_menu
   // better4_create_menu_control better4_trick_string
   // better4_create_menu_control better4_control_special_meter
   better4_create_menu_control better4_control_extratrick_sound
-  better4_create_menu_item text = "Panel Test" pad_choose_script = better4_panel_test pad_choose_params = <...>
+  better4_create_menu_control better4_control_menudemo
   if not IsBetterObserving
     if not IsObserving
       better4_create_menu_item text = "Change CAS" pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }

@@ -1145,21 +1145,23 @@ script attract_mode_timer
   begin
     Wait <max_time> seconds
     movie_file = ( attract_mode_movies [ current_attract_movie ] )
-    if not IsNGC
-      GetArraySize attract_mode_movies
-      if not ( <array_size> > ( current_attract_movie + 1 ) )
-        Change current_attract_movie = 0
-      else
-        Change current_attract_movie = ( current_attract_movie + 1 )
+    if better4_control_menudemo_value
+      if not IsNGC
+        GetArraySize attract_mode_movies
+        if not ( <array_size> > ( current_attract_movie + 1 ) )
+          Change current_attract_movie = 0
+        else
+          Change current_attract_movie = ( current_attract_movie + 1 )
+        endif
       endif
-    endif
-    if CD
-      UnloadPreFile "skaterparts.pre"
-      MemPushContext 0
-      PlayMovie <movie_file>
-      MemPopContext
-      DumpHeaps
-      LoadPreFile "skaterparts.pre"
+      if CD
+        UnloadPreFile "skaterparts.pre"
+        MemPushContext 0
+        PlayMovie <movie_file>
+        MemPopContext
+        DumpHeaps
+        LoadPreFile "skaterparts.pre"
+      endif
     endif
   repeat
 endscript
