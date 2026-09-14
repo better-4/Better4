@@ -859,6 +859,20 @@ script better4_change_perfectlanding
   endif
 endscript
 
+better4_control_menudemo_index = 1
+better4_control_menudemo_value = on
+better4_control_menudemo = {
+  id = better4_control_menudemo_id
+  index_name = better4_control_menudemo_index
+  value_name = better4_control_menudemo_value
+  text = "Menu Demo"
+  ini_key = "MenuDemo"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -892,6 +906,7 @@ script better4_controls_init
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter
   better4_control_init better4_control_perfectlanding
+  better4_control_init better4_control_menudemo
 endscript
 
 script better4_control_init
