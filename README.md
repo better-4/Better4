@@ -62,6 +62,7 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 
 ### Levels
 
+* Added Los Angeles from THPS3
 * Made more walls wallridable in Chicago
 
 ### CAS
@@ -83,10 +84,13 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Added configuration for buttons font (PS3, Xbox, PC)
 * Added FOV configuration
 * Added aspect ratio configuration
+* Added size customization for panel elements (trick string, score, etc.)
 
 ## Known Issues
 
 * Server list / player list disappears after hosting a game too quickly. Fixed by re-opening the internet menu.
+* Cycling previous / next player while observing sometimes does not work. Fixed by pausing and unpausing.
+* LA objectives (graffiti trick objects, KOTH crown, CTF flags, etc.) not yet implemented
 
 ## Credits
 
