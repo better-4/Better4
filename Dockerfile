@@ -200,7 +200,7 @@ COPY data/images /out/data/images/better4
 COPY data/levels /out/data/levels/better4
 COPY data/models /out/data/models/better4
 COPY data/sounds /out/data/sounds/Wav/better4
-COPY data/anims /out/data/sounds/Wav/better4
+COPY data/anims /out/data/anims/better4
 
 ########################################
 FROM scratch AS export
