@@ -90,21 +90,22 @@ LevelNum_Zoo = 7
 LevelNum_Cnv = 8
 LevelNum_Hof = 9
 LevelNum_Sk4ed = 10
-LevelNum_Airport = 1
-LevelNum_Canada = 2
-LevelNum_Rio = 3
-LevelNum_Suburbia = 4
-LevelNum_Foundry = 5
-LevelNum_SkaterIsland = 6
-LevelNum_LA = 7
-LevelNum_Tokyo = 8
-LevelNum_Ship = 9
-LevelNum_Oil = 10
-LevelNum_Tutorials = 11
-LevelNum_Warehouse = 12
-LevelNum_Burnside = 13
-LevelNum_Roswell = 14
-LevelNum_Rooftops = 15
+LevelNum_Motox = 11
+// LevelNum_Airport = 1
+// LevelNum_Canada = 2
+// LevelNum_Rio = 3
+// LevelNum_Suburbia = 4
+// LevelNum_Foundry = 5
+// LevelNum_SkaterIsland = 6
+// LevelNum_LA = 7
+// LevelNum_Tokyo = 8
+// LevelNum_Ship = 9
+// LevelNum_Oil = 10
+// LevelNum_Tutorials = 11
+// LevelNum_Warehouse = 12
+// LevelNum_Burnside = 13
+// LevelNum_Roswell = 14
+// LevelNum_Rooftops = 15
 script LoadLevelPreFile
   if IsTrue UsePreFilesForLevelLoading
     LoadPreFile <...>
