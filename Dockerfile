@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.7-labs
+# syntax=docker/dockerfile:1.7
 #
 # `docker build -f Dockerfile --target export -o build/out .`
 ########################################
