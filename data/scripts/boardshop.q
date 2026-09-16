@@ -204,7 +204,7 @@ script boardshop_create_deck_menu
       Change boardshop_current_deck_list_index = <index>
       break
     endif
-     <index> = ( <index> + 1 )
+    <index> = ( <index> + 1 )
   repeat <array_size>
   SetScreenElementProps id = root_window off
   if ObjectExists id = boardshop_anchor_middle
@@ -838,8 +838,8 @@ script boardshop_switch_deck_list
   boardshop_reset_small_decks
   Wait 1 gameframe
    <temp_index> = boardshop_current_deck_list_index
-  GetArraySize master_skater_list
-   <number_of_skaters> = ( <array_size> + 1 )
+  GetArraySize better4_deck_categories
+   <number_of_skaters> = <array_size>
   GetArraySize deck_graphic
    <found_new_profile> = 0
   begin
@@ -858,7 +858,11 @@ script boardshop_switch_deck_list
     endif
      <skater_name> = ( ( deck_graphic [ <temp_index> ] ).skater )
     if not ( <skater_name> = None )
-      GetSkaterProfileInfoByName name = <skater_name>
+      if GetIndexOfItemContaining array = better4_deck_categories name = name value = <skater_name>
+        <display_name> = ( ( better4_deck_categories [ <index> ] ).display_name )
+        <is_pro> = ( ( better4_deck_categories [ <index> ] ).is_pro )
+        <name> = <skater_name>
+      endif
       if GotParam is_hidden
         if not ( <is_hidden> = 1 )
            <found_new_profile> = 1
@@ -905,6 +909,9 @@ script boardshop_menu_exit
   endif
 endscript
 script boardshop_deck_design_focus
+  Printf "@@ FOCUSING DECK"
+  PrintStruct <...>
+  Printf "@@ ----"
   GetTags
   KillSpawnedScript name = boardshop_replace_main_board_texture
   if GotParam flag
@@ -966,8 +973,12 @@ script boardshop_reset_small_griptapes
   PlaySound BoardsFlip
 endscript
 script boardshop_replace_small_deck_textures
+  PrintStruct <...>
   if not GotParam name
     GetSkaterProfileInfo player = <currentSkaterProfileIndex>
+  endif
+  if not GotParam index
+    <index> = ( boardshop_current_deck_list_index - 1 )
   endif
   if GotParam display_name
     if ( <is_pro> = 0 )
@@ -982,68 +993,90 @@ script boardshop_replace_small_deck_textures
       }
     endif
   endif
-   <board_index> = 1
+  <board_index> = 1
   if not GotParam index
-     <index> = ( boardshop_current_deck_list_index - 1 )
+    <index> = ( boardshop_current_deck_list_index - 1 )
   endif
+  <any_hidden> = 0
   begin
     if not GetIndexOfItemContaining array = deck_graphic index = ( <index> + 1 ) name = skater value = <name>
       break
     endif
-     <dest> = ( ( deck_graphic [ <index> ] ).with )
-     <flag> = ( ( deck_graphic [ <index> ] ).flag )
-    if ObjectExists id = boardshop_deck_design_menu
-      if GetGlobalFlag flag = <flag>
-        SetScreenElementProps {
-          id = { boardshop_deck_design_menu child = <board_index> }
-          event_handlers = [ { focus boardshop_deck_design_focus params = { flagged_deck flag = <flag> dest = ( ( deck_graphic [ <index> ] ).with ) highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) } }
-            { unfocus edit_tricks_menu_unfocus params = { flagged_deck } }
-            { pad_choose boardshop_menu_choose_deck params = { dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
-            { pad_start boardshop_menu_choose_deck params = { dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
-          ]
-          replace_handlers
-        }
-        SetScreenElementProps {
-          id = { boardshop_deck_design_menu child = { <board_index> child = 0 } }
-          text = ( ( deck_graphic [ <index> ] ).frontend_desc )
-          rgba = [ 25 83 67 128 ]
-        }
-        GetScreenElementDims id = { boardshop_deck_design_menu child = { <board_index> child = 0 } }
-        line_scale = ( ( ( <width> / 4 ) * (1, 0) ) + (0, 0.25) )
-        DoScreenElementMorph {
-          id = { boardshop_deck_design_menu child = { <board_index> child = 3 } }
-          alpha = 1
-          scale = <line_scale>
-          time = 0
-        }
-      else
-        GoalManager_GetCash
-        if ( <cash> > 49 )
-           <buy_deck_script> = boardshop_buy_deck
+    <hidden> = ( ( deck_graphic [ <index> ] ).hidden )
+    if ( <hidden> = 1 )
+      <any_hidden> = 1
+      SetScreenElementProps {
+        id = { boardshop_deck_design_menu child = <board_index> }
+        not_focusable
+      }
+      SetScreenElementProps {
+        id = { boardshop_deck_design_menu child = { <board_index> child = 0 } }
+        text = ""
+        rgba = [ 25 83 67 128 ]
+      }
+      DoScreenElementMorph {
+        id = { boardshop_deck_design_menu child = { <board_index> child = 3 } }
+        alpha = 0
+        time = 0
+      }
+      <dest> = "textures\boards\LockedB01"
+    else
+      <dest> = ( ( deck_graphic [ <index> ] ).with )
+      <flag> = ( ( deck_graphic [ <index> ] ).flag )
+      if ObjectExists id = boardshop_deck_design_menu
+        if GetGlobalFlag flag = <flag>
+          SetScreenElementProps {
+            id = { boardshop_deck_design_menu child = <board_index> }
+            event_handlers = [ { focus boardshop_deck_design_focus params = { flagged_deck flag = <flag> dest = ( ( deck_graphic [ <index> ] ).with ) highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) } }
+              { unfocus edit_tricks_menu_unfocus params = { flagged_deck } }
+              { pad_choose boardshop_menu_choose_deck params = { dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
+              { pad_start boardshop_menu_choose_deck params = { dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
+            ]
+            replace_handlers
+            focusable
+          }
+          SetScreenElementProps {
+            id = { boardshop_deck_design_menu child = { <board_index> child = 0 } }
+            text = ( ( deck_graphic [ <index> ] ).frontend_desc )
+            rgba = [ 25 83 67 128 ]
+          }
+          GetScreenElementDims id = { boardshop_deck_design_menu child = { <board_index> child = 0 } }
+          line_scale = ( ( ( <width> / 4 ) * (1, 0) ) + (0, 0.25) )
+          DoScreenElementMorph {
+            id = { boardshop_deck_design_menu child = { <board_index> child = 3 } }
+            alpha = 1
+            scale = <line_scale>
+            time = 0
+          }
         else
-           <buy_deck_script> = boardshop_not_enough_money
+          GoalManager_GetCash
+          if ( <cash> > 49 )
+            <buy_deck_script> = boardshop_buy_deck
+          else
+            <buy_deck_script> = boardshop_not_enough_money
+          endif
+          SetScreenElementProps {
+            id = { boardshop_deck_design_menu child = <board_index> }
+            event_handlers = [ { focus boardshop_deck_design_focus params = { flag = <flag> dest = ( ( deck_graphic [ <index> ] ).with ) highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) } }
+              { pad_choose <buy_deck_script> params = { flag = <flag> currentSkaterProfileIndex = <currentSkaterProfileIndex> name = <name> dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
+              { pad_start <buy_deck_script> params = { flag = <flag> currentSkaterProfileIndex = <currentSkaterProfileIndex> name = <name> dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
+              { focus boardshop_deck_design_focus params = { flag = <flag> dest = ( ( deck_graphic [ <index> ] ).with ) highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) } }
+              { unfocus edit_tricks_menu_unfocus params = { } }
+            ]
+            replace_handlers
+          }
+          SetScreenElementProps {
+            id = { boardshop_deck_design_menu child = { <board_index> child = 0 } }
+            text = ( ( deck_graphic [ <index> ] ).frontend_desc )
+            rgba = [ 88 105 112 128 ]
+          }
+          DoScreenElementMorph {
+            id = { boardshop_deck_design_menu child = { <board_index> child = 3 } }
+            alpha = 0
+            time = 0
+          }
+          <dest> = "textures\boards\LockedB01"
         endif
-        SetScreenElementProps {
-          id = { boardshop_deck_design_menu child = <board_index> }
-          event_handlers = [ { focus boardshop_deck_design_focus params = { flag = <flag> dest = ( ( deck_graphic [ <index> ] ).with ) highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) } }
-            { pad_choose <buy_deck_script> params = { flag = <flag> currentSkaterProfileIndex = <currentSkaterProfileIndex> name = <name> dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
-            { pad_start <buy_deck_script> params = { flag = <flag> currentSkaterProfileIndex = <currentSkaterProfileIndex> name = <name> dest = ( ( deck_graphic [ <index> ] ).with ) desc_id = ( ( deck_graphic [ <index> ] ).desc_id ) } }
-            { focus boardshop_deck_design_focus params = { flag = <flag> dest = ( ( deck_graphic [ <index> ] ).with ) highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) } }
-            { unfocus edit_tricks_menu_unfocus params = { } }
-          ]
-          replace_handlers
-        }
-        SetScreenElementProps {
-          id = { boardshop_deck_design_menu child = { <board_index> child = 0 } }
-          text = ( ( deck_graphic [ <index> ] ).frontend_desc )
-          rgba = [ 88 105 112 128 ]
-        }
-        DoScreenElementMorph {
-          id = { boardshop_deck_design_menu child = { <board_index> child = 3 } }
-          alpha = 0
-          time = 0
-        }
-         <dest> = "textures\boards\LockedB01"
       endif
     endif
     boardshop_get_small_deck_model_checksum index = ( <board_index> - 1 )
@@ -1056,9 +1089,14 @@ script boardshop_replace_small_deck_textures
      <board_index> = ( <board_index> + 1 )
   repeat 10
   if ObjectExists id = boardshop_deck_design_menu
-    boardshop_deck_design_menu:GetTags
-    if GotParam tag_selected_id
-      FireEvent type = focus target = <tag_selected_id>
+    if ( <any_hidden> = 1 )
+      FireEvent type = unfocus target = boardshop_deck_design_menu
+      FireEvent type = focus target = boardshop_deck_design_menu
+    else
+      boardshop_deck_design_menu:GetTags
+      if GotParam tag_selected_id
+        FireEvent type = focus target = <tag_selected_id>
+      endif
     endif
   endif
   PlaySound BoardsFlip
