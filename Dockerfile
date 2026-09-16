@@ -187,7 +187,7 @@ FROM toolchain AS build-anims
 COPY --from=build-nx-tools /opt/nx-tools /opt/nx-tools
 
 COPY data/anims data/anims
-COPY vendor/nx-tools/assets vendor/nx-tools/assets
+COPY vendor/nx-tools/assets/stdkey vendor/nx-tools/assets/stdkey
 
 RUN mkdir -p "/out/data/anims/better4" \
     && /opt/nx-tools/nx-cli anim convert-bulk \
