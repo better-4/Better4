@@ -93,7 +93,7 @@ script better4_anim_trigger
     SetRollingFriction 100
     switch <index> 
     case 0
-        PlayAnim Anim = Wallpush_Crouched cycle
+        PlayAnim Anim = defaultthug1 cycle
     case 1
         PlayAnim Anim = Wallpush_Manual cycle
     case 2
