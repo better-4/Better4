@@ -507,10 +507,10 @@ endscript
 script launch_chat_keyboard
   DestroyScreenElement id = current_menu_anchor
   remove_pause_menu_textures_from_vram
-  create_onscreen_keyboard allow_cancel keyboard_cancel_script = cancel_chat_menu keyboard_done_script = menu_entered_chat_message keyboard_title = "ENTER MESSAGE" min_length = 0 max_length = 50
+  create_better_onscreen_keyboard allow_cancel keyboard_cancel_script = cancel_chat_menu keyboard_done_script = menu_entered_chat_message keyboard_title = "ENTER MESSAGE" min_length = 0 max_length = 127 text_block
 endscript
 script enter_kb_chat
-  create_onscreen_keyboard allow_cancel no_buttons keyboard_done_script = entered_chat_message keyboard_title = "ENTER MESSAGE" min_length = 1 max_length = 50
+  create_better_onscreen_keyboard allow_cancel no_buttons keyboard_done_script = entered_chat_message keyboard_title = "ENTER MESSAGE" min_length = 1 max_length = 127 text_block
 endscript
 script send_chat_message
   Printf "Sending chat message..."
