@@ -83,8 +83,13 @@ void patchLoad() {
 	// add_path_override("scripts\\qdir.txt", "scripts\\better4\\qdir.txt");
 	add_path_override("levels\\hof\\hof.col.Xbx", "levels\\better4\\hof\\hof.col.Xbx");
 	add_path_override("levels\\sch\\sch.col.Xbx", "levels\\better4\\sch\\sch.col.Xbx");
+	add_path_override("levels\\sf2\\sf2.col.Xbx", "levels\\better4\\sf2\\sf2.col.Xbx");
 	add_path_override("levels\\alc\\alc.col.Xbx", "levels\\better4\\alc\\alc.col.Xbx");
-	
+	add_path_override("levels\\kon\\kon.col.Xbx", "levels\\better4\\kon\\kon.col.Xbx");
+	add_path_override("levels\\jnk\\jnk.col.Xbx", "levels\\better4\\jnk\\jnk.col.Xbx");
+	add_path_override("levels\\lon\\lon.col.Xbx", "levels\\better4\\lon\\lon.col.Xbx");
+	add_path_override("levels\\zoo\\zoo.col.Xbx", "levels\\better4\\zoo\\zoo.col.Xbx");
+	add_path_override("levels\\cnv\\cnv.col.Xbx", "levels\\better4\\cnv\\cnv.col.Xbx");
 
 	add_path_override("levels\\LA\\LA.col.Xbx", "levels\\better4\\LA\\LA.col.Xbx");
 	add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
