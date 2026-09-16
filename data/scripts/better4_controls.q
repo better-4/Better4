@@ -11,6 +11,7 @@ better4_control_spinkeys = {
   index_name = better4_control_spinkeys_index
   text = "Spin Keys"
   ini_key = "SpinKeys"
+  help = "Change control bindings for in-air spins."
   options = [
     { text = "\be/\bf" } // L1/R1
     { text = "\bg/\bh" } // L2/R2
@@ -30,6 +31,7 @@ better4_control_spinetransfer = {
   index_name = better4_control_spinetransfer_index
   text = "Spine Transfer"
   ini_key = "SpineTransfer"
+  help = "Change control bindings for spine transfers."
   options = [
     { text = "\bg/\bh" } // L2/R2
     { text = "\bh" } // R2
@@ -71,6 +73,7 @@ better4_control_revert = {
   value_name = better4_control_revert_value
   text = "Revert"
   ini_key = "Revert"
+  help = "Change control bindings for reverts."
   options = [
     { text = "\bh/\bg" value = RevertVanilla } // R2/L2
     { text = "\bh" value = RevertOnlyR2 } // R2
@@ -102,6 +105,7 @@ better4_control_powerslide = {
   value_name = better4_control_powerslide_value
   text = "Quickturn"
   ini_key = "Powerslide"
+  help = "Change control bindings for quickturns."
   options = [
     { text = "\b4+\bf+\be" value = PowerslideVanilla } // Down+R1+L1
     { text = "\b4+\bh+\bg" value = PowerslideDownR2L2 } // Down+R2+L2
@@ -133,6 +137,7 @@ better4_control_stancechange = {
   value_name = better4_control_stancechange_value
   text = "Stance Change"
   ini_key = "StanceChange"
+  help = "Change control bindings for stance change. 'H&R' = Hold and Release."
   options = [
     { text = "\bg" value = StanceChangeL2 } // L2
     { text = "Off" value = NoTricks }
@@ -171,6 +176,7 @@ better4_control_manualspin = {
   value_name = better4_control_manualspin_value
   text = "Manual Spin"
   ini_key = "ManualSpin"
+  help = "Change control bindings for manual spins. 'R2' is backside-only."
   options = [
     { text = "\bh" value = 0 } // R2
     { text = "\bh/\bg" value = 1 } // R2/L2
@@ -186,6 +192,7 @@ better4_control_wallpush = {
   value_name = better4_control_wallpush_value
   text = "Wallpush"
   ini_key = "Wallpush"
+  help = "Toggle wallpush (\b0) on or off."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -229,6 +236,7 @@ better4_control_spacewalk = {
   value_name = better4_control_spacewalk_value
   text = "Spacewalk"
   ini_key = "Spacewalk"
+  help = "Toggle spacewalk (\b6 \b5 \b1) on or off."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -253,6 +261,7 @@ better4_control_manualfloat = {
   value_name = better4_control_manualfloat_value
   text = "Manual Float"
   ini_key = "ManualFloat"
+  help = "Toggle PS2-exclusive manual float glitches on or off."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -267,6 +276,7 @@ better4_control_doublerevert = {
   value_name = better4_control_doublerevert_value
   text = "Double Revert"
   ini_key = "DoubleRevert"
+  help = "Toggle whether or not a second revert is required after dropping down into a revert."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -281,6 +291,7 @@ better4_control_revertrecovery = {
   value_name = better4_control_revertrecovery_value
   text = "Revert Recovery"
   ini_key = "RevertRecovery"
+  help = "Change the speed at which the skater is actionable after finishing a revert in the air."
   options = [
     { text = "Vanilla" value = off }
     { text = "Fast" value = on }
@@ -312,6 +323,7 @@ better4_control_dropdown = {
   value_name = better4_control_dropdown_value
   text = "Dropdown"
   ini_key = "Dropdown"
+  help = "Change control bindings for dropdowns."
   options = [
     { text = "\bh/\bg" value = DropdownVanilla } // R2/L2
     { text = "\bh" value = DropdownOnlyR2 } // R2
@@ -332,6 +344,7 @@ better4_control_liptricks = {
   value_name = better4_control_liptricks_value
   text = "Lip Tricks"
   ini_key = "LipTricks"
+  help = "Toggle lip tricks on or off."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -358,6 +371,7 @@ better4_control_railspin = {
   value_name = better4_control_railspin_value
   text = "Rail Spin"
   ini_key = "RailSpin"
+  help = "Toggle whether or not manual spins carry into a grind."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -372,6 +386,7 @@ better4_control_pressure = {
   value_name = better4_control_pressure_value
   text = "Pressure Stance"
   ini_key = "PressureStance"
+  help = "Toggle pressure flips on or off."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -389,8 +404,9 @@ better4_control_wallieplant = {
   id = better4_control_wallieplant_id
   index_name = better4_control_wallieplant_index
   value_name = better4_control_wallieplant_value
-  text = "Wallieplant"
+  text = "WalliePlant"
   ini_key = "Wallieplant"
+  help = "Change control bindings for WalliePlants."
   options = [
     { text = "\b7+\b7+\b3" value = WallieplantTricks } // Up+Up+X
     { text = "\b7+\b3" value = WallieplantTricks_Single } // Up+X
@@ -405,6 +421,7 @@ better4_control_wallspin = {
   value_name = better4_control_wallspin_value
   text = "Wall Spin"
   ini_key = "WallSpin"
+  help = "Toggle whether or not manual spins carry into a wallride."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -419,6 +436,7 @@ better4_control_wallridebail = {
   value_name = better4_control_wallridebail_value
   text = "Wallride Bail"
   ini_key = "WallrideBail"
+  help = "Toggle whether or not doing a trick into a wallride causes the skater to bail. 'Off' enables THUG1-style boostplants."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -435,6 +453,7 @@ better4_control_boardscuff = {
   value_name = better4_control_boardscuff_value
   text = "Board Scuff"
   ini_key = "BoardScuff"
+  help = "Toggle board scuff on or off."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -447,6 +466,7 @@ better4_control_pauseonunfocus = {
   index_name = better4_control_pauseonunfocus_index
   text = "Pause On Unfocus"
   ini_key = "PauseOnUnfocus"
+  help = "Toggle whether or not the game pauses when the window is unfocused."
   options = [
     { text = "Off" }
     { text = "On" }
@@ -471,6 +491,7 @@ better4_control_buttonsfont = {
   value_name = better4_control_buttonsfont_value
   text = "Buttons Font"
   ini_key = "ButtonsFont"
+  help = "Change which button glyphs are displayed."
   options = [
     { text = "PC" value = ButtonsFontPC }
     { text = "PS2" value = ButtonsFontPS2 }
@@ -496,6 +517,7 @@ better4_control_fov = {
   value_name = better4_control_fov_value
   text = "FOV"
   ini_key = "FOV"
+  help = "Change the field of view."
   options = [
     { text = "60" value = 60 }
     { text = "61" value = 61 }
@@ -574,6 +596,7 @@ better4_control_aspect_ratio = {
   value_name = better4_control_aspect_ratio_value
   text = "Aspect Ratio"
   ini_key = "AspectRatio"
+  help = "Change the aspect ratio. 'Auto' calculates the optimal aspect ratio from the window resolution."
   options = [
     { text = "Auto" value = 0 } // Doesn't use value
     { text = "16:9" value = 1.77778 }
@@ -599,6 +622,7 @@ better4_control_extratrick_sound = {
   value_name = better4_control_extratrick_sound_value
   text = "Extra Trick Sound"
   ini_key = "ExtraTrickSound"
+  help = "Change which sound is played when performing extra tricks (e.g. double-tap tricks)."
   options = [
     { text = "THPS4" value = THPS4 }
     { text = "THUG" value = THUG }
@@ -614,6 +638,7 @@ better4_control_chat_size = {
   value_name = better4_control_chat_size_value
   text = "Chat Size"
   ini_key = "ChatSize"
+  help = "Change the size of the player chat window."
   options = [
     { text = "Extra Small" value = 0 }
     { text = "Small" value = 1 }
@@ -662,6 +687,7 @@ better4_control_chat_duration = {
   value_name = better4_control_chat_duration_value
   text = "Chat Duration"
   ini_key = "ChatDuration"
+  help = "Change the duration player chat messages stay on screen."
   options = [
     { text = "5 Seconds" value = 5 }
     { text = "10 Seconds" value = 10 }
@@ -680,6 +706,7 @@ better4_control_trickstring = {
   value_name = better4_control_trickstring_value
   text = "Trick String"
   ini_key = "TrickString"
+  help = "Change the size of the trick string."
   options = [
     { text = "Off" value = off }
     { text = "Small" value = 0.33 }
@@ -738,6 +765,7 @@ better4_control_scorepot = {
   value_name = better4_control_scorepot_value
   text = "Score Pot"
   ini_key = "ScorePot"
+  help = "Change the size of the score pot (directly above the trick string)."
   options = [
     { text = "Off" value = off }
     { text = "Small" value = 0.33 }
@@ -790,6 +818,7 @@ better4_control_specialmeter = {
   value_name = better4_control_specialmeter_value
   text = "Special Meter"
   ini_key = "SpecialMeter"
+  help = "Change the size of the special meter and total score."
   options = [
     { text = "Off" value = off }
     { text = "Small" value = 0.33 }
@@ -824,6 +853,7 @@ better4_control_perfectlanding = {
   value_name = better4_control_perfectlanding_value
   text = "Perfect Landing"
   ini_key = "PerfectLanding"
+  help = "Change the size of perfect/sloppy landing messages."
   options = [
     { text = "Off" value = off }
     { text = "Small" value = 0.33 }
@@ -867,6 +897,7 @@ better4_control_menudemo = {
   value_name = better4_control_menudemo_value
   text = "Menu Demo"
   ini_key = "MenuDemo"
+  help = "Toggle the main menu demo on or off."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
