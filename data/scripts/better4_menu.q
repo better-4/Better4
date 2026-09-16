@@ -31,6 +31,8 @@ script better4_create_menu {
     DestroyScreenElement id = current_menu_anchor
   endif
 
+
+
   pulse_blur
   make_new_menu {
     menu_id = better4_menu
@@ -57,14 +59,47 @@ script better4_create_menu {
   create_icon pos = (151, 65) id = better4_icon texture = <icon>
   draw_menu_box {
     delta_pos = (92, -20)
-    middle_repeat = 16
-    box_right_scale = (0.8, 1.175)
+    // middle_repeat = 16
+    middle_repeat = 13
+    // box_right_scale = (0.8, 1.175)
+    box_right_scale = (0.8, 1.0)
     scale = (1.2, 1.0)
     box_bottom_scale = (1.16, 1.0)
     box_right_offset = (-21, 0)
   }
-  RunScriptOnScreenElement id = current_menu_anchor animate_in
   better4_menu_spacer
+
+  help_text_dims = (640, 60)
+
+  CreateScreenElement {
+    id = better4_help_text_container
+    type = ContainerElement
+    parent = better4_menu
+    scale = 1.0
+    dims = <help_text_dims>
+    just = [ center center ]
+    pos = { (1.0, 0.825) proportional }
+  }
+
+  CreateScreenElement {
+    type = TextBlockElement
+    parent = better4_help_text_container
+    id = better4_help_text
+    scale = 0.7
+    pos = { (0, 0) proportional }
+    dims = <help_text_dims>
+    just = [ center center ]
+    internal_just = [ center center ]
+    font = small
+    text = ""
+    internal_scale = 0.9
+    rgba = [ 88 105 112 128 ]
+    shadow
+    shadow_offs = (0.6, 0.6)
+    shadow_rgba = [ 30 30 30 75 ]
+  }
+
+  RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 
 script better4_menu_item_focus
@@ -74,6 +109,14 @@ script better4_menu_item_focus
     id = { <id> child = 1 }
     rgba = [ 128 128 128 50 ]
   }
+  if ScreenElementExists id = better4_help_text
+    if GotParam help
+      <help_text> = <help>
+    else
+      <help_text> = ""
+    endif
+    SetScreenElementProps id = better4_help_text text = <help_text>
+  endif
 endscript
 
 script better4_menu_item_unfocus
@@ -104,8 +147,8 @@ script better4_create_menu_item {
     id = <id>
     dims = <dims>
     event_handlers = [
-      { focus <focus_script> params = <focus_params> }
-      { unfocus <unfocus_script> params = <unfocus_params> }
+      { focus <focus_script> params = <...> }
+      { unfocus <unfocus_script> params = <...> }
       { pad_choose generic_menu_pad_choose_sound }
       { pad_choose <pad_choose_script> params = <pad_choose_params> }
     ]
@@ -158,8 +201,8 @@ script better4_create_menu_control {
     id = <id>
     dims = <dims>
     event_handlers = [
-      { focus <focus_script> params = <focus_params> }
-      { unfocus <unfocus_script> params = <unfocus_params> }
+      { focus <focus_script> params = <...> }
+      { unfocus <unfocus_script> params = <...> }
       { pad_left better4_menu_cycle_control_left params = <...> }
       { pad_right better4_menu_cycle_control_right params = <...> }
       { pad_choose better4_menu_cycle_control_right params = <...> }
@@ -263,7 +306,6 @@ script better4_onground_menu
   better4_create_menu_control better4_control_stancechange
   better4_create_menu_control better4_control_pressure
   better4_create_menu_control better4_control_doublerevert
-  better4_create_menu_control better4_control_revertrecovery
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
 endscript
@@ -273,6 +315,7 @@ script better4_inair_menu
   better4_menu_spacer
   better4_create_menu_control better4_control_spinkeys
   better4_create_menu_control better4_control_spinetransfer
+  better4_create_menu_control better4_control_revertrecovery
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
 endscript
@@ -370,12 +413,17 @@ script better4_misc_menu
   better4_create_menu_control better4_control_menudemo
   if not IsBetterObserving
     if not IsObserving
-      better4_create_menu_item text = "Change CAS" pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
+      better4_create_menu_item {
+        text = "Change CAS"
+        pad_choose_script = pre_cas_menu_exit
+        pad_choose_params = { new_menu_script = launch_load_cas_sequence }
+        help = "Load a new Create-A-Skater (CAS). Local-only."
+      }
     else
-      better4_create_menu_item text = "Change CAS" not_focusable pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
+      better4_create_menu_item text = "Change CAS" not_focusable
     endif
   else
-    better4_create_menu_item text = "Change CAS" not_focusable pad_choose_script = pre_cas_menu_exit pad_choose_params = { new_menu_script = launch_load_cas_sequence }
+    better4_create_menu_item text = "Change CAS" not_focusable
   endif
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
