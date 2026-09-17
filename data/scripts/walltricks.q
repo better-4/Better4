@@ -1,6 +1,8 @@
 off = 0
 on = 1
+doing_a_wallride_left = 0
 script WallRide
+  change Wall_Ride_Jump_Out_Speed = 40
   if ( better4_control_wallspin_value = off )
     RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
   endif
@@ -12,8 +14,10 @@ script WallRide
   Vibrate actuator = 1 percent = 40
   Obj_ClearFlag FLAG_SKATER_MANUALCHEESE
   if GotParam left
+    change doing_a_wallride_left = 1
     Move X = 36
   else
+    change doing_a_wallride_left = 0
     Move X = -36
   endif
   if BailIsOn
@@ -23,7 +27,18 @@ script WallRide
     endif
   endif
   BailOff
-  SetQueueTricks better4_control_wallieplant_value
+  SetQueueTricks better4_control_wallieplant_value WallridePlantRight WallridePlantLeft
+  if GotParam left
+    if ( doing_a_wallride_left = 1 )
+     SetQueueTricks better4_control_wallieplant_value WallridePlantRight
+	endif
+  else
+    if GotParam right
+	  if ( doing_a_wallride_left = 0 )
+	    SetQueueTricks better4_control_wallieplant_value WallridePlantLeft
+	  endif
+    endif
+  endif
   NollieOff
   PressureOff
   SetTrickScore 200
@@ -123,6 +138,52 @@ script Trick_WallPlant
   WaitAnimWhilstChecking
   Goto Airborne StretchTime = 10 BlendPeriod = 0
 endscript
+
+WallridePlantLeft = [ { Trigger = { TapOnceRelease Left X 500 } Scr = boom params = { leftleft } } ]
+WallridePlantRight = [ { Trigger = { TapOnceRelease Right X 500 } Scr = boom params = { rightright } } ] 
+
+SCRIPT Trick_WallridePlant_left
+    if (doing_a_wallride_left = 1)
+	  goto Wallie
+	endif
+	Trick_WallridePlant
+endscript
+script boom
+  if gotparam leftleft
+    printf "leftleft"
+    if (doing_a_wallride_left = 1)
+	  goto Wallie
+	endif
+  else
+     if gotparam rightright
+	   printf "rightrightt"
+	   if (doing_a_wallride_left = 0)
+	    goto Wallie
+	   endif
+	 endif
+  endif
+  Trick_WallridePlant
+endscript
+SCRIPT Trick_WallridePlant_right
+    if (doing_a_wallride_left = 0)
+	  goto Wallie
+	endif
+	Trick_WallridePlant
+endscript
+SCRIPT Trick_WallridePlant 
+	change Wall_Ride_Jump_Out_Speed = 256
+    printf "wallrideplant trigger"	
+	// ClearTrickQueue 
+	InAirExceptions 
+	Vibrate actuator = 1 Percent = 50 Duration = 0.1 
+	PlayAnim Anim = Ollie BlendPeriod = 0.0 
+	SetTrickName "WallridePlant" 
+	SetTrickScore 500 
+	Display 
+	#"Jump" 
+	WaitAnimWhilstChecking 
+	Goto Airborne StretchTime = 10 BlendPeriod = 0 
+ENDSCRIPT
 
 Wall_Bounce_Dont_Slow_Angle = 30
 Physics_Disallow_Rewallpush_Duration = 800
