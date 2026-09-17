@@ -289,6 +289,10 @@ script Ollie OutSpeed = 1
   StopSkitch
   if GotParam NoDoNextTrick
   else
+    // Better4: clear manual exceptions prior to DoNextTrick so mfg does a standing wallpush
+    if GotParam clear_manual_exceptions
+      OnGroundExceptions
+    endif
     DoNextTrick
   endif
   if ( in_pressure = 1 )

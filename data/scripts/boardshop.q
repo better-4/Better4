@@ -909,9 +909,6 @@ script boardshop_menu_exit
   endif
 endscript
 script boardshop_deck_design_focus
-  Printf "@@ FOCUSING DECK"
-  PrintStruct <...>
-  Printf "@@ ----"
   GetTags
   KillSpawnedScript name = boardshop_replace_main_board_texture
   if GotParam flag
