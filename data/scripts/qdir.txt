@@ -205,3 +205,4 @@ better4/looptricks.qb
 better4/better4_levels.qb
 better4/better4_level_menu.qb
 better4/better4_decks.qb
+better4/better4_griptapes.qb
