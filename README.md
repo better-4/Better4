@@ -1,13 +1,13 @@
 # Better4
 
-Better4 is a THPS4 modpack that includes modern gameplay and QOL features while maintaining the spirit of the original game.
+Better4 is a THPS4 modpack that includes modern gameplay and QOL features while maintaining the look and feel of the original game.
 
 > [!WARNING]
 > Better4 is beta software and may contain bugs. See [Known Issues](#known-issues).
 
 ## Installation
 
-First, verify THPS4 is installed. Download the [latest GitHub release](https://github.com/better-4/Better4/releases/latest) and drag `Skate4.exe` from your THPS4 game directory onto `install.bat`.
+First, verify THPS4 is installed. Download the [latest GitHub release](https://github.com/better-4/Better4/releases/latest), unzip it, and run `install.bat`, selecting your `Skate4.exe` file when prompted. Alternatively, you may drag and drop `Skate4.exe` from your THPS4 game directory onto `install.bat`.
 
 If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
 
@@ -62,8 +62,10 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 
 ### Levels
 
+* Improved collision on base THPS4 levels
+  * Made more surfaces wallridable
+  * Removed bottom-plane collisions in a few spots where a wallride 
 * Added Los Angeles from THPS3
-* Made more walls wallridable in Chicago
 
 ### CAS
 
@@ -74,13 +76,14 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Restored hidden CAS items for pros, secret skaters, and neversoft devs
 * Added custom boards (banana, hoverboard, old school, ollie)
 * Added bunched cargos
-* Added button to unassign trick in "Edit Tricks" menu
+* Added various CAS items from other games (bunched cargos, muska hat, zoom glasses)
 * Added option to change CAS during gameplay (local-only)
 
 ### Misc
 
 * Added toggle for pause-on-unfocus
 * Added toggle for board scuff
+* Added button to unassign trick in "Edit Tricks" menu
 * Added configuration for buttons font (PS3, Xbox, PC)
 * Added FOV configuration
 * Added aspect ratio configuration
@@ -89,14 +92,13 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 ## Known Issues
 
 * Server list / player list disappears after hosting a game too quickly. Fixed by re-opening the internet menu.
-* Cycling previous / next player while observing sometimes does not work. Fixed by pausing and unpausing.
 * LA objectives (graffiti trick objects, KOTH crown, CTF flags, etc.) not yet implemented
 
 ## Credits
 
 A special thank you to the following people, without whom this project would not exist:
 
-* [@zedthps](https://github.com/zedthps), [@voss10](https://github.com/voss10), and [@1borgy](https://github.com/1borgy) for their contributions
+* [@zedthps](https://github.com/zedthps), [@voss10](https://github.com/voss10), [@1borgy](https://github.com/1borgy), and [@clairethps](https://github.com/clairethps) for their contributions
 * [@PARTYMANX](https://github.com/PARTYMANX) for their work on [partymod-thps4](https://github.com/PARTYMANX/partymod-thps4)
 * [@DCxDemo](https://github.com/DCxDemo) for their work on [THPSQScriptEd](https://github.com/DCxDemo/LegacyTHPS/)
 * The folks at [@GameProgressive](https://github.com/GameProgressive) for their work on [UniSpySDK](https://github.com/GameProgressive/UniSpySDK)
