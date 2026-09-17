@@ -13,6 +13,7 @@ void lobby_add_player(char *name);
 void lobby_remove_player(char *name);
 
 int __cdecl CFunc_StartBetterPlayerList(CStruct *params);
+int __cdecl CFunc_RefreshBetterPlayerList(CStruct *params);
 int __cdecl CFunc_StopBetterPlayerList(CStruct *params);
 int __cdecl CFunc_UpdateBetterPlayerList(CStruct *params);
 int __cdecl CFunc_NumBetterPlayersInLobby(CStruct *params, CScript *out);

@@ -188,6 +188,8 @@ script chosen_host_game
   if InNetGame
     network_start_selected
   else
+    StopBetterServerList
+    StopBetterPlayerList
     GSEnableNet
     SetHosting 1
     if InSplitScreenGame
@@ -457,6 +459,7 @@ script chose_internet
     DestroyScreenElement id = current_menu_anchor
   endif
   StartBetterPlayerList
+  StartBetterServerList
   create_network_select_games_menu
 endscript
 script confirm_observe
@@ -489,8 +492,6 @@ script host_chosen
 endscript
 script host_net_chosen
   console_hide
-  StopBetterServerList
-  StopBetterPlayerList
   // FreeServerList
   Change CAME_FROM_LAN = 0
   launch_network_host_options_menu
@@ -535,7 +536,6 @@ script join_chosen
 endscript
 script better_join_chosen
   if FoundBetterServers
-    // StopBetterServerList
     SetJoinMode JOIN_MODE_PLAY
     actions_menu_anchor:DoMorph scale = 0
     DoScreenElementMorph id = game_list_up_arrow time = 0 scale = 1
@@ -563,7 +563,6 @@ script observe_chosen
 endscript
 script better_observe_chosen
   if FoundBetterServers
-    // StopBetterServerList
     SetJoinMode JOIN_MODE_OBSERVE
     actions_menu_anchor:DoMorph scale = 0
     hide_internet_only_menus
@@ -1609,7 +1608,7 @@ script back_from_game_list
 endscript
 script back_from_better_server_list
   StopDescribingBetterServer
-  StartBetterServerList
+  RefreshBetterServerList
   actions_menu_anchor:DoMorph scale = 1
   server_desc_menu_anchor:DoMorph scale = 0
   game_list_up_arrow:DoMorph scale = 0
@@ -1814,7 +1813,8 @@ script create_network_select_games_menu
       check_join_internet_ip
     else
       if not TryJoinServerIPSuccess
-        StartBetterServerList
+        RefreshBetterServerList
+        RefreshBetterPlayerList
         // RefreshServerList force_refresh
         // hide_internet_only_menus
         // refresh_chosen
