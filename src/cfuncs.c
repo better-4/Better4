@@ -20,7 +20,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 43
+#define BETTER4_NUM_CFUNCS 44
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -83,6 +83,7 @@ void addCFuncs() {
 	addCFunc("NotifyStateChanged", (void *)CFunc_NotifyStateChanged);
 	addCFunc("StopReporting", (void *)CFunc_StopReporting);
 	addCFunc("StartBetterPlayerList", (void *)CFunc_StartBetterPlayerList);
+	addCFunc("RefreshBetterPlayerList", (void *)CFunc_RefreshBetterPlayerList);
 	addCFunc("StopBetterPlayerList", (void *)CFunc_StopBetterPlayerList);
 	addCFunc("NumBetterPlayersInLobby", (void *)CFunc_NumBetterPlayersInLobby);
 	addCFunc("SendBetterMessage", (void *)CFunc_SendBetterMessage);

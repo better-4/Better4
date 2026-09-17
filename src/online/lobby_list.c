@@ -188,6 +188,11 @@ int __cdecl CFunc_StartBetterPlayerList(CStruct *params) {
 	return 1;
 }
 
+int __cdecl CFunc_RefreshBetterPlayerList(CStruct *params) {
+	update_player_menu();
+	return 1;
+}
+
 int __cdecl CFunc_StopBetterPlayerList(CStruct *params) {
 	lobby_list_disconnect();
 	return 1;
