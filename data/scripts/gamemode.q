@@ -1020,14 +1020,14 @@ script wait_then_create_rankings
 endscript
 script create_rankings score_title_text = "SCORE"
   EnableHUD
-  destroy_observer_ui
-  restore_rank_screen_events // Also adds restart game event on square
   Printf "create_rankings"
   if ObjectExists id = dialog_box_anchor
     return
   endif
   pause_trick_text
   exit_pause_menu
+  destroy_observer_ui
+  restore_rank_screen_events // Also adds restart game event on square
   Printf "****************** CREATING RANKINGS!!!! ********************"
   if IsAutoServing
     SpawnScript wait_then_force_close_rankings

@@ -77,6 +77,7 @@ script SkaterInit
   ClearSkaterCamOverride
   ClearPanel_Landed
   if IsBetterObserving
+    destroy_observer_ui // ran here to clear 'restart game' event
     create_observer_ui
     skater:SetRollingFriction 20
     skater:NetDisablePlayerInput
