@@ -62,10 +62,10 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 
 ### Levels
 
-* Improved collision on base THPS4 levels
-  * Made more surfaces wallridable
-  * Removed bottom-plane collisions in a few spots where a wallride 
 * Added Los Angeles from THPS3
+* Improved collision in THPS4 levels
+  * Made more surfaces wallridable
+  * Removed bottom-plane collisions in a few spots where a wallride makes the skater hit their head on a ledge above (e.g. slam bros warehouse in San Francisco)
 
 ### CAS
 
@@ -84,10 +84,11 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Added toggle for pause-on-unfocus
 * Added toggle for board scuff
 * Added button to unassign trick in "Edit Tricks" menu
-* Added configuration for buttons font (PS3, Xbox, PC)
+* Added configuration for buttons font (PS2, Xbox, PC)
 * Added FOV configuration
 * Added aspect ratio configuration
 * Added size customization for panel elements (trick string, score, etc.)
+* Added toggle for the main menu demo that plays after a period of inactivity
 
 ## Known Issues
 
@@ -102,6 +103,7 @@ A special thank you to the following people, without whom this project would not
 * [@PARTYMANX](https://github.com/PARTYMANX) for their work on [partymod-thps4](https://github.com/PARTYMANX/partymod-thps4)
 * [@DCxDemo](https://github.com/DCxDemo) for their work on [THPSQScriptEd](https://github.com/DCxDemo/LegacyTHPS/)
 * The folks at [@GameProgressive](https://github.com/GameProgressive) for their work on [UniSpySDK](https://github.com/GameProgressive/UniSpySDK)
+* [@denetii](https://github.com/denetii) for their work on [io_thps_scene](https://github.com/denetii/io_thps_scene)
 * [PunishedFiddle](https://www.moddb.com/members/punishedfiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
 * [@ILC-YTP](https://github.com/ILC-YTP) for their work on [Faster Save/Load](https://github.com/ILC-YTP/THPS4-mods/tree/main/Faster-SaveLoad)
 
