@@ -2267,9 +2267,33 @@ skater_m_elbowpads = [
     mesh = "models/skater_m/extra_elbowpad.skin"
   }
   {
+    desc_id = #"Elbow Pad L"
+    frontend_desc = 'Elbow Pad L'
+    mesh = "models/better4/shared/pads/extra_elbowpadL.skin"
+  }  
+  {
+    desc_id = #"Elbow Pad R"
+    frontend_desc = 'Elbow Pad R'
+    mesh = "models/better4/shared/pads/extra_elbowpadR.skin"
+  }  
+  {
     desc_id = #" Vert Elbow Pads"
     frontend_desc = 'Vert Elbow Pads'
     mesh = "models/skater_m/extra_elbowpad.skin"
+    replace = "CS_NN_elbow01.png"
+    with = "textures/skater_m/CS_NN_elbow02"
+  }
+  {
+    desc_id = #"vElbow Pad L"
+    frontend_desc = 'Vert Elbow Pad L'
+    mesh = "models/better4/shared/pads/extra_elbowpadL.skin"
+    replace = "CS_NN_elbow01.png"
+    with = "textures/skater_m/CS_NN_elbow02"
+  }  
+  {
+    desc_id = #"vElbow Pad R"
+    frontend_desc = 'Vert Elbow Pad R'
+    mesh = "models/better4/shared/pads/extra_elbowpadR.skin"
     replace = "CS_NN_elbow01.png"
     with = "textures/skater_m/CS_NN_elbow02"
   }
