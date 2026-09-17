@@ -508,7 +508,6 @@ newtrickfont_colors = [
   [ 128 0 0 60 ]
 ]
 script pause_trick_text
-  Printf "@@ PAUSING TRICK TEXT"
   DoScreenElementMorph id = the_trick_text alpha = 0.0 remember_alpha
   SetScreenElementProps id = the_trick_text override_encoded_rgba remember_override_rgba_state
   DoScreenElementMorph id = the_score_pot_text alpha = 0.0 remember_alpha
@@ -523,7 +522,6 @@ script pause_trick_text
   endif
 endscript
 script unpause_trick_text
-  Printf "@@ UNPAUSING TRICK TEXT"
   if not ( better4_control_trickstring_value = off )
     DoScreenElementMorph id = the_trick_text restore_alpha
     SetScreenElementProps id = the_trick_text restore_override_rgba_state
@@ -545,7 +543,6 @@ script unpause_trick_text
   endif
 endscript
 script trick_text_pulse
-  Printf "@@ TRICK_TEXT_PULSE"
   TerminateObjectsScripts id = <trick_text_container_id>
   TerminateObjectsScripts id = <the_trick_text_id>
   TerminateObjectsScripts id = <the_score_pot_text_id> script_name = do_score_pot_text_landed
@@ -648,7 +645,6 @@ script trick_text_countdown
   RunScriptOnScreenElement id = <the_trick_text_id> do_trick_text_countdown params = { <...> }
 endscript
 script do_trick_text_countdown
-  Printf "@@ DO_TRICK_TEXT_COUNTDOWN"
   reset_just_trick_text_appearance <...>
   DoMorph scale = 0.0 time = 0.5
   DoMorph alpha = 0.0

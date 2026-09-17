@@ -159,7 +159,7 @@ script WaitWhilstChecking
 endscript
 
 script Ground_Wallpush
-  Printf "@@ GROUND_WALLPUSH"
+  OnGroundExceptions
   Init_Wallpush
 
   if Crouched
@@ -201,7 +201,6 @@ Wallpush_Trick = { Name = "Wallpush" Score = 10 NoBlend FlipAfter Anim = Wallpus
 NoseWallpush_Trick = { Name = "Wallpush" Score = 10 NoBlend FlipAfter Anim = Wallpush_Manual BalanceAnim = NoseManual_Range BalanceAnim2 = NoseManual_Range2 Nollie OffMeterTop = ManualLand OffMeterBottom = NoseManualBail ExtraTricks2 = NoseManualBranches ExtraTricks = FlatlandBranches AllowWallpush }
 
 script Manual_Wallpush
-  Printf "@@ MANUAL_WALLPUSH"
   Init_Wallpush
   BlendPeriodOut 0
   if GotParam ToNoseManual

@@ -195,7 +195,7 @@ script Manual BlendPeriod = 0.3
     NollieOn
   else
     NollieOff
-    SetException Ex = Ollied Scr = Ollie params = { <...> }
+    SetException Ex = Ollied Scr = Ollie params = { clear_manual_exceptions <...> }
   endif
   SetException Ex = FlailHitWall Scr = FlailHitWall
   SetException Ex = FlailLeft Scr = FlailLeft
@@ -347,8 +347,8 @@ script Manual BlendPeriod = 0.3
   if GotParam IsExtra
     LaunchExtraMessage
   endif
-  if GotParam ExtraSpeedBoost 
-	SpacewalkBoost ExtraSpeedBoost = <ExtraSpeedBoost> 
+  if GotParam ExtraSpeedBoost
+    SpacewalkBoost ExtraSpeedBoost = <ExtraSpeedBoost>
   endif
   WaitAnimFinished
   if GotParam FlipGraphic

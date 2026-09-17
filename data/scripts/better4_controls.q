@@ -738,7 +738,6 @@ script better4_change_trickstring
     Change better4_trickstring_shadow_offs = better4_trickstring_shadow_offs_large
     Change better4_trickstring_internal_scale = 0.7
   endswitch
-  Printf "@@ changed trickstring_shadow_offs=%s trickstring_internal_scale=%i" s = better4_trickstring_shadow_offs i = better4_trickstring_internal_scale
   // Player 1
   if ScreenElementExists id = the_trick_text
     SetScreenElementProps {
@@ -791,7 +790,6 @@ script better4_change_scorepot
   case 3
     Change better4_scorepot_pos = better4_scorepot_pos_large
   endswitch
-  Printf "@@ changed scorepot_pos=%p" p = better4_scorepot_pos
   // Player 1
   if ScreenElementExists id = the_score_pot_text
     DoScreenElementMorph {
