@@ -75,7 +75,6 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Unlocked full RGB range
 * Restored hidden CAS items for pros, secret skaters, and neversoft devs
 * Added custom boards (banana, hoverboard, old school, ollie)
-* Added bunched cargos
 * Added various CAS items from other games (bunched cargos, muska hat, zoom glasses)
 * Added option to change CAS during gameplay (local-only)
 
