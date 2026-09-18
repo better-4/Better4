@@ -124,18 +124,17 @@ script better4_level_menu_list
 endscript
 
 script better4_change_level_random
-  if not ObjectExists id = main_menu_anchor
-    GetArraySize level_info
-    begin
-      GetRandomValue name = index integer a = 0 b = ( <array_size> - 3 ) // excludes created parks and motox
-      random_lvl = ( ( level_info [ <index> ] ).checksum )
-      if not LevelIs <random_lvl>
-        if InNetGame
-          level_select_change_level level = <random_lvl> show_warning
-        else
-          level_select_change_level level = <random_lvl>
-        break
+  GetArraySize level_info
+  begin
+    GetRandomValue name = index integer a = 0 b = ( <array_size> - 3 ) // excludes created parks and motox
+    random_lvl = ( ( level_info [ <index> ] ).checksum )
+    if not LevelIs <random_lvl>
+      if InNetGame
+        level_select_change_level level = <random_lvl> show_warning
+      else
+        level_select_change_level level = <random_lvl>
       endif
-    repeat
-  endif
+      break
+    endif
+  repeat
 endscript
