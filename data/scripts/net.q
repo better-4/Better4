@@ -30,9 +30,10 @@ level_info = [
   { name = "Zoo" checksum = load_zoo }
   { name = "Carnival" checksum = load_cnv }
   { name = "Chicago" checksum = load_hof }
+  { name = "Los Angeles" checksum = Load_LA }
+  // keep moto and created park at bottom so that they're excluded from random lvl
   { name = "Created Park" checksum = load_Sk4Ed_gameplay }
   { name = "MotoX" checksum = Load_Motox }
-  { name = "Los Angeles" checksum = Load_LA }
 ]
 num_players_info = [
   { name = "2 Players" checksum = num_2 }
