@@ -143,9 +143,11 @@ script load_level level_number = 0
     Printf "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
     SetScoreDegradation 0
   endif
+  Printf "1"
   if InSplitScreenGame
     UnSetGlobalFlag flag = CHEAT_DISCO
   endif
+  Printf "2"
   if IsTrue Bootstrap_build
     DisplayLoadingScreen "loadscrn_demo_controls" 27
   else
@@ -175,16 +177,24 @@ script load_level level_number = 0
       DisplayLoadingScreen "loadscrn_generic"
     endif
   endif
+  Printf "3"
   CareerStartLevel level = <level_number>
+  Printf "4"
   ResetLevelFlags
+  Printf "5"
   if ( <level_number> = LevelNum_Skateshop )
   endif
+  Printf "6"
   if GotParam scnpre
+    Printf "7"
     LoadLevelPreFile <scnpre>
   endif
+  Printf "8"
   if GotParam sky
+    Printf "9"
     LoadScene scene = <sky>
   endif
+  Printf "10"
   if GotParam park_editor
     if IsNGC
       Ngc_ReduceColors 0
@@ -197,21 +207,29 @@ script load_level level_number = 0
       Ngc_ReduceColors 1
     endif
   else
+    Printf "11"
     LoadScene scene = <level>
   endif
+  Printf "12"
   if GotParam level_name
+    Printf "13"
     SetLevelName <level_name>
   else
+    Printf "14"
     SetLevelName <level>
   endif
+  Printf "15"
   if GotParam scnpre
+    Printf "16"
     UnloadPreFile <scnpre> dont_assert
   endif
+  Printf "17"
   if not IsPS2
     if GotParam pre
       LoadLevelPreFile <pre>
     endif
   endif
+  Printf "18"
   if GotParam qb
     if GotParam park_editor
       LoadNodeArray <qb> park_editor
@@ -219,34 +237,48 @@ script load_level level_number = 0
       LoadNodeArray <qb>
     endif
   endif
+  Printf "19"
   if IsPS2
     if GotParam pre
       LoadLevelPreFile <pre>
     endif
   endif
+  Printf "20"
   if GotParam park_editor
   else
     PreloadModels
   endif
+  Printf "21"
   if GotParam level_qb
+    Printf "22"
     LoadQB <level_qb> LevelSpecific
+    Printf "23"
   endif
+  Printf "24"
   preselect_random_parts <...>
+  Printf "25"
   if GotParam park_editor
     LoadSound "Shared\Hits\FallPungee_11"
     LoadSound "Shared\Water\FallWater"
     LoadTerrain_parked
   else
+    Printf "26"
     LoadTerrain
   endif
+  Printf "27"
   if IsTrue UseLevelOverrideStats
+    Printf "28"
     if GotParam default_stats
+      Printf "29"
       SetAllStats value = <default_stats>
     endif
   endif
+  Printf "30"
   if GotParam temp_script
+    Printf "31"
      <temp_script> <...>
     if GotParam extranetanimsscript
+      Printf "32"
       if InNetGame
         Printf "                    WE'RE IN A NET GAME!!!!!!!!!!!!!"
         PushMemProfile "Level Specific Anims"
@@ -257,33 +289,48 @@ script load_level level_number = 0
   endif
   if GotParam park_editor
   else
+    Printf "33"
     if GotParam startup_script
+        Printf "34"
        <startup_script>
     endif
   endif
+  Printf "35"
   if GotParam pre
+    Printf "36"
     UnloadPreFile <pre> dont_assert
   endif
+  Printf "37"
   if not InNetGame
+    Printf "38"
     if GotParam pedpre
+      Printf "39"
       LoadPreFile <pedpre> dont_assert
     endif
   endif
+  Printf "40"
   if not InNetGame
+    Printf "41"
     if not GotParam park_editor
+      Printf "42"
       PreloadPedestrians
     endif
   endif
+  Printf "43"
   if not InNetGame
     if InMultiplayerGame
       PreloadModel name = "crown"
     endif
   endif
+  Printf "44"
   if not InNetGame
+    Printf "45"
     if GotParam pedpre
+      Printf "46"
       UnloadPreFile <pedpre> dont_assert
     endif
   endif
+  Printf "47"
   if ( <level_number> = LevelNum_Skateshop )
     if not IsTrue cas_artist
       LoadPreFile "skaterparts.pre"
@@ -295,7 +342,9 @@ script load_level level_number = 0
       LoadPipPre <colpre> heap = topdown
     endif
   endif
+  Printf "48"
   LoadCollision scene = <level>
+  Printf "49"
   if GotParam park_editor
     if GotParam outer_shell
       if IsTrue UsePreFilesForLevelLoading
@@ -305,13 +354,17 @@ script load_level level_number = 0
       LoadCollision scene = <outer_shell>
     endif
   endif
+  Printf "50"
   PopMemProfile
+  Printf "51"
   if GotParam park_editor
     if GotParam startup_script
        <startup_script>
     endif
   else
+    Printf "52"
     ParseNodeArray
+    Printf "53"
   endif
   if GotParam goals_script
      <goals_script>
@@ -774,6 +827,7 @@ level_SkateShop = {
 script Load_Hof
   load_level level_hof
 endscript
+
 level_hof = {
   structure_name = level_hof
   load_script = Load_Hof

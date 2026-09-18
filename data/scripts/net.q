@@ -33,6 +33,8 @@ level_info = [
   { name = "Created Park" checksum = load_Sk4Ed_gameplay }
   { name = "MotoX" checksum = Load_Motox }
   { name = "Los Angeles" checksum = Load_LA }
+  { name = "Australia" checksum = Load_Aus }
+  { name = "Airport" checksum = Load_AP }
 ]
 num_players_info = [
   { name = "2 Players" checksum = num_2 }
