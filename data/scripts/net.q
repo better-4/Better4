@@ -3400,6 +3400,7 @@ script CreateLostConnectionDialog
   HideLoadingScreen
   exit_pause_menu
   destroy_observer_ui
+  ObserveSelf
   EnableHUD
   destroy_onscreen_keyboard
   force_close_rankings dont_retry
