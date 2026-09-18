@@ -3,7 +3,7 @@ lvl_menu_helper_text = { helper_text_elements = [
   { text = "\b7/\b4 = Select" }
   { text = "\b2 = Back" }
   { text = "\b3 = Accept" } 
-  { text = "\b0 = Random Level" } 
+  { text = "\b1 = Random Level" } 
   ]
 }
 script better4_create_level_select_menu_game
@@ -12,13 +12,13 @@ script better4_create_level_select_menu_game
   endif
   Change game_index = 1
   create_helper_text lvl_menu_helper_text
-  
+
   SetScreenElementProps {
     id = level_select_vmenu
     event_handlers = [
       { pad_left better4_level_menu_left params = <...> }
       { pad_right better4_level_menu_right params = <...> }
-      { pad_space better4_change_level_random  }
+      { pad_option better4_change_level_random params = <...>  }
     ]
   }
 
@@ -127,12 +127,17 @@ script better4_change_level_random
   GetArraySize level_info
   begin
     GetRandomValue name = index integer a = 0 b = ( <array_size> - 3 ) // excludes created parks and motox
-    random_lvl = ( ( level_info [ <index> ] ).checksum )
-    if not LevelIs <random_lvl>
+    <text> = ( ( level_info [ <index> ] ).name )
+    <level> = ( ( level_info [ <index> ] ).checksum )
+    if not LevelIs <level>
       if InNetGame
-        level_select_change_level level = <random_lvl> show_warning
+        level_select_change_level <...> show_warning
       else
-        level_select_change_level level = <random_lvl>
+        if GotParam from_server_options
+          level_select_menu_exit <...> net_pad_back = 0 from_server_options
+        else
+          level_select_change_level <...>
+        endif
       endif
       break
     endif
