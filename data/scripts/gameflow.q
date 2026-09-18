@@ -172,7 +172,12 @@ script GameFlow_StartRun
   PlaySkaterCamAnim Skater = 0 stop
   TogglePanel 1
   DisablePause
-  ResetSkaters
+  if not InNetGame
+    ResetSkaters
+  endif
+  if ( better4_control_respawn_on_newrun_value = on )
+    ResetSkaters
+  endif
   if IsBetterObserving
     SnapObsCameraBack
   endif

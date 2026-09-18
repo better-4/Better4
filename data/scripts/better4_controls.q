@@ -902,6 +902,21 @@ better4_control_menudemo = {
   ]
 }
 
+better4_control_respawn_on_newrun_index = 1
+better4_control_respawn_on_newrun_value = on
+better4_control_respawn_on_newrun = {
+  id = better4_control_respawn_on_newrun_id
+  index_name = better4_control_respawn_on_newrun_index
+  value_name = better4_control_respawn_on_newrun_value
+  text = "Respawn On New Run"
+  ini_key = "RespawnOnNewRun"
+  help = "Toggle whether you respawn upon game start/end."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
