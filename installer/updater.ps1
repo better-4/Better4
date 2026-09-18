@@ -1,10 +1,26 @@
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName = 'CheckForUpdates')]
 param(
+    [Parameter(ParameterSetName = 'Install')]
+    [switch]$Install,
+    [Parameter(ParameterSetName = 'Install')]
+    [string]$Skate4Exe = "",
+    [Parameter(ParameterSetName = 'Install')]
+    [switch]$Silent,
+    [Parameter(ParameterSetName = 'Install')]
+    [switch]$Elevated,
+
+    [Parameter(ParameterSetName = 'CheckForUpdates')]
+    [switch]$CheckForUpdates,
+    [Parameter(ParameterSetName = 'CheckForUpdates')]
     [string]$CurrentVersion,
+    [Parameter(ParameterSetName = 'CheckForUpdates')]
     [int]$CallerPid = 0,
 
-    [switch]$Phase2,
+    [Parameter(ParameterSetName = 'DoUpdate')]
+    [switch]$DoUpdate,
+    [Parameter(ParameterSetName = 'DoUpdate')]
     [int]$WaitPid = 0,
+    [Parameter(ParameterSetName = 'DoUpdate')]
     [string]$ExtractedDir = ""
 )
 
@@ -184,137 +200,288 @@ function Wait-ForKeyAndExit {
     exit $Code
 }
 
-if ($Phase2) {
-    if ($WaitPid -gt 0) {
-        Write-Host "Waiting for Better4 (PID $WaitPid) to close..."
-        Wait-Process -Id $WaitPid -Timeout 60 -ErrorAction SilentlyContinue
+function Exit-InstallError {
+    param([string]$Message)
+    Write-Host "ERROR: $Message" -ForegroundColor Red
+    if (-not $Silent) {
+        Write-Host ""
+        Read-Host "Press Enter to close" | Out-Null
     }
-
-    $skateExePath = Join-Path $InstallDir "Skate4.exe"
-    $installBatPath = Join-Path $ExtractedDir "install.bat"
-    $exePath = Join-Path $InstallDir "Better4.exe"
-
-    if (-not (Test-Path $skateExePath)) {
-        Write-Host "ERROR: Skate4.exe not found in '$InstallDir'." -ForegroundColor Red
-        Wait-ForKeyAndExit 1
-    }
-    if (-not (Test-Path $installBatPath)) {
-        Write-Host "ERROR: install.bat missing from the downloaded release." -ForegroundColor Red
-        Wait-ForKeyAndExit 1
-    }
-
-    $installStartedUtc = [DateTime]::UtcNow
-
-    Write-Host "Installing Better4 update to '$InstallDir'..."
-    & $installBatPath $skateExePath 'SILENT'
-
-    $exeExists = Test-Path $exePath
-    $wasUpdated = $exeExists -and (Get-Item $exePath).LastWriteTimeUtc -ge $installStartedUtc
-
-    if ($wasUpdated) {
-        Write-Host "Update complete."
-    } elseif ($exeExists) {
-        Write-Host "'$InstallDir' may need administrator privileges - if install.bat opened an elevated window, Better4 will relaunch itself once that finishes." -ForegroundColor Yellow
-    } else {
-        Write-Host "ERROR: install.bat did not produce Better4.exe." -ForegroundColor Red
-        Wait-ForKeyAndExit 1
-    }
-
-    exit 0
+    exit 1
 }
 
-$checkEnabled = Get-IniValue -Path $IniPath -Section "Updater" -Key "CheckForUpdates" -Default "1"
-if ($checkEnabled -eq "0") {
-    exit $EXIT_CONTINUE
-}
+function Test-DirectoryWritable {
+    param([string]$Path)
 
-Initialize-Forms
-$checkingForm = Show-CheckingWindow
-try {
+    $probePath = Join-Path $Path "write_test.tmp"
     try {
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        $release = Invoke-RestMethod -Uri "https://api.github.com/repos/better-4/Better4/releases/latest" `
-            -Headers @{ "User-Agent" = "better4-updater"; "Accept" = "application/vnd.github+json" } `
-            -TimeoutSec 5
+        [IO.File]::WriteAllText($probePath, "test")
+        Remove-Item $probePath -Force
+        return $true
     } catch {
-        exit $EXIT_CONTINUE
+        return $false
     }
-
-    $latestTag = $release.tag_name
-    $changelog = $release.body
-    if (-not $release.assets -or $release.assets.Count -eq 0) {
-        exit $EXIT_CONTINUE
-    }
-    $zipUrl = $release.assets[0].browser_download_url
-
-    try {
-        $latestVersion = [version]$latestTag
-        $currentVersionParsed = [version]$CurrentVersion
-    } catch {
-        exit $EXIT_CONTINUE
-    }
-
-    if ($latestVersion -le $currentVersionParsed) {
-        exit $EXIT_CONTINUE
-    }
-
-    $skippedVersion = Get-IniValue -Path $IniPath -Section "Updater" -Key "SkippedVersion" -Default ""
-    if ($skippedVersion -eq $latestTag) {
-        exit $EXIT_CONTINUE
-    }
-} finally {
-    $checkingForm.Close()
 }
 
-try {
-    $choice = Show-UpdateDialog -Version $latestTag -Changelog $changelog
-} catch {
-    exit $EXIT_CONTINUE
-}
+switch ($PSCmdlet.ParameterSetName) {
+    'Install' {
+        $resolvedSkate4Exe = $Skate4Exe
+        if ([string]::IsNullOrWhiteSpace($resolvedSkate4Exe)) {
+            Initialize-Forms
+            $dialog = New-Object System.Windows.Forms.OpenFileDialog
+            $dialog.Title = "Select your Skate4.exe"
+            $dialog.Filter = "Executable Files (*.exe)|*.exe"
+            if ($dialog.ShowDialog() -ne [System.Windows.Forms.DialogResult]::OK) {
+                Write-Host "ERROR: no Skate4.exe selected." -ForegroundColor Red
+                exit 1
+            }
+            $resolvedSkate4Exe = $dialog.FileName
+        }
 
-switch ($choice) {
-    "Skip" {
-        Set-IniValue -Path $IniPath -Section "Updater" -Key "SkippedVersion" -Value $latestTag
-        exit $EXIT_CONTINUE
+        if ((Split-Path $resolvedSkate4Exe -Leaf) -ne "Skate4.exe") {
+            Write-Host "ERROR: expected Skate4.exe, but got '$(Split-Path $resolvedSkate4Exe -Leaf)'." -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $resolvedSkate4Exe)) {
+            Write-Host "ERROR: could not find '$resolvedSkate4Exe'." -ForegroundColor Red
+            exit 1
+        }
+
+        $TargetDir = Split-Path $resolvedSkate4Exe -Parent
+
+        if (-not $Elevated -and -not (Test-DirectoryWritable $TargetDir)) {
+            Write-Host "'$TargetDir' is not writable, requesting administrator privileges..."
+            $elevArgs = @(
+                '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "`"$PSCommandPath`"",
+                '-Install', '-Skate4Exe', "`"$resolvedSkate4Exe`"", '-Elevated'
+            )
+            if ($Silent) { $elevArgs += '-Silent' }
+            Start-Process -FilePath 'powershell.exe' -ArgumentList $elevArgs -Verb RunAs
+            exit 0
+        }
+
+        Write-Host "Installing Better4 to '$TargetDir'..."
+
+        $installFiles = @(
+            "better4.dll",
+            "better4.ini",
+            "better4config.exe",
+            "better4patcher.exe",
+            "better4updater.ps1",
+            "gamecontrollerdb.txt",
+            "readme-better4.txt",
+            "readme-partymod.txt",
+            "README-SDL.txt",
+            "SDL2.dll"
+        )
+        $skipIfExists = @("better4.ini", "readme-partymod.txt")
+
+        foreach ($fileName in $installFiles) {
+            $destPath = Join-Path $TargetDir $fileName
+            if ($skipIfExists -contains $fileName -and (Test-Path $destPath)) {
+                Write-Host "  $fileName (already exists, skipping)"
+                continue
+            }
+            Write-Host "  $fileName"
+            try {
+                Copy-Item -Path (Join-Path $PSScriptRoot $fileName) -Destination $TargetDir -Force -ErrorAction Stop
+            } catch {
+                Exit-InstallError "could not update '$fileName' - close Better4.exe first, then try again."
+            }
+        }
+
+        $dataDir = Join-Path $PSScriptRoot "data"
+        if (Test-Path $dataDir -PathType Container) {
+            Write-Host "  data\*"
+            $destDataDir = Join-Path $TargetDir "data"
+            New-Item -ItemType Directory -Path $destDataDir -Force | Out-Null
+            try {
+                Copy-Item -Path (Join-Path $dataDir '*') -Destination $destDataDir -Recurse -Force -ErrorAction Stop
+            } catch {
+                Exit-InstallError "could not update game data - close Better4.exe first, then try again."
+            }
+        }
+
+        Write-Host ""
+        Write-Host "Running better4patcher..."
+
+        Push-Location $TargetDir
+
+        $exePath = Join-Path $TargetDir "Better4.exe"
+        $backupPath = Join-Path $TargetDir "Better4.exe.bak"
+        $hadBackup = $false
+        if (Test-Path $exePath) {
+            try {
+                Move-Item $exePath $backupPath -Force -ErrorAction Stop
+            } catch {
+                Pop-Location
+                Exit-InstallError "could not back up Better4.exe - close Better4.exe first, then try again."
+            }
+            $hadBackup = $true
+        }
+
+        & (Join-Path $TargetDir "better4patcher.exe")
+        $patcherSucceeded = $LASTEXITCODE -eq 0
+
+        if ($patcherSucceeded) {
+            if ($hadBackup) {
+                Remove-Item $backupPath -Force
+            }
+        } else {
+            if ($hadBackup) {
+                Move-Item $backupPath $exePath -Force
+            }
+            Write-Host "ERROR: better4patcher failed." -ForegroundColor Red
+        }
+
+        if ($Silent) {
+            if ($patcherSucceeded -and (Test-Path $exePath)) {
+                Start-Process $exePath
+            }
+        } else {
+            Write-Host ""
+            Read-Host "Press Enter to close" | Out-Null
+        }
+
+        Pop-Location
+
+        if ($patcherSucceeded) { exit 0 } else { exit 1 }
     }
-    "DontAsk" {
-        Set-IniValue -Path $IniPath -Section "Updater" -Key "CheckForUpdates" -Value "0"
-        exit $EXIT_CONTINUE
+
+    'DoUpdate' {
+        if ($WaitPid -gt 0) {
+            Write-Host "Waiting for Better4 (PID $WaitPid) to close..."
+            Wait-Process -Id $WaitPid -Timeout 60 -ErrorAction SilentlyContinue
+        }
+
+        $skateExePath = Join-Path $InstallDir "Skate4.exe"
+        $installBatPath = Join-Path $ExtractedDir "install.bat"
+        $exePath = Join-Path $InstallDir "Better4.exe"
+
+        if (-not (Test-Path $skateExePath)) {
+            Write-Host "ERROR: Skate4.exe not found in '$InstallDir'." -ForegroundColor Red
+            Wait-ForKeyAndExit 1
+        }
+        if (-not (Test-Path $installBatPath)) {
+            Write-Host "ERROR: install.bat missing from the downloaded release." -ForegroundColor Red
+            Wait-ForKeyAndExit 1
+        }
+
+        $installStartedUtc = [DateTime]::UtcNow
+
+        Write-Host "Installing Better4 update to '$InstallDir'..."
+        & $installBatPath $skateExePath 'SILENT'
+
+        $exeExists = Test-Path $exePath
+        $wasUpdated = $exeExists -and (Get-Item $exePath).LastWriteTimeUtc -ge $installStartedUtc
+
+        if ($wasUpdated) {
+            Write-Host "Update complete."
+        } elseif ($exeExists) {
+            Write-Host "'$InstallDir' may need administrator privileges - if install.bat opened an elevated window, Better4 will relaunch itself once that finishes." -ForegroundColor Yellow
+        } else {
+            Write-Host "ERROR: install.bat did not produce Better4.exe." -ForegroundColor Red
+            Wait-ForKeyAndExit 1
+        }
+
+        exit 0
     }
-    "Install" {
-        $downloadForm, $downloadLabel, $downloadProgressBar = Show-DownloadingWindow
+
+    'CheckForUpdates' {
+        $checkEnabled = Get-IniValue -Path $IniPath -Section "Updater" -Key "CheckForUpdates" -Default "1"
+        if ($checkEnabled -eq "0") {
+            exit $EXIT_CONTINUE
+        }
+
+        Initialize-Forms
+        $checkingForm = Show-CheckingWindow
         try {
             try {
-                $tempDir = [IO.Path]::GetTempPath()
-                $zipPath = Join-Path $tempDir "better4-update.zip"
-                Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing -TimeoutSec 30
-
-                $downloadLabel.Text = "Installing update..."
-                $downloadProgressBar.Value = 51
-                $downloadProgressBar.Value = 50
-                [System.Windows.Forms.Application]::DoEvents()
-
-                $extractDir = Join-Path $tempDir "better4-update"
-                if (Test-Path $extractDir) {
-                    Remove-Item $extractDir -Recurse -Force
-                }
-                Expand-Archive -Path $zipPath -DestinationPath $extractDir -Force
+                [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+                $release = Invoke-RestMethod -Uri "https://api.github.com/repos/better-4/Better4/releases/latest" `
+                    -Headers @{ "User-Agent" = "better4-updater"; "Accept" = "application/vnd.github+json" } `
+                    -TimeoutSec 5
             } catch {
                 exit $EXIT_CONTINUE
             }
+
+            $latestTag = $release.tag_name
+            $changelog = $release.body
+            if (-not $release.assets -or $release.assets.Count -eq 0) {
+                exit $EXIT_CONTINUE
+            }
+            $zipUrl = $release.assets[0].browser_download_url
+
+            try {
+                $latestVersion = [version]$latestTag
+                $currentVersionParsed = [version]$CurrentVersion
+            } catch {
+                exit $EXIT_CONTINUE
+            }
+
+            if ($latestVersion -le $currentVersionParsed) {
+                exit $EXIT_CONTINUE
+            }
+
+            $skippedVersion = Get-IniValue -Path $IniPath -Section "Updater" -Key "SkippedVersion" -Default ""
+            if ($skippedVersion -eq $latestTag) {
+                exit $EXIT_CONTINUE
+            }
         } finally {
-            $downloadForm.Close()
+            $checkingForm.Close()
         }
 
-        $argList = @(
-            '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "`"$PSCommandPath`"",
-            '-Phase2', '-WaitPid', $CallerPid, '-ExtractedDir', "`"$extractDir`""
-        )
-        Start-Process -FilePath 'powershell.exe' -ArgumentList $argList
+        try {
+            $choice = Show-UpdateDialog -Version $latestTag -Changelog $changelog
+        } catch {
+            exit $EXIT_CONTINUE
+        }
 
-        exit $EXIT_UPDATING
-    }
-    default {
-        exit $EXIT_CONTINUE
+        switch ($choice) {
+            "Skip" {
+                Set-IniValue -Path $IniPath -Section "Updater" -Key "SkippedVersion" -Value $latestTag
+                exit $EXIT_CONTINUE
+            }
+            "DontAsk" {
+                Set-IniValue -Path $IniPath -Section "Updater" -Key "CheckForUpdates" -Value "0"
+                exit $EXIT_CONTINUE
+            }
+            "Install" {
+                $downloadForm, $downloadLabel, $downloadProgressBar = Show-DownloadingWindow
+                try {
+                    try {
+                        $tempDir = [IO.Path]::GetTempPath()
+                        $zipPath = Join-Path $tempDir "better4-update.zip"
+                        Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing -TimeoutSec 30
+
+                        $downloadLabel.Text = "Installing update..."
+                        $downloadProgressBar.Value = 51
+                        $downloadProgressBar.Value = 50
+                        [System.Windows.Forms.Application]::DoEvents()
+
+                        $extractDir = Join-Path $tempDir "better4-update"
+                        if (Test-Path $extractDir) {
+                            Remove-Item $extractDir -Recurse -Force
+                        }
+                        Expand-Archive -Path $zipPath -DestinationPath $extractDir -Force
+                    } catch {
+                        exit $EXIT_CONTINUE
+                    }
+                } finally {
+                    $downloadForm.Close()
+                }
+
+                $argList = @(
+                    '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', "`"$PSCommandPath`"",
+                    '-DoUpdate', '-WaitPid', $CallerPid, '-ExtractedDir', "`"$extractDir`""
+                )
+                Start-Process -FilePath 'powershell.exe' -ArgumentList $argList
+
+                exit $EXIT_UPDATING
+            }
+            default {
+                exit $EXIT_CONTINUE
+            }
+        }
     }
 }
