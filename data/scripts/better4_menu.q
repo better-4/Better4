@@ -411,6 +411,7 @@ script better4_misc_menu
   // better4_create_menu_control better4_control_special_meter
   better4_create_menu_control better4_control_extratrick_sound
   better4_create_menu_control better4_control_menudemo
+  better4_create_menu_control better4_control_respawn_on_newrun
   if not IsBetterObserving
     if not IsObserving
       better4_create_menu_item {

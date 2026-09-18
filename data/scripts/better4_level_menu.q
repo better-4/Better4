@@ -1,16 +1,24 @@
 game_index = 1
-
+lvl_menu_helper_text = { helper_text_elements = [ 
+  { text = "\b7/\b4 = Select" }
+  { text = "\b2 = Back" }
+  { text = "\b3 = Accept" } 
+  { text = "\b0 = Random Level" } 
+  ]
+}
 script better4_create_level_select_menu_game
   if ObjectExists id = level_select_anchor_game
     DestroyScreenElement id = level_select_anchor_game
   endif
   Change game_index = 1
-
+  create_helper_text lvl_menu_helper_text
+  
   SetScreenElementProps {
     id = level_select_vmenu
     event_handlers = [
       { pad_left better4_level_menu_left params = <...> }
       { pad_right better4_level_menu_right params = <...> }
+      { pad_space better4_change_level_random  }
     ]
   }
 
@@ -113,4 +121,21 @@ script better4_level_menu_list
   AssignAlias id = level_select_vmenu alias = current_menu
   ForEachIn <levels> do = level_select_menu_add_item params = <...>
   FireEvent type = focus target = level_select_vmenu
+endscript
+
+script better4_change_level_random
+  if not ObjectExists id = main_menu_anchor
+    GetArraySize level_info
+    begin
+      GetRandomValue name = index integer a = 0 b = ( <array_size> - 3 ) // excludes created parks and motox
+      random_lvl = ( ( level_info [ <index> ] ).checksum )
+      if not LevelIs <random_lvl>
+        if InNetGame
+          level_select_change_level level = <random_lvl> show_warning
+        else
+          level_select_change_level level = <random_lvl>
+        break
+      endif
+    repeat
+  endif
 endscript
