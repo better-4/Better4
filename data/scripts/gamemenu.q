@@ -2190,6 +2190,7 @@ script level_select_create_info_box
     id = level_select_anchor_info
     pos = <pos>
     dims = (640, 480)
+    scale = 0
   }
   GetStackedScreenElementPos x id = level_select_menu_bottom_cap offset = (10, 0)
   CreateScreenElement {
@@ -2259,18 +2260,25 @@ script level_select_menu_add_item
      <locked> = 0
   else
     if GetGlobalFlag flag = <flag>
-       <rgba> = [ 88 105 112 128 ]
-      if ( <level_num> = 10 )
-         <pad_choose_script> = level_select_created_park_menu
+      if GotParam not_focusable
+        <rgba> = [ 47 42 38 128 ]
+        <pad_choose_script> = level_select_invalid_choice
+        <locked> = 1
+        <not_focusable> = not_focusable
       else
-        if GotParam from_server_options
-           <pad_choose_script> = level_select_menu_exit
+        <rgba> = [ 88 105 112 128 ]
+        if ( <level_num> = 10 )
+          <pad_choose_script> = level_select_created_park_menu
         else
-           <pad_choose_script> = level_select_change_level
+          if GotParam from_server_options
+            <pad_choose_script> = level_select_menu_exit
+          else
+            <pad_choose_script> = level_select_change_level
+          endif
         endif
+        <pad_choose_params> = <...>
+        <locked> = 0
       endif
-       <pad_choose_params> = <...>
-       <locked> = 0
     else
       if GotParam PreReq_flags
         GetArraySize <PreReq_flags>
@@ -2334,6 +2342,7 @@ script level_select_menu_add_item
       { unfocus level_select_menu_unfocus params = { rgba = <rgba> } }
     ]
     replace_handlers
+    <not_focusable>
   }
   CreateScreenElement {
     type = TextElement

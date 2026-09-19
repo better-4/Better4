@@ -13,6 +13,7 @@ script better4_create_level_select_menu_game
   if ObjectExists id = level_select_anchor_game
     DestroyScreenElement id = level_select_anchor_game
   endif
+
   Change level_menu_game_index = 3 // Default to THPS4
   create_helper_text lvl_menu_helper_text
 
@@ -83,7 +84,7 @@ script better4_level_menu_left
   Printf "@@ LEVEL_MENU_LEFT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
   Change level_menu_game_index = <new_index>
 
-  better4_level_menu_refresh
+  better4_level_menu_refresh <...>
 endscript
 
 script better4_level_menu_right
@@ -99,7 +100,7 @@ script better4_level_menu_right
   Printf "@@ LEVEL_MENU_RIGHT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
   Change level_menu_game_index = <new_index>
 
-  better4_level_menu_refresh
+  better4_level_menu_refresh <...>
 endscript
 
 script better4_level_menu_refresh
@@ -123,26 +124,22 @@ script better4_level_menu_refresh
     id = level_select_game_text
     text = <text>
   }
-  better4_level_menu_list levels = <levels>
+  RemoveParameter text
+
+  better4_level_menu_list <...>
 endscript
 
 script better4_level_menu_list
-  Printf "@@ 1"
-  FireEvent type = unfocus target = level_select_vmenu
-
-  Printf "@@ 2"
   if ObjectExists id = level_select_vmenu
+    FireEvent type = unfocus target = level_select_vmenu
     SetScreenElementLock id = level_select_vmenu off
     DestroyScreenElement id = level_select_vmenu recurse preserve_parent
+    FireEvent type = focus target = level_select_vmenu
   endif
 
-  Printf "@@ 3"
   AssignAlias id = level_select_vmenu alias = current_menu
-  Printf "@@ 4"
   ForEachIn <levels> do = level_select_menu_add_item params = <...>
-  Printf "@@ 5"
-  FireEvent type = focus target = level_select_vmenu
-  Printf "@@ 6"
+  SetScreenElementLock id = level_select_vmenu on
 endscript
 
 script better4_change_level_random
