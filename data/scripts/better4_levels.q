@@ -2,36 +2,17 @@
 
 LevelNum_LA = 12
 
+thps_level_info = []
+
+thps2_level_info = []
+
 thps3_level_info = [
   { text = "Los Angeles" level_num = LevelNum_LA points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_LA taxi_id = Cab_sign_10_Custom }
 ]
 
-script Load_LA
-  load_level level_la
-endscript
-
-level_la = {
-  structure_name = level_la
-  load_script = Load_LA
-  name = "LA"
-  ambient_track = "music\amb_alc"
-  loading_screen = "better4\loadscrn_LA"
-  loading_time = 15
-  pre = "la.pre"
-  scnpre = "lascn.pre"
-  level = "LA"
-  sky = "Alc_Sky"
-  qb = "levels\better4\la\la.qb"
-  level_qb = "levels\better4\la\la_scripts.qb"
-  colpre = "lacol.pre"
-  pedpre = "laped.pre"
-  startup_script = LA_Startup
-  goals_script = la_goals
-  setup_script = la_setup
+level_defaults = {
+  loading_time = 1
   default_stats = 10
-  level_number = LevelNum_LA
-  temp_script = load_cameras_and_terrains
-  // extranetanimsscript = load_level_anims
   ambient_red = 72
   ambient_green = 72
   ambient_blue = 72
@@ -48,4 +29,27 @@ level_la = {
   green_1 = 0
   blue_1 = 0
   mod_factor_1 = 1.0
+}
+
+script Load_LA
+  load_level level_la
+endscript
+
+level_la = {
+  structure_name = level_la
+  load_script = Load_LA
+  name = "LA"
+  level = "LA"
+  qb = "levels\better4\la\la.qb"
+  level_qb = "levels\better4\la\la_scripts.qb"
+  sky = "Alc_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "better4\loadscrn_LA"
+  startup_script = LA_Startup
+  goals_script = la_goals
+  setup_script = la_setup
+  level_number = LevelNum_LA
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
 }
