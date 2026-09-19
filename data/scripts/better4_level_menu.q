@@ -1,16 +1,20 @@
-game_index = 1
-lvl_menu_helper_text = { helper_text_elements = [ 
+level_menu_game_index = 3 // 0: THPS, 1: THPS2, 2: THPS3, 3: THPS4
+level_menu_num_games = 4
+
+lvl_menu_helper_text = { helper_text_elements = [
   { text = "\b7/\b4 = Select" }
   { text = "\b2 = Back" }
-  { text = "\b3 = Accept" } 
-  { text = "\b1 = Random Level" } 
+  { text = "\b3 = Accept" }
+  { text = "\b1 = Random Level" }
   ]
 }
+
 script better4_create_level_select_menu_game
   if ObjectExists id = level_select_anchor_game
     DestroyScreenElement id = level_select_anchor_game
   endif
-  Change game_index = 1
+
+  Change level_menu_game_index = 3 // Default to THPS4
   create_helper_text lvl_menu_helper_text
 
   SetScreenElementProps {
@@ -52,9 +56,7 @@ script better4_create_level_select_menu_game
     pos = ( <pos> - (33, 0) )
     scale = (0.5, 0.5)
     texture = left_arrow
-    // XXX (ellie): only start left at full alpha since thps4 is default
     rgba = [ 128 128 128 100 ]
-    // rgba = [ 128 128 128 0 ]
     z_priority = 10
   }
   CreateScreenElement {
@@ -64,63 +66,80 @@ script better4_create_level_select_menu_game
     pos = ( <pos> + (33, 0) )
     scale = (0.5, 0.5)
     texture = right_arrow
-    rgba = [ 128 128 128 0 ]
+    rgba = [ 128 128 128 100 ]
     z_priority = 10
   }
 endscript
 
-// XXX (ellie): make this cycle properly to add more levels at some point. maybe HMenu?
 script better4_level_menu_left
   generic_menu_up_or_down_sound Down
-  RunScriptOnScreenElement id = level_select_game_right menu_blink_arrow
-  if not ( game_index = 0 )
-    Change game_index = 0
-    SetScreenElementProps {
-      id = level_select_game_text
-      text = "THPS3"
-    }
-    SetScreenElementProps {
-      id = level_select_game_left
-      rgba = [ 128 128 128 0 ]
-    }
-    SetScreenElementProps {
-      id = level_select_game_right
-      rgba = [ 128 128 128 100 ]
-    }
-    better4_level_menu_list levels = thps3_level_info <...>
+  RunScriptOnScreenElement id = level_select_game_left menu_blink_arrow
+
+  <new_index> = level_menu_game_index
+  if ( <new_index> > 0 )
+    <new_index> = ( <new_index> - 1 )
+  else
+    <new_index> = ( level_menu_num_games - 1 )
   endif
+  Printf "@@ LEVEL_MENU_LEFT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
+  Change level_menu_game_index = <new_index>
+
+  better4_level_menu_refresh <...>
 endscript
 
 script better4_level_menu_right
   generic_menu_up_or_down_sound Up
-  RunScriptOnScreenElement id = level_select_game_left menu_blink_arrow
-  if not ( game_index = 1 )
-    Change game_index = 1
-    SetScreenElementProps {
-      id = level_select_game_text
-      text = "THPS4"
-    }
-    SetScreenElementProps {
-      id = level_select_game_left
-      rgba = [ 128 128 128 100 ]
-    }
-    SetScreenElementProps {
-      id = level_select_game_right
-      rgba = [ 128 128 128 0 ]
-    }
-    better4_level_menu_list levels = level_select_menu_level_info <...>
+  RunScriptOnScreenElement id = level_select_game_right menu_blink_arrow
+
+  <new_index> = level_menu_game_index
+  if ( <new_index> < ( level_menu_num_games - 1 ) )
+    <new_index> = ( <new_index> + 1 )
+  else
+    <new_index> = 0
   endif
+  Printf "@@ LEVEL_MENU_RIGHT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
+  Change level_menu_game_index = <new_index>
+
+  better4_level_menu_refresh <...>
+endscript
+
+script better4_level_menu_refresh
+  switch level_menu_game_index
+  case 0
+    <text> = "THPS"
+    <levels> = thps_level_info
+  case 1
+    <text> = "THPS2"
+    <levels> = thps2_level_info
+  case 2
+    <text> = "THPS3"
+    <levels> = thps3_level_info
+  case 3
+    <text> = "THPS4"
+    <levels> = level_select_menu_level_info
+  endswitch
+  Printf "@@ LEVEL_MENU_REFRESH: text=%t" t = <text>
+
+  SetScreenElementProps {
+    id = level_select_game_text
+    text = <text>
+  }
+  RemoveParameter text
+
+  better4_level_menu_list <...>
 endscript
 
 script better4_level_menu_list
   if ObjectExists id = level_select_vmenu
+    FireEvent type = unfocus target = level_select_vmenu
     SetScreenElementLock id = level_select_vmenu off
     DestroyScreenElement id = level_select_vmenu recurse preserve_parent
+    FireEvent type = focus target = level_select_vmenu
   endif
 
   AssignAlias id = level_select_vmenu alias = current_menu
   ForEachIn <levels> do = level_select_menu_add_item params = <...>
-  FireEvent type = focus target = level_select_vmenu
+  SetScreenElementLock id = level_select_vmenu on
 endscript
 
 script better4_change_level_random
