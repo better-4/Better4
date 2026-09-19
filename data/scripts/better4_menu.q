@@ -253,7 +253,6 @@ script better4_menu_cycle_control
   <index> = <index_name>
   CastToInteger index
   <value_text> = ( ( <options> [ <index> ] ).text )
-  PrintStruct <...>
   SetScreenElementProps {
     id = { <id> child = 2 }
     text = <value_text>
@@ -412,6 +411,7 @@ script better4_misc_menu
   better4_create_menu_control better4_control_extratrick_sound
   better4_create_menu_control better4_control_menudemo
   better4_create_menu_control better4_control_respawn_on_newrun
+  better4_create_menu_control better4_control_updatedcollision
   if not IsBetterObserving
     if not IsObserving
       better4_create_menu_item {
