@@ -2,6 +2,7 @@
 
 #include "decomp/Tmr.h"
 #include "input.h"
+#include "load.h"
 #include "online.h"
 #include "online/client.h"
 #include "online/server.h"
@@ -20,7 +21,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 44
+#define BETTER4_NUM_CFUNCS 45
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -91,6 +92,7 @@ void addCFuncs() {
 	addCFunc("GetElapsedTime", (void *)CFunc_GetElapsedTime);
 	addCFunc("SetWallpushEnabled", (void *)CFunc_SetWallpushEnabled);
 	addCFunc("CancelWallpush", (void *)CFunc_CancelWallpush);
+	addCFunc("SetUpdatedCollision", (void *)CFunc_SetUpdatedCollision);
 }
 
 void printCFuncs() {

@@ -276,7 +276,7 @@ better4_control_doublerevert = {
   value_name = better4_control_doublerevert_value
   text = "Double Revert"
   ini_key = "DoubleRevert"
-  help = "Toggle whether or not a second revert is required after dropping down into a revert."
+  help = "Toggle whether a second revert is required after dropping down into a revert."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -371,7 +371,7 @@ better4_control_railspin = {
   value_name = better4_control_railspin_value
   text = "Rail Spin"
   ini_key = "RailSpin"
-  help = "Toggle whether or not manual spins carry into a grind."
+  help = "Toggle whether manual spins carry into a grind."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -421,7 +421,7 @@ better4_control_wallspin = {
   value_name = better4_control_wallspin_value
   text = "Wall Spin"
   ini_key = "WallSpin"
-  help = "Toggle whether or not manual spins carry into a wallride."
+  help = "Toggle whether manual spins carry into a wallride."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -436,7 +436,7 @@ better4_control_wallridebail = {
   value_name = better4_control_wallridebail_value
   text = "Wallride Bail"
   ini_key = "WallrideBail"
-  help = "Toggle whether or not doing a trick into a wallride causes the skater to bail. 'Off' enables THUG1-style boostplants."
+  help = "Toggle whether doing a trick into a wallride causes the skater to bail. 'Off' enables THUG1-style boostplants."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -466,7 +466,7 @@ better4_control_pauseonunfocus = {
   index_name = better4_control_pauseonunfocus_index
   text = "Pause On Unfocus"
   ini_key = "PauseOnUnfocus"
-  help = "Toggle whether or not the game pauses when the window is unfocused."
+  help = "Toggle whether the game pauses when the window is unfocused."
   options = [
     { text = "Off" }
     { text = "On" }
@@ -917,6 +917,24 @@ better4_control_respawn_on_newrun = {
   ]
 }
 
+better4_control_updatedcollision_index = 1
+better4_control_updatedcollision = {
+  id = better4_control_updatedcollision_id
+  index_name = better4_control_updatedcollision_index
+  text = "Updated Collision"
+  ini_key = "Updated Collision"
+  help = "Toggle whether to use updated collision for THPS4 levels. Takes effect on next level change."
+  options = [
+    { text = "Off" }
+    { text = "On" }
+  ]
+  change_script = better4_control_updatedcollision_change
+}
+
+script better4_control_updatedcollision_change
+  SetUpdatedCollision index = better4_control_updatedcollision_index
+endscript
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -951,6 +969,8 @@ script better4_controls_init
   better4_control_init better4_control_specialmeter
   better4_control_init better4_control_perfectlanding
   better4_control_init better4_control_menudemo
+  better4_control_init better4_control_respawn_on_newrun
+  better4_control_init better4_control_updatedcollision
 endscript
 
 script better4_control_init

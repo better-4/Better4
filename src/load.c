@@ -7,9 +7,17 @@
 
 map_t *override_map;
 
+// Init to 0 so is initialized by better4_controls_init
+static int use_updated_collision = 0;
+
 void add_path_override(char *original_path, char *new_path) {
 	map_put(override_map, original_path, strlen(original_path), new_path, strlen(new_path) + 1);
 	printLog("Adding path override \"%s\" -> \"%s\"\n", original_path, new_path);
+}
+
+void remove_path_override(char *original_path) {
+	map_del(override_map, original_path, strlen(original_path));
+	printLog("Removing path override \"%s\"\n", original_path);
 }
 
 void *__cdecl Pip_Load(char *path) {
@@ -76,11 +84,7 @@ void __fastcall Obj_CSkaterCareer_StartLevel(void *career, unused_t _, int level
 	_StartLevel(career, UNUSED, level_num);
 }
 
-void patchLoad() {
-	static int num_overrides = 1;
-	override_map = map_alloc(num_overrides, NULL, NULL);
-
-	// add_path_override("scripts\\qdir.txt", "scripts\\better4\\qdir.txt");
+void add_path_overrides() {
 	add_path_override("levels\\hof\\hof.col.Xbx", "levels\\better4\\hof\\hof.col.Xbx");
 	add_path_override("levels\\sch\\sch.col.Xbx", "levels\\better4\\sch\\sch.col.Xbx");
 	add_path_override("levels\\sf2\\sf2.col.Xbx", "levels\\better4\\sf2\\sf2.col.Xbx");
@@ -90,7 +94,25 @@ void patchLoad() {
 	add_path_override("levels\\lon\\lon.col.Xbx", "levels\\better4\\lon\\lon.col.Xbx");
 	add_path_override("levels\\zoo\\zoo.col.Xbx", "levels\\better4\\zoo\\zoo.col.Xbx");
 	add_path_override("levels\\cnv\\cnv.col.Xbx", "levels\\better4\\cnv\\cnv.col.Xbx");
+}
 
+void remove_path_overrides() {
+	remove_path_override("levels\\hof\\hof.col.Xbx");
+	remove_path_override("levels\\sch\\sch.col.Xbx");
+	remove_path_override("levels\\sf2\\sf2.col.Xbx");
+	remove_path_override("levels\\alc\\alc.col.Xbx");
+	remove_path_override("levels\\kon\\kon.col.Xbx");
+	remove_path_override("levels\\jnk\\jnk.col.Xbx");
+	remove_path_override("levels\\lon\\lon.col.Xbx");
+	remove_path_override("levels\\zoo\\zoo.col.Xbx");
+	remove_path_override("levels\\cnv\\cnv.col.Xbx");
+}
+
+void patchLoad() {
+	static int num_overrides = 1;
+	override_map = map_alloc(num_overrides, NULL, NULL);
+
+	// Always override new levels
 	add_path_override("levels\\LA\\LA.col.Xbx", "levels\\better4\\LA\\LA.col.Xbx");
 	add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
 	add_path_override("levels\\LA\\LA.tex.Xbx", "levels\\better4\\LA\\LA.tex.Xbx");
@@ -125,4 +147,24 @@ void patchLoad() {
 	// patchCall(0x00512045, (void *)Script_LoadQB); // SkateScript::LoadAllStartupQBFiles
 
 	// patchCall(0x0051ab13, (void *)Obj_CSkaterCareer_StartLevel);
+}
+
+int __cdecl CFunc_SetUpdatedCollision(CStruct* params) {
+	float index;
+	if (!CStruct_GetFloat(params, 0x7f8c98fe, &index, 0)) {
+		printLog("SetUpdatedCollision missing param \"index\" (0x7f8c98fe)\n");
+		return 0;
+	}
+	
+	int prev_use_updated_collision = use_updated_collision;
+	use_updated_collision = (int)index;
+	printLog("Set use_updated_collision=%d\n", use_updated_collision);
+
+	if (prev_use_updated_collision != use_updated_collision) {
+		if (use_updated_collision) {
+			add_path_overrides();
+		} else {
+			remove_path_overrides();
+		}
+	}
 }
