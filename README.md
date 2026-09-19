@@ -66,6 +66,7 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Improved collision in THPS4 levels
   * Made more surfaces wallridable
   * Removed bottom-plane collisions in a few spots where a wallride makes the skater hit their head on a ledge above (e.g. slam bros warehouse in San Francisco)
+* Enabled Zoo teleport in multiplayer games; teleport is now two-way
 
 ### CAS
 
