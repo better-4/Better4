@@ -8,38 +8,38 @@
 // * Add path overrides in Better4 repo in `src/load.c` for col/scn/tex
 
 // THPS1
-LevelNum_Warehouse = 13
-LevelNum_School = 14
-LevelNum_Mall = 15
-LevelNum_Skatepark = 16
-LevelNum_Downtown = 17
-LevelNum_DHJ = 18
-LevelNum_Burnside = 19
-LevelNum_Streets = 20
-LevelNum_Roswell = 21
+LevelNum_Warehouse = 0
+LevelNum_School = 0
+LevelNum_Mall = 0
+LevelNum_Vans = 13
+LevelNum_Downtown = 0
+LevelNum_DHJ = 0
+LevelNum_Burnside = 0
+LevelNum_Streets = 0
+LevelNum_Roswell = 0
 
 // THPS2
-LevelNum_Hangar = 22
-LevelNum_School2 = 23
-LevelNum_Marseille = 24
-LevelNum_NYC = 25
-LevelNum_Venice = 26
-LevelNum_Skatestreet = 27
-LevelNum_Philly = 28
-LevelNum_Bullring = 29
-LevelNum_Heaven = 30
-LevelNum_Chopper = 31
+LevelNum_Hangar = 0
+LevelNum_School2 = 0
+LevelNum_Marseille = 0
+LevelNum_NYC = 0
+LevelNum_Venice = 0
+LevelNum_Skatestreet = 0
+LevelNum_Philly = 0
+LevelNum_Bullring = 0
+LevelNum_Heaven = 0
+LevelNum_Chopper = 0
 
 // THPS3
-LevelNum_Foundry = 32
-LevelNum_Canada = 33
-LevelNum_Rio = 34
-LevelNum_Suburbia = 35
-LevelNum_Airport = 36
-LevelNum_SkaterIsland = 37
+LevelNum_Foundry = 0
+LevelNum_Canada = 0
+LevelNum_Rio = 0
+LevelNum_Suburbia = 0
+LevelNum_Airport = 0
+LevelNum_SkaterIsland = 0
 LevelNum_LA = 12
-LevelNum_Tokyo = 38
-LevelNum_CruiseShip = 39
+LevelNum_Tokyo = 0
+LevelNum_CruiseShip = 0
 
 level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_10_Custom }
 
@@ -47,7 +47,7 @@ thps_level_info = [
   { text = "Warehouse" not_focusable level_num = LevelNum_Warehouse level = Load_Warehouse level_info_defaults }
   { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults }
   { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults }
-  { text = "Skatepark" not_focusable level_num = LevelNum_Skatepark level = Load_Skatepark level_info_defaults }
+  { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
   { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults }
   { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults }
   { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults }
@@ -100,6 +100,33 @@ level_defaults = {
   blue_1 = 0
   mod_factor_1 = 1.0
 }
+
+// THPS
+
+script Load_Vans
+  load_level level_vans
+endscript
+
+level_vans = {
+  structure_name = level_vans
+  load_script = Load_Vans
+  name = "Skatepark"
+  level = "Vans"
+  qb = "levels\better4\vans\vans.qb"
+  level_qb = "levels\better4\vans\vans_scripts.qb"
+  sky = "Alc_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = Vans_Startup
+  goals_script = vans_goals
+  setup_script = vans_setup
+  level_number = LevelNum_Vans
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
+
+// THPS3
 
 script Load_LA
   load_level level_la

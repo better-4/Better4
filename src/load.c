@@ -56,7 +56,7 @@ void *__cdecl Pip_Unload(char *path) {
 void *__cdecl File_Open(char *path, char *mode) {
     static void *(__cdecl* _Open)(char *, char *) = (void *)0x00536250;
 
-	// printLog("File::Open: \"%s\"\n", path);
+	printLog("File::Open: \"%s\"\n", path);
 	void *ret;
 	char *override = map_get(override_map, path, strlen(path));
 
@@ -116,6 +116,10 @@ void patchLoad() {
 	add_path_override("levels\\LA\\LA.col.Xbx", "levels\\better4\\LA\\LA.col.Xbx");
 	add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
 	add_path_override("levels\\LA\\LA.tex.Xbx", "levels\\better4\\LA\\LA.tex.Xbx");
+
+	add_path_override("levels\\Vans\\Vans.col.Xbx", "levels\\better4\\Vans\\Vans.col.Xbx");
+	add_path_override("levels\\Vans\\Vans.scn.Xbx", "levels\\better4\\Vans\\Vans.scn.Xbx");
+	add_path_override("levels\\Vans\\Vans.tex.Xbx", "levels\\better4\\Vans\\Vans.tex.Xbx");
 
 	// patchCall(0x0040b50e, (void *)Pip_Load); // ??
 	// patchCall(0x00464cd4, (void *)Pip_Load); // ??
