@@ -135,7 +135,7 @@ endscript
 level_ap = {
   structure_name = level_ap
   load_script = Load_AP
-  name = "Skatepark"
+  name = "Airport"
   level = "AP"
   qb = "levels\better4\ap\ap.qb"
   level_qb = "levels\better4\ap\ap_scripts.qb"
