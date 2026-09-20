@@ -92,7 +92,6 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 
 ## Known Issues
 
-* Using updated collision causes trash cans to fall through the map
 * LA graffiti trick objects, KOTH crown, CTF flags, gaps, etc. not yet implemented
 
 ## Credits
