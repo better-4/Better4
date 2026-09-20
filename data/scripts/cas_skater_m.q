@@ -1631,12 +1631,12 @@ skater_m_legs = [
     no_color
   }
   {
-    desc_id = #"Gathered Cargos Camo"
+    desc_id = #"Gathered Cargos"
     frontend_desc = 'Camo Cargos'
     mesh = "models/skater_m/pant_gatheredcargo.skin"
   }
   {
-    desc_id = #"Gathered Cargos"
+    desc_id = #"BunchedCargos"
     frontend_desc = 'Bunched Cargos'
     mesh = "models/better4/skater_m/pant_gatheredcargo.skin"
   }
