@@ -2519,6 +2519,14 @@ script level_select_menu_focus
       text = <info_text>
     }
     RunScriptOnScreenElement id = level_select_anchor_info level_select_animate_info
+  else
+    if GotParam under_construction
+      SetScreenElementProps {
+        id = level_select_points_info
+        text = "This level is currently under construction."
+      }
+      RunScriptOnScreenElement id = level_select_anchor_info level_select_animate_info
+    endif
   endif
 endscript
 created_park_warning = 0

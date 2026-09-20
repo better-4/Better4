@@ -41,13 +41,13 @@ LevelNum_LA = 12
 LevelNum_Tokyo = 0
 LevelNum_CruiseShip = 0
 
-level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_10_Custom }
+level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_11_Locked }
 
 thps_level_info = [
   { text = "Warehouse" not_focusable level_num = LevelNum_Warehouse level = Load_Warehouse level_info_defaults }
   { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults }
   { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults }
-  { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
+  { text = "Skatepark" under_construction level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
   { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults }
   { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults }
   { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults }
@@ -73,9 +73,9 @@ thps3_level_info = [
   { text = "Canada" not_focusable level_num = LevelNum_Canada level = Load_Canada level_info_defaults }
   { text = "Rio" not_focusable level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
   { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults }
-  { text = "Airport" level_num = LevelNum_AP level = Load_AP level_info_defaults }
+  { text = "Airport" under_construction level_num = LevelNum_AP level = Load_AP level_info_defaults }
   { text = "Skater Island" not_focusable level_num = LevelNum_SkaterIsland level = Load_SkaterIsland level_info_defaults }
-  { text = "Los Angeles" level_num = LevelNum_LA level = Load_LA level_info_defaults  }
+  { text = "Los Angeles" under_construction level_num = LevelNum_LA level = Load_LA level_info_defaults  }
   { text = "Tokyo" not_focusable level_num = LevelNum_Tokyo level = Load_Tokyo level_info_defaults }
   { text = "Cruise Ship" not_focusable level_num = LevelNum_CruiseShip level = Load_CruiseShip level_info_defaults }
 ]
