@@ -175,16 +175,20 @@ script load_level level_number = 0
       DisplayLoadingScreen "loadscrn_generic"
     endif
   endif
+  Printf "@@ 1"
   CareerStartLevel level = <level_number>
+  Printf "@@ 2"
   ResetLevelFlags
   if ( <level_number> = LevelNum_Skateshop )
   endif
+  Printf "@@ 3"
   if GotParam scnpre
     LoadLevelPreFile <scnpre>
   endif
   if GotParam sky
     LoadScene scene = <sky>
   endif
+  Printf "@@ 4"
   if GotParam park_editor
     if IsNGC
       Ngc_ReduceColors 0
@@ -199,14 +203,17 @@ script load_level level_number = 0
   else
     LoadScene scene = <level>
   endif
+  Printf "@@ 5"
   if GotParam level_name
     SetLevelName <level_name>
   else
     SetLevelName <level>
   endif
+  Printf "@@ 6"
   if GotParam scnpre
     UnloadPreFile <scnpre> dont_assert
   endif
+  Printf "@@ 7"
   if not IsPS2
     if GotParam pre
       LoadLevelPreFile <pre>
@@ -231,6 +238,7 @@ script load_level level_number = 0
   if GotParam level_qb
     LoadQB <level_qb> LevelSpecific
   endif
+  Printf "@@ 8"
   preselect_random_parts <...>
   if GotParam park_editor
     LoadSound "Shared\Hits\FallPungee_11"
@@ -255,6 +263,7 @@ script load_level level_number = 0
       endif
     endif
   endif
+  Printf "@@ 9"
   if GotParam park_editor
   else
     if GotParam startup_script
@@ -279,23 +288,28 @@ script load_level level_number = 0
       PreloadModel name = "crown"
     endif
   endif
+  Printf "@@ 10"
   if not InNetGame
     if GotParam pedpre
       UnloadPreFile <pedpre> dont_assert
     endif
   endif
+  Printf "@@ 11"
   if ( <level_number> = LevelNum_Skateshop )
     if not IsTrue cas_artist
       LoadPreFile "skaterparts.pre"
     endif
   endif
+  Printf "@@ 12"
   PushMemProfile "Level Collision decompressed PIP + Supersectors"
   if IsTrue UsePreFilesForLevelLoading
     if GotParam colpre
       LoadPipPre <colpre> heap = topdown
     endif
   endif
+  Printf "@@ 13"
   LoadCollision scene = <level>
+  Printf "@@ 14"
   if GotParam park_editor
     if GotParam outer_shell
       if IsTrue UsePreFilesForLevelLoading
@@ -305,32 +319,40 @@ script load_level level_number = 0
       LoadCollision scene = <outer_shell>
     endif
   endif
+  Printf "@@ 15"
   PopMemProfile
+  Printf "@@ 16"
   if GotParam park_editor
     if GotParam startup_script
        <startup_script>
     endif
   else
+    Printf "@@ 17"
     ParseNodeArray
   endif
+  Printf "@@ 18"
   if GotParam goals_script
      <goals_script>
   endif
+  Printf "@@ 19"
   if GameModeEquals is_singlesession
     AddGoal_TrickAttack
   endif
+  Printf "@@ 20"
   if GameModeEquals is_career
     if not ( <level_number> = 0 )
       SetGlobalFlag flag = CAREER_STARTED
       Printf "CAREER_STARTED"
     endif
   endif
+  Printf "@@ 21"
   init_goal_manager
   initialize_cash_icons
   if GotParam setup_script
      <setup_script>
   endif
   UnPauseGame
+  Printf "@@ 22"
 endscript
 script LoadTerrain_parked
   SetTerrainDefault
