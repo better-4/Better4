@@ -174,9 +174,20 @@ script GameFlow_StartRun
   DisablePause
   if not InNetGame
     ResetSkaters
-  endif
-  if ( better4_control_respawn_on_newrun_value = on )
-    ResetSkaters
+  else
+    if ( better4_control_respawn_on_newrun_value = on )
+      ResetSkaters
+    else
+      skater:GetTags
+      if ( <state> = skater_inair )
+        skater:PlayAnim Anim = AirIdle // manually play in air animation, using SkaterInit does default idle animation
+      endif
+      if not IsBetterObserving
+        if skater:PlayerInputIsDisabled // when rank screen is closed, skater gets popped up in air + input still disabled
+          skater:NetEnablePlayerInput
+        endif
+      endif
+    endif
   endif
   if IsBetterObserving
     SnapObsCameraBack
