@@ -1746,6 +1746,7 @@ script cas_catchup_trickslots
     if ( <cas_desired_total> > 11 )
        <cas_desired_total> = 11
     endif
+    <cas_desired_total> = 12
     if ( <cas_desired_total> < <cas_current_num_specials> )
        <index> = <cas_desired_total>
        <num_to_remove> = ( <cas_current_num_specials> - <cas_desired_total> )

@@ -159,7 +159,11 @@ script WaitWhilstChecking
 endscript
 
 script Ground_Wallpush
-  OnGroundExceptions
+  if GotParam clear_manual_exceptions
+    ClearException Ollie
+    SetException Ex = Ollied Scr = Ollie
+  endif
+
   Init_Wallpush
 
   if Crouched
