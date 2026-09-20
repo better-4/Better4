@@ -35,7 +35,7 @@ LevelNum_Foundry = 0
 LevelNum_Canada = 0
 LevelNum_Rio = 0
 LevelNum_Suburbia = 0
-LevelNum_Airport = 0
+LevelNum_AP = 14
 LevelNum_SkaterIsland = 0
 LevelNum_LA = 12
 LevelNum_Tokyo = 0
@@ -73,7 +73,7 @@ thps3_level_info = [
   { text = "Canada" not_focusable level_num = LevelNum_Canada level = Load_Canada level_info_defaults }
   { text = "Rio" not_focusable level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
   { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults }
-  { text = "Airport" not_focusable level_num = LevelNum_Airport level = Load_Airport level_info_defaults }
+  { text = "Airport" level_num = LevelNum_AP level = Load_AP level_info_defaults }
   { text = "Skater Island" not_focusable level_num = LevelNum_SkaterIsland level = Load_SkaterIsland level_info_defaults }
   { text = "Los Angeles" level_num = LevelNum_LA level = Load_LA level_info_defaults  }
   { text = "Tokyo" not_focusable level_num = LevelNum_Tokyo level = Load_Tokyo level_info_defaults }
@@ -127,6 +127,29 @@ level_vans = {
 }
 
 // THPS3
+
+script Load_AP
+  load_level level_ap
+endscript
+
+level_ap = {
+  structure_name = level_ap
+  load_script = Load_AP
+  name = "Skatepark"
+  level = "AP"
+  qb = "levels\better4\ap\ap.qb"
+  level_qb = "levels\better4\ap\ap_scripts.qb"
+  sky = "Alc_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = AP_Startup
+  goals_script = ap_goals
+  setup_script = ap_setup
+  level_number = LevelNum_AP
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
 
 script Load_LA
   load_level level_la
