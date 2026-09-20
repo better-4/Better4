@@ -16,9 +16,9 @@ colormenu_hue_increment = 5
 colormenu_saturation_increment = 3
 colormenu_value_increment = 2
 colormenu_min_saturation = 0.0
-colormenu_max_saturation = 128.0
+colormenu_max_saturation = 100.0
 colormenu_min_value = 0.0
-colormenu_max_value = 128.0
+colormenu_max_value = 100.0
 script colormenu_focus rgba = [ 128 128 128 50 ]
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
