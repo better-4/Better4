@@ -78,6 +78,7 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
 * Added custom boards (banana, hoverboard, old school, ollie)
 * Added various CAS items from other games (bunched cargos, muska hat, zoom glasses)
 * Added option to change CAS during gameplay (local-only)
+* Added 12th special trick slot
 
 ### Misc
 
