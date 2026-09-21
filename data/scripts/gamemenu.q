@@ -7361,6 +7361,10 @@ script load_textures_to_main_memory
   LoadTexture no_vram_alloc "PanelSprites/comp_tall_line"
   LoadTexture no_vram_alloc "PanelSprites/PA_goals"
   LoadTexture no_vram_alloc "better4/openspy"
+  LoadTexture no_vram_alloc "better4/thps"
+  LoadTexture no_vram_alloc "better4/thps2"
+  LoadTexture no_vram_alloc "better4/thps3"
+  LoadTexture no_vram_alloc "better4/thps4_lm"
 endscript
 script remove_temp_textures_from_vram
   RemoveTextureFromVram no_assert "paused"
