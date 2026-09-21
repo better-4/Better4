@@ -34,16 +34,17 @@ script better4_create_level_select_menu_game
     pos = (320, 240)
   }
 
-  GetStackedScreenElementPos y id = select_skater_mainbar offset = (128, 27)
+  GetStackedScreenElementPos y id = select_skater_mainbar offset = (128, 17)
   CreateScreenElement {
-    type = TextElement
+    type = SpriteElement
     id = level_select_game_text
     parent = level_select_anchor_game
-    font = dialog
-    text = "THPS4"
-    rgba = [ 88 105 112 128 ]
+    // font = dialog
+    // text = "THPS4"
+    // rgba = [ 88 105 112 128 ]
+    texture = thps4_lm
     just = [ center center ]
-    scale = 0.7
+    scale = 0.3
     pos = <pos>
     z_priority = 10
     not_focusable
@@ -53,8 +54,8 @@ script better4_create_level_select_menu_game
     type = SpriteElement
     id = level_select_game_left
     parent = level_select_anchor_game
-    pos = ( <pos> - (33, 0) )
-    scale = (0.5, 0.5)
+    pos = ( <pos> - (56, 0) )
+    scale = (0.7, 0.7)
     texture = left_arrow
     rgba = [ 128 128 128 100 ]
     z_priority = 10
@@ -63,8 +64,8 @@ script better4_create_level_select_menu_game
     type = SpriteElement
     id = level_select_game_right
     parent = level_select_anchor_game
-    pos = ( <pos> + (33, 0) )
-    scale = (0.5, 0.5)
+    pos = ( <pos> + (56, 0) )
+    scale = (0.7, 0.7)
     texture = right_arrow
     rgba = [ 128 128 128 100 ]
     z_priority = 10
@@ -105,26 +106,26 @@ endscript
 
 script better4_level_menu_refresh
   switch level_menu_game_index
-  case 0
-    <text> = "THPS"
+  case 0 // thps1
+    <texture> = thps
     <levels> = thps_level_info
-  case 1
-    <text> = "THPS2"
+  case 1 // thps2
+    <texture> = thps2
     <levels> = thps2_level_info
-  case 2
-    <text> = "THPS3"
+  case 2 // thps3
+    <texture> = thps3
     <levels> = thps3_level_info
-  case 3
-    <text> = "THPS4"
+  case 3 // thps4
+    <texture> = thps4_lm
     <levels> = level_select_menu_level_info
   endswitch
-  Printf "@@ LEVEL_MENU_REFRESH: text=%t" t = <text>
+  Printf "@@ LEVEL_MENU_REFRESH: text=%t" t = <texture>
 
   SetScreenElementProps {
     id = level_select_game_text
-    text = <text>
+    texture = <texture>
   }
-  RemoveParameter text
+  RemoveParameter texture
 
   better4_level_menu_list <...>
 endscript
