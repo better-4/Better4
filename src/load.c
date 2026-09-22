@@ -123,9 +123,9 @@ void patchLoad() {
 	add_path_override("levels\\AP\\AP.scn.Xbx", "levels\\better4\\AP\\AP.scn.Xbx");
 	add_path_override("levels\\AP\\AP.tex.Xbx", "levels\\better4\\AP\\AP.tex.Xbx");
 
-	add_path_override("levels\\LA\\LA.col.Xbx", "levels\\better4\\LA\\LA.col.Xbx");
-	add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
-	add_path_override("levels\\LA\\LA.tex.Xbx", "levels\\better4\\LA\\LA.tex.Xbx");
+    add_path_override("levels\\LA\\LA.col.Xbx", "levels\\better4\\LA\\LA.col.Xbx");
+    add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
+    add_path_override("levels\\LA\\LA.tex.Xbx", "levels\\better4\\LA\\LA.tex.Xbx");
 
 
 	// patchCall(0x0040b50e, (void *)Pip_Load); // ??
