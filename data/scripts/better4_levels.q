@@ -47,7 +47,7 @@ thps_level_info = [
   { text = "Warehouse" not_focusable level_num = LevelNum_Warehouse level = Load_Warehouse level_info_defaults }
   { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults }
   { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults }
-  { text = "Skatepark" under_construction level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
+  { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
   { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults }
   { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults }
   { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults }
