@@ -124,6 +124,31 @@ endscript
 script SkateInOrBail_Out
   ClearPanel_Landed
 endscript
+GRINDTAP_TIME = 1000 
+GRINDTAP_SCORE = 400 
+GRINDTAP_TWEAK = 25 
+GrindTaps_FS = 
+[ 
+ { Trigger = { TripleInOrder , UpRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_CrailSlide_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , DownRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Darkslide_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , DownLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_DoubleBluntSlide2 Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , UpLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_HangTenNoseGrind_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Up , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_NosegrindPivot_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Right , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Salad_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Left , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Hurricane_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Down , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_GrindOverturn_FS Params = { IsExtra = 1 } } 
+] 
+GrindTaps_BS = 
+[ 
+ { Trigger = { TripleInOrder , UpRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_CrailSlide_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , DownRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Darkslide_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , DownLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_DoubleBluntSlide2 Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , UpLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_HangTenNoseGrind_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Up , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_NosegrindPivot_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Right , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Salad_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Down , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_GrindOverturn_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrder , Left , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Hurricane_BS Params = { IsExtra = 1 } } 
+]
 Extra_FS_Grinds =
 [
   { Trigger = { InOrder Triangle Triangle 300 } Scr = Trick_5050_FS Params = { name = 'FS 50-50' IsExtra = yes } }
@@ -160,6 +185,15 @@ script Grind GrindTweak = 7 boardscuff = 0
     RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
   endif
   KillExtraTricks
+  IF NOT GotParam IsATap 
+	IF NOT GotParam IsExtra 
+	  IF ChecksumEquals a = <Extratricks> b = Extra_BS_Grinds 
+		  SetExtraTricks GrindTaps_BS 
+	  ELSE 
+		  SetExtraTricks GrindTaps_FS 
+	  ENDIF 
+	ENDIF 
+  ENDIF
   SetTags state = skater_onrail OutAnim = <OutAnim> initanim = <initanim> Anim = <Anim>
   SetTrickName ""
   SetTrickScore 0
@@ -230,7 +264,11 @@ script Grind GrindTweak = 7 boardscuff = 0
   if GotParam IsSpecial
     SetGrindTweak 36
   else
-    SetGrindTweak <GrindTweak>
+    if gotparam IsATap
+	  SetGrindTweak GRINDTAP_TWEAK
+	 else
+      SetGrindTweak <GrindTweak>
+	endif
   endif
   if GotParam IsExtra
     LaunchExtraMessage
@@ -622,12 +660,12 @@ script Trick_Nosebluntslide_FS_180
   Goto Trick_NoseBluntSlide_FS Params = { NoBlend = yes }
 endscript
 script Trick_Hurricane_BS
-  Grind { name = 'BS Hurricane' score = 400 initanim = BSHurricaneGrind_Init Anim = BSHurricaneGrind_Range OutAnim = BSHurricaneGrind_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = BackwardsGrindBails Nollie = yes IsSpecial OutAnimOnOllie }
+  Grind { name = 'BS Hurricane' score = GRINDTAP_SCORE initanim = BSHurricaneGrind_Init Anim = BSHurricaneGrind_Range OutAnim = BSHurricaneGrind_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = BackwardsGrindBails Nollie = yes OutAnimOnOllie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_Hurricane_FS
-  Grind { name = 'FS Hurricane' score = 400 initanim = FSHurricaneGrind_Init Anim = FSHurricaneGrind_Range OutAnim = FSHurricaneGrind_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall IsSpecial OutAnimOnOllie }
+  Grind { name = 'FS Hurricane' score = GRINDTAP_SCORE initanim = FSHurricaneGrind_Init Anim = FSHurricaneGrind_Range OutAnim = FSHurricaneGrind_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall OutAnimOnOllie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_Hurricane_BS_180
   Rotate
@@ -640,12 +678,12 @@ script Trick_Hurricane_FS_180
   Goto Trick_Hurricane_FS Params = { NoBlend = yes }
 endscript
 script Trick_Darkslide_BS
-  Grind { name = 'BS Darkslide' score = 400 initanim = Darkslide_Init Anim = Darkslide_Range OutAnim = Darkslide_Out type = Slide NoBlend = <NoBlend>
-    GrindBail = BackwardsGrindBails IsSpecial OutAnimOnOllie BoardRotate = yes }
+  Grind { name = 'BS Darkslide' score = GRINDTAP_SCORE initanim = Darkslide_Init Anim = Darkslide_Range OutAnim = Darkslide_Out type = Slide NoBlend = <NoBlend>
+    GrindBail = BackwardsGrindBails OutAnimOnOllie BoardRotate = yes IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_Darkslide_FS
-  Grind { name = 'FS Darkslide' score = 400 initanim = Darkslide_Init Anim = Darkslide_Range OutAnim = Darkslide_Out type = Slide NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall IsSpecial OutAnimOnOllie BoardRotate = yes }
+  Grind { name = 'FS Darkslide' score = GRINDTAP_SCORE initanim = Darkslide_Init Anim = Darkslide_Range OutAnim = Darkslide_Out type = Slide NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall OutAnimOnOllie BoardRotate = yes IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_Darkslide_BS_180
   Rotate
@@ -694,12 +732,12 @@ script Trick_fandangle_FS_180
   Goto Trick_fandangle_FS Params = { NoBlend = yes }
 endscript
 script Trick_CrailSlide_BS
-  Grind { name = 'BS Crail Slide' score = 500 initanim = CrailSlide_Init Anim = CrailSlide_Range OutAnim = CrailSlide_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall IsSpecial Extratricks = Extra_TailGrinds_BS OutAnimOnOllie }
+  Grind { name = 'BS Crail Slide' score = GRINDTAP_SCORE initanim = CrailSlide_Init Anim = CrailSlide_Range OutAnim = CrailSlide_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall Extratricks = Extra_TailGrinds_BS OutAnimOnOllie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_CrailSlide_FS
-  Grind { name = 'FS Crail Slide' score = 500 initanim = CrailSlide_Init Anim = CrailSlide_Range OutAnim = CrailSlide_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall IsSpecial Extratricks = Extra_TailGrinds_FS OutAnimOnOllie }
+  Grind { name = 'FS Crail Slide' score = GRINDTAP_SCORE initanim = CrailSlide_Init Anim = CrailSlide_Range OutAnim = CrailSlide_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall Extratricks = Extra_TailGrinds_FS OutAnimOnOllie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_CrailSlide_BS_180
   Rotate
@@ -712,12 +750,12 @@ script Trick_CrailSlide_FS_180
   Goto Trick_CrailSlide_FS Params = { NoBlend = yes }
 endscript
 script Trick_GrindOverturn_BS
-  Grind { name = 'BS 5-0 Overturn' score = 500 initanim = GrindOverturn_Init Anim = GrindOverturn_Range OutAnim = GrindOverturn_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall IsSpecial Extratricks = Extra_TailGrinds_BS OutAnimOnOllie }
+  Grind { name = 'BS 5-0 Overturn' score = GRINDTAP_SCORE initanim = GrindOverturn_Init Anim = GrindOverturn_Range OutAnim = GrindOverturn_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall Extratricks = Extra_TailGrinds_BS OutAnimOnOllie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_GrindOverturn_FS
-  Grind { name = 'FS 5-0 Overturn' score = 500 initanim = GrindOverturn_Init Anim = GrindOverturn_Range OutAnim = GrindOverturn_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall IsSpecial Extratricks = Extra_TailGrinds_FS OutAnimOnOllie }
+  Grind { name = 'FS 5-0 Overturn' score = GRINDTAP_SCORE initanim = GrindOverturn_Init Anim = GrindOverturn_Range OutAnim = GrindOverturn_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall Extratricks = Extra_TailGrinds_FS OutAnimOnOllie  IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_GrindOverturn_BS_180
   Rotate
@@ -730,12 +768,12 @@ script Trick_GrindOverturn_FS_180
   Goto Trick_GrindOverturn_FS Params = { NoBlend = yes }
 endscript
 script Trick_HangTenNoseGrind_BS
-  Grind { name = 'Hang Ten Nosegrind' score = 500 initanim = HangTenNoseGrind_Init Anim = HangTenNoseGrind_Range OutAnim = HangTenNoseGrind_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall Extratricks = Extra_NoseGrinds_BS IsSpecial Nollie }
+  Grind { name = 'Hang Ten Nosegrind' score = GRINDTAP_SCORE initanim = HangTenNoseGrind_Init Anim = HangTenNoseGrind_Range OutAnim = HangTenNoseGrind_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall Extratricks = Extra_NoseGrinds_BS Nollie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_HangTenNoseGrind_FS
-  Grind { name = 'Hang Ten Nosegrind' score = 500 initanim = HangTenNoseGrind_Init Anim = HangTenNoseGrind_Range OutAnim = HangTenNoseGrind_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall Extratricks = Extra_NoseGrinds_FS IsSpecial Nollie }
+  Grind { name = 'Hang Ten Nosegrind' score = GRINDTAP_SCORE initanim = HangTenNoseGrind_Init Anim = HangTenNoseGrind_Range OutAnim = HangTenNoseGrind_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall Extratricks = Extra_NoseGrinds_FS Nollie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_HangTenNoseGrind_BS_180
   Rotate
@@ -793,8 +831,8 @@ script Trick_BigHitter_FS_180
   Goto Trick_BigHitter_BS_180
 endscript
 script Trick_NosegrindPivot_BS Extratricks = Extra_TailGrinds_FS
-  Grind { name = 'Nosegrind to Pivot' score = 500 initanim = NosegrindPivot_Init Anim = NosegrindPivot_Range OutAnim = NosegrindPivot_Out type = Grind NoBlend = <NoBlend>
-    GrindBail = FiftyFiftyFall IsSpecial BoardRotate = yes FlipAfter = 50 Extratricks = <Extratricks> EarlyOut = Init_Tailgrind OutAnimOnOllie }
+  Grind { name = 'Nosegrind to Pivot' score = GRINDTAP_SCORE initanim = NosegrindPivot_Init Anim = NosegrindPivot_Range OutAnim = NosegrindPivot_Out type = Grind NoBlend = <NoBlend>
+    GrindBail = FiftyFiftyFall BoardRotate = yes FlipAfter = 50 Extratricks = <Extratricks> EarlyOut = Init_Tailgrind OutAnimOnOllie IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_NosegrindPivot_FS
   Goto Trick_NosegrindPivot_BS
@@ -912,12 +950,12 @@ script Trick_Sobriety_FS_180
   Goto Trick_Sobriety_BS_180
 endscript
 script Trick_Salad_FS name = 'FS Salad'
-  Grind { name = <name> score = 125 GrindTweak = 9 initanim = FSSaladGrind_Init Anim = FSSaladGrind_range type = Grind NoBlend = <NoBlend>
-    GrindBail = Nutter Extratricks = Extra_TailGrinds_FS IsSpecial IsExtra = <IsExtra> }
+  Grind { name = <name> score = GRINDTAP_SCORE GrindTweak = 9 initanim = FSSaladGrind_Init Anim = FSSaladGrind_range type = Grind NoBlend = <NoBlend>
+    GrindBail = Nutter Extratricks = Extra_TailGrinds_FS IsExtra = <IsExtra> IsATap }
 endscript
 script Trick_Salad_BS name = 'BS Salad'
-  Grind { name = <name> score = 125 GrindTweak = 9 initanim = BSSaladGrind_Init Anim = BSSaladGrind_range type = Grind NoBlend = <NoBlend>
-    GrindBail = Nutter Extratricks = Extra_TailGrinds_BS IsSpecial IsExtra = <IsExtra> }
+  Grind { name = <name> score = GRINDTAP_SCORE GrindTweak = 9 initanim = BSSaladGrind_Init Anim = BSSaladGrind_range type = Grind NoBlend = <NoBlend>
+    GrindBail = Nutter Extratricks = Extra_TailGrinds_BS IsExtra = <IsExtra> IsATap }
 endscript
 script Trick_Salad_FS_180
   FlipAndRotate
@@ -1089,8 +1127,8 @@ script Trick_BballSlide2_180
   BackwardsGrind Grind = Trick_BballSlide2
 endscript
 script Trick_DoubleBluntSlide2
-  Grind { name = 'Double Blunt Slide' score = 500 initanim = DoubleBlunt_Init Anim = DoubleBlunt_Idle Idle type = Slide NoBlend = <NoBlend>
-    GrindBail = BackwardsGrindBails Extratricks = Extra_TailGrinds_FS IsSpecial }
+  Grind { name = 'Double Blunt Slide' score = GRINDTAP_SCORE initanim = DoubleBlunt_Init Anim = DoubleBlunt_Idle Idle type = Slide NoBlend = <NoBlend>
+    GrindBail = BackwardsGrindBails Extratricks = Extra_TailGrinds_FS IsATap IsExtra = <IsExtra> }
 endscript
 script Trick_DoubleBluntSlide2_180
   BackwardsGrind Grind = Trick_DoubleBluntSlide2
