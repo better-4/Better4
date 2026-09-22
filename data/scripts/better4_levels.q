@@ -8,7 +8,7 @@
 // * Add path overrides in Better4 repo in `src/load.c` for col/scn/tex
 
 // THPS1
-LevelNum_Warehouse = 0
+LevelNum_Warehouse = 15
 LevelNum_School = 0
 LevelNum_Mall = 0
 LevelNum_Vans = 13
@@ -44,7 +44,7 @@ LevelNum_CruiseShip = 0
 level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_11_Locked }
 
 thps_level_info = [
-  { text = "Warehouse" not_focusable level_num = LevelNum_Warehouse level = Load_Warehouse level_info_defaults }
+  { text = "Warehouse" under_construction level_num = LevelNum_Warehouse level = Load_Ware level_info_defaults }
   { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults }
   { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults }
   { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
@@ -102,6 +102,29 @@ level_defaults = {
 }
 
 // THPS
+
+script Load_Ware
+  load_level level_ware
+endscript
+
+level_ware = {
+  structure_name = level_ware
+  load_script = Load_Ware
+  name = "Warehouse"
+  level = "Ware"
+  qb = "levels\Ware\Ware.qb"
+  level_qb = "levels\Ware\Ware_scripts.qb"
+  sky = "Alc_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = Ware_Startup
+  goals_script = ware_goals
+  setup_script = ware_setup
+  level_number = LevelNum_Ware
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
 
 script Load_Vans
   load_level level_vans
