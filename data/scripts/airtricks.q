@@ -1,3 +1,4 @@
+should_do_nollie_tre = 0
 SpecialTricks =
 [
   { Trigger = { TripleInOrder Up right Square 400 } TrickSlot = SpAir_U_R_Square }
@@ -243,9 +244,12 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   endif
   if InNollie
     if GotParam Nollie
-      if not GotParam TreNollieFix
-        NollieOff
+      if GotParam TreNollieFix
+        Change should_do_nollie_tre = 1
+      else
+        Change should_do_nollie_tre = 0
       endif
+      NollieOff
       PlayAnim Anim = <Nollie> BlendPeriod = 0.3 speed = <speed>
     else
       PlayAnim Anim = <Anim> BlendPeriod = 0.3 speed = <speed>
@@ -253,7 +257,16 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   else
     if GotParam UseCurrent
       Printf "USING THE CURRENT FRAME"
-      PlayAnim Anim = <Anim> From = Current BlendPeriod = 0.3 speed = <speed>
+      if GotParam TreNollieFix
+        if ( should_do_nollie_tre = 1 )
+          Change should_do_nollie_tre = 0
+          PlayAnim Anim = Nollie360Flip From = Current BlendPeriod = 0.3 speed = <speed>
+        else
+          PlayAnim Anim = <Anim> From = Current BlendPeriod = 0.3 speed = <speed>
+        endif
+      else
+        PlayAnim Anim = <Anim> From = Current BlendPeriod = 0.3 speed = <speed>
+      endif
     else
       PlayAnim Anim = <Anim> BlendPeriod = 0.3 speed = <speed>
     endif

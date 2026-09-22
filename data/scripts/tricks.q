@@ -21,6 +21,7 @@ script SkaterInit
   BashOff
   NollieOff 
   PressureOff
+  Change should_do_nollie_tre = 0
   NotifyBailDone
   Obj_KillSpawnedScript name = BailBoardControl
   SwitchOnBoard
