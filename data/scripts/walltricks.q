@@ -113,6 +113,9 @@ WallRideTricks =
 WallRideTricks_Single =
 [ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
 script Trick_WallPlant
+  if ( better4_control_boostplant_value = off )
+    ClearTrickQueue
+  endif
   InAirExceptions
   Vibrate actuator = 1 percent = 50 duration = 0.1
   PlayAnim Anim = Boneless BlendPeriod = 0.0

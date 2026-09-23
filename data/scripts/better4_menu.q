@@ -336,6 +336,7 @@ script better4_onwall_menu
   better4_create_menu_control better4_control_wallspin
   better4_create_menu_control better4_control_wallridebail
   better4_create_menu_control better4_control_wallieplant
+  better4_create_menu_control better4_control_boostplant
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
 endscript

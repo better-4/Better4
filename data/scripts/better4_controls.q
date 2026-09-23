@@ -935,6 +935,21 @@ script better4_control_updatedcollision_change
   SetUpdatedCollision index = better4_control_updatedcollision_index
 endscript
 
+better4_control_boostplant_index = 1
+better4_control_boostplant_value = on
+better4_control_boostplant = {
+  id = better4_control_boostplant_id
+  index_name = better4_control_boostplant_index
+  value_name = better4_control_boostplant_value
+  text = "Boostplant"
+  ini_key = "Boostplant"
+  help = "Toggle whether boostplants are enabled or disabled."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -971,6 +986,7 @@ script better4_controls_init
   better4_control_init better4_control_menudemo
   better4_control_init better4_control_respawn_on_newrun
   better4_control_init better4_control_updatedcollision
+  better4_control_init better4_control_boostplant
 endscript
 
 script better4_control_init
