@@ -10,6 +10,6 @@
 	path = vendor/UniSpySDK
 	url = git@github.com:better-4/UniSpySDK.git
 [submodule "vendor/nx-tools"]
-	path = vendor/nx-tools
-	url = git@github.com:1borgy/nx-tools.git
+	path = vendor/nx
+	url = git@github.com:1borgy/nx.git
 	branch = dev
