@@ -74,20 +74,20 @@ RUN curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh \
     && rm /tmp/dotnet-install.sh
 
 ########################################
-FROM lukemathwalker/cargo-chef:latest-rust-1 AS chef-nx-tools
-RUN mkdir -p /src/vendor/nx-tools
-WORKDIR /src/vendor/nx-tools
+FROM lukemathwalker/cargo-chef:latest-rust-1 AS chef-nx
+RUN mkdir -p /src/vendor/nx
+WORKDIR /src/vendor/nx
 
-FROM chef-nx-tools AS plan-nx-tools
-COPY vendor/nx-tools .
+FROM chef-nx AS plan-nx
+COPY vendor/nx .
 RUN cargo chef prepare --recipe-path recipe.json
 
-FROM chef-nx-tools AS build-nx-tools
-COPY --from=plan-nx-tools /src/vendor/nx-tools/recipe.json recipe.json
+FROM chef-nx AS build-nx
+COPY --from=plan-nx /src/vendor/nx/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
-COPY vendor/nx-tools .
+COPY vendor/nx .
 RUN cargo build --release --bin nx-cli \
-    && mkdir -p /opt/nx-tools && cp ./target/release/nx-cli /opt/nx-tools/nx-cli
+    && mkdir -p /opt/nx && cp ./target/release/nx-cli /opt/nx/nx-cli
 
 ########################################
 FROM base AS toolchain
@@ -184,17 +184,17 @@ RUN mkdir -p "/out/data/scripts/better4" \
 
 ########################################
 FROM toolchain AS build-anims
-COPY --from=build-nx-tools /opt/nx-tools /opt/nx-tools
+COPY --from=build-nx /opt/nx /opt/nx
 
 COPY data/anims data/anims
-COPY vendor/nx-tools/assets/stdkey vendor/nx-tools/assets/stdkey
+COPY vendor/nx/assets/stdkey vendor/nx/assets/stdkey
 
 RUN mkdir -p "/out/data/anims/better4" \
-    && /opt/nx-tools/nx-cli anim convert-bulk \
+    && /opt/nx/nx-cli anim convert-bulk \
          --input-dir data/anims/thug --output-dir /out/data/anims/better4 \
          --in-game thug --out-game thps4 \
-         --qkeys vendor/nx-tools/assets/stdkey/thug/standardkeyQ.bin \
-         --tkeys vendor/nx-tools/assets/stdkey/thug/standardkeyT.bin
+         --qkeys vendor/nx/assets/stdkey/thug/standardkeyQ.bin \
+         --tkeys vendor/nx/assets/stdkey/thug/standardkeyT.bin
 
 ########################################
 FROM toolchain AS build-data
