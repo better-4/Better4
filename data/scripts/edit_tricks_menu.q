@@ -966,44 +966,73 @@ script special_tricks_menu_add_type
     not_focusable
   }
 endscript
-SCRIPT special_tricks_menu_unassign_trick 
-	edit_tricks_menu_1_index = <index> 
-	BindTrickToKeyCombo { 
-		special 
-		index = ( <index> - 1 ) 
-		key_combo = Unassigned 
-		trick = Unassigned 
-		update_mappings = 1 
-	} 
-	GetCurrentSkaterProfileIndex 
-	IF InSplitScreenGame 
-		printf "in a split screen game" 
-	ELSE 
-		UpdateTrickMappings Skater = <currentSkaterProfileIndex> 
-	ENDIF 
-	GoalManager_ReplaceTrickText all 
-	edit_tricks_menu_back_from_trick_list 
-ENDSCRIPT
 
-SCRIPT edit_tricks_menu_unassign_trick 
-	edit_tricks_menu_1_index = <index> 
-	IF GotParam highlight_script 
-		RunScriptOnScreenElement id = <id> <highlight_script> params = { highlight_bar_scale = <highlight_bar_scale> } 
-	ENDIF 
-	BindTrickToKeyCombo { 
-		key_combo = <key_combo> 
-		trick = Unassigned 
-		update_mappings = 1 
-	} 
-	GetCurrentSkaterProfileIndex 
-	IF InSplitScreenGame 
-		printf "in a split screen game" 
-	ELSE 
-		UpdateTrickMappings Skater = <currentSkaterProfileIndex> 
-	ENDIF 
-	GoalManager_ReplaceTrickText all 
-	edit_tricks_menu_back_from_trick_list 
-ENDSCRIPT
+script special_tricks_menu_unassign_trick
+	edit_tricks_menu_1_index = <index>
+	BindTrickToKeyCombo {
+		special
+		index = ( <index> - 1 )
+		key_combo = Unassigned
+		trick = Unassigned
+		update_mappings = 1
+	}
+	GetCurrentSkaterProfileIndex
+	if InSplitScreenGame
+		printf "in a split screen game"
+  else
+		UpdateTrickMappings Skater = <currentSkaterProfileIndex>
+	endif
+	GoalManager_ReplaceTrickText all
+	edit_tricks_menu_back_from_trick_list
+  PlaySound MenuSelect vol = 100
+endscript
+
+script edit_tricks_menu_unassign_trick
+  // XXX (ellie): unassigning a single-tap trick (e.g. Air_SquareL) causes crashes when
+  // hosting on college. Disable unassigning these tricks until root cause is determined.
+  <can_unassign> = 0
+  switch <key_combo>
+  case Air_U_U_Circle
+    <can_unassign> = 1
+  case Air_D_D_Circle
+    <can_unassign> = 1
+  case Air_L_L_Circle
+    <can_unassign> = 1
+  case Air_R_R_Circle
+    <can_unassign> = 1
+  case Air_U_U_Square
+    <can_unassign> = 1
+  case Air_D_D_Square
+    <can_unassign> = 1
+  case Air_L_L_Square
+    <can_unassign> = 1
+  case Air_R_R_Square
+    <can_unassign> = 1
+  endswitch
+  if ( <can_unassign> )
+    edit_tricks_menu_1_index = <index>
+    if GotParam highlight_script
+      RunScriptOnScreenElement id = <id> <highlight_script> params = { highlight_bar_scale = <highlight_bar_scale> }
+    endif
+    BindTrickToKeyCombo {
+      key_combo = <key_combo>
+      trick = Unassigned
+      update_mappings = 1
+    }
+    GetCurrentSkaterProfileIndex
+    if InSplitScreenGame
+      printf "in a split screen game"
+    else
+      UpdateTrickMappings Skater = <currentSkaterProfileIndex>
+    endif
+    GoalManager_ReplaceTrickText all
+    edit_tricks_menu_back_from_trick_list
+    PlaySound MenuSelect vol = 100
+  else
+    PlaySound GUI_buzzer01 vol = 100
+  endif
+endscript
+
 script special_tricks_menu_add_trick
   if GotParam first_item
     focus_params = { first_item }
