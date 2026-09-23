@@ -9,6 +9,7 @@ script launch_boardshop_menu
     Change edit_skater_menu_level_1_index = <parent_index>
   endif
   KillSpawnedScript name = Skateshop_slideshow
+  skater:Obj_MoveToNode name = TRG_SS_BoardShop orient
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_BoardSelect play_hold
   if GotParam previous_menu
@@ -906,6 +907,7 @@ script boardshop_menu_exit
     create_secrets_menu
   else
     create_edit_skater_menu <edit_skater_menu_params>
+	skater:Obj_MoveToNode name = TRG_SS_Appearance orient
   endif
 endscript
 script boardshop_deck_design_focus
