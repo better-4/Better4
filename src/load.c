@@ -115,9 +115,9 @@ void patchLoad() {
 	// Always override new levels
 	// THPS
 
-//  add_path_override("levels\\Ware\\Ware.col.Xbx", "levels\\better4\\Ware\\Ware.col.Xbx");
-//	add_path_override("levels\\Ware\\Ware.scn.Xbx", "levels\\better4\\Ware\\Ware.scn.Xbx");
-//	add_path_override("levels\\Ware\\Ware.tex.Xbx", "levels\\better4\\Ware\\Ware.tex.Xbx");
+    add_path_override("levels\\Ware\\Ware.col.Xbx", "levels\\better4\\Ware\\Ware.col.Xbx");
+	add_path_override("levels\\Ware\\Ware.scn.Xbx", "levels\\better4\\Ware\\Ware.scn.Xbx");
+	add_path_override("levels\\Ware\\Ware.tex.Xbx", "levels\\better4\\Ware\\Ware.tex.Xbx");
 
 	add_path_override("levels\\Vans\\Vans.col.Xbx", "levels\\better4\\Vans\\Vans.col.Xbx");
 	add_path_override("levels\\Vans\\Vans.scn.Xbx", "levels\\better4\\Vans\\Vans.scn.Xbx");
