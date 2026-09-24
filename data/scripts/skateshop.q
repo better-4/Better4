@@ -1835,9 +1835,9 @@ script create_ss_menu
     DestroyScreenElement id = current_menu_anchor
   endif
   KillSkaterCamAnim all
-  PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
+  PlaySkaterCamAnim name = SS_AppSkaterSelect play_hold
   skater:BlendPeriodOut 0.0
-  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_Appearance orient
   Kill name = SSO_Fence05
   Create name = SSO_Fence02
   if GotParam change_gamemode
@@ -2266,7 +2266,7 @@ script skateshop_practice_quit
   GoalManager_HidePoints
   GoalManager_HideGoalPoints
   skater:BlendPeriodOut 0.0
-  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_Appearance orient
   MakeSkaterGoto SkateshopAI params = { }
   launch_ss_menu
 endscript
@@ -2294,8 +2294,8 @@ script launch_select_skater_menu
       Change goto_secret_shop = 0
     endif
     KillSkaterCamAnim all
-    PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
-    skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+    PlaySkaterCamAnim name = SS_AppSkaterSelect play_hold
+    skater:Obj_MoveToNode name = TRG_SS_Appearance orient
     if not GotParam From2p
     else
       Printf "GOTPARAM FROM 2p"
@@ -4677,7 +4677,7 @@ script edit_skater_menu_exit
       if IsTrue came_to_cas_menu_from_main_menu
         create_pre_cas_menu
       else
-        skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+        skater:Obj_MoveToNode name = TRG_SS_Appearance orient
         launch_ss_menu
       endif
     else
