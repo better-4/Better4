@@ -5164,7 +5164,7 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesL_items }
   }
   {
-    text = 'L. Accessories Color'
+    text = 'L. Accessory Color'
     submenu = accessoriesL_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesL_items }
@@ -5178,12 +5178,26 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesR_items }
   }
   {
-    text = 'R. Accessories Color'
+    text = 'R. Accessory Color'
     submenu = accessoriesR_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesR_items }
     is_enabled_script = check_if_part_colorable
     is_enabled_params = { parts = [ accessoriesR ] }
+  }
+  {
+    text = 'Misc Items'
+    submenu = accessoriesM_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+  }
+  {
+    text = 'Misc Item Color'
+    submenu = accessoriesM_color_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+    is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ accessoriesM accessoriesM_f ] }
   }
 ]
 edit_skater_leg_options = [
