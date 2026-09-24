@@ -33,7 +33,7 @@ LevelNum_Chopper = 0
 // THPS3
 LevelNum_Foundry = 0
 LevelNum_Canada = 0
-LevelNum_Rio = 0
+LevelNum_Rio = 16
 LevelNum_Suburbia = 0
 LevelNum_AP = 14
 LevelNum_SkaterIsland = 0
@@ -71,7 +71,7 @@ thps2_level_info = [
 thps3_level_info = [
   { text = "Foundry" not_focusable level_num = LevelNum_Foundry level = Load_Foundry level_info_defaults }
   { text = "Canada" not_focusable level_num = LevelNum_Canada level = Load_Canada level_info_defaults }
-  { text = "Rio" not_focusable level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
+  { text = "Rio" under_construction level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
   { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults }
   { text = "Airport" under_construction level_num = LevelNum_AP level = Load_AP level_info_defaults }
   { text = "Skater Island" not_focusable level_num = LevelNum_SkaterIsland level = Load_SkaterIsland level_info_defaults }
@@ -150,6 +150,29 @@ level_vans = {
 }
 
 // THPS3
+
+script Load_Rio
+  load_level level_Rio
+endscript
+
+level_Rio = {
+  structure_name = level_Rio
+  load_script = Load_Rio
+  name = "Rio"
+  level = "Rio"
+  qb = "levels\Rio\Rio.qb"
+ // level_qb = "levels\Rio\Rio_scripts.qb"
+  sky = "Alc_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = Rio_Startup
+  goals_script = Rio_goals
+  setup_script = Rio_setup
+  level_number = LevelNum_Rio
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
 
 script Load_AP
   load_level level_ap
