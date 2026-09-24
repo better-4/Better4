@@ -329,10 +329,22 @@ script DoFormatCard
   endif
 endscript
 script launch_files_menu
-  PS2CasCheckAndConversion
-  Wait 1 gameframe
-  PS2PrkCheckAndConversion
-  Wait 1 gameframe
+  if not GotParam SkipPS2SaveCheck
+    if ( (PS2CasCheckAndConversion) or (PS2PrkCheckAndConversion ) )
+      Wait 1 gameframe
+      create_snazzy_dialog_box {
+        title = 'Notice'
+        text = 'New PS2 saves have been converted!'
+        pad_back_script = launch_files_menu
+        pad_back_params = { SkipPS2SaveCheck <...> } 
+        buttons = [
+          { font = small text = 'Ok' pad_choose_script = launch_files_menu pad_choose_params = { SkipPS2SaveCheck <...> } }
+        ]
+      }
+      return
+    endif
+    Wait 1 gameframe
+  endif
   DebugFn 766
   memcard_menus_cleanup
   create_files_menu <...>
@@ -422,9 +434,7 @@ script create_files_menu pos_tweak = (-20, -45)
           Goto mcmess_ErrorNotEnoughRoomButTHPSFilesExist params = { FileType = <FileType> SpaceRequired = <SpaceRequired> }
         endif
       else
-        if not GotParam FilesLimitReached
-           <add_createnew_option> = 1
-        endif
+        <add_createnew_option> = 1
       endif
     endif
     if GotParam add_createnew_option
@@ -743,12 +753,12 @@ script files_menu_add_bottom_bar
       f = <displayed_space_available>
     }
   endswitch
-  GetMaxTHPS4FilesAllowed
+  //GetMaxTHPS4FilesAllowed
+  GetProperSaveFileCount
   FormatText {
     TextName = RightText
-    'Files: %t/%m'
-    t = <TotalTHPS4FilesOnCard>
-    m = <MaxTHPS4FilesAllowed>
+    'Files: %t'
+    t = <proper_file_count>
   }
    <text_bg_rgba> = [ 0 0 0 50 ]
    <text_offset> = (5, 2)
