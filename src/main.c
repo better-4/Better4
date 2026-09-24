@@ -1,6 +1,8 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
+#include "online/host_options.h"
+#include "online/net_handlers.h"
 #include "security.h"
 #include "updater.h"
 #include "wallpush.h"
@@ -217,6 +219,8 @@ void patchBetter4() {
 	patchLoad();
 	patchLevelLimit();
 	patchPoolSizes();
+	patchNetHandlers();
+	patchHostOptions();
 }
 
 void better4Main() {

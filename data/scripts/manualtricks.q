@@ -207,7 +207,7 @@ script Manual BlendPeriod = 0.3
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = Skitched Scr = Skitch
 
-  if ( better4_control_wallpush_value = on )
+  if ( ( better4_control_wallpush_value = on ) and ( better4_modifier_disablewallpush_value = off ) )
     if GotParam AllowWallpush
       if GotParam Nollie
         SetException Ex = Wallpush Scr = Manual_Wallpush
@@ -230,7 +230,11 @@ script Manual BlendPeriod = 0.3
     if GotParam IsExtra
       SetManualTricks NoTricks
     else
-      SetManualTricks NoTricks Special = SpecialManualTricks
+      if ( better4_modifier_disablemanual_value = on )
+        SetManualTricks NoTricks
+      else
+        SetManualTricks NoTricks Special = SpecialManualTricks
+      endif
     endif
   endif
   StartBalanceTrick
@@ -473,7 +477,7 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
     SetException Ex = OffMeterBottom Scr = <OffMeterBottom> params = { <...> }
   endif
 
-  if ( better4_control_wallpush_value = on )
+  if ( ( better4_control_wallpush_value = on ) and ( better4_modifier_disablewallpush_value = off ) )
     if GotParam AllowWallpush
       if GotParam Nollie
         SetException Ex = Wallpush Scr = Manual_Wallpush

@@ -10,6 +10,7 @@ script load_permanent_prefiles
 endscript
 script load_permanent_assets
   better4_controls_init
+  better4_modifiers_init
   SetDefaultPermanent 1
   SetReferenceChecksum 0
   LoadPreFile "anims.pre"

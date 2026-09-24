@@ -146,10 +146,14 @@ script OnGroundExceptions
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = Skitched Scr = Skitch
   SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBail
-  SetException Ex = Wallpush Scr = Ground_Wallpush
+  if ( ( better4_control_wallpush_value = on ) and ( better4_modifier_disablewallpush_value = off ) )
+    SetException Ex = Wallpush Scr = Ground_Wallpush
+  endif
   SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
-  SetManualTricks special = SpecialManualTricks GroundManualTricks
+  if ( better4_modifier_disablemanual_value = off )
+    SetManualTricks special = SpecialManualTricks GroundManualTricks
+  endif
   SetTags state = skater_onground
   VibrateOff
   SwitchOnBoard
@@ -187,7 +191,9 @@ script InAirExceptions
   SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBailAir CallInsteadofGoto
   SetSkaterAirTricks
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
-  SetManualTricks special = SpecialManualTricks ManualTricks
+  if ( better4_modifier_disablemanual_value = off )
+    SetManualTricks special = SpecialManualTricks ManualTricks
+  endif
   SetTags state = skater_inair
   VibrateOff
   EnablePlayerInput
@@ -695,7 +701,9 @@ script OnGroundNollieAI
   OnGroundExceptions
   SetException Ex = Ollied Scr = Nollie
   SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
-  SetManualTricks special = SpecialManualTricks GroundManualTricks
+  if ( better4_modifier_disablemanual_value = off )
+    SetManualTricks special = SpecialManualTricks GroundManualTricks
+  endif
   NollieOn
   begin
     if LeftPressed
@@ -961,7 +969,9 @@ script Land2 RevertTime = 5
   if LandedFromVert
     OverrideCancelGround
     Obj_ClearFlag FLAG_SKATER_MANUALCHEESE
-    SetExtraTricks tricks = better4_control_revert_value Duration = 5
+    if ( better4_modifier_disablerevert_value = off )
+      SetExtraTricks tricks = better4_control_revert_value Duration = 5
+    endif
   else
     if backwards
       FlipAndRotate
@@ -1022,7 +1032,9 @@ script Land2 RevertTime = 5
   endif
   ClearTrickQueue
   ClearEventBuffer buttons = [ X ]
-  SetManualTricks special = SpecialManualTricks ManualTricks
+  if ( better4_modifier_disablemanual_value = off )
+    SetManualTricks special = SpecialManualTricks ManualTricks
+  endif
   OnGroundExceptions_NoEndRun
   OnExceptionRun Landout
   if GotParam NoReverts

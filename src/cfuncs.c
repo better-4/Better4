@@ -5,10 +5,12 @@
 #include "load.h"
 #include "online.h"
 #include "online/client.h"
+#include "online/host_options.h"
+#include "online/lobby_list.h"
+#include "online/net_handlers.h"
 #include "online/player_list.h"
 #include "online/server.h"
 #include "online/server_list.h"
-#include "online/lobby_list.h"
 #include "version.h"
 #include "wallpush.h"
 
@@ -22,7 +24,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 46
+#define BETTER4_NUM_CFUNCS 49
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -95,6 +97,7 @@ void addCFuncs() {
 	addCFunc("CancelWallpush", (void *)CFunc_CancelWallpush);
 	addCFunc("SetUpdatedCollision", (void *)CFunc_SetUpdatedCollision);
 	addCFunc("FillPlayerListMenu", (void *)CFunc_FillPlayerListMenu);
+	addCFunc("ChangeGameModifier", (void *)CFunc_ChangeGameModifier);
 }
 
 void printCFuncs() {

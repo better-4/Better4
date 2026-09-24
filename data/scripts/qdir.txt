@@ -206,3 +206,5 @@ better4/better4_levels.qb
 better4/better4_level_menu.qb
 better4/better4_decks.qb
 better4/better4_griptapes.qb
+better4/better4_host_options.qb
+better4/better4_modifiers.qb
