@@ -21,25 +21,26 @@ struct Net_Dispatcher *Net_App_GetDispatcher(Net_App *this);
 void Net_App_EnqueueMessage(
     Net_App *this,
     void *handle,
-    uint8_t unk1,
-    uint32_t unk2,
-    uint32_t *unk3,
-    int unk4,
-    int unk5,
-    uint8_t unk6,
-    uint8_t unk7,
-    int unk8
+    uint8_t msg_id,
+    uint32_t len,
+    void *data,
+    int priority,
+    int queue_type, // ?
+    uint8_t group_id, // ?
+    uint8_t singular, // ?
+    int delay // ?
 );
+
 void Net_App_EnqueueMessageToServer(
     Net_App *this,
-    uint8_t unk1,
-    uint32_t unk2,
-    uint32_t *unk3,
-    int unk4,
-    int unk5,
-    uint8_t unk6,
-    uint8_t unk7,
-    int unk8
+    uint8_t msg_id,
+    uint32_t len,
+    void *data,
+    int priority,
+    int queue_type, // ?
+    uint8_t group_id, // ?
+    uint8_t singular, // ?
+    int delay // ?
 );
 
 #endif

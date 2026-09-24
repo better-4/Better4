@@ -50,6 +50,8 @@ void patchNetHandlers() {
 	patchCall(0x00500aa1, (void *)Net_Dispatcher_AddHandler_Wrapper);
 
     // ScriptJoinServer
+    patchCall(0x00483db7, (void *)Mdl_Skate_AddNetworkMsgHandlers);
+    // GameNet::Manager::s_join_state_code
     patchCall(0x0050d7c1, (void *)Mdl_Skate_AddNetworkMsgHandlers);
     // ScriptStartServer
     patchCall(0x0050d6b3, (void *)Mdl_Skate_StartServer);
@@ -65,9 +67,10 @@ int __cdecl CFunc_B4PingClient(CStruct* params) {
     int i = 0;
 	while (current_player != 0) {
         void *handle = GameNet_PlayerInfo_GetConnHandle(current_player);
-        printLog("SENDING PING TO CLIENT i=%d player_info=%p handle=%p\n", i, current_player, handle);
-        Net_App_EnqueueMessage(server, handle, MSG_ID_PING, 0, 0, 0x80, 2, '\b', 0, 0);
+        printLog("SENDING PING TO CLIENT i=%d name=%s player_info=%p handle=%p\n", i, current_player->name, current_player, handle);
+        Net_App_EnqueueMessage(server, handle, MSG_ID_PING, 0, 0, 0x80, 0, 0, 0, 0);
         current_player = GameNet_Manager_NextPlayerInfo(gamenet_manager, &search, 1);
+        i += 1;
 	}
 
 	return 1;
