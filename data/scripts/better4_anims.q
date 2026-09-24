@@ -88,6 +88,14 @@ script better4_anim_debug
     MakeSkaterGoto better4_anim_trigger params = <...>
 endscript
 
+script better4_ping_client
+    B4PingClient
+endscript
+
+script better4_ping_server
+    B4PingServer
+endscript
+
 script better4_anim_trigger
     printf "Animation Started"
     SetRollingFriction 100

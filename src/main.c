@@ -1,6 +1,7 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
+#include "net_handlers.h"
 #include "security.h"
 #include "updater.h"
 #include "wallpush.h"
@@ -63,6 +64,7 @@ void patchBetter4() {
 	patchStrcpy();
 	patchWallpush();
 	patchLoad();
+	patchNetHandlers();
 }
 
 void better4Main() {
