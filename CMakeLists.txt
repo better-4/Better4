@@ -78,6 +78,8 @@ add_library(better4 SHARED
     "${SRC}/online/server.h"
     "${SRC}/online/server_list.c"
     "${SRC}/online/server_list.h"
+    "${SRC}/ps2conversion.h"
+    "${SRC}/ps2conversion.c"
 
 )
 target_include_directories(better4 PUBLIC

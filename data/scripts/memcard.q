@@ -329,6 +329,10 @@ script DoFormatCard
   endif
 endscript
 script launch_files_menu
+  PS2CasCheckAndConversion
+  Wait 1 gameframe
+  PS2PrkCheckAndConversion
+  Wait 1 gameframe
   DebugFn 766
   memcard_menus_cleanup
   create_files_menu <...>

@@ -10,6 +10,7 @@
 #include "online/lobby_list.h"
 #include "version.h"
 #include "wallpush.h"
+#include "ps2conversion.h"
 
 #include <log.h>
 #include <patch.h>
@@ -21,7 +22,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 45
+#define BETTER4_NUM_CFUNCS 47
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -93,6 +94,8 @@ void addCFuncs() {
 	addCFunc("SetWallpushEnabled", (void *)CFunc_SetWallpushEnabled);
 	addCFunc("CancelWallpush", (void *)CFunc_CancelWallpush);
 	addCFunc("SetUpdatedCollision", (void *)CFunc_SetUpdatedCollision);
+	addCFunc("PS2CasCheckAndConversion", (void *)CFunc_PS2CasCheckAndConversion);
+	addCFunc("PS2PrkCheckAndConversion", (void *)CFunc_PS2PrkCheckAndConversion);
 }
 
 void printCFuncs() {
