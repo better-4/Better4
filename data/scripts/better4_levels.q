@@ -9,37 +9,37 @@
 
 // THPS1
 LevelNum_Ware = 15
-LevelNum_School = 0
-LevelNum_Mall = 0
+LevelNum_School = 17
+LevelNum_Mall = 18
 LevelNum_Vans = 13
-LevelNum_Downtown = 0
-LevelNum_DHJ = 0
-LevelNum_Burnside = 0
-LevelNum_Streets = 0
-LevelNum_Roswell = 0
+LevelNum_Downtown = 19
+LevelNum_DHJ = 20
+LevelNum_Burnside = 21
+LevelNum_Streets = 22
+LevelNum_Roswell = 23
 
 // THPS2
-LevelNum_Hangar = 0
-LevelNum_School2 = 0
-LevelNum_Marseille = 0
-LevelNum_NYC = 0
-LevelNum_Venice = 0
-LevelNum_Skatestreet = 0
-LevelNum_Philly = 0
-LevelNum_Bullring = 0
-LevelNum_Heaven = 0
-LevelNum_Chopper = 0
+LevelNum_Hangar = 24
+LevelNum_School2 = 25
+LevelNum_Marseille = 26
+LevelNum_NYC = 27
+LevelNum_Venice = 28
+LevelNum_Skatestreet = 29
+LevelNum_Philly = 30
+LevelNum_Bullring = 31
+LevelNum_Heaven = 32
+LevelNum_Chopper = 33
 
 // THPS3
-LevelNum_Foundry = 0
-LevelNum_Canada = 0
+LevelNum_Foundry = 34
+LevelNum_Canada = 35
 LevelNum_Rio = 16
-LevelNum_Suburbia = 0
+LevelNum_Suburbia = 36
 LevelNum_AP = 14
-LevelNum_SkaterIsland = 0
+LevelNum_SkaterIsland = 37
 LevelNum_LA = 12
-LevelNum_Tokyo = 0
-LevelNum_CruiseShip = 0
+LevelNum_Tokyo = 38
+LevelNum_CruiseShip = 39
 
 level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_11_Locked }
 
