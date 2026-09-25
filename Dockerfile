@@ -173,6 +173,11 @@ COPY installer/updater.ps1 /out/better4updater.ps1
 RUN cp ${SDL2_DIR}/lib/x86/SDL2.dll /out
 RUN cp ${SDL2_DIR}/README.txt /out/README-SDL.txt
 COPY README.md /out/readme-better4.txt
+RUN mkdir -p /out/SavePS2
+COPY <<EOF /out/SavePS2/readme-ps2saves.md
+Place PS2 CAS or PRK files here. They will automatically be converted and added to the 'Save' folder once in-game.
+The format of the PS2 save must be .psu
+EOF
 
 ########################################
 FROM toolchain-dotnet AS build-qscripts
