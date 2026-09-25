@@ -51,7 +51,7 @@ thps_level_info = [
   { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults }
   { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults }
   { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults }
-  { text = "Streets" not_focusable level_num = LevelNum_Streets level = Load_Streets level_info_defaults }
+  { text = "Streets" under_construction level_num = LevelNum_Streets level = Load_Streets level_info_defaults }
   { text = "Roswell" not_focusable level_num = LevelNum_Roswell level = Load_Roswell level_info_defaults }
 ]
 
@@ -144,6 +144,29 @@ level_vans = {
   goals_script = vans_goals
   setup_script = vans_setup
   level_number = LevelNum_Vans
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
+
+script Load_Streets
+  load_level level_streets
+endscript
+
+level_streets = {
+  structure_name = level_streets
+  load_script = Load_Streets
+  name = "Skatepark"
+  level = "Streets"
+  qb = "levels\streets\streets.qb"
+  // level_qb = "levels\streets\streets_scripts.qb"
+  sky = "Alc_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = Streets_Startup
+  goals_script = streets_goals
+  setup_script = streets_setup
+  level_number = LevelNum_Streets
   temp_script = load_cameras_and_terrains
   // extranetanimsscript = load_level_anims
   level_defaults
