@@ -21,7 +21,7 @@ bool doesSaveExist (char *path)
 		printf("this save already exists in the directory, next!\n\n");
 		return true;
 	}
-	printf("new path : %s\n", path);
+	//printf("new path : %s\n", path);
 	return false;
 }
 
@@ -58,34 +58,39 @@ bool psuValidation (save_type saveType, uint8_t *psuData)
 	}
 	psuProductCode[product_len] = '\0';
 	psuSaveType = psuData[index + 7]; // last letter of 8 letter save code
-	printf("product code : %s\n", psuProductCode);
-	printf("save type : %c\n", psuSaveType);
 	for (int i = 0; i < 5; i++) {
 		if (!strcmp(TH4ProductCodesPS2[i], psuProductCode)) {
-			printf("this is a THPS4 psu file\n");
+			//printf("this is a THPS4 psu file\n");
 			if (psuSaveType == saveType) {
-				printf("correct save type! proceeding...\n");
+				//printf("validated! proceeding...\n");
 				return true;
 			}
 			else {
-				printf("this is not the save type we're looking for, next!\n\n");
+				//printf("this is not the save type we're looking for, next!\n\n");
 				return false;
 			}
 		}
 	}
-	printf("this is not a THPS4 psu file or corrupted. next!\n\n");
+
+	printf("the current .psu being processed is not a THPS4 psu file or corrupted\n");
+	printf("product code : %s\n", psuProductCode);
+	printf("save type : %c\n", psuSaveType);
+	printf("next!\n\n");
 	return false;
 }
 
 int __cdecl CFunc_PS2CasCheckAndConversion(CStruct* params) 
 {
+	printf("\nps2 cas check and conversion:\n\n");
 	bool new_save_flag = PS2SaveConversion (SKA_SIZE, SAVE_TYPE_SKA);
 	return new_save_flag;
 }
 
 int __cdecl CFunc_PS2PrkCheckAndConversion(CStruct* params) 
 {
+	printf("\nps2 prk check and conversion:\n\n");
 	bool new_save_flag = PS2SaveConversion (PRK_SIZE, SAVE_TYPE_PRK);
+	printf("\nall conversions complete!\n");
 	return new_save_flag;
 }
 
@@ -154,7 +159,7 @@ bool PS2SaveConversion(int saveFileSize, save_type saveType)
 			goto free_psu_data;
 		}
 		fread(psuData, sizeof(uint8_t), psuFileSize, psuFile);
-		printf("processing: %s\n", ps2_dir.cFileName);
+		//printf("processing: %s\n", ps2_dir.cFileName);
 		fclose(psuFile);
 		
 		// validation
@@ -204,6 +209,5 @@ bool PS2SaveConversion(int saveFileSize, save_type saveType)
 	} while (FindNextFile(psu_search, &ps2_dir) != 0);
 
 	FindClose(psu_search);
-	printf("\nall conversions complete!\n");
 	return new_save_flag;
 }
