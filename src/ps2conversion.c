@@ -81,14 +81,13 @@ bool psuValidation (save_type saveType, uint8_t *psuData)
 
 int __cdecl CFunc_PS2CasCheckAndConversion(CStruct* params) 
 {
-	printf("\nps2 cas check and conversion:\n\n");
+	printf("\nps2 save check and conversion:\n\n\n");
 	bool new_save_flag = PS2SaveConversion (SKA_SIZE, SAVE_TYPE_SKA);
 	return new_save_flag;
 }
 
 int __cdecl CFunc_PS2PrkCheckAndConversion(CStruct* params) 
 {
-	printf("\nps2 prk check and conversion:\n\n");
 	bool new_save_flag = PS2SaveConversion (PRK_SIZE, SAVE_TYPE_PRK);
 	printf("\nall conversions complete!\n");
 	return new_save_flag;
@@ -132,7 +131,7 @@ bool PS2SaveConversion(int saveFileSize, save_type saveType)
 	WIN32_FIND_DATA ps2_dir;
 	HANDLE psu_search = FindFirstFile(".\\SavePS2\\*.psu", &ps2_dir);
 	if (psu_search == INVALID_HANDLE_VALUE) {
-		printf("no .psu files found in the directory.\n");
+		if (saveType != SAVE_TYPE_PRK) printf("no .psu files found in the directory.\n\n"); // prevent double message
 		return false;
 	}
 
