@@ -79,20 +79,14 @@ bool psuValidation (save_type saveType, uint8_t *psuData)
 
 int __cdecl CFunc_PS2CasCheckAndConversion(CStruct* params) 
 {
-	bool new_save_created = PS2SaveConversion (SKA_SIZE, SAVE_TYPE_SKA);
-	if (new_save_created)
-		return 1;
-	else
-		return 0;
+	bool new_save_flag = PS2SaveConversion (SKA_SIZE, SAVE_TYPE_SKA);
+	return new_save_flag;
 }
 
 int __cdecl CFunc_PS2PrkCheckAndConversion(CStruct* params) 
 {
-	bool new_save_created = PS2SaveConversion (PRK_SIZE, SAVE_TYPE_PRK);
-	if (new_save_created)
-		return 1;
-	else
-		return 0;
+	bool new_save_flag = PS2SaveConversion (PRK_SIZE, SAVE_TYPE_PRK);
+	return new_save_flag;
 }
 
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
@@ -126,15 +120,15 @@ int GetProperSaveFileCount ()
 	return fileCount;
 }
 
-int PS2SaveConversion(int saveFileSize, save_type saveType) 
+bool PS2SaveConversion(int saveFileSize, save_type saveType) 
 {
 	// setup directory search
-	bool new_save_created = false;
+	bool new_save_flag = false;
 	WIN32_FIND_DATA ps2_dir;
 	HANDLE psu_search = FindFirstFile(".\\SavePS2\\*.psu", &ps2_dir);
 	if (psu_search == INVALID_HANDLE_VALUE) {
 		printf("no .psu files found in the directory.\n");
-		return 0;
+		return false;
 	}
 
 	do
@@ -201,7 +195,7 @@ int PS2SaveConversion(int saveFileSize, save_type saveType)
 		fwrite(convertedSave, sizeof(uint8_t), saveFileSize, newSaveFile);
 		fclose(newSaveFile);
 		printf("conversion complete, next!\n\n");
-		new_save_created = true;
+		new_save_flag = true;
 
 		free_all:
 		free(convertedSave);
@@ -211,8 +205,5 @@ int PS2SaveConversion(int saveFileSize, save_type saveType)
 
 	FindClose(psu_search);
 	printf("\nall conversions complete!\n");
-	if (new_save_created)
-		return 1;
-	else
-		return 0;
+	return new_save_flag;
 }
