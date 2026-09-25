@@ -682,6 +682,7 @@ script create_main_menu
   add_main_menu_textures_to_vram
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
+  SetLightDirection index = 0 heading = 330.0 pitch = -40.0
   MakeSkaterGoto SkateshopAI params = { NoSFX }
   SetMemThreadSafe off
   SetMenuPadMappings [ active
