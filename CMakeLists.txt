@@ -74,6 +74,8 @@ add_library(better4 SHARED
     "${SRC}/online/patches.h"
     "${SRC}/online/peer.c"
     "${SRC}/online/peer.h"
+    "${SRC}/online/player_list.c"
+    "${SRC}/online/player_list.h"
     "${SRC}/online/server.c"
     "${SRC}/online/server.h"
     "${SRC}/online/server_list.c"
