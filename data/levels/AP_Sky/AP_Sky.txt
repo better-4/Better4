@@ -1,0 +1,387 @@
+%include "qb_table.qbi"
+
+#/ custom script code end
+
+$NodeArray$ =
+:i :a{
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_Playerone_0$
+		:i $Class$ = $Restart$
+		:i $Type$ = $Generic$
+		:i $RestartName$ = %s(11,"P1: Restart")
+		:i $CreatedAtStart$
+		:i $restart_types$ = :a{$Player1$:a}
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_Multiplayer_0$
+		:i $Class$ = $Restart$
+		:i $Type$ = $Multiplayer$
+		:i $CreatedAtStart$
+		:i $RestartName$ = %s(14,"Multi: Restart")
+		:i $restart_types$ = :a{call $Multiplayer$ arguments
+				$Horse$:a}
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_Team_Restart$
+		:i $Class$ = $Restart$
+		:i $Type$ = $Team$
+		:i $CreatedAtStart$
+		:i $RestartName$ = %s(13,"Team: Restart")
+		:i $restart_types$ = :a{$Team$:a}
+	:i :s}
+
+	:i :s{
+		:i $Position$ = %vec3(0.0, 108.0, 0.0)
+		:i $Angles$ = %vec3(0.0, 0.0, 0.0)
+		:i $Name$ = $TRG_KOTH$
+		:i $Class$ = $GenericNode$
+		:i $Type$ = $Crown$
+	:i :s}
+
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Blue$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Blue$
+		:i $NeverSuspend$
+		:i $model$ = %s(41,"gameobjects\flags\flag_blue\flag_blue.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_BlueScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Blue_Base$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Blue_Base$
+		:i $NeverSuspend$
+		:i $model$ = %s(51,"gameobjects\flags\flag_blue_base\flag_blue_base.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_Blue_BaseScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(500.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Red$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Red$
+		:i $NeverSuspend$
+		:i $model$ = %s(39,"gameobjects\flags\flag_red\flag_red.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_RedScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(500.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Red_Base$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Red_Base$
+		:i $NeverSuspend$
+		:i $model$ = %s(49,"gameobjects\flags\flag_red_base\flag_red_base.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_Red_BaseScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,500.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Green$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Green$
+		:i $NeverSuspend$
+		:i $model$ = %s(43,"gameobjects\flags\flag_green\flag_green.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_GreenScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,500.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Green_Base$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Green_Base$
+		:i $NeverSuspend$
+		:i $model$ = %s(53,"gameobjects\flags\flag_green_base\flag_green_base.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_Green_BaseScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(-500.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Yellow$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Yellow$
+		:i $NeverSuspend$
+		:i $model$ = %s(45,"gameobjects\flags\flag_yellow\flag_yellow.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_YellowScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(-500.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_CTF_Yellow_Base$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Yellow_Base$
+		:i $NeverSuspend$
+		:i $model$ = %s(55,"gameobjects\flags\flag_yellow_base\flag_yellow_base.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_CTF_Yellow_BaseScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(1000.000000,0.000000,1000.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_Flag_Blue$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Blue$
+		:i $NeverSuspend$
+		:i $model$ = %s(41,"gameobjects\flags\flag_blue\flag_blue.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_Flag_BlueScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(700.000000,0.000000,1000.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_Flag_Red$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Red$
+		:i $NeverSuspend$
+		:i $model$ = %s(39,"gameobjects\flags\flag_red\flag_red.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_Flag_RedScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(400.000000,0.000000,1000.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_Flag_Green$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Green$
+		:i $NeverSuspend$
+		:i $model$ = %s(43,"gameobjects\flags\flag_green\flag_green.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_Flag_GreenScript$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(100.000000,0.000000,1000.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_Flag_Yellow$
+		:i $Class$ = $GameObject$
+		:i $Type$ = $Flag_Yellow$
+		:i $NeverSuspend$
+		:i $model$ = %s(45,"gameobjects\flags\flag_yellow\flag_yellow.mdl")
+		:i $lod_dist1$ = %i(800,00000320)
+		:i $lod_dist2$ = %i(801,00000321)
+		:i $TriggerScript$ = $TRG_Flag_YellowScript$
+	:i :s}
+:i :a}
+:i function $AP_Sky_Goals$
+    :i doIf $InMultiplayerGame$
+        :i call $add_multiplayer_mode_goals$
+    :i endif
+
+:i endfunction
+
+:i function $AP_Sky_Startup$
+:i endfunction
+
+:i function $AP_Sky_Setup$
+:i endfunction
+
+
+:i $TriggerScripts$ =
+:i :a{
+	:i $LoadTerrain$
+            
+:i $TRG_CTF_BlueScript$
+:i $TRG_CTF_RedScript$
+:i $TRG_CTF_YellowScript$
+:i $TRG_CTF_GreenScript$
+:i $TRG_CTF_Blue_BaseScript$
+:i $TRG_CTF_Red_BaseScript$
+:i $TRG_CTF_Yellow_BaseScript$
+:i $TRG_CTF_Green_BaseScript$
+:i $TRG_Flag_BlueScript$
+:i $TRG_Flag_RedScript$
+:i $TRG_Flag_YellowScript$
+:i $TRG_Flag_GreenScript$
+:i $TRG_Flag_Blue_BaseScript$
+:i $TRG_Flag_Red_BaseScript$
+:i $TRG_Flag_Yellow_BaseScript$
+:i $TRG_Flag_Green_BaseScript$
+
+
+:i :a}
+
+
+:i function $TRG_CTF_BlueScript$
+    :i call $Team_Flag$ arguments $blue$
+:i endfunction
+
+:i function $TRG_CTF_RedScript$
+    :i call $Team_Flag$ arguments $red$
+:i endfunction
+
+:i function $TRG_CTF_YellowScript$
+    :i call $Team_Flag$ arguments $yellow$
+:i endfunction
+
+:i function $TRG_CTF_GreenScript$
+    :i call $Team_Flag$ arguments $green$
+:i endfunction
+
+:i function $TRG_Flag_BlueScript$
+    :i call $Team_Flag$ arguments $blue$
+:i endfunction
+
+:i function $TRG_Flag_RedScript$
+    :i call $Team_Flag$ arguments $red$
+:i endfunction
+
+:i function $TRG_Flag_YellowScript$
+    :i call $Team_Flag$ arguments $yellow$
+:i endfunction
+
+:i function $TRG_Flag_GreenScript$
+    :i call $Team_Flag$ arguments $green$
+:i endfunction
+
+:i function $TRG_Flag_Blue_BaseScript$
+    :i call $Team_Flag_Base$ arguments $blue$
+:i endfunction
+
+:i function $TRG_Flag_Red_BaseScript$
+    :i call $Team_Flag_Base$ arguments $red$
+:i endfunction
+
+:i function $TRG_Flag_Yellow_BaseScript$
+    :i call $Team_Flag_Base$ arguments $yellow$
+:i endfunction
+
+:i function $TRG_Flag_Green_BaseScript$
+    :i call $Team_Flag_Base$ arguments $green$
+:i endfunction
+
+:i function $TRG_CTF_Blue_BaseScript$
+    :i call $Team_Flag_Base$ arguments $blue$
+:i endfunction
+
+:i function $TRG_CTF_Red_BaseScript$
+    :i call $Team_Flag_Base$ arguments $red$
+:i endfunction
+
+:i function $TRG_CTF_Yellow_BaseScript$
+    :i call $Team_Flag_Base$ arguments $yellow$
+:i endfunction
+
+:i function $TRG_CTF_Green_BaseScript$
+    :i call $Team_Flag_Base$ arguments $green$
+:i endfunction
+:i function $LoadAllParticleTextures$
+:i endfunction
+:i function $LoadTerrain$
+
+	:i $SetTerrainDEFAULT$
+
+	:i $SetTerrainCONCSMOOTH$
+
+	:i $SetTerrainCONCROUGH$
+
+	:i $SetTerrainMETALSMOOTH$
+
+	:i $SetTerrainMETALROUGH$
+
+	:i $SetTerrainMETALCORRUGATED$
+
+	:i $SetTerrainMETALGRATING$
+
+	:i $SetTerrainMETALTIN$
+
+	:i $SetTerrainWOOD$
+
+	:i $SetTerrainWOODMASONITE$
+
+	:i $SetTerrainWOODPLYWOOD$
+
+	:i $SetTerrainWOODFLIMSY$
+
+	:i $SetTerrainWOODSHINGLE$
+
+	:i $SetTerrainWOODPIER$
+
+	:i $SetTerrainBRICK$
+
+	:i $SetTerrainTILE$
+
+	:i $SetTerrainASPHALT$
+
+	:i $SetTerrainROCK$
+
+	:i $SetTerrainGRAVEL$
+
+	:i $SetTerrainSIDEWALK$
+
+	:i $SetTerrainGRASS$
+
+	:i $SetTerrainGRASSDRIED$
+
+	:i $SetTerrainDIRT$
+
+	:i $SetTerrainDIRTPACKED$
+
+	:i $SetTerrainWATER$
+
+	:i $SetTerrainICE$
+
+	:i $SetTerrainSNOW$
+
+	:i $SetTerrainSAND$
+
+	:i $SetTerrainPLEXIGLASS$
+
+	:i $SetTerrainFIBERGLASS$
+
+	:i $SetTerrainCARPET$
+
+	:i $SetTerrainCONVEYOR$
+
+	:i $SetTerrainCHAINLINK$
+
+	:i $SetTerrainMETALFUTURE$
+
+	:i $SetTerrainGENERIC1$
+
+	:i $SetTerrainGENERIC2$
+
+	:i $SetTerrainWETCONC$
+
+	:i $SetTerrainMETALFENCE$
+
+
+    #/    :i call $script_change_tod$ arguments $tod_action$ = $set_tod_night$
+    #/    :i call $start_dynamic_tod$
+
+        :i endfunction
+:i function $load_level_anims$
+    :i $animload_human$
+:i endfunction
+:i function $LoadCameras$
+:i endfunction
+:i function $LoadObjectAnims$
+:i endfunction
+
+:i :end
