@@ -44,7 +44,8 @@ LevelNum_CruiseShip = 0
 level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_11_Locked }
 
 thps_level_info = [
-  { text = "Warehouse" under_construction level_num = LevelNum_Ware level = Load_Ware level_info_defaults }
+  // TODO (ellie): remove not_focusable flag before merge
+  { text = "Warehouse" not_focusable level_num = LevelNum_Ware level = Load_Ware level_info_defaults }
   { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults }
   { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults }
   { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
@@ -156,10 +157,10 @@ endscript
 level_streets = {
   structure_name = level_streets
   load_script = Load_Streets
-  name = "Skatepark"
+  name = "Streets"
   level = "Streets"
-  qb = "levels\streets\streets.qb"
-  // level_qb = "levels\streets\streets_scripts.qb"
+  qb = "levels\better4\streets\streets.qb"
+  // level_qb = "levels\better4\streets\streets_scripts.qb"
   sky = "Alc_Sky"
   ambient_track = "music\amb_alc"
   loading_screen = "loadscrn_generic"
