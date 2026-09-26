@@ -13,6 +13,11 @@ char TH4ProductCodesPS2 [5][20] =
 
 bool doesSaveExist (th4_save *save)
 {
+	if (save->type == SAVE_TYPE_SKA)
+		snprintf(save->path, sizeof(save->path), ".\\Save\\%s.SKA", save->name);
+	else
+		snprintf(save->path, sizeof(save->path), ".\\Save\\%s.PRK", save->name);
+	
 	FILE *cas_check = fopen(save->path, "r");
 	if (cas_check != NULL) {
 		fclose(cas_check);
@@ -179,10 +184,6 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 		if (!valid_name) goto free_all;
 
 		// save already exist check
-		if (new_save.type == SAVE_TYPE_SKA)
-			snprintf(new_save.path, sizeof(new_save.path), ".\\Save\\%s.SKA", new_save.name);
-		else
-			snprintf(new_save.path, sizeof(new_save.path), ".\\Save\\%s.PRK", new_save.name);
 		bool save_exist = doesSaveExist(&new_save);
 		if (save_exist) goto free_all;
 
