@@ -126,8 +126,8 @@ int GetProperSaveFileCount ()
 	FindClose (save_search);
 	return fileCount;
 }
-
-int __cdecl CFunc_PS2SaveConversion(CStruct* params, int saveFileSize, save_t saveType) 
+//int __cdecl CFunc_PS2SaveConversion(CStruct* params, int saveFileSize, save_t saveType) 
+bool PS2SaveConversion(int saveFileSize, save_t saveType)
 {
 	// setup directory search
 	bool new_save_flag = false;
