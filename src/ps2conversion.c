@@ -44,13 +44,20 @@ bool getSaveName (uint8_t *saveData, char *saveName)
 	return true;
 }
 
-bool psuValidation (save_type saveType, uint8_t *psuData)
+bool psuValidation (save_t saveType, uint8_t *psuData, int psuFileSize)
 {
 	char psuProductCode [11] = {0}; 
-	save_type psuSaveType = 0;
+	save_t psuSaveType = 0;
 	int index = PRODUCT_CODE_OFFSET;
 	int product_len = 0;
-	
+
+	if (psuFileSize != PSU_SKA_SIZE && psuFileSize != PSU_PRK_SIZE) 
+	{
+		printf("the current .psu being processed is corrupted or not a THPS4 CAS/PRK file \n");
+		printf("next!\n\n");
+		return false;
+	}
+
 	while ( (psuData[index] < 'a' || psuData[index] > 'z') && (product_len < 10) ) {
 		psuProductCode[product_len] = psuData[index];
 		index++;
@@ -72,10 +79,6 @@ bool psuValidation (save_type saveType, uint8_t *psuData)
 		}
 	}
 
-	printf("the current .psu being processed is not a THPS4 psu file or corrupted\n");
-	printf("product code : %s\n", psuProductCode);
-	printf("save type : %c\n", psuSaveType);
-	printf("next!\n\n");
 	return false;
 }
 
@@ -124,7 +127,7 @@ int GetProperSaveFileCount ()
 	return fileCount;
 }
 
-bool PS2SaveConversion(int saveFileSize, save_type saveType) 
+int __cdecl CFunc_PS2SaveConversion(CStruct* params, int saveFileSize, save_t saveType) 
 {
 	// setup directory search
 	bool new_save_flag = false;
@@ -162,7 +165,7 @@ bool PS2SaveConversion(int saveFileSize, save_type saveType)
 		fclose(psuFile);
 		
 		// validation
-		bool valid_psu = psuValidation(saveType, psuData);
+		bool valid_psu = psuValidation(saveType, psuData, psuFileSize);
 		if (!valid_psu) goto free_psu_data;
 
 		// copy save data from psu
