@@ -4,8 +4,9 @@
 #include "decomp/GameNet_Manager.h"
 #include "decomp/Net_App.h"
 #include "decomp/Net_Dispatcher.h"
+#include "online/host_options.h"
 
-#define MSG_ID_PING 0x7C
+// #define MSG_ID_PING 0x7C
 
 void *__fastcall Net_Dispatcher_AddHandler_Wrapper(Net_Dispatcher *this, unused_t _, uint8_t opcode, Handler *handler, int flags, void *data, int priority) {
     printLog("Net::Dispatcher::AddHandler: this=%p opcode=%x flags=%x priority=%x\n", this, opcode, flags, priority);
@@ -27,9 +28,11 @@ void __fastcall Mdl_Skate_AddNetworkMsgHandlers(void *this, unused_t _, Net_App 
 
     Net_App *client2 = GameNet_Manager_Instance()->client;
     Net_Dispatcher *dispatcher = Net_App_GetDispatcher(client);
-    printLog("Mdl::Skate::AddNetworkMsgHandlers: this=%p dispatcher=%p client=%x client2=%x unk2=%x\n", this, dispatcher, client, client2, unk2);
+    // printLog("Mdl::Skate::AddNetworkMsgHandlers: this=%p dispatcher=%p client=%x client2=%x unk2=%x\n", this, dispatcher, client, client2, unk2);
 
-    Net_Dispatcher_AddHandler(dispatcher, MSG_ID_PING, client_handle_ping, 0, this, 0x80);
+    host_options_add_handlers(dispatcher);
+
+    // Net_Dispatcher_AddHandler(dispatcher, MSG_ID_PING, client_handle_ping, 0, this, 0x80);
 }
 
 // Server-side
@@ -40,7 +43,7 @@ void __fastcall Mdl_Skate_StartServer(void *this) {
     Net_App *server = GameNet_Manager_Instance()->server;
     Net_Dispatcher *dispatcher = Net_App_GetDispatcher(server);
     printLog("Mdl::Skate::StartServer: this=%p dispatcher=%p\n", this, dispatcher);
-    Net_Dispatcher_AddHandler(dispatcher, MSG_ID_PING, server_handle_ping, 0, this, 0x80);
+    // Net_Dispatcher_AddHandler(dispatcher, MSG_ID_PING, server_handle_ping, 0, this, 0x80);
 }
 
 void patchNetHandlers() {
@@ -68,7 +71,7 @@ int __cdecl CFunc_B4PingClient(CStruct* params) {
 	while (current_player != 0) {
         void *handle = GameNet_PlayerInfo_GetConnHandle(current_player);
         printLog("SENDING PING TO CLIENT i=%d name=%s player_info=%p handle=%p\n", i, current_player->name, current_player, handle);
-        Net_App_EnqueueMessage(server, handle, MSG_ID_PING, 0, 0, 0x80, 0, 0, 0, 0);
+        // Net_App_EnqueueMessage(server, handle, MSG_ID_PING, 0, 0, 0x80, 0, 0, 0, 0);
         current_player = GameNet_Manager_NextPlayerInfo(gamenet_manager, &search, 1);
         i += 1;
 	}
@@ -78,7 +81,7 @@ int __cdecl CFunc_B4PingClient(CStruct* params) {
 
 int __cdecl CFunc_B4PingServer(CStruct* params) {
     Net_App *client = GameNet_Manager_Instance()->client;
-    Net_App_EnqueueMessageToServer(client, MSG_ID_PING, 0, 0, 0x80, 2, '\b', 0, 0);
+    // Net_App_EnqueueMessageToServer(client, MSG_ID_PING, 0, 0, 0x80, 2, '\b', 0, 0);
 
     printLog("SENDING PING TO SERVER\n");
 	return 1;

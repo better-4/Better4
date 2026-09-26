@@ -1,6 +1,7 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
+#include "online/host_options.h"
 #include "online/net_handlers.h"
 #include "security.h"
 #include "updater.h"
@@ -65,6 +66,7 @@ void patchBetter4() {
 	patchWallpush();
 	patchLoad();
 	patchNetHandlers();
+	patchHostOptions();
 }
 
 void better4Main() {

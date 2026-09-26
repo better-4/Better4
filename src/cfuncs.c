@@ -3,12 +3,13 @@
 #include "decomp/Tmr.h"
 #include "input.h"
 #include "load.h"
-#include "online/net_handlers.h"
 #include "online.h"
 #include "online/client.h"
+#include "online/host_options.h"
+#include "online/lobby_list.h"
+#include "online/net_handlers.h"
 #include "online/server.h"
 #include "online/server_list.h"
-#include "online/lobby_list.h"
 #include "version.h"
 #include "wallpush.h"
 
@@ -22,7 +23,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 47
+#define BETTER4_NUM_CFUNCS 48
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -96,6 +97,7 @@ void addCFuncs() {
 	addCFunc("SetUpdatedCollision", (void *)CFunc_SetUpdatedCollision);
 	addCFunc("B4PingClient", (void *)CFunc_B4PingClient);
 	addCFunc("B4PingServer", (void *)CFunc_B4PingServer);
+	addCFunc("ChangeGameModifier", (void *)CFunc_ChangeGameModifier);
 }
 
 void printCFuncs() {

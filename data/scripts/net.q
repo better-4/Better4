@@ -113,6 +113,7 @@ script create_big_black_hiding_box
   }
 endscript
 script quit_network_game
+  better4_modifiers_init
   ObserveSelf
   destroy_observer_ui
   EnablePlayerNames
@@ -2219,12 +2220,13 @@ script net_chosen_join_server
     endif
     show_nat_start_dialog
     PrintStruct <...>
-    StopBetterServerList
-    StopBetterPlayerList
     if not StartNatNegotiation <...>
       create_join_failed_dialog
     endif
   else
+    StopBetterServerList
+    StopBetterPlayerList
+    better4_modifiers_init
     JoinServer <...>
   endif
   PlaySkaterCamAnim name = SS_MenuCam play_hold
@@ -3031,6 +3033,12 @@ script create_network_host_options_menu
           text2 = "Toggle level objects"
           id = menu_network_host_options_level_objects
           pad_choose_script = create_pro_trick_objects_menu
+        }
+        network_host_options_menu_add_item {
+          text1 = "Game Mods:"
+          text2 = "Toggle game modifiers"
+          id = menu_network_host_options_game_modifiers
+          pad_choose_script = better4_create_game_modifiers_menu
         }
         if not GoalManager_HasActiveGoals
           if not IsBetterObserving

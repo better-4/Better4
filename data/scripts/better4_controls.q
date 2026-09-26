@@ -1021,11 +1021,15 @@ script better4_control_cycle
   GetArraySize <options>
   if ( <new_index> < 0 )
     <new_index> = ( <new_index> + <array_size> )
-    Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+    if GotParam ini_key
+      Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+    endif
   else
     if not ( <array_size> > <new_index> )
       <new_index> = ( <new_index> - <array_size> )
-      Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+      if GotParam ini_key
+        Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+      endif
     endif
   endif
   better4_control_change needs_write <...>
@@ -1033,9 +1037,11 @@ endscript
 
 script better4_control_change
   CastToInteger new_index
-  Printf "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
-  if GotParam needs_write
-    SetIniInteger section = better4_controls_ini_section key = <ini_key> value = <new_index>
+  if GotParam ini_key
+    Printf "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
+    if GotParam needs_write
+      SetIniInteger section = better4_controls_ini_section key = <ini_key> value = <new_index>
+    endif
   endif
   ChangeGlobal Name = <index_name> value = <new_index>
   if GotParam value_name

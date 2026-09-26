@@ -31,8 +31,6 @@ script better4_create_menu {
     DestroyScreenElement id = current_menu_anchor
   endif
 
-
-
   pulse_blur
   make_new_menu {
     menu_id = better4_menu
@@ -271,6 +269,101 @@ endscript
 
 script better4_menu_cycle_control_left
   better4_menu_cycle_control <...> delta = -1
+endscript
+
+script better4_create_menu_modifier {
+    parent = current_menu
+    font = small
+    highlight_bar_scale = (1.12, 1.3)
+    highlight_bar_pos = (124, -7)
+    text_pos = (-5, -15)
+    child_pos = (255, -16)
+    rgba = [ 88 105 112 128 ]
+    child_rgba = [ 88 105 112 128 ]
+    just = [ left top ]
+    child_just = [ right top ]
+    scale = 0.8
+    dims = (200, 20)
+    focus_script = better4_menu_item_focus
+    unfocus_script = better4_menu_item_unfocus
+    pad_choose_script = item_chosen
+}
+  CreateScreenElement {
+    type = ContainerElement
+    parent = <parent>
+    id = <id>
+    dims = <dims>
+    event_handlers = [
+      { focus <focus_script> params = <...> }
+      { unfocus <unfocus_script> params = <...> }
+      { pad_left better4_menu_cycle_modifier_left params = <...> }
+      { pad_right better4_menu_cycle_modifier_right params = <...> }
+      { pad_choose better4_menu_cycle_modifier_right params = <...> }
+    ]
+    replace_handlers
+  }
+
+  <anchor_id> = <id>
+  CreateScreenElement {
+    Type = TextElement
+    parent = <anchor_id>
+    font = <font>
+    pos = <text_pos>
+    rgba = <rgba>
+    just = <just>
+    text = <text>
+    scale = <scale>
+  }
+
+  CreateScreenElement {
+    type = SpriteElement
+    parent = <anchor_id>
+    texture = highlight_bar
+    pos = <highlight_bar_pos>
+    scale = <highlight_bar_scale>
+    just = [ center center ]
+    rgba = [ 128 128 128 0 ]
+    z_priority = 3
+  }
+
+  <index> = <value_name>
+  CastToInteger index
+  <value_text> = ( ( modifier_options [ <index> ] ).text )
+  CreateScreenElement {
+    Type = TextElement
+    parent = <anchor_id>
+    font = <font>
+    pos = <child_pos>
+    rgba = <child_rgba>
+    just = <child_just>
+    text = <value_text>
+    scale = <scale>
+  }
+endscript
+
+script better4_menu_cycle_modifier
+  better4_modifier_cycle <...>
+  <index> = <value_name>
+  CastToInteger index
+  <value_text> = ( ( modifier_options [ <index> ] ).text )
+  SetScreenElementProps {
+    id = { <id> child = 2 }
+    text = <value_text>
+  }
+  switch delta
+  case 1
+    generic_menu_up_or_down_sound Up
+  case -1
+    generic_menu_up_or_down_sound Down
+  endswitch
+endscript
+
+script better4_menu_cycle_modifier_right
+  better4_menu_cycle_modifier <...> delta = 1
+endscript
+
+script better4_menu_cycle_modifier_left
+  better4_menu_cycle_modifier <...> delta = -1
 endscript
 
 script better4_options_menu
