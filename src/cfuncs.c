@@ -3,7 +3,7 @@
 #include "decomp/Tmr.h"
 #include "input.h"
 #include "load.h"
-#include "net_handlers.h"
+#include "online/net_handlers.h"
 #include "online.h"
 #include "online/client.h"
 #include "online/server.h"

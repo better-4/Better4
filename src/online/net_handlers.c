@@ -1,4 +1,4 @@
-#include "net_handlers.h"
+#include "online/net_handlers.h"
 
 #include "decomp/common.h"
 #include "decomp/GameNet_Manager.h"
