@@ -26,8 +26,8 @@ int __cdecl CFunc_PS2CasCheckAndConversion(CStruct* params);
 int __cdecl CFunc_PS2PrkCheckAndConversion(CStruct* params);
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script);
 int GetProperSaveFileCount ();
-bool PS2SaveConversion(int saveFileSize, save_type saveType);
-bool psuValidation (save_type saveType, uint8_t *psuData, uint8_t psuFileSize);
+bool PS2SaveConversion(int saveFileSize, save_t saveType);
+bool psuValidation (save_t saveType, uint8_t *psuData, uint8_t psuFileSize);
 bool getSaveName (uint8_t *saveData, char *saveName);
 
 #endif
