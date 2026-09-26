@@ -68,9 +68,9 @@ bool psuValidation (psu_t *psu, th4_save *save)
 			save->size = PRK_SIZE;
 			break;
 		
-			default:
-				goto invalid;
-				break;
+		default:
+			goto invalid;
+			break;
 	}
 
 	while ( (psu->data[index] < 'a' || psu->data[index] > 'z') && (product_len < 10) ) {
