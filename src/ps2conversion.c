@@ -1,6 +1,4 @@
 #include "ps2conversion.h"
-#include <windows.h>
-#include <stdio.h>
 
 
 char TH4ProductCodesPS2 [5][20] = 
@@ -13,9 +11,9 @@ char TH4ProductCodesPS2 [5][20] =
 };
 
 
-bool doesSaveExist (char *path)
+bool doesSaveExist (th4_save *save)
 {
-	FILE *cas_check = fopen(path, "r");
+	FILE *cas_check = fopen(save->path, "r");
 	if (cas_check != NULL) {
 		fclose(cas_check);
 		printf("this save already exists in the directory, next!\n\n");
@@ -25,75 +23,73 @@ bool doesSaveExist (char *path)
 	return false;
 }
 
-bool getSaveName (uint8_t *saveData, char *saveName)
+bool getSaveName (th4_save *save)
 {
 	int index = NAME_OFFSET;
 	int name_len = 0;
 
-	while ( (saveData[index] != 0) && (name_len < NAME_SIZE - 1) ) {
-		if (saveData[index] == ':') {
+	while ( (save->data[index] != 0) && (name_len < NAME_SIZE - 1) ) {
+		if (save->data[index] == ':') {
 			printf("name contains colon, cannot be converted. next!\n\n");
 			return false;
 		}
-		saveName[name_len] = saveData[index];
+		save->name[name_len] = save->data[index];
 		index++;
 		name_len++;
 	}
-	saveName [name_len] = '\0';
-	printf("save name : %s\n", saveName);
+	save->name [name_len] = '\0';
+	printf("save name : %s\n", save->name);
 	return true;
 }
 
-bool psuValidation (save_t saveType, uint8_t *psuData, int psuFileSize)
+bool psuValidation (psu_t *psu, th4_save *save)
 {
 	char psuProductCode [11] = {0}; 
-	save_t psuSaveType = 0;
+	save_t saveTypeFound = 0;
 	int index = PRODUCT_CODE_OFFSET;
 	int product_len = 0;
 
-	if (psuFileSize != PSU_SKA_SIZE && psuFileSize != PSU_PRK_SIZE) 
+	switch (psu->size)
 	{
-		printf("the current .psu being processed is corrupted or not a THPS4 CAS/PRK file \n");
-		printf("next!\n\n");
-		return false;
+		case PSU_SKA_SIZE:
+			psu->saveType = SAVE_TYPE_SKA;
+			save->type = SAVE_TYPE_SKA;
+			save->size = SKA_SIZE;
+			break;
+		
+		case PSU_PRK_SIZE:
+			psu->saveType = SAVE_TYPE_PRK;
+			save->type = SAVE_TYPE_PRK;
+			save->size = PRK_SIZE;
+			break;
+		
+			default:
+				goto invalid;
+				break;
 	}
 
-	while ( (psuData[index] < 'a' || psuData[index] > 'z') && (product_len < 10) ) {
-		psuProductCode[product_len] = psuData[index];
+	while ( (psu->data[index] < 'a' || psu->data[index] > 'z') && (product_len < 10) ) {
+		psuProductCode[product_len] = psu->data[index];
 		index++;
 		product_len++;
 	}
 	psuProductCode[product_len] = '\0';
-	psuSaveType = psuData[index + 7]; // last letter of 8 letter save code
+	saveTypeFound = psu->data[index + 7]; // last letter of 8 letter save code
 	for (int i = 0; i < 5; i++) {
 		if (!strcmp(TH4ProductCodesPS2[i], psuProductCode)) {
 			//printf("this is a THPS4 psu file\n");
-			if (psuSaveType == saveType) {
+			if (saveTypeFound == psu->saveType) {
 				//printf("validated! proceeding...\n");
 				return true;
 			}
-			else {
-				//printf("this is not the save type we're looking for, next!\n\n");
-				return false;
-			}
+			else break;
 		}
 	}
 
+	invalid:
+	printf("the current .psu being processed is corrupted or not a THPS4 CAS/PRK file \n");
+	printf("next!\n\n");
 	return false;
-}
-
-int __cdecl CFunc_PS2CasCheckAndConversion(CStruct* params) 
-{
-	printf("\nps2 save check and conversion:\n\n\n");
-	bool new_save_flag = PS2SaveConversion (SKA_SIZE, SAVE_TYPE_SKA);
-	return new_save_flag;
-}
-
-int __cdecl CFunc_PS2PrkCheckAndConversion(CStruct* params) 
-{
-	bool new_save_flag = PS2SaveConversion (PRK_SIZE, SAVE_TYPE_PRK);
-	printf("\nall conversions complete!\n");
-	return new_save_flag;
 }
 
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
@@ -126,88 +122,85 @@ int GetProperSaveFileCount ()
 	FindClose (save_search);
 	return fileCount;
 }
-//int __cdecl CFunc_PS2SaveConversion(CStruct* params, int saveFileSize, save_t saveType) 
-bool PS2SaveConversion(int saveFileSize, save_t saveType)
+int __cdecl CFunc_PS2SaveConversion(CStruct* params) 
 {
 	// setup directory search
+	printf("\n\n\nps2 save check and conversion : \n\n\n");
 	bool new_save_flag = false;
 	WIN32_FIND_DATA ps2_dir;
 	HANDLE psu_search = FindFirstFile(".\\SavePS2\\*.psu", &ps2_dir);
 	if (psu_search == INVALID_HANDLE_VALUE) {
-		if (saveType != SAVE_TYPE_PRK) printf("no .psu files found in the directory.\n\n"); // prevent double message
+		printf("no .psu files found in the directory.\n\n"); 
 		return false;
 	}
 
 	do
 	{
+		psu_t psu = {0};
+		th4_save new_save = {0};
 		if (ps2_dir.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue; 
 
 		// grab psu data
-		int psuFileSize = ps2_dir.nFileSizeLow;
-		uint8_t *psuData = (uint8_t *)malloc(psuFileSize * sizeof(uint8_t));
-    if (psuData == NULL) {
+		psu.size = ps2_dir.nFileSizeLow;
+		psu.data = (uint8_t *)malloc(psu.size * sizeof(uint8_t));
+    if (psu.data == NULL) {
         printf("unable to allocate space for psu data, next!\n\n");
         continue; 
     }
-		memset(psuData, 0, psuFileSize * sizeof(uint8_t));
+		memset(psu.data, 0, psu.size * sizeof(uint8_t));
+		snprintf(psu.path, sizeof(psu.path), ".\\SavePS2\\%s", ps2_dir.cFileName);
 		
-		char psuPath[MAX_PATH] = {0};
-		snprintf(psuPath, sizeof(psuPath), ".\\SavePS2\\%s", ps2_dir.cFileName);
-		//printf("directory : %s\n", psuPath);
-		
-		FILE *psuFile = fopen(psuPath, "rb+");
-		if (psuFile == NULL) {
+		psu.file = fopen(psu.path, "rb+");
+		if (psu.file == NULL) {
 			printf("unable to read psu file, next!\n\n");
 			goto free_psu_data;
 		}
-		fread(psuData, sizeof(uint8_t), psuFileSize, psuFile);
+		fread(psu.data, sizeof(uint8_t), psu.size, psu.file);
 		//printf("processing: %s\n", ps2_dir.cFileName);
-		fclose(psuFile);
+		fclose(psu.file);
 		
 		// validation
-		bool valid_psu = psuValidation(saveType, psuData, psuFileSize);
+		bool valid_psu = psuValidation(&psu,&new_save);
 		if (!valid_psu) goto free_psu_data;
 
 		// copy save data from psu
-		uint8_t *convertedSave = (uint8_t *)malloc(saveFileSize * sizeof(uint8_t));
-    if (convertedSave == NULL) {
+		new_save.data = (uint8_t *)malloc(new_save.size * sizeof(uint8_t));
+    if (new_save.data == NULL) {
         printf("unable to allocate space for converted save data, next!");
         goto free_psu_data; 
     }
-		memset(convertedSave, 0, saveFileSize * sizeof(uint8_t));
-		for (int i = PSU_SAVE_OFFSET; i != psuFileSize; i++) {
-			convertedSave[i - PSU_SAVE_OFFSET] = psuData[i];
+		memset(new_save.data, 0, new_save.size * sizeof(uint8_t));
+		for (int i = PSU_SAVE_OFFSET; i != psu.size; i++) {
+			new_save.data[i - PSU_SAVE_OFFSET] = psu.data[i];
 		}
 
 		// get name + validation
-		char saveName[NAME_SIZE] = {0};
-		bool valid_name = getSaveName (convertedSave, saveName);
+		bool valid_name = getSaveName (&new_save);
 		if (!valid_name) goto free_all;
 
 		// save already exist check
-		char newSavePath [MAX_PATH] = {0};
-		if (saveType == SAVE_TYPE_SKA)
-			snprintf(newSavePath, sizeof(newSavePath), ".\\Save\\%s.SKA", saveName);
+		if (new_save.type == SAVE_TYPE_SKA)
+			snprintf(new_save.path, sizeof(new_save.path), ".\\Save\\%s.SKA", new_save.name);
 		else
-			snprintf(newSavePath, sizeof(newSavePath), ".\\Save\\%s.PRK", saveName);
-		bool save_exist = doesSaveExist(newSavePath);
+			snprintf(new_save.path, sizeof(new_save.path), ".\\Save\\%s.PRK", new_save.name);
+		bool save_exist = doesSaveExist(&new_save);
 		if (save_exist) goto free_all;
 
 		// write new save file
-		FILE *newSaveFile = fopen(newSavePath, "wb");
-		if (newSaveFile == NULL) {
+		new_save.file = fopen(new_save.path, "wb");
+		if (new_save.file == NULL) {
 			printf("unable to create new save file, next!\n\n");
 			goto free_all;
 		}
-		fwrite(convertedSave, sizeof(uint8_t), saveFileSize, newSaveFile);
-		fclose(newSaveFile);
+		fwrite(new_save.data, sizeof(uint8_t), new_save.size, new_save.file);
+		fclose(new_save.file);
 		printf("conversion complete, next!\n\n");
 		new_save_flag = true;
 
 		free_all:
-		free(convertedSave);
+		free(new_save.data);
 		free_psu_data:
-		free(psuData);
+		free(psu.data);
 	} while (FindNextFile(psu_search, &ps2_dir) != 0);
 
 	FindClose(psu_search);

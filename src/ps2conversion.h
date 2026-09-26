@@ -3,6 +3,8 @@
 
 #include "cfuncs.h"
 #include <stdbool.h>
+#include <stdio.h>
+#include <windows.h>
 
 #define NAME_OFFSET 0x19 // byte where name starts in .SKA/.PRK
 #define PSU_SAVE_OFFSET 0x3800 // byte where save data starts in .PSU
@@ -22,12 +24,30 @@ typedef enum save_t
   SAVE_TYPE_NET = 'e'
 } save_t;
 
-int __cdecl CFunc_PS2CasCheckAndConversion(CStruct* params);
-int __cdecl CFunc_PS2PrkCheckAndConversion(CStruct* params);
+typedef struct
+{
+  save_t saveType;
+  uint8_t *data;
+  int size;
+  FILE *file;
+  char path [MAX_PATH];
+} psu_t;
+
+typedef struct 
+{
+  FILE *file;
+  uint8_t *data;
+  save_t type;
+  int size;
+  char name [NAME_SIZE];
+  char path [MAX_PATH];
+} th4_save;
+
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script);
 int GetProperSaveFileCount ();
-bool PS2SaveConversion(int saveFileSize, save_t saveType);
-bool psuValidation (save_t saveType, uint8_t *psuData, uint8_t psuFileSize);
-bool getSaveName (uint8_t *saveData, char *saveName);
+int __cdecl CFunc_PS2SaveConversion(CStruct* params);
+bool psuValidation (psu_t *psu, th4_save *save);
+bool getSaveName (th4_save *save);
+bool doesSaveExist (th4_save *save);
 
 #endif

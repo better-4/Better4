@@ -330,7 +330,7 @@ script DoFormatCard
 endscript
 script launch_files_menu
   if not GotParam SkipPS2SaveCheck
-    if ( (PS2CasCheckAndConversion) or (PS2PrkCheckAndConversion ) )
+    if ( (PS2SaveConversion) )
       Wait 1 gameframe
       create_snazzy_dialog_box {
         title = 'Notice'
