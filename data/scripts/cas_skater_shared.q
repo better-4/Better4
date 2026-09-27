@@ -453,14 +453,14 @@ hat = [
     null_item
   }
   
-  // {
-    // desc_id = #"Russian Hat thug"
-    // frontend_desc = 'Russian Hat (THUG1)'
-    // mesh = "models/better4/shared/hats/hat_russian_thug1.skin"
-    // script disqualify_script
-      // cas_temp_disq_remove_long_hair
-    // endscript
-  // }
+  {
+    desc_id = #"Russian Hat thug"
+    frontend_desc = 'Russian Hat'
+    mesh = "models/better4/shared/hats/hat_russian_thug1.skin"
+    script disqualify_script
+      cas_temp_disq_remove_long_hair
+    endscript
+  }
   
   // commented due to possibility of running out of memory
   
@@ -480,14 +480,14 @@ hat = [
     unlock_flag = CAS_UNLOCK_09
     is_weird_hat
   }
-  // {
-  //   desc_id = #"muska hat"
-  //   frontend_desc = 'Muska Hat'
-  //   mesh = "models/better4/shared/hats/hat_muska.skin"
-  //   script disqualify_script
-  //     cas_temp_disq_remove_long_hair
-  //   endscript
-  // }
+  {
+    desc_id = #"muska hat"
+    frontend_desc = 'Muska Hat'
+    mesh = "models/better4/shared/hats/hat_muska.skin"
+    script disqualify_script
+      cas_temp_disq_remove_long_hair
+    endscript
+  }
 ]
 Helmet = [
   {
