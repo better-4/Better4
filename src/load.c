@@ -126,21 +126,25 @@ void patchLoad() {
 	add_path_override("levels\\Streets\\Streets.col.Xbx", "levels\\better4\\Streets\\Streets.col.Xbx");
 	add_path_override("levels\\Streets\\Streets.scn.Xbx", "levels\\better4\\Streets\\Streets.scn.Xbx");
 	add_path_override("levels\\Streets\\Streets.tex.Xbx", "levels\\better4\\Streets\\Streets.tex.Xbx");
-
 	// THPS3
 
     add_path_override("levels\\Rio\\Rio.col.Xbx", "levels\\better4\\Rio\\Rio.col.Xbx");
     add_path_override("levels\\Rio\\Rio.scn.Xbx", "levels\\better4\\Rio\\Rio.scn.Xbx");
     add_path_override("levels\\Rio\\Rio.tex.Xbx", "levels\\better4\\Rio\\Rio.tex.Xbx");
+    add_path_override("levels\\Rio_Sky\\Rio_Sky.col.Xbx", "levels\\better4\\Rio_Sky\\Rio_Sky.col.Xbx");
+    add_path_override("levels\\Rio_Sky\\Rio_Sky.scn.Xbx", "levels\\better4\\Rio_Sky\\Rio_Sky.scn.Xbx");
+    add_path_override("levels\\Rio_Sky\\Rio_Sky.tex.Xbx", "levels\\better4\\Rio_Sky\\Rio_Sky.tex.Xbx");
 
 	add_path_override("levels\\AP\\AP.col.Xbx", "levels\\better4\\AP\\AP.col.Xbx");
 	add_path_override("levels\\AP\\AP.scn.Xbx", "levels\\better4\\AP\\AP.scn.Xbx");
 	add_path_override("levels\\AP\\AP.tex.Xbx", "levels\\better4\\AP\\AP.tex.Xbx");
+	add_path_override("levels\\AP_Sky\\AP_Sky.col.Xbx", "levels\\better4\\AP_Sky\\AP_Sky.col.Xbx");
+	add_path_override("levels\\AP_Sky\\AP_Sky.scn.Xbx", "levels\\better4\\AP_Sky\\AP_Sky.scn.Xbx");
+	add_path_override("levels\\AP_Sky\\AP_Sky.tex.Xbx", "levels\\better4\\AP_Sky\\AP_Sky.tex.Xbx");
 
     add_path_override("levels\\LA\\LA.col.Xbx", "levels\\better4\\LA\\LA.col.Xbx");
     add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
     add_path_override("levels\\LA\\LA.tex.Xbx", "levels\\better4\\LA\\LA.tex.Xbx");
-
 
 	// patchCall(0x0040b50e, (void *)Pip_Load); // ??
 	// patchCall(0x00464cd4, (void *)Pip_Load); // ??
