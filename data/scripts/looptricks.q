@@ -30,7 +30,9 @@ script LoopGapStart
   LockVelocityDirection On
   SetSkaterAirTricks
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
-  SetManualTricks special = SpecialManualTricks ManualTricks
+  if ( better4_modifier_disablemanual_value = off )
+    SetManualTricks special = SpecialManualTricks ManualTricks
+  endif
   PlayAnim Anim = AirIdle Cycle NoRestart
   begin
     DoNextTrick

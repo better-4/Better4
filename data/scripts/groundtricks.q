@@ -34,7 +34,9 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   ClearException Ollied
   SetSpecialFriction [ 0 10 15 20 30 50 ]
   SetQueueTricks NoTricks
-  SetManualTricks Special = SpecialManualTricks ManualTricks
+  if ( better4_modifier_disablemanual_value = off )
+    SetManualTricks Special = SpecialManualTricks ManualTricks
+  endif
   NollieOff 
   PressureOff
   if Obj_FlagSet FLAG_SKATER_REVERTFS

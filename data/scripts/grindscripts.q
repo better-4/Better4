@@ -23,7 +23,9 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
       ClearException GroundGone
       SetQueueTricks NoTricks
       SetManualTricks NoTricks
-      SetExtraTricks tricks = better4_control_revert_value Duration = 20
+      if ( better4_modifier_disablerevert_value = off )
+        SetExtraTricks tricks = better4_control_revert_value Duration = 20
+      endif
       if GotParam OutAnim
         PlayAnim Anim = <OutAnim> Blendperiod = 0.3
       else
@@ -62,7 +64,9 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
       ClearException GroundGone
       SetQueueTricks NoTricks
       SetManualTricks NoTricks
-      SetExtraTricks tricks = better4_control_revert_value Duration = 20
+      if ( better4_modifier_disablerevert_value = off )
+        SetExtraTricks tricks = better4_control_revert_value Duration = 20
+      endif
       if GotParam OutAnim
         PlayAnim Anim = <OutAnim> Blendperiod = 0.3
       else
