@@ -1738,27 +1738,19 @@ endscript
 script launch_load_cas_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_credits play_hold
-  if InNetGame
-    Change AbortScript = back_to_pause_menu
-    Change DoneScript = back_to_pause_menu
-    Change RetryScript = retry_launch_load_cas_sequence
-  else
-  if GameModeEquals Is_SingleSession
-    Change AbortScript = back_to_pause_menu
-    Change DoneScript = back_to_pause_menu
-    Change RetryScript = retry_launch_load_cas_sequence
-  else
-  if GameModeEquals Is_FreeSkate
-    Change AbortScript = back_to_pause_menu
-    Change DoneScript = back_to_pause_menu
-    Change RetryScript = retry_launch_load_cas_sequence
-  else
-    Change AbortScript = back_to_main_menu
-    Change DoneScript = jump_to_edit_skater
-    Change RetryScript = retry_launch_load_cas_sequence
-  endif
-  endif
-  endif
+  Change AbortScript = back_to_main_menu
+  Change DoneScript = jump_to_edit_skater
+  Change RetryScript = retry_launch_load_cas_sequence
+  Change SavingOrLoading = Loading
+  check_card FileType = Cas
+  launch_files_menu FileType = Cas
+endscript
+script launch_load_cas_ingame_sequence
+  destroy_main_menu
+  PlaySkaterCamAnim name = SS_menucam_credits play_hold
+  Change AbortScript = back_to_pause_menu
+  Change DoneScript = back_to_pause_menu
+  Change RetryScript = retry_launch_load_cas_sequence
   Change SavingOrLoading = Loading
   check_card FileType = Cas
   launch_files_menu FileType = Cas

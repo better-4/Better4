@@ -413,20 +413,16 @@ script better4_misc_menu
   better4_create_menu_control better4_control_menudemo
   better4_create_menu_control better4_control_respawn_on_newrun
   better4_create_menu_control better4_control_updatedcollision
-  if not IsBetterObserving
-    if not IsObserving
-      better4_create_menu_item {
-        text = "Change CAS"
-        pad_choose_script = pre_cas_menu_exit
-        pad_choose_params = { new_menu_script = launch_load_cas_sequence }
-        help = "Load a new Create-A-Skater (CAS). Local-only."
-      }
-    else
-      better4_create_menu_item text = "Change CAS" not_focusable
-    endif
-  else
-    better4_create_menu_item text = "Change CAS" not_focusable
-  endif
+  // i tried getting this option non focusable if in main menu, it works (cant select) but can still hover over
+  // just dont display instead
+  if not ( (IsBetterObserving) or (IsObserving) or (LevelIs Load_skateshop) )
+    better4_create_menu_item {
+      text = "Change CAS"
+      pad_choose_script = pre_cas_menu_exit
+      pad_choose_params = { new_menu_script = launch_load_cas_ingame_sequence }
+      help = "Load a new Create-A-Skater (CAS). Local-only."
+    }
+  endif 
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript
