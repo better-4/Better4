@@ -44,8 +44,7 @@ LevelNum_CruiseShip = 39
 level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_11_Locked }
 
 thps_level_info = [
-  // TODO (ellie): remove not_focusable flag before merge
-  { text = "Warehouse" not_focusable level_num = LevelNum_Ware level = Load_Ware level_info_defaults }
+  { text = "Warehouse" under_construction level_num = LevelNum_Ware level = Load_Ware level_info_defaults }
   { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults }
   { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults }
   { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
