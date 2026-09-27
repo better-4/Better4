@@ -5,6 +5,7 @@
 #include "load.h"
 #include "online.h"
 #include "online/client.h"
+#include "online/player_list.h"
 #include "online/server.h"
 #include "online/server_list.h"
 #include "online/lobby_list.h"

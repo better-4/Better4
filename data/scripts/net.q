@@ -34,6 +34,8 @@ level_info = [
   { name = "Skatepark" checksum = Load_Vans }
   { name = "Airport" checksum = Load_AP }
   { name = "Warehouse" checksum = Load_Ware }
+  { name = "Rio" checksum = Load_Rio }
+  { name = "Streets" checksum = Load_Streets }
   // keep moto and created park at bottom so that they're excluded from random lvl
   { name = "Created Park" checksum = load_Sk4Ed_gameplay }
   { name = "MotoX" checksum = Load_Motox }
@@ -346,7 +348,7 @@ script create_player_options_dialog
         buttons = [ { text = "cancel" pad_choose_script = cancel_remove_player }
           { text = "kick" pad_choose_script = kick_player }
           { text = "ban" pad_choose_script = ban_player }
-          { text = "remove homie" pad_choose_script = remove_buddy pad_choose_params = <...> }
+          // { text = "remove homie" pad_choose_script = remove_buddy pad_choose_params = <...> }
         ]
         no_animate
       }
@@ -354,7 +356,7 @@ script create_player_options_dialog
       create_dialog_box { title = "Player Options"
         text = <name>
         buttons = [ { text = "cancel" pad_choose_script = cancel_remove_player }
-          { text = "remove homie" pad_choose_script = remove_buddy pad_choose_params = <...> }
+          // { text = "remove homie" pad_choose_script = remove_buddy pad_choose_params = <...> }
         ]
         no_animate
       }
@@ -368,7 +370,7 @@ script create_player_options_dialog
           buttons = [ { text = "cancel" pad_choose_script = cancel_remove_player }
             { text = "kick" pad_choose_script = kick_player }
             { text = "ban" pad_choose_script = ban_player }
-            { text = "add homie" pad_choose_script = add_buddy pad_choose_params = <...> }
+            // { text = "add homie" pad_choose_script = add_buddy pad_choose_params = <...> }
           ]
           no_animate
         }
@@ -376,7 +378,7 @@ script create_player_options_dialog
         create_dialog_box { title = "Player Options"
           text = <name>
           buttons = [ { text = "cancel" pad_choose_script = cancel_remove_player }
-            { text = "add homie" pad_choose_script = add_buddy pad_choose_params = <...> }
+            // { text = "add homie" pad_choose_script = add_buddy pad_choose_params = <...> }
           ]
           no_animate
         }
@@ -2173,11 +2175,7 @@ script describe_selected_server
   endif
 endscript
 script choose_selected_player
-  if OnXbox
-    RemovePlayer <...>
-  else
-    CreatePlayerOptions <...>
-  endif
+  CreatePlayerOptions <...>
 endscript
 script choose_selected_account
   ChooseAccount <...>

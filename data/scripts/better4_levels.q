@@ -9,37 +9,37 @@
 
 // THPS1
 LevelNum_Ware = 15
-LevelNum_School = 0
-LevelNum_Mall = 0
+LevelNum_School = 17
+LevelNum_Mall = 18
 LevelNum_Vans = 13
-LevelNum_Downtown = 0
-LevelNum_DHJ = 0
-LevelNum_Burnside = 0
-LevelNum_Streets = 0
-LevelNum_Roswell = 0
+LevelNum_Downtown = 19
+LevelNum_DHJ = 20
+LevelNum_Burnside = 21
+LevelNum_Streets = 22
+LevelNum_Roswell = 23
 
 // THPS2
-LevelNum_Hangar = 0
-LevelNum_School2 = 0
-LevelNum_Marseille = 0
-LevelNum_NYC = 0
-LevelNum_Venice = 0
-LevelNum_Skatestreet = 0
-LevelNum_Philly = 0
-LevelNum_Bullring = 0
-LevelNum_Heaven = 0
-LevelNum_Chopper = 0
+LevelNum_Hangar = 24
+LevelNum_School2 = 25
+LevelNum_Marseille = 26
+LevelNum_NYC = 27
+LevelNum_Venice = 28
+LevelNum_Skatestreet = 29
+LevelNum_Philly = 30
+LevelNum_Bullring = 31
+LevelNum_Heaven = 32
+LevelNum_Chopper = 33
 
 // THPS3
-LevelNum_Foundry = 0
-LevelNum_Canada = 0
-LevelNum_Rio = 0
-LevelNum_Suburbia = 0
+LevelNum_Foundry = 34
+LevelNum_Canada = 35
+LevelNum_Rio = 16
+LevelNum_Suburbia = 36
 LevelNum_AP = 14
-LevelNum_SkaterIsland = 0
+LevelNum_SkaterIsland = 37
 LevelNum_LA = 12
-LevelNum_Tokyo = 0
-LevelNum_CruiseShip = 0
+LevelNum_Tokyo = 38
+LevelNum_CruiseShip = 39
 
 level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_11_Locked }
 
@@ -51,7 +51,7 @@ thps_level_info = [
   { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults }
   { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults }
   { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults }
-  { text = "Streets" not_focusable level_num = LevelNum_Streets level = Load_Streets level_info_defaults }
+  { text = "Streets" under_construction level_num = LevelNum_Streets level = Load_Streets level_info_defaults }
   { text = "Roswell" not_focusable level_num = LevelNum_Roswell level = Load_Roswell level_info_defaults }
 ]
 
@@ -71,7 +71,7 @@ thps2_level_info = [
 thps3_level_info = [
   { text = "Foundry" not_focusable level_num = LevelNum_Foundry level = Load_Foundry level_info_defaults }
   { text = "Canada" not_focusable level_num = LevelNum_Canada level = Load_Canada level_info_defaults }
-  { text = "Rio" not_focusable level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
+  { text = "Rio" under_construction level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
   { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults }
   { text = "Airport" under_construction level_num = LevelNum_AP level = Load_AP level_info_defaults }
   { text = "Skater Island" not_focusable level_num = LevelNum_SkaterIsland level = Load_SkaterIsland level_info_defaults }
@@ -149,7 +149,53 @@ level_vans = {
   level_defaults
 }
 
+script Load_Streets
+  load_level level_streets
+endscript
+
+level_streets = {
+  structure_name = level_streets
+  load_script = Load_Streets
+  name = "Streets"
+  level = "Streets"
+  qb = "levels\better4\streets\streets.qb"
+  // level_qb = "levels\better4\streets\streets_scripts.qb"
+  sky = "Alc_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = Streets_Startup
+  goals_script = streets_goals
+  setup_script = streets_setup
+  level_number = LevelNum_Streets
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
+
 // THPS3
+
+script Load_Rio
+  load_level level_Rio
+endscript
+
+level_Rio = {
+  structure_name = level_Rio
+  load_script = Load_Rio
+  name = "Rio"
+  level = "Rio"
+  qb = "levels\better4\Rio\Rio.qb"
+ // level_qb = "levels\better4\Rio\Rio_scripts.qb"
+  sky = "Rio_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = Rio_Startup
+  goals_script = Rio_goals
+  setup_script = Rio_setup
+  level_number = LevelNum_Rio
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
 
 script Load_AP
   load_level level_ap
@@ -162,7 +208,7 @@ level_ap = {
   level = "AP"
   qb = "levels\better4\ap\ap.qb"
   level_qb = "levels\better4\ap\ap_scripts.qb"
-  sky = "Alc_Sky"
+  sky = "AP_Sky"
   ambient_track = "music\amb_alc"
   loading_screen = "loadscrn_generic"
   startup_script = AP_Startup

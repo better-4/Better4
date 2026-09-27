@@ -109,7 +109,7 @@ void remove_path_overrides() {
 }
 
 void patchLoad() {
-	static int num_overrides = 1;
+	static int num_overrides = 256;
 	override_map = map_alloc(num_overrides, NULL, NULL);
 
 	// Always override new levels
@@ -123,7 +123,16 @@ void patchLoad() {
 	add_path_override("levels\\Vans\\Vans.scn.Xbx", "levels\\better4\\Vans\\Vans.scn.Xbx");
 	add_path_override("levels\\Vans\\Vans.tex.Xbx", "levels\\better4\\Vans\\Vans.tex.Xbx");
 
+	add_path_override("levels\\Streets\\Streets.col.Xbx", "levels\\better4\\Streets\\Streets.col.Xbx");
+	add_path_override("levels\\Streets\\Streets.scn.Xbx", "levels\\better4\\Streets\\Streets.scn.Xbx");
+	add_path_override("levels\\Streets\\Streets.tex.Xbx", "levels\\better4\\Streets\\Streets.tex.Xbx");
+
 	// THPS3
+
+    add_path_override("levels\\Rio\\Rio.col.Xbx", "levels\\better4\\Rio\\Rio.col.Xbx");
+    add_path_override("levels\\Rio\\Rio.scn.Xbx", "levels\\better4\\Rio\\Rio.scn.Xbx");
+    add_path_override("levels\\Rio\\Rio.tex.Xbx", "levels\\better4\\Rio\\Rio.tex.Xbx");
+
 	add_path_override("levels\\AP\\AP.col.Xbx", "levels\\better4\\AP\\AP.col.Xbx");
 	add_path_override("levels\\AP\\AP.scn.Xbx", "levels\\better4\\AP\\AP.scn.Xbx");
 	add_path_override("levels\\AP\\AP.tex.Xbx", "levels\\better4\\AP\\AP.tex.Xbx");

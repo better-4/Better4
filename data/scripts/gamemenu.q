@@ -696,21 +696,10 @@ script create_pause_menu
         endif
       endif
     endif
+    make_sprite_menu_item text = "Player List" id = menu_network_player_list_select pad_choose_script = launch_player_list_menu
+    make_text_sprite texture = PA_fonts parent = menu_network_player_list_select
     make_sprite_menu_item text = "Options" id = menu_options pad_choose_script = create_options_menu
     make_text_sprite texture = PA_options parent = menu_options
-    if not OnXbox
-      if IsTrue bootstrap_build
-        make_sprite_menu_item text = "Player List" id = menu_network_remove_select pad_choose_script = launch_remove_players_menu not_focusable = not_focusable
-        make_text_sprite texture = PA_fonts parent = menu_network_remove_select
-      else
-        make_sprite_menu_item text = "Player List" id = menu_network_player_list_select pad_choose_script = launch_player_list_menu
-        make_text_sprite texture = PA_fonts parent = menu_network_player_list_select
-        if ProfileLoggedIn
-          make_sprite_menu_item text = "Homie List" id = menu_network_homie_list_select pad_choose_script = launch_shell_buddy_list
-          make_text_sprite texture = PA_fonts parent = menu_network_homie_list_select
-        endif
-      endif
-    endif
   else
     if not IsTrue bootstrap_build
       make_sprite_menu_item text = "Change Level" id = menu_level_select pad_choose_script = launch_level_select_menu
