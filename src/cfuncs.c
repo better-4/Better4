@@ -22,7 +22,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 47
+#define BETTER4_NUM_CFUNCS 49
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -96,6 +96,8 @@ void addCFuncs() {
 	addCFunc("SetUpdatedCollision", (void *)CFunc_SetUpdatedCollision);
 	addCFunc("PS2SaveConversion", (void *)CFunc_PS2SaveConversion);
 	addCFunc("GetProperSaveFileCount", (void *)CFunc_GetProperSaveFileCount);
+	addCFunc("GetSaveDirectoryListing", (void *)CFunc_GetSaveDirectoryListing);
+	addCFunc("GetMostRecentCAS", (void *)CFunc_GetMostRecentCAS);
 }
 
 void printCFuncs() {

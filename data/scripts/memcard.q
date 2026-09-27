@@ -448,6 +448,8 @@ script create_files_menu pos_tweak = (-20, -45)
     endif
   else
     GetMemCardDirectoryListing FileType = <FileType>
+    GetFileTypeName file_type = <FileType>
+    GetSaveDirectoryListing FileType = <filetype_name>
   endif
   if GotParam DirectoryListing
     if GotParam Save
@@ -1823,11 +1825,13 @@ endscript
 script MaybeLoadCustomSkater
   if not CurrentSkaterIsPro
     if CustomSkaterFilenameDefined
-      GetCustomSkaterFilename
+      GetMostRecentCAS
       DisableReset
       if MemCardFileExists name = <CASFileName> type = Cas
         ResetTimer
         mcmess_AutoLoadingCas filename = <CASFileName>
+        printf "this is auto loading the cas!"
+        printf "cas being loaded : %s" s = <CASFileName>
         DisableReset
         LoadFromMemoryCard name = <CASFileName> type = Cas
         mem_card_message_pause XSkips NoTimerReset

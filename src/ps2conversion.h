@@ -21,7 +21,7 @@ typedef enum save_t
   SAVE_TYPE_SKA = 'b',
   SAVE_TYPE_PRK = 'c',
   SAVE_TYPE_RPL = 'd', // thanks ellie
-  SAVE_TYPE_NET = 'e'
+  SAVE_TYPE_NWS = 'e'
 } save_t;
 
 typedef struct
@@ -43,11 +43,23 @@ typedef struct
   char path [MAX_PATH];
 } th4_save;
 
+typedef struct
+{
+  int total;
+  int ska;
+  int prk;
+  int rpl;
+  int car;
+  int nws;
+} save_amount;
+
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script);
 int GetProperSaveFileCount ();
 int __cdecl CFunc_PS2SaveConversion(CStruct* params);
 bool psuValidation (psu_t *psu, th4_save *save);
 bool getSaveName (th4_save *save);
 bool doesSaveExist (th4_save *save);
+int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script);
+int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script);
 
 #endif

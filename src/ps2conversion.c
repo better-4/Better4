@@ -1,7 +1,7 @@
 #include "ps2conversion.h"
 
-
-char TH4ProductCodesPS2 [5][20] = 
+save_amount save_count = {0};
+const char TH4ProductCodesPS2 [5][20] = 
 {
 	"SLUS-20504", // NTSC
 	"SLES-51130", // PAL
@@ -9,7 +9,6 @@ char TH4ProductCodesPS2 [5][20] =
 	"SLES-51131", // Greatest Hits PAL
 	"SLPM-65419" // JPN
 };
-
 
 bool doesSaveExist (th4_save *save)
 {
@@ -101,7 +100,7 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 {
 	CStruct *out = CScript_GetParams(script);
 	int fileCount = GetProperSaveFileCount();
-	printf("file count from cfunc: %d\n", fileCount);
+	printf("total file count: %d\n", fileCount);
 	CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, fileCount); 
 	return 1;
 }
@@ -109,7 +108,7 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 int GetProperSaveFileCount ()
 {
 	// setup directory search
-	int fileCount = 0;
+	save_count.total = 0;
 	WIN32_FIND_DATA save_dir;
 	HANDLE save_search = FindFirstFile(".\\Save\\*", &save_dir);
 	if (save_search == INVALID_HANDLE_VALUE) {
@@ -121,11 +120,11 @@ int GetProperSaveFileCount ()
 	{
 		if (strcmp(save_dir.cFileName, ".") == 0 || strcmp(save_dir.cFileName, "..") == 0) // thps4 file count doesn't do this lol
 			continue; 
-		fileCount++;
+			save_count.total++;
 	} while (FindNextFile(save_search, &save_dir) != 0);
 
 	FindClose (save_search);
-	return fileCount;
+	return save_count.total;
 }
 int __cdecl CFunc_PS2SaveConversion(CStruct* params) 
 {
@@ -136,7 +135,7 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 	HANDLE psu_search = FindFirstFile(".\\SavePS2\\*.psu", &ps2_dir);
 	if (psu_search == INVALID_HANDLE_VALUE) {
 		printf("no .psu files found in the directory.\n\n"); 
-		return false;
+		return 0;
 	}
 
 	do
@@ -206,4 +205,65 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 
 	FindClose(psu_search);
 	return new_save_flag;
+}
+
+int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
+{
+	CStruct *out = CScript_GetParams(script);
+	uint64_t newestTimestamp = 0;
+	char newestCasName[NAME_SIZE] = {0};
+	WIN32_FIND_DATA save_dir;
+	HANDLE ska_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
+	if (ska_search == INVALID_HANDLE_VALUE) {
+		printf("\nno CAS file found in the directory.\n");
+		return 0;
+	}
+
+	do
+	{
+		uint64_t saveTimestamp;
+		memcpy(&saveTimestamp, &save_dir.ftLastWriteTime, sizeof(uint64_t));
+		if (saveTimestamp > newestTimestamp)
+		{
+			int name_len = strlen(save_dir.cFileName);
+			if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
+			else continue;
+			newestTimestamp = saveTimestamp;
+			snprintf(newestCasName, sizeof(newestCasName), "%s", save_dir.cFileName);
+		}
+	} while (FindNextFile(ska_search, &save_dir) != 0);
+
+	printf("\n\nmost recent cas : %s\n\n",newestCasName);
+	CStruct_AddString(out,0xF36C1878/*casfilename*/, newestCasName);
+	return 1;
+}
+
+
+int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script)
+{
+	char *FileType = "";
+	WIN32_FIND_DATA save_dir;
+	CStruct_GetString(params,0x11093FB5, &FileType, 0);
+	printf("\n\n\nsave type requested to list: %s\n\n\n", FileType);
+
+	if (!strcmp(FileType,"SKATER"))
+	{
+		
+	}
+	else if (!strcmp(FileType,"CAREER"))
+	{
+		
+	}
+	else if (!strcmp(FileType,"NETWORK SETTINGS"))
+	{
+
+	}
+	else if (!strcmp(FileType,"PARK"))
+	{
+
+	}
+	else return 0;
+
+	
+	return 1;
 }
