@@ -192,12 +192,12 @@ void patchPoolSizes() {
 	patchDWord(0x005339f8 + 1, 0x10000000);  // Arena end address: 0x4800000 -> 0x9000000
 
 	// Mem::Manager::InitOtherHeaps (0x00534220)
-	patchDWord(0x00534380 + 1, 0xf4c040); // Script heap size: 0x3d3010 -> 0xf4c040
+	patchDWord(0x00534380 + 1, 0xf4c040); // Script size: 0x3d3010 -> 0xf4c040
+	patchDWord(0x00534557 + 1, 0x1b7740); // skater_geom size: 0x6ddd0 -> 0x1b7740
 
 	// Script::AllocatePools (0x0040b780)
 	patchDWord(0x0040b819 + 1, 0x1130); // Reserve CStruct: 0x44c -> 0x1130
 	patchDWord(0x0040b84a + 1, 0x1f40); // CPair: 0x3e8 -> 0x1f40
-	patchDWord(0x0040b7e3 + 1, 0x4e20); // Reserve CComponent: 0x1388 -> 0x4e20
 	patchDWord(0x0040b7e3 + 1, 0x4e20); // Reserve CComponent: 0x1388 -> 0x4e20
 }
 
