@@ -20,9 +20,18 @@ Better4 does not modify any vanilla game files. Any game data created by the ins
 
 ## Features
 
+### Online
+
+* Added NAT negotiation when connecting to servers (no more port forwarding!)
+* Restored server browser, lobby user list, and peerchat from PS2
+* Restored in-game player list from PS2
+* Added observe UI, improved observing behavior
+* Added chat commands (`/obs`, `/set`, `/goto`)
+* Added "Restart Game" option to game ranking screen
+
 ### Gameplay
 
-Better4 ships with THPS4 default controls, but can be configured to your liking. Here is a brief overview of all gameplay features added:
+Better4 ships with THPS4 vanilla controls, but may be configured to your liking. Here is a brief overview of all gameplay features added:
 
 * Added left and right dropdown
 * Added left and right manual spin
@@ -49,51 +58,48 @@ Better4 ships with THPS4 default controls, but can be configured to your liking.
   * Ollie North
   * Double Kickflip Varial Indy
 
-### Online
-
-* Added NAT negotiation when connecting to servers (no more port forwarding!)
-* Added server browser
-* Added lobby player list and peerchat
-* Added better observe functionality (observe after 0, don't need to leave game)
-* Added observe UI
-* Added "Restart Game" option to game ranking screen
-* Added chat size and duration configuration
-* Added chat commands (/obs, /set, /goto)
-
 ### Levels
 
-* Added Los Angeles from THPS3
-* Improved collision in THPS4 levels
+Better4 ships with improvements to the original THPS4 levels (configurable by `Misc > Updated Collision`) and adds levels from other games.
+
+* THPS
+  * Warehouse
+  * Skatepark
+  * Streets
+* THPS3
+  * Rio
+  * Airport
+  * Los Angeles
+* THPS4
   * Made more surfaces wallridable
   * Removed bottom-plane collisions in a few spots where a wallride makes the skater hit their head on a ledge above (e.g. slam bros warehouse in San Francisco)
-* Enabled Zoo teleport in multiplayer games; teleport is now two-way
+  * Enabled Zoo teleport in multiplayer games; teleport is now two-way
 
 ### CAS
 
-* Added board scales
-* Added X + Y + Z + XYZ sliders for all scales
-* Widened min/max scales (0-200)
-* Unlocked full RGB range
 * Restored hidden CAS items for pros, secret skaters, and neversoft devs
-* Added custom boards (banana, hoverboard, old school, ollie)
-* Added various CAS items from other games (bunched cargos, muska hat, zoom glasses)
+* Added X + Y + Z + XYZ sliders for all scales, widened scale range (0-200)
+* Added board scales
+* Unlocked full saturation/value range
+* Added custom board types (banana, hoverboard, old school, ollie)
+* Added various CAS items from other games (bunched cargos, zoom glasses)
 * Added option to change CAS during gameplay (local-only)
-* Added 12th special trick slot
 
 ### Misc
 
-* Added toggle for pause-on-unfocus
-* Added toggle for board scuff
+* Added 12th special trick slot
 * Added button to unassign trick in "Edit Tricks" menu
 * Added configuration for buttons font (PS2, Xbox, PC)
+* Added size customization for panel elements (trick string, score, chat, etc.)
 * Added FOV configuration
 * Added aspect ratio configuration
-* Added size customization for panel elements (trick string, score, etc.)
+* Added toggle for pause-on-unfocus
+* Added toggle for board scuff
 * Added toggle for the main menu demo that plays after a period of inactivity
 
 ## Known Issues
 
-* LA graffiti trick objects, KOTH crown, CTF flags, gaps, etc. not yet implemented
+* Custom levels from other games do not support gaps, CTF, or level objects
 
 ## Credits
 
