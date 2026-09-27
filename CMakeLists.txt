@@ -62,6 +62,7 @@ add_library(better4 SHARED
     "${SRC}/decomp/Obj_CSkater.h"
     "${SRC}/decomp/Obj_CSkaterCam.c"
     "${SRC}/decomp/Obj_CSkaterCam.h"
+    "${SRC}/decomp/Obj_CSkaterCareer.h"
     "${SRC}/decomp/Prefs_Preferences.c"
     "${SRC}/decomp/Prefs_Preferences.h"
     "${SRC}/decomp/Tmr.c"
