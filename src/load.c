@@ -124,6 +124,11 @@ void patchLoad() {
 	add_path_override("levels\\Vans\\Vans.tex.Xbx", "levels\\better4\\Vans\\Vans.tex.Xbx");
 
 	// THPS3
+
+    add_path_override("levels\\Rio\\Rio.col.Xbx", "levels\\better4\\Rio\\Rio.col.Xbx");
+    add_path_override("levels\\Rio\\Rio.scn.Xbx", "levels\\better4\\Rio\\Rio.scn.Xbx");
+    add_path_override("levels\\Rio\\Rio.tex.Xbx", "levels\\better4\\Rio\\Rio.tex.Xbx");
+
 	add_path_override("levels\\AP\\AP.col.Xbx", "levels\\better4\\AP\\AP.col.Xbx");
 	add_path_override("levels\\AP\\AP.scn.Xbx", "levels\\better4\\AP\\AP.scn.Xbx");
 	add_path_override("levels\\AP\\AP.tex.Xbx", "levels\\better4\\AP\\AP.tex.Xbx");
