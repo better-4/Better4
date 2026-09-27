@@ -1,8 +1,9 @@
 <div align="center">
   <img src=".github/assets/b4logo.png" width=65%>
+  <div>
+    <em>A THPS4 modpack that includes modern gameplay and QOL features while maintaining the look and feel of the original game.</em>
+  </div>
 </div>
-
-Better4 is a THPS4 modpack that includes modern gameplay and QOL features while maintaining the look and feel of the original game.
 
 > [!WARNING]
 > Better4 is beta software and may contain bugs. See [Known Issues](#known-issues).
