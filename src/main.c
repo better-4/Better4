@@ -219,8 +219,8 @@ void patchBetter4() {
 	patchLoad();
 	patchLevelLimit();
 	patchPoolSizes();
-	patchNetHandlers();
-	patchHostOptions();
+	// patchNetHandlers();
+	// patchHostOptions();
 }
 
 void better4Main() {
