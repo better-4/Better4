@@ -221,6 +221,7 @@ appearance_custom_skater_male =
   skater_m_torso = { desc_id = Tanktop }
   skater_m_legs = { desc_id = #"Cargo Pants" h = 30 s = 20 v = 30 use_default_hsv = 0 }
   skater_m_socks = { desc_id = Medium }
+  hat = { desc_id = None }
   shoes = { desc_id = #"Koston Shoe" }
   accessoriesL = { desc_id = #"Rocker Watch L" }
   right_forearm_tattoo = { desc_id = #"Tattoo 9" }
@@ -243,6 +244,7 @@ appearance_custom_skater_female =
   accessoriesR = { desc_id = #"bracelet 4" }
   skater_f_legs = { desc_id = #"Ankle Pants" }
   skater_f_socks = { desc_id = Ankle }
+  hat = { desc_id = None }
   shoes = { desc_id = #"Burnquist Shoe" }
   body_shape = female_scale_info
 }
@@ -1824,6 +1826,22 @@ skater_m_hat_hair = [
     desc_id = #"Hat hair Test"
     frontend_desc = 'hat hair test'
     mesh = "models/skater_m/Hair_M_W_Mullet_A.skin"
+  }
+  {
+    desc_id = #"Buzzed Light HAT"
+    frontend_desc = 'Buzzed Light'
+    mesh = "models/skater_m/Hair_M_W_Buzz.skin"
+    is_short_hair
+  }
+  {
+    desc_id = #"Buzzed Dark HAT"
+    frontend_desc = 'Buzzed Dark'
+    mesh = "models/skater_m/Hair_M_W_Buzz.skin"
+    replace = "CS_JB_Hair_BuzzL1.png"
+    with = "textures/skater_m/CS_JB_Hair_BuzzD1"
+    replace1 = "CS_JB_Hair_BuzzL2.png"
+    with1 = "textures/skater_m/CS_JB_Hair_BuzzD2"
+    is_short_hair
   }
 ]
 skater_m_hair = [
