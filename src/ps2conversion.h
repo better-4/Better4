@@ -45,13 +45,11 @@ typedef struct
 
 typedef struct
 {
-  int total;
-  int ska;
-  int prk;
-  int rpl;
-  int car;
-  int nws;
-} save_amount;
+  int **list;
+  int size;
+  int amount;
+  int current_count;
+} directory_t;
 
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script);
 int GetProperSaveFileCount ();

@@ -1,6 +1,6 @@
 #include "ps2conversion.h"
 
-save_amount save_count = {0};
+directory_t directory = {0};
 const char TH4ProductCodesPS2 [5][20] = 
 {
 	"SLUS-20504", // NTSC
@@ -93,7 +93,12 @@ bool psuValidation (psu_t *psu, th4_save *save)
 
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 {
-	save_count.total = 0;
+	directory.amount = 0;
+	directory.current_count = 0;
+	directory.size = 1;
+	directory.list = malloc(NAME_SIZE * sizeof(char*));
+
+	if (directory.list == NULL) return 0;
 	WIN32_FIND_DATA save_dir;
 	char *FileType = "";
 	HANDLE save_search;
@@ -127,12 +132,32 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 	{
 		if (strcmp(save_dir.cFileName, ".") == 0 || strcmp(save_dir.cFileName, "..") == 0) // thps4 file count doesn't do this lol
 			continue; 
-			save_count.total++;
+
+		int name_len = strlen(save_dir.cFileName);
+		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
+		else continue;
+		if (directory.amount > directory.size)
+		{
+			directory.size*=2;
+			char **temp = realloc(directory.list, directory.size * NAME_SIZE * sizeof(char*));
+			if (temp == NULL) {
+					for (int i = 0; i < directory.amount; i++) free(directory.list[i]);
+					free(directory.list);
+					return 1;
+			}
+			directory.list = temp;
+		}
+		directory.list[directory.amount]  = malloc(strlen(save_dir.cFileName) + 1);
+		if (directory.list[directory.amount] != NULL) {
+				strcpy(directory.list[directory.amount], save_dir.cFileName);
+				//printf("directory #%d : %s\n",directory.amount,directory.list[directory.amount] );
+				directory.amount++;
+		}
 	} while (FindNextFile(save_search, &save_dir) != 0);
 
 	FindClose (save_search);
-	printf("%s total file count: %d\n",FileType, save_count.total);
-	CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, save_count.total); 
+	printf("%s total file count: %d\n",FileType, directory.amount);
+	CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, directory.amount); 
 	return 1;
 }
 
@@ -249,80 +274,20 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
 
 int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script)
 {
-	char casName[NAME_SIZE] = {0};
-	bool reached_end = true;
-	int count = 0;
-	int *total_count;
 	CStruct *out = CScript_GetParams(script);
-	char *FileType = "";
-	WIN32_FIND_DATA save_dir;
-	HANDLE save_search;
-	CStruct_GetString(params,0x11093FB5, &FileType, 0);
-	printf("\n\n\nsave type requested to list: %s\n\n\n", FileType);
-
-	if (!strcmp(FileType,"SKATER"))
+	if (directory.current_count < directory.amount)
 	{
-		save_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
-		total_count = &save_count.ska;
+		CStruct_AddString(out,0x91D9667F/*save_filename*/, directory.list [directory.current_count]);
+		//printf("save to list: %s\n", directory.list [directory.current_count]);
+		directory.current_count++;
 	}
-	else if (!strcmp(FileType,"CAREER"))
+	else 
 	{
-		save_search = FindFirstFile(".\\Save\\*.CAR", &save_dir);
-		total_count = &save_count.car;
-	}
-	else if (!strcmp(FileType,"NETWORK SETTINGS"))
-	{
-		save_search = FindFirstFile(".\\Save\\*.NWS", &save_dir);
-		total_count = &save_count.nws;
-	}
-	else if (!strcmp(FileType,"PARK"))
-	{
-		save_search = FindFirstFile(".\\Save\\*.PRK", &save_dir);
-		total_count = &save_count.prk;
-	}
-	else return 0;
-	if (save_search == INVALID_HANDLE_VALUE) {
-		printf("\nno CAS file found in the directory.\n");
+		for (int i = 0; i < directory.amount; i++) free(directory.list[i]);
+			free(directory.list);
+		printf("freed list!\n");
 		return 0;
 	}
-	CStruct_RemoveComponent(params, 0x11093FB5);
-	//while (count < *total_count && FindNextFile (save_search, &save_dir)) count++;
-	do
-	{
-		int name_len = strlen(save_dir.cFileName);
-		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
-		else 
-		{
-			reached_end = !(FindNextFile(save_search, &save_dir));
-			if (reached_end)
-			{
-				FindClose(save_search);
-				*total_count = 0;
-				printf("cas being listed : %s\n",casName );
-				printf("current count : %d, total count : %d\n", count,*total_count);
-				CStruct_AddString(out,0x91D9667F/*save_filename*/, casName);
-				return 0;
-			}
-			count++;
-			continue;
-		}
-		snprintf(casName, sizeof(casName), "%s", save_dir.cFileName);
-		count++;
-		reached_end = !(FindNextFile(save_search, &save_dir));
-		if (reached_end)
-		{
-			FindClose(save_search);
-			*total_count = 0;
-			printf("cas being listed : %s\n",casName );
-			printf("current count : %d, total count : %d\n", count,*total_count);
-			CStruct_AddString(out,0x91D9667F/*save_filename*/, casName);
-			return 0;
-		} 
-	} while (count < *total_count); 
-	printf("cas being listed : %s\n",casName );
-	printf("current count : %d, total count : %d\n", count,*total_count);
-	*total_count = count+1;
-	CStruct_AddString(out,0x91D9667F/*save_filename*/, casName);
-	FindClose(save_search);
+
 	return 1; 
 }

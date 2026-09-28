@@ -450,36 +450,37 @@ script create_files_menu pos_tweak = (-20, -45)
   else
     GetMemCardDirectoryListing FileType = <FileType>
   endif
+  GetProperSaveFileCount FileType = <filetype_name>
   if GotParam DirectoryListing
     if GotParam Save
       if GotParam add_createnew_option
         begin
-          if (GetSaveDirectoryListing FileType = <filetype_name>)
-            printf "from script before listed file name : %s" s =  <save_filename>
+          if (GetSaveDirectoryListing)
+            //printf "from script before listed file name : %s" s =  <save_filename>
             better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save }
           else
-            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save  }
+            //better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save  }
             break
           endif
         repeat
       else
         begin
-          if (GetSaveDirectoryListing FileType = <filetype_name>)
-            printf "from script before listed file name : %s" s =  <save_filename>
-            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save ListAllTypes }
+          if (GetSaveDirectoryListing)
+            //printf "from script before listed file name : %s" s =  <save_filename>
+            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save }
           else
-            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save ListAllTypes }
+            //better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save }
             break
           endif
         repeat
       endif
     else
       begin
-        if (GetSaveDirectoryListing FileType = <filetype_name>)
-          printf "from script before listed file name : %s" s =  <save_filename>
+        if (GetSaveDirectoryListing)
+          //printf "from script before listed file name : %s" s =  <save_filename>
           better4_files_menu_add_item { pad_choose_script = Load filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> }
         else
-          better4_files_menu_add_item { pad_choose_script = Load filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> }
+          //better4_files_menu_add_item { pad_choose_script = Load filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> }
           break
         endif
       repeat
@@ -560,7 +561,7 @@ script better4_files_menu_add_item pad_choose_script = nullscript font = dialog 
   else
     rgba = [ 88 105 112 128 ]
   endif
-  printf "from script file name : %s" s =  <filename>
+  //printf "from script file name : %s" s =  <filename>
   CreateScreenElement {
     type = TextElement
     parent = <container_id>
@@ -914,7 +915,7 @@ script files_menu_add_bottom_bar
   endswitch
   //GetMaxTHPS4FilesAllowed
   GetFileTypeName file_type = <FileType>
-  GetProperSaveFileCount FileType = <filetype_name>
+  //GetProperSaveFileCount FileType = <filetype_name>
   FormatText {
     TextName = LeftText
     '%s Files: %t'
