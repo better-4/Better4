@@ -3032,12 +3032,12 @@ script create_network_host_options_menu
           id = menu_network_host_options_level_objects
           pad_choose_script = create_pro_trick_objects_menu
         }
-        network_host_options_menu_add_item {
-          text1 = "Game Mods:"
-          text2 = "Toggle game modifiers"
-          id = menu_network_host_options_game_modifiers
-          pad_choose_script = better4_create_game_modifiers_menu
-        }
+        // network_host_options_menu_add_item {
+        //   text1 = "Game Mods:"
+        //   text2 = "Toggle game modifiers"
+        //   id = menu_network_host_options_game_modifiers
+        //   pad_choose_script = better4_create_game_modifiers_menu
+        // }
         if not GoalManager_HasActiveGoals
           if not IsBetterObserving
             network_host_options_menu_add_item {
