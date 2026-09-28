@@ -1815,6 +1815,17 @@ skater_m_legs = [
     unlock_flag = CAS_UNLOCK_17
   }
 ]
+skater_m_hat_hair = [ 
+  { 
+	desc_id = None 
+	frontend_desc = "None" 
+  } 
+  {
+    desc_id = #"Hat hair Test"
+    frontend_desc = 'hat hair test'
+    mesh = "models/skater_m/Hair_M_W_Mullet_A.skin"
+  }
+]
 skater_m_hair = [
   {
     desc_id = Bald

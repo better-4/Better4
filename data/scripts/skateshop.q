@@ -5046,6 +5046,25 @@ edit_skater_head_options = [
     is_enabled_params = { parts = [ skater_m_hair skater_f_hair ] }
   }
   {
+    text = 'Hat Hair'
+    submenu = hat_hair_menu
+    is_visible_script = currently_editing_custom_or_eddie
+    is_visible_script2 = check_for_head_flags
+    is_visible_params2 = { group = hair_items }
+    is_enabled_script = check_if_group_editable
+    is_enabled_params = { group = hat_hair_items }
+  }
+  {
+    text = 'Hat Hair Color'
+    submenu = hat_hair_color_menu
+    is_visible_script = currently_editing_custom_or_eddie
+    is_visible_params = { group = hat_hair_items }
+    is_visible_script2 = check_for_head_flags
+    is_visible_params2 = { group = hat_hair_items }
+    is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ skater_m_hat_hair skater_f_hat_hair ] }
+  }
+  {
     text = 'Facial Hair'
     submenu = jaw_menu
     is_visible_script = currently_editing_custom_male
@@ -5164,7 +5183,7 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesL_items }
   }
   {
-    text = 'L. Accessories Color'
+    text = 'L. Accessory Color'
     submenu = accessoriesL_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesL_items }
@@ -5178,12 +5197,26 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesR_items }
   }
   {
-    text = 'R. Accessories Color'
+    text = 'R. Accessory Color'
     submenu = accessoriesR_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesR_items }
     is_enabled_script = check_if_part_colorable
     is_enabled_params = { parts = [ accessoriesR ] }
+  }
+  {
+    text = 'Misc Items'
+    submenu = accessoriesM_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+  }
+  {
+    text = 'Misc Item Color'
+    submenu = accessoriesM_color_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+    is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ accessoriesM accessoriesM_f ] }
   }
 ]
 edit_skater_leg_options = [

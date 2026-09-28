@@ -116,6 +116,10 @@ hat = [
     is_lasek
     is_burnquist
     is_glifberg
+    script disqualify_script
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
+    endscript
     null_item
   }
   {
@@ -123,7 +127,8 @@ hat = [
     frontend_desc = 'Forward Cap'
     mesh = "models/skater_m/hat_capforward.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
     supports_logo
   }
@@ -452,18 +457,14 @@ hat = [
     only_with = [ glifberg ]
     null_item
   }
-  
   {
     desc_id = #"Russian Hat thug"
-    frontend_desc = 'Russian Hat'
+    frontend_desc = 'Russian Hat (THUG1)'
     mesh = "models/better4/shared/hats/hat_russian_thug1.skin"
     script disqualify_script
       cas_temp_disq_remove_long_hair
     endscript
   }
-  
-  // commented due to possibility of running out of memory
-  
   {
     desc_id = #"Paper Bag"
     frontend_desc = 'Paper Bag'
@@ -538,13 +539,31 @@ Helmet = [
   }
 ]
 
-// accessoriesM = [
-  // {
-    // desc_id = None
-    // frontend_desc = 'None'
-    // no_color
-  // }
-// ]
+accessoriesM = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+    no_color
+  }
+  {
+    desc_id = #"Bull Ring"
+    frontend_desc = 'Bull Ring (THUG2)'
+    mesh = "models/better4/shared/miscitems/extra_bullring_thug2.skin"
+  }
+]
+
+accessoriesM_f = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+    no_color
+  }
+  {
+    desc_id = #"Bull Ring F"
+    frontend_desc = 'Bull Ring (THUG2)'
+    mesh = "models/better4/shared/miscitems/extra_bullring_thug2F.skin"
+  }
+]
 
 accessoriesL = [
   {
