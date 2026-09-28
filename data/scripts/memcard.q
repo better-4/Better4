@@ -413,6 +413,7 @@ script create_files_menu pos_tweak = (-20, -45)
   endif
   create_icon texture = <icon_texture> pos = ( (55, 90) + <pos_tweak> )
   files_menu_add_top_bar
+  GetFileTypeName file_type = <FileType>  
   if GotParam Save
     GetMemCardDirectoryListing
     GetMemCardSpaceAvailable
@@ -448,18 +449,40 @@ script create_files_menu pos_tweak = (-20, -45)
     endif
   else
     GetMemCardDirectoryListing FileType = <FileType>
-    GetFileTypeName file_type = <FileType>
-    GetSaveDirectoryListing FileType = <filetype_name>
   endif
   if GotParam DirectoryListing
     if GotParam Save
       if GotParam add_createnew_option
-        ForEachIn <DirectoryListing> do = files_menu_add_item params = { pad_choose_script = OKToOverwrite MenuFileType = <FileType> Save }
+        begin
+          if (GetSaveDirectoryListing FileType = <filetype_name>)
+            printf "from script before listed file name : %s" s =  <save_filename>
+            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save }
+          else
+            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save  }
+            break
+          endif
+        repeat
       else
-        ForEachIn <DirectoryListing> do = files_menu_add_item params = { pad_choose_script = OKToOverwrite MenuFileType = <FileType> Save ListAllTypes }
+        begin
+          if (GetSaveDirectoryListing FileType = <filetype_name>)
+            printf "from script before listed file name : %s" s =  <save_filename>
+            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save ListAllTypes }
+          else
+            better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save ListAllTypes }
+            break
+          endif
+        repeat
       endif
     else
-      ForEachIn <DirectoryListing> do = files_menu_add_item params = { pad_choose_script = Load }
+      begin
+        if (GetSaveDirectoryListing FileType = <filetype_name>)
+          printf "from script before listed file name : %s" s =  <save_filename>
+          better4_files_menu_add_item { pad_choose_script = Load filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> }
+        else
+          better4_files_menu_add_item { pad_choose_script = Load filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> }
+          break
+        endif
+      repeat
     endif
   else
     if not GotParam Save
@@ -478,6 +501,140 @@ script create_files_menu pos_tweak = (-20, -45)
   SetScreenElementProps id = files_scrolling_menu reset_window_top
   CheckForCardRemoval menu_id = files_menu
 endscript
+
+script better4_files_menu_add_item pad_choose_script = nullscript font = dialog icon_alpha = 1.0
+  if GotParam Save
+    if not GotParam ListAllTypes
+      if not ( <MenuFileType> = <file_type> )
+        return
+      endif
+    endif
+  endif
+  RemoveParameter ListAllTypes
+  if IsNGC
+    heap = topdown
+  else
+    heap = #"Default"
+  endif
+  if IsNGC
+    CreateScreenElement {
+      type = ContainerElement
+      parent = current_menu
+      dims = (550, 24)
+      event_handlers = [ { focus files_menu_focus }
+        { unfocus files_menu_unfocus }
+        { pad_choose <pad_choose_script> }
+        { pad_choose generic_menu_pad_choose_sound }
+        { pad_start <pad_choose_script> }
+        { pad_circle files_menu_delete }
+      ]
+      heap = <heap>
+    }
+  else
+    CreateScreenElement {
+      type = ContainerElement
+      parent = current_menu
+      dims = (550, 24)
+      event_handlers = [ { focus files_menu_focus }
+        { unfocus files_menu_unfocus }
+        { pad_choose <pad_choose_script> }
+        { pad_start <pad_choose_script> }
+        { pad_square files_menu_delete }
+      ]
+    }
+  endif
+  <container_id> = <id>
+  <container_id>:SetTags <...>
+  if IsXBOX
+    if GotParam Corrupt
+      GetFileTypeName file_type = <file_type>
+      FormatText TextName = filename 'DAMAGED %s' s = <filetype_name>
+    endif
+  endif
+  if GotParam Save
+    if ( <MenuFileType> = <file_type> )
+      rgba = [ 88 105 112 128 ]
+    else
+      rgba = [ 44 52 56 64 ]
+    endif
+  else
+    rgba = [ 88 105 112 128 ]
+  endif
+  printf "from script file name : %s" s =  <filename>
+  CreateScreenElement {
+    type = TextElement
+    parent = <container_id>
+    font = <font>
+    text = <filename>
+    pos = (45, 0)
+    just = [ left center ]
+    rgba = <rgba>
+    z_priority = 6
+    heap = <heap>
+  }
+  if GotParam total_file_size
+    GetPlatform
+    switch <Platform>
+    case PS2
+      FormatText TextName = file_size_text '%d KB' d = ( <total_file_size> -1 )
+    case Xbox
+      FormatText TextName = file_size_text '%d kbs' d = <total_file_size>
+    case NGC
+      FormatText TextName = file_size_text '%d kbs' d = <total_file_size>
+    endswitch
+  else
+     <file_size_text> = ""
+  endif
+  CreateScreenElement {
+    type = TextElement
+    parent = <container_id>
+    font = small
+    text = <file_size_text>
+    pos = (500, 2)
+    just = [ right center ]
+    rgba = <rgba>
+    z_priority = 6
+    heap = <heap>
+  }
+  switch <file_type>
+  case OptionsAndPros
+     <file_type_icon> = mem_career
+  case NetworkSettings
+     <file_type_icon> = mem_net
+  case Park
+     <file_type_icon> = mem_park
+  case Replay
+     <file_type_icon> = mem_replay
+  case Cas
+     <file_type_icon> = mem_skater
+  default
+     <file_type_icon> = mem_bad
+  endswitch
+  CreateScreenElement {
+    type = SpriteElement
+    parent = <container_id>
+    texture = <file_type_icon>
+    pos = (25, 0)
+    just = [ center center ]
+    rgba = [ 50 50 50 128 ]
+    scale = 0.72
+    z_priority = 1
+    alpha = <icon_alpha>
+    heap = <heap>
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = <container_id>
+    texture = highlight_bar
+    pos = (5, 0)
+    just = [ left center ]
+    scale = (2, 1.2)
+    rgba = [ 128 128 128 0 ]
+    heap = <heap>
+  }
+  files_menu_add_bg parent = <container_id>
+endscript
+
 script files_menu_add_item pad_choose_script = nullscript font = dialog icon_alpha = 1.0
   if GotParam Save
     if not GotParam ListAllTypes
@@ -756,26 +913,26 @@ script files_menu_add_bottom_bar
     }
   endswitch
   //GetMaxTHPS4FilesAllowed
-  GetProperSaveFileCount
+  GetFileTypeName file_type = <FileType>
+  GetProperSaveFileCount FileType = <filetype_name>
   FormatText {
-    TextName = RightText
-    'Files: %t'
+    TextName = LeftText
+    '%s Files: %t'
     t = <proper_file_count>
+    s = <filetype_name>
   }
    <text_bg_rgba> = [ 0 0 0 50 ]
    <text_offset> = (5, 2)
-  if GotParam Save
-    CreateScreenElement {
-      type = TextElement
-      parent = <mem_info_id>
-      font = small
-      pos = ( (5, -11) + <text_offset> )
-      just = [ left top ]
-      rgba = [ 88 105 112 128 ]
-      scale = 0.75
-      text = <LeftText>
-    }
-  endif
+  CreateScreenElement {
+    type = TextElement
+    parent = <mem_info_id>
+    font = small
+    pos = ( (5, -11) + <text_offset> )
+    just = [ left top ]
+    rgba = [ 88 105 112 128 ]
+    scale = 0.75
+    text = <LeftText>
+  }
   CreateScreenElement {
     type = SpriteElement
     parent = <mem_info_id>

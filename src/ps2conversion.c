@@ -72,13 +72,8 @@ bool psuValidation (psu_t *psu, th4_save *save)
 			break;
 	}
 
-	while ( (psu->data[index] < 'a' || psu->data[index] > 'z') && (product_len < 10) ) {
-		psuProductCode[product_len] = psu->data[index];
-		index++;
-		product_len++;
-	}
-	psuProductCode[product_len] = '\0';
-	saveTypeFound = psu->data[index + 7]; // last letter of 8 letter save code
+	memcpy(psuProductCode, psu->data + PRODUCT_CODE_OFFSET, 10);
+	saveTypeFound = psu->data[PRODUCT_CODE_OFFSET + 17]; // last letter of 8 letter save code
 	for (int i = 0; i < 5; i++) {
 		if (!strcmp(TH4ProductCodesPS2[i], psuProductCode)) {
 			//printf("this is a THPS4 psu file\n");
@@ -98,23 +93,35 @@ bool psuValidation (psu_t *psu, th4_save *save)
 
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 {
-	CStruct *out = CScript_GetParams(script);
-	int fileCount = GetProperSaveFileCount();
-	printf("total file count: %d\n", fileCount);
-	CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, fileCount); 
-	return 1;
-}
-
-int GetProperSaveFileCount ()
-{
-	// setup directory search
 	save_count.total = 0;
 	WIN32_FIND_DATA save_dir;
-	HANDLE save_search = FindFirstFile(".\\Save\\*", &save_dir);
+	char *FileType = "";
+	HANDLE save_search;
+	CStruct *out = CScript_GetParams(script);
+	CStruct_GetString(params,0x11093FB5, &FileType, 0);
+
+	if (!strcmp(FileType,"SKATER"))
+	{
+		save_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
+	}
+	else if (!strcmp(FileType,"CAREER"))
+	{
+		save_search = FindFirstFile(".\\Save\\*.CAR", &save_dir);
+	}
+	else if (!strcmp(FileType,"NETWORK SETTINGS"))
+	{
+		save_search = FindFirstFile(".\\Save\\*.NWS", &save_dir);
+	}
+	else if (!strcmp(FileType,"PARK"))
+	{
+		save_search = FindFirstFile(".\\Save\\*.PRK", &save_dir);
+	}
+	else return 0;
 	if (save_search == INVALID_HANDLE_VALUE) {
-		printf("no save files found in the directory.\n");
+		printf("\nno CAS file found in the directory.\n");
 		return 0;
 	}
+	CStruct_RemoveComponent(params, 0x11093FB5);
 
 	do 
 	{
@@ -124,8 +131,12 @@ int GetProperSaveFileCount ()
 	} while (FindNextFile(save_search, &save_dir) != 0);
 
 	FindClose (save_search);
-	return save_count.total;
+	printf("%s total file count: %d\n",FileType, save_count.total);
+	CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, save_count.total); 
+	return 1;
 }
+
+
 int __cdecl CFunc_PS2SaveConversion(CStruct* params) 
 {
 	// setup directory search
@@ -151,7 +162,6 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
         printf("unable to allocate space for psu data, next!\n\n");
         continue; 
     }
-		memset(psu.data, 0, psu.size * sizeof(uint8_t));
 		snprintf(psu.path, sizeof(psu.path), ".\\SavePS2\\%s", ps2_dir.cFileName);
 		
 		psu.file = fopen(psu.path, "rb+");
@@ -173,10 +183,7 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
         printf("unable to allocate space for converted save data, next!");
         goto free_psu_data; 
     }
-		memset(new_save.data, 0, new_save.size * sizeof(uint8_t));
-		for (int i = PSU_SAVE_OFFSET; i != psu.size; i++) {
-			new_save.data[i - PSU_SAVE_OFFSET] = psu.data[i];
-		}
+		memcpy(new_save.data, psu.data + PSU_SAVE_OFFSET, new_save.size);
 
 		// get name + validation
 		bool valid_name = getSaveName (&new_save);
@@ -235,35 +242,87 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
 
 	printf("\n\nmost recent cas : %s\n\n",newestCasName);
 	CStruct_AddString(out,0xF36C1878/*casfilename*/, newestCasName);
+	FindClose(ska_search);
 	return 1;
 }
 
 
 int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script)
 {
+	char casName[NAME_SIZE] = {0};
+	bool reached_end = true;
+	int count = 0;
+	int *total_count;
+	CStruct *out = CScript_GetParams(script);
 	char *FileType = "";
 	WIN32_FIND_DATA save_dir;
+	HANDLE save_search;
 	CStruct_GetString(params,0x11093FB5, &FileType, 0);
 	printf("\n\n\nsave type requested to list: %s\n\n\n", FileType);
 
 	if (!strcmp(FileType,"SKATER"))
 	{
-		
+		save_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
+		total_count = &save_count.ska;
 	}
 	else if (!strcmp(FileType,"CAREER"))
 	{
-		
+		save_search = FindFirstFile(".\\Save\\*.CAR", &save_dir);
+		total_count = &save_count.car;
 	}
 	else if (!strcmp(FileType,"NETWORK SETTINGS"))
 	{
-
+		save_search = FindFirstFile(".\\Save\\*.NWS", &save_dir);
+		total_count = &save_count.nws;
 	}
 	else if (!strcmp(FileType,"PARK"))
 	{
-
+		save_search = FindFirstFile(".\\Save\\*.PRK", &save_dir);
+		total_count = &save_count.prk;
 	}
 	else return 0;
-
-	
-	return 1;
+	if (save_search == INVALID_HANDLE_VALUE) {
+		printf("\nno CAS file found in the directory.\n");
+		return 0;
+	}
+	CStruct_RemoveComponent(params, 0x11093FB5);
+	//while (count < *total_count && FindNextFile (save_search, &save_dir)) count++;
+	do
+	{
+		int name_len = strlen(save_dir.cFileName);
+		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
+		else 
+		{
+			reached_end = !(FindNextFile(save_search, &save_dir));
+			if (reached_end)
+			{
+				FindClose(save_search);
+				*total_count = 0;
+				printf("cas being listed : %s\n",casName );
+				printf("current count : %d, total count : %d\n", count,*total_count);
+				CStruct_AddString(out,0x91D9667F/*save_filename*/, casName);
+				return 0;
+			}
+			count++;
+			continue;
+		}
+		snprintf(casName, sizeof(casName), "%s", save_dir.cFileName);
+		count++;
+		reached_end = !(FindNextFile(save_search, &save_dir));
+		if (reached_end)
+		{
+			FindClose(save_search);
+			*total_count = 0;
+			printf("cas being listed : %s\n",casName );
+			printf("current count : %d, total count : %d\n", count,*total_count);
+			CStruct_AddString(out,0x91D9667F/*save_filename*/, casName);
+			return 0;
+		} 
+	} while (count < *total_count); 
+	printf("cas being listed : %s\n",casName );
+	printf("current count : %d, total count : %d\n", count,*total_count);
+	*total_count = count+1;
+	CStruct_AddString(out,0x91D9667F/*save_filename*/, casName);
+	FindClose(save_search);
+	return 1; 
 }
