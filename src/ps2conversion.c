@@ -53,25 +53,6 @@ bool psuValidation (psu_t *psu, th4_save *save)
 	int index = PRODUCT_CODE_OFFSET;
 	int product_len = 0;
 
-	switch (psu->size)
-	{
-		case PSU_SKA_SIZE:
-			psu->saveType = SAVE_TYPE_SKA;
-			save->type = SAVE_TYPE_SKA;
-			save->size = SKA_SIZE;
-			break;
-		
-		case PSU_PRK_SIZE:
-			psu->saveType = SAVE_TYPE_PRK;
-			save->type = SAVE_TYPE_PRK;
-			save->size = PRK_SIZE;
-			break;
-		
-		default:
-			goto invalid;
-			break;
-	}
-
 	memcpy(psuProductCode, psu->data + PRODUCT_CODE_OFFSET, 10);
 	saveTypeFound = psu->data[PRODUCT_CODE_OFFSET + 17]; // last letter of 8 letter save code
 	for (int i = 0; i < 5; i++) {
@@ -85,7 +66,6 @@ bool psuValidation (psu_t *psu, th4_save *save)
 		}
 	}
 
-	invalid:
 	printf("the current .psu being processed is corrupted or not a THPS4 CAS/PRK file \n");
 	printf("next!\n\n");
 	return false;
@@ -180,9 +160,26 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 		th4_save new_save = {0};
 		if (ps2_dir.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue; 
 
-		// grab psu data
+		// grab psu data + size check
 		psu.size = ps2_dir.nFileSizeLow;
-		if (psu.size > PSU_PRK_SIZE) continue;
+		switch (psu->size)
+		{
+			case PSU_SKA_SIZE:
+				psu->saveType = SAVE_TYPE_SKA;
+				save->type = SAVE_TYPE_SKA;
+				save->size = SKA_SIZE;
+				break;
+			
+			case PSU_PRK_SIZE:
+				psu->saveType = SAVE_TYPE_PRK;
+				save->type = SAVE_TYPE_PRK;
+				save->size = PRK_SIZE;
+				break;
+			
+			default:
+				continue;
+				break;
+		}
 		psu.data = (uint8_t *)malloc(psu.size * sizeof(uint8_t));
     if (psu.data == NULL) {
         printf("unable to allocate space for psu data, next!\n\n");
