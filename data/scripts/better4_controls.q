@@ -336,6 +336,21 @@ better4_control_dropdown = {
   ]
 }
 
+better4_control_directional_dropdown_index = 0
+better4_control_directional_dropdown_value = off
+better4_control_directional_dropdown = {
+  id = better4_control_directional_dropdown_id
+  index_name = better4_control_directional_dropdown_index
+  value_name = better4_control_directional_dropdown_value
+  text = "Directional DD"
+  ini_key = "DirectionalDD"
+  help = "Toggle whether you can change dropdown direction by pressing \b6/\b5"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 better4_control_liptricks_index = 1
 better4_control_liptricks_value = on
 better4_control_liptricks = {
@@ -987,6 +1002,7 @@ script better4_controls_init
   better4_control_init better4_control_respawn_on_newrun
   better4_control_init better4_control_updatedcollision
   better4_control_init better4_control_boostplant
+  better4_control_init better4_control_directional_dropdown
 endscript
 
 script better4_control_init
