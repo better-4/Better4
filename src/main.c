@@ -189,18 +189,32 @@ void patchLevelLimit() {
 }
 
 void patchPoolSizes() {
+	// Increase the size of the general-purpose arena allocated on startup.
 	// Mem::Manager::Manager (0x00533990)
-	patchDWord(0x005339dd + 1, 0x10000000); // Arena malloc: 0x4800000 -> 0x9000000
-	patchDWord(0x005339f8 + 1, 0x10000000);  // Arena end address: 0x4800000 -> 0x9000000
+	patchDWord(0x005339dd + 1, 0x10000000); // Arena malloc: 0x4800000 (72 MB) -> 0x10000000 (256 MB)
+	patchDWord(0x005339f8 + 1, 0x10000000);  // Arena end address: 0x4800000 (72 MB) -> 0x10000000 (256 MB)
 
-	// Mem::Manager::InitOtherHeaps (0x00534220)
-	patchDWord(0x00534380 + 1, 0xf4c040); // Script size: 0x3d3010 -> 0xf4c040
-	patchDWord(0x00534557 + 1, 0x1b7740); // skater_geom size: 0x6ddd0 -> 0x1b7740
+	// Increase the size of specific heap contexts.
+	// Each subsystem (`Script`, `skater_geom`, etc.) has its own heap context.
+    // Mem::Manager::InitOtherHeaps (0x00534220)
+	patchDWord(0x00534380 + 1, 0xf4c040); // Script size: 0x3d3010 (3.8 MB) -> 0xf4c040 (15.3 MB)
+	patchDWord(0x00534557 + 1, 0x1b7740); // skater_geom size: 0x6ddd0 (439 KB) -> 0x1b7740 (1.7 MB)
 
+	// Increase the size of the pools in the `Script` heap.
+	// Each type of object (e.g. `CComponent`) may only have N (e.g. 70,000) instances allocated at once.
 	// Script::AllocatePools (0x0040b780)
-	patchDWord(0x0040b819 + 1, 0x1130); // Reserve CStruct: 0x44c -> 0x1130
-	patchDWord(0x0040b84a + 1, 0x1f40); // CPair: 0x3e8 -> 0x1f40
-	patchDWord(0x0040b7e3 + 1, 0x4e20); // Reserve CComponent: 0x1388 -> 0x4e20
+	patchDWord(0x0040b7cd + 1, 0x445c0); // CComponent: 70,000 -> 280,000
+	patchDWord(0x0040b7e3 + 1, 0x4e20); // Reserve CComponent: 5,000 -> 20,000
+	patchDWord(0x0040b7fe + 1, 0xcb20); // CStruct: 13,000 -> 52,000
+	patchDWord(0x0040b819 + 1, 0x1130); // Reserve CStruct: 1,100 -> 4,400
+	patchDWord(0x0040b835 + 1, 0x7d00); // CVector: 8,000 -> 32,000
+	patchDWord(0x0040b84a + 1, 0xfa0); // CPair: 1,000 -> 4,000
+	patchDWord(0x0040b859 + 1, 0x4e20); // CArray: 5,000 -> 20,000
+	patchDWord(0x0040b868 + 1, 0x5dc0); // CSymbolTableEntry: 6,000 -> 24,000
+	patchDWord(0x0040b87f + 1, 0x348); // CScript: 210 -> 840
+	patchByte(0x0040b88e + 1, 0x7f); // CStoredRandom: 100 -> 127 (max signed u8; don't increase)
+	patchDWord(0x0040b895 + 1, 0x55f0); // AllocatePermanentStringHeap max_strings: 5500 -> 22000
+	patchDWord(0x0040b89a + 1, 0x6b6c0); // AllocatePermanentStringHeap max_size: 0x1adb0 (107.4 KB) -> 0x6b6c0 (429.7 KB)
 }
 
 void patchBetter4() {
