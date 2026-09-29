@@ -240,8 +240,9 @@ void patchBetter4() {
 void better4Main() {
 	initConfigFile();
 
-	int isDebug = getIniBool("Miscellaneous", "Debug", 0, configFile);
-	initializeLogging(isDebug);
+	int is_debug = getIniBool("Miscellaneous", "Debug", 0, configFile);
+	int log_level = GetPrivateProfileInt("Miscellaneous", "LogLevel", 2, configFile);
+	initializeLogging(is_debug, log_level);
 
 	checkForUpdate();
 

@@ -388,7 +388,7 @@ int __cdecl CFunc_FoundBetterServers(CStruct *params) {
 int __cdecl CFunc_ChooseBetterServer(CStruct *params) {
 	uint32_t server_ptr = 0;
 	if (!CStruct_GetChecksum(params, 0x40c698af/*id*/, &server_ptr, 0)) {
-		printLog("ChooseBetterServer missing param \"id\" (0x40c698af)\n");
+		logWarning("ChooseBetterServer missing param \"id\" (0x40c698af)\n");
 		return 0;
 	}
 	return choose_server((ServerInfo *)server_ptr);
@@ -397,7 +397,7 @@ int __cdecl CFunc_ChooseBetterServer(CStruct *params) {
 int __cdecl CFunc_DescribeBetterServer(CStruct *params) {
 	uint32_t server_ptr = 0;
 	if (!CStruct_GetChecksum(params, 0x40c698af/*id*/, &server_ptr, 0)) {
-		printLog("DescribeBetterServer missing param \"id\" (0x40c698af)\n");
+		logWarning("DescribeBetterServer missing param \"id\" (0x40c698af)\n");
 		return 0;
 	}
 	return describe_server((ServerInfo *)server_ptr);

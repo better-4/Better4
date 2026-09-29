@@ -76,7 +76,7 @@ void __cdecl GSGamePlaying(uint8_t playing) {
 int __cdecl CFunc_SetHosting(CStruct *params) {
 	float is_hosting;
 	if (!CStruct_GetFloat(params, 0, &is_hosting, 0)) {
-		printLog("SetHosting missing param \"is_hosting\" (unnamed)\n");
+		logWarning("SetHosting missing param \"is_hosting\" (unnamed)\n");
 		return 0;
 	}
 

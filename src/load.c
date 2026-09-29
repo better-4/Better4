@@ -181,7 +181,7 @@ void patchLoad() {
 int __cdecl CFunc_SetUpdatedCollision(CStruct* params) {
 	float index;
 	if (!CStruct_GetFloat(params, 0x7f8c98fe, &index, 0)) {
-		printLog("SetUpdatedCollision missing param \"index\" (0x7f8c98fe)\n");
+		logWarning("SetUpdatedCollision missing param \"index\" (0x7f8c98fe)\n");
 		return 0;
 	}
 	
