@@ -67,7 +67,8 @@ script SkateshopAI stopskateshopstreams = 1
       random( @PlayAnim Anim = StandIdleA
       @PlayAnim Anim = StandIdleB
       @PlayAnim Anim = StandIdleC
-     ) case editskater_female
+     )
+    case editskater_female
       random( @PlayAnim Anim = Idle_Jenna1
       WaitAnimFinished
       PlayAnim Anim = Idle_Jenna1

@@ -1,4 +1,21 @@
 boardshop_deck_price = 50
+boardshop_menu_pos = (82, 90)
+boardshop_helper_text = {
+  helper_text_elements = [
+    { text = "\b8/\b4 = Select" }
+    { text = "\m1 = Accept" }
+    { text = "\m2 = Back" }
+    { text = "\be/\bf = Rotate" }
+  ]
+}
+boardshop_helper_text_custom = {
+  helper_text_elements = [
+    { text = "\b7/\b4/\b6/\b5 = Select" }
+    { text = "\m0 = Accept" }
+    { text = "\m1 = Back" }
+    { text = "\be/\bf = Rotate" }
+  ]
+}
 script launch_boardshop_menu
   SetScreenElementLock id = root_window off
   pulse_blur
@@ -9,7 +26,7 @@ script launch_boardshop_menu
     Change edit_skater_menu_level_1_index = <parent_index>
   endif
   KillSpawnedScript name = Skateshop_slideshow
-  skater:Obj_MoveToNode name = TRG_SS_BoardShop orient
+  // skater:Obj_MoveToNode name = TRG_SS_BoardShop orient
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_BoardSelect play_hold
   if GotParam previous_menu
@@ -22,6 +39,9 @@ script launch_boardshop_menu
   endif
   boardshop_add_textures_to_vram
   boardshop_create_initial_menus
+  // skater:PlayAnim Anim = random( @StandIdleA @StandIdleB @StandIdleC ) cycle
+  skater:PlayAnim Anim = TestAnim cycle
+  skater:Obj_MoveToNode name = TRG_SS_BoardShop orient
 endscript
 script boardshop_create_initial_menus
   SetScreenElementLock id = root_window off
@@ -102,6 +122,7 @@ script boardshop_create_main_menu
     dims = (640, 480)
     pos = (320, 240)
   }
+   // <root_pos> = boardshop_menu_pos
    <root_pos> = (390, 79)
   CreateScreenElement {
     type = VMenu
@@ -113,10 +134,13 @@ script boardshop_create_main_menu
       { pad_back boardshop_menu_exit params = <...> }
       { pad_up generic_menu_up_or_down_sound params = { up } }
       { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_l1 skateshop_rotate_skater_left }
+      { pad_r1 skateshop_rotate_skater_right }
     ]
   }
   AssignAlias id = boardshop_vmenu alias = current_menu
-  create_helper_text generic_helper_text
+  // create_helper_text generic_helper_text
+  create_helper_text boardshop_helper_text
   get_current_skater_deck_menu_enabled
   if ( <decks_menu_enabled> = 0 )
      <deck_menu_not_focusable> = not_focusable
@@ -186,6 +210,9 @@ script boardshop_create_main_menu
     focus_params = { highlight_bar_scale = (0.94, 1.3) highlight_bar_pos = (-28, -16) }
   }
   FireEvent type = focus target = boardshop_vmenu
+  if GotParam from_griptape
+    skater:Obj_MoveToNode name = TRG_SS_BoardShop orient
+  endif
 endscript
 script boardshop_create_deck_menu
   if not GotParam profile_index
@@ -211,12 +238,14 @@ script boardshop_create_deck_menu
   if ObjectExists id = boardshop_anchor_middle
     DestroyScreenElement id = boardshop_anchor_middle
   endif
+   // <root_pos> = boardshop_menu_pos
    <root_pos> = (360, 67)
   CreateScreenElement {
     type = ContainerElement
     parent = current_menu_anchor
     id = boardshop_anchor_middle
     dims = (640, 480)
+    // pos = ( (320, 240) + (-30, -12) )
     pos = (320, 240)
   }
   if ( <name> = custom )
@@ -248,14 +277,16 @@ script boardshop_create_deck_menu
       { pad_right <pad_right_script> params = <pad_right_params> }
       { pad_up generic_menu_up_or_down_sound params = { up } }
       { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_l1 skateshop_rotate_skater_left }
+      { pad_r1 skateshop_rotate_skater_right }
     ]
   }
   AssignAlias id = boardshop_deck_design_menu alias = current_menu
   kill_start_key_binding
   if ( <name> = custom )
-    create_helper_text generic_helper_text_up_down_left_right
+    create_helper_text boardshop_helper_text_custom
   else
-    create_helper_text generic_helper_text
+    create_helper_text boardshop_helper_text
   endif
   CreateScreenElement {
     type = ContainerElement
@@ -352,7 +383,7 @@ script boardshop_create_deck_menu
   repeat 10
   SetScreenElementLock id = boardshop_deck_design_menu on
   SetScreenElementLock id = boardshop_deck_design_menu off
-  GetStackedScreenElementPos y id = boardshop_deck_design_menu offset = (-58, -10)
+  GetStackedScreenElementPos y id = boardshop_deck_design_menu offset = (-29, -15)
   CreateScreenElement {
     type = SpriteElement
     parent = boardshop_anchor_middle
@@ -446,8 +477,10 @@ script boardshop_create_griptape_menu
     pad_right_script = <pad_right_script>
     pad_right_params = { index = <pad_right_start_index> right }
     internal_just = [ left top ]
+    from_griptape
   }
-  create_helper_text generic_helper_text_up_down_left_right
+  create_helper_text boardshop_helper_text_custom
+
   if ( <pad_left_script> = nullscript )
     SetScreenElementProps {
       id = boardshop_left_arrow
@@ -518,6 +551,7 @@ script boardshop_create_griptape_menu
        <count> = ( <count> + 1 )
     repeat 10
   endif
+  skater:Obj_MoveToNode name = TRG_SS_GriptapeShop orient
   FireEvent type = focus target = boardshop_griptape_menu
 endscript
 script boardshop_create_board_menu
@@ -530,11 +564,7 @@ script boardshop_create_board_menu
     title = "Board"
     internal_just = [ left top ]
   }
-  create_helper_text { helper_text_elements = [ { text = "\b7/\b4 = Select" }
-      { text = "\m1 = Back" }
-      { text = "\m0 = Accept" }
-    ]
-  }
+  create_helper_text boardshop_helper_text
   SetScreenElementLock id = boardshop_griptape_menu on
   SetScreenElementLock id = boardshop_griptape_menu off
   GetStackedScreenElementPos y id = boardshop_griptape_menu
@@ -574,6 +604,7 @@ script boardshop_create_wheel_color_menu
       { text = "\b6/\b5 = Adjust" }
       { text = "\m1 = Back" }
       { text = "\m0 = Accept" }
+      { text = "\be/\bf = Rotate" }
     ]
   }
   SetScreenElementLock id = boardshop_griptape_menu on
@@ -608,7 +639,10 @@ script boardshop_create_wheel_color_menu
   repeat 10
   FireEvent type = focus target = boardshop_griptape_menu
 endscript
-script boardshop_add_griptape_wheel_menu internal_just = [ left top ]
+script boardshop_add_griptape_wheel_menu {
+  internal_just = [ left top ]
+  just = [ left top ]
+}
   if ObjectExists id = boardshop_anchor_middle
     DestroyScreenElement id = boardshop_anchor_middle
   endif
@@ -619,18 +653,24 @@ script boardshop_add_griptape_wheel_menu internal_just = [ left top ]
     dims = (640, 480)
     pos = (320, 240)
   }
+   // <root_pos> = ( boardshop_menu_pos + (-30, -18) )
    <root_pos> = (360, 60)
+  if GotParam from_griptape
+    <back_params> = { from_griptape }
+  endif
   CreateScreenElement {
     type = VMenu
     parent = boardshop_anchor_middle
     id = boardshop_griptape_menu
     pos = <root_pos>
-    just = [ left top ]
+    just = <just>
     internal_just = <internal_just>
     event_handlers = [ { pad_back generic_menu_pad_back_sound }
-      { pad_back boardshop_create_main_menu }
+      { pad_back boardshop_create_main_menu params = <back_params> }
       { pad_up generic_menu_up_or_down_sound params = { up } }
       { pad_down generic_menu_up_or_down_sound params = { down } }
+      { pad_l1 skateshop_rotate_skater_left }
+      { pad_r1 skateshop_rotate_skater_right }
     ]
   }
   AssignAlias id = boardshop_griptape_menu alias = current_menu
