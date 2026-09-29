@@ -764,6 +764,8 @@ script create_pause_menu
   // make_text_sprite texture = PA_options parent = menu_anim_debug2
   // make_sprite_menu_item text = "Anim Debug 3" id = menu_anim_debug3 pad_choose_script = better4_anim_debug pad_choose_params = { index = 2 }
   // make_text_sprite texture = PA_options parent = menu_anim_debug3
+  // make_sprite_menu_item text = "Anim Debug 4" id = menu_anim_debug4 pad_choose_script = better4_anim_debug pad_choose_params = { index = 3 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug4
   if InNetGame
     if not OnServer
       if not IsBetterObserving

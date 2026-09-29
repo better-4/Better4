@@ -194,7 +194,8 @@ RUN mkdir -p "/out/data/anims/better4" \
          --input-dir data/anims/thug --output-dir /out/data/anims/better4 \
          --in-game thug --out-game thps4 \
          --qkeys vendor/nx/assets/stdkey/thug/standardkeyQ.bin \
-         --tkeys vendor/nx/assets/stdkey/thug/standardkeyT.bin
+         --tkeys vendor/nx/assets/stdkey/thug/standardkeyT.bin \
+    && cp data/anims/*.dat /out/data/anims/better4
 
 ########################################
 FROM toolchain AS build-data

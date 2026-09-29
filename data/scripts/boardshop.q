@@ -39,8 +39,7 @@ script launch_boardshop_menu
   endif
   boardshop_add_textures_to_vram
   boardshop_create_initial_menus
-  // skater:PlayAnim Anim = random( @StandIdleA @StandIdleB @StandIdleC ) cycle
-  skater:PlayAnim Anim = TestAnim cycle
+  skater:PlayAnim Anim = PreviewDeck cycle
   skater:Obj_MoveToNode name = TRG_SS_BoardShop orient
 endscript
 script boardshop_create_initial_menus
@@ -947,7 +946,8 @@ script boardshop_menu_exit
     create_secrets_menu
   else
     create_edit_skater_menu <edit_skater_menu_params>
-	skater:Obj_MoveToNode name = TRG_SS_Appearance orient
+    skater:Obj_MoveToNode name = TRG_SS_Appearance orient
+    MakeSkaterGoto SkateshopAI params = { NoSFX CAS_Screen }
   endif
 endscript
 script boardshop_deck_design_focus
