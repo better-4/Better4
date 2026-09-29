@@ -416,6 +416,7 @@ script better4_onrail_menu
   better4_create_menu menu_title = "ON RAIL" icon = PA_lip close_script = better4_options_controls close_params = <...>
   better4_menu_spacer
   better4_create_menu_control better4_control_dropdown
+  better4_create_menu_control better4_control_directional_dropdown
   better4_create_menu_control better4_control_liptricks
   better4_create_menu_control better4_control_railspin
   better4_menu_spacer
