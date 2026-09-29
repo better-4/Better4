@@ -459,7 +459,7 @@ script create_files_menu pos_tweak = (-20, -45)
             //printf "from script before listed file name : %s" s =  <save_filename>
             better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save }
           else
-            //better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save  }
+            //better4_files_menu_add_item { pad_choose_script = OKToOverwrite  filename = <save_filename> actual_file_name = <save_filename> file_type = <FileType> MenuFileType = <FileType> Save }
             break
           endif
         repeat
