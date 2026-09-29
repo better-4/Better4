@@ -182,6 +182,7 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 
 		// grab psu data
 		psu.size = ps2_dir.nFileSizeLow;
+		if (psu.size > PSU_PRK_SIZE) continue;
 		psu.data = (uint8_t *)malloc(psu.size * sizeof(uint8_t));
     if (psu.data == NULL) {
         printf("unable to allocate space for psu data, next!\n\n");
