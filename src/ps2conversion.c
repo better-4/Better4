@@ -103,7 +103,7 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 	}
 	else return 0;
 	if (save_search == INVALID_HANDLE_VALUE) {
-		printf("\nno CAS file found in the directory.\n");
+		printf("\nno %s files found in the directory.\n",FileType);
 		return 0;
 	}
 	CStruct_RemoveComponent(params, 0x11093FB5);
@@ -162,18 +162,18 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 
 		// grab psu data + size check
 		psu.size = ps2_dir.nFileSizeLow;
-		switch (psu->size)
+		switch (psu.size)
 		{
 			case PSU_SKA_SIZE:
-				psu->saveType = SAVE_TYPE_SKA;
-				save->type = SAVE_TYPE_SKA;
-				save->size = SKA_SIZE;
+				psu.saveType = SAVE_TYPE_SKA;
+				new_save.type = SAVE_TYPE_SKA;
+				new_save.size = SKA_SIZE;
 				break;
 			
 			case PSU_PRK_SIZE:
-				psu->saveType = SAVE_TYPE_PRK;
-				save->type = SAVE_TYPE_PRK;
-				save->size = PRK_SIZE;
+				psu.saveType = SAVE_TYPE_PRK;
+				new_save.type = SAVE_TYPE_PRK;
+				new_save.size = PRK_SIZE;
 				break;
 			
 			default:
@@ -251,6 +251,7 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
 
 	do
 	{
+		if (save_dir.nFileSizeLow != SKA_SIZE) continue;
 		uint64_t saveTimestamp;
 		memcpy(&saveTimestamp, &save_dir.ftLastWriteTime, sizeof(uint64_t));
 		if (saveTimestamp > newestTimestamp)
