@@ -106,19 +106,19 @@ static int cancel_nat_negotiation() {
 int __cdecl CFunc_StartNatNegotiation(CStruct *params) {
 	char *ip = "";
 	if (!CStruct_GetString(params, 0, &ip, 0)) {
-		printLog("StartNatNegotiation missing param \"ip\" (unnamed)\n");
+		logWarning("StartNatNegotiation missing param \"ip\" (unnamed)\n");
 		return 0;
 	}
 
 	int port = 0;
 	if (!CStruct_GetInteger(params, 0, &port, 0)) {
-		printLog("StartNatNegotiation missing param \"port\" (unnamed)\n");
+		logWarning("StartNatNegotiation missing param \"port\" (unnamed)\n");
 		return 0;
 	}
 
 	int cookie = 0;
 	if (!CStruct_GetInteger(params, 0x751f4599/*cookie*/, &cookie, 0)) {
-		printLog("StartNatNegotiation missing param \"cookie\" (0x751f4599)\n");
+		logWarning("StartNatNegotiation missing param \"cookie\" (0x751f4599)\n");
 		return 0;
 	}
 

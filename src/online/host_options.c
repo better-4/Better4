@@ -57,7 +57,7 @@ void patchHostOptions() {
 int __cdecl CFunc_ChangeGameModifier(CStruct *params) {
 	float f_flag = 0;
 	if (!CStruct_GetFloat(params, 0x2e0b1465/*flag*/, &f_flag, 0)) {
-		printLog("ChangeGameModifier missing param \"flag\" (0x2e0b1465)\n");
+		logWarning("ChangeGameModifier missing param \"flag\" (0x2e0b1465)\n");
 		return 0;
 	}
     int flag = (int)f_flag;
@@ -69,7 +69,7 @@ int __cdecl CFunc_ChangeGameModifier(CStruct *params) {
 
 	float f_value = 0;
 	if (!CStruct_GetFloat(params, 0xe288a7cb/*value*/, &f_value, 0)) {
-		printLog("ChangeGameModifier missing param \"value\" (0xe288a7cb)\n");
+		logWarning("ChangeGameModifier missing param \"value\" (0xe288a7cb)\n");
 		return 0;
 	}
     int value = (int)f_value;

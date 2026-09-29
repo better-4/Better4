@@ -124,13 +124,13 @@ void patchCFuncs() {
 int __cdecl CFunc_GetIniBool(CStruct *params) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		printLog("GetIniBool missing param \"section\" (0xd28c8510)\n");
+		logWarning("GetIniBool missing param \"section\" (0xd28c8510)\n");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		printLog("GetIniBool missing param \"key\" (0x756f5456)\n");
+		logWarning("GetIniBool missing param \"key\" (0x756f5456)\n");
 		return 0;
 	}
 
@@ -140,20 +140,20 @@ int __cdecl CFunc_GetIniBool(CStruct *params) {
 int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		printLog("GetIniInteger missing param \"section\" (0xd28c8510)\n");
+		logWarning("GetIniInteger missing param \"section\" (0xd28c8510)\n");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		printLog("GetIniInteger missing param \"key\" (0x756f5456)\n");
+		logWarning("GetIniInteger missing param \"key\" (0x756f5456)\n");
 		return 0;
 	}
 
 	uint32_t value_name_checksum = 0;
 	if (!CStruct_GetChecksum(params, 0xbf4212ef, &value_name_checksum, 0)) {
 		// NOTE: checksum is for lowercase "valuename"; seemingly case insensitive
-		printLog("GetIniInteger missing param \"ValueName\" (0xbf4212ef)\n");
+		logWarning("GetIniInteger missing param \"ValueName\" (0xbf4212ef)\n");
 		return 0;
 	}
 
@@ -171,19 +171,19 @@ int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script) {
 int __cdecl CFunc_SetIniBool(CStruct *params, CScript *script) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		printLog("SetIniBool missing param \"section\" (0xd28c8510)\n");
+		logWarning("SetIniBool missing param \"section\" (0xd28c8510)\n");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		printLog("SetIniBool missing param \"key\" (0x756f5456)\n");
+		logWarning("SetIniBool missing param \"key\" (0x756f5456)\n");
 		return 0;
 	}
 
 	float value = 0;
 	if (!CStruct_GetFloat(params, 0xe288a7cb, &value, 0)) {
-		printLog("SetIniBool missing param \"value\" (0xe288a7cb)\n");
+		logWarning("SetIniBool missing param \"value\" (0xe288a7cb)\n");
 		return 0;
 	}
 
@@ -202,19 +202,19 @@ int __cdecl CFunc_SetIniBool(CStruct *params, CScript *script) {
 int __cdecl CFunc_SetIniInteger(CStruct *params, CScript *script) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		printLog("SetIniInteger missing param \"section\" (0xd28c8510)\n");
+		logWarning("SetIniInteger missing param \"section\" (0xd28c8510)\n");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		printLog("SetIniInteger missing param \"key\" (0x756f5456)\n");
+		logWarning("SetIniInteger missing param \"key\" (0x756f5456)\n");
 		return 0;
 	}
 
 	float value = 0;
 	if (!CStruct_GetFloat(params, 0xe288a7cb, &value, 0)) {
-		printLog("SetIniInteger missing param \"value\" (0xe288a7cb)\n");
+		logWarning("SetIniInteger missing param \"value\" (0xe288a7cb)\n");
 		return 0;
 	}
 
@@ -239,7 +239,7 @@ static CFunc_Change_t CFunc_Change = (CFunc_Change_t)0x0050f630;
 int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script) {
 	uint32_t name = 0;
 	if (!CStruct_GetChecksum(params, 0xa1dc81f9, &name, 0)) {
-		printLog("ChangeGlobal missing param \"name\" (0xa1dc81f9)\n");
+		logWarning("ChangeGlobal missing param \"name\" (0xa1dc81f9)\n");
 		return 0;
 	}
 	CStruct_RemoveComponent(params, 0xa1dc81f9);
@@ -253,7 +253,7 @@ int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script) {
 		CStruct_RemoveComponent(params, 0xe288a7cb);
 		CStruct_AddChecksum(params, name, checksum_value);
 	} else {
-		printLog("ChangeGlobal missing param \"value\" (0xe288a7cb)\n");
+		logWarning("ChangeGlobal missing param \"value\" (0xe288a7cb)\n");
 		return 0;
 	}
 
@@ -271,7 +271,7 @@ int __cdecl CFunc_GetStartTime(CStruct* params, CScript *script) {
 int __cdecl CFunc_GetElapsedTime(CStruct* params, CScript *script) {
 	int start_time;
     if (!CStruct_GetInteger(params, 0xd16b61e6, &start_time, 0)) {
-		printLog("GetElapsedTime missing param \"StartTime\" (0xd16b61e6)\n");
+		logWarning("GetElapsedTime missing param \"StartTime\" (0xd16b61e6)\n");
 		return 0;
 	}
 

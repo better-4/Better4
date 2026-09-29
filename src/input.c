@@ -106,7 +106,7 @@ int spine_transfer_op = 0;
 int __cdecl CFunc_SetSpineTransferControl(void *params) {
 	float index;
 	if (!CStruct_GetFloat(params, 0x7f8c98fe, &index, 0)) {
-		printLog("SetSpineTransferControl missing param \"index\" (0x7f8c98fe)\n");
+		logWarning("SetSpineTransferControl missing param \"index\" (0x7f8c98fe)\n");
 		return 0;
 	}
 
@@ -223,7 +223,7 @@ uint32_t offset_rightspin_trigger = OFFSET_R1_TRIGGER;
 int __cdecl CFunc_SetSpinKeysControl(void *params) {
 	float index;
 	if (!CStruct_GetFloat(params, 0x7f8c98fe, &index, 0)) {
-		printLog("SetSpinKeysControl missing param \"index\" (0x7f8c98fe)\n");
+		logWarning("SetSpinKeysControl missing param \"index\" (0x7f8c98fe)\n");
 		return 0;
 	}
 	
@@ -372,7 +372,7 @@ int pause_on_unfocus = 0;
 int __cdecl CFunc_SetPauseOnUnfocus(void *params) {
 	float index;
 	if (!CStruct_GetFloat(params, 0x7f8c98fe, &index, 0)) {
-		printLog("SetPauseOnUnfocus missing param \"index\" (0x7f8c98fe)\n");
+		logWarning("SetPauseOnUnfocus missing param \"index\" (0x7f8c98fe)\n");
 		return 0;
 	}
 	
