@@ -1,10 +1,5 @@
 #include "ps2conversion.h"
 
-// pre 2nd memory buff, this would crash trying to save a career file
-// was likely due to a combination of malloc calls + save allocation process + pool was already almost full = maxing heap
-// should be fine now, still enforcing a limit of 200 per save type
-// can always switch to fixed array but i dont feel like rewriting atm :)
-
 directory_t directory = {0};
 const char TH4ProductCodesPS2 [5][20] = 
 {
