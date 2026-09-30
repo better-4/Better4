@@ -103,13 +103,13 @@ void addCFuncs() {
 void printCFuncs() {
     // sanity check: verify we registered exactly the # of cfuncs we reserved
     if (cfunc_index != NUM_CFUNCS) {
-        printLog("WARNING: registered %d cfuncs, expected %d\n", cfunc_index, NUM_CFUNCS);
+        logWarning("WARNING: registered %d cfuncs, expected %d\n", cfunc_index, NUM_CFUNCS);
     }
 
-    // printLog("printing cfuncs we own\n");
+    // logDebug("Printing cfuncs we own\n");
     // for (int i = 0; i < NUM_CFUNCS; i++) {
     //     CFunc cfunc = cfuncs[i];
-    //     printLog("%s: 0x%p\n", cfunc.name, cfunc.func);
+    //     logDebug("%s: 0x%p\n", cfunc.name, cfunc.func);
     // }
 }
 

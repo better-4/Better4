@@ -111,7 +111,7 @@ int __cdecl CFunc_SetSpineTransferControl(void *params) {
 	}
 
 	spine_transfer_control_index = (int)index;
-	printLog("Set spine_transfer_control_index=%d\n", spine_transfer_control_index);
+	logDebug("Set spine_transfer_control_index=%d\n", spine_transfer_control_index);
 
 	switch (spine_transfer_control_index) {
 	case 1:
@@ -228,7 +228,7 @@ int __cdecl CFunc_SetSpinKeysControl(void *params) {
 	}
 	
 	spin_keys_control_index = (int)index;
-	printLog("Set spin_keys_control_index=%d\n", spin_keys_control_index);
+	logDebug("Set spin_keys_control_index=%d\n", spin_keys_control_index);
 
 	switch (spin_keys_control_index) {
 	case 1:
@@ -257,10 +257,10 @@ int __cdecl CFunc_SetSpinKeysControl(void *params) {
 		offset_rightspin_trigger = OFFSET_R1_TRIGGER;
 		break;
 	}
-	printLog("Set offset_leftspin_held=0x%x\n", offset_leftspin_held);
-	printLog("Set offset_leftspin_trigger=0x%x\n", offset_leftspin_trigger);
-	printLog("Set offset_rightspin_held=0x%x\n", offset_rightspin_held);
-	printLog("Set offset_rightspin_trigger=0x%x\n", offset_rightspin_trigger);
+	logDebug("Set offset_leftspin_held=0x%x\n", offset_leftspin_held);
+	logDebug("Set offset_leftspin_trigger=0x%x\n", offset_leftspin_trigger);
+	logDebug("Set offset_rightspin_held=0x%x\n", offset_rightspin_held);
+	logDebug("Set offset_rightspin_trigger=0x%x\n", offset_rightspin_trigger);
 
 	return 1;
 }
@@ -377,7 +377,7 @@ int __cdecl CFunc_SetPauseOnUnfocus(void *params) {
 	}
 	
 	pause_on_unfocus = (int)index;
-	printLog("Set pause_on_unfocus=%d\n", pause_on_unfocus);
+	logDebug("Set pause_on_unfocus=%d\n", pause_on_unfocus);
 
 	return 1;
 }

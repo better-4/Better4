@@ -15,12 +15,14 @@
 #include <stdint.h>
 
 static void gs_debug_callback(GSIDebugCategory cat, GSIDebugType type, GSIDebugLevel level, const char * fmt, va_list args) {
-    printLog("[%s][%s] ", gGSIDebugCatStrings[cat], gGSIDebugTypeStrings[type]);
-    vprintLog(fmt, args);
+	char message[256];
+    vsnprintf(message, 256, fmt, args);
+
+	logDebug("[%s][%s] %s", gGSIDebugCatStrings[cat], gGSIDebugTypeStrings[type], message);
 }
 
 static int gs_count_callback(PEER peer, qr2_key_type type, void *param) {
-	printLog("gs_count_callback: %d\n", type);
+	logDebug("gs_count_callback: %d\n", type);
 	switch (type) {
 	case key_server:
 		return 11;
@@ -33,7 +35,7 @@ static int gs_count_callback(PEER peer, qr2_key_type type, void *param) {
 }
 
 static void gs_key_list_callback(PEER peer, qr2_key_type type, qr2_keybuffer_t keybuffer, void *param) {
-	printLog("gs_key_list_callback: %d\n", type);
+	logDebug("gs_key_list_callback: %d\n", type);
 	switch (type) {
 	case key_server:
         qr2_keybuffer_add(keybuffer, HOSTNAME_KEY);
@@ -58,7 +60,7 @@ static void gs_key_list_callback(PEER peer, qr2_key_type type, qr2_keybuffer_t k
 }
 
 static void gs_server_key_callback(PEER peer, int key, qr2_buffer_t buffer, void *param) {
-	printLog("gs_server_key_callback: %d\n", key);
+	logDebug("gs_server_key_callback: %d\n", key);
 	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
 	
 	switch (key) {
@@ -67,7 +69,7 @@ static void gs_server_key_callback(PEER peer, int key, qr2_buffer_t buffer, void
 		CStruct *server_name = Prefs_Preferences_GetPreference(net_preferences, 0x2a5cf019/*server_name*/);
 		char *ui_string = "";
 		if (!CStruct_GetString(server_name, 0x96875c0f/*ui_string*/, &ui_string, 0)) {
-			printLog("gs_server_key_callback: could not get server_name's ui_string\n");
+			logWarning("gs_server_key_callback: could not get server_name's ui_string\n");
 		}
 		qr2_buffer_add(buffer, ui_string);
 		break;
@@ -88,7 +90,7 @@ static void gs_server_key_callback(PEER peer, int key, qr2_buffer_t buffer, void
 
 			char *ui_string = "";
 			if (!CStruct_GetString(level, 0x96875c0f/*ui_string*/, &ui_string, 0)) {
-				printLog("GSInitGameSpy: could not get level's ui_string\n");
+				logWarning("GSInitGameSpy: could not get level's ui_string\n");
 			}
 
 			qr2_buffer_add(buffer, ui_string);
@@ -141,7 +143,7 @@ static void gs_server_key_callback(PEER peer, int key, qr2_buffer_t buffer, void
 }
 
 static void gs_player_key_callback(PEER peer, int key, int index, qr2_buffer_t buffer, void *param) {
-	printLog("gs_player_key_callback: %d, index %d\n", key, index);
+	logDebug("gs_player_key_callback: %d, index %d\n", key, index);
 	// TODO (ellie): ping reporting?
 	switch (key) {
 	case PLAYER__KEY:
@@ -162,10 +164,10 @@ static void gs_player_key_callback(PEER peer, int key, int index, qr2_buffer_t b
 		}
 
 		if (target_player) {
-			printLog("gs_player_key_callback: target_player=0x%p, name=%s\n", target_player, target_player->name);
+			logDebug("gs_player_key_callback: target_player=0x%p, name=%s\n", target_player, target_player->name);
 			qr2_buffer_add(buffer, target_player->name);
 		} else {
-			printLog("gs_player_key_callback: target_player is null\n");
+			logDebug("gs_player_key_callback: target_player is null\n");
 			qr2_buffer_add(buffer, "");
 		}
 		break;
@@ -178,16 +180,16 @@ static void gs_player_key_callback(PEER peer, int key, int index, qr2_buffer_t b
 static void gs_public_address_callback(PEER peer, unsigned int ip, unsigned short port, void *param) {
 	struct in_addr addr;
 	addr.s_addr = ip;
-    printLog("Received public address: %s:%d\n", inet_ntoa(addr), port);
+    logDebug("Received public address: %s:%d\n", inet_ntoa(addr), port);
 }
 
 static void gs_natneg_progress_callback(NegotiateState state, void *param) {
 	switch (state) {
 	case ns_initack:
-		printLog("gs_natneg_progress_callback: ns_initack\n");
+		logDebug("gs_natneg_progress_callback: ns_initack\n");
 		break;
 	case ns_connectping:
-		printLog("gs_natneg_progress_callback: ns_connectping\n");
+		logDebug("gs_natneg_progress_callback: ns_connectping\n");
 		break;
 	default:
 		break;
@@ -199,17 +201,17 @@ static void gs_natneg_complete_callback(NegotiateResult result, SOCKET gamesocke
 
 	switch (result) {
 	case nr_success:
-		printLog("gs_natneg_complete_callback: nr_success\n");
-		printLog("gs_natneg_complete_callback: being joined by client %s:%d\n", inet_ntoa(remoteaddr->sin_addr), ntohs(remoteaddr->sin_port));
+		logDebug("gs_natneg_complete_callback: nr_success\n");
+		logInfo("gs_natneg_complete_callback: being joined by client %s:%d\n", inet_ntoa(remoteaddr->sin_addr), ntohs(remoteaddr->sin_port));
 		break;
 	case nr_deadbeatpartner:
-		printLog("gs_natneg_complete_callback: nr_deadbeatpartner\n");
+		logWarning("gs_natneg_complete_callback: nr_deadbeatpartner\n");
 		break;
 	case nr_inittimeout:
-		printLog("gs_natneg_complete_callback: nr_inittimeout\n");
+		logWarning("gs_natneg_complete_callback: nr_inittimeout\n");
 		break;
 	case nr_pingtimeout:
-		printLog("gs_natneg_complete_callback: nr_pingtimeout\n");
+		logWarning("gs_natneg_complete_callback: nr_pingtimeout\n");
 		break;
 	default:
 		break;
@@ -217,7 +219,7 @@ static void gs_natneg_complete_callback(NegotiateResult result, SOCKET gamesocke
 }
 
 static void gs_nat_negotiate_callback(PEER peer, int cookie, void *param) {
-	printLog("gs_nat_negotiate_callback: received Nat Negotiate Cookie: 0x%08X\n", cookie);
+	logDebug("gs_nat_negotiate_callback: received Nat Negotiate Cookie: 0x%08X\n", cookie);
 
 	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
 	Net_App *server = gamenet_manager->server;
@@ -228,27 +230,27 @@ static void gs_nat_negotiate_callback(PEER peer, int cookie, void *param) {
 		gs_nat_negotiating = 1;
 		break;
 	case ne_allocerror:
-		printLog("gs_nat_negotiate_callback: memory allocation failed\n");
+		logDebug("gs_nat_negotiate_callback: memory allocation failed\n");
 	case ne_dnserror:
-		printLog("gs_nat_negotiate_callback: DNS lookup failed\n");
+		logDebug("gs_nat_negotiate_callback: DNS lookup failed\n");
 	case ne_socketerror:
-		printLog("gs_nat_negotiate_callback: socket failed to be created\n");
+		logDebug("gs_nat_negotiate_callback: socket failed to be created\n");
 	}
 }
 
 static void gs_add_error_callback(PEER peer, qr2_error_t error, gsi_char *errorString, void *param) {
-    printLog("OpenSpy reporting error: %d (%s)\n", error, errorString);
+    logWarning("OpenSpy reporting error: %d (%s)\n", error, errorString);
 }
 
 void foreign_packet_handler(uint8_t *packet, int len, struct sockaddr *sender) {
 	if (len < 6) {
-		printLog("foreign_packet_handler: packet not long enough (len=%d)\n", len);
+		logDebug("foreign_packet_handler: packet not long enough (len=%d)\n", len);
 		return;
 	}
 
 	if (packet[0] == QR_MAGIC_1 && packet[1] == QR_MAGIC_2) {
 		if (gs_peer) {
-			printLog("foreign_packet_handler: handling QR request\n");
+			logDebug("foreign_packet_handler: handling QR request\n");
 			peerParseQuery(gs_peer, packet, len, sender);
 		}
 	} else if (
@@ -259,7 +261,7 @@ void foreign_packet_handler(uint8_t *packet, int len, struct sockaddr *sender) {
 		&& packet[4] == NN_MAGIC_4
 		&& packet[5] == NN_MAGIC_5
 	) {
-		printLog("foreign_packet_handler: processing natneg data\n");
+		logDebug("foreign_packet_handler: processing natneg data\n");
 		NNProcessData(packet, len, sender);
 	}
 }
@@ -273,7 +275,7 @@ void create_console_message(char *message) {
 }
 
 void gs_player_joined_callback(PEER peer, RoomType room_type, char *nick, void *param) {
-	printLog("gs_player_joined_callback: room_type=%d, nick=%s\n", room_type, nick);
+	logDebug("gs_player_joined_callback: room_type=%d, nick=%s\n", room_type, nick);
 
 	static char text[256];
 	sprintf_s(text, sizeof(text), "\\c4%s joined the room", nick);
@@ -283,7 +285,7 @@ void gs_player_joined_callback(PEER peer, RoomType room_type, char *nick, void *
 }
 
 void gs_player_left_callback(PEER peer, RoomType room_type, char *nick, char *reason, void *param) {
-	printLog("gs_player_left_callback: room_type=%d, nick=%s, reason=%s\n", room_type, nick, reason);
+	logDebug("gs_player_left_callback: room_type=%d, nick=%s, reason=%s\n", room_type, nick, reason);
 
 	static char text[256];
 	sprintf_s(text, sizeof(text), "\\c2%s left the room", nick);
@@ -293,15 +295,15 @@ void gs_player_left_callback(PEER peer, RoomType room_type, char *nick, char *re
 }
 
 void gs_new_player_list_callback(PEER peer, RoomType room_type, void *param) {
-	printLog("gs_new_player_list_callback: room_type=%d\n", room_type);
+	logDebug("gs_new_player_list_callback: room_type=%d\n", room_type);
 }
 
 void gs_room_key_changed_callback(PEER peer, RoomType room_type, char *nick, char *key, char *value, void *param) {
-	printLog("gs_room_key_changed_callback: room_type=%d, nick=%s, key=%s, value=%s\n", room_type, nick, key, value);
+	logDebug("gs_room_key_changed_callback: room_type=%d, nick=%s, key=%s, value=%s\n", room_type, nick, key, value);
 }
 
 void gs_room_message_callback(PEER peer, RoomType room_type, char *nick, char *message, MessageType message_type, void *param) {
-	printLog("gs_room_message_callback: room_type=%d, nick=%s, message=%s, message_type=%d\n", room_type, nick, message, message_type);
+	logDebug("gs_room_message_callback: room_type=%d, nick=%s, message=%s, message_type=%d\n", room_type, nick, message, message_type);
 
 	static char text[256];
 	sprintf_s(text, sizeof(text), "%s: %s", nick, message);
@@ -315,7 +317,7 @@ void gs_peer_initialize() {
 		gsSetDebugCallback(gs_debug_callback);
 		gsSetDebugLevel(GSIDebugCat_All, GSIDebugType_All, GSIDebugLevel_Debug);
 
-		printLog("gs_peer_initialize: starting available check\n");
+		logDebug("gs_peer_initialize: starting available check\n");
 		GSIStartAvailableCheck(GAME_NAME);
 		GSIACResult result;
 		while ((result = GSIAvailableCheckThink()) == GSIACWaiting) {
@@ -345,10 +347,10 @@ void gs_peer_initialize() {
 
 		callbacks.qrAddError = gs_add_error_callback;
 
-		printLog("gs_peer_initialize: peerInitialize\n");
+		logDebug("gs_peer_initialize: peerInitialize\n");
 		gs_peer = peerInitialize(&callbacks);
 
-		printLog("gs_peer_initialize: peerSetTitle\n");
+		logDebug("gs_peer_initialize: peerSetTitle\n");
 		PEERBool ping_rooms[3] = {0, 1, 0};
 		PEERBool x_ping_rooms[3] = {0, 0, 0};
 		peerSetTitle(gs_peer, GAME_NAME, GAME_KEY, GAME_NAME, GAME_KEY, 4, 15, 1, ping_rooms, x_ping_rooms);
@@ -360,12 +362,12 @@ void gs_peer_initialize() {
 
 void gs_peer_shutdown() {
 	if (gs_peer) {
-		printLog("gs_peer_shutdown: peerStopGame\n");
+		logDebug("gs_peer_shutdown: peerStopGame\n");
 		peerStopGame(gs_peer);
 		piStopReporting(gs_peer);
-		printLog("gs_peer_shutdown: peerClearTitle\n");
+		logDebug("gs_peer_shutdown: peerClearTitle\n");
 		peerClearTitle(gs_peer);
-		printLog("gs_peer_shutdown: peerShutdown\n");
+		logDebug("gs_peer_shutdown: peerShutdown\n");
 		peerShutdown(gs_peer);
 		gs_peer = 0;
 	}

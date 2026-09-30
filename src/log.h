@@ -11,9 +11,17 @@ enum {
 };
 
 void initializeLogging();
-int vprintLog(const char* fmt, va_list args);
-int printLog(const char* fmt, ...);
+
+int logError(const char *fmt, ...);
+int logWarning(const char *fmt, ...);
+int logInfo(const char *fmt, ...);
+int logDebug(const char *fmt, ...);
 
 void patchScriptPrintf();
+
+int __cdecl CFunc_LogError(CStruct* params, CScript *script);
+int __cdecl CFunc_LogWarning(CStruct* params, CScript *script);
+int __cdecl CFunc_LogInfo(CStruct* params, CScript *script);
+int __cdecl CFunc_LogDebug(CStruct* params, CScript *script);
 
 #endif

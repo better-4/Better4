@@ -116,18 +116,6 @@ int vprintLog(const char* fmt, va_list args, char level) {
     return ret;
 }
 
-int printLog(const char* fmt, ...) {
-	if (log_level >= LOG_LEVEL_INFO) {
-		va_list args;
-		va_start(args, fmt);
-		int ret = vprintLog(fmt, args, 'I');
-		va_end(args);
-		return ret;
-	} else {
-		return 0;
-	}
-}
-
 int logError(const char* fmt, ...) {
 	if (log_level >= LOG_LEVEL_ERROR) {
 		va_list args;
@@ -181,10 +169,10 @@ void patchScriptPrintf() {
 	// game when entering the main menu. Instead, patch individual call sites in CFuncs.
 
 	// CFuncs::ScriptPrintf (0x0050a1e0)
-	patchCall(0x0050a3cb, printLog);
-	patchCall(0x0050a3e5, printLog);
-	patchCall(0x0050a4b5, printLog);
-	patchCall(0x0050a4fb, printLog);
+	patchCall(0x0050a3cb, logInfo);
+	patchCall(0x0050a3e5, logInfo);
+	patchCall(0x0050a4b5, logInfo);
+	patchCall(0x0050a4fb, logInfo);
 
 	// CFuncs::ScriptPrintStruct (0041a4c0)
 	patchCall(0x0041a4ce, printf);
@@ -206,4 +194,30 @@ void patchScriptPrintf() {
 	patchCall(0x0041a6d1, printf);
 	patchCall(0x0041a6fb, printf);
 	patchCall(0x0041a70b, printf);
+}
+
+typedef int(__cdecl* LogCallback)(const char *fmt, ...);
+
+int __cdecl CFunc_LogLevel(CStruct* params, CScript *script, LogCallback callback) {
+	char *fmt;
+	if (!CStruct_GetFloat(params, 0, &fmt, 0)) {
+		logWarning("LogInfo missing param \"fmt\" (unnamed)\n");
+		return 0;
+	}
+}
+
+int __cdecl CFunc_LogError(CStruct* params, CScript *script) {
+	return CFunc_LogLevel(params, script, logError);
+}
+
+int __cdecl CFunc_LogWarning(CStruct* params, CScript *script) {
+	return CFunc_LogLevel(params, script, logWarning);
+}
+
+int __cdecl CFunc_LogInfo(CStruct* params, CScript *script) { 
+	return CFunc_LogLevel(params, script, logInfo);
+}
+
+int __cdecl CFunc_LogDebug(CStruct* params, CScript *script) {
+	return CFunc_LogLevel(params, script, logDebug);
 }

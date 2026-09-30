@@ -18,10 +18,10 @@
 static void gs_natneg_progress_callback(NegotiateState state, void *param) {
 	switch (state) {
 	case ns_initack:
-		printLog("gs_natneg_progress_callback: ns_initack\n");
+		logDebug("gs_natneg_progress_callback: ns_initack\n");
 		break;
 	case ns_connectping:
-		printLog("gs_natneg_progress_callback: ns_connectping\n");
+		logDebug("gs_natneg_progress_callback: ns_connectping\n");
 		break;
 	default:
 		break;
@@ -31,26 +31,26 @@ static void gs_natneg_progress_callback(NegotiateState state, void *param) {
 static void gs_natneg_complete_callback(NegotiateResult result, SOCKET gamesocket, SOCKADDR_IN *remoteaddr, void *param) {
 	switch (result) {
 	case nr_success:
-		printLog("gs_natneg_complete_callback: nr_success\n");
+		logDebug("gs_natneg_complete_callback: nr_success\n");
 
 		GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
 		uint8_t join_mode = (uint8_t)gamenet_manager->join_mode;
 		uint32_t ip = remoteaddr->sin_addr.s_addr;
 		uint16_t port = ntohs(remoteaddr->sin_port);
-		printLog("gs_natneg_complete_callback: joining server %s:%d, join mode %d\n", inet_ntoa(remoteaddr->sin_addr), port, join_mode);
+		logInfo("gs_natneg_complete_callback: joining server %s:%d, join mode %d\n", inet_ntoa(remoteaddr->sin_addr), port, join_mode);
 
 		GameNet_Manager_JoinServer(gamenet_manager, join_mode, ip, port, 0);
 		gs_peer_shutdown();
 
 		break;
 	case nr_deadbeatpartner:
-		printLog("gs_natneg_complete_callback: nr_deadbeatpartner\n");
+		logWarning("gs_natneg_complete_callback: nr_deadbeatpartner\n");
 		break;
 	case nr_inittimeout:
-		printLog("gs_natneg_complete_callback: nr_inittimeout\n");
+		logWarning("gs_natneg_complete_callback: nr_inittimeout\n");
 		break;
 	case nr_pingtimeout:
-		printLog("gs_natneg_complete_callback: nr_pingtimeout\n");
+		logWarning("gs_natneg_complete_callback: nr_pingtimeout\n");
 		break;
 	default:
 		break;
@@ -65,7 +65,7 @@ static void gs_natneg_complete_callback(NegotiateResult result, SOCKET gamesocke
 }
 
 static int start_nat_negotiation(char *ip, uint16_t port, int cookie) {
-	printLog("start_nat_negotiation: %s:%d with cookie 0x%08x\n", ip, port, cookie);
+	logDebug("start_nat_negotiation: %s:%d with cookie 0x%08x\n", ip, port, cookie);
 
 	gs_peer_initialize();
 	peerSendNatNegotiateCookie(gs_peer, inet_addr(ip), port, cookie);
@@ -80,13 +80,13 @@ static int start_nat_negotiation(char *ip, uint16_t port, int cookie) {
 		gs_nat_negotiating = 1;
 		break;
 	case ne_allocerror:
-		printLog("start_nat_negotiation: memory allocation failed\n");
+		logWarning("start_nat_negotiation: memory allocation failed\n");
 		return 0;
 	case ne_dnserror:
-		printLog("start_nat_negotiation: DNS lookup failed\n");
+		logWarning("start_nat_negotiation: DNS lookup failed\n");
 		return 0;
 	case ne_socketerror:
-		printLog("start_nat_negotiation: socket failed to be created\n");
+		logWarning("start_nat_negotiation: socket failed to be created\n");
 		return 0;
 	}
 
@@ -94,7 +94,7 @@ static int start_nat_negotiation(char *ip, uint16_t port, int cookie) {
 }
 
 static int cancel_nat_negotiation() {
-	printLog("cancel_nat_negotiation\n");
+	logDebug("cancel_nat_negotiation\n");
 
 	gs_peer_shutdown();
 	gs_nat_negotiating = 0;
@@ -141,7 +141,7 @@ uint8_t __fastcall Net_App_validate_and_copy_stream(struct sockaddr_in *sender, 
 	uint8_t ret = _validate_and_copy_stream(app, UNUSED, in, out, len);
 
 	if (app->foreign_packet_handler) {
-		printLog("Calling client's foreign packet handler\n");
+		logDebug("Calling client's foreign packet handler\n");
 		app->foreign_packet_handler(in, len, sender);
 	}
 
