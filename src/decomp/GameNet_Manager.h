@@ -41,4 +41,8 @@ char *GameNet_Manager_GetPassword(GameNet_Manager *this);
 void GameNet_Manager_JoinServer(GameNet_Manager *this, uint8_t join_mode, uint32_t ip, uint16_t port, uint32_t unk);
 Net_App *GameNet_Manager_SpawnClient(GameNet_Manager *this, uint8_t unk, uint8_t unk2, uint8_t unk3, int index);
 
+uint32_t GameNet_Manager_InInternetMode(GameNet_Manager *this);
+uint32_t GameNet_Manager_InLanMode(GameNet_Manager *this);
+uint32_t GameNet_Manager_InNetGame(GameNet_Manager *this);
+
 #endif
