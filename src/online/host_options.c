@@ -51,7 +51,21 @@ uint32_t __cdecl GameNet_Manager_s_handle_ready_response(int *unk1) {
 }
 
 void patchHostOptions() {
+    // GameNet::Manager::SpawnServer (0x004869a0)
     patchDWord(0x00486abd + 1, (void *)GameNet_Manager_s_handle_ready_response);
+
+    // XXX (ellie): Technically this allows people to cheat in online lobbies - would be
+    // more proper to instead check if the modifier is enabled when in net game.
+
+    // Obj::CSkater::DoGameLogic (0x004c8ed0)
+    patchNop(0x004c91dd, 2); // Don't disallow CHEAT_ALWAYS_SPECIAL in net games
+
+    // Obj::CSkater::DoRailPhysics (0x004c4030)
+    patchNop(0x004c48ee, 2); // Don't disallow CHEAT_PERFECT_RAIL in net games
+
+    // Obj::CSkater::DoOnGroundPhysics (0x004bfe30)
+    patchNop(0x004c006e, 6); // Don't disallow CHEAT_PERFECT_SKITCH in net games
+    patchNop(0x004c00df, 2); // Don't disallow CHEAT_PERFECT_MANUAL in net games
 }
 
 int __cdecl CFunc_ChangeGameModifier(CStruct *params) {
