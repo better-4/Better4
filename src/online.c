@@ -45,7 +45,7 @@ int __cdecl CFunc_GetLocalSkaterIndex(CStruct* params, CScript* script) {
         if (skater == local_skater)
         {
             CStruct* out = CScript_GetParams(script);
-            CStruct_AddInteger(out, 0x7F8C98FE/*index*/, (int)skater_index);
+            CStruct_AddInteger(out, 0x7f8c98fe/*index*/, (int)skater_index);
             return 1;
         }
     }

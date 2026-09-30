@@ -109,7 +109,7 @@ int __cdecl CFunc_CancelWallpush(CStruct *params) {
 int __cdecl CFunc_SetWallpushEnabled(CStruct *params) {
 	float enabled;
 	if (!CStruct_GetFloat(params, 0xaf06447b/*enabled*/, &enabled, 0)) {
-		printLog("SetWallpushEnabled missing param \"enabled\" (0xaf06447b)\n");
+		logWarning("SetWallpushEnabled missing param \"enabled\" (0xaf06447b)\n");
 		return 0;
 	}
     wallpush_enabled = (int)enabled;

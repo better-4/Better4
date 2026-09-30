@@ -1,6 +1,8 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
+#include "online/host_options.h"
+#include "online/net_handlers.h"
 #include "security.h"
 #include "updater.h"
 #include "wallpush.h"
@@ -55,11 +57,11 @@ void patchIykyk() {
 void patchLevelLimit() {
 	static uint8_t s_is_competition[NUM_LEVELS] = { 0 };
 
-	// Mdl::Skate::Skate
+	// Mdl::Skate::Skate (0x004f9630)
 	patchDWord(0x004f9870 + 1, sizeof(Obj_CSkaterCareer));
-	patchByte(0x004f99df + 1, NUM_LEVELS);
+	// patchByte(0x004f99df + 1, NUM_LEVELS); // XXX (ellie): CGameRecords constructor; not needed? causes failure to save career
 
-	// Obj::CSkaterCareer::ReadFromStructure
+	// Obj::CSkaterCareer::ReadFromStructure (0x004dd6a0)
 	patchDWord(0x004dd6f7 + 2, offsetof(Obj_CSkaterCareer, level_flags));
 	patchDWord(0x004dd6ff + 2, offsetof(Obj_CSkaterCareer, goal_flags) - offsetof(Obj_CSkaterCareer, level_flags));
 	patchDWord(0x004dd766 + 2, offsetof(Obj_CSkaterCareer, global_flags));
@@ -67,81 +69,80 @@ void patchLevelLimit() {
 	patchDWord(0x004dd7b6 + 3, offsetof(Obj_CSkaterCareer, gap_checklist));
 	patchDWord(0x004dd8e7 + 3, offsetof(Obj_CSkaterCareer, level_visited));
 
-	// Obj::CSkaterCareer::WriteIntoStructure
+	// Obj::CSkaterCareer::WriteIntoStructure (0x004dcbc0)
 	patchDWord(0x004dce11 + 2, offsetof(Obj_CSkaterCareer, level_flags));
 	patchDWord(0x004dcf41 + 2, offsetof(Obj_CSkaterCareer, global_flags));
 	patchDWord(0x004dd039 + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dd043 + 3, offsetof(Obj_CSkaterCareer, gap_checklist));
 	patchDWord(0x004dd5ae + 3, offsetof(Obj_CSkaterCareer, level_visited));
 
-	// Obj::CSkaterCareer::GetGapChecklist
+	// Obj::CSkaterCareer::GetGapChecklist (0x004dc690)
 	patchDWord(0x004dc699 + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dc69f + 3, offsetof(Obj_CSkaterCareer, gap_checklist));
 
-	// Obj::CSkaterCareer::JustGotFlag
+	// Obj::CSkaterCareer::JustGotFlag (0x004dcb80)
 	patchDWord(0x004dcb89 + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dcb96 + 3, offsetof(Obj_CSkaterCareer, start_level_flags));
 	patchDWord(0x004dcba0 + 3, offsetof(Obj_CSkaterCareer, level_flags));
 
-	// Obj::CSkaterCareer::GetFlag
+	// Obj::CSkaterCareer::GetFlag (0x004dcb40)
 	patchDWord(0x004dcb4b + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dcb68 + 3, offsetof(Obj_CSkaterCareer, level_flags));
 
-	// Obj::CSkaterCareer::UnSetFlag
+	// Obj::CSkaterCareer::UnSetFlag (0x004dcaf0)
 	patchDWord(0x004dcafd + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dcb12 + 3, offsetof(Obj_CSkaterCareer, level_flags));
 	patchDWord(0x004dcb28 + 3, offsetof(Obj_CSkaterCareer, start_level_flags));
 	patchDWord(0x004dcb32 + 3, offsetof(Obj_CSkaterCareer, start_level_flags));
 
-	// Obj::CSkaterCareer::SetFlag
+	// Obj::CSkaterCareer::SetFlag (0x004dcab0)
 	patchDWord(0x004dcabb + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dcad2 + 3, offsetof(Obj_CSkaterCareer, level_flags));
 
-	// Obj::CSkaterCareer::GetGlobalFlag
+	// Obj::CSkaterCareer::GetGlobalFlag (0x004dca80)
 	patchDWord(0x004dca96 + 3, offsetof(Obj_CSkaterCareer, global_flags));
 
-	// Obj::CSkaterCareer::UnSetGlobalFlag
+	// Obj::CSkaterCareer::UnSetGlobalFlag (0x004dca50)
 	patchDWord(0x004dca5e + 3, offsetof(Obj_CSkaterCareer, global_flags));
 
-	// Obj::CSkaterCareer::SetGlobalFlag
+	// Obj::CSkaterCareer::SetGlobalFlag (0x004dca20)
 	patchDWord(0x004dca2e + 3, offsetof(Obj_CSkaterCareer, global_flags));
 
-	// Obj::CSkaterCareer::CountMedals
+	// Obj::CSkaterCareer::CountMedals (0x004dc9a0)
 	patchDWord(0x004dc9ab + 2, &s_is_competition);
 	patchDWord(0x004dc9bc + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchByte(0x004dca05 + 2, NUM_LEVELS);
 
-	// Obj::CSkaterCareer::CountTotalGoalsCompleted
+	// Obj::CSkaterCareer::CountTotalGoalsCompleted (0x004dc930)
 	patchDWord(0x004dc93b + 2, &s_is_competition);
 	patchDWord(0x004dc94c + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchByte(0x004dc98e + 2, NUM_LEVELS);
 
-	// Obj::CSkaterCareer::CountGoalsCompleted
+	// Obj::CSkaterCareer::CountGoalsCompleted (0x004dc8e9)
 	patchDWord(0x004dc8e9 + 2, offsetof(Obj_CSkaterCareer, current_level));
 
-	// Obj::CSkaterCareer::JustGotGoal
+	// Obj::CSkaterCareer::JustGotGoal (0x004dc8a0)
 	patchDWord(0x004dc8a9 + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dc8b6 + 3, offsetof(Obj_CSkaterCareer, start_goal_flags));
 
-	// Obj::CSkaterCareer::GetGoal
+	// Obj::CSkaterCareer::GetGoal (0x004dc860)
 	patchDWord(0x004dc86b + 2, offsetof(Obj_CSkaterCareer, current_level));
 
-	// Obj::CSkaterCareer::UnSetGoal
+	// Obj::CSkaterCareer::UnSetGoal (0x004dc810)
 	patchDWord(0x004dc81d + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dc845 + 3, offsetof(Obj_CSkaterCareer, start_goal_flags));
 	patchDWord(0x004dc84f + 3, offsetof(Obj_CSkaterCareer, start_goal_flags));
 
-	// Obj::CSkaterCareer::SetGoal
+	// Obj::CSkaterCareer::SetGoal (0x004dc7d0)
 	patchDWord(0x004dc7db + 2, offsetof(Obj_CSkaterCareer, current_level));
 
-	// TODO: Obj::CSkaterCareer::HasVisitedLevel (inlined, only called by GotAllGaps?)
+	// Obj::CSkaterCareer::HasVisitedLevel (inlined, only called by GotAllGaps)
+	// Obj::CSkaterCareer::MarkLevelVisited (inlined, only called by StartLevel)
 
-	// TODO: Obj::CSkaterCareer::MarkLevelVisited (inlined, only called by StartLevel?)
-
-	// Obj::CSkaterCareer::GetLevel
+	// Obj::CSkaterCareer::GetLevel (0x004dc7c0)
 	patchDWord(0x004dc7c0 + 2, offsetof(Obj_CSkaterCareer, current_level));
 
-	// Obj::CSkaterCareer::StartLevel
+	// Obj::CSkaterCareer::StartLevel (0x004dc760)
 	patchDWord(0x004dc769 + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dc771 + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dc777 + 2, offsetof(Obj_CSkaterCareer, current_level));
@@ -153,16 +154,16 @@ void patchLevelLimit() {
 	patchDWord(0x004dc7a8 + 2, offsetof(Obj_CSkaterCareer, level_flags) + 4);
 	patchDWord(0x004dc7ae + 2, offsetof(Obj_CSkaterCareer, start_level_flags) + 4);
 
-	// Obj::CSkaterCareer::GotAllGaps
+	// Obj::CSkaterCareer::GotAllGaps (0x004dc6b0)
 	patchDWord(0x004dc6b6 + 3, offsetof(Obj_CSkaterCareer, level_visited));
 	patchDWord(0x004dc6cc + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dc6d2 + 3, offsetof(Obj_CSkaterCareer, gap_checklist));
 
-	// Obj::CSkaterCareer::GetGapChecklist
+	// Obj::CSkaterCareer::GetGapChecklist (0x004dc690)
 	patchDWord(0x004dc699 + 2, offsetof(Obj_CSkaterCareer, current_level));
 	patchDWord(0x004dc69f + 3, offsetof(Obj_CSkaterCareer, gap_checklist));
 
-	// Obj::CSkaterCareer::Init
+	// Obj::CSkaterCareer::Init (0x004dc600)
 	patchDWord(0x004dc608 + 2, offsetof(Obj_CSkaterCareer, level_flags));
 	patchDWord(0x004dc60e + 2, offsetof(Obj_CSkaterCareer, goal_flags) - offsetof(Obj_CSkaterCareer, level_flags));
 	patchDWord(0x004dc616 + 2, offsetof(Obj_CSkaterCareer, goal_flags) - offsetof(Obj_CSkaterCareer, level_flags) + 4);
@@ -177,14 +178,43 @@ void patchLevelLimit() {
 	patchDWord(0x004dc65b + 3, offsetof(Obj_CSkaterCareer, gap_checklist));
 	patchByte(0x004dc668 + 2, NUM_LEVELS);
 
-	// Obj::CSkaterCareer::~CSkaterCareer
+	// Obj::CSkaterCareer::~CSkaterCareer (0x004dc510)
 	patchDWord(0x004dc516 + 1, NUM_LEVELS);
 	patchDWord(0x004dc522 + 2, offsetof(Obj_CSkaterCareer, gap_checklist));
 
-	// Obj::CSkaterCareer::CSkaterCareer
+	// Obj::CSkaterCareer::CSkaterCareer (0x004dc450)
 	patchDWord(0x004dc477 + 2, offsetof(Obj_CSkaterCareer, gap_checklist));
 	patchDWord(0x004dc4d4 + 3, offsetof(Obj_CSkaterCareer, level_visited));
 	patchByte(0x004dc4df + 2, NUM_LEVELS);
+}
+
+void patchPoolSizes() {
+	// Increase the size of the general-purpose arena allocated on startup.
+	// Mem::Manager::Manager (0x00533990)
+	patchDWord(0x005339dd + 1, 0x10000000); // Arena malloc: 0x4800000 (72 MB) -> 0x10000000 (256 MB)
+	patchDWord(0x005339f8 + 1, 0x10000000);  // Arena end address: 0x4800000 (72 MB) -> 0x10000000 (256 MB)
+
+	// Increase the size of specific heap contexts.
+	// Each subsystem (`Script`, `skater_geom`, etc.) has its own heap context.
+    // Mem::Manager::InitOtherHeaps (0x00534220)
+	patchDWord(0x00534380 + 1, 0xf4c040); // Script size: 0x3d3010 (3.8 MB) -> 0xf4c040 (15.3 MB)
+	patchDWord(0x00534557 + 1, 0x1b7740); // skater_geom size: 0x6ddd0 (439 KB) -> 0x1b7740 (1.7 MB)
+
+	// Increase the size of the pools in the `Script` heap.
+	// Each type of object (e.g. `CComponent`) may only have N (e.g. 70,000) instances allocated at once.
+	// Script::AllocatePools (0x0040b780)
+	patchDWord(0x0040b7cd + 1, 0x445c0); // CComponent: 70,000 -> 280,000
+	patchDWord(0x0040b7e3 + 1, 0x4e20); // Reserve CComponent: 5,000 -> 20,000
+	patchDWord(0x0040b7fe + 1, 0xcb20); // CStruct: 13,000 -> 52,000
+	patchDWord(0x0040b819 + 1, 0x1130); // Reserve CStruct: 1,100 -> 4,400
+	patchDWord(0x0040b835 + 1, 0x7d00); // CVector: 8,000 -> 32,000
+	patchDWord(0x0040b84a + 1, 0xfa0); // CPair: 1,000 -> 4,000
+	patchDWord(0x0040b859 + 1, 0x4e20); // CArray: 5,000 -> 20,000
+	patchDWord(0x0040b868 + 1, 0x5dc0); // CSymbolTableEntry: 6,000 -> 24,000
+	patchDWord(0x0040b87f + 1, 0x348); // CScript: 210 -> 840
+	patchByte(0x0040b88e + 1, 0x7f); // CStoredRandom: 100 -> 127 (max signed u8; don't increase)
+	patchDWord(0x0040b895 + 1, 0x55f0); // AllocatePermanentStringHeap max_strings: 5500 -> 22000
+	patchDWord(0x0040b89a + 1, 0x6b6c0); // AllocatePermanentStringHeap max_size: 0x1adb0 (107.4 KB) -> 0x6b6c0 (429.7 KB)
 }
 
 void patchBetter4() {
@@ -202,13 +232,17 @@ void patchBetter4() {
 	patchWallpush();
 	patchLoad();
 	patchLevelLimit();
+	patchPoolSizes();
+	// patchNetHandlers();
+	// patchHostOptions();
 }
 
 void better4Main() {
 	initConfigFile();
 
-	int isDebug = getIniBool("Miscellaneous", "Debug", 0, configFile);
-	initializeLogging(isDebug);
+	int is_debug = getIniBool("Miscellaneous", "Debug", 0, configFile);
+	int log_level = GetPrivateProfileInt("Miscellaneous", "LogLevel", 2, configFile);
+	initializeLogging(is_debug, log_level);
 
 	checkForUpdate();
 

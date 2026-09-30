@@ -113,7 +113,7 @@ WallRideTricks =
 WallRideTricks_Single =
 [ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
 script Trick_WallPlant
-  if ( better4_control_boostplant_value = off )
+  if ( ( better4_control_boostplant_value = off ) or ( better4_modifier_disableboostplant_value = on ) )
     ClearTrickQueue
   endif
   InAirExceptions

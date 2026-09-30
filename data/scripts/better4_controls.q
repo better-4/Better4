@@ -336,6 +336,21 @@ better4_control_dropdown = {
   ]
 }
 
+better4_control_directional_dropdown_index = 0
+better4_control_directional_dropdown_value = off
+better4_control_directional_dropdown = {
+  id = better4_control_directional_dropdown_id
+  index_name = better4_control_directional_dropdown_index
+  value_name = better4_control_directional_dropdown_value
+  text = "Directional DD"
+  ini_key = "DirectionalDD"
+  help = "Toggle whether you can change dropdown direction by pressing \b6/\b5"
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 better4_control_liptricks_index = 1
 better4_control_liptricks_value = on
 better4_control_liptricks = {
@@ -987,6 +1002,7 @@ script better4_controls_init
   better4_control_init better4_control_respawn_on_newrun
   better4_control_init better4_control_updatedcollision
   better4_control_init better4_control_boostplant
+  better4_control_init better4_control_directional_dropdown
 endscript
 
 script better4_control_init
@@ -1021,11 +1037,15 @@ script better4_control_cycle
   GetArraySize <options>
   if ( <new_index> < 0 )
     <new_index> = ( <new_index> + <array_size> )
-    Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+    if GotParam ini_key
+      Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+    endif
   else
     if not ( <array_size> > <new_index> )
       <new_index> = ( <new_index> - <array_size> )
-      Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+      if GotParam ini_key
+        Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+      endif
     endif
   endif
   better4_control_change needs_write <...>
@@ -1033,9 +1053,11 @@ endscript
 
 script better4_control_change
   CastToInteger new_index
-  Printf "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
-  if GotParam needs_write
-    SetIniInteger section = better4_controls_ini_section key = <ini_key> value = <new_index>
+  if GotParam ini_key
+    Printf "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
+    if GotParam needs_write
+      SetIniInteger section = better4_controls_ini_section key = <ini_key> value = <new_index>
+    endif
   endif
   ChangeGlobal Name = <index_name> value = <new_index>
   if GotParam value_name
