@@ -74,3 +74,18 @@ Net_App *GameNet_Manager_SpawnClient(GameNet_Manager *this, uint8_t unk, uint8_t
     static Net_App *(__fastcall* _SpawnClient)(GameNet_Manager *, unused_t, uint8_t, uint8_t, uint8_t, int) = (void *)0x00486c90;
     return _SpawnClient(this, UNUSED, unk, unk2, unk3, index);
 }
+
+uint32_t GameNet_Manager_InInternetMode(GameNet_Manager *this) {
+    static uint32_t (__fastcall* _InInternetMode)(GameNet_Manager *) = (void *)0x00485bf0;
+    return _InInternetMode(this);
+}
+
+uint32_t GameNet_Manager_InLanMode(GameNet_Manager *this) {
+    static uint32_t (__fastcall* _InLanMode)(GameNet_Manager *) = (void *)0x00485be0;
+    return _InLanMode(this);
+}
+
+uint32_t GameNet_Manager_InNetGame(GameNet_Manager *this) {
+    static uint32_t (__fastcall* _InNetGame)(GameNet_Manager *) = (void *)0x00485ba0;
+    return _InNetGame(this);
+}

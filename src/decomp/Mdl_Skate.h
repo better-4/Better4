@@ -10,5 +10,6 @@ typedef void Mdl_Skate;
 
 Mdl_Skate *Mdl_Skate_Instance();
 struct Obj_CSkater *Mdl_Skate_GetSkater(Mdl_Skate *this, uint32_t index);
+void Mdl_Skate_LeaveServer(Mdl_Skate *this);
 
 #endif
