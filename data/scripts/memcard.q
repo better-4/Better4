@@ -1722,18 +1722,13 @@ endscript
 script launch_load_cas_sequence
   destroy_main_menu
   PlaySkaterCamAnim name = SS_menucam_credits play_hold
-  if (
-    ( InNetGame ) or
-    ( GameModeEquals is_singlesession ) or
-    ( GameModeEquals is_freeskate ) or
-    ( GameModeEquals is_career)
-  )
-    Change AbortScript = back_to_pause_menu
-    Change DoneScript = back_to_pause_menu
-    Change RetryScript = retry_launch_load_cas_sequence
-  else
+  if LevelIs Load_Skateshop
     Change AbortScript = back_to_main_menu
     Change DoneScript = jump_to_edit_skater
+    Change RetryScript = retry_launch_load_cas_sequence
+  else
+    Change AbortScript = back_to_pause_menu
+    Change DoneScript = back_to_pause_menu
     Change RetryScript = retry_launch_load_cas_sequence
   endif
   Change SavingOrLoading = Loading
