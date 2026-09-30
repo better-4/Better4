@@ -330,6 +330,8 @@ script DoFormatCard
 endscript
 script launch_files_menu
   if not GotParam SkipPS2SaveCheck
+    GetFileTypeName file_type = <FileType>
+    GetProperSaveFileCount FileType = <filetype_name> build_list = 0
     if ( (PS2SaveConversion) )
       Wait 1 gameframe
       create_snazzy_dialog_box {
@@ -414,6 +416,7 @@ script create_files_menu pos_tweak = (-20, -45)
   create_icon texture = <icon_texture> pos = ( (55, 90) + <pos_tweak> )
   files_menu_add_top_bar
   GetFileTypeName file_type = <FileType>  
+  GetProperSaveFileCount FileType = <filetype_name> build_list = 1
   if GotParam Save
     GetMemCardDirectoryListing
     GetMemCardSpaceAvailable
@@ -435,7 +438,9 @@ script create_files_menu pos_tweak = (-20, -45)
           Goto mcmess_ErrorNotEnoughRoomButTHPSFilesExist params = { FileType = <FileType> SpaceRequired = <SpaceRequired> }
         endif
       else
-        <add_createnew_option> = 1
+        if ( <proper_file_count> < 200)
+          <add_createnew_option> = 1
+        endif
       endif
     endif
     if GotParam add_createnew_option
@@ -450,7 +455,6 @@ script create_files_menu pos_tweak = (-20, -45)
   else
     GetMemCardDirectoryListing FileType = <FileType>
   endif
-  GetProperSaveFileCount FileType = <filetype_name>
   if GotParam DirectoryListing
     if GotParam Save
       if GotParam add_createnew_option
@@ -918,7 +922,7 @@ script files_menu_add_bottom_bar
   //GetProperSaveFileCount FileType = <filetype_name>
   FormatText {
     TextName = LeftText
-    '%s Files: %t'
+    '%s Files: %t/200'
     t = <proper_file_count>
     s = <filetype_name>
   }
@@ -934,35 +938,7 @@ script files_menu_add_bottom_bar
     scale = 0.75
     text = <LeftText>
   }
-  CreateScreenElement {
-    type = SpriteElement
-    parent = <mem_info_id>
-    texture = black
-    scale = (49, 5)
-    pos = (5, -11)
-    just = [ left top ]
-    rgba = <text_bg_rgba>
-  }
   GetStackedScreenElementPos X id = <id> offset = (3, 0)
-  CreateScreenElement {
-    type = TextElement
-    parent = <mem_info_id>
-    font = small
-    pos = ( <pos> + <text_offset> )
-    just = [ left top ]
-    rgba = [ 88 105 112 128 ]
-    scale = 0.75
-    text = <MiddleText>
-  }
-  CreateScreenElement {
-    type = SpriteElement
-    parent = <mem_info_id>
-    texture = black
-    scale = (47, 5)
-    pos = <pos>
-    just = [ left top ]
-    rgba = <text_bg_rgba>
-  }
   GetStackedScreenElementPos X id = <id> offset = (3, 0)
   CreateScreenElement {
     type = TextElement
@@ -973,15 +949,6 @@ script files_menu_add_bottom_bar
     rgba = [ 88 105 112 128 ]
     scale = 0.75
     text = <RightText>
-  }
-  CreateScreenElement {
-    type = SpriteElement
-    parent = <mem_info_id>
-    texture = black
-    scale = (31, 5)
-    pos = <pos>
-    just = [ left top ]
-    rgba = <text_bg_rgba>
   }
 endscript
 script files_menu_add_bg { cap_texture = grungeframe_mid

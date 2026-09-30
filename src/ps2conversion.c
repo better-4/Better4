@@ -1,5 +1,10 @@
 #include "ps2conversion.h"
 
+// pre 2nd memory buff, this would crash trying to save a career file
+// was likely due to a combination of malloc calls + save allocation process + pool was already almost full = maxing heap
+// should be fine now, still enforcing a limit of 200 per save type
+// can always switch to fixed array but i dont feel like rewriting atm :)
+
 directory_t directory = {0};
 const char TH4ProductCodesPS2 [5][20] = 
 {
@@ -71,20 +76,21 @@ bool psuValidation (psu_t *psu, th4_save *save)
 	return false;
 }
 
-int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
+int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // also builds directory list
 {
+	printf("doing file count\n");
 	directory.amount = 0;
 	directory.current_count = 0;
-	directory.size = 1;
-	directory.list = malloc(NAME_SIZE * sizeof(char*));
+	memset(directory.list, 0, sizeof(directory.list));
 
-	if (directory.list == NULL) return 0;
 	WIN32_FIND_DATA save_dir;
 	char *FileType = "";
+	int build_list = 0;
 	HANDLE save_search;
 	CStruct *out = CScript_GetParams(script);
 	CStruct_GetString(params,0x11093FB5, &FileType, 0);
-
+	CStruct_GetInteger(params,0xBC4B6A0D, &build_list, 0);
+	
 	if (!strcmp(FileType,"SKATER"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
@@ -104,9 +110,9 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 	else return 0;
 	if (save_search == INVALID_HANDLE_VALUE) {
 		printf("\nno %s files found in the directory.\n",FileType);
+		CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, 0);
 		return 0;
 	}
-	CStruct_RemoveComponent(params, 0x11093FB5);
 
 	do 
 	{
@@ -116,31 +122,20 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script)
 		int name_len = strlen(save_dir.cFileName);
 		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
 		else continue;
-		if (directory.amount > directory.size)
+	
+		if (directory.amount < 200) 
 		{
-			directory.size*=2;
-			char **temp = realloc(directory.list, directory.size * NAME_SIZE * sizeof(char*));
-			if (temp == NULL) {
-					for (int i = 0; i < directory.amount; i++) free(directory.list[i]);
-					free(directory.list);
-					return 1;
-			}
-			directory.list = temp;
-		}
-		directory.list[directory.amount]  = malloc(strlen(save_dir.cFileName) + 1);
-		if (directory.list[directory.amount] != NULL) {
-				strcpy(directory.list[directory.amount], save_dir.cFileName);
+				if (build_list) strcpy(directory.list[directory.amount], save_dir.cFileName);
 				//printf("directory #%d : %s\n",directory.amount,directory.list[directory.amount] );
-				directory.amount++;
 		}
+		directory.amount++;
 	} while (FindNextFile(save_search, &save_dir) != 0);
 
 	FindClose (save_search);
 	printf("%s total file count: %d\n",FileType, directory.amount);
-	CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, directory.amount); 
+	if (build_list) CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, directory.amount); 
 	return 1;
 }
-
 
 int __cdecl CFunc_PS2SaveConversion(CStruct* params) 
 {
@@ -156,6 +151,8 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 
 	do
 	{
+		printf("directoryu amount : %d\n", directory.amount);
+		if (directory.amount >= 200) break;
 		psu_t psu = {0};
 		th4_save new_save = {0};
 		if (ps2_dir.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue; 
@@ -180,57 +177,41 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 				continue;
 				break;
 		}
-		psu.data = (uint8_t *)malloc(psu.size * sizeof(uint8_t));
-    if (psu.data == NULL) {
-        printf("unable to allocate space for psu data, next!\n\n");
-        continue; 
-    }
 		snprintf(psu.path, sizeof(psu.path), ".\\SavePS2\\%s", ps2_dir.cFileName);
 		
 		psu.file = fopen(psu.path, "rb+");
 		if (psu.file == NULL) {
 			printf("unable to read psu file, next!\n\n");
-			goto free_psu_data;
+			continue;
 		}
 		fread(psu.data, sizeof(uint8_t), psu.size, psu.file);
 		//printf("processing: %s\n", ps2_dir.cFileName);
 		fclose(psu.file);
 		
-		// validation
+		// validation + copy
 		bool valid_psu = psuValidation(&psu,&new_save);
-		if (!valid_psu) goto free_psu_data;
-
-		// copy save data from psu
-		new_save.data = (uint8_t *)malloc(new_save.size * sizeof(uint8_t));
-    if (new_save.data == NULL) {
-        printf("unable to allocate space for converted save data, next!");
-        goto free_psu_data; 
-    }
+		if (!valid_psu) continue;
 		memcpy(new_save.data, psu.data + PSU_SAVE_OFFSET, new_save.size);
 
 		// get name + validation
 		bool valid_name = getSaveName (&new_save);
-		if (!valid_name) goto free_all;
+		if (!valid_name) continue;
 
 		// save already exist check
 		bool save_exist = doesSaveExist(&new_save);
-		if (save_exist) goto free_all;
+		if (save_exist) continue;
 
 		// write new save file
 		new_save.file = fopen(new_save.path, "wb");
 		if (new_save.file == NULL) {
 			printf("unable to create new save file, next!\n\n");
-			goto free_all;
+			continue;
 		}
 		fwrite(new_save.data, sizeof(uint8_t), new_save.size, new_save.file);
 		fclose(new_save.file);
 		printf("conversion complete, next!\n\n");
 		new_save_flag = true;
 
-		free_all:
-		free(new_save.data);
-		free_psu_data:
-		free(psu.data);
 	} while (FindNextFile(psu_search, &ps2_dir) != 0);
 
 	FindClose(psu_search);
@@ -274,19 +255,14 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
 int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script)
 {
 	CStruct *out = CScript_GetParams(script);
-	if (directory.current_count < directory.amount)
+	if (directory.amount == 0) return 0;
+	if (directory.current_count < directory.amount && directory.current_count < 200)
 	{
 		CStruct_AddString(out,0x91D9667F/*save_filename*/, directory.list [directory.current_count]);
 		//printf("save to list: %s\n", directory.list [directory.current_count]);
 		directory.current_count++;
 	}
-	else 
-	{
-		for (int i = 0; i < directory.amount; i++) free(directory.list[i]);
-			free(directory.list);
-		printf("freed list!\n");
-		return 0;
-	}
+	else return 0;
 
 	return 1; 
 }

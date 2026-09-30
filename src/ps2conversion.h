@@ -13,7 +13,7 @@
 #define SKA_SIZE 2048
 #define PSU_PRK_SIZE 30720
 #define PRK_SIZE 16384
-#define NAME_SIZE 16 // 15 + null terminator
+#define NAME_SIZE 16 // 15 + null
 
 typedef enum save_t
 {
@@ -27,7 +27,7 @@ typedef enum save_t
 typedef struct
 {
   save_t saveType;
-  uint8_t *data;
+  uint8_t data [PSU_PRK_SIZE]; 
   int size;
   FILE *file;
   char path [MAX_PATH];
@@ -36,7 +36,7 @@ typedef struct
 typedef struct 
 {
   FILE *file;
-  uint8_t *data;
+  uint8_t data [PRK_SIZE];
   save_t type;
   int size;
   char name [NAME_SIZE];
@@ -45,8 +45,7 @@ typedef struct
 
 typedef struct
 {
-  int **list;
-  int size;
+  char list [200][NAME_SIZE];
   int amount;
   int current_count;
 } directory_t;
