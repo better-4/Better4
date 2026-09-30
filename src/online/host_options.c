@@ -43,10 +43,11 @@ void notify_game_modifiers() {
 	}
 }
 
-void __cdecl GameNet_Manager_s_handle_ready_response(int *unk1) {
-    static void (__cdecl* _s_handle_ready_response)(int *) = (void *)0x0047cbc0;
-    _s_handle_ready_response(unk1);
+uint32_t __cdecl GameNet_Manager_s_handle_ready_response(int *unk1) {
+    static uint32_t (__cdecl* _s_handle_ready_response)(int *) = (void *)0x0047cbc0;
+    int ret = _s_handle_ready_response(unk1);
     notify_game_modifiers();
+    return ret;
 }
 
 void patchHostOptions() {
