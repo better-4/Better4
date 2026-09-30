@@ -55,9 +55,9 @@ script load_permanent_textures
   LoadTexture "PanelSprites/MemcardSprites/mem_bg_piece"
 endscript
 script hide_panel_stuff
-  Printf "*************** HIDING PANEL STUFF *********************"
+  LogInfo "*************** HIDING PANEL STUFF *********************"
   if ObjectExists id = player1_panel_container
-    Printf "*************** HIDING PANEL STUFF 2 *********************"
+    LogInfo "*************** HIDING PANEL STUFF 2 *********************"
     DoScreenElementMorph {
       id = player1_panel_container
       alpha = 0
@@ -65,9 +65,9 @@ script hide_panel_stuff
   endif
 endscript
 script show_panel_stuff
-  Printf "*************** SHOWING PANEL STUFF *********************"
+  LogInfo "*************** SHOWING PANEL STUFF *********************"
   if ObjectExists id = player1_panel_container
-    Printf "*************** HIDING PANEL STUFF 2 *********************"
+    LogInfo "*************** HIDING PANEL STUFF 2 *********************"
     DoScreenElementMorph {
       id = player1_panel_container
       alpha = 1

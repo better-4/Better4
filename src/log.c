@@ -27,7 +27,7 @@ static void print_addr(DWORD64 a) {
                            GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)(size_t)a, &hm))
         GetModuleFileNameA(hm, path, MAX_PATH);
     const char *name = strrchr(path, '\\');
-    logError("  %08llx  %s+0x%llx\n", a, name ? name + 1 : path,
+    logError("  %08llx  %s+0x%llx", a, name ? name + 1 : path,
             (unsigned long long)(a - (DWORD64)(size_t)hm));
 }
 
@@ -36,13 +36,13 @@ static LONG WINAPI crash_handler(EXCEPTION_POINTERS *ep) {
     if (InterlockedExchange(&g_in_handler, 1)) return EXCEPTION_CONTINUE_SEARCH;
 
     EXCEPTION_RECORD *er = ep->ExceptionRecord;
-    logError( "=== EXCEPTION %08lx at %p\n", er->ExceptionCode, er->ExceptionAddress);
+    logError( "=== EXCEPTION %08lx at %p", er->ExceptionCode, er->ExceptionAddress);
     if (er->ExceptionCode == EXCEPTION_ACCESS_VIOLATION && er->NumberParameters >= 2)
-        logError( " (%s %p)\n", er->ExceptionInformation[0] ? "write" : "read",
+        logError( " (%s %p)", er->ExceptionInformation[0] ? "write" : "read",
                 (void *)er->ExceptionInformation[1]);
 
     CONTEXT *c = ep->ContextRecord;
-    logError("EAX=%08lx EBX=%08lx ECX=%08lx EDX=%08lx\nESI=%08lx EDI=%08lx EBP=%08lx ESP=%08lx EIP=%08lx\n",
+    logError("EAX=%08lx EBX=%08lx ECX=%08lx EDX=%08lx ESI=%08lx EDI=%08lx EBP=%08lx ESP=%08lx EIP=%08lx",
             c->Eax, c->Ebx, c->Ecx, c->Edx, c->Esi, c->Edi, c->Ebp, c->Esp, c->Eip);
 
     STACKFRAME64 sf = {0};
@@ -54,14 +54,14 @@ static LONG WINAPI crash_handler(EXCEPTION_POINTERS *ep) {
 	sf.AddrStack.Mode = AddrModeFlat;
     CONTEXT copy = *c;
     HANDLE proc = GetCurrentProcess(), thr = GetCurrentThread();
-    logError("Stack:\n");
+    logError("Stack:");
     for (int i = 0; i < 64 && StackWalk64(IMAGE_FILE_MACHINE_I386, proc, thr, &sf, &copy, NULL,
                                           SymFunctionTableAccess64, SymGetModuleBase64, NULL); i++) {
         if (!sf.AddrPC.Offset) break;
         print_addr(sf.AddrPC.Offset);
     }
 
-    logError("Raw stack scan:\n");
+    logError("Raw stack scan:");
     DWORD *sp = (DWORD *)c->Esp;
     __try {
         for (int i = 0, n = 0; i < 1024 && n < 48; i++) {
@@ -95,14 +95,19 @@ void initializeLogging(int console, int level) {
 	AddVectoredExceptionHandler(1, crash_handler);
 }
 
-int vprintLog(const char* fmt, va_list args, char level) {
+int vprintLog(const char* fmt, va_list args, char level, int newline) {
 	clock_t milliseconds = clock();
 
 	char message[256];
     vsnprintf(message, 256, fmt, args);
 
-	char full_log[291];
-    int ret = sprintf_s(full_log, 291, "%08ld %c %s", milliseconds, level, message);
+	char full_log[300];
+	int ret;
+	if (newline) {
+		ret = sprintf_s(full_log, 300, "%05ld %c %s\n", milliseconds, level, message);
+	} else {
+		ret = sprintf_s(full_log, 300, "%05ld %c %s", milliseconds, level, message);
+	}
 
 	if (allocated_console) {
 		fputs(full_log, stdout);
@@ -116,23 +121,11 @@ int vprintLog(const char* fmt, va_list args, char level) {
     return ret;
 }
 
-int printLog(const char* fmt, ...) {
-	if (log_level >= LOG_LEVEL_INFO) {
-		va_list args;
-		va_start(args, fmt);
-		int ret = vprintLog(fmt, args, 'I');
-		va_end(args);
-		return ret;
-	} else {
-		return 0;
-	}
-}
-
 int logError(const char* fmt, ...) {
 	if (log_level >= LOG_LEVEL_ERROR) {
 		va_list args;
 		va_start(args, fmt);
-		int ret = vprintLog(fmt, args, 'E');
+		int ret = vprintLog(fmt, args, 'E', 1);
 		va_end(args);
 		return ret;
 	} else {
@@ -144,7 +137,7 @@ int logWarning(const char* fmt, ...) {
 	if (log_level >= LOG_LEVEL_WARNING) {
 		va_list args;
 		va_start(args, fmt);
-		int ret = vprintLog(fmt, args, 'W');
+		int ret = vprintLog(fmt, args, 'W', 1);
 		va_end(args);
 		return ret;
 	} else {
@@ -156,7 +149,7 @@ int logInfo(const char* fmt, ...) {
 	if (log_level >= LOG_LEVEL_INFO) {
 		va_list args;
 		va_start(args, fmt);
-		int ret = vprintLog(fmt, args, 'I');
+		int ret = vprintLog(fmt, args, 'I', 1);
 		va_end(args);
 		return ret;
 	} else {
@@ -168,7 +161,20 @@ int logDebug(const char* fmt, ...) {
 	if (log_level >= LOG_LEVEL_DEBUG) {
 		va_list args;
 		va_start(args, fmt);
-		int ret = vprintLog(fmt, args, 'D');
+		int ret = vprintLog(fmt, args, 'D', 1);
+		va_end(args);
+		return ret;
+	} else {
+		return 0;
+	}
+}
+
+int patchedPrintf(const char* fmt, ...) {
+	if (log_level >= LOG_LEVEL_INFO) {
+		va_list args;
+		va_start(args, fmt);
+		// Print info log, but don't print a newline (printf includes it)
+		int ret = vprintLog(fmt, args, 'I', 0);
 		va_end(args);
 		return ret;
 	} else {
@@ -181,12 +187,12 @@ void patchScriptPrintf() {
 	// game when entering the main menu. Instead, patch individual call sites in CFuncs.
 
 	// CFuncs::ScriptPrintf (0x0050a1e0)
-	patchCall(0x0050a3cb, printLog);
-	patchCall(0x0050a3e5, printLog);
-	patchCall(0x0050a4b5, printLog);
-	patchCall(0x0050a4fb, printLog);
+	patchCall(0x0050a3cb, patchedPrintf);
+	patchCall(0x0050a3e5, patchedPrintf);
+	patchCall(0x0050a4b5, patchedPrintf);
+	patchCall(0x0050a4fb, patchedPrintf);
 
-	// CFuncs::ScriptPrintStruct (0041a4c0)
+	// CFuncs::ScriptPrintStruct (0x0041a4c0)
 	patchCall(0x0041a4ce, printf);
 	patchCall(0x0041a4e2, printf);
 	patchCall(0x0041a4f2, printf);
@@ -206,4 +212,50 @@ void patchScriptPrintf() {
 	patchCall(0x0041a6d1, printf);
 	patchCall(0x0041a6fb, printf);
 	patchCall(0x0041a70b, printf);
+}
+
+typedef int(__cdecl* LogCallback)(const char *fmt, ...);
+
+int __cdecl _CFunc_LogLevel(CStruct* params, CScript *script, int level, LogCallback callback) {
+    static uint32_t(__cdecl* _sFormatText)(CStruct *, CStruct *) = (void *)0x00509e40;
+
+	if (log_level >= level) {
+		char *text = "";
+		if (CStruct_GetString(params, 0, &text, 0)) {
+			CStruct *format_params = CStruct_New();
+			
+			CStruct_AddChecksum(format_params, 0xff0db407/*TextName*/, 0xbc4ac08b/*PrintfText*/);
+			CStruct_AppendStructure(format_params, params);
+
+			if (_sFormatText(format_params, format_params)) {
+				CStruct_GetString(format_params, 0xbc4ac08b/*PrintfText*/, &text, 0);
+			} else {
+				// TODO (ellie): add GetScriptInfo here? but probably not helpful until we get checksum resolving
+				text = "Error formatting text for log";
+			}
+
+			callback(text);
+
+			CStruct_Free(format_params);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+int __cdecl CFunc_LogError(CStruct* params, CScript *script) {
+	return _CFunc_LogLevel(params, script, LOG_LEVEL_ERROR, logError);
+}
+
+int __cdecl CFunc_LogWarning(CStruct* params, CScript *script) {
+	return _CFunc_LogLevel(params, script, LOG_LEVEL_WARNING, logWarning);
+}
+
+int __cdecl CFunc_LogInfo(CStruct* params, CScript *script) {
+	return _CFunc_LogLevel(params, script, LOG_LEVEL_INFO, logInfo);
+}
+
+int __cdecl CFunc_LogDebug(CStruct* params, CScript *script) {
+	return _CFunc_LogLevel(params, script, LOG_LEVEL_DEBUG, logDebug);
 }

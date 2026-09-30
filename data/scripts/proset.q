@@ -313,7 +313,7 @@ script toggle_geo_nomenu
   Create prefix = <geo_not_prefix>
   Create prefix = <trg_not_prefix>
   if GetFlag flag = <flag>
-    Printf "turning it on"
+    LogInfo "turning it on"
     Create prefix = <geo_prefix>
     Create prefix = <trg_prefix>
     Kill prefix = <geo_not_prefix>

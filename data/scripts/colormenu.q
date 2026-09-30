@@ -136,19 +136,19 @@ script colormenu_refresh_skaters
   if IsAlive name = TRG_Deck_Main
     colormenu_get_hsv part = board
     if ( <use_default_hsv> = 1 )
-      Printf "clear color"
+      LogInfo "clear color"
       PrintStruct <...>
       trg_deck_maintrucks:Obj_ClearColor
       trg_deck_mainjets:Obj_ClearColor
     else
-      Printf "set color"
+      LogInfo "set color"
       trg_deck_maintrucks:Obj_SetColor h = <h> s = <s> v = <v>
       trg_deck_mainjets:Obj_SetColor h = <h> s = <s> v = <v>
     endif
   endif
 endscript
 script colormenu_increment_hue
-  Printf "incrementing hue"
+  LogInfo "incrementing hue"
   colormenu_get_hsv part = <part>
    <h> = ( <h> + colormenu_hue_increment )
   if ( <h> > 359 )
@@ -159,7 +159,7 @@ script colormenu_increment_hue
   colormenu_refresh_skaters
 endscript
 script colormenu_decrement_hue
-  Printf "decrementing hue"
+  LogInfo "decrementing hue"
   colormenu_get_hsv part = <part>
    <h> = ( <h> - colormenu_hue_increment )
   if ( <h> < 0 )
@@ -170,7 +170,7 @@ script colormenu_decrement_hue
   colormenu_refresh_skaters
 endscript
 script colormenu_increment_saturation
-  Printf "incrementing saturation"
+  LogInfo "incrementing saturation"
   colormenu_get_hsv part = <part>
    <s> = ( <s> + colormenu_saturation_increment )
   if ( <s> > colormenu_max_saturation )
@@ -181,7 +181,7 @@ script colormenu_increment_saturation
   colormenu_refresh_skaters
 endscript
 script colormenu_decrement_saturation
-  Printf "decrementing saturation"
+  LogInfo "decrementing saturation"
   colormenu_get_hsv part = <part>
    <s> = ( <s> - colormenu_saturation_increment )
   if ( <s> < colormenu_min_saturation )
@@ -192,7 +192,7 @@ script colormenu_decrement_saturation
   colormenu_refresh_skaters
 endscript
 script colormenu_increment_value
-  Printf "incrementing value"
+  LogInfo "incrementing value"
   colormenu_get_hsv part = <part>
    <v> = ( <v> + colormenu_value_increment )
   if ( <v> > colormenu_max_value )
@@ -203,7 +203,7 @@ script colormenu_increment_value
   colormenu_refresh_skaters
 endscript
 script colormenu_decrement_value
-  Printf "decrementing value"
+  LogInfo "decrementing value"
   colormenu_get_hsv part = <part>
    <v> = ( <v> - colormenu_value_increment )
   if ( <v> < colormenu_min_value )

@@ -963,7 +963,7 @@ mode_nethorse = {
   is_net = 1
 }
 script force_close_rankings
-  Printf "************************* FORCE CLOSING RANKINGS ******************************"
+  LogInfo "************************* FORCE CLOSING RANKINGS ******************************"
   SetScreenElementProps {
     id = root_window
     event_handlers = [
@@ -983,7 +983,7 @@ script force_close_rankings
   endif
 endscript
 script close_rankings
-  Printf "************************* CLOSING RANKINGS ******************************"
+  LogInfo "************************* CLOSING RANKINGS ******************************"
   restore_start_key_binding
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
@@ -1020,7 +1020,7 @@ script wait_then_create_rankings
 endscript
 script create_rankings score_title_text = "SCORE"
   EnableHUD
-  Printf "create_rankings"
+  LogInfo "create_rankings"
   if ObjectExists id = dialog_box_anchor
     return
   endif
@@ -1028,7 +1028,7 @@ script create_rankings score_title_text = "SCORE"
   exit_pause_menu
   destroy_observer_ui
   restore_rank_screen_events // Also adds restart game event on square
-  Printf "****************** CREATING RANKINGS!!!! ********************"
+  LogInfo "****************** CREATING RANKINGS!!!! ********************"
   if IsAutoServing
     SpawnScript wait_then_force_close_rankings
   endif
@@ -1229,7 +1229,7 @@ script create_rankings score_title_text = "SCORE"
   FireEvent type = focus target = rankings_done_button
 endscript
 script player_menu_add_item font = small
-  Printf "player_menu_add_item"
+  LogInfo "player_menu_add_item"
   SetScreenElementLock id = <parent> off
   if GotParam team_score
      <text_just> = [ right top ]
@@ -1258,7 +1258,7 @@ script player_menu_add_item font = small
     just = <text_just>
     rgba = [ 85 85 85 128 ]
   }
-  Printf "creating bg element"
+  LogInfo "creating bg element"
   CreateScreenElement {
     type = SpriteElement
     parent = <container_id>

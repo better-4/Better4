@@ -218,7 +218,7 @@ void patchPoolSizes() {
 }
 
 void patchBetter4() {
-	printLog("Initializing Better4 patches, using config=%s\n", configFile);
+	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
 	patchScriptPrintf();
 	patchButtonsFont();

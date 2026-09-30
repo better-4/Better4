@@ -188,7 +188,7 @@ script boardshop_create_main_menu
 endscript
 script boardshop_create_deck_menu
   if not GotParam profile_index
-    Printf "no index!"
+    LogInfo "no index!"
     return
   endif
   boardshop_sync_to_skater_griptape
@@ -830,7 +830,7 @@ script boardshop_buy_deck_accept
   endif
 endscript
 script boardshop_not_enough_money
-  Printf "you don't have the money!"
+  LogInfo "you don't have the money!"
   generic_menu_pad_back_sound
   PlaySound CheatBad vol = 50
 endscript

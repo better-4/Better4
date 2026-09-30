@@ -256,7 +256,7 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     endif
   else
     if GotParam UseCurrent
-      Printf "USING THE CURRENT FRAME"
+      LogInfo "USING THE CURRENT FRAME"
       if GotParam TreNollieFix
         if ( should_do_nollie_tre = 1 )
           Change should_do_nollie_tre = 0

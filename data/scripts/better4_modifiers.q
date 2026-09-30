@@ -162,7 +162,7 @@ script better4_modifier_init
   <value> = <default>
   CastToInteger value
   ChangeGlobal Name = <value_name> value = <value>
-  Printf "Initializing modifier %t to %v" t = <text> v = <value>
+  LogInfo "Initializing modifier %t to %v" t = <text> v = <value>
   if IsHost
     ChangeGameModifier flag = <flag> value = <value>
   endif

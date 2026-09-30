@@ -12,7 +12,7 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
   ClearManualTrick
   if GotParam FallingRight
     if SkateInAble Right
-      Printf "SkateInable RIGHT >>>>>>>>>>>>>>>>>>>>>>>>"
+      LogInfo "SkateInable RIGHT >>>>>>>>>>>>>>>>>>>>>>>>"
       SetLandedFromVert
       SetState ground
       Move y = -5
@@ -38,16 +38,16 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
         if ControllerPressed Left
           Move y = <movey>
           Move X = <moveleft>
-          Printf "droppin left"
+          LogInfo "droppin left"
         else
           Move y = <movey>
           Move X = <moveright>
-          Printf "droppin right"
+          LogInfo "droppin right"
         endif
       else
         Move y = <movey>
         Move X = <moveright>
-        Printf "droppin right"
+        LogInfo "droppin right"
       endif
       if GotParam GrindBail
         Goto <GrindBail>
@@ -59,7 +59,7 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
   if GotParam FallingLeft
     if SkateInAble Left
       SetLandedFromVert
-      Printf "SkateInable LEFT >>>>>>>>>>>>>>>>>>>>>>>>"
+      LogInfo "SkateInable LEFT >>>>>>>>>>>>>>>>>>>>>>>>"
       SetState ground
       Move X = 1
       Move y = -5
@@ -85,16 +85,16 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
         if ControllerPressed Right
           Move y = <movey>
           Move X = <moveright>
-          Printf "droppin right"
+          LogInfo "droppin right"
         else
           Move y = <movey>
           Move X = <moveleft>
-          Printf "droppin left"
+          LogInfo "droppin left"
         endif
       else
         Move y = <movey>
         Move X = <moveleft>
-        Printf "droppin left"
+        LogInfo "droppin left"
       endif
       if GotParam GrindBail
         Goto <GrindBail>
@@ -103,7 +103,7 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
       endif
     endif
   endif
-  Printf "Missing a FallingLeft or FallingRight ?"
+  LogInfo "Missing a FallingLeft or FallingRight ?"
   if GotParam GrindBail
     Goto <GrindBail>
   else
@@ -373,7 +373,7 @@ script OffRail
     BoardRotateAfter
   endif
   if GotParam FlipAfter
-    Printf "flipping.................."
+    LogInfo "flipping.................."
     FlipAfter
   endif
   waitanimfinished
@@ -529,7 +529,7 @@ script Trick_Crooked_BS name = 'BS Crooked'
 endscript
 script Trick_Crooked_FS_180
   if backwards
-    Printf "I'm backwards............"
+    LogInfo "I'm backwards............"
   endif
   FlipAndRotate
   BoardRotateAfter
@@ -542,7 +542,7 @@ script Trick_Crooked_BS_180
 endscript
 script Trick_NGCRook_FS_rot
   Rotate
-  Printf "fixed it bitches................................"
+  LogInfo "fixed it bitches................................"
   Goto Trick_NGCRook_FS
 endscript
 script Trick_NGCRook_FS name = 'FS Overcrook'

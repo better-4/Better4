@@ -12,11 +12,11 @@ static uint8_t gs_is_hosting = 0;
 
 // Called on EnteredNetworkGame when hosting
 void __cdecl GSInitGameSpy(char *unk) {
-	printLog("GSInitGameSpy\n");
+	logDebug("GSInitGameSpy");
 
 	if (gs_is_hosting) {
 		if (!gs_peer) {
-			printLog("GSInitGameSpy: gs_peer_initialize\n");
+			logDebug("GSInitGameSpy: gs_peer_initialize");
 			gs_peer_initialize();
 		}
 
@@ -24,11 +24,11 @@ void __cdecl GSInitGameSpy(char *unk) {
 		Net_App *server = gamenet_manager->server;
 		server->foreign_packet_handler = foreign_packet_handler;
 
-		printLog("GSInitGameSpy: peerStartReporting\n");
+		logDebug("GSInitGameSpy: peerStartReporting");
 		int result = peerStartReportingWithSocket(gs_peer, server->socket, HOST_PORT);
 
 		if (result) {
-			printLog("GSInitGameSpy: peerStateChanged\n");
+			logDebug("GSInitGameSpy: peerStateChanged");
 			peerStateChanged(gs_peer);
 		}
 	}
@@ -37,9 +37,9 @@ void __cdecl GSInitGameSpy(char *unk) {
 // Called when setting level to skateshop or freeing GameNet::Manager
 void __stdcall GSCloseGameSpy() {
 	if (gs_peer && gs_is_hosting) {
-		printLog("GSCloseGameSpy: stopping game\n");
+		logInfo("GSCloseGameSpy: stopping game");
 		peerStopGame(gs_peer);
-		printLog("GSCloseGameSpy: freeing natneg/peer\n");
+		logDebug("GSCloseGameSpy: freeing natneg/peer");
 		NNFreeNegotiateList();
 		gs_peer_shutdown();
 		gs_server_ready = 0;
@@ -49,7 +49,7 @@ void __stdcall GSCloseGameSpy() {
 		// So if in internet/lan mode, then force leave the server
 		GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
 		if (GameNet_Manager_InLanMode(gamenet_manager) || GameNet_Manager_InInternetMode(gamenet_manager)) {
-			printLog("GSCloseGameSpy: leaving server\n");
+			logInfo("GSCloseGameSpy: leaving server");
 			Mdl_Skate *mdl_skate = Mdl_Skate_Instance();
 			Mdl_Skate_LeaveServer(mdl_skate);
 		}
@@ -59,7 +59,7 @@ void __stdcall GSCloseGameSpy() {
 // Called with ready=1 or ready=0 when setting level, notify state change
 void __cdecl GSServerReady(uint8_t ready) {
 	if (gs_is_hosting && gs_peer && gs_server_ready != ready) {
-		printLog("GSServerReady: sending ready=%d\n", ready);
+		logDebug("GSServerReady: sending ready=%d", ready);
 		gs_server_ready = ready;
 		peerStateChanged(gs_peer);
 	}
@@ -68,7 +68,7 @@ void __cdecl GSServerReady(uint8_t ready) {
 // Called when state changes
 void __stdcall GSStateChanged() {
 	if (gs_is_hosting && gs_peer) {
-		printLog("GSStateChanged: sending state changed\n");
+		logDebug("GSStateChanged: sending state changed");
 		peerStateChanged(gs_peer);
 	}
 }
@@ -76,7 +76,7 @@ void __stdcall GSStateChanged() {
 // Called when ending or starting a network game
 void __cdecl GSGamePlaying(uint8_t playing) {
 	if (gs_is_hosting && gs_peer && gs_game_playing != playing) {
-		printLog("GSGamePlaying: sending playing=%d\n", playing);
+		logDebug("GSGamePlaying: sending playing=%d", playing);
 		gs_game_playing = playing;
 		peerStateChanged(gs_peer);
 	}
@@ -85,7 +85,7 @@ void __cdecl GSGamePlaying(uint8_t playing) {
 int __cdecl CFunc_SetHosting(CStruct *params) {
 	float is_hosting;
 	if (!CStruct_GetFloat(params, 0, &is_hosting, 0)) {
-		logWarning("SetHosting missing param \"is_hosting\" (unnamed)\n");
+		logWarning("SetHosting missing param \"is_hosting\" (unnamed)");
 		return 0;
 	}
 
@@ -105,7 +105,7 @@ int __cdecl CFunc_StopReporting(CStruct *params) {
 
 int __cdecl CFunc_NotifyStateChanged(CStruct *params) {
 	if (gs_peer) {
-		printLog("NotifyStateChanged: sending state changed\n");
+		logDebug("NotifyStateChanged: sending state changed");
 		peerStateChanged(gs_peer);
 		return 1;
 	} else {

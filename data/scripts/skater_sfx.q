@@ -209,7 +209,7 @@ playlist_tracks = [
   { track_title = "Zeke: Death Alley " }
 ]
 script SpecialSounds frames = 10
-  Printf "got launched"
+  LogInfo "got launched"
   Wait <frames> frames
   if AnimEquals MightAsWellJump_Init
   endif
@@ -225,7 +225,7 @@ script Jamie_JumpSounds
   PlaySound bitchslap2 pitch = 70
 endscript
 script Jamie_HeroSounds
-  Printf "got launched"
+  LogInfo "got launched"
   Wait 1 frames
   if ProfileEquals is_named = thomas
     PlayStream random( @jamie_special05 @jamie_special06 @nostream @nostream ) 
