@@ -76,6 +76,7 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 	printf("doing file count\n");
 	directory.amount = 0;
 	directory.current_count = 0;
+	directory.expected_file_size = 0;
 	memset(directory.list, 0, sizeof(directory.list));
 
 	WIN32_FIND_DATA save_dir;
@@ -89,18 +90,22 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 	if (!strcmp(FileType,"SKATER"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
+		directory.expected_file_size = SKA_SIZE;
 	}
 	else if (!strcmp(FileType,"CAREER"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.CAR", &save_dir);
+		directory.expected_file_size = CAR_SIZE;
 	}
 	else if (!strcmp(FileType,"NETWORK SETTINGS"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.NWS", &save_dir);
+		directory.expected_file_size = NWS_SIZE;
 	}
 	else if (!strcmp(FileType,"PARK"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.PRK", &save_dir);
+		directory.expected_file_size = PRK_SIZE;
 	}
 	else return 0;
 	if (save_search == INVALID_HANDLE_VALUE) {
@@ -113,7 +118,7 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 	{
 		if (strcmp(save_dir.cFileName, ".") == 0 || strcmp(save_dir.cFileName, "..") == 0) // thps4 file count doesn't do this lol
 			continue; 
-
+		if (directory.expected_file_size != save_dir.nFileSizeLow) continue;
 		int name_len = strlen(save_dir.cFileName);
 		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
 		else continue;
@@ -239,6 +244,7 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
 			snprintf(newestCasName, sizeof(newestCasName), "%s", save_dir.cFileName);
 		}
 	} while (FindNextFile(ska_search, &save_dir) != 0);
+	if (newestTimestamp == 0) return 0; // no valid cas found
 
 	printf("\n\nmost recent cas : %s\n\n",newestCasName);
 	CStruct_AddString(out,0xF36C1878/*casfilename*/, newestCasName);

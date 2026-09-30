@@ -14,6 +14,9 @@
 #define PSU_PRK_SIZE 30720
 #define PRK_SIZE 16384
 #define NAME_SIZE 16 // 15 + null
+#define NWS_SIZE 2048
+// i was wrong about career size file varying LOL ( i exported corrupted ps2 career file )
+#define CAR_SIZE 40960
 
 typedef enum save_t
 {
@@ -48,6 +51,7 @@ typedef struct
   char list [200][NAME_SIZE];
   int amount;
   int current_count;
+  int expected_file_size;
 } directory_t;
 
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script);
