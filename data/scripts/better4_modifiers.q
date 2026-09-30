@@ -73,63 +73,83 @@ script better4_modifier_disablespacewalk_change
   endswitch
 endscript
 
-// better4_modifier_alwaysspecial_value = 0
-// better4_modifier_alwaysspecial = {
-//   id = better4_modifier_alwaysspecial_id
-//   flag = 5
-//   value_name = better4_modifier_alwaysspecial_value
-//   text = "Always Special"
-//   help = "Toggle whether players always have their special meter filled."
-//   change_script = better4_modifier_alwaysspecial_change
+better4_modifier_alwaysspecial_value = 0
+better4_modifier_alwaysspecial = {
+  id = better4_modifier_alwaysspecial_id
+  flag = 5
+  value_name = better4_modifier_alwaysspecial_value
+  text = "Always Special"
+  help = "Toggle whether players always have their special meter filled."
+  change_script = better4_modifier_alwaysspecial_change
+  #"default" = 0
+}
+
+script better4_modifier_alwaysspecial_change
+  switch better4_modifier_alwaysspecial_value
+  case off
+    UnSetGlobalFlag flag = CHEAT_ALWAYS_SPECIAL
+  case on
+    SetGlobalFlag flag = CHEAT_ALWAYS_SPECIAL
+  endswitch
+endscript
+
+better4_modifier_perfectrail_value = 0
+better4_modifier_perfectrail = {
+  id = better4_modifier_perfectrail_id
+  flag = 6
+  value_name = better4_modifier_perfectrail_value
+  text = "Perfect Rail"
+  help = "Toggle whether players always have perfect rail balance."
+  change_script = better4_modifier_perfectrail_change
+  #"default" = 0
+}
+
+script better4_modifier_perfectrail_change
+  switch better4_modifier_perfectrail_value
+  case off
+    UnSetGlobalFlag flag = CHEAT_PERFECT_RAIL
+  case on
+    SetGlobalFlag flag = CHEAT_PERFECT_RAIL
+  endswitch
+endscript
+
+better4_modifier_perfectmanual_value = 0
+better4_modifier_perfectmanual = {
+  id = better4_modifier_perfectmanual_id
+  flag = 7
+  value_name = better4_modifier_perfectmanual_value
+  text = "Perfect Manual"
+  help = "Toggle whether players always have perfect manual balance."
+  change_script = better4_modifier_perfectmanual_change
+  #"default" = 0
+}
+
+script better4_modifier_perfectmanual_change
+  switch better4_modifier_perfectmanual_value
+  case off
+    UnSetGlobalFlag flag = CHEAT_PERFECT_MANUAL
+  case on
+    SetGlobalFlag flag = CHEAT_PERFECT_MANUAL
+  endswitch
+endscript
+
+// better4_modifier_perfectskitch_value = 0
+// better4_modifier_perfectskitch = {
+//   id = better4_modifier_perfectskitch_id
+//   flag = 8
+//   value_name = better4_modifier_perfectskitch_value
+//   text = "Perfect Skitch"
+//   help = "Toggle whether players always have perfect skitch balance."
+//   change_script = better4_modifier_perfectskitch_change
 //   #"default" = 0
 // }
 //
-// script better4_modifier_alwaysspecial_change
-//   switch better4_modifier_alwaysspecial_value
+// script better4_modifier_perfectskitch_change
+//   switch better4_modifier_perfectskitch_value
 //   case off
-//     UnSetGlobalFlag flag = CHEAT_ALWAYS_SPECIAL
+//     UnSetGlobalFlag flag = CHEAT_PERFECT_SKITCH
 //   case on
-//     SetGlobalFlag flag = CHEAT_ALWAYS_SPECIAL
-//   endswitch
-// endscript
-//
-// better4_modifier_perfectrail_value = 0
-// better4_modifier_perfectrail = {
-//   id = better4_modifier_perfectrail_id
-//   flag = 6
-//   value_name = better4_modifier_perfectrail_value
-//   text = "Perfect Rail"
-//   help = "Toggle whether players always have perfect rail balance."
-//   change_script = better4_modifier_perfectrail_change
-//   #"default" = 0
-// }
-//
-// script better4_modifier_perfectrail_change
-//   switch better4_modifier_perfectrail_value
-//   case off
-//     UnSetGlobalFlag flag = CHEAT_PERFECT_RAIL
-//   case on
-//     SetGlobalFlag flag = CHEAT_PERFECT_RAIL
-//   endswitch
-// endscript
-//
-// better4_modifier_perfectmanual_value = 0
-// better4_modifier_perfectmanual = {
-//   id = better4_modifier_perfectmanual_id
-//   flag = 7
-//   value_name = better4_modifier_perfectmanual_value
-//   text = "Perfect Manual"
-//   help = "Toggle whether players always have perfect manual balance."
-//   change_script = better4_modifier_perfectmanual_change
-//   #"default" = 0
-// }
-//
-// script better4_modifier_perfectmanual_change
-//   switch better4_modifier_perfectmanual_value
-//   case off
-//     UnSetGlobalFlag flag = CHEAT_PERFECT_MANUAL
-//   case on
-//     SetGlobalFlag flag = CHEAT_PERFECT_MANUAL
+//     SetGlobalFlag flag = CHEAT_PERFECT_SKITCH
 //   endswitch
 // endscript
 
@@ -177,9 +197,10 @@ script better4_modifiers_init
   better4_modifier_init better4_modifier_disableboostplant
   better4_modifier_init better4_modifier_disablewallpush
   better4_modifier_init better4_modifier_disablespacewalk
-  // better4_modifier_init better4_modifier_alwaysspecial
-  // better4_modifier_init better4_modifier_perfectrail
-  // better4_modifier_init better4_modifier_perfectmanual
+  better4_modifier_init better4_modifier_alwaysspecial
+  better4_modifier_init better4_modifier_perfectrail
+  better4_modifier_init better4_modifier_perfectmanual
+  // better4_modifier_init better4_modifier_perfectskitch
 endscript
 
 script better4_modifier_set
@@ -194,12 +215,14 @@ script better4_modifier_set
     <mod> = better4_modifier_disablewallpush
   case 4
     <mod> = better4_modifier_disablespacewalk
-  // case 5
-  //   <mod> = better4_modifier_alwaysspecial
-  // case 6
-  //   <mod> = better4_modifier_perfectrail
-  // case 7
-  //   <mod> = better4_modifier_perfectmanual
+  case 5
+    <mod> = better4_modifier_alwaysspecial
+  case 6
+    <mod> = better4_modifier_perfectrail
+  case 7
+    <mod> = better4_modifier_perfectmanual
+  // case 8
+  //   <mod> = better4_modifier_perfectskitch
   endswitch
 
   AddParams <mod>
