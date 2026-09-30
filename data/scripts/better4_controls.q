@@ -518,7 +518,7 @@ better4_control_buttonsfont = {
 
 prev_buttonsfont = better4_control_buttonsfont_value
 script better4_control_buttonsfont_change
-  Printf "Changing buttonfont from %p to %n" p = prev_buttonsfont n = better4_control_buttonsfont_value
+  LogInfo "Changing buttonfont from %p to %n" p = prev_buttonsfont n = better4_control_buttonsfont_value
   UnloadFont prev_buttonsfont
   LoadFont better4_control_buttonsfont_value buttons_font
   Change prev_buttonsfont = better4_control_buttonsfont_value
@@ -1015,12 +1015,12 @@ script better4_control_init
   }
   GetArraySize <options>
   if ( <new_index> < 0 )
-    Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
+    LogInfo "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
     <new_index> = 0
   else
     if not ( <array_size> > <new_index> )
       <new_index> = ( <array_size> - 1 )
-      Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
+      LogInfo "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
     endif
   endif
 
@@ -1038,13 +1038,13 @@ script better4_control_cycle
   if ( <new_index> < 0 )
     <new_index> = ( <new_index> + <array_size> )
     if GotParam ini_key
-      Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+      LogInfo "Wrapping around %k to %i" k = <ini_key> i = <new_index>
     endif
   else
     if not ( <array_size> > <new_index> )
       <new_index> = ( <new_index> - <array_size> )
       if GotParam ini_key
-        Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+        LogInfo "Wrapping around %k to %i" k = <ini_key> i = <new_index>
       endif
     endif
   endif
@@ -1054,7 +1054,7 @@ endscript
 script better4_control_change
   CastToInteger new_index
   if GotParam ini_key
-    Printf "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
+    LogInfo "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
     if GotParam needs_write
       SetIniInteger section = better4_controls_ini_section key = <ini_key> value = <new_index>
     endif

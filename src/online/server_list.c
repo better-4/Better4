@@ -51,21 +51,21 @@ static void update_server_info(ServerInfo *server_info, SBServer server) {
 	strcpy_s(server_info->gametype, SERVER_INFO_STRLEN, SBServerGetStringValue(server, "gametype", ""));
 	strcpy_s(server_info->gamemode, SERVER_INFO_STRLEN, SBServerGetStringValue(server, "gamemode", ""));
 
-	logDebug("gs_listing_games_callback: server added (%s:%d)\n", server_info->ip, server_info->port);
-	logDebug("  hostname: %s\n", server_info->hostname);
-	logDebug("  gamever: %s\n", server_info->gamever);
-	logDebug("  mapname: %s\n", server_info->mapname);
-	logDebug("  gametype: %s\n", server_info->gametype);
-	logDebug("  password: %d\n", server_info->password);
-	logDebug("  gamemode: %s\n", server_info->gamemode);
-	logDebug("  num_players/max_players: %d/%d\n", server_info->num_players, server_info->max_players);
-	logDebug("  num_observers/max_observers: %d/%d\n", server_info->num_observers, server_info->max_observers);
-	logDebug("  num_teams: %d\n", server_info->num_teams);
+	logDebug("gs_listing_games_callback: server added (%s:%d)", server_info->ip, server_info->port);
+	logDebug("  hostname: %s", server_info->hostname);
+	logDebug("  gamever: %s", server_info->gamever);
+	logDebug("  mapname: %s", server_info->mapname);
+	logDebug("  gametype: %s", server_info->gametype);
+	logDebug("  password: %d", server_info->password);
+	logDebug("  gamemode: %s", server_info->gamemode);
+	logDebug("  num_players/max_players: %d/%d", server_info->num_players, server_info->max_players);
+	logDebug("  num_observers/max_observers: %d/%d", server_info->num_observers, server_info->max_observers);
+	logDebug("  num_teams: %d", server_info->num_teams);
 
     for (int i = 0; i < server_info->num_players; i++) {
         PlayerInfo *player_info = &server_info->players[i];
         strcpy_s(player_info->name, PLAYER_NAME_STRLEN, SBServerGetPlayerStringValue(server, i, "player", "..."));
-        logDebug("  player %d: %s\n", i, player_info->name);
+        logDebug("  player %d: %s", i, player_info->name);
     }
 }
 
@@ -85,25 +85,25 @@ static void focus_server(ServerInfo *server_info) {
 }
 
 static void gs_listing_games_callback(PEER peer, PEERBool success, char *name, SBServer server, PEERBool staging, int msg, int progress, void *param) {
-	logDebug("gs_listing_games_callback: name=%s, msg=%d, progress=%d, staging=%d\n", name, msg, progress, staging);
+	logDebug("gs_listing_games_callback: name=%s, msg=%d, progress=%d, staging=%d", name, msg, progress, staging);
 
 	if (!success) {
-		logWarning("gs_listing_games_callback: unsuccessful\n");
+		logWarning("gs_listing_games_callback: unsuccessful");
 		return;
 	}
 
 	switch (msg) {
 	case PEER_CLEAR:
-		logDebug("gs_listing_games_callback: PEER_CLEAR\n");
+		logDebug("gs_listing_games_callback: PEER_CLEAR");
 		Script_RunScript(0x152aad5d/*destroy_server_menu_children*/, 0, 0, 0, 0);
 		num_servers = 0;
 		break;
 
 	case PEER_ADD:
-		logDebug("gs_listing_games_callback: PEER_ADD\n");
+		logDebug("gs_listing_games_callback: PEER_ADD");
 
 		if (num_servers >= MAX_NUM_SERVERS) {
-			logWarning("gs_listing_games_callback: hit limit of %d servers, can't add more\n", MAX_NUM_SERVERS);
+			logWarning("gs_listing_games_callback: hit limit of %d servers, can't add more", MAX_NUM_SERVERS);
 			break;
 		}
 
@@ -116,7 +116,7 @@ static void gs_listing_games_callback(PEER peer, PEERBool success, char *name, S
 		break;
 
 	case PEER_UPDATE:
-		logDebug("gs_listing_games_callback: PEER_UPDATE\n");
+		logDebug("gs_listing_games_callback: PEER_UPDATE");
 		ServerInfo *target_server_info = 0;
 		for (int i = 0; i < num_servers; i++) {
 			ServerInfo *server_info = &servers[i];
@@ -142,7 +142,7 @@ static void gs_listing_games_callback(PEER peer, PEERBool success, char *name, S
 		break;
 
 	case PEER_REMOVE:
-		logDebug("gs_listing_games_callback: PEER_REMOVE\n");
+		logDebug("gs_listing_games_callback: PEER_REMOVE");
 
 		uint8_t needs_refocus = 0;
 
@@ -176,7 +176,7 @@ static void gs_listing_games_callback(PEER peer, PEERBool success, char *name, S
 			if (needs_refocus) {
 				int new_focus_index = target_server_index < num_servers ? target_server_index : num_servers - 1;
 				currently_described_server = &servers[new_focus_index];
-				logDebug("refocusing to name=%s, new_focus_index=%d\n", currently_described_server->hostname, new_focus_index);
+				logDebug("refocusing to name=%s, new_focus_index=%d", currently_described_server->hostname, new_focus_index);
 			}
 
 			update_server_menu();
@@ -185,13 +185,13 @@ static void gs_listing_games_callback(PEER peer, PEERBool success, char *name, S
 		break;
 
 	case PEER_COMPLETE:
-		logDebug("gs_listing_games_callback: PEER_COMPLETE\n");
+		logDebug("gs_listing_games_callback: PEER_COMPLETE");
 		break;
 	}
 }
 
 static void gs_server_list_init() {
-	logDebug("gs_server_list_init\n");
+	logDebug("gs_server_list_init");
 	if (!gs_peer) {
 		num_servers = 0;
 		currently_described_server = 0;
@@ -201,7 +201,7 @@ static void gs_server_list_init() {
 }
 
 static void gs_server_list_shutdown() {
-	logDebug("gs_server_list_shutdown\n");
+	logDebug("gs_server_list_shutdown");
 	if (gs_peer) {
 		peerStopListingGames(gs_peer);
 	}
@@ -288,7 +288,7 @@ static void add_desc_line(char *key, char *value) {
 }
 
 static int describe_server(ServerInfo *server) {
-	logDebug("describing server=%p, hostname=%s\n", server, server->hostname);
+	logDebug("describing server=%p, hostname=%s", server, server->hostname);
 	currently_described_server = server;
 
 	Script_RunScript(0xdd6ddfd6/*destroy_server_desc_children*/, 0, 0, 0, 0);
@@ -323,7 +323,7 @@ static int describe_server(ServerInfo *server) {
 }
 
 static int choose_server(ServerInfo *server) {
-	logDebug("choosing server=%p, hostname=%s\n", server, server->hostname);
+	logDebug("choosing server=%p, hostname=%s", server, server->hostname);
 
 	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
 	uint32_t error_reason = 0;
@@ -388,7 +388,7 @@ int __cdecl CFunc_FoundBetterServers(CStruct *params) {
 int __cdecl CFunc_ChooseBetterServer(CStruct *params) {
 	uint32_t server_ptr = 0;
 	if (!CStruct_GetChecksum(params, 0x40c698af/*id*/, &server_ptr, 0)) {
-		logWarning("ChooseBetterServer missing param \"id\" (0x40c698af)\n");
+		logWarning("ChooseBetterServer missing param \"id\" (0x40c698af)");
 		return 0;
 	}
 	return choose_server((ServerInfo *)server_ptr);
@@ -397,7 +397,7 @@ int __cdecl CFunc_ChooseBetterServer(CStruct *params) {
 int __cdecl CFunc_DescribeBetterServer(CStruct *params) {
 	uint32_t server_ptr = 0;
 	if (!CStruct_GetChecksum(params, 0x40c698af/*id*/, &server_ptr, 0)) {
-		logWarning("DescribeBetterServer missing param \"id\" (0x40c698af)\n");
+		logWarning("DescribeBetterServer missing param \"id\" (0x40c698af)");
 		return 0;
 	}
 	return describe_server((ServerInfo *)server_ptr);

@@ -2,7 +2,7 @@
 UsePreFilesForLevelLoading = 0
 AlwaysDump = 0
 script cleanup_before_loading_level
-  Printf "*********************** cleanup_before_loading_level"
+  LogInfo "*********************** cleanup_before_loading_level"
   Cleanup
   StopMusic
   PauseMusic
@@ -60,7 +60,7 @@ endscript
 script PostLevelLoad
 endscript
 script script_assert <...>
-  Printf "ASSERT MESSAGE:"
+  LogInfo "ASSERT MESSAGE:"
   ScriptAssert <...>
 endscript
 script request_level
@@ -129,18 +129,18 @@ script load_level level_number = 0
     endif
   endif
   kill_start_key_binding
-  Printf "replace_handlers to take away start key in load_level"
+  LogInfo "replace_handlers to take away start key in load_level"
   set_level_lights <...>
   SetScoreAccumulation 0
   if GameModeEquals is_singlesession
-    Printf "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
-    Printf "setting score degradation to 1"
-    Printf "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+    LogInfo "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+    LogInfo "setting score degradation to 1"
+    LogInfo "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
     SetScoreDegradation 1
   else
-    Printf "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
-    Printf "setting score degradation to 0"
-    Printf "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+    LogInfo "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
+    LogInfo "setting score degradation to 0"
+    LogInfo "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS"
     SetScoreDegradation 0
   endif
   if InSplitScreenGame
@@ -175,54 +175,60 @@ script load_level level_number = 0
       DisplayLoadingScreen "loadscrn_generic"
     endif
   endif
-  Printf "@@ 1"
+  LogDebug "load_level: CareerStartLevel level_number=%n" n = <level_number>
   CareerStartLevel level = <level_number>
-  Printf "@@ 2"
+  LogDebug "load_level: ResetLevelFlags"
   ResetLevelFlags
   if ( <level_number> = LevelNum_Skateshop )
   endif
-  Printf "@@ 3"
   if GotParam scnpre
+    LogDebug "load_level: loading level scene pre file scnpre=%p" p = <scnpre>
     LoadLevelPreFile <scnpre>
   endif
   if GotParam sky
+    LogDebug "load_level: loading sky scene sky=%s" s = <sky>
     LoadScene scene = <sky>
   endif
-  Printf "@@ 4"
   if GotParam park_editor
     if IsNGC
       Ngc_ReduceColors 0
     endif
+    LogDebug "load_level: loading park editor scene"
     LoadScene scene = <level> is_dictionary
     if GotParam outer_shell
+      LogDebug "load_level: loading park editor outer shell"
       LoadScene scene = <outer_shell> no_supersectors
     endif
     if IsNGC
       Ngc_ReduceColors 1
     endif
   else
+    LogDebug "load_level: loading level scene level=%l" l = <level>
     LoadScene scene = <level>
   endif
-  Printf "@@ 5"
   if GotParam level_name
+    LogDebug "load_level: setting level_name=%n" n = <level_name>
     SetLevelName <level_name>
   else
+    LogDebug "load_level: setting level_name=%n" n = <level>
     SetLevelName <level>
   endif
-  Printf "@@ 6"
   if GotParam scnpre
+    LogDebug "load_level: unloading level scene pre file scnpre=%p" p = <scnpre>
     UnloadPreFile <scnpre> dont_assert
   endif
-  Printf "@@ 7"
   if not IsPS2
     if GotParam pre
+      LogDebug "load_level: loading level pre file pre=%p" p = <pre>
       LoadLevelPreFile <pre>
     endif
   endif
   if GotParam qb
     if GotParam park_editor
+      LogDebug "load_level: loading park editor nodearray qb=%q" q = <qb>
       LoadNodeArray <qb> park_editor
     else
+      LogDebug "load_level: loading nodearray qb=%q" q = <qb>
       LoadNodeArray <qb>
     endif
   endif
@@ -233,12 +239,13 @@ script load_level level_number = 0
   endif
   if GotParam park_editor
   else
+    LogDebug "load_level: pre-loading models"
     PreloadModels
   endif
   if GotParam level_qb
+    LogDebug "load_level: loading level qb qb=%q" q = <level_qb>
     LoadQB <level_qb> LevelSpecific
   endif
-  Printf "@@ 8"
   preselect_random_parts <...>
   if GotParam park_editor
     LoadSound "Shared\Hits\FallPungee_11"
@@ -256,25 +263,27 @@ script load_level level_number = 0
      <temp_script> <...>
     if GotParam extranetanimsscript
       if InNetGame
-        Printf "                    WE'RE IN A NET GAME!!!!!!!!!!!!!"
+        LogInfo "                    WE'RE IN A NET GAME!!!!!!!!!!!!!"
         PushMemProfile "Level Specific Anims"
          <extranetanimsscript>
         PopMemProfile
       endif
     endif
   endif
-  Printf "@@ 9"
   if GotParam park_editor
   else
     if GotParam startup_script
+      LogDebug "load_level: running level startup_script"
        <startup_script>
     endif
   endif
   if GotParam pre
+    LogDebug "load_level: unloading level pre file pre=%p" p = <pre>
     UnloadPreFile <pre> dont_assert
   endif
   if not InNetGame
     if GotParam pedpre
+      LogDebug "load_level: loading ped pre file pedpre=%p" p = <pedpre>
       LoadPreFile <pedpre> dont_assert
     endif
   endif
@@ -288,28 +297,26 @@ script load_level level_number = 0
       PreloadModel name = "crown"
     endif
   endif
-  Printf "@@ 10"
   if not InNetGame
     if GotParam pedpre
+      LogDebug "load_level: unloading ped pre file pre=%p" p = <pedpre>
       UnloadPreFile <pedpre> dont_assert
     endif
   endif
-  Printf "@@ 11"
   if ( <level_number> = LevelNum_Skateshop )
     if not IsTrue cas_artist
       LoadPreFile "skaterparts.pre"
     endif
   endif
-  Printf "@@ 12"
   PushMemProfile "Level Collision decompressed PIP + Supersectors"
   if IsTrue UsePreFilesForLevelLoading
     if GotParam colpre
+      LogDebug "load_level: loading col pre file colpre=%p" p = <colpre>
       LoadPipPre <colpre> heap = topdown
     endif
   endif
-  Printf "@@ 13"
+  LogDebug "load_level: loading collision level=%l" l = <level>
   LoadCollision scene = <level>
-  Printf "@@ 14"
   if GotParam park_editor
     if GotParam outer_shell
       if IsTrue UsePreFilesForLevelLoading
@@ -319,40 +326,39 @@ script load_level level_number = 0
       LoadCollision scene = <outer_shell>
     endif
   endif
-  Printf "@@ 15"
   PopMemProfile
-  Printf "@@ 16"
   if GotParam park_editor
     if GotParam startup_script
+      LogDebug "load_level: running startup script"
        <startup_script>
     endif
   else
-    Printf "@@ 17"
+    LogDebug "load_level: parsing nodearray"
     ParseNodeArray
   endif
-  Printf "@@ 18"
   if GotParam goals_script
+    LogDebug "load_level: running goals script"
      <goals_script>
   endif
-  Printf "@@ 19"
   if GameModeEquals is_singlesession
     AddGoal_TrickAttack
   endif
-  Printf "@@ 20"
   if GameModeEquals is_career
     if not ( <level_number> = 0 )
       SetGlobalFlag flag = CAREER_STARTED
-      Printf "CAREER_STARTED"
+      LogInfo "CAREER_STARTED"
     endif
   endif
-  Printf "@@ 21"
+  LogDebug "load_level: initializing goal manager"
   init_goal_manager
+  LogDebug "load_level: initializing cash icons"
   initialize_cash_icons
   if GotParam setup_script
+    LogDebug "load_level: running setup script"
      <setup_script>
   endif
+  LogDebug "load_level: unpausing game"
   UnPauseGame
-  Printf "@@ 22"
 endscript
 script LoadTerrain_parked
   SetTerrainDefault

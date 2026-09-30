@@ -2,7 +2,7 @@
 script TwoWayLoopCheck
   if not InAir
     if Obj_FlagSet FLAG_SKATER_INLOOP
-      Printf "In the loop and so making you land"
+      LogInfo "In the loop and so making you land"
       Obj_ClearFlag FLAG_SKATER_INLOOP
       SetRollingFriction #"default"
       LockVelocityDirection Off

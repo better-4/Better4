@@ -408,9 +408,9 @@ script DoBoardScuff
     Obj_ReplaceTexture src = "CS_NN_board_trans01.png" dest = "textures/scuffs/CS_NN_boardscuff_04"
   default
   endswitch
-  Printf "Ready to scuff >>>>>>>>>>>>>>>>>>>>>>>>"
+  LogInfo "Ready to scuff >>>>>>>>>>>>>>>>>>>>>>>>"
   else
-    Printf "i cant get scuffed"
+    LogInfo "i cant get scuffed"
  endif
 endscript
 script BailBoardControl BoardOffFrame = 5
@@ -686,13 +686,13 @@ script BloodBig bone = "head"
 endscript
 script BloodCar bone = "head"
   Wait 30 frames
-  Printf "MAKING SOME BIG BLOOD..............."
+  LogInfo "MAKING SOME BIG BLOOD..............."
   TextureSplat radius = 2 size = 20 bone = head name = "blood_01" lifetime = 20
 endscript
 script BloodJackAss bone = "head"
   if not GetGlobalFlag flag = BLOOD_OFF
     Wait 30 frames
-    Printf "MAKING SOME BIG BLOOD..............."
+    LogInfo "MAKING SOME BIG BLOOD..............."
     BloodOn_Down size = randomrange(8, 15)
     BloodOn_Down size = randomrange(8, 15)
     Wait randomrange(1, 8) frames

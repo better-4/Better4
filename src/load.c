@@ -12,12 +12,12 @@ static int use_updated_collision = 0;
 
 void add_path_override(char *original_path, char *new_path) {
 	map_put(override_map, original_path, strlen(original_path), new_path, strlen(new_path) + 1);
-	logInfo("Adding path override \"%s\" -> \"%s\"\n", original_path, new_path);
+	logInfo("Adding path override \"%s\" -> \"%s\"", original_path, new_path);
 }
 
 void remove_path_override(char *original_path) {
 	map_del(override_map, original_path, strlen(original_path));
-	logInfo("Removing path override \"%s\"\n", original_path);
+	logInfo("Removing path override \"%s\"", original_path);
 }
 
 void *__cdecl Pip_Load(char *path) {
@@ -25,10 +25,10 @@ void *__cdecl Pip_Load(char *path) {
 
 	void *ret;
 	char *override = map_get(override_map, path, strlen(path));
-	// logDebug("Pip::Load: loading \"%s\"\n", path);
+	// logDebug("Pip::Load: loading \"%s\"", path);
 
 	if (override) {
-		logInfo("Pip::Load: Override \"%s\" with \"%s\"\n", path, override);
+		logInfo("Pip::Load: Override \"%s\" with \"%s\"", path, override);
 		ret = _Load(override);
 	} else {
 		ret = _Load(path);
@@ -44,7 +44,7 @@ void *__cdecl Pip_Unload(char *path) {
 	char *override = map_get(override_map, path, strlen(path));
 
 	if (override) {
-		logInfo("Pip::Unload: Override \"%s\" with \"%s\"\n", path, override);
+		logInfo("Pip::Unload: Override \"%s\" with \"%s\"", path, override);
 		ret = _Unload(override);
 	} else {
 		ret = _Unload(path);
@@ -56,12 +56,12 @@ void *__cdecl Pip_Unload(char *path) {
 void *__cdecl File_Open(char *path, char *mode) {
     static void *(__cdecl* _Open)(char *, char *) = (void *)0x00536250;
 
-	logDebug("File::Open: \"%s\"\n", path);
+	logDebug("File::Open: \"%s\"", path);
 	void *ret;
 	char *override = map_get(override_map, path, strlen(path));
 
 	if (override) {
-		logInfo("File::Open: Override \"%s\" with \"%s\"\n", path, override);
+		logInfo("File::Open: Override \"%s\" with \"%s\"", path, override);
 		ret = _Open(override, mode);
 	} else {
 		ret = _Open(path, mode);
@@ -73,14 +73,14 @@ void *__cdecl File_Open(char *path, char *mode) {
 void *__cdecl Script_LoadQB(char *path, int unk) {
     static void *(__cdecl* _LoadQB)(char *, int) = (void *)0x0040b4c0;
 
-	logDebug("Script::LoadQB: (\"%s\", \"%d\")\n", path, unk);
+	logDebug("Script::LoadQB: (\"%s\", \"%d\")", path, unk);
 
 	return _LoadQB(path, unk);
 }
 
 void __fastcall Obj_CSkaterCareer_StartLevel(void *career, unused_t _, int level_num) {
     static void (__fastcall* _StartLevel)(void *, unused_t, int) = (void *)0x004dc760;
-	logDebug("Obj::CSkaterCareer::StartLevel: level_num=%d\n", level_num);
+	logDebug("Obj::CSkaterCareer::StartLevel: level_num=%d", level_num);
 	_StartLevel(career, UNUSED, level_num);
 }
 
@@ -181,13 +181,13 @@ void patchLoad() {
 int __cdecl CFunc_SetUpdatedCollision(CStruct* params) {
 	float index;
 	if (!CStruct_GetFloat(params, 0x7f8c98fe, &index, 0)) {
-		logWarning("SetUpdatedCollision missing param \"index\" (0x7f8c98fe)\n");
+		logWarning("SetUpdatedCollision missing param \"index\" (0x7f8c98fe)");
 		return 0;
 	}
 	
 	int prev_use_updated_collision = use_updated_collision;
 	use_updated_collision = (int)index;
-	logInfo("Set use_updated_collision=%d\n", use_updated_collision);
+	logInfo("Set use_updated_collision=%d", use_updated_collision);
 
 	if (prev_use_updated_collision != use_updated_collision) {
 		if (use_updated_collision) {

@@ -16,7 +16,7 @@ extern char configFile[1024];
 
 void checkForUpdate() {
 	if (!getIniBool("Updater", "CheckForUpdates", 1, configFile)) {
-		logInfo("checkForUpdate: disabled via ini; skipping\n");
+		logInfo("checkForUpdate: disabled via ini; skipping");
 		return;
 	}
 
@@ -24,10 +24,10 @@ void checkForUpdate() {
 	_snprintf(scriptPath, sizeof(scriptPath), "%sbetter4updater.ps1", executableDirectory);
 	scriptPath[sizeof(scriptPath) - 1] = '\0';
 
-	logDebug("checkForUpdate: looking for updater at \"%s\"\n", scriptPath);
+	logDebug("checkForUpdate: looking for updater at \"%s\"", scriptPath);
 
 	if (GetFileAttributesA(scriptPath) == INVALID_FILE_ATTRIBUTES) {
-		logWarning("checkForUpdate: no script found; skipping update check\n");
+		logWarning("checkForUpdate: no script found; skipping update check");
 		return;
 	}
 
@@ -38,12 +38,12 @@ void checkForUpdate() {
 		scriptPath, BETTER4_VERSION, ourPid);
 	cmdLine[sizeof(cmdLine) - 1] = '\0';
 
-	logDebug("checkForUpdate: launching: %s\n", cmdLine);
+	logDebug("checkForUpdate: launching: %s", cmdLine);
 
 	HANDLE hNul = CreateFileA("NUL", GENERIC_READ | GENERIC_WRITE,
 		FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
 	if (hNul == INVALID_HANDLE_VALUE) {
-		logWarning("checkForUpdate: CreateFileA(NUL) failed (error %lu)\n", GetLastError());
+		logWarning("checkForUpdate: CreateFileA(NUL) failed (error %lu)", GetLastError());
 		return;
 	}
 	SetHandleInformation(hNul, HANDLE_FLAG_INHERIT, HANDLE_FLAG_INHERIT);
@@ -62,28 +62,28 @@ void checkForUpdate() {
 	CloseHandle(hNul);
 
 	if (!created) {
-		logWarning("checkForUpdate: CreateProcessA failed (error %lu)\n", GetLastError());
+		logWarning("checkForUpdate: CreateProcessA failed (error %lu)", GetLastError());
 		return;
 	}
 
-	logDebug("checkForUpdate: spawned better4updater.ps1 as PID %lu, waiting for it to finish...\n", pi.dwProcessId);
+	logDebug("checkForUpdate: spawned better4updater.ps1 as PID %lu, waiting for it to finish...", pi.dwProcessId);
 
 	WaitForSingleObject(pi.hProcess, INFINITE);
 
-	logDebug("checkForUpdate: better4updater.ps1 (PID %lu) finished\n", pi.dwProcessId);
+	logDebug("checkForUpdate: better4updater.ps1 (PID %lu) finished", pi.dwProcessId);
 
 	DWORD exitCode = 0;
 	GetExitCodeProcess(pi.hProcess, &exitCode);
 
-	logDebug("checkForUpdate: better4updater.ps1 exit code = %lu\n", exitCode);
+	logDebug("checkForUpdate: better4updater.ps1 exit code = %lu", exitCode);
 
 	CloseHandle(pi.hProcess);
 	CloseHandle(pi.hThread);
 
 	if (exitCode == UPDATE_EXIT_CODE_UPDATING) {
-		logInfo("checkForUpdate: update in progress; exiting to let it finish\n");
+		logInfo("checkForUpdate: update in progress; exiting to let it finish");
 		ExitProcess(0);
 	}
 
-	logInfo("checkForUpdate: done; loading normally\n");
+	logInfo("checkForUpdate: done; loading normally");
 }

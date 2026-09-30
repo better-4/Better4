@@ -82,7 +82,7 @@ script better4_level_menu_left
   else
     <new_index> = ( level_menu_num_games - 1 )
   endif
-  Printf "@@ LEVEL_MENU_LEFT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
+  LogInfo "@@ LEVEL_MENU_LEFT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
   Change level_menu_game_index = <new_index>
 
   better4_level_menu_refresh <...>
@@ -98,7 +98,7 @@ script better4_level_menu_right
   else
     <new_index> = 0
   endif
-  Printf "@@ LEVEL_MENU_RIGHT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
+  LogInfo "@@ LEVEL_MENU_RIGHT: prev=%p new=%n" p = level_menu_game_index n = <new_index>
   Change level_menu_game_index = <new_index>
 
   better4_level_menu_refresh <...>
@@ -119,7 +119,7 @@ script better4_level_menu_refresh
     <texture> = thps4_lm
     <levels> = level_select_menu_level_info
   endswitch
-  Printf "@@ LEVEL_MENU_REFRESH: text=%t" t = <texture>
+  LogInfo "@@ LEVEL_MENU_REFRESH: text=%t" t = <texture>
 
   SetScreenElementProps {
     id = level_select_game_text

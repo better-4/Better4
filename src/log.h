@@ -1,6 +1,9 @@
 #ifndef _LOG_H_
 #define _LOG_H_
 
+#include "decomp/CScript.h"
+#include "decomp/CStruct.h"
+
 #include <stdarg.h>
 
 enum {

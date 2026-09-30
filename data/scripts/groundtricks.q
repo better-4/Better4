@@ -313,7 +313,7 @@ script Ollie OutSpeed = 1
   InAirExceptions
   Vibrate Actuator = 1 Percent = 50 Duration = 0.05
   if GotParam FromLip
-    Printf "came from lip=================="
+    LogInfo "came from lip=================="
     PlayAnim Anim = <OutAnim> BlendPeriod = 0.0
     BlendPeriodOut 0
   else
@@ -331,7 +331,7 @@ script Ollie OutSpeed = 1
     RotateAfter
   endif
   if GotParam FlipAfter
-    Printf "=========flipping the skater in Ollie"
+    LogInfo "=========flipping the skater in Ollie"
     FlipAfter
   endif
   if GotParam NoBlend

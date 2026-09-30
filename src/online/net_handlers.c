@@ -9,7 +9,7 @@
 // #define MSG_ID_PING 0x7C
 
 void *__fastcall Net_Dispatcher_AddHandler_Wrapper(Net_Dispatcher *this, unused_t _, uint8_t opcode, Handler *handler, int flags, void *data, int priority) {
-    logDebug("Net::Dispatcher::AddHandler: this=%p opcode=%x flags=%x priority=%x\n", this, opcode, flags, priority);
+    logDebug("Net::Dispatcher::AddHandler: this=%p opcode=%x flags=%x priority=%x", this, opcode, flags, priority);
 	return Net_Dispatcher_AddHandler(this, opcode, handler, flags, data, priority);
 }
 
@@ -20,7 +20,7 @@ void __fastcall Mdl_Skate_AddNetworkMsgHandlers(void *this, unused_t _, Net_App 
 
     Net_App *client2 = GameNet_Manager_Instance()->client;
     Net_Dispatcher *dispatcher = Net_App_GetDispatcher(client);
-    // logDebug("Mdl::Skate::AddNetworkMsgHandlers: this=%p dispatcher=%p client=%x client2=%x unk2=%x\n", this, dispatcher, client, client2, unk2);
+    // logDebug("Mdl::Skate::AddNetworkMsgHandlers: this=%p dispatcher=%p client=%x client2=%x unk2=%x", this, dispatcher, client, client2, unk2);
 
     host_options_add_handlers(dispatcher);
 
@@ -34,7 +34,7 @@ void __fastcall Mdl_Skate_StartServer(void *this) {
 
     Net_App *server = GameNet_Manager_Instance()->server;
     Net_Dispatcher *dispatcher = Net_App_GetDispatcher(server);
-    logDebug("Mdl::Skate::StartServer: this=%p dispatcher=%p\n", this, dispatcher);
+    logDebug("Mdl::Skate::StartServer: this=%p dispatcher=%p", this, dispatcher);
     // Net_Dispatcher_AddHandler(dispatcher, MSG_ID_PING, server_handle_ping, 0, this, 0x80);
 }
 

@@ -23,14 +23,14 @@ static uint8_t flag_cancel_wallpush = 0;
 static int last_wallpush_time = 0;
 
 void print_vector(Mth_Vector vec) {
-    logDebug("(%f, %f, %f, %f)\n", vec.x, vec.y, vec.z, vec.w);
+    logDebug("(%f, %f, %f, %f)", vec.x, vec.y, vec.z, vec.w);
 }
 
 void print_matrix(Mth_Matrix mat) {
-    logDebug("[ %f %f %f %f  \n", mat.x.x, mat.x.y, mat.x.z, mat.x.w);
-    logDebug("  %f %f %f %f  \n", mat.y.x, mat.y.y, mat.y.z, mat.y.w);
-    logDebug("  %f %f %f %f  \n", mat.z.x, mat.z.y, mat.z.z, mat.z.w);
-    logDebug("  %f %f %f %f ]\n", mat.w.x, mat.w.y, mat.w.z, mat.w.w);
+    logDebug("[ %f %f %f %f  ", mat.x.x, mat.x.y, mat.x.z, mat.x.w);
+    logDebug("  %f %f %f %f  ", mat.y.x, mat.y.y, mat.y.z, mat.y.w);
+    logDebug("  %f %f %f %f  ", mat.z.x, mat.z.y, mat.z.z, mat.z.w);
+    logDebug("  %f %f %f %f ]", mat.w.x, mat.w.y, mat.w.z, mat.w.w);
 }
 
 uint8_t check_wallpush(Obj_CSkater *this) {
@@ -41,7 +41,7 @@ uint8_t check_wallpush(Obj_CSkater *this) {
 
     float wallpush_cooldown = Script_GetFloat(0x0017d543/*Physics_Disallow_Rewallpush_Duration*/);
     if (Tmr_ElapsedTime(last_wallpush_time) < wallpush_cooldown) {
-        logDebug("check_wallpush: on cooldown\n");
+        logDebug("check_wallpush: on cooldown");
         return 0;
     }
 
@@ -56,7 +56,7 @@ uint8_t check_wallpush(Obj_CSkater *this) {
     Obj_CMovingObject_ProcessExceptions((Obj_CMovingObject *)this);
 
     if (flag_cancel_wallpush) {
-        logDebug("check_wallpush: got flag_cancel_wallpush\n");
+        logDebug("check_wallpush: got flag_cancel_wallpush");
         flag_cancel_wallpush = 0;
         return 0;
     }
@@ -101,7 +101,7 @@ void __fastcall Obj_CSkater_BounceOffWall(Obj_CSkater *this, unused_t _, Mth_Vec
 }
 
 int __cdecl CFunc_CancelWallpush(CStruct *params) {
-    logDebug("CFunc_CancelWallpush: setting flag_cancel_wallpush=1\n");
+    logDebug("CFunc_CancelWallpush: setting flag_cancel_wallpush=1");
     flag_cancel_wallpush = 1;
     return 1;
 }
@@ -109,11 +109,11 @@ int __cdecl CFunc_CancelWallpush(CStruct *params) {
 int __cdecl CFunc_SetWallpushEnabled(CStruct *params) {
 	float enabled;
 	if (!CStruct_GetFloat(params, 0xaf06447b/*enabled*/, &enabled, 0)) {
-		logWarning("SetWallpushEnabled missing param \"enabled\" (0xaf06447b)\n");
+		logWarning("SetWallpushEnabled missing param \"enabled\" (0xaf06447b)");
 		return 0;
 	}
     wallpush_enabled = (int)enabled;
-    logInfo("Set wallpush_enabled=%d\n", wallpush_enabled);
+    logInfo("Set wallpush_enabled=%d", wallpush_enabled);
     return 1;
 }
 

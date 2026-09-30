@@ -248,7 +248,7 @@ script scalingmenu_get_limits
   return min = <min> max = <max>
 endscript
 script scalingmenu_increment
-  Printf "incrementing scale"
+  LogInfo "incrementing scale"
   scalingmenu_get_xyz part = <part>
   scalingmenu_get_limits part = <part> <...>
   if GotParam affectX
@@ -280,7 +280,7 @@ script scalingmenu_increment
   scalingmenu_refresh_skaters
 endscript
 script scalingmenu_decrement
-  Printf "decrementing scale"
+  LogInfo "decrementing scale"
   scalingmenu_get_xyz part = <part>
   scalingmenu_get_limits part = <part> <...>
   if GotParam affectX
@@ -363,10 +363,10 @@ script scalingmenu_refresh_arrows
        <v> = <z>
     endif
   endif
-  Printf "%x %y %z" X = <X> Y = <Y> z = <z>
+  LogInfo "%x %y %z" X = <X> Y = <Y> z = <z>
   scalingmenu_get_limits part = <part> <...>
   sliderbar_rescale_to_bar min = <min> max = <max> value = <v> left = scalingmenu_arrow_left right = scalingmenu_arrow_right
-  Printf <x_val>
+  LogInfo <x_val>
   SetScreenElementProps {
     id = <up_arrow_id>
     pos = ( (1, 0) * <x_val> )

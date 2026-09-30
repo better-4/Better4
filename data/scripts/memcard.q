@@ -102,11 +102,11 @@ script ResetAbortAndDoneScripts
 endscript
 DoneScript = DefaultDoneScript
 script DefaultDoneScript
-  Printf "DefaultDoneScript called !!!"
+  LogInfo "DefaultDoneScript called !!!"
 endscript
 AbortScript = DefaultAbortScript
 script DefaultAbortScript
-  Printf "DefaultAbortScript called !!!"
+  LogInfo "DefaultAbortScript called !!!"
 endscript
 script memcard_menus_cleanup
   EnableReset
@@ -130,10 +130,10 @@ script back_to_pause_menu
   ResetAbortAndDoneScripts
   restore_start_key_binding
   if ( save_successful = 1 )
-    Printf "save complete ========================="
+    LogInfo "save complete ========================="
     parked_quit level = load_skateshop
   else
-    Printf "save aborted ========================="
+    LogInfo "save aborted ========================="
     create_pause_menu
   endif
   Change save_successful = 2
@@ -222,7 +222,7 @@ script back_to_internet_options_menu
 endscript
 RetryScript = DefaultRetryScript
 script DefaultRetryScript
-  Printf "DefaultRetryScript called !!!"
+  LogInfo "DefaultRetryScript called !!!"
 endscript
 script mem_card_message_pause
   DisableReset
