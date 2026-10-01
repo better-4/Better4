@@ -770,13 +770,13 @@ script create_pause_menu
     if not OnServer
       if not IsBetterObserving
         if InInternetMode
-          if IsTrue bootstrap_build
-            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe not_focusable = not_focusable
-            make_text_sprite texture = PA_network parent = menu_network_observe_select
-          else
-            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe
-            make_text_sprite texture = PA_network parent = menu_network_observe_select
-          endif
+          // if IsTrue bootstrap_build
+          //   make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe not_focusable = not_focusable
+          //   make_text_sprite texture = PA_network parent = menu_network_observe_select
+          // else
+          //   make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe
+          //   make_text_sprite texture = PA_network parent = menu_network_observe_select
+          // endif
         endif
       endif
     endif
