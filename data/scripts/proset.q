@@ -1,5 +1,7 @@
 
 toggle_comp_geo_params = {
+  bit = 7
+  param_id = toggle_comp_geo_params
   flag = FLAG_G_COMP_GEO_ON
   geo_prefix = "G_COMP_"
   trg_prefix = "TRG_G_COMP_"
