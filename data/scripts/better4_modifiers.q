@@ -133,25 +133,35 @@ script better4_modifier_perfectmanual_change
   endswitch
 endscript
 
-// better4_modifier_perfectskitch_value = 0
-// better4_modifier_perfectskitch = {
-//   id = better4_modifier_perfectskitch_id
-//   flag = 8
-//   value_name = better4_modifier_perfectskitch_value
-//   text = "Perfect Skitch"
-//   help = "Toggle whether players always have perfect skitch balance."
-//   change_script = better4_modifier_perfectskitch_change
-//   #"default" = 0
-// }
-//
-// script better4_modifier_perfectskitch_change
-//   switch better4_modifier_perfectskitch_value
-//   case off
-//     UnSetGlobalFlag flag = CHEAT_PERFECT_SKITCH
-//   case on
-//     SetGlobalFlag flag = CHEAT_PERFECT_SKITCH
-//   endswitch
-// endscript
+better4_modifier_perfectskitch_value = 0
+better4_modifier_perfectskitch = {
+  id = better4_modifier_perfectskitch_id
+  flag = 8
+  value_name = better4_modifier_perfectskitch_value
+  text = "Perfect Skitch"
+  help = "Toggle whether players always have perfect skitch balance."
+  change_script = better4_modifier_perfectskitch_change
+  #"default" = 0
+}
+
+script better4_modifier_perfectskitch_change
+  switch better4_modifier_perfectskitch_value
+  case off
+    UnSetGlobalFlag flag = CHEAT_PERFECT_SKITCH
+  case on
+    SetGlobalFlag flag = CHEAT_PERFECT_SKITCH
+  endswitch
+endscript
+
+better4_modifier_disabletrickboost_value = 0
+better4_modifier_disabletrickboost = {
+  id = better4_modifier_disabletrickboost_id
+  flag = 9
+  value_name = better4_modifier_disabletrickboost_value
+  text = "Disable Trick Boost"
+  help = "Toggle whether players receive a boost from using tricks like Jango Jump Jet."
+  #"default" = 0
+}
 
 script better4_modifier_cycle
   <value> = <value_name>
@@ -200,7 +210,8 @@ script better4_modifiers_init
   better4_modifier_init better4_modifier_alwaysspecial
   better4_modifier_init better4_modifier_perfectrail
   better4_modifier_init better4_modifier_perfectmanual
-  // better4_modifier_init better4_modifier_perfectskitch
+  better4_modifier_init better4_modifier_perfectskitch
+  better4_modifier_init better4_modifier_disabletrickboost
 endscript
 
 script better4_modifier_set
@@ -221,8 +232,10 @@ script better4_modifier_set
     <mod> = better4_modifier_perfectrail
   case 7
     <mod> = better4_modifier_perfectmanual
-  // case 8
-  //   <mod> = better4_modifier_perfectskitch
+  case 8
+    <mod> = better4_modifier_perfectskitch
+  case 9
+    <mod> = better4_modifier_disabletrickboost
   endswitch
 
   AddParams <mod>
@@ -235,9 +248,9 @@ script better4_modifier_set
     ChangeGlobal Name = <value_name> value = <new_value>
 
     if ( <new_value> = 0 )
-      FormatText TextName = message "\c2Host disabled modifier '%t'" t = <text>
+      FormatText TextName = message "\c2Host turned off modifier '%t'" t = <text>
     else
-      FormatText TextName = message "\c4Host enabled modifier '%t'" t = <text>
+      FormatText TextName = message "\c4Host turned on modifier '%t'" t = <text>
     endif
 
     create_console_message text = <message>
