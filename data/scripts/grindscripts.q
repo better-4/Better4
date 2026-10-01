@@ -145,25 +145,25 @@ GRINDTAP_SCORE = 400
 GRINDTAP_TWEAK = 25 
 GrindTaps_FS = 
 [ 
- { Trigger = { TripleInOrder , UpRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_CrailSlide_FS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , DownRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Darkslide_FS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , DownLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_DoubleBluntSlide2 Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , UpLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_HangTenNoseGrind_FS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Up , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_NosegrindPivot_FS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Right , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Salad_FS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Left , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Hurricane_FS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Down , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_GrindOverturn_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , UpRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_CrailSlide_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , DownRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Darkslide_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , DownLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_DoubleBluntSlide2 Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , UpLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_HangTenNoseGrind_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Up , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_NosegrindPivot_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Right , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Salad_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Left , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Hurricane_FS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Down , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_GrindOverturn_FS Params = { IsExtra = 1 } } 
 ] 
 GrindTaps_BS = 
 [ 
- { Trigger = { TripleInOrder , UpRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_CrailSlide_BS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , DownRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Darkslide_BS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , DownLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_DoubleBluntSlide2 Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , UpLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_HangTenNoseGrind_BS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Up , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_NosegrindPivot_BS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Right , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Salad_BS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Down , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_GrindOverturn_BS Params = { IsExtra = 1 } } 
- { Trigger = { TripleInOrder , Left , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Hurricane_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , UpRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_CrailSlide_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , DownRight , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Darkslide_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , DownLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_DoubleBluntSlide2 Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , UpLeft , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_HangTenNoseGrind_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Up , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_NosegrindPivot_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Right , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Salad_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Down , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_GrindOverturn_BS Params = { IsExtra = 1 } } 
+ { Trigger = { TripleInOrderSloppy , Left , Triangle , Triangle , GRINDTAP_TIME } Scr = Trick_Hurricane_BS Params = { IsExtra = 1 } } 
 ]
 Extra_FS_Grinds =
 [
@@ -288,7 +288,7 @@ script Grind GrindTweak = 7 boardscuff = 0
   endif
   if GotParam IsExtra
     LaunchExtraMessage
-    AdjustBalance SpeedMult = 1.25
+    // AdjustBalance SpeedMult = 1.25
   endif
   if GotParam Profile
     if ProfileEquals is_named = <Profile>
@@ -301,8 +301,16 @@ script Grind GrindTweak = 7 boardscuff = 0
   else
     PlayAnim Anim = <initanim> Blendperiod = 0.3
   endif
-  DoBalanceTrick ButtonA = Right ButtonB = Left type = <type> DoFlipCheck
-  Wait 10 frames
+  IF GotParam IsATap 
+	IF NOT DoingBalanceTrick
+	  DoBalanceTrick ButtonA = Right ButtonB = Left Type = <Type> DoFlipCheck ClearCheese 
+	ENDIF
+  ELSE
+	IF NOT GotParam IsExtra
+	  DoBalanceTrick ButtonA = Right ButtonB = Left Type = <Type> DoFlipCheck 
+	ENDIF
+  ENDIF 
+  Wait 15 frames
   SetExtraTricks better4_control_dropdown_value
   if GotParam IsSpecial
     LaunchSpecialMessage text = "Special Grind"
