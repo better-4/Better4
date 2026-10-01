@@ -1823,10 +1823,15 @@ skater_m_hat_hair = [
 	frontend_desc = "None" 
   } 
   {
-    desc_id = #"Hat hair Test"
-    frontend_desc = 'hat hair test'
-    mesh = "models/skater_m/Hair_M_W_Mullet_A.skin"
+    desc_id = #"Medium THUG1"
+    frontend_desc = 'Medium'
+    mesh = "models/better4/hairs/hair_mediumthugHAT.skin"
   }
+  {
+    desc_id = #"Long THUG1"
+    frontend_desc = 'Long'
+    mesh = "models/better4/hairs/hair_longthugHAT.skin"
+  }  
   {
     desc_id = #"Buzzed Light HAT"
     frontend_desc = 'Buzzed Light'

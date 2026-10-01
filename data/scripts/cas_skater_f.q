@@ -821,7 +821,17 @@ skater_f_hat_hair = [
   { 
 	desc_id = None 
 	frontend_desc = "None" 
-  } 
+  }
+  {
+    desc_id = #"Medium THUG1 F"
+    frontend_desc = 'Medium'
+    mesh = "models/better4/hairs/hair_mediumthugHAT.skin"
+  }  
+  {
+    desc_id = #"Long THUG1 F"
+    frontend_desc = 'Long'
+    mesh = "models/better4/hairs/hair_longthugHAT.skin"
+  }  
   {
     desc_id = #"Very Short Dark HAT"
     frontend_desc = 'Very Short Dark'
