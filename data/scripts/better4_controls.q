@@ -641,9 +641,50 @@ better4_control_extratrick_sound = {
   options = [
     { text = "THPS4" value = THPS4 }
     { text = "THUG" value = THUG }
+	{ text = "THPS3" value = THPS3 }
     { text = "Off" value = off }	
   ]
+  change_script = better4_change_extratrick_sound
 }
+
+script better4_change_extratrick_sound
+if ScreenElementExists  id = better4_vmenu
+  switch better4_control_extratrick_sound_value
+  case THPS4
+     PlaySound ExtraTrick vol = 100
+  case THUG
+     PlaySound extratrick_thug vol = 100
+  case THPS3
+     PlaySound HUD_specialtrickAA vol = 100
+  case Off
+  endswitch
+endif
+endscript
+
+better4_control_specialtrick_sound_index = 0
+better4_control_specialtrick_sound_value = on
+better4_control_specialtrick_sound = {
+  id = better4_control_specialtrick_sound_id
+  index_name = better4_control_specialtrick_sound_index
+  value_name = better4_control_specialtrick_sound_value
+  text = "Sp. Trick Sound"
+  ini_key = "SpecialTrickSound"
+  help = "Change which sound is played when performing extra tricks (e.g. double-tap tricks)."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }	
+  ]
+  change_script = better4_change_specialtrick_sound
+}
+
+script better4_change_specialtrick_sound
+  if ScreenElementExists id = better4_vmenu
+    if (better4_control_specialtrick_sound_value = on)
+      PlaySound HUD_specialtrickAA vol = 100 pitch = 100
+    else
+    endif
+  endif
+endscript
 
 better4_control_chat_size_index = 2
 better4_control_chat_size_value = 2
@@ -994,6 +1035,7 @@ script better4_controls_init
   better4_control_init better4_control_chat_duration
   better4_control_init better4_control_pressure
   better4_control_init better4_control_extratrick_sound
+  better4_control_init better4_control_specialtrick_sound
   better4_control_init better4_control_trickstring
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter

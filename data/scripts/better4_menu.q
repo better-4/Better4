@@ -501,9 +501,8 @@ script better4_misc_menu
   better4_menu_spacer
   better4_create_menu_control better4_control_boardscuff
   better4_create_menu_control better4_control_pauseonunfocus
-  // better4_create_menu_control better4_trick_string
-  // better4_create_menu_control better4_control_special_meter
   better4_create_menu_control better4_control_extratrick_sound
+  better4_create_menu_control better4_control_specialtrick_sound
   better4_create_menu_control better4_control_menudemo
   better4_create_menu_control better4_control_respawn_on_newrun
   better4_create_menu_control better4_control_updatedcollision
