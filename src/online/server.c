@@ -15,21 +15,23 @@ void __cdecl GSInitGameSpy(char *unk) {
 	logDebug("GSInitGameSpy");
 
 	if (gs_is_hosting) {
-		if (!gs_peer) {
-			logDebug("GSInitGameSpy: gs_peer_initialize");
-			gs_peer_initialize();
-		}
-
 		GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
-		Net_App *server = gamenet_manager->server;
-		server->foreign_packet_handler = foreign_packet_handler;
 
-		logDebug("GSInitGameSpy: peerStartReporting");
-		int result = peerStartReportingWithSocket(gs_peer, server->socket, HOST_PORT);
+		if (GameNet_Manager_InInternetMode(gamenet_manager)) {
+			if (!gs_peer) {
+				logDebug("GSInitGameSpy: gs_peer_initialize");
+				gs_peer_initialize();
+			}
 
-		if (result) {
-			logDebug("GSInitGameSpy: peerStateChanged");
-			peerStateChanged(gs_peer);
+			Net_App *server = gamenet_manager->server;
+			server->foreign_packet_handler = foreign_packet_handler;
+			logDebug("GSInitGameSpy: peerStartReporting");
+			int result = peerStartReportingWithSocket(gs_peer, server->socket, HOST_PORT);
+
+			if (result) {
+				logDebug("GSInitGameSpy: peerStateChanged");
+				peerStateChanged(gs_peer);
+			}
 		}
 	}
 }

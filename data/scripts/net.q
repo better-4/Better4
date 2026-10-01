@@ -136,11 +136,6 @@ script quit_network_game
     ]
     replace_handlers
   }
-  if InInternetMode
-    if ProfileLoggedIn
-      SetLobbyStatus
-    endif
-  endif
   chosen_leave_server
   dialog_box_exit
   SetGameType career
@@ -157,9 +152,6 @@ script quit_network_game
       Wait 1
     endif
   repeat
-  if InInternetMode
-    SetQuietMode off
-  endif
   level_select_change_level level = load_skateshop no_levelUnload
 endscript
 script spawned_chosen_host_game
@@ -1773,15 +1765,15 @@ script create_network_select_games_menu
   endif
   dialog_box_exit
   Change CAME_FROM_LAN = 0
-  SetNetworkMode LAN_MODE
+  SetNetworkMode INTERNET_MODE
   if IsInternetGameHost
     host_net_chosen
   else
-    SetNetworkMode LAN_MODE
+    SetNetworkMode INTERNET_MODE
     make_server_list_menu
     create_helper_text generic_helper_text pos = (0, 0)
     if OnXbox
-      SetNetworkMode LAN_MODE
+      SetNetworkMode INTERNET_MODE
     endif
     SetScreenElementProps { id = actions_menu event_handlers = [
         { pad_back back_from_internet_menu }
@@ -3952,10 +3944,6 @@ script update_score
   endif
 endscript
 script entered_network_game
-  LogInfo "Entered network game"
-  if InInternetMode
-    SetQuietMode
-  endif
   kill_net_panel_messages
   console_unhide
   remove_network_menu_textures_from_vram
@@ -3964,7 +3952,6 @@ script entered_network_game
     refresh_skater_model_for_cheats
   endif
   Change check_for_unplugged_controllers = 1
-  LogInfo "Should init gamespy now?"
   EnteredNetworkGame
 endscript
 script restart_local_server
