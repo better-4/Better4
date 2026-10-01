@@ -220,3 +220,25 @@ int __cdecl CFunc_GetObsPlayerName(CStruct *params, CScript *script) {
     return 1;
 }
 
+GameNet_PlayerInfo *__fastcall GameNet_Manager_GetCurrentlyObservedPlayer(GameNet_Manager *this) {
+    static GameNet_PlayerInfo *(__fastcall* _GetCurrentlyObservedPlayer)(GameNet_Manager *) = (void *)0x004886b0;
+
+	GameNet_PlayerInfo *player;
+
+	if (local_observe_target) {
+		player = local_observe_target;
+	} else {
+		player = _GetCurrentlyObservedPlayer(this);
+	}
+
+	return player;
+}
+
+void patchObserve() {
+	// GameNet::PlayerInfo::SetSkater (0x00491410)
+	patchCall(0x0049142d, (void *)GameNet_Manager_GetCurrentlyObservedPlayer);
+	// Obj::CSkater::s_display_code (0x004b5120)
+	patchCall(0x004b51d7, (void *)GameNet_Manager_GetCurrentlyObservedPlayer);
+	// Mdl::Skate::handle_anims (0x004fe1c0)
+	patchCall(0x004fe279, (void *)GameNet_Manager_GetCurrentlyObservedPlayer);
+}
