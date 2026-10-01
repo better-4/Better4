@@ -49,6 +49,7 @@ typedef struct
 typedef struct
 {
   char list [200][NAME_SIZE];
+  save_t type;
   int amount;
   int current_count;
   int expected_file_size;
@@ -63,5 +64,6 @@ bool doesSaveExist (th4_save *save);
 int __cdecl CFunc_GetSaveDirectoryListing (CStruct *params, CScript *script);
 int __cdecl CFunc_GetMostRecentCAS (CStruct *params, CScript *script);
 int __cdecl CFunc_DeleteSaveFile (CStruct *params, CScript *script);
+bool actualNameCheck (char *name, save_t type);
 
 #endif

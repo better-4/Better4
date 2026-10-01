@@ -46,6 +46,59 @@ bool getSaveName (th4_save *save)
 	return true;
 }
 
+bool actualNameCheck (char *name, save_t type)
+{
+	char path [MAX_PATH] = {0};
+	uint8_t save_data [48] ={0};
+	char actual_name [NAME_SIZE] = {0};
+	int index = NAME_OFFSET;
+	int name_len = 0;
+	switch (type)
+	{
+		case SAVE_TYPE_SKA:
+			snprintf(path, sizeof(path), ".\\Save\\%s.SKA", name);
+			break;
+		case SAVE_TYPE_PRK:
+			snprintf(path, sizeof(path), ".\\Save\\%s.PRK", name);
+			break;
+		case SAVE_TYPE_NWS:
+			snprintf(path, sizeof(path), ".\\Save\\%s.NWS", name);
+			break;
+		case SAVE_TYPE_CAR:
+			snprintf(path, sizeof(path), ".\\Save\\%s.CAR", name);
+			break;
+		default:
+			return false;
+			break;
+	}
+	
+	FILE *cas_check = fopen(path, "rb+");
+	if (cas_check == NULL) {
+		printf("this cas doesn't exist!\n");
+		return false;
+	}
+	fread(save_data, sizeof(uint8_t), 48, cas_check);
+
+	while ( (save_data[index] != 0) && (name_len < NAME_SIZE - 1) ) {
+		if (save_data[index] == ':') {
+			printf("name contains colon, invalid!\n\n");
+			return false;
+		}
+		actual_name[name_len] = save_data[index];
+		index++;
+		name_len++;
+	}
+	actual_name [name_len] = '\0';
+	printf ("actual name : %s file name : %s\n", actual_name, name);
+	if (strcmp(actual_name, name))
+	{
+		printf("invalid cas, not listing\n");
+		return false;
+	}
+	fclose(cas_check);
+	return true;
+}
+
 bool psuValidation (psu_t *psu, th4_save *save)
 {
 	char psuProductCode [11] = {0}; 
@@ -91,21 +144,25 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 	{
 		save_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
 		directory.expected_file_size = SKA_SIZE;
+		directory.type = SAVE_TYPE_SKA;
 	}
 	else if (!strcmp(FileType,"CAREER"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.CAR", &save_dir);
 		directory.expected_file_size = CAR_SIZE;
+		directory.type = SAVE_TYPE_CAR;
 	}
 	else if (!strcmp(FileType,"NETWORK SETTINGS"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.NWS", &save_dir);
 		directory.expected_file_size = NWS_SIZE;
+		directory.type = SAVE_TYPE_NWS;
 	}
 	else if (!strcmp(FileType,"PARK"))
 	{
 		save_search = FindFirstFile(".\\Save\\*.PRK", &save_dir);
 		directory.expected_file_size = PRK_SIZE;
+		directory.type = SAVE_TYPE_PRK;
 	}
 	else return 0;
 	if (save_search == INVALID_HANDLE_VALUE) {
@@ -122,7 +179,8 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 		int name_len = strlen(save_dir.cFileName);
 		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
 		else continue;
-	
+		bool valid_cas = actualNameCheck (save_dir.cFileName, directory.type);
+		if (!valid_cas) continue;
 		if (directory.amount < 200) 
 		{
 				if (build_list) strcpy(directory.list[directory.amount], save_dir.cFileName);
@@ -273,7 +331,7 @@ int __cdecl CFunc_DeleteSaveFile (CStruct *params, CScript *script)
 	char *FileType = "";
 	char *save_filename;
 	char save_path [MAX_PATH];
-	
+
 	CStruct *out = CScript_GetParams(script);
 	CStruct_GetString(params,0x11093FB5, &FileType, 0);
 	CStruct_GetString(params,0x91D9667F, &save_filename, 0);
