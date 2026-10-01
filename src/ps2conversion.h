@@ -54,13 +54,14 @@ typedef struct
   int expected_file_size;
 } directory_t;
 
-int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script);
+int __cdecl CFunc_GetProperSaveFileCount (CStruct *params, CScript *script);
 int GetProperSaveFileCount ();
-int __cdecl CFunc_PS2SaveConversion(CStruct* params);
+int __cdecl CFunc_PS2SaveConversion (CStruct* params);
 bool psuValidation (psu_t *psu, th4_save *save);
 bool getSaveName (th4_save *save);
 bool doesSaveExist (th4_save *save);
-int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script);
-int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script);
+int __cdecl CFunc_GetSaveDirectoryListing (CStruct *params, CScript *script);
+int __cdecl CFunc_GetMostRecentCAS (CStruct *params, CScript *script);
+int __cdecl CFunc_DeleteSaveFile (CStruct *params, CScript *script);
 
 #endif

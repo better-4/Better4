@@ -1114,37 +1114,35 @@ script remove_files_menu_textures_from_vram
 endscript
 script files_menu_delete
   GetTags
-  if GotParam index
-    if GotParam Save
-      memcard_menus_cleanup
-      GetFileTypeName file_type = <file_type>
-      FormatText {
-        TextName = DeleteText
-        'Delete the %t file\n\'%s\' ?'
-        t = <filetype_name>
-        s = <filename>
-      }
-      create_snazzy_dialog_box {
-        title = 'Delete'
-        text = <DeleteText>
-        pad_back_script = launch_files_menu
-        pad_back_params = { FileType = <MenuFileType> Save }
-        buttons = [
-          { font = small text = 'No' pad_choose_script = launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
-          { font = small text = 'Yes' pad_choose_script = delete_file pad_choose_params = <...> }
-        ]
-      }
-      CheckForCardRemoval menu_id = dialog_box_anchor
-    endif
+  if GotParam Save
+    memcard_menus_cleanup
+    GetFileTypeName file_type = <file_type>
+    FormatText {
+      TextName = DeleteText
+      'Delete the %t file\n\'%s\' ?'
+      t = <filetype_name>
+      s = <filename>
+    }
+    create_snazzy_dialog_box {
+      title = 'Delete'
+      text = <DeleteText>
+      pad_back_script = launch_files_menu
+      pad_back_params = { FileType = <MenuFileType> Save }
+      buttons = [
+        { font = small text = 'No' pad_choose_script = launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
+        { font = small text = 'Yes' pad_choose_script = delete_file pad_choose_params = <...> }
+      ]
+    }
+    CheckForCardRemoval menu_id = dialog_box_anchor
   endif
 endscript
 script delete_file
   memcard_menus_cleanup
   Change StopCheckingForCardRemoval = 1
   ResetTimer
-  mcmess_DeletingFile FileType = <file_type>
+  //mcmess_DeletingFile FileType = <file_type>
   DisableReset
-  if DeleteMemCardFile CardFileName = <actual_file_name> XBoxDirectoryName = <xbox_directory_name>
+  if DeleteSaveFile FileType = <filetype_name> save_filename = <filename>
     mem_card_message_pause XSkips NoTimerReset NoCardRemovalCheck
     create_snazzy_dialog_box {
       title = 'File Deleted'

@@ -25,7 +25,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 51
+#define BETTER4_NUM_CFUNCS 52
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -101,6 +101,7 @@ void addCFuncs() {
 	addCFunc("GetProperSaveFileCount", (void *)CFunc_GetProperSaveFileCount);
 	addCFunc("GetSaveDirectoryListing", (void *)CFunc_GetSaveDirectoryListing);
 	addCFunc("GetMostRecentCAS", (void *)CFunc_GetMostRecentCAS);
+	addCFunc("DeleteSaveFile", (void *)CFunc_DeleteSaveFile);
 	addCFunc("FillPlayerListMenu", (void *)CFunc_FillPlayerListMenu);
 	addCFunc("ChangeGameModifier", (void *)CFunc_ChangeGameModifier);
 }
