@@ -46,15 +46,15 @@ void __stdcall GSCloseGameSpy() {
 		gs_peer_shutdown();
 		gs_server_ready = 0;
 		gs_game_playing = 0;
-	} else if (!gs_is_hosting) {
-		// On client side, still in internet/lan mode if we did not leave gracefully (e.g. crash instead of quit)
-		// So if in internet/lan mode, then force leave the server
-		GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
-		if (GameNet_Manager_InLanMode(gamenet_manager) || GameNet_Manager_InInternetMode(gamenet_manager)) {
-			logInfo("GSCloseGameSpy: leaving server");
-			Mdl_Skate *mdl_skate = Mdl_Skate_Instance();
-			Mdl_Skate_LeaveServer(mdl_skate);
-		}
+	}
+
+	// Still in internet/lan mode if we did not leave gracefully (e.g. crash or alt-f4)
+	// So if in internet/lan mode, then force leave the server
+	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
+	if (GameNet_Manager_InLanMode(gamenet_manager) || GameNet_Manager_InInternetMode(gamenet_manager)) {
+		logInfo("GSCloseGameSpy: leaving server");
+		Mdl_Skate *mdl_skate = Mdl_Skate_Instance();
+		Mdl_Skate_LeaveServer(mdl_skate);
 	}
 }
 
