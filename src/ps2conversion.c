@@ -270,11 +270,10 @@ int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script)
 
 int __cdecl CFunc_DeleteSaveFile (CStruct *params, CScript *script)
 {
-	WIN32_FIND_DATA save_dir;
 	char *FileType = "";
 	char *save_filename;
 	char save_path [MAX_PATH];
-	HANDLE save_search;
+	
 	CStruct *out = CScript_GetParams(script);
 	CStruct_GetString(params,0x11093FB5, &FileType, 0);
 	CStruct_GetString(params,0x91D9667F, &save_filename, 0);
@@ -296,11 +295,6 @@ int __cdecl CFunc_DeleteSaveFile (CStruct *params, CScript *script)
 		snprintf(save_path, sizeof(save_path), ".\\Save\\%s.PRK", save_filename);
 	}
 	else return 0;
-
-	if (save_search == INVALID_HANDLE_VALUE) {
-		printf("\nthis file has already been deleted!\n");
-		return 0;
-	}
 
 	if (DeleteFileA(save_path)) 
 	{
