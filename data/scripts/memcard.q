@@ -332,18 +332,20 @@ script launch_files_menu
   if not GotParam SkipPS2SaveCheck
     GetFileTypeName file_type = <FileType>
     GetProperSaveFileCount FileType = <filetype_name> build_list = 0
-    if ( (PS2SaveConversion) )
-      Wait 1 gameframe
-      create_snazzy_dialog_box {
-        title = 'Notice'
-        text = 'New PS2 saves have been converted!'
-        pad_back_script = launch_files_menu
-        pad_back_params = { SkipPS2SaveCheck <...> } 
-        buttons = [
-          { font = small text = 'Ok' pad_choose_script = launch_files_menu pad_choose_params = { SkipPS2SaveCheck <...> } }
-        ]
-      }
-      return
+    if ( <FileType> = Cas or <FileType> = Park )
+      if ( ( PS2SaveConversion FileType = <filetype_name> ) )
+        Wait 1 gameframe
+        create_snazzy_dialog_box {
+          title = 'Notice'
+          text = 'New PS2 saves have been converted!'
+          pad_back_script = launch_files_menu
+          pad_back_params = { SkipPS2SaveCheck <...> } 
+          buttons = [
+            { font = small text = 'Ok' pad_choose_script = launch_files_menu pad_choose_params = { SkipPS2SaveCheck <...> } }
+          ]
+        }
+        return
+      endif
     endif
     Wait 1 gameframe
   endif

@@ -89,7 +89,7 @@ bool actualNameCheck (char *name, save_t type)
 		name_len++;
 	}
 	actual_name [name_len] = '\0';
-	printf ("actual name : %s file name : %s\n", actual_name, name);
+	//printf ("actual name : %s file name : %s\n", actual_name, name);
 	if (strcmp(actual_name, name))
 	{
 		printf("invalid cas, not listing\n");
@@ -195,9 +195,14 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 	return 1;
 }
 
-int __cdecl CFunc_PS2SaveConversion(CStruct* params) 
+int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script)
 {
 	// setup directory search
+	char *FileType = "";
+	int expected_psu_size = 0;
+	CStruct *out = CScript_GetParams(script);
+	CStruct_GetString(params,0x11093FB5, &FileType, 0);
+
 	printf("\n\n\nps2 save check and conversion : \n\n\n");
 	bool new_save_flag = false;
 	WIN32_FIND_DATA ps2_dir;
@@ -209,6 +214,7 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 
 	do
 	{
+		
 		printf("directoryu amount : %d\n", directory.amount);
 		if (directory.amount >= 200) break;
 		psu_t psu = {0};
@@ -216,25 +222,21 @@ int __cdecl CFunc_PS2SaveConversion(CStruct* params)
 		if (ps2_dir.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue; 
 
 		// grab psu data + size check
-		psu.size = ps2_dir.nFileSizeLow;
-		switch (psu.size)
-		{
-			case PSU_SKA_SIZE:
-				psu.saveType = SAVE_TYPE_SKA;
-				new_save.type = SAVE_TYPE_SKA;
-				new_save.size = SKA_SIZE;
-				break;
-			
-			case PSU_PRK_SIZE:
-				psu.saveType = SAVE_TYPE_PRK;
-				new_save.type = SAVE_TYPE_PRK;
-				new_save.size = PRK_SIZE;
-				break;
-			
-			default:
-				continue;
-				break;
+		if (!strcmp(FileType,"SKATER")) {
+			expected_psu_size = PSU_SKA_SIZE;
+			psu.saveType = SAVE_TYPE_SKA;
+			new_save.type = SAVE_TYPE_SKA;
+			new_save.size = SKA_SIZE;
 		}
+		else if (!strcmp(FileType,"PARK")){
+			expected_psu_size = PSU_PRK_SIZE;
+			psu.saveType = SAVE_TYPE_PRK;
+			new_save.type = SAVE_TYPE_PRK;
+			new_save.size = PRK_SIZE;
+		}
+		else return 0;
+		psu.size = ps2_dir.nFileSizeLow;
+		if (psu.size != expected_psu_size) continue;
 		snprintf(psu.path, sizeof(psu.path), ".\\SavePS2\\%s", ps2_dir.cFileName);
 		
 		psu.file = fopen(psu.path, "rb+");

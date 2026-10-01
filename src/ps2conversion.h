@@ -57,7 +57,7 @@ typedef struct
 
 int __cdecl CFunc_GetProperSaveFileCount (CStruct *params, CScript *script);
 int GetProperSaveFileCount ();
-int __cdecl CFunc_PS2SaveConversion (CStruct* params);
+int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script);
 bool psuValidation (psu_t *psu, th4_save *save);
 bool getSaveName (th4_save *save);
 bool doesSaveExist (th4_save *save);
