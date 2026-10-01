@@ -1,5 +1,5 @@
 #include "ps2conversion.h"
-
+//todo: clean up recursive strcmp and name offset when looking for career/nws
 directory_t directory = {0};
 const char TH4ProductCodesPS2 [5][20] = 
 {
