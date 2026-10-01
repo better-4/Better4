@@ -498,11 +498,13 @@ script JumpJets
   Obj_GetId
   MangleChecksums a = skatersplash b = <objId>
   if not Obj_FlagSet FLAG_SKATER_JUMPJETSON
-    begin
-      #"Jump"
-      Wait 1 game frame
-    repeat 2
-    Obj_SpawnScript JumpJetTracker params = { <...> }
+    if ( better4_modifier_disabletrickboost_value = off )
+      begin
+        #"Jump"
+        Wait 1 game frame
+      repeat 2
+      Obj_SpawnScript JumpJetTracker params = { <...> }
+    endif
   endif
   EmptyParticleSystem name = <mangled_id>
   SetScript name = <mangled_id> Emitscript = emit_jumpjets
