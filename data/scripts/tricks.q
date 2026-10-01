@@ -1545,6 +1545,7 @@ script RestartSkaterExceptions
   Obj_AttachFrame bone = "head"
 endscript
 script LaunchSpecialMessage text = "Special Trick" vol = 100 pitch = 100
+if ( better4_control_specialtrick_sound_value = on )
   if InMultiplayerGame
     PlaySound HUD_specialtrickAA vol = <vol> pitch = <pitch>
   else
@@ -1561,6 +1562,7 @@ script LaunchSpecialMessage text = "Special Trick" vol = 100 pitch = 100
       PlaySound HUD_specialtrickAA vol = <vol> pitch = <pitch>
     endif
   endif
+endif
 endscript
 script EndSpecial
   if ( GetGlobalFlag flag = CHEAT_COOL_SPECIAL_TRICKS )
@@ -1578,6 +1580,8 @@ script LaunchExtraMessage text = "Hidden Combo!"
      PlaySound ExtraTrick vol = 100
   case THUG
      PlaySound extratrick_thug vol = 100
+  case THPS3
+     PlaySound HUD_specialtrickAA vol = 100
   case Off
   endswitch
 endscript
