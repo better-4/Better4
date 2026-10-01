@@ -1,6 +1,7 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
+#include "online.h"
 #include "online/host_options.h"
 #include "online/net_handlers.h"
 #include "security.h"
@@ -235,6 +236,7 @@ void patchBetter4() {
 	patchPoolSizes();
 	patchNetHandlers();
 	patchHostOptions();
+	patchObserve();
 }
 
 void better4Main() {
