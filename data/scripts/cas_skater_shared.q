@@ -538,13 +538,31 @@ Helmet = [
   }
 ]
 
-// accessoriesM = [
-  // {
-    // desc_id = None
-    // frontend_desc = 'None'
-    // no_color
-  // }
-// ]
+accessoriesM = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+    no_color
+  }
+  {
+    desc_id = #"Bull Ring"
+    frontend_desc = 'Bull Ring (THUG2)'
+    mesh = "models/better4/shared/miscitems/extra_bullring_thug2.skin"
+  }
+]
+
+accessoriesM_f = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+    no_color
+  }
+  {
+    desc_id = #"Bull Ring F"
+    frontend_desc = 'Bull Ring (THUG2)'
+    mesh = "models/better4/shared/miscitems/extra_bullring_thug2F.skin"
+  }
+]
 
 accessoriesL = [
   {

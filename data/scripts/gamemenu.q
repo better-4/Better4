@@ -758,12 +758,14 @@ script create_pause_menu
       endif
     endif
   endif
-  // make_sprite_menu_item text = "Anim Debug 1" id = menu_anim_debug1 pad_choose_script = better4_anim_debug pad_choose_params = { index = 0 }
-  // make_text_sprite texture = PA_options parent = menu_anim_debug1
+  // make_sprite_menu_item text = "Anim Debug 1" id = menu_anim_debug pad_choose_script = better4_anim_debug pad_choose_params = { index = 0 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug
   // make_sprite_menu_item text = "Anim Debug 2" id = menu_anim_debug2 pad_choose_script = better4_anim_debug pad_choose_params = { index = 1 }
   // make_text_sprite texture = PA_options parent = menu_anim_debug2
   // make_sprite_menu_item text = "Anim Debug 3" id = menu_anim_debug3 pad_choose_script = better4_anim_debug pad_choose_params = { index = 2 }
   // make_text_sprite texture = PA_options parent = menu_anim_debug3
+  // make_sprite_menu_item text = "Anim Debug 4" id = menu_anim_debug4 pad_choose_script = better4_anim_debug pad_choose_params = { index = 3 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug4
   if InNetGame
     if not OnServer
       if not IsBetterObserving
@@ -7295,8 +7297,8 @@ script load_textures_to_main_memory
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/ED_torso"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/ED_tricks"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/edit_bar"
-  LoadTexture no_vram_alloc "PanelSprites/SkateSprites/bw_slider"
-  LoadTexture no_vram_alloc "PanelSprites/SkateSprites/colorbar"
+  LoadTexture no_vram_alloc "better4/PanelSprites/SkateSprites/bw_slider"
+  LoadTexture no_vram_alloc "better4/PanelSprites/SkateSprites/colorbar"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/scalebar"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/scale_down"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/scale_up"

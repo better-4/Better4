@@ -67,7 +67,8 @@ script SkateshopAI stopskateshopstreams = 1
       random( @PlayAnim Anim = StandIdleA
       @PlayAnim Anim = StandIdleB
       @PlayAnim Anim = StandIdleC
-     ) case editskater_female
+     )
+    case editskater_female
       random( @PlayAnim Anim = Idle_Jenna1
       WaitAnimFinished
       PlayAnim Anim = Idle_Jenna1
@@ -682,6 +683,7 @@ script create_main_menu
   add_main_menu_textures_to_vram
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
+  SetLightDirection index = 0 heading = 330.0 pitch = -40.0
   MakeSkaterGoto SkateshopAI params = { NoSFX }
   SetMemThreadSafe off
   SetMenuPadMappings [ active
@@ -1835,9 +1837,9 @@ script create_ss_menu
     DestroyScreenElement id = current_menu_anchor
   endif
   KillSkaterCamAnim all
-  PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
+  PlaySkaterCamAnim name = SS_AppSkaterSelect play_hold
   skater:BlendPeriodOut 0.0
-  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_Appearance orient
   Kill name = SSO_Fence05
   Create name = SSO_Fence02
   if GotParam change_gamemode
@@ -2266,7 +2268,7 @@ script skateshop_practice_quit
   GoalManager_HidePoints
   GoalManager_HideGoalPoints
   skater:BlendPeriodOut 0.0
-  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_Appearance orient
   MakeSkaterGoto SkateshopAI params = { }
   launch_ss_menu
 endscript
@@ -2294,8 +2296,8 @@ script launch_select_skater_menu
       Change goto_secret_shop = 0
     endif
     KillSkaterCamAnim all
-    PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
-    skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+    PlaySkaterCamAnim name = SS_AppSkaterSelect play_hold
+    skater:Obj_MoveToNode name = TRG_SS_Appearance orient
     if not GotParam From2p
     else
       LogInfo "GOTPARAM FROM 2p"
@@ -4677,7 +4679,7 @@ script edit_skater_menu_exit
       if IsTrue came_to_cas_menu_from_main_menu
         create_pre_cas_menu
       else
-        skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+        skater:Obj_MoveToNode name = TRG_SS_Appearance orient
         launch_ss_menu
       endif
     else
@@ -5164,7 +5166,7 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesL_items }
   }
   {
-    text = 'L. Accessories Color'
+    text = 'L. Accessory Color'
     submenu = accessoriesL_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesL_items }
@@ -5178,12 +5180,26 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesR_items }
   }
   {
-    text = 'R. Accessories Color'
+    text = 'R. Accessory Color'
     submenu = accessoriesR_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesR_items }
     is_enabled_script = check_if_part_colorable
     is_enabled_params = { parts = [ accessoriesR ] }
+  }
+  {
+    text = 'Misc Items'
+    submenu = accessoriesM_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+  }
+  {
+    text = 'Misc Item Color'
+    submenu = accessoriesM_color_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+    is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ accessoriesM accessoriesM_f ] }
   }
 ]
 edit_skater_leg_options = [

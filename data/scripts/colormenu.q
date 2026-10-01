@@ -1,4 +1,6 @@
-colormenu_bar_scale = (4.4, 2)
+colormenu_bar_scale = (1.1, 0.5)
+saturation_bar_scale = (1.1, 0.5)
+value_bar_scale = (1.1, 0.5)
 colormenu_bar_focus_rgba = [ 128 128 128 118 ]
 colormenu_bar_unfocus_rgba = [ 40 40 40 118 ]
 colormenu_bar_pos = (12, 0)
@@ -286,7 +288,7 @@ script colormenu_add_options_to_menu
     pad_choose_script = nullscript
     child_texture = bw_slider
     icon_id = saturation_slider_bar
-    icon_scale = colormenu_bar_scale
+    icon_scale = saturation_bar_scale
     icon_rgba = colormenu_bar_unfocus_rgba
     icon_pos = colormenu_bar_pos
     text_pos = colormenu_text_pos
@@ -321,7 +323,7 @@ script colormenu_add_options_to_menu
     pad_choose_script = nullscript
     child_texture = bw_slider
     icon_id = value_slider_bar
-    icon_scale = colormenu_bar_scale
+    icon_scale = value_bar_scale
     icon_rgba = colormenu_bar_unfocus_rgba
     icon_pos = colormenu_bar_pos
     text_pos = colormenu_text_pos
