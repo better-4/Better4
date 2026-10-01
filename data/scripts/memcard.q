@@ -418,7 +418,7 @@ script create_files_menu pos_tweak = (-20, -45)
   GetFileTypeName file_type = <FileType>  
   GetProperSaveFileCount FileType = <filetype_name> build_list = 1
   if GotParam Save
-    GetMemCardDirectoryListing
+    //GetMemCardDirectoryListing
     GetMemCardSpaceAvailable
     GetMemCardSpaceRequired <FileType>
     RemoveParameter add_createnew_option
@@ -453,9 +453,9 @@ script create_files_menu pos_tweak = (-20, -45)
       }
     endif
   else
-    GetMemCardDirectoryListing FileType = <FileType>
+    //GetMemCardDirectoryListing FileType = <FileType>
   endif
-  if GotParam DirectoryListing
+  if not( <proper_file_count> = 0)
     if GotParam Save
       if GotParam add_createnew_option
         begin
@@ -1725,7 +1725,7 @@ script auto_load
     endif
   endif
   DisableReset
-  GetMemCardDirectoryListing
+  GetMemCardDirectoryListing // this auto load path (should?) always get most recent career/nws regardless of directory changes
   GetMostRecentSave <DirectoryListing> NetworkSettings
   mem_card_message_pause NoTimerReset NoCardRemovalCheck
   if not CardIsInSlot
