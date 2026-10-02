@@ -237,6 +237,7 @@ void patchBetter4() {
 	patchNetHandlers();
 	patchHostOptions();
 	patchObserve();
+	patchMemberFunctions();
 }
 
 void better4Main() {

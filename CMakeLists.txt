@@ -22,6 +22,8 @@ add_library(better4 SHARED
     "${SRC}/log.c"
     "${SRC}/log.h"
     "${SRC}/main.c"
+    "${SRC}/member.c"
+    "${SRC}/member.h"
     "${SRC}/online.c"
     "${SRC}/online.h"
     "${SRC}/security.c"

@@ -301,15 +301,15 @@ script Grind GrindTweak = 7 boardscuff = 0
   else
     PlayAnim Anim = <initanim> Blendperiod = 0.3
   endif
-  IF GotParam IsATap 
-	IF NOT DoingBalanceTrick
-	  DoBalanceTrick ButtonA = Right ButtonB = Left Type = <Type> DoFlipCheck ClearCheese 
-	ENDIF
-  ELSE
-	IF NOT GotParam IsExtra
-	  DoBalanceTrick ButtonA = Right ButtonB = Left Type = <Type> DoFlipCheck 
-	ENDIF
-  ENDIF 
+  if GotParam IsATap
+    if not DoingBalanceTrick
+      DoBalanceTrick ButtonA = Right ButtonB = Left Type = <Type> DoFlipCheck ClearCheese
+    endif
+  else
+    if not GotParam IsExtra
+      DoBalanceTrick ButtonA = Right ButtonB = Left Type = <Type> DoFlipCheck
+    endif
+  endif
   Wait 15 frames
   SetExtraTricks better4_control_dropdown_value
   if GotParam IsSpecial
