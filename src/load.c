@@ -113,6 +113,7 @@ void patchLoad() {
 	override_map = map_alloc(num_overrides, NULL, NULL);
 
 	// Always override new levels
+
 	// THPS
 
     add_path_override("levels\\Ware\\Ware.col.Xbx", "levels\\better4\\Ware\\Ware.col.Xbx");
@@ -126,6 +127,7 @@ void patchLoad() {
 	add_path_override("levels\\Streets\\Streets.col.Xbx", "levels\\better4\\Streets\\Streets.col.Xbx");
 	add_path_override("levels\\Streets\\Streets.scn.Xbx", "levels\\better4\\Streets\\Streets.scn.Xbx");
 	add_path_override("levels\\Streets\\Streets.tex.Xbx", "levels\\better4\\Streets\\Streets.tex.Xbx");
+
 	// THPS3
 
     add_path_override("levels\\Rio\\Rio.col.Xbx", "levels\\better4\\Rio\\Rio.col.Xbx");
@@ -145,6 +147,11 @@ void patchLoad() {
     add_path_override("levels\\LA\\LA.col.Xbx", "levels\\better4\\LA\\LA.col.Xbx");
     add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
     add_path_override("levels\\LA\\LA.tex.Xbx", "levels\\better4\\LA\\LA.tex.Xbx");
+
+	// THPS4
+
+	add_path_override("levels\\skateshop\\skateshop.scn.Xbx", "levels\\better4\\skateshop\\skateshop.scn.Xbx");
+	add_path_override("levels\\skateshop\\skateshop.tex.Xbx", "levels\\better4\\skateshop\\skateshop.tex.Xbx");
 
 	// patchCall(0x0040b50e, (void *)Pip_Load); // ??
 	// patchCall(0x00464cd4, (void *)Pip_Load); // ??

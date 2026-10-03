@@ -1251,7 +1251,7 @@ deck_graphic = [
     desc_id = #"Thomas 3"
     frontend_desc = 'Freebird'
     common_deck_graphic_params
-    with = "textures/boards/ThomasB03"
+    with = "textures/better4/boards/ThomasB03"
     skater = Thomas
     flag = BOARD_UNLOCKED_THOMASB03
   }
