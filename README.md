@@ -1,5 +1,8 @@
 <div align="center">
-  <img src=".github/assets/b4logo.png" width=50%>
+  <img src=".github/assets/b4logo.png" width=50%></img>
+  
+  [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?&logo=discord&logoColor=white)](https://discord.gg/k7MKWFqejf)
+  
 </div>
 
 Better4 is a THPS4 modpack that includes modern gameplay and QOL features while maintaining the look and feel of the original game.
