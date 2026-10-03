@@ -419,6 +419,8 @@ script ManualOut
 endscript
 script ManualLand
   VibrateOff
+  ClearException Wallpush
+  SetException Ex = Wallpush Scr = Ground_Wallpush
   SetException Ex = RunHasEnded Scr = EndOfRun
   SetException Ex = GoalHasEnded Scr = Goal_EndOfRun
   ClearPanel_Landed
