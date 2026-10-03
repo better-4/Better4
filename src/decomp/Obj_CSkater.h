@@ -16,14 +16,16 @@ typedef struct Obj_CSkater {
     Obj_CCompositeObject *object; // 0x634
     uint8_t unk3[0x342];
     uint8_t input_disabled; // 0x97a
-    uint8_t unk4[0x2be5];
+    uint8_t unk4[0x1db9];
+    uint8_t doing_balance_trick; // 0x2734
+    uint8_t unk5[0xe2b];
     // XXX (ellie): i don't actually know how big CFeeler is; if it increases in size this will break
     CFeeler feeler; // 0x3560, size 0x9c
-    uint8_t unk5[0x184];
+    uint8_t unk6[0x184];
     Mth_Vector current_normal; // 0x3780, size 0x10
-    uint8_t unk6[0x34];
+    uint8_t unk7[0x34];
     uint32_t camera_control_flag; // 0x37c4
-    uint8_t unk7[0xc];
+    uint8_t unk8[0xc];
     struct Obj_CSkaterCam *camera; // 0x37d4
 } Obj_CSkater;
 
