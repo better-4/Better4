@@ -168,6 +168,8 @@ hat = [
     is_campbell
     script disqualify_script
       cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
@@ -181,6 +183,8 @@ hat = [
     is_hawk
     script disqualify_script
       cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
@@ -204,8 +208,9 @@ hat = [
     is_lasek
     is_burnquist
     script disqualify_script
-      ClearPart part = skater_f_hair
-	  ClearPart part = skater_m_hair
+	  cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
@@ -216,8 +221,9 @@ hat = [
     is_lasek
     is_burnquist
     script disqualify_script
-      ClearPart part = skater_f_hair
-	  ClearPart part = skater_m_hair
+	  cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
