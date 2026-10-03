@@ -116,6 +116,10 @@ hat = [
     is_lasek
     is_burnquist
     is_glifberg
+    script disqualify_script
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
+    endscript
     null_item
   }
   {
@@ -123,7 +127,8 @@ hat = [
     frontend_desc = 'Forward Cap'
     mesh = "models/skater_m/hat_capforward.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
     supports_logo
   }
@@ -132,7 +137,8 @@ hat = [
     frontend_desc = 'Backward Cap'
     mesh = "models/skater_m/hat_capbackward.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
     supports_logo
   }
@@ -141,7 +147,8 @@ hat = [
     frontend_desc = 'Trucker Cap'
     mesh = "models/skater_m/hat_trucker.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -149,7 +156,8 @@ hat = [
     frontend_desc = 'Beanie 1'
     mesh = "models/skater_m/hat_beanie.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -160,6 +168,8 @@ hat = [
     is_campbell
     script disqualify_script
       cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
@@ -173,6 +183,8 @@ hat = [
     is_hawk
     script disqualify_script
       cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
@@ -184,7 +196,8 @@ hat = [
     is_burnquist
     is_rowley
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -195,7 +208,9 @@ hat = [
     is_lasek
     is_burnquist
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+	  cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
@@ -206,7 +221,9 @@ hat = [
     is_lasek
     is_burnquist
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+	  cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hat_hair
+	  ClearPart part = skater_m_hat_hair
     endscript
   }
   {
@@ -216,7 +233,8 @@ hat = [
     is_rowley
     is_lasek
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -225,7 +243,8 @@ hat = [
     mesh = "models/skater_m/hat_cowboy.skin"
     is_rowley
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -234,7 +253,8 @@ hat = [
     mesh = "models/skater_m/hat_giligan.skin"
     is_rowley
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -242,7 +262,8 @@ hat = [
     frontend_desc = 'Golf Cap'
     mesh = "models/skater_m/hat_beret.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -252,7 +273,8 @@ hat = [
     is_rowley
     is_campbell
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -264,7 +286,8 @@ hat = [
     is_burnquist
     is_glifberg
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -273,7 +296,8 @@ hat = [
     mesh = "models/skater_m/hat_deerstalker.skin"
     is_rowley
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -283,7 +307,8 @@ hat = [
     is_rowley
     is_campbell
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -315,7 +340,8 @@ hat = [
     is_campbell
     is_hawk
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -325,7 +351,8 @@ hat = [
     is_glifberg
     is_rowley
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -341,7 +368,8 @@ hat = [
     frontend_desc = 'Beret'
     mesh = "models/skater_m/hat_greenberet.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -352,7 +380,8 @@ hat = [
     is_campbell
     is_lasek
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -361,7 +390,8 @@ hat = [
     mesh = "models/skater_m/hat_viking.skin"
     is_rowley
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -369,7 +399,8 @@ hat = [
     frontend_desc = 'British Officer'
     mesh = "models/skater_m/hat_constable.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -380,7 +411,8 @@ hat = [
     is_burnquist
     is_hawk
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -389,7 +421,8 @@ hat = [
     mesh = "models/skater_m/hat_beer.skin"
     is_rowley
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -401,7 +434,8 @@ hat = [
     replace1 = "Hat_logo_none.png"
     with1 = "textures/logos/Hat_firm01"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -411,7 +445,8 @@ hat = [
     replace = "CS_NH_cap.png"
     with = "textures/skater_m/CS_NH_Campbell_cap"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -421,7 +456,8 @@ hat = [
     replace = "CS_NH_cap.png"
     with = "textures/skater_m/CS_NH_koston_cap"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -431,7 +467,8 @@ hat = [
     replace = "CS_NH_cap.png"
     with = "textures/skater_m/CS_JB_Hat_cap_lasek"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -443,7 +480,8 @@ hat = [
     replace1 = "Hat_logo_none.png"
     with1 = "textures/logos/Hat_flip01"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
   {
@@ -452,18 +490,15 @@ hat = [
     only_with = [ glifberg ]
     null_item
   }
-  
   {
     desc_id = #"Russian Hat thug"
-    frontend_desc = 'Russian Hat'
+    frontend_desc = 'Russian Hat (THUG1)'
     mesh = "models/better4/shared/hats/hat_russian_thug1.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
-  
-  // commented due to possibility of running out of memory
-  
   {
     desc_id = #"Paper Bag"
     frontend_desc = 'Paper Bag'
@@ -473,6 +508,8 @@ hat = [
       ClearPart part = Helmet
       ClearPart part = skater_m_hair
       ClearPart part = skater_f_hair
+      ClearPart part = skater_m_hat_hair
+      ClearPart part = skater_f_hat_hair
       ClearPart part = skater_m_jaw
       // ClearPart part = glasses
       // cas_temp_disq_remove_head
@@ -485,7 +522,8 @@ hat = [
     frontend_desc = 'Muska Hat'
     mesh = "models/better4/shared/hats/hat_muska.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
     endscript
   }
 ]
@@ -502,7 +540,8 @@ Helmet = [
     frontend_desc = 'Skate Helmet 1'
     mesh = "models/skater_m/hat_helmet.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
       ClearPart part = hat
     endscript
     supports_logo
@@ -515,7 +554,8 @@ Helmet = [
     frontend_desc = 'Skate Helmet 2'
     mesh = "models/skater_m/hat_helmet2.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
       ClearPart part = hat
     endscript
     supports_logo
@@ -528,13 +568,13 @@ Helmet = [
     frontend_desc = 'Skate Helmet'
     mesh = "models/skater_m/hat_helmet_cab.skin"
     script disqualify_script
-      cas_temp_disq_remove_long_hair
+      ClearPart part = skater_f_hair
+	  ClearPart part = skater_m_hair
       ClearPart part = hat
     endscript
     supports_logo
     is_reynolds
     is_margera
-    only_with = [ caballero ]
   }
 ]
 
