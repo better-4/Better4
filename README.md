@@ -115,7 +115,7 @@ A special thank you to the following people, without whom this project would not
 * [@Peachboy](https://github.com/Peachboy402) for their work on various loading screens
 * [@Trekeln](https://github.com/Trekeln) for their work on the Better4 logo
 * [@ILC-YTP](https://github.com/ILC-YTP) for their work on [Faster Save/Load](https://github.com/ILC-YTP/THPS4-mods/tree/main/Faster-SaveLoad)
-* [PunishedFiddle](https://www.moddb.com/members/punishedfiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
+* [@PunishedFiddle](https://github.com/PunishedFiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
 
 ## For Developers
 
