@@ -25,6 +25,7 @@ ConfigurableTricks = [
   Trick_BballSlide
   Trick_Beanplant
   Trick_Benihana
+  Trick_Benihana_Extra
   Trick_BetweenLegsSlam
   Trick_BetweenTheLegs
   Trick_BigHitter
@@ -122,6 +123,7 @@ ConfigurableTricks = [
   Trick_KFMelon
   Trick_KFSuperman
   Trick_Kickflip
+  Trick_Kickflip_Extra
   Trick_KickFlipOneFootTail
   Trick_KickFlipUnderFlip
   Trick_LayoutFlip
@@ -197,6 +199,7 @@ ConfigurableTricks = [
   Trick_Truckstand
   Trick_VarialHeelflip
   Trick_VarialKickflip
+  Trick_VarialKickflip2
   Trick_Layout
   Trick_MaulForceGrab
   Trick_RodeoClown
@@ -216,5 +219,4 @@ ConfigurableTricks = [
   Trick_Varial
   Trick_HTeethSweeper
   Trick_Summoner
-  Trick_VarialKickflip2
 ]
