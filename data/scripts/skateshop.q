@@ -30,22 +30,22 @@ script SkateshopAI stopskateshopstreams = 1
     BlendPeriodOut 0
   endif
   if GotParam CAS_Screen
+    // b4: always use editskater_male anims in cas screen
+    <name> = editskater_male
     if ( <is_male> = 1 )
-       <name> = editskater_male
       TurnOffSpecialItem
-    else
-      switch <name>
-      case Steamer
-        LogInfo "THIS IS ELISSA"
-         <name> = editskater_male
-      case JENNA
-         <name> = JENNA
-      default
-         <name> = editskater_female
-        LogInfo "THIS IS A CHICK"
-      endswitch
+    // else
+    //   switch <name>
+    //   case Steamer
+    //     LogInfo "THIS IS ELISSA"
+    //      <name> = editskater_male
+    //   case JENNA
+    //      <name> = JENNA
+    //   default
+    //      <name> = editskater_female
+    //     LogInfo "THIS IS A CHICK"
+    //   endswitch
     endif
-  else
   endif
   if GotParam Credits
      <name> = neversoft
