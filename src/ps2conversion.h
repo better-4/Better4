@@ -6,7 +6,9 @@
 #include <stdio.h>
 #include <windows.h>
 
-#define NAME_OFFSET 0x19 // byte where name starts in .SKA/.PRK
+#define SKA_PRK_NAME_OFFSET 0x19 // byte where name starts in .SKA/.PRK
+#define NWS_NAME_OFFSET 0x27
+#define CAR_NAME_OFFSET 0x24
 #define PSU_SAVE_OFFSET 0x3800 // byte where save data starts in .PSU
 #define PRODUCT_CODE_OFFSET 0x42 // byte where product code starts in .PSU
 #define PSU_SKA_SIZE 16384

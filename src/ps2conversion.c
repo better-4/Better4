@@ -1,5 +1,6 @@
 #include "ps2conversion.h"
-//todo: clean up recursive strcmp and name offset when looking for career/nws
+//todo: implement page system for 'unlimited saves' 
+// more rewrite :p
 directory_t directory = {0};
 const char TH4ProductCodesPS2 [5][20] = 
 {
@@ -29,7 +30,7 @@ bool doesSaveExist (th4_save *save)
 
 bool getSaveName (th4_save *save)
 {
-	int index = NAME_OFFSET;
+	int index = SKA_PRK_NAME_OFFSET;
 	int name_len = 0;
 
 	while ( (save->data[index] != 0) && (name_len < NAME_SIZE - 1) ) {
@@ -46,26 +47,30 @@ bool getSaveName (th4_save *save)
 	return true;
 }
 
-bool actualNameCheck (char *name, save_t type)
+bool actualNameCheck (char *name, save_t type) // basic check to see if geniune save, size is checked prior to this
 {
 	char path [MAX_PATH] = {0};
-	uint8_t save_data [48] ={0};
+	uint8_t save_data [60] ={0};
 	char actual_name [NAME_SIZE] = {0};
-	int index = NAME_OFFSET;
+	int index = 0;
 	int name_len = 0;
 	switch (type)
 	{
 		case SAVE_TYPE_SKA:
 			snprintf(path, sizeof(path), ".\\Save\\%s.SKA", name);
+			index = SKA_PRK_NAME_OFFSET;
 			break;
 		case SAVE_TYPE_PRK:
 			snprintf(path, sizeof(path), ".\\Save\\%s.PRK", name);
+			index = SKA_PRK_NAME_OFFSET;
 			break;
 		case SAVE_TYPE_NWS:
 			snprintf(path, sizeof(path), ".\\Save\\%s.NWS", name);
+			index = NWS_NAME_OFFSET;
 			break;
 		case SAVE_TYPE_CAR:
 			snprintf(path, sizeof(path), ".\\Save\\%s.CAR", name);
+			index = CAR_NAME_OFFSET;
 			break;
 		default:
 			return false;
@@ -77,8 +82,9 @@ bool actualNameCheck (char *name, save_t type)
 		printf("this cas doesn't exist!\n");
 		return false;
 	}
-	fread(save_data, sizeof(uint8_t), 48, cas_check);
-
+	fread(save_data, sizeof(uint8_t), 60, cas_check);
+	for (int i = 0; i < 60 ; i++)
+		printf("%d byte of save checking : %c\n",i+1, save_data[i] );
 	while ( (save_data[index] != 0) && (name_len < NAME_SIZE - 1) ) {
 		if (save_data[index] == ':') {
 			printf("name contains colon, invalid!\n\n");
@@ -89,7 +95,7 @@ bool actualNameCheck (char *name, save_t type)
 		name_len++;
 	}
 	actual_name [name_len] = '\0';
-	//printf ("actual name : %s file name : %s\n", actual_name, name);
+	printf ("actual name : %s file name : %s\n", actual_name, name);
 	if (strcmp(actual_name, name))
 	{
 		printf("invalid cas, not listing\n");
@@ -176,11 +182,14 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 		if (strcmp(save_dir.cFileName, ".") == 0 || strcmp(save_dir.cFileName, "..") == 0) // thps4 file count doesn't do this lol
 			continue; 
 		if (directory.expected_file_size != save_dir.nFileSizeLow) continue;
+
 		int name_len = strlen(save_dir.cFileName);
 		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
 		else continue;
+
 		bool valid_cas = actualNameCheck (save_dir.cFileName, directory.type);
 		if (!valid_cas) continue;
+
 		if (directory.amount < 200) 
 		{
 				if (build_list) strcpy(directory.list[directory.amount], save_dir.cFileName);
@@ -201,11 +210,15 @@ int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script)
 	char *FileType = "";
 	int expected_psu_size = 0;
 	CStruct *out = CScript_GetParams(script);
-	CStruct_GetString(params,0x11093FB5, &FileType, 0);
-
-	printf("\n\n\nps2 save check and conversion : \n\n\n");
 	bool new_save_flag = false;
 	WIN32_FIND_DATA ps2_dir;
+
+	CStruct_GetString(params,0x11093FB5, &FileType, 0);
+	if (!strcmp(FileType,"SKATER")) expected_psu_size = PSU_SKA_SIZE;
+	else if (!strcmp(FileType,"PARK"))expected_psu_size = PSU_PRK_SIZE;
+	else return 0;
+
+	printf("\n\n\nps2 save check and conversion : \n\n\n");
 	HANDLE psu_search = FindFirstFile(".\\SavePS2\\*.psu", &ps2_dir);
 	if (psu_search == INVALID_HANDLE_VALUE) {
 		printf("no .psu files found in the directory.\n\n"); 
@@ -215,30 +228,36 @@ int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script)
 	do
 	{
 		
-		printf("directoryu amount : %d\n", directory.amount);
+		printf("directory amount : %d\n", directory.amount);
 		if (directory.amount >= 200) break;
 		psu_t psu = {0};
 		th4_save new_save = {0};
 		if (ps2_dir.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) continue; 
 
 		// grab psu data + size check
-		if (!strcmp(FileType,"SKATER")) {
-			expected_psu_size = PSU_SKA_SIZE;
-			psu.saveType = SAVE_TYPE_SKA;
-			new_save.type = SAVE_TYPE_SKA;
-			new_save.size = SKA_SIZE;
-		}
-		else if (!strcmp(FileType,"PARK")){
-			expected_psu_size = PSU_PRK_SIZE;
-			psu.saveType = SAVE_TYPE_PRK;
-			new_save.type = SAVE_TYPE_PRK;
-			new_save.size = PRK_SIZE;
-		}
-		else return 0;
 		psu.size = ps2_dir.nFileSizeLow;
 		if (psu.size != expected_psu_size) continue;
-		snprintf(psu.path, sizeof(psu.path), ".\\SavePS2\\%s", ps2_dir.cFileName);
+
+		switch (psu.size)
+		{
+			case PSU_PRK_SIZE:
+				psu.saveType = SAVE_TYPE_PRK;
+				new_save.type = SAVE_TYPE_PRK;
+				new_save.size = PRK_SIZE;
+				break;
+
+			case PSU_SKA_SIZE:
+				psu.saveType = SAVE_TYPE_SKA;
+				new_save.type = SAVE_TYPE_SKA;
+				new_save.size = SKA_SIZE;
+				break;
+
+			default:
+				continue;
+				break;
+		}
 		
+		snprintf(psu.path, sizeof(psu.path), ".\\SavePS2\\%s", ps2_dir.cFileName);
 		psu.file = fopen(psu.path, "rb+");
 		if (psu.file == NULL) {
 			printf("unable to read psu file, next!\n\n");
