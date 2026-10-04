@@ -1949,7 +1949,7 @@ script MaybeLoadCustomSkater
     else
       SetCustomSkaterFilename "Unimplemented"
     endif
-  else
+  else // if no cas found game does vanilla routine
     if not CurrentSkaterIsPro
       if CustomSkaterFilenameDefined
         DisableReset
