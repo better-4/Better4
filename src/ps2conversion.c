@@ -241,7 +241,7 @@ int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script)
 	do
 	{
 		
-		printf("directory amount : %d\n", directory.amount);
+		//printf("directory amount : %d\n", directory.amount);
 		if (directory.amount >= 200) break;
 		psu_t psu = {0};
 		th4_save new_save = {0};
