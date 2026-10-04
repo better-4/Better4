@@ -843,7 +843,6 @@ shoes = [
     desc_id = #"Bare Feet"
     frontend_desc = 'Bare Feet'
     bare_feet
-    lockout_parts = [ socks_items ]
     no_color
     is_clowny
   }
