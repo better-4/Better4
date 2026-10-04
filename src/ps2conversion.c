@@ -108,7 +108,7 @@ bool actualNameCheck (char *name, save_t type) // basic check to see if geniune 
 		name_len++;
 	}
 	actual_name [name_len] = '\0';
-	printf ("actual name : %s file name : %s\n", actual_name, name);
+	//printf ("actual name : %s file name : %s\n", actual_name, name);
 	if (strcmp(actual_name, name))
 	{
 		printf("invalid cas, not listing\n");
@@ -200,8 +200,8 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 		if (name_len > 4 && name_len < NAME_SIZE + 4) save_dir.cFileName [name_len - 4] = '\0'; // cut off .ska
 		else continue;
 
-		bool valid_cas = actualNameCheck (save_dir.cFileName, directory.type);
-		if (!valid_cas) continue;
+		bool actual_name = actualNameCheck (save_dir.cFileName, directory.type);
+		if (!actual_name) continue;
 
 		if (directory.amount < 200) 
 		{
