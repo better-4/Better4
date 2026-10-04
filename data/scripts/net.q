@@ -3476,6 +3476,8 @@ script cancel_join_server
     CancelJoinServer
     restart_local_server
     SetNetworkMode INTERNET_MODE
+    StartBetterPlayerList
+    StartBetterServerList
   else
     LogInfo "******* in cancel_join_server 4"
     CancelJoinServer
