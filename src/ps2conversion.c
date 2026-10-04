@@ -21,10 +21,10 @@ bool doesSaveExist (th4_save *save)
 	FILE *cas_check = fopen(save->path, "r");
 	if (cas_check != NULL) {
 		fclose(cas_check);
-		printf("this save already exists in the directory, next!\n\n");
+		logInfo("this save already exists in the directory, next!");
 		return true;
 	}
-	//printf("new path : %s\n", path);
+	//printf("new path : %s", path);
 	return false;
 }
 
@@ -35,7 +35,7 @@ bool getSaveName (th4_save *save)
 
 	while ( (save->data[index] != 0) && (name_len < NAME_SIZE - 1) ) {
 		if (save->data[index] == ':') {
-			printf("name contains colon, cannot be converted. next!\n\n");
+			logInfo("name contains colon, cannot be converted. next!");
 			return false;
 		}
 		save->name[name_len] = save->data[index];
@@ -43,7 +43,7 @@ bool getSaveName (th4_save *save)
 		name_len++;
 	}
 	save->name [name_len] = '\0';
-	printf("save name : %s\n", save->name);
+	logInfo("save name : %s", save->name);
 	return true;
 }
 
@@ -75,7 +75,7 @@ bool actualNameCheck (char *name, save_t type) // basic check to see if geniune 
 	
 	FILE *cas_check = fopen(path, "rb+");
 	if (cas_check == NULL) {
-		printf("this cas doesn't exist!\n");
+		logInfo("this cas doesn't exist!");
 		return false;
 	}
 
@@ -88,7 +88,7 @@ bool actualNameCheck (char *name, save_t type) // basic check to see if geniune 
 			if (i <= 57) 
 			{
 				strncpy(filename_indicator, save_data + i, 3);
-				//printf(" file name indicator found : %s\n",filename_indicator  );
+				//printf(" file name indicator found : %s",filename_indicator  );
 				if (!strcmp(filename_indicator, "\x16\xF4\xC3")) {
 					index = i + 3;
 					found_filename = true;
@@ -100,7 +100,7 @@ bool actualNameCheck (char *name, save_t type) // basic check to see if geniune 
 
 	while ( (save_data[index] != 0) && (name_len < NAME_SIZE - 1) ) {
 		if (save_data[index] == ':') {
-			printf("name contains colon, invalid!\n\n");
+			logInfo("name contains colon, invalid!");
 			return false;
 		}
 		actual_name[name_len] = save_data[index];
@@ -108,10 +108,10 @@ bool actualNameCheck (char *name, save_t type) // basic check to see if geniune 
 		name_len++;
 	}
 	actual_name [name_len] = '\0';
-	//printf ("actual name : %s file name : %s\n", actual_name, name);
+	//printf ("actual name : %s file name : %s", actual_name, name);
 	if (strcmp(actual_name, name))
 	{
-		printf("invalid cas, not listing\n");
+		logInfo("invalid cas, not listing");
 		return false;
 	}
 	fclose(cas_check);
@@ -129,23 +129,23 @@ bool psuValidation (psu_t *psu, th4_save *save)
 	saveTypeFound = psu->data[PRODUCT_CODE_OFFSET + 17]; // last letter of 8 letter save code
 	for (int i = 0; i < 5; i++) {
 		if (!strcmp(TH4ProductCodesPS2[i], psuProductCode)) {
-			//printf("this is a THPS4 psu file\n");
+			//printf("this is a THPS4 psu file");
 			if (saveTypeFound == psu->saveType) {
-				//printf("validated! proceeding...\n");
+				//printf("validated! proceeding...");
 				return true;
 			}
 			else break;
 		}
 	}
 
-	printf("the current .psu being processed is corrupted or not a THPS4 CAS/PRK file \n");
-	printf("next!\n\n");
+	logInfo("the current .psu being processed is corrupted or not a THPS4 CAS/PRK file ");
+	logInfo("next!");
 	return false;
 }
 
 int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // also builds directory list
 {
-	printf("doing file count\n");
+	logInfo("doing file count");
 	directory.amount = 0;
 	directory.current_count = 0;
 	directory.expected_file_size = 0;
@@ -185,7 +185,7 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 	}
 	else return 0;
 	if (save_search == INVALID_HANDLE_VALUE) {
-		printf("\nno %s files found in the directory.\n",FileType);
+		logInfo("no %s files found in the directory.",FileType);
 		CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, 0);
 		return 0;
 	}
@@ -206,13 +206,13 @@ int __cdecl CFunc_GetProperSaveFileCount(CStruct *params, CScript *script) // al
 		if (directory.amount < 200) 
 		{
 				if (build_list) strcpy(directory.list[directory.amount], save_dir.cFileName);
-				//printf("directory #%d : %s\n",directory.amount,directory.list[directory.amount] );
+				//printf("directory #%d : %s",directory.amount,directory.list[directory.amount] );
 		}
 		directory.amount++;
 	} while (FindNextFile(save_search, &save_dir) != 0);
 
 	FindClose (save_search);
-	printf("%s total file count: %d\n",FileType, directory.amount);
+	logInfo("%s total file count: %d",FileType, directory.amount);
 	if (build_list) CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, directory.amount); 
 	return 1;
 }
@@ -231,17 +231,17 @@ int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script)
 	else if (!strcmp(FileType,"PARK"))expected_psu_size = PSU_PRK_SIZE;
 	else return 0;
 
-	printf("\n\n\nps2 save check and conversion : \n\n\n");
+	logInfo("ps2 save check and conversion : ");
 	HANDLE psu_search = FindFirstFile(".\\SavePS2\\*.psu", &ps2_dir);
 	if (psu_search == INVALID_HANDLE_VALUE) {
-		printf("no .psu files found in the directory.\n\n"); 
+		logInfo("no .psu files found in the directory."); 
 		return 0;
 	}
 
 	do
 	{
 		
-		//printf("directory amount : %d\n", directory.amount);
+		//printf("directory amount : %d", directory.amount);
 		if (directory.amount >= 200) break;
 		psu_t psu = {0};
 		th4_save new_save = {0};
@@ -273,11 +273,11 @@ int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script)
 		snprintf(psu.path, sizeof(psu.path), ".\\SavePS2\\%s", ps2_dir.cFileName);
 		psu.file = fopen(psu.path, "rb+");
 		if (psu.file == NULL) {
-			printf("unable to read psu file, next!\n\n");
+			logInfo("unable to read psu file, next!");
 			continue;
 		}
 		fread(psu.data, sizeof(uint8_t), psu.size, psu.file);
-		//printf("processing: %s\n", ps2_dir.cFileName);
+		//printf("processing: %s", ps2_dir.cFileName);
 		fclose(psu.file);
 		
 		// validation + copy
@@ -296,12 +296,12 @@ int __cdecl CFunc_PS2SaveConversion (CStruct *params, CScript *script)
 		// write new save file
 		new_save.file = fopen(new_save.path, "wb");
 		if (new_save.file == NULL) {
-			printf("unable to create new save file, next!\n\n");
+			logInfo("unable to create new save file, next!");
 			continue;
 		}
 		fwrite(new_save.data, sizeof(uint8_t), new_save.size, new_save.file);
 		fclose(new_save.file);
-		printf("conversion complete, next!\n\n");
+		logInfo("conversion complete, next!");
 		new_save_flag = true;
 
 	} while (FindNextFile(psu_search, &ps2_dir) != 0);
@@ -318,7 +318,7 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
 	WIN32_FIND_DATA save_dir;
 	HANDLE ska_search = FindFirstFile(".\\Save\\*.SKA", &save_dir);
 	if (ska_search == INVALID_HANDLE_VALUE) {
-		printf("\nno CAS file found in the directory.\n");
+		logInfo("no CAS file found in the directory.");
 		return 0;
 	}
 
@@ -338,7 +338,7 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script)
 	} while (FindNextFile(ska_search, &save_dir) != 0);
 	if (newestTimestamp == 0) return 0; // no valid cas found
 
-	printf("\n\nmost recent cas : %s\n\n",newestCasName);
+	logInfo("most recent cas : %s",newestCasName);
 	CStruct_AddString(out,0xF36C1878/*casfilename*/, newestCasName);
 	FindClose(ska_search);
 	return 1;
@@ -352,7 +352,7 @@ int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script)
 	if (directory.current_count < directory.amount && directory.current_count < 200)
 	{
 		CStruct_AddString(out,0x91D9667F/*save_filename*/, directory.list [directory.current_count]);
-		//printf("save to list: %s\n", directory.list [directory.current_count]);
+		//printf("save to list: %s", directory.list [directory.current_count]);
 		directory.current_count++;
 	}
 	else return 0;
@@ -390,10 +390,10 @@ int __cdecl CFunc_DeleteSaveFile (CStruct *params, CScript *script)
 
 	if (DeleteFileA(save_path)) 
 	{
-		printf("file deleted successfully\n");
+		logInfo("file deleted successfully");
 		return 1;
 	} 
-	else printf("failed to delete file!\n");
+	else logInfo("failed to delete file!");
 	
 	return 0;
 }

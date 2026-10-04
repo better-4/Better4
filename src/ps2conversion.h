@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <windows.h>
+#include <log.h>
 
 #define SKA_PRK_NAME_OFFSET 0x19 // byte where name starts in .SKA/.PRK
 #define PSU_SAVE_OFFSET 0x3800 // byte where save data starts in .PSU
