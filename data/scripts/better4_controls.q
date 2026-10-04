@@ -669,7 +669,7 @@ better4_control_specialtrick_sound = {
   value_name = better4_control_specialtrick_sound_value
   text = "Sp. Trick Sound"
   ini_key = "SpecialTrickSound"
-  help = "Change which sound is played when performing extra tricks (e.g. double-tap tricks)."
+  help = "Toggle whether performing a special trick plays the special trick sound."
   options = [
     { text = "On" value = on }
     { text = "Off" value = off }	
@@ -685,6 +685,21 @@ script better4_change_specialtrick_sound
     endif
   endif
 endscript
+
+better4_control_skatervoice_index = 0
+better4_control_skatervoice_value = on
+better4_control_skatervoice = {
+  id = better4_control_skatervoice_id
+  index_name = better4_control_skatervoice_index
+  value_name = better4_control_skatervoice_value
+  text = "Skater Voice"
+  ini_key = "SkaterVoice"
+  help = "Toggle whether skater voices play when bailing."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }
+  ]
+}
 
 better4_control_chat_size_index = 2
 better4_control_chat_size_value = 2
@@ -1036,6 +1051,7 @@ script better4_controls_init
   better4_control_init better4_control_pressure
   better4_control_init better4_control_extratrick_sound
   better4_control_init better4_control_specialtrick_sound
+  better4_control_init better4_control_skatervoice
   better4_control_init better4_control_trickstring
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter

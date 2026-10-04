@@ -188,7 +188,9 @@ script GeneralBail Friction = 18 Friction2 = 20 HeavyFriction = 100
   KillSpecial
   SpawnClothingLandScript
   if not GotParam NoScuff
-    PlaySkaterStream type = "bail"
+    if ( better4_control_skatervoice_value = on )
+      PlaySkaterStream type = "bail"
+    endif
   endif
   SetSkaterCamLerpReductionTimer time = 0
   InBail
