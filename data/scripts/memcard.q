@@ -1908,7 +1908,7 @@ script Load
     mem_card_message_pause XSkips NoTimerReset NoCardRemovalCheck
     switch <file_type>
     case OptionsAndPros
-      MaybeLoadCustomSkater
+      //MaybeLoadCustomSkater
       career_post_load
     case Replay
       memcard_menus_cleanup
