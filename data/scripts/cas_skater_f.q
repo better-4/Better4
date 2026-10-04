@@ -817,6 +817,38 @@ skater_f_legs = [
     unlock_flag = CAS_UNLOCK_17
   }
 ]
+skater_f_hat_hair = [ 
+  { 
+	desc_id = None 
+	frontend_desc = "None" 
+  }
+  {
+    desc_id = #"Medium THUG1 F"
+    frontend_desc = 'Medium'
+    mesh = "models/better4/hairs/hair_mediumthugHAT.skin"
+  }  
+  {
+    desc_id = #"Long THUG1 F"
+    frontend_desc = 'Long'
+    mesh = "models/better4/hairs/hair_longthugHAT.skin"
+  }  
+  {
+    desc_id = #"Very Short Dark HAT"
+    frontend_desc = 'Very Short Dark'
+    mesh = "models/skater_f/hair_veryshort.skin"
+    is_short_hair
+  }
+  {
+    desc_id = #"Very Short Light HAT"
+    frontend_desc = 'Very Short Light'
+    mesh = "models/skater_f/hair_veryshort.skin"
+    replace = "CS_JB_Hair_F_Buzz1_D1.png"
+    with = "textures/skater_m/CS_JB_Hair_F_Buzz1_L1"
+    replace1 = "CS_JB_Hair_F_Buzz1_D2.png"
+    with1 = "textures/skater_m/CS_JB_Hair_F_Buzz1_L2"
+    is_short_hair
+  }
+]
 skater_f_hair = [
   {
     desc_id = #"Long Dark"

@@ -79,7 +79,7 @@ script create_cas_submenu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script cas_add_item
-  Printf "Adding CAS item here"
+  LogInfo "Adding CAS item here"
   if GotParam play_deck_sound
     PlaySound MenuSelect vol = 100
   endif
@@ -97,7 +97,7 @@ script cas_add_item
   endif
 endscript
 script cas_remove_item
-  Printf "Removing CAS item here"
+  LogInfo "Removing CAS item here"
   PrintStruct <...>
   GetCurrentSkaterProfileIndex
   if LevelIs Load_Skateshop
@@ -173,7 +173,7 @@ master_bodyshape_list = [
   { text = "Kid" scaling_table = kid_scale_info }
 ]
 script cas_apply_bodyshape
-  Printf "Applying body shape here"
+  LogInfo "Applying body shape here"
   GetCurrentSkaterProfileIndex
   if LevelIs Load_Skateshop
     EditPlayerAppearance player = 0 profile = <currentSkaterProfileIndex> target = SetChecksum targetParams = { <...> }
@@ -222,7 +222,7 @@ script cas_apply_sex apply_male = 1
      <success> = 0
   endif
   if ( <success> = <apply_male> )
-    Printf "Same sex"
+    LogInfo "Same sex"
   else
     if ( <apply_male> = 1 )
       RememberTemporaryAppearance player = <currentSkaterProfileIndex> name = old_female_profile

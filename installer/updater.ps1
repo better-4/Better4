@@ -414,12 +414,13 @@ switch ($PSCmdlet.ParameterSetName) {
 
             try {
                 $latestVersion = [version]$latestTag
-                $currentVersionParsed = [version]$CurrentVersion
+                $currentVersionParsed = [version]($CurrentVersion -replace '-.*')
             } catch {
                 exit $EXIT_CONTINUE
             }
 
-            if ($latestVersion -le $currentVersionParsed) {
+            $isDev = $CurrentVersion -like '*-*'
+            if ($latestVersion -lt $currentVersionParsed -or ($latestVersion -eq $currentVersionParsed -and -not $isDev)) {
                 exit $EXIT_CONTINUE
             }
 

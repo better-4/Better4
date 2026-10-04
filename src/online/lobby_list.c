@@ -18,7 +18,7 @@ static char new_nick[PLAYER_NAME_STRLEN];
 static char nick_suffix = '0';
 
 void gs_nick_error_callback(PEER peer, int type, char* nick, int num_suggestions, char **suggestions, void *param) {
-	printLog("gs_nick_error_callback: type=%d, nick=%s\n", type, nick);
+	logWarning("gs_nick_error_callback: type=%d, nick=%s", type, nick);
 
 	strcpy_s(new_nick, PLAYER_NAME_STRLEN, nick);
 	int nick_len = strlen(new_nick);
@@ -42,13 +42,13 @@ void gs_nick_error_callback(PEER peer, int type, char* nick, int num_suggestions
 	if (nick_suffix <= '9') {
 		peerRetryWithNick(gs_peer, new_nick);
 	} else {
-		printLog("gs_nick_error_callback: exhausted name retries\n");
+		logError("gs_nick_error_callback: exhausted name retries");
 		nick_suffix = '0';
 	}
 }
 
 void add_player_to_menu(LobbyPlayerInfo *player) {
-	printLog("add_player_to_menu: name=%s\n", player->name);
+	logDebug("add_player_to_menu: name=%s", player->name);
 	CStruct *params = CStruct_New();
 	CStruct_AddChecksum(params, 0x40c698af/*id*/, player);
 	CStruct_AddString(params, 0xc4745838/*text*/, player->name);
@@ -58,7 +58,6 @@ void add_player_to_menu(LobbyPlayerInfo *player) {
 }
 
 void update_player_menu() {
-	printLog("update_player_menu\n");
 	Script_RunScript(0x283426d8/*player_list_menu_unlock*/, 0, 0, 0, 0);
 	Script_RunScript(0x67e4c742/*destroy_player_list_menu_children*/, 0, 0, 0, 0);
 
@@ -76,14 +75,14 @@ void update_player_menu() {
 }
 
 void lobby_add_player(char *name) {
-	printLog("lobby_add_player: name=%s\n", name);
+	logDebug("lobby_add_player: name=%s", name);
 	LobbyPlayerInfo *player_info = &players[num_players++];
 	strcpy_s(player_info->name, PLAYER_NAME_STRLEN, name);
 	update_player_menu();
 }
 
 void lobby_remove_player(char *name) {
-	printLog("lobby_remove_player: name=%s\n", name);
+	logDebug("lobby_remove_player: name=%s", name);
 
 	int target_player_index = -1;
 	for (int i = 0; i < num_players; i++) {
@@ -105,7 +104,7 @@ void lobby_remove_player(char *name) {
 }
 
 void gs_enum_players_callback(PEER peer, PEERBool success, RoomType room_type, int index, char *nick, int flags, void *param) {
-	printLog("gs_enum_players_callback: success=%d, room_type=%d, index=%d, nick=%s, flags=%d\n", success, room_type, index, nick, flags);
+	logDebug("gs_enum_players_callback: success=%d, room_type=%d, index=%d, nick=%s, flags=%d", success, room_type, index, nick, flags);
 
 	if (success && nick) {
 		lobby_add_player(nick);
@@ -113,13 +112,13 @@ void gs_enum_players_callback(PEER peer, PEERBool success, RoomType room_type, i
 }
 
 void gs_join_room_callback(PEER peer, PEERBool success, PEERJoinResult result, RoomType room_type, void *param) {
-	printLog("gs_join_room_callback: success=%d, result=%d, room_type=%d\n", success, result, room_type);
+	logDebug("gs_join_room_callback: success=%d, result=%d, room_type=%d", success, result, room_type);
 	gs_room_type = room_type;
 	peerEnumPlayers(peer, room_type, gs_enum_players_callback, param);
 }
 
 void gs_connect_callback(PEER peer, PEERBool success, int failure_reason, void *param) {
-	printLog("gs_connect_callback: success=%d, failure_reason=%s\n", success, failure_reason);
+	logDebug("gs_connect_callback: success=%d, failure_reason=%s", success, failure_reason);
 	if (success) {
 		nick_suffix = '0';
 		peerJoinTitleRoom(gs_peer, 0, gs_join_room_callback, 0, gsi_false);
@@ -127,7 +126,6 @@ void gs_connect_callback(PEER peer, PEERBool success, int failure_reason, void *
 }
 
 void lobby_list_initialize() {
-	printLog("lobby_list_initialize\n");
 	if (!gs_peer) {
 		gs_peer_initialize();
 		num_players = 0;
@@ -141,14 +139,14 @@ void lobby_list_initialize() {
 
     char *ui_string = "";
     if (!CStruct_GetString(network_id, 0x96875c0f/*ui_string*/, &ui_string, 0)) {
-        printLog("StartBetterPlayerList: could not get network_id's ui_string\n");
+        logWarning("StartBetterPlayerList: could not get network_id's ui_string");
     }
 
 	// sanitize player name
 	char player_name[PLAYER_NAME_STRLEN] = { '\0' };
 	for (int i = 0; i < PLAYER_NAME_STRLEN - 1; i++) {
 		char c = ui_string[i];
-		printLog("lobby_list_initialize: c=%x\n", c);
+		logDebug("lobby_list_initialize: c=%x", c);
 		if (c == '\0') {
 			break;
 		} else if (c == ' '
@@ -168,13 +166,12 @@ void lobby_list_initialize() {
 			player_name[i] = c;
 		}
 	}
-	printLog("lobby_list_initialize: sanitized name=%s\n", player_name);
+	logInfo("lobby_list_initialize: sanitized name=%s", player_name);
 
     peerConnect(gs_peer, player_name, 0, gs_nick_error_callback, gs_connect_callback, 0, gsi_false);
 }
 
 void lobby_list_disconnect() {
-	printLog("lobby_list_disconnect\n");
 	if (gs_peer) {
 		peerDisconnect(gs_peer);
 		gs_peer_shutdown();
@@ -207,7 +204,7 @@ int __cdecl CFunc_NumBetterPlayersInLobby(CStruct *params, CScript *script) {
 int __cdecl CFunc_SendBetterMessage(CStruct *params) {
 	char *message = "";
 	if (!CStruct_GetString(params, 0xc4745838/*text*/, &message, 0)) {
-		printLog("SendBetterMessage: could not get param \"text\" (0xc4745838)\n");
+		logWarning("SendBetterMessage: could not get param \"text\" (0xc4745838)");
 	}
 	peerMessageRoom(gs_peer, gs_room_type, message, NormalMessage);
 }

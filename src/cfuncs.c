@@ -3,6 +3,7 @@
 #include "decomp/Tmr.h"
 #include "input.h"
 #include "load.h"
+#include "log.h"
 #include "online.h"
 #include "online/client.h"
 #include "online/host_options.h"
@@ -15,8 +16,8 @@
 #include "wallpush.h"
 #include "ps2conversion.h"
 
-#include <log.h>
-#include <patch.h>
+#include <partymod-thps4/src/patch.h>
+
 #include <string.h>
 #include <windows.h>
 
@@ -104,18 +105,22 @@ void addCFuncs() {
 	addCFunc("DeleteSaveFile", (void *)CFunc_DeleteSaveFile);
 	addCFunc("FillPlayerListMenu", (void *)CFunc_FillPlayerListMenu);
 	addCFunc("ChangeGameModifier", (void *)CFunc_ChangeGameModifier);
+	addCFunc("LogError", (void *)CFunc_LogError);
+	addCFunc("LogWarning", (void *)CFunc_LogWarning);
+	addCFunc("LogInfo", (void *)CFunc_LogInfo);
+	addCFunc("LogDebug", (void *)CFunc_LogDebug);
 }
 
 void printCFuncs() {
     // sanity check: verify we registered exactly the # of cfuncs we reserved
     if (cfunc_index != NUM_CFUNCS) {
-        printLog("WARNING: registered %d cfuncs, expected %d\n", cfunc_index, NUM_CFUNCS);
+        logWarning("WARNING: registered %d cfuncs, expected %d", cfunc_index, NUM_CFUNCS);
     }
 
-    // printLog("printing cfuncs we own\n");
+    // logDebug("Printing cfuncs we own");
     // for (int i = 0; i < NUM_CFUNCS; i++) {
     //     CFunc cfunc = cfuncs[i];
-    //     printLog("%s: 0x%p\n", cfunc.name, cfunc.func);
+    //     logDebug("%s: 0x%p", cfunc.name, cfunc.func);
     // }
 }
 
@@ -130,13 +135,13 @@ void patchCFuncs() {
 int __cdecl CFunc_GetIniBool(CStruct *params) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		logWarning("GetIniBool missing param \"section\" (0xd28c8510)\n");
+		logWarning("GetIniBool missing param \"section\" (0xd28c8510)");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		logWarning("GetIniBool missing param \"key\" (0x756f5456)\n");
+		logWarning("GetIniBool missing param \"key\" (0x756f5456)");
 		return 0;
 	}
 
@@ -146,20 +151,20 @@ int __cdecl CFunc_GetIniBool(CStruct *params) {
 int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		logWarning("GetIniInteger missing param \"section\" (0xd28c8510)\n");
+		logWarning("GetIniInteger missing param \"section\" (0xd28c8510)");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		logWarning("GetIniInteger missing param \"key\" (0x756f5456)\n");
+		logWarning("GetIniInteger missing param \"key\" (0x756f5456)");
 		return 0;
 	}
 
 	uint32_t value_name_checksum = 0;
 	if (!CStruct_GetChecksum(params, 0xbf4212ef, &value_name_checksum, 0)) {
 		// NOTE: checksum is for lowercase "valuename"; seemingly case insensitive
-		logWarning("GetIniInteger missing param \"ValueName\" (0xbf4212ef)\n");
+		logWarning("GetIniInteger missing param \"ValueName\" (0xbf4212ef)");
 		return 0;
 	}
 
@@ -177,19 +182,19 @@ int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script) {
 int __cdecl CFunc_SetIniBool(CStruct *params, CScript *script) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		logWarning("SetIniBool missing param \"section\" (0xd28c8510)\n");
+		logWarning("SetIniBool missing param \"section\" (0xd28c8510)");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		logWarning("SetIniBool missing param \"key\" (0x756f5456)\n");
+		logWarning("SetIniBool missing param \"key\" (0x756f5456)");
 		return 0;
 	}
 
 	float value = 0;
 	if (!CStruct_GetFloat(params, 0xe288a7cb, &value, 0)) {
-		logWarning("SetIniBool missing param \"value\" (0xe288a7cb)\n");
+		logWarning("SetIniBool missing param \"value\" (0xe288a7cb)");
 		return 0;
 	}
 
@@ -208,19 +213,19 @@ int __cdecl CFunc_SetIniBool(CStruct *params, CScript *script) {
 int __cdecl CFunc_SetIniInteger(CStruct *params, CScript *script) {
 	char *section = "";
 	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
-		logWarning("SetIniInteger missing param \"section\" (0xd28c8510)\n");
+		logWarning("SetIniInteger missing param \"section\" (0xd28c8510)");
 		return 0;
 	}
 
 	char *key = "";
 	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
-		logWarning("SetIniInteger missing param \"key\" (0x756f5456)\n");
+		logWarning("SetIniInteger missing param \"key\" (0x756f5456)");
 		return 0;
 	}
 
 	float value = 0;
 	if (!CStruct_GetFloat(params, 0xe288a7cb, &value, 0)) {
-		logWarning("SetIniInteger missing param \"value\" (0xe288a7cb)\n");
+		logWarning("SetIniInteger missing param \"value\" (0xe288a7cb)");
 		return 0;
 	}
 
@@ -245,7 +250,7 @@ static CFunc_Change_t CFunc_Change = (CFunc_Change_t)0x0050f630;
 int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script) {
 	uint32_t name = 0;
 	if (!CStruct_GetChecksum(params, 0xa1dc81f9, &name, 0)) {
-		logWarning("ChangeGlobal missing param \"name\" (0xa1dc81f9)\n");
+		logWarning("ChangeGlobal missing param \"name\" (0xa1dc81f9)");
 		return 0;
 	}
 	CStruct_RemoveComponent(params, 0xa1dc81f9);
@@ -259,7 +264,7 @@ int __cdecl CFunc_ChangeGlobal(CStruct *params, CScript *script) {
 		CStruct_RemoveComponent(params, 0xe288a7cb);
 		CStruct_AddChecksum(params, name, checksum_value);
 	} else {
-		logWarning("ChangeGlobal missing param \"value\" (0xe288a7cb)\n");
+		logWarning("ChangeGlobal missing param \"value\" (0xe288a7cb)");
 		return 0;
 	}
 
@@ -277,7 +282,7 @@ int __cdecl CFunc_GetStartTime(CStruct* params, CScript *script) {
 int __cdecl CFunc_GetElapsedTime(CStruct* params, CScript *script) {
 	int start_time;
     if (!CStruct_GetInteger(params, 0xd16b61e6, &start_time, 0)) {
-		logWarning("GetElapsedTime missing param \"StartTime\" (0xd16b61e6)\n");
+		logWarning("GetElapsedTime missing param \"StartTime\" (0xd16b61e6)");
 		return 0;
 	}
 

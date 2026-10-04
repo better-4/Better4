@@ -7,9 +7,11 @@ script better4_create_game_modifiers_menu
   better4_create_menu_modifier better4_modifier_disableboostplant
   better4_create_menu_modifier better4_modifier_disablewallpush
   better4_create_menu_modifier better4_modifier_disablespacewalk
-  // better4_create_menu_modifier better4_modifier_alwaysspecial
-  // better4_create_menu_modifier better4_modifier_perfectrail
-  // better4_create_menu_modifier better4_modifier_perfectmanual
+  better4_create_menu_modifier better4_modifier_alwaysspecial
+  better4_create_menu_modifier better4_modifier_perfectrail
+  better4_create_menu_modifier better4_modifier_perfectmanual
+  // better4_create_menu_modifier better4_modifier_perfectskitch
+  better4_create_menu_modifier better4_modifier_disabletrickboost
   better4_menu_spacer
   better4_create_menu_item text = "Back" id = back_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
 endscript

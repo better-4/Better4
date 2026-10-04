@@ -301,18 +301,18 @@ better4_control_revertrecovery = {
 // On Rails
 
 DropdownVanilla = [
-  { Trigger = { Press L2 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 movey = 5 } }
-  { Trigger = { Press R2 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 movey = 5 } }
+  { Trigger = { Press L2 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 moveright = -5 movey = 5 } }
+  { Trigger = { Press R2 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 moveleft = 5 movey = 5 } }
 ]
-DropdownOnlyR2 = [ { Trigger = { Press R2 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 movey = 5 } } ]
-DropdownOnlyL2 = [ { Trigger = { Press L2 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 movey = 5 } } ]
-DropdownR2andL2 = [ { Trigger = { HoldThree L2 R2 L2 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveright = -5 movey = 5 } } ]
-DropdownOnlyR1 = [ { Trigger = { Press R1 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 movey = 5 } } ]
-DropdownOnlyL1 = [ { Trigger = { Press L1 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 movey = 5 } } ]
-DropdownR1andL1 = [ { Trigger = { HoldThree L1 R1 L1 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveright = -5 movey = 5 } } ]
+DropdownOnlyR2 = [ { Trigger = { Press R2 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 moveleft = 5 movey = 5 } } ]
+DropdownOnlyL2 = [ { Trigger = { Press L2 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 moveright = -5 movey = 5 } } ]
+DropdownR2andL2 = [ { Trigger = { HoldThree L2 R2 L2 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveright = -5 moveleft = 5 movey = 5 } } ]
+DropdownOnlyR1 = [ { Trigger = { Press R1 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 moveleft = 5 movey = 5 } } ]
+DropdownOnlyL1 = [ { Trigger = { Press L1 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 moveright = -5 movey = 5 } } ]
+DropdownR1andL1 = [ { Trigger = { HoldThree L1 R1 L1 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveright = -5 moveleft = 5 movey = 5 } } ]
 DropdownR1orL1 = [
-  { Trigger = { Press L1 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 movey = 5 } }
-  { Trigger = { Press R1 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 movey = 5 } }
+  { Trigger = { Press L1 100 } Scr = SkateInOrBail params = { FallingLeft GrindBail = Airborne moveleft = 5 moveright = -5 movey = 5 } }
+  { Trigger = { Press R1 100 } Scr = SkateInOrBail params = { FallingRight GrindBail = Airborne moveright = -5 moveleft = 5 movey = 5 } }
 ]
 
 better4_control_dropdown_index = 1
@@ -518,7 +518,7 @@ better4_control_buttonsfont = {
 
 prev_buttonsfont = better4_control_buttonsfont_value
 script better4_control_buttonsfont_change
-  Printf "Changing buttonfont from %p to %n" p = prev_buttonsfont n = better4_control_buttonsfont_value
+  LogInfo "Changing buttonfont from %p to %n" p = prev_buttonsfont n = better4_control_buttonsfont_value
   UnloadFont prev_buttonsfont
   LoadFont better4_control_buttonsfont_value buttons_font
   Change prev_buttonsfont = better4_control_buttonsfont_value
@@ -641,7 +641,63 @@ better4_control_extratrick_sound = {
   options = [
     { text = "THPS4" value = THPS4 }
     { text = "THUG" value = THUG }
+	{ text = "THPS3" value = THPS3 }
     { text = "Off" value = off }	
+  ]
+  change_script = better4_change_extratrick_sound
+}
+
+script better4_change_extratrick_sound
+if ScreenElementExists  id = better4_vmenu
+  switch better4_control_extratrick_sound_value
+  case THPS4
+     PlaySound ExtraTrick vol = 100
+  case THUG
+     PlaySound extratrick_thug vol = 100
+  case THPS3
+     PlaySound HUD_specialtrickAA vol = 100
+  case Off
+  endswitch
+endif
+endscript
+
+better4_control_specialtrick_sound_index = 0
+better4_control_specialtrick_sound_value = on
+better4_control_specialtrick_sound = {
+  id = better4_control_specialtrick_sound_id
+  index_name = better4_control_specialtrick_sound_index
+  value_name = better4_control_specialtrick_sound_value
+  text = "Sp. Trick Sound"
+  ini_key = "SpecialTrickSound"
+  help = "Toggle whether performing a special trick plays the special trick sound."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }	
+  ]
+  change_script = better4_change_specialtrick_sound
+}
+
+script better4_change_specialtrick_sound
+  if ScreenElementExists id = better4_vmenu
+    if (better4_control_specialtrick_sound_value = on)
+      PlaySound HUD_specialtrickAA vol = 100 pitch = 100
+    else
+    endif
+  endif
+endscript
+
+better4_control_skatervoice_index = 0
+better4_control_skatervoice_value = on
+better4_control_skatervoice = {
+  id = better4_control_skatervoice_id
+  index_name = better4_control_skatervoice_index
+  value_name = better4_control_skatervoice_value
+  text = "Skater Voice"
+  ini_key = "SkaterVoice"
+  help = "Toggle whether skater voices play when bailing."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }
   ]
 }
 
@@ -994,6 +1050,8 @@ script better4_controls_init
   better4_control_init better4_control_chat_duration
   better4_control_init better4_control_pressure
   better4_control_init better4_control_extratrick_sound
+  better4_control_init better4_control_specialtrick_sound
+  better4_control_init better4_control_skatervoice
   better4_control_init better4_control_trickstring
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter
@@ -1015,12 +1073,12 @@ script better4_control_init
   }
   GetArraySize <options>
   if ( <new_index> < 0 )
-    Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
+    LogInfo "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
     <new_index> = 0
   else
     if not ( <array_size> > <new_index> )
       <new_index> = ( <array_size> - 1 )
-      Printf "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
+      LogInfo "Clamping %k=%i to %n" k = <ini_key> i = <index> n = <new_index>
     endif
   endif
 
@@ -1038,13 +1096,13 @@ script better4_control_cycle
   if ( <new_index> < 0 )
     <new_index> = ( <new_index> + <array_size> )
     if GotParam ini_key
-      Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+      LogInfo "Wrapping around %k to %i" k = <ini_key> i = <new_index>
     endif
   else
     if not ( <array_size> > <new_index> )
       <new_index> = ( <new_index> - <array_size> )
       if GotParam ini_key
-        Printf "Wrapping around %k to %i" k = <ini_key> i = <new_index>
+        LogInfo "Wrapping around %k to %i" k = <ini_key> i = <new_index>
       endif
     endif
   endif
@@ -1054,7 +1112,7 @@ endscript
 script better4_control_change
   CastToInteger new_index
   if GotParam ini_key
-    Printf "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
+    LogInfo "Setting control %k=%i (%t)" k = <ini_key> i = <new_index> t = ( ( <options> [ <new_index> ] ).text )
     if GotParam needs_write
       SetIniInteger section = better4_controls_ini_section key = <ini_key> value = <new_index>
     endif

@@ -1426,8 +1426,7 @@ script animload_human
     LoadAnim name = "anims\skater_specials\HulaHoopGrind_Out.ska" descChecksum = HulaHoopGrind_Out
     LoadAnim name = "anims\skater_specials\FlipKickDad_Init.ska" descChecksum = FlipKickDad_Init
     LoadAnim name = "anims\skater_specials\FlipKickDad.ska" descChecksum = FlipKickDad
-    better4_load_anims_th3
-    better4_load_anims_thug
+    better4_load_anims
   endif
   SetReferenceChecksum 0
 endscript

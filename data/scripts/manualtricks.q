@@ -268,9 +268,9 @@ script Manual BlendPeriod = 0.3
         GetManualCheese
         ManualCheese = ( <ManualCheese> + 1 )
         SetTags ManualCheese = <ManualCheese>
-        Printf "::::::::::::::::::::Cheese= %c" c = <ManualCheese>
+        LogInfo "::::::::::::::::::::Cheese= %c" c = <ManualCheese>
         if ( <ManualCheese> > 1 )
-          Printf "MESSING WITH BALANCE TO FIGHT CHEESERS"
+          LogInfo "MESSING WITH BALANCE TO FIGHT CHEESERS"
           AdjustBalance TimeAdd = 2 SpeedMult = 2 LeanMult = 1.2
         endif
       endif
@@ -397,7 +397,7 @@ script SpacewalkBoost ExtraSpeedBoost = 200
 endscript
 
 script CheckForNewTrick_ManualOut
-  Printf "give the events back!!!!!!!"
+  LogInfo "give the events back!!!!!!!"
   RestoreExtraTrickEvents 100
   ManualOut
 endscript
@@ -419,6 +419,8 @@ script ManualOut
 endscript
 script ManualLand
   VibrateOff
+  ClearException Wallpush
+  SetException Ex = Wallpush Scr = Ground_Wallpush
   SetException Ex = RunHasEnded Scr = EndOfRun
   SetException Ex = GoalHasEnded Scr = Goal_EndOfRun
   ClearPanel_Landed
@@ -454,8 +456,8 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
   SpawnClothingLandScriptHalfMax
   // GetManualName
   // if ( <ManualName> = <name> )
-  //   Printf "TRYING TO DO THE SAME MANUAL TWICE IN A ROW!!!!"
-  //   Printf "ManualName=%a name=%b" a = <ManualName> b = <name>
+  //   LogInfo "TRYING TO DO THE SAME MANUAL TWICE IN A ROW!!!!"
+  //   LogInfo "ManualName=%a name=%b" a = <ManualName> b = <name>
   //   AdjustBalance TimeAdd = 2 SpeedMult = 1.25
   // endif
   if GotParam RodneyOnly
@@ -597,10 +599,10 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
     endif
   endif
   if GotParam extrapercent
-    Printf "waiting an extrapercent"
+    LogInfo "waiting an extrapercent"
     WaitAnim <extrapercent> percent
   endif
-  Printf "Setting extra tricks active"
+  LogInfo "Setting extra tricks active"
   SetManualExtraTricks <...>
   if GotParam FlipAfter
     FlipAfter

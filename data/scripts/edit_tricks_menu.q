@@ -1346,11 +1346,11 @@ script edit_tricks_menu_bind_trick
     edit_tricks_menu_2:GetTags
   endif
   if not GotParam new_key_combo
-    Printf "no new_key_combo"
+    LogInfo "no new_key_combo"
     return
   endif
   if not GotParam new_trick
-    Printf "no new_trick"
+    LogInfo "no new_trick"
     return
   endif
   if InSplitScreenGame
@@ -1360,7 +1360,7 @@ script edit_tricks_menu_bind_trick
   endif
   if GotParam special
     if GoalManager_GetTrickFromKeyCombo special key_combo = <new_key_combo>
-      Printf "special key combo already bound"
+      LogInfo "special key combo already bound"
       BindTrickToKeyCombo {
         special
         index = <current_index>
@@ -1380,9 +1380,9 @@ script edit_tricks_menu_bind_trick
     endif
   else
     if GetKeyComboBoundToTrick trick = <new_trick>
-      Printf "trick already bound"
+      LogInfo "trick already bound"
       if GoalManager_GetTrickFromKeyCombo key_combo = <new_key_combo>
-        Printf "rebinding"
+        LogInfo "rebinding"
         PrintStruct <...>
         BindTrickToKeyCombo {
           key_combo = <current_key_combo>
@@ -1392,7 +1392,7 @@ script edit_tricks_menu_bind_trick
       endif
     endif
   endif
-  Printf "binding new trick"
+  LogInfo "binding new trick"
   if GotParam special
     BindTrickToKeyCombo {
       special
@@ -1410,7 +1410,7 @@ script edit_tricks_menu_bind_trick
   endif
   GetCurrentSkaterProfileIndex
   if InSplitScreenGame
-    Printf "in a split screen game"
+    LogInfo "in a split screen game"
   else
     UpdateTrickMappings skater = <currentSkaterProfileIndex>
   endif
@@ -1511,7 +1511,7 @@ endscript
 script special_tricks_menu_select_key_combo
   edit_tricks_menu_2:GetTags
   edit_tricks_menu_3:GetTags
-  Printf "special_tricks_menu_select_key_combo"
+  LogInfo "special_tricks_menu_select_key_combo"
   PrintStruct <...>
   edit_tricks_menu_bind_trick new_key_combo = <key_combo> new_trick = <trick> index = <index> special
   special_tricks_menu_goto_trick_list

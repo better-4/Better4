@@ -11,6 +11,10 @@ endscript
 script load_permanent_assets
   better4_controls_init
   better4_modifiers_init
+  LogDebug "@@ test debug int=%i" i = 3
+  LogInfo "@@ test info str=%s" s = "heyyyy"
+  LogWarning "@@ test warning"
+  LogError "@@ test error"
   SetDefaultPermanent 1
   SetReferenceChecksum 0
   LoadPreFile "anims.pre"
@@ -172,7 +176,7 @@ script default_system_startup
   endif
   new_screen_element_test
   SetScreenElementProps id = root_window event_handlers = [ { pad_start nullscript } ] replace_handlers
-  Printf "replace_handlers to take away start key in load_level"
+  LogInfo "replace_handlers to take away start key in load_level"
   SetServerMode on
   SetJoinMode JOIN_MODE_PLAY
   StartServer
@@ -316,9 +320,9 @@ script create_startup_menu
     pad_choose_script = bootstrap_displayscreen
     pad_choose_params = { screen = "loadscrn_marketing" }
   }
-  Printf "create_Startup_menu"
+  LogInfo "create_Startup_menu"
   RunScriptOnScreenElement id = startup_menu menu_onscreen
-  Printf "step2"
+  LogInfo "step2"
   CreateScreenElement {
     parent = root_window
     type = TextElement
@@ -333,7 +337,7 @@ script create_startup_menu
   }
   startup_camera_playback
   Change STARTGAME_FIRST_TIME = 0
-  Printf "step3"
+  LogInfo "step3"
 endscript
 script bootstrap_displayscreen screen = "loadscrn_demo_controls"
   if ObjectExists id = startup_menu

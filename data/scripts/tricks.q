@@ -48,7 +48,7 @@ script SkaterInit
   endif
   VibrateOff
   ClearSkaterFlags
-  Printf "Clearing skaters flags =============="
+  LogInfo "Clearing skaters flags =============="
   SetExceptionThatPreservesBalanceTrick MadeOtherSkaterBail
   Obj_KillSpawnedScript name = WindyClothes
   Obj_SpawnScript WindyClothes
@@ -434,7 +434,7 @@ script DoCrouch_Slope_old
   CrouchFrame = ( 1 + ( SLOPE_CUTOFF -1 ) * ( ( SLOPE_CUTOFF - <Slope> ) / ( 2 * SLOPE_CUTOFF ) ) )
   if not GotParam CrouchFrame
   endif
-  Printf "CrouchFrame=%g" g = <CrouchFrame>
+  LogInfo "CrouchFrame=%g" g = <CrouchFrame>
   PlayAnim Anim = CrouchLean_Range From = <CrouchFrame> To = ( <CrouchFrame> + 1 )
 endscript
 PUSH_IF_SLOPE = 2
@@ -941,7 +941,7 @@ script Land
     Goto DoingTrickBail
   endif
   if DoingTrick
-    Printf "DOING A TRICK"
+    LogInfo "DOING A TRICK"
     Goto DoingTrickBail
   endif
   if GotParam NoBlend
@@ -1215,7 +1215,7 @@ script VibrateOff
 endscript
 script EndOfRun
   EndOfRunStarted
-  Printf "EndOfRun called"
+  LogInfo "EndOfRun called"
   SetState ground
   CleanUpSpecialItems
   StopBalanceTrick
@@ -1289,7 +1289,7 @@ script EndOfRun
 endscript
 script Goal_EndOfRun
   Goal_EndOfRunStarted
-  Printf "Goal_EndOfRun called"
+  LogInfo "Goal_EndOfRun called"
   SetState ground
   CleanUpSpecialItems
   StopBalanceTrick
@@ -1545,6 +1545,7 @@ script RestartSkaterExceptions
   Obj_AttachFrame bone = "head"
 endscript
 script LaunchSpecialMessage text = "Special Trick" vol = 100 pitch = 100
+if ( better4_control_specialtrick_sound_value = on )
   if InMultiplayerGame
     PlaySound HUD_specialtrickAA vol = <vol> pitch = <pitch>
   else
@@ -1561,6 +1562,7 @@ script LaunchSpecialMessage text = "Special Trick" vol = 100 pitch = 100
       PlaySound HUD_specialtrickAA vol = <vol> pitch = <pitch>
     endif
   endif
+endif
 endscript
 script EndSpecial
   if ( GetGlobalFlag flag = CHEAT_COOL_SPECIAL_TRICKS )
@@ -1578,6 +1580,8 @@ script LaunchExtraMessage text = "Hidden Combo!"
      PlaySound ExtraTrick vol = 100
   case THUG
      PlaySound extratrick_thug vol = 100
+  case THPS3
+     PlaySound HUD_specialtrickAA vol = 100
   case Off
   endswitch
 endscript

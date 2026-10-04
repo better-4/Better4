@@ -1,6 +1,7 @@
 #include "cfuncs.h"
 #include "log.h"
 #include "input.h"
+#include "online.h"
 #include "online/host_options.h"
 #include "online/net_handlers.h"
 #include "security.h"
@@ -218,7 +219,7 @@ void patchPoolSizes() {
 }
 
 void patchBetter4() {
-	printLog("Initializing Better4 patches, using config=%s\n", configFile);
+	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
 	patchScriptPrintf();
 	patchButtonsFont();
@@ -233,8 +234,9 @@ void patchBetter4() {
 	patchLoad();
 	patchLevelLimit();
 	patchPoolSizes();
-	// patchNetHandlers();
-	// patchHostOptions();
+	patchNetHandlers();
+	patchHostOptions();
+	patchObserve();
 }
 
 void better4Main() {

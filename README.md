@@ -1,5 +1,8 @@
 <div align="center">
-  <img src=".github/assets/b4logo.png" width=50%>
+  <img src=".github/assets/b4logo.png" width=50%></img>
+  
+  [![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?&logo=discord&logoColor=white)](https://discord.gg/k7MKWFqejf)
+  
 </div>
 
 Better4 is a THPS4 modpack that includes modern gameplay and QOL features while maintaining the look and feel of the original game.
@@ -112,10 +115,10 @@ A special thank you to the following people, without whom this project would not
 * [@DCxDemo](https://github.com/DCxDemo) for their work on [THPSQScriptEd](https://github.com/DCxDemo/LegacyTHPS/)
 * The folks at [@GameProgressive](https://github.com/GameProgressive) for their work on [UniSpySDK](https://github.com/GameProgressive/UniSpySDK)
 * [@denetii](https://github.com/denetii) for their work on [io_thps_scene](https://github.com/denetii/io_thps_scene)
-* [Peachboy](https://steamcommunity.com/id/peachnerd) for their work on loading screens
-* [Trekeln](https://github.com/Trekeln) for their work on the Better4 logo
+* [@Peachboy](https://github.com/Peachboy402) for their work on various loading screens
+* [@Trekeln](https://github.com/Trekeln) for their work on the Better4 logo
 * [@ILC-YTP](https://github.com/ILC-YTP) for their work on [Faster Save/Load](https://github.com/ILC-YTP/THPS4-mods/tree/main/Faster-SaveLoad)
-* [PunishedFiddle](https://www.moddb.com/members/punishedfiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
+* [@PunishedFiddle](https://github.com/PunishedFiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
 
 ## For Developers
 

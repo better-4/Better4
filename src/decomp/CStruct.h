@@ -36,6 +36,7 @@ void CStruct_AddFloat(CStruct *this, uint32_t checksum, float value);
 void CStruct_AddInteger(CStruct *this, uint32_t checksum, int value);
 void CStruct_AddString(CStruct *this, uint32_t checksum, char *value);
 void CStruct_AddStructure(CStruct *this, uint32_t checksum, CStruct *value);
+void CStruct_AppendStructure(CStruct *this, CStruct *other);
 int CStruct_GetChecksum(CStruct *this, uint32_t checksum, uint32_t *ret, int assert);
 int CStruct_GetFloat(CStruct *this, uint32_t checksum, float *ret, int assert);
 int CStruct_GetInteger(CStruct *this, uint32_t checksum, int *ret, int assert);

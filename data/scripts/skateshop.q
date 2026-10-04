@@ -13,7 +13,7 @@ script SkateshopAI stopskateshopstreams = 1
   GetCurrentSkaterProfileIndex
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
   if ( <name> = JENNA )
-    Printf "switching on shoes..................."
+    LogInfo "switching on shoes..................."
     SwitchOnAtomic shoes
   endif
   switch <name>
@@ -30,22 +30,22 @@ script SkateshopAI stopskateshopstreams = 1
     BlendPeriodOut 0
   endif
   if GotParam CAS_Screen
+    // b4: always use editskater_male anims in cas screen
+    <name> = editskater_male
     if ( <is_male> = 1 )
-       <name> = editskater_male
       TurnOffSpecialItem
-    else
-      switch <name>
-      case Steamer
-        Printf "THIS IS ELISSA"
-         <name> = editskater_male
-      case JENNA
-         <name> = JENNA
-      default
-         <name> = editskater_female
-        Printf "THIS IS A CHICK"
-      endswitch
+    // else
+    //   switch <name>
+    //   case Steamer
+    //     LogInfo "THIS IS ELISSA"
+    //      <name> = editskater_male
+    //   case JENNA
+    //      <name> = JENNA
+    //   default
+    //      <name> = editskater_female
+    //     LogInfo "THIS IS A CHICK"
+    //   endswitch
     endif
-  else
   endif
   if GotParam Credits
      <name> = neversoft
@@ -55,7 +55,7 @@ script SkateshopAI stopskateshopstreams = 1
        <name> = editskater_female
     endif
   endif
-  Printf "------------- THIS SKATER IS: %n" n = <name>
+  LogInfo "------------- THIS SKATER IS: %n" n = <name>
   stream_freq = 0
   stream_freq = randomrange(0, 7)
   begin
@@ -67,7 +67,8 @@ script SkateshopAI stopskateshopstreams = 1
       random( @PlayAnim Anim = StandIdleA
       @PlayAnim Anim = StandIdleB
       @PlayAnim Anim = StandIdleC
-     ) case editskater_female
+     )
+    case editskater_female
       random( @PlayAnim Anim = Idle_Jenna1
       WaitAnimFinished
       PlayAnim Anim = Idle_Jenna1
@@ -642,7 +643,7 @@ script skateshop_transition menu_anim = animate_out
 endscript
 script skateshop_transition2
   if GotParam cam_anim
-    Printf "got a cam_anim"
+    LogInfo "got a cam_anim"
     PlaySkaterCamAnim skater = 0 name = <cam_anim>
   endif
   if GotParam came_from_main_menu
@@ -682,6 +683,7 @@ script create_main_menu
   add_main_menu_textures_to_vram
   KillSkaterCamAnim all
   PlaySkaterCamAnim name = SS_MenuCam play_hold
+  SetLightDirection index = 0 heading = 330.0 pitch = -40.0
   MakeSkaterGoto SkateshopAI params = { NoSFX }
   SetMemThreadSafe off
   SetMenuPadMappings [ active
@@ -1166,7 +1168,7 @@ script attract_mode_timer
   repeat
 endscript
 script reset_attract_mode_timer
-  Printf "reset_attract_mode_timer"
+  LogInfo "reset_attract_mode_timer"
   KillSpawnedScript name = attract_mode_timer
   SpawnScript attract_mode_timer
 endscript
@@ -1693,7 +1695,7 @@ script cas_catchup_to_pro_stats_after_load
          <points_available> = ( <points_available> - ( <total_points> - <max_points> ) )
         SetSkaterProfileInfo player = <currentSkaterProfileIndex> params = { points_available = <points_available> }
       endif
-      Printf "case 1"
+      LogInfo "case 1"
     else
       get_total_stat_points_for_current_profile ignore_points_available
        <custom_points> = <total_points>
@@ -1702,7 +1704,7 @@ script cas_catchup_to_pro_stats_after_load
          <difference> = 0
       endif
       SetSkaterProfileInfo player = <currentSkaterProfileIndex> params = { points_available = <difference> }
-      Printf "case 2 %d %e" d = <pro_points> e = <custom_points>
+      LogInfo "case 2 %d %e" d = <pro_points> e = <custom_points>
     endif
   endif
 endscript
@@ -1835,9 +1837,9 @@ script create_ss_menu
     DestroyScreenElement id = current_menu_anchor
   endif
   KillSkaterCamAnim all
-  PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
+  PlaySkaterCamAnim name = SS_AppSkaterSelect play_hold
   skater:BlendPeriodOut 0.0
-  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_Appearance orient
   Kill name = SSO_Fence05
   Create name = SSO_Fence02
   if GotParam change_gamemode
@@ -2160,45 +2162,45 @@ script SetUpSkateshopSkaters
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
   switch <name>
   case Hawk
-    Printf "got Hawk"
+    LogInfo "got Hawk"
     Kill name = TRG_SS_PedProTony
   case Burnquist
-    Printf "got Burnquist"
+    LogInfo "got Burnquist"
     Kill name = TRG_SS_PedProBob
   case Caballero
-    Printf "got Caballero"
+    LogInfo "got Caballero"
     Kill name = TRG_SS_PedProSteve
   case Campbell
-    Printf "got Campbell"
+    LogInfo "got Campbell"
     Kill name = TRG_SS_PedProKareem
   case Glifberg
-    Printf "got Glifberg"
+    LogInfo "got Glifberg"
     Kill name = TRG_SS_PedProRune
   case Koston
-    Printf "got Koston"
+    LogInfo "got Koston"
     Kill name = TRG_SS_PedProEric
   case Lasek
-    Printf "got Lasek"
+    LogInfo "got Lasek"
     Kill name = TRG_SS_PedProBucky
   case Margera
-    Printf "got Margera"
+    LogInfo "got Margera"
     Kill name = TRG_SS_PedProBam
   case Mullen
-    Printf "got Mullen"
+    LogInfo "got Mullen"
     Kill name = TRG_SS_PedProRodney
   case Muska
-    Printf "got Muska"
+    LogInfo "got Muska"
   case Reynolds
-    Printf "got Reynolds"
+    LogInfo "got Reynolds"
     Kill name = TRG_SS_PedProAndrew
   case Rowley
-    Printf "got Rowley"
+    LogInfo "got Rowley"
     Kill name = TRG_SS_PedProGeoff
   case Steamer
-    Printf "got Steamer"
+    LogInfo "got Steamer"
     Kill name = TRG_SS_PedProElissa
   case Thomas
-    Printf "got Thomas"
+    LogInfo "got Thomas"
     Kill name = TRG_SS_PedProJamie
   endswitch
 endscript
@@ -2244,7 +2246,7 @@ script skateshop_practice_start_pressed
     exit_pause_menu
   endif
   if ChecksumEquals a = <menu_state> b = off
-    Printf "-------------------- PAUSING GAME ----------------------"
+    LogInfo "-------------------- PAUSING GAME ----------------------"
     PauseMusicAndStreams 1
     PauseGame
     pause_trick_text
@@ -2266,7 +2268,7 @@ script skateshop_practice_quit
   GoalManager_HidePoints
   GoalManager_HideGoalPoints
   skater:BlendPeriodOut 0.0
-  skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+  skater:Obj_MoveToNode name = TRG_SS_Appearance orient
   MakeSkaterGoto SkateshopAI params = { }
   launch_ss_menu
 endscript
@@ -2294,11 +2296,11 @@ script launch_select_skater_menu
       Change goto_secret_shop = 0
     endif
     KillSkaterCamAnim all
-    PlaySkaterCamAnim name = SS_SkaterChoosing play_hold
-    skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+    PlaySkaterCamAnim name = SS_AppSkaterSelect play_hold
+    skater:Obj_MoveToNode name = TRG_SS_Appearance orient
     if not GotParam From2p
     else
-      Printf "GOTPARAM FROM 2p"
+      LogInfo "GOTPARAM FROM 2p"
     endif
   endif
   GetCurrentSkaterProfileIndex
@@ -2307,7 +2309,7 @@ script launch_select_skater_menu
       use_as_first
     ]
   else
-    Printf "Resetting skater profile number"
+    LogInfo "Resetting skater profile number"
     SetCurrentSkaterProfile 0
     RefreshSkaterModel profile = 0 skater = 0
     if LevelIs load_skateshop
@@ -2556,11 +2558,11 @@ script show_level_select_pro_challenge
   endif
 endscript
 script select_skater_menu_fire_focus
-  Printf "select_skater_menu_fire_focus"
+  LogInfo "select_skater_menu_fire_focus"
   Wait 1 frame
   select_skater_get_current_skater_name
   FireEvent type = focus target = select_skater_hmenu data = { child_id = <current_skater> }
-  Printf "select_skater_menu_fire_focus done"
+  LogInfo "select_skater_menu_fire_focus done"
 endscript
 script select_skater_create_top_bar scale = (1.14, 1) text = "" parent = select_skater_anchor
    <pos> = <root_pos>
@@ -2847,7 +2849,7 @@ script SkateshopGO
   skater:PlaySkaterStream type = "SSGo"
 endscript
 script load_second_skater_profile
-  Printf "REFRESHING SKATER MODEL"
+  LogInfo "REFRESHING SKATER MODEL"
   SetCurrentSkaterProfile 1
   RefreshSkaterModel profile = 1 skater = 0
   SyncPlayer2Profile
@@ -4427,19 +4429,19 @@ script buy_secret_cas_item
   if not ( GetGlobalFlag flag = <flag> )
     secret_can_buy_item { <...> secret_gear }
   else
-    Printf "you already bought that!"
+    LogInfo "you already bought that!"
   endif
 endscript
 script add_secret_item_to_cas
   GetActualCASOptionStruct part = <part> desc_id = <desc_id>
   cas_item_is_visible <...>
-  Printf "trying to add_secret_item_to_cas"
+  LogInfo "trying to add_secret_item_to_cas"
   PrintStruct <...>
   if ( <is_visible> = 1 )
-    Printf "cas_add_item on %d" d = <desc_id>
+    LogInfo "cas_add_item on %d" d = <desc_id>
     cas_add_item <...>
   else
-    Printf "item %d is disqualified" d = <desc_id>
+    LogInfo "item %d is disqualified" d = <desc_id>
   endif
 endscript
 script secret_gear_focus highlight_bar_scale = (0.85, 1.1) highlight_bar_pos = (-112, -10) text_rgba = [ 128 118 0 128 ]
@@ -4677,7 +4679,7 @@ script edit_skater_menu_exit
       if IsTrue came_to_cas_menu_from_main_menu
         create_pre_cas_menu
       else
-        skater:Obj_MoveToNode name = TRG_SS_SkaterChoosing orient
+        skater:Obj_MoveToNode name = TRG_SS_Appearance orient
         launch_ss_menu
       endif
     else
@@ -4768,7 +4770,7 @@ script set_which_arrow
 endscript
 script menu_vert_blink_arrow menu_id = current_menu
   if not ObjectExists id = <id>
-    Printf "bad arrow id"
+    LogInfo "bad arrow id"
     return
   endif
   TerminateObjectsScripts id = <id>
@@ -4988,16 +4990,16 @@ script check_for_shoe_flags
       GetArraySize <lockout_parts>
        <index> = 0
       begin
-        Printf "testing %s %t" s = <group> t = ( <lockout_parts> [ <index> ] )
+        LogInfo "testing %s %t" s = <group> t = ( <lockout_parts> [ <index> ] )
         if ( <group> = ( <lockout_parts> [ <index> ] ) )
-          Printf "unenabled item %s" s = <group>
+          LogInfo "unenabled item %s" s = <group>
           return is_enabled = 0
         endif
          <index> = ( <index> + 1 )
       repeat <array_size>
     endif
   endif
-  Printf "enabled item %s" s = <group>
+  LogInfo "enabled item %s" s = <group>
   return is_enabled = 1
 endscript
 script check_for_head_flags
@@ -5008,14 +5010,14 @@ script check_for_head_flags
        <index> = 0
       begin
         if ( <group> = ( <lockout_parts> [ <index> ] ) )
-          Printf "unenabled item %s" s = <group>
+          LogInfo "unenabled item %s" s = <group>
           return is_enabled = 0
         endif
          <index> = ( <index> + 1 )
       repeat <array_size>
     endif
   endif
-  Printf "enabled item %s" s = <group>
+  LogInfo "enabled item %s" s = <group>
   return is_enabled = 1
 endscript
 edit_skater_head_options = [
@@ -5044,6 +5046,25 @@ edit_skater_head_options = [
     is_visible_params2 = { group = hair_items }
     is_enabled_script = check_if_part_colorable
     is_enabled_params = { parts = [ skater_m_hair skater_f_hair ] }
+  }
+  {
+    text = 'Hat Hair'
+    submenu = hat_hair_menu
+    is_visible_script = currently_editing_custom_or_eddie
+    is_visible_script2 = check_for_head_flags
+    is_visible_params2 = { group = hair_items }
+    is_enabled_script = check_if_group_editable
+    is_enabled_params = { group = hat_hair_items }
+  }
+  {
+    text = 'Hat Hair Color'
+    submenu = hat_hair_color_menu
+    is_visible_script = currently_editing_custom_or_eddie
+    is_visible_params = { group = hat_hair_items }
+    is_visible_script2 = check_for_head_flags
+    is_visible_params2 = { group = hat_hair_items }
+    is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ skater_m_hat_hair skater_f_hat_hair ] }
   }
   {
     text = 'Facial Hair'
@@ -5164,7 +5185,7 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesL_items }
   }
   {
-    text = 'L. Accessories Color'
+    text = 'L. Accessory Color'
     submenu = accessoriesL_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesL_items }
@@ -5178,12 +5199,26 @@ edit_skater_torso_options = [
     is_visible_params = { group = accessoriesR_items }
   }
   {
-    text = 'R. Accessories Color'
+    text = 'R. Accessory Color'
     submenu = accessoriesR_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = accessoriesR_items }
     is_enabled_script = check_if_part_colorable
     is_enabled_params = { parts = [ accessoriesR ] }
+  }
+  {
+    text = 'Misc Items'
+    submenu = accessoriesM_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+  }
+  {
+    text = 'Misc Item Color'
+    submenu = accessoriesM_color_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = accessoriesM_items }
+    is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ accessoriesM accessoriesM_f ] }
   }
 ]
 edit_skater_leg_options = [
@@ -5411,17 +5446,17 @@ script spawn_two_player
   StartServer
   SetJoinMode JOIN_MODE_PLAY
   JoinServer
-  Printf "------------------------- 1"
+  LogInfo "------------------------- 1"
   begin
     if JoinServerComplete
-      Printf "------------------------- 2"
+      LogInfo "------------------------- 2"
       break
     else
-      Printf "------------------------- 3"
+      LogInfo "------------------------- 3"
       Wait 1
     endif
   repeat
-  Printf "------------------------- 4"
+  LogInfo "------------------------- 4"
   ScreenElementSystemCleanup
 endscript
 script launch_two_player

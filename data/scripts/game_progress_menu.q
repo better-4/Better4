@@ -174,7 +174,7 @@ script game_progress_menu_fill
     if not StructureContains structure = ( master_skater_list [ <index> ] ) is_secret
        <skater_display_name> = ( ( master_skater_list [ <index> ] ).display_name )
        <skater_name> = ( ( master_skater_list [ <index> ] ).name )
-      Printf "looking for skater %s" s = <skater_name>
+      LogInfo "looking for skater %s" s = <skater_name>
       if GoalManager_SkaterHasBeatenProSpecificChallenge skater = <skater_name>
          <beaten_text> = "Complete"
       else

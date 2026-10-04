@@ -116,7 +116,7 @@ script back_from_net_options_menu
         launch_main_menu
       else
         FormatText TextName = msg_text "***** NOT EMPTY, WAS %s *****" s = <ui_string>
-        Printf <msg_text>
+        LogInfo <msg_text>
         if ObjectExists id = current_menu_anchor
           DestroyScreenElement id = current_menu_anchor
         endif

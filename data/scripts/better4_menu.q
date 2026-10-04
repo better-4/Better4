@@ -373,6 +373,7 @@ script better4_options_menu
   better4_create_menu_item text = "HUD Options" id = hud_option pad_choose_script = better4_hud_menu pad_choose_params = <...>
   better4_create_menu_item text = "Camera Options" id = camera_option pad_choose_script = better4_camera_menu pad_choose_params = <...>
   better4_create_menu_item text = "Chat Options" id = chat_option pad_choose_script = better4_chat_menu pad_choose_params = <...>
+  better4_create_menu_item text = "Sound Options" id = sound_option pad_choose_script = better4_sound_menu pad_choose_params = <...>
   better4_create_menu_item text = "Misc" id = misc_option pad_choose_script = better4_misc_menu pad_choose_params = <...>
   better4_menu_spacer
   better4_create_menu_item text = "Close" id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
@@ -496,14 +497,21 @@ script better4_panel_test
   endswitch
 endscript
 
+script better4_sound_menu
+  better4_create_menu menu_title = "SOUND OPTIONS" icon = PA_sound close_script = better4_options_menu close_params = <...>
+  better4_menu_spacer
+  better4_create_menu_control better4_control_extratrick_sound
+  better4_create_menu_control better4_control_specialtrick_sound
+  better4_create_menu_control better4_control_skatervoice
+  better4_menu_spacer
+  better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+endscript
+
 script better4_misc_menu
   better4_create_menu menu_title = "MISC" icon = PA_trick close_script = better4_options_menu close_params = <...>
   better4_menu_spacer
   better4_create_menu_control better4_control_boardscuff
   better4_create_menu_control better4_control_pauseonunfocus
-  // better4_create_menu_control better4_trick_string
-  // better4_create_menu_control better4_control_special_meter
-  better4_create_menu_control better4_control_extratrick_sound
   better4_create_menu_control better4_control_menudemo
   better4_create_menu_control better4_control_respawn_on_newrun
   better4_create_menu_control better4_control_updatedcollision

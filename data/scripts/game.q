@@ -88,7 +88,7 @@ script do_backend_continue_delay
   Wait 0.2 seconds
 endscript
 script View_Goal_movies
-  Printf "viewing movies -----------------------"
+  LogInfo "viewing movies -----------------------"
   SpawnSkaterScript StartRunScript params = { from_menu }
 endscript
 script View_ListAllGoals
@@ -129,7 +129,7 @@ endscript
 script test_fragmentation
   begin
     Wait 0.05 second
-    Printf "Launching Message"
+    LogInfo "Launching Message"
   repeat
 endscript
 script RefreshGameMenu_Replay
@@ -145,7 +145,7 @@ script RefreshGameMenu_Replay
   endif
 endscript
 script RefreshGameMenu
-  Printf "refreshing"
+  LogInfo "refreshing"
   helper_select_choose_back_centered
   if InNetGame
   else
@@ -365,7 +365,7 @@ script populate_goals_menu
   if GetGlobalFlag flag = LEVEL_UNLOCKED_RIO
     AddLine parent = career_level_goals id = level3 text = <BestMedal>
   else
-    Printf "--------------------- Printing best medal for Rio"
+    LogInfo "--------------------- Printing best medal for Rio"
     AddLine parent = career_level_goals id = level3 text = <BestMedal> static
   endif
   GetGoalsCompleted LevelNum_Suburbia
@@ -444,7 +444,7 @@ endscript
 script enter_chat_mode
 endscript
 script back_to_main
-  Printf "running back_to_main"
+  LogInfo "running back_to_main"
   LaunchMenuScreen screen = main_menu
 endscript
 script change_airtricks1
@@ -513,7 +513,7 @@ script enter_kb_chat
   create_onscreen_keyboard allow_cancel no_buttons keyboard_done_script = entered_chat_message keyboard_title = "ENTER MESSAGE" min_length = 1 max_length = 50
 endscript
 script send_chat_message
-  Printf "Sending chat message..."
+  LogInfo "Sending chat message..."
   SendChatMessage <...>
 endscript
 script PreRunQueuedScripts

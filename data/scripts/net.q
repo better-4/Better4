@@ -1,7 +1,7 @@
 InNetOptionsFromNetPlay = 0
 CAME_FROM_LAN = 0
 script launch_viewer
-  Printf "launch_viewer is no longer needed ... you can remove it from your startup script"
+  LogInfo "launch_viewer is no longer needed ... you can remove it from your startup script"
 endscript
 script auto_launch_viewer
   LoadFromMemoryCard name = "Network settings" type = NetworkSettings
@@ -136,11 +136,6 @@ script quit_network_game
     ]
     replace_handlers
   }
-  if InInternetMode
-    if ProfileLoggedIn
-      SetLobbyStatus
-    endif
-  endif
   chosen_leave_server
   dialog_box_exit
   SetGameType career
@@ -157,9 +152,6 @@ script quit_network_game
       Wait 1
     endif
   repeat
-  if InInternetMode
-    SetQuietMode off
-  endif
   level_select_change_level level = load_skateshop no_levelUnload
 endscript
 script spawned_chosen_host_game
@@ -176,7 +168,7 @@ script spawned_chosen_host_game
   SetCurrentGameType
   InitSkaterHeaps
   SetServerMode
-  Printf "StartServer"
+  LogInfo "StartServer"
   StartServer
   SetJoinMode JOIN_MODE_PLAY
   JoinServer
@@ -785,12 +777,12 @@ script confirm_upload_park
   endif
 endscript
 script upload_content
-  Printf "Uploading content"
+  LogInfo "Uploading content"
   create_dialog_box { title = "Uploading file" text = "Starting transfer..." }
   UploadFile
 endscript
 script download_content
-  Printf "retrieving directory listing"
+  LogInfo "retrieving directory listing"
   DestroyScreenElement id = current_menu_anchor
   create_dialog_box { title = net_status_msg
     text = "Retrieving directory listing..."
@@ -798,7 +790,7 @@ script download_content
   DownloadDirectoryList
 endscript
 script download_selected_file
-  Printf "Downloading content"
+  LogInfo "Downloading content"
   DestroyScreenElement id = current_menu_anchor
   create_dialog_box { title = "Downloading File"
     text = ""
@@ -1469,7 +1461,7 @@ script return_current_lobby_focus
   case 2
     FireEvent type = focus target = lobby_player_list_menu
   default
-    Printf "return_current_lobby_focus This should never happen!"
+    LogInfo "return_current_lobby_focus This should never happen!"
   endswitch
 endscript
 script server_list_focus
@@ -1773,15 +1765,15 @@ script create_network_select_games_menu
   endif
   dialog_box_exit
   Change CAME_FROM_LAN = 0
-  SetNetworkMode LAN_MODE
+  SetNetworkMode INTERNET_MODE
   if IsInternetGameHost
     host_net_chosen
   else
-    SetNetworkMode LAN_MODE
+    SetNetworkMode INTERNET_MODE
     make_server_list_menu
     create_helper_text generic_helper_text pos = (0, 0)
     if OnXbox
-      SetNetworkMode LAN_MODE
+      SetNetworkMode INTERNET_MODE
     endif
     SetScreenElementProps { id = actions_menu event_handlers = [
         { pad_back back_from_internet_menu }
@@ -3032,12 +3024,12 @@ script create_network_host_options_menu
           id = menu_network_host_options_level_objects
           pad_choose_script = create_pro_trick_objects_menu
         }
-        // network_host_options_menu_add_item {
-        //   text1 = "Game Mods:"
-        //   text2 = "Toggle game modifiers"
-        //   id = menu_network_host_options_game_modifiers
-        //   pad_choose_script = better4_create_game_modifiers_menu
-        // }
+        network_host_options_menu_add_item {
+          text1 = "Game Mods:"
+          text2 = "Toggle game modifiers"
+          id = menu_network_host_options_game_modifiers
+          pad_choose_script = better4_create_game_modifiers_menu
+        }
         if not GoalManager_HasActiveGoals
           if not IsBetterObserving
             network_host_options_menu_add_item {
@@ -3452,7 +3444,7 @@ script CreateJoinRefusedDialog
   endif
 endscript
 script create_refused_dialog
-  Printf "******* in cancel_join_server 12"
+  LogInfo "******* in cancel_join_server 12"
   if InNetGame
     create_dialog_box { title = net_refused_msg
       text = <reason>
@@ -3472,43 +3464,45 @@ script reattempt_join_server
   PlaySkaterCamAnim name = SS_MenuCam play_hold
 endscript
 script cancel_join_server
-  Printf "******* in cancel_join_server"
+  LogInfo "******* in cancel_join_server"
   if GotParam cancel_nn
     CancelNatNegotiation
   endif
   destroy_onscreen_keyboard
   dialog_box_exit
-  Printf "******* in cancel_join_server 2"
+  LogInfo "******* in cancel_join_server 2"
   if InInternetMode
-    Printf "******* in cancel_join_server 3"
+    LogInfo "******* in cancel_join_server 3"
     CancelJoinServer
     restart_local_server
     SetNetworkMode INTERNET_MODE
+    StartBetterPlayerList
+    StartBetterServerList
   else
-    Printf "******* in cancel_join_server 4"
+    LogInfo "******* in cancel_join_server 4"
     CancelJoinServer
-    Printf "******* in cancel_join_server 5"
+    LogInfo "******* in cancel_join_server 5"
     restart_local_server
-    Printf "******* in cancel_join_server 6"
+    LogInfo "******* in cancel_join_server 6"
     SetNetworkMode LAN_MODE
   endif
-  Printf "******* in cancel_join_server 7"
+  LogInfo "******* in cancel_join_server 7"
   if GotParam show_timeout
-    Printf "******* in cancel_join_server 8"
+    LogInfo "******* in cancel_join_server 8"
     create_join_timeout_dialog
   else
     if GotParam show_refused_dialog
-      Printf "******* in cancel_join_server 9"
+      LogInfo "******* in cancel_join_server 9"
       create_refused_dialog <...>
     else
-      Printf "******* in cancel_join_server 10"
+      LogInfo "******* in cancel_join_server 10"
       create_network_select_games_menu
     endif
   endif
   kill_start_key_binding
-  Printf "******* in cancel_join_server 11"
+  LogInfo "******* in cancel_join_server 11"
   begin
-    Printf "******* in cancel_join_server 12"
+    LogInfo "******* in cancel_join_server 12"
     if LocalSkaterExists
       MakeSkaterGoto SkateshopAI params = { NoSFX }
       KillSkaterCamAnim all
@@ -3952,10 +3946,6 @@ script update_score
   endif
 endscript
 script entered_network_game
-  Printf "Entered network game"
-  if InInternetMode
-    SetQuietMode
-  endif
   kill_net_panel_messages
   console_unhide
   remove_network_menu_textures_from_vram
@@ -3964,7 +3954,6 @@ script entered_network_game
     refresh_skater_model_for_cheats
   endif
   Change check_for_unplugged_controllers = 1
-  Printf "Should init gamespy now?"
   EnteredNetworkGame
 endscript
 script restart_local_server
@@ -4141,7 +4130,7 @@ script launch_add_buddy
 endscript
 script cancel_add_buddy
   dialog_box_exit
-  Printf "cancel_add_buddy"
+  LogInfo "cancel_add_buddy"
   actions_menu_anchor:DoMorph scale = 1
   game_list_menu_anchor:DoMorph scale = 1
   DoScreenElementMorph id = player_list_anchor time = 0 scale = 1

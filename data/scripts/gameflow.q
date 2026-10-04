@@ -36,16 +36,16 @@ script ChangeLevelGameFlow // zed TODO: Look at later for possible trick font an
       switch <checksum>
       case teams_none
         SetNumTeams 0
-        Printf "Team mode off"
+        LogInfo "Team mode off"
       case teams_two
         SetNumTeams 2
-        Printf "2 Teams"
+        LogInfo "2 Teams"
       case teams_three
         SetNumTeams 3
-        Printf "3 Teams"
+        LogInfo "3 Teams"
       case teams_four
         SetNumTeams 4
-        Printf "4 Teams"
+        LogInfo "4 Teams"
       endswitch
     endif
   endif
@@ -59,12 +59,12 @@ script ChangeLevelGameFlow // zed TODO: Look at later for possible trick font an
   StandardGameFlow
 endscript
 script pause_game_flow
-  Printf "Pausing game flow"
+  LogInfo "Pausing game flow"
   PauseGameFlow
   Wait 1 gameframe
 endscript
 script unpause_game_flow
-  Printf "Unpausing game flow"
+  LogInfo "Unpausing game flow"
   UnpauseGameFlow
 endscript
 script GameFlow_Startup
@@ -131,7 +131,7 @@ script GameFlow_Startup
           if LoadReplayData
             view_loaded_replay
           else
-            Printf "Loading replay from mem card failed !!!"
+            LogInfo "Loading replay from mem card failed !!!"
           endif
         endif
       endif
@@ -141,7 +141,7 @@ endscript
 script GameFlow_StartRun
   if not LevelIs load_skateshop
     if GameModeEquals is_singlesession
-      Printf "*********** SETTING END OF RUN TYPE ********"
+      LogInfo "*********** SETTING END OF RUN TYPE ********"
       StartGoal_TrickAttack time = 120
       GoalManager_SetEndRunType name = TrickAttack EndOfRun
       SetScoreAccumulation 1
@@ -198,7 +198,7 @@ script GameFlow_StartRun
   if CareerLevelIs LevelNum_Tutorials
     PauseMusic 1
   else
-    Printf "starting a run....skip tracks and crank up the music"
+    LogInfo "starting a run....skip tracks and crank up the music"
     if GameModeEquals is_horse
     else
       SkipMusicTrack
@@ -279,13 +279,13 @@ script GameFlow_PlayRun
   EnablePause
   begin
     if ShouldEndRun
-      Printf "************ SHOULD BREAK"
+      LogInfo "************ SHOULD BREAK"
       break
     endif
     if GameModeEquals is_horse
       if FirstTrickStarted
         HideClock
-        Printf "************ TRICK STARTED"
+        LogInfo "************ TRICK STARTED"
         break
       endif
     endif
@@ -297,7 +297,7 @@ script GameFlow_PlayRun
   repeat
 endscript
 script GameFlow_WaitEnd
-  Printf "************ IN GAMEFLOW_WAITEND"
+  LogInfo "************ IN GAMEFLOW_WAITEND"
   begin
     if EndRunSelected
       break
@@ -316,7 +316,7 @@ script GameFlow_WaitEnd
     Wait 1 gameframe
   repeat
   EnableActuators 0
-  Printf "About to disable"
+  LogInfo "About to disable"
   DisablePause
   Wait 2 game frames
   if not GameModeEquals is_singlesession
@@ -329,7 +329,7 @@ script GameFlow_WaitEnd
   KillSpawnedScript name = SK3_Killskater_Finish
 endscript
 script GameFlow_End
-  Printf "************** IN GAMEFLOW END************"
+  LogInfo "************** IN GAMEFLOW END************"
   begin
     if CalculateFinalScores
       break
@@ -352,27 +352,27 @@ script GameFlow_End
     endif
   endif
   if JustGotFlag flag = GOAL_STAT_POINT1
-    Printf "stat point"
+    LogInfo "stat point"
     SwitchToMenu menu = stats_menu
     pause_game_flow
   else
     if JustGotFlag flag = GOAL_STAT_POINT2
-      Printf "stat point"
+      LogInfo "stat point"
       SwitchToMenu menu = stats_menu
       pause_game_flow
     else
       if JustGotFlag flag = GOAL_STAT_POINT3
-        Printf "stat point"
+        LogInfo "stat point"
         SwitchToMenu menu = stats_menu
         pause_game_flow
       else
         if JustGotFlag flag = GOAL_STAT_POINT4
-          Printf "stat point"
+          LogInfo "stat point"
           SwitchToMenu menu = stats_menu
           pause_game_flow
         else
           if JustGotFlag flag = GOAL_STAT_POINT5
-            Printf "stat point"
+            LogInfo "stat point"
             SwitchToMenu menu = stats_menu
             pause_game_flow
           endif
@@ -403,12 +403,12 @@ script GameFlow_End
   endif
 endscript
 script StandardGameFlow
-  Printf "starting standard gameflow"
+  LogInfo "starting standard gameflow"
   GameFlow_Startup
   StandardGameFlowBody
 endscript
 script StandardGameFlowToggleView
-  Printf "starting standard gameflow"
+  LogInfo "starting standard gameflow"
   GameFlow_Startup
   ToggleViewMode
   StandardGameFlowBody

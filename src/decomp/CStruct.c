@@ -45,6 +45,11 @@ void CStruct_AddStructure(CStruct *this, uint32_t checksum, CStruct *value) {
     _AddStructure(this, UNUSED, checksum, value);
 }
 
+void CStruct_AppendStructure(CStruct *this, CStruct *other) {
+    static void(__fastcall* _AppendStructure)(CStruct *, unused_t, CStruct *) = (void *)0x004159c0;
+    _AppendStructure(this, UNUSED, other);
+}
+
 int CStruct_GetChecksum(CStruct *this, uint32_t checksum, uint32_t *ret, int assert) {
     static int(__fastcall* _GetChecksum)(CStruct *, unused_t, uint32_t, uint32_t *, int) = (void *)0x004184b0;
     return _GetChecksum(this, UNUSED, checksum, ret, assert);

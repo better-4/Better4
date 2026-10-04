@@ -1,5 +1,7 @@
 
 toggle_comp_geo_params = {
+  bit = 7
+  param_id = toggle_comp_geo_params
   flag = FLAG_G_COMP_GEO_ON
   geo_prefix = "G_COMP_"
   trg_prefix = "TRG_G_COMP_"
@@ -313,7 +315,7 @@ script toggle_geo_nomenu
   Create prefix = <geo_not_prefix>
   Create prefix = <trg_not_prefix>
   if GetFlag flag = <flag>
-    Printf "turning it on"
+    LogInfo "turning it on"
     Create prefix = <geo_prefix>
     Create prefix = <trg_prefix>
     Kill prefix = <geo_not_prefix>

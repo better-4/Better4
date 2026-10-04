@@ -182,7 +182,7 @@ script handle_start_pressed
           return
         endif
       endif
-      Printf "-------------------- PAUSING GAME ----------------------"
+      LogInfo "-------------------- PAUSING GAME ----------------------"
       PauseGame
       Wait 1 gameframe
       pause_trick_text
@@ -758,23 +758,25 @@ script create_pause_menu
       endif
     endif
   endif
-  // make_sprite_menu_item text = "Anim Debug 1" id = menu_anim_debug1 pad_choose_script = better4_anim_debug pad_choose_params = { index = 0 }
-  // make_text_sprite texture = PA_options parent = menu_anim_debug1
+  // make_sprite_menu_item text = "Anim Debug 1" id = menu_anim_debug pad_choose_script = better4_anim_debug pad_choose_params = { index = 0 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug
   // make_sprite_menu_item text = "Anim Debug 2" id = menu_anim_debug2 pad_choose_script = better4_anim_debug pad_choose_params = { index = 1 }
   // make_text_sprite texture = PA_options parent = menu_anim_debug2
   // make_sprite_menu_item text = "Anim Debug 3" id = menu_anim_debug3 pad_choose_script = better4_anim_debug pad_choose_params = { index = 2 }
   // make_text_sprite texture = PA_options parent = menu_anim_debug3
+  // make_sprite_menu_item text = "Anim Debug 4" id = menu_anim_debug4 pad_choose_script = better4_anim_debug pad_choose_params = { index = 3 }
+  // make_text_sprite texture = PA_options parent = menu_anim_debug4
   if InNetGame
     if not OnServer
       if not IsBetterObserving
         if InInternetMode
-          if IsTrue bootstrap_build
-            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe not_focusable = not_focusable
-            make_text_sprite texture = PA_network parent = menu_network_observe_select
-          else
-            make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe
-            make_text_sprite texture = PA_network parent = menu_network_observe_select
-          endif
+          // if IsTrue bootstrap_build
+          //   make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe not_focusable = not_focusable
+          //   make_text_sprite texture = PA_network parent = menu_network_observe_select
+          // else
+          //   make_sprite_menu_item text = "Observe" id = menu_network_observe_select pad_choose_script = chose_observe
+          //   make_text_sprite texture = PA_network parent = menu_network_observe_select
+          // endif
         endif
       endif
     endif
@@ -808,7 +810,7 @@ script create_pause_menu
     make_text_sprite texture = PA_quit parent = menu_quit
   else
     if CustomParkMode testing
-      Printf "PARK EDITOR TEST PLAY MENU"
+      LogInfo "PARK EDITOR TEST PLAY MENU"
       make_sprite_menu_item text = "Back to editor" id = menu_skateshop pad_choose_script = menu_confirm_quit pad_choose_params = { yes_script = exit_test_play }
       make_text_sprite texture = PA_quit parent = menu_skateshop
     else
@@ -913,7 +915,7 @@ script exit_pause_menu menu_id = current_menu_anchor
     DoScreenElementMorph id = console_message_vmenu time = 0 scale = 1
   endif
   if ( HIDEHUD = 1 )
-    Printf "hiding"
+    LogInfo "hiding"
     hide_root_window
   endif
 endscript
@@ -1328,7 +1330,7 @@ script got_all_gaps_screen_exit
   UnPauseGame
 endscript
 script launch_pause_menu cur_menu = current_menu_anchor
-  Printf "why was this called?"
+  LogInfo "why was this called?"
 endscript
 script menu_confirm_quit_out_yes
   DebugFn766
@@ -1449,7 +1451,7 @@ script level_select_change_level_quit
   SetButtonEventMappings block_menu_input
   GoalManager_DeactivateAllGoals
   GoalManager_LevelUnload
-  Printf "leaving and destroying server"
+  LogInfo "leaving and destroying server"
   SetParkEditorState state = off
   UnPauseGame
   chosen_leave_server
@@ -1460,19 +1462,19 @@ script level_select_change_level_quit
   SetServerMode on
   StartServer
   SetJoinMode JOIN_MODE_PLAY
-  Printf "attempting to join server"
+  LogInfo "attempting to join server"
   JoinServer
-  Printf "waiting"
+  LogInfo "waiting"
   begin
-    Printf "waiting 1 frame"
+    LogInfo "waiting 1 frame"
     if JoinServerComplete
       break
     else
       Wait 1
     endif
-    Printf "still waiting"
+    LogInfo "still waiting"
   repeat
-  Printf "attempting to change level"
+  LogInfo "attempting to change level"
   level_select_change_level <...>
   SetButtonEventMappings unblock_menu_input
 endscript
@@ -1513,7 +1515,7 @@ script create_view_models_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script view_model
-  Printf "View Model here"
+  LogInfo "View Model here"
   SetViewerModel <...>
   restore_start_key_binding
   RunScriptOnScreenElement id = current_menu_anchor menu_offscreen
@@ -1554,10 +1556,10 @@ script create_set_pro_skater_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in params = { final_pos = (320, 134) }
 endscript
 script set_pro_skater
-  Printf "Set pro skater here"
+  LogInfo "Set pro skater here"
   load_pro_skater { profile = 0 skater = 0 <...> }
   if LevelIs load_skateshop
-    Printf "we're in the skateshop"
+    LogInfo "we're in the skateshop"
     launch_ss_menu
   else
     exit_pause_menu
@@ -1581,7 +1583,7 @@ script create_change_skater_appearance_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script change_skater_appearance
-  Printf "Change skater appearance here"
+  LogInfo "Change skater appearance here"
   InitSkaterModel skater = 0 <...>
   exit_pause_menu
 endscript
@@ -2753,10 +2755,10 @@ script level_select_created_park_menu_exit
   endif
   AssignAlias id = level_select_anchor alias = current_menu_anchor
   if GotParam launch_level
-    Printf "launching created level"
+    LogInfo "launching created level"
   endif
   if GotParam load_park
-    Printf "launching created level"
+    LogInfo "launching created level"
   endif
   if GotParam park_list
     level_select_created_park_list <...>
@@ -2765,7 +2767,7 @@ script level_select_created_park_menu_exit
   endif
 endscript
 script level_select_created_park_list
-  Printf "level_select_created_park_list"
+  LogInfo "level_select_created_park_list"
   dialog_box_exit
   if GotParam in_park_editor
     if ObjectExists id = current_menu_anchor
@@ -2927,9 +2929,9 @@ script level_select_created_park_list_exit
     in_park_ed = 1
   endif
   if GotParam slot
-    Printf "loading from disk"
+    LogInfo "loading from disk"
     if GotParam in_park_ed
-      Printf "in the park editor"
+      LogInfo "in the park editor"
       parked_load_from_disk slot = <slot>
     else
       if GotParam from_server_options
@@ -2950,7 +2952,7 @@ script level_select_created_park_list_exit
   endif
 endscript
 script premade_park_wait_message
-  Printf "premade_park_wait_message"
+  LogInfo "premade_park_wait_message"
   DoScreenElementMorph id = current_menu_anchor scale = 0
   create_error_box title = "Loading..." text = "Please wait while the pre-made park is loaded."
   FireEvent type = showed_wait_message target = system
@@ -3853,7 +3855,7 @@ script screen_setup_hide_hud
   screen_option_update_hud_toggle
 endscript
 script split_setup_horizontal
-  Printf "changing split mode to horizontal"
+  LogInfo "changing split mode to horizontal"
   SetScreenMode split_horizontal
   ResetSkaterCameras
   ScreenElementSystemCleanup
@@ -3865,7 +3867,7 @@ script split_setup_horizontal
   UpdateScore
 endscript
 script split_setup_vertical
-  Printf "changing split mode to vertical"
+  LogInfo "changing split mode to vertical"
   SetScreenMode split_vertical
   ResetSkaterCameras
   ScreenElementSystemCleanup
@@ -4901,18 +4903,18 @@ script SetSoundtrack
     return
   endif
   FormatText ChecksumName = trackchecksum "%t" t = <track>
-  Printf "soundtrack = %i" i = <trackchecksum>
+  LogInfo "soundtrack = %i" i = <trackchecksum>
   generic_menu_pad_choose
   SoundtrackExists trackname = <track>
-  Printf "soundtrack index = %i" i = <index>
+  LogInfo "soundtrack index = %i" i = <index>
   if not ( current_soundtrack = <trackchecksum> )
     StopMusic
   endif
   if ( <index> = -1 )
-    Printf "use playlist"
+    LogInfo "use playlist"
     UseStandardSoundtrack
   else
-    Printf "use soundtrack"
+    LogInfo "use soundtrack"
     UseUserSoundtrack <index>
   endif
   Change current_soundtrack = <trackchecksum>
@@ -4923,14 +4925,14 @@ script SetSoundtrack
   endif
 endscript
 script SoundtrackExists trackname = ""
-  Printf "trackname = %t" t = <trackname>
+  LogInfo "trackname = %t" t = <trackname>
   FormatText ChecksumName = tracknamesum "%t" t = <trackname>
   GetNumSoundtracks
   if not ( <numsoundtracks> = 0 )
     index = 0
     begin
       GetSoundtrackName <index>
-      Printf "soundtrackname = %t" t = <soundtrackname>
+      LogInfo "soundtrackname = %t" t = <soundtrackname>
       FormatText ChecksumName = soundtracksum "%s" s = <soundtrackname>
       if ( <tracknamesum> = <soundtracksum> )
         return { index = <index> }
@@ -4941,7 +4943,7 @@ script SoundtrackExists trackname = ""
   return { index = -1 }
 endscript
 script set_loaded_soundtrack
-  Printf "set_loaded_soundtrack"
+  LogInfo "set_loaded_soundtrack"
   if not IsXBOX
     return
   endif
@@ -4950,10 +4952,10 @@ script set_loaded_soundtrack
     StopMusic
   endif
   if ( <index> = -1 )
-    Printf "use playlist"
+    LogInfo "use playlist"
     UseStandardSoundtrack
   else
-    Printf "use soundtrack %i" i = <index>
+    LogInfo "use soundtrack %i" i = <index>
     UseUserSoundtrack <index>
   endif
 endscript
@@ -5146,7 +5148,7 @@ script menu_turn_music_down
   if ( <value> = 0 )
     SetScreenElementProps id = { <id> child = 3 } rgba = [ 128 128 128 0 ]
     SetCDToAmbience
-    Printf "SetCDToAmbience"
+    LogInfo "SetCDToAmbience"
   endif
 endscript
 script menu_turn_music_up
@@ -5163,7 +5165,7 @@ script menu_turn_music_up
   endif
   if ( <value> = 1 )
     SetCDToMusic
-    Printf "SetCDToMusic"
+    LogInfo "SetCDToMusic"
   endif
 endscript
 script menu_turn_sound_down
@@ -6716,7 +6718,7 @@ script stats_menu_change_other_skater_stats
   endswitch
    <points_available> = ( <points_available> - <Change> )
   if not SetSkaterProfileInfoByName name = <name> params = { points_available = <points_available> }
-    Printf "############### couldn't change points available!"
+    LogInfo "############### couldn't change points available!"
   endif
 endscript
 script stats_menu_exit
@@ -6751,12 +6753,12 @@ script create_gamemode_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script change_gamemode_career
-  Printf "********** CHANGING GAME MODE TO CAREER"
+  LogInfo "********** CHANGING GAME MODE TO CAREER"
   SetGameType career
   SetCurrentGameType
 endscript
 script change_gamemode_net
-  Printf "********** CHANGING GAME MODE TO NET!!!"
+  LogInfo "********** CHANGING GAME MODE TO NET!!!"
   SetGameType net
   SetCurrentGameType
 endscript
@@ -6956,7 +6958,7 @@ script menu_select menu_select_script = item_chosen
    <menu_select_script>
 endscript
 script item_chosen menu_id = current_menu_anchor
-  Printf "item_chosen"
+  LogInfo "item_chosen"
   RunScriptOnScreenElement id = <menu_id> animate_out callback = create_pause_menu
 endscript
 script make_text_sub_menu_item { focus_script = do_scale_up
@@ -7295,8 +7297,8 @@ script load_textures_to_main_memory
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/ED_torso"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/ED_tricks"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/edit_bar"
-  LoadTexture no_vram_alloc "PanelSprites/SkateSprites/bw_slider"
-  LoadTexture no_vram_alloc "PanelSprites/SkateSprites/colorbar"
+  LoadTexture no_vram_alloc "better4/PanelSprites/SkateSprites/bw_slider"
+  LoadTexture no_vram_alloc "better4/PanelSprites/SkateSprites/colorbar"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/scalebar"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/scale_down"
   LoadTexture no_vram_alloc "PanelSprites/SkateSprites/scale_up"
