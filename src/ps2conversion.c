@@ -1,5 +1,5 @@
 #include "ps2conversion.h"
-//todo: implement page system for 'unlimited saves' 
+//todo: implement page system for 'unlimited saves' , cleanup?
 // more rewrite :p
 directory_t directory = {0};
 const char TH4ProductCodesPS2 [5][20] = 
@@ -58,19 +58,15 @@ bool actualNameCheck (char *name, save_t type) // basic check to see if geniune 
 	{
 		case SAVE_TYPE_SKA:
 			snprintf(path, sizeof(path), ".\\Save\\%s.SKA", name);
-			index = SKA_PRK_NAME_OFFSET;
 			break;
 		case SAVE_TYPE_PRK:
 			snprintf(path, sizeof(path), ".\\Save\\%s.PRK", name);
-			index = SKA_PRK_NAME_OFFSET;
 			break;
 		case SAVE_TYPE_NWS:
 			snprintf(path, sizeof(path), ".\\Save\\%s.NWS", name);
-			index = NWS_NAME_OFFSET;
 			break;
 		case SAVE_TYPE_CAR:
 			snprintf(path, sizeof(path), ".\\Save\\%s.CAR", name);
-			index = CAR_NAME_OFFSET;
 			break;
 		default:
 			return false;
@@ -82,9 +78,26 @@ bool actualNameCheck (char *name, save_t type) // basic check to see if geniune 
 		printf("this cas doesn't exist!\n");
 		return false;
 	}
+
 	fread(save_data, sizeof(uint8_t), 60, cas_check);
-	for (int i = 0; i < 60 ; i++)
-		printf("%d byte of save checking : %c\n",i+1, save_data[i] );
+	bool found_filename = false;
+	char filename_indicator [4] = {0};
+	for (int i = 0; i < 60; i++)
+	{
+		if (save_data [i] == 0x16)
+			if (i <= 57) 
+			{
+				strncpy(filename_indicator, save_data + i, 3);
+				//printf(" file name indicator found : %s\n",filename_indicator  );
+				if (!strcmp(filename_indicator, "\x16\xF4\xC3")) {
+					index = i + 3;
+					found_filename = true;
+					break;
+				}
+			}
+	}
+	if (!found_filename) return false;
+
 	while ( (save_data[index] != 0) && (name_len < NAME_SIZE - 1) ) {
 		if (save_data[index] == ':') {
 			printf("name contains colon, invalid!\n\n");

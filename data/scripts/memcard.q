@@ -378,6 +378,7 @@ script create_files_menu pos_tweak = (-20, -45)
         { text = "\m1 = Back" }
         { text = "\m0 = Accept" }
         { text = "\md = Delete" }
+        { text = "\b6/\b5 = Change Page"}
       ]
     }
   else
@@ -385,6 +386,7 @@ script create_files_menu pos_tweak = (-20, -45)
     helper_text = { helper_text_elements = [ { text = "\b7/\b4 = Select" }
         { text = "\m1 = Back" }
         { text = "\m0 = Accept" }
+        { text = "\b6/\b5 = Change Page"}
       ]
     }
   endif
@@ -407,6 +409,8 @@ script create_files_menu pos_tweak = (-20, -45)
     event_handlers = [ { pad_back AbortScript }
       { pad_down menu_vert_blink_arrow params = { id = files_menu_down_arrow } }
       { pad_up menu_vert_blink_arrow params = { id = files_menu_up_arrow } }
+      { pad_left launch_files_menu params = { <...> } }
+      { pad_right launch_files_menu params = { <...> } }
     ]
   }
   set_sub_bg pos = ( (207, 90) + <pos_tweak> )
