@@ -1,5 +1,5 @@
 #include "ps2conversion.h"
-//todo: implement page system for 'unlimited saves' , CLEANUP sloppy stuff
+//todo: implement page system for 'unlimited saves' , CLEANUP ( theres some sloppy stuff, fclose missing in some return paths, filename indicator check , etc )
 // more rewrite :p
 directory_t directory = {0};
 const char TH4ProductCodesPS2 [5][20] = 
