@@ -263,6 +263,7 @@ switch ($PSCmdlet.ParameterSetName) {
         Write-Host "Installing Better4 to '$TargetDir'..."
 
         $installFiles = @(
+            "b4bink.dll",
             "better4.dll",
             "better4.ini",
             "better4config.exe",

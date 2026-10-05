@@ -201,6 +201,7 @@ FROM toolchain AS build-data
 COPY assets/install.bat /out
 COPY assets/updater.ps1 /out/better4updater.ps1
 COPY assets/cam100.CAR /out/save/cam100.CAR
+COPY assets/b4bink.dll /out/b4bink.dll
 COPY data/scripts/qdir.txt /out/data/scripts/better4/qdir.txt
 COPY data/fonts /out/data/fonts/better4
 COPY data/images /out/data/images/better4
