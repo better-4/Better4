@@ -168,8 +168,6 @@ RUN --mount=type=cache,target=/build \
 COPY vendor/partymod-thps4/partymod.ini /out/better4.ini
 COPY vendor/partymod-thps4/gamecontrollerdb.txt /out
 COPY vendor/partymod-thps4/readme-partymod.txt /out
-COPY installer/install.bat /out
-COPY installer/updater.ps1 /out/better4updater.ps1
 RUN cp ${SDL2_DIR}/lib/x86/SDL2.dll /out
 RUN cp ${SDL2_DIR}/README.txt /out/README-SDL.txt
 COPY README.md /out/readme-better4.txt
@@ -200,6 +198,9 @@ RUN mkdir -p "/out/data/anims/better4" \
 ########################################
 FROM toolchain AS build-data
 
+COPY assets/install.bat /out
+COPY assets/updater.ps1 /out/better4updater.ps1
+COPY assets/cam100.CAR /out/save/cam100.CAR
 COPY data/scripts/qdir.txt /out/data/scripts/better4/qdir.txt
 COPY data/fonts /out/data/fonts/better4
 COPY data/images /out/data/images/better4

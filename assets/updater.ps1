@@ -272,9 +272,10 @@ switch ($PSCmdlet.ParameterSetName) {
             "readme-better4.txt",
             "readme-partymod.txt",
             "README-SDL.txt",
-            "SDL2.dll"
+            "SDL2.dll",
+            "save\cam100.CAR"
         )
-        $skipIfExists = @("better4.ini", "readme-partymod.txt")
+        $skipIfExists = @("better4.ini", "readme-partymod.txt", "save\cam100.CAR")
 
         foreach ($fileName in $installFiles) {
             $destPath = Join-Path $TargetDir $fileName
@@ -284,7 +285,8 @@ switch ($PSCmdlet.ParameterSetName) {
             }
             Write-Host "  $fileName"
             try {
-                Copy-Item -Path (Join-Path $PSScriptRoot $fileName) -Destination $TargetDir -Force -ErrorAction Stop
+                New-Item -ItemType Directory -Path (Split-Path $destPath -Parent) -Force | Out-Null
+                Copy-Item -Path (Join-Path $PSScriptRoot $fileName) -Destination $destPath -Force -ErrorAction Stop
             } catch {
                 Exit-InstallError "could not update '$fileName' - close Better4.exe first, then try again."
             }
