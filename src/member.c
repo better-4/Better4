@@ -34,10 +34,10 @@ void printMemberFuncs() {
         logWarning("WARNING: registered %d member functions, expected %d", member_func_index, NUM_MEMBERFUNCS);
     }
 
-    logDebug("Printing member functions we own");
-    for (int i = 0; i < NUM_MEMBERFUNCS; i++) {
-        logDebug("%d: %s", i, member_funcs[i]);
-    }
+    // logDebug("Printing member functions we own");
+    // for (int i = 0; i < NUM_MEMBERFUNCS; i++) {
+    //     logDebug("%d: %s", i, member_funcs[i]);
+    // }
 }
 
 
