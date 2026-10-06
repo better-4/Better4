@@ -16,6 +16,10 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\SkateToPressure.ska" descChecksum = SkateToPressure
 
   LoadAnim name = "anims\better4\PreviewDeck.ska" descChecksum = PreviewDeck
+
+  LoadAnim name = "anims\better4\FSDarkSlide_Init.ska" descChecksum = FSDarkSlide_Init
+  LoadAnim name = "anims\better4\FSDarkSlide_Range.ska" descChecksum = FSDarkSlide_Range
+  LoadAnim name = "anims\better4\FSDarkSlide_Out.ska" descChecksum = FSDarkSlide_Out
 endscript
 
 script better4_load_anims_th3

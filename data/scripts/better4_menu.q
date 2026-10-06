@@ -420,6 +420,7 @@ script better4_onrail_menu
   better4_create_menu_control better4_control_directional_dropdown
   better4_create_menu_control better4_control_liptricks
   better4_create_menu_control better4_control_railspin
+  better4_create_menu_control better4_control_doubletapgrinds
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
 endscript

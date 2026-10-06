@@ -393,6 +393,21 @@ better4_control_railspin = {
   ]
 }
 
+better4_control_doubletapgrinds_index = 0
+better4_control_doubletapgrinds_value = off
+better4_control_doubletapgrinds = {
+  id = better4_control_doubletapgrinds_id
+  index_name = better4_control_doubletapgrinds_index
+  value_name = better4_control_doubletapgrinds_value
+  text = "Double Tap Grinds"
+  ini_key = "DoubleTapGrinds"
+  help = "Toggle whether double-tap grinds (5-0 overturn, darkslide, etc.) are enabled."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 better4_control_pressure_index = 0
 better4_control_pressure_value = off
 better4_control_pressure = {
@@ -1037,6 +1052,7 @@ script better4_controls_init
   better4_control_init better4_control_dropdown
   better4_control_init better4_control_liptricks
   better4_control_init better4_control_railspin
+  better4_control_init better4_control_doubletapgrinds
   better4_control_init better4_control_wallieplant
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
