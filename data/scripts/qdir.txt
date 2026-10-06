@@ -10,7 +10,7 @@ BDJ_Scripts.qb
 betting_guy.qb
 boardselect.qb
 better4/boardshop.qb
-ButtonScripts.qb
+better4/ButtonScripts.qb
 camera.qb
 cas.qb
 cash_icons.qb

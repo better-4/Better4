@@ -3,13 +3,12 @@
 
 #include <math.h>
 
-// TODO (ellie): should these take in an `*out` param instead of returning a new vec?
-Mth_Vector Mth_Vector_Mult(Mth_Vector *this, float scale) {
+Mth_Vector Mth_Vector_Add(Mth_Vector *this, Mth_Vector *other) {
     Mth_Vector out;
-    out.x = scale * this->x;
-    out.y = scale * this->y;
-    out.z = scale * this->z;
-    out.w = scale * this->w;
+    out.x = this->x + other->x;
+    out.y = this->y + other->y;
+    out.z = this->z + other->z;
+    out.w = this->w + other->w;
     return out;
 }
 
@@ -19,6 +18,16 @@ Mth_Vector Mth_Vector_Sub(Mth_Vector *this, Mth_Vector *other) {
     out.y = this->y - other->y;
     out.z = this->z - other->z;
     out.w = this->w - other->w;
+    return out;
+}
+
+// TODO (ellie): should these take in an `*out` param instead of returning a new vec?
+Mth_Vector Mth_Vector_Mult(Mth_Vector *this, float scale) {
+    Mth_Vector out;
+    out.x = scale * this->x;
+    out.y = scale * this->y;
+    out.z = scale * this->z;
+    out.w = scale * this->w;
     return out;
 }
 

@@ -22,20 +22,8 @@ static int wallpush_enabled = 0;
 static uint8_t flag_cancel_wallpush = 0;
 static int last_wallpush_time = 0;
 
-void print_vector(Mth_Vector vec) {
-    logDebug("(%f, %f, %f, %f)", vec.x, vec.y, vec.z, vec.w);
-}
-
-void print_matrix(Mth_Matrix mat) {
-    logDebug("[ %f %f %f %f  ", mat.x.x, mat.x.y, mat.x.z, mat.x.w);
-    logDebug("  %f %f %f %f  ", mat.y.x, mat.y.y, mat.y.z, mat.y.w);
-    logDebug("  %f %f %f %f  ", mat.z.x, mat.z.y, mat.z.z, mat.z.w);
-    logDebug("  %f %f %f %f ]", mat.w.x, mat.w.y, mat.w.z, mat.w.w);
-}
-
 uint8_t check_wallpush(Obj_CSkater *this) {
-    uint8_t triangle_pressed = *((uint8_t *)this + OFFSET_TRIANGLE_TRIGGER);
-    if (!triangle_pressed) {
+    if (!this->pad.triangle.pressed) {
         return 0;
     }
 

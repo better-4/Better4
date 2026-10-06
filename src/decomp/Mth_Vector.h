@@ -8,8 +8,9 @@ typedef struct Mth_Vector {
     float w;
 } Mth_Vector;
 
-Mth_Vector Mth_Vector_Mult(Mth_Vector *this, float scale);
+Mth_Vector Mth_Vector_Add(Mth_Vector *this, Mth_Vector *other);
 Mth_Vector Mth_Vector_Sub(Mth_Vector *this, Mth_Vector *other);
+Mth_Vector Mth_Vector_Mult(Mth_Vector *this, float scale);
 
 void Mth_Vector_Assign(Mth_Vector *this, Mth_Vector *src);
 float Mth_Vector_Length(Mth_Vector *this);

@@ -958,6 +958,7 @@ script create_main_menu
     ]
   }
   better4_main_menu_watermark
+  LaunchViewer
   RunScriptOnScreenElement id = main_menu menu_onscreen
   FireEvent type = focus target = attract_container
   KillSpawnedScript name = Skateshop_Slideshow
