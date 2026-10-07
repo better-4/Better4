@@ -245,6 +245,9 @@ void __fastcall Obj_CSkater_DoGameLogic(Obj_CSkater *this) {
 			Mth_Vector new_pos = Mth_Vector_Add(pos, &translation);
 			print_vector(*pos);
 			Gfx_Camera_SetPos(camera, &new_pos);
+
+			Mth_Matrix *mat = Gfx_Camera_GetMatrix(camera);
+			print_matrix(*mat);
 		}
 	} else {
 		_DoGameLogic(this);
