@@ -49,18 +49,19 @@ uint8_t check_wallpush(Obj_CSkater *this) {
         return 0;
     }
 
-    Mth_Vector perp = Mth_Vector_Mult(&this->feeler.normal, 2.0f * Mth_DotProduct(&this->object->velocity, &this->feeler.normal));
-    Mth_Vector new_velocity = Mth_Vector_Sub(&this->object->velocity, &perp);
+    Mth_Vector new_velocity;
+    Mth_Vector_Mult(&new_velocity, &this->feeler.normal, 2.0f * Mth_DotProduct(&this->object->velocity, &this->feeler.normal)); // new_velocity = normal * dot
+    Mth_Vector_Sub(&new_velocity, &this->object->velocity, &new_velocity); // new_velocity = object.velocity - new_velocity
 
     float speed = Mth_Vector_Length(&new_velocity);
 	if (speed > 0.001f) {
         float min_exit_speed = Script_GetFloat(0xb78542c2/*Physics_Wallpush_Min_Exit_Speed*/);
         float speed_loss = Script_GetFloat(0x1112fb1c/*Physics_Wallpush_Speed_Loss*/);
         float mult = fmax(min_exit_speed, speed - speed_loss) / speed;
-        new_velocity = Mth_Vector_Mult(&new_velocity, mult);
+        Mth_Vector_Mult(&new_velocity, &new_velocity, mult); // new_velocity *= mult
     } else {
         float min_exit_speed = Script_GetFloat(0xb78542c2/*Physics_Wallpush_Min_Exit_Speed*/);
-        new_velocity = Mth_Vector_Mult(&this->object->matrix.z, min_exit_speed);
+        Mth_Vector_Mult(&new_velocity, &this->object->matrix.z, min_exit_speed); // new_velocity = mat.z * min_exit_speed
     }
 
     Mth_Vector_RotateToPlane(&new_velocity, &this->current_normal);

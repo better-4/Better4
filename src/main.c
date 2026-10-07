@@ -1,6 +1,7 @@
 #include "cfuncs.h"
-#include "log.h"
+#include "freecam.h"
 #include "input.h"
+#include "log.h"
 #include "online.h"
 #include "online/host_options.h"
 #include "online/net_handlers.h"
@@ -218,44 +219,6 @@ void patchPoolSizes() {
 	patchByte(0x0040b88e + 1, 0x7f); // CStoredRandom: 100 -> 127 (max signed u8; don't increase)
 	patchDWord(0x0040b895 + 1, 0x55f0); // AllocatePermanentStringHeap max_strings: 5500 -> 22000
 	patchDWord(0x0040b89a + 1, 0x6b6c0); // AllocatePermanentStringHeap max_size: 0x1adb0 (107.4 KB) -> 0x6b6c0 (429.7 KB)
-}
-
-void print_vector(Mth_Vector vec) {
-    logDebug("(%f, %f, %f, %f)", vec.x, vec.y, vec.z, vec.w);
-}
-
-void print_matrix(Mth_Matrix mat) {
-    logDebug("[ %f %f %f %f  ", mat.x.x, mat.x.y, mat.x.z, mat.x.w);
-    logDebug("  %f %f %f %f  ", mat.y.x, mat.y.y, mat.y.z, mat.y.w);
-    logDebug("  %f %f %f %f  ", mat.z.x, mat.z.y, mat.z.z, mat.z.w);
-    logDebug("  %f %f %f %f ]", mat.w.x, mat.w.y, mat.w.z, mat.w.w);
-}
-
-void __fastcall Obj_CSkater_DoGameLogic(Obj_CSkater *this) {
-    static void (__fastcall *_DoGameLogic)(Obj_CSkater *) = (void *)0x004c8ed0;
-	// static uint32_t *addr_view_mode = (void *)0x00ab7538;
-	if (this->view_mode > 0) {
-		if (this->pad.x.pressed) {
-			Gfx_Camera *camera = (Gfx_Camera *)this->camera;
-
-			Mth_Vector translation;
-			translation.y = 1.0;
-
-			Mth_Vector *pos = Gfx_Camera_GetPos(camera);
-			Mth_Vector new_pos = Mth_Vector_Add(pos, &translation);
-			print_vector(*pos);
-			Gfx_Camera_SetPos(camera, &new_pos);
-
-			Mth_Matrix *mat = Gfx_Camera_GetMatrix(camera);
-			print_matrix(*mat);
-		}
-	} else {
-		_DoGameLogic(this);
-	}
-}
-
-void patchFreecam() {
-	patchCall(0x004b3ee1, (void *)Obj_CSkater_DoGameLogic);
 }
 
 void patchBetter4() {
