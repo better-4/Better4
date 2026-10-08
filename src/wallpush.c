@@ -49,7 +49,7 @@ uint8_t check_wallpush(Obj_CSkater *this) {
         return 0;
     }
 
-    Mth_Vector new_velocity;
+    Mth_Vector new_velocity = { 0 };
     Mth_Vector_Mult(&new_velocity, &this->feeler.normal, 2.0f * Mth_DotProduct(&this->object->velocity, &this->feeler.normal)); // new_velocity = normal * dot
     Mth_Vector_Sub(&new_velocity, &this->object->velocity, &new_velocity); // new_velocity = object.velocity - new_velocity
 
