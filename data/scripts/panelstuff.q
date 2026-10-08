@@ -221,7 +221,7 @@ script create_panel_stuff
     parent = root_window
     id = cash_goal_sprite
     texture = cash_goal
-    scale = 1
+    scale = better4_control_goalpts_value
     just = [ left top ]
     pos = (464, 28)
     alpha = 0
@@ -234,8 +234,8 @@ script create_panel_stuff
     id = cash_text
     font = small
     text = " "
-    scale = 0.75
-    pos = (546, 28)
+    scale = better4_goalpts_scale
+    pos = better4_cash_pos
     just = [ left top ]
     rgba = [ 51 72 105 128 ]
   }
@@ -244,9 +244,9 @@ script create_panel_stuff
     parent = root_window
     id = goal_points_text
     font = small
-    pos = (562, 43)
+    pos = better4_goalpts_pos
     just = [ left top ]
-    scale = 0.75
+    scale = better4_goalpts_scale
     rgba = [ 127 102 0 128 ]
     text = " "
   }
@@ -354,20 +354,29 @@ script create_panel_stuff
     z_priority = 0
   }
   reset_trick_text_appearance the_score_pot_text_id = the_score_pot_text the_trick_text_id = the_trick_text trick_text_container_id = trick_text_container
+  switch better4_control_balance_index
+  case 0
+    <balance_texture> = balancemeter
+	<balance_arrow> = balancearrow_glow
+  case 1
+    <balance_texture> = nollie_icon
+	<balance_arrow> = nollie_icon
+  endswitch
   CreateScreenElement {
     id = the_balance_meter
     type = SpriteElement
     parent = player1_panel_container
-    texture = balancemeter
+    texture = <balance_texture>
     scale = 1.0
     just = [ center center ]
     rgba = [ 128 128 128 0 ]
     tags = { tag_turned_on = 0 tag_mode = balance }
   }
   CreateScreenElement {
+    id = the_balance_meter_arrow
     type = SpriteElement
     parent = the_balance_meter
-    texture = balancearrow_glow
+    texture = <balance_arrow>
     scale = 1.0
     pos = (0, 0)
     just = [ center center ]
@@ -479,6 +488,7 @@ script create_panel_stuff
       tags = { tag_turned_on = 0 tag_mode = balance }
     }
     CreateScreenElement {
+	  id = ( the_balance_meter_arrow + 1 )
       type = SpriteElement
       parent = ( the_balance_meter + 1 )
       texture = balancearrow_glow
@@ -915,6 +925,7 @@ script hide_balance_meter
 endscript
 script pause_balance_meter
   RunScriptOnScreenElement id = the_balance_meter do_hide_balance_meter params = { id = the_balance_meter }
+  RunScriptOnScreenElement id = the_balance_meter_arrow do_hide_balance_meter params = { id = the_balance_meter_arrow }
   if InSplitScreenGame
     RunScriptOnScreenElement id = ( the_balance_meter + 1 ) do_hide_balance_meter params = { id = ( the_balance_meter + 1 ) }
   endif
@@ -929,6 +940,7 @@ script show_balance_meter
 endscript
 script unpause_balance_meter
   RunScriptOnScreenElement id = the_balance_meter do_show_balance_meter params = { id = the_balance_meter }
+  RunScriptOnScreenElement id = the_balance_meter_arrow do_hide_balance_meter params = { id = the_balance_meter_arrow }
   if InSplitScreenGame
     RunScriptOnScreenElement id = ( the_balance_meter + 1 ) do_show_balance_meter params = { id = ( the_balance_meter + 1 ) }
   endif
