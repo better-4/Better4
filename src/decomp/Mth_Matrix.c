@@ -135,18 +135,6 @@ void Mth_Matrix_RotateZ(Mth_Matrix *out, Mth_Matrix *this, float angle) {
     Mth_Matrix_Mult(out, this, &rotation);
 }
 
-void Mth_Matrix_RotateLocal(Mth_Matrix *out, Mth_Matrix *this, Mth_Vector *rot) {
-    if (rot->x) {
-        Mth_Matrix_RotateX(out, this, rot->x);
-    }
-    if (rot->y) {
-        Mth_Matrix_RotateY(out, this, rot->y);
-    }
-    if (rot->z) {
-        Mth_Matrix_RotateZ(out, this, rot->z);
-    }
-}
-
 void Mth_Matrix_CreateRotateMatrix(Mth_Matrix *out, Mth_Vector *axis, float angle) {
     Mth_Vector unit_axis;
     Mth_Vector_Assign(&unit_axis, axis);

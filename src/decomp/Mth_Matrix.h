@@ -21,7 +21,6 @@ void Mth_CreateRotateZMatrix(Mth_Matrix *out, float angle);
 void Mth_Matrix_RotateX(Mth_Matrix *out, Mth_Matrix *this, float angle);
 void Mth_Matrix_RotateY(Mth_Matrix *out, Mth_Matrix *this, float angle);
 void Mth_Matrix_RotateZ(Mth_Matrix *out, Mth_Matrix *this, float angle);
-void Mth_Matrix_RotateLocal(Mth_Matrix *out, Mth_Matrix *this, Mth_Vector *rot);
 void Mth_Matrix_CreateRotateMatrix(Mth_Matrix *out, Mth_Vector *axis, float angle);
 
 #endif
