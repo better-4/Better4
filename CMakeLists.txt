@@ -15,6 +15,8 @@ endif()
 add_library(better4 SHARED
     "${SRC}/cfuncs.c"
     "${SRC}/cfuncs.h"
+    "${SRC}/freecam.c"
+    "${SRC}/freecam.h"
     "${SRC}/input.c"
     "${SRC}/input.h"
     "${SRC}/load.c"
@@ -48,6 +50,8 @@ add_library(better4 SHARED
     "${SRC}/decomp/GameNet_PlayerInfo.h"
     "${SRC}/decomp/Gfx_Camera.c"
     "${SRC}/decomp/Gfx_Camera.h"
+    "${SRC}/decomp/Inp_Manager.c"
+    "${SRC}/decomp/Inp_Manager.h"
     "${SRC}/decomp/Lst_Search.c"
     "${SRC}/decomp/Lst_Search.h"
     "${SRC}/decomp/Mdl_Skate.c"
