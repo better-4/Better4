@@ -12,10 +12,8 @@ endscript
 script better4_toggle_freecam
   switch better4_in_freecam
   case 0
-    Change better4_in_freecam = 1
     better4_enter_freecam
   case 1
-    Change better4_in_freecam = 0
     better4_exit_freecam
   endswitch
 endscript
@@ -39,12 +37,15 @@ script better4_enter_freecam
     return
   endif
 
+  Change better4_in_freecam = 1
+
   if IsBetterObserving
     destroy_observer_ui
   endif
 
   EnableActuators 0
   PauseMusicAndStreams
+  PlaySound MenuBack vol = 50
   SetViewMode 1
   hide_panel_stuff
 
@@ -113,9 +114,11 @@ script add_freecam_help {
 endscript
 
 script better4_exit_freecam
+  Change better4_in_freecam = 0
   LogInfo "exiting freecam"
   EnableActuators
   UnPauseMusicAndStreams
+  PlaySound MenuBack vol = 50
   SetViewMode 0
   show_panel_stuff
   SetScreen Angle = better4_control_fov_value
