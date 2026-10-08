@@ -1,6 +1,7 @@
 #include "cfuncs.h"
-#include "log.h"
+#include "freecam.h"
 #include "input.h"
+#include "log.h"
 #include "online.h"
 #include "online/host_options.h"
 #include "online/net_handlers.h"
@@ -8,6 +9,8 @@
 #include "updater.h"
 #include "wallpush.h"
 
+#include "decomp/Gfx_Camera.h"
+#include "decomp/Obj_CSkater.h"
 #include "decomp/Obj_CSkaterCareer.h"
 
 #include "partymod-thps4/src/main.h"
@@ -238,6 +241,7 @@ void patchBetter4() {
 	patchHostOptions();
 	patchObserve();
 	patchMemberFunctions();
+	patchFreecam();
 }
 
 void better4Main() {

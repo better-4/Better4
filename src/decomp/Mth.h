@@ -2,6 +2,7 @@
 #define _DECOMP_MTH_H_
 
 #include "decomp/Mth_Vector.h"
+#include "decomp/Mth_Matrix.h"
 
 float Mth_DegToRad(float deg);
 float Mth_RadToDeg(float rad);

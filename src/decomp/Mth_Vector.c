@@ -3,30 +3,32 @@
 
 #include <math.h>
 
-// TODO (ellie): should these take in an `*out` param instead of returning a new vec?
-Mth_Vector Mth_Vector_Mult(Mth_Vector *this, float scale) {
-    Mth_Vector out;
-    out.x = scale * this->x;
-    out.y = scale * this->y;
-    out.z = scale * this->z;
-    out.w = scale * this->w;
-    return out;
+void Mth_Vector_Add(Mth_Vector *out, Mth_Vector *this, Mth_Vector *other) {
+    out->x = this->x + other->x;
+    out->y = this->y + other->y;
+    out->z = this->z + other->z;
+    out->w = this->w + other->w;
 }
 
-Mth_Vector Mth_Vector_Sub(Mth_Vector *this, Mth_Vector *other) {
-    Mth_Vector out;
-    out.x = this->x - other->x;
-    out.y = this->y - other->y;
-    out.z = this->z - other->z;
-    out.w = this->w - other->w;
-    return out;
+void Mth_Vector_Sub(Mth_Vector *out, Mth_Vector *this, Mth_Vector *other) {
+    out->x = this->x - other->x;
+    out->y = this->y - other->y;
+    out->z = this->z - other->z;
+    out->w = this->w - other->w;
 }
 
-void Mth_Vector_Assign(Mth_Vector *this, Mth_Vector *src) {
-    this->x = src->x;
-    this->y = src->y;
-    this->z = src->z;
-    this->w = src->w;
+void Mth_Vector_Mult(Mth_Vector *out, Mth_Vector *this, float scale) {
+    out->x = this->x * scale;
+    out->y = this->y * scale;
+    out->z = this->z * scale;
+    out->w = this->w * scale;
+}
+
+void Mth_Vector_Assign(Mth_Vector *out, Mth_Vector *this) {
+    out->x = this->x;
+    out->y = this->y;
+    out->z = this->z;
+    out->w = this->w;
 }
 
 float Mth_Vector_Length(Mth_Vector *this) {

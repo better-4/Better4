@@ -22,20 +22,8 @@ static int wallpush_enabled = 0;
 static uint8_t flag_cancel_wallpush = 0;
 static int last_wallpush_time = 0;
 
-void print_vector(Mth_Vector vec) {
-    logDebug("(%f, %f, %f, %f)", vec.x, vec.y, vec.z, vec.w);
-}
-
-void print_matrix(Mth_Matrix mat) {
-    logDebug("[ %f %f %f %f  ", mat.x.x, mat.x.y, mat.x.z, mat.x.w);
-    logDebug("  %f %f %f %f  ", mat.y.x, mat.y.y, mat.y.z, mat.y.w);
-    logDebug("  %f %f %f %f  ", mat.z.x, mat.z.y, mat.z.z, mat.z.w);
-    logDebug("  %f %f %f %f ]", mat.w.x, mat.w.y, mat.w.z, mat.w.w);
-}
-
 uint8_t check_wallpush(Obj_CSkater *this) {
-    uint8_t triangle_pressed = *((uint8_t *)this + OFFSET_TRIANGLE_TRIGGER);
-    if (!triangle_pressed) {
+    if (!this->pad.triangle.pressed) {
         return 0;
     }
 
@@ -61,18 +49,19 @@ uint8_t check_wallpush(Obj_CSkater *this) {
         return 0;
     }
 
-    Mth_Vector perp = Mth_Vector_Mult(&this->feeler.normal, 2.0f * Mth_DotProduct(&this->object->velocity, &this->feeler.normal));
-    Mth_Vector new_velocity = Mth_Vector_Sub(&this->object->velocity, &perp);
+    Mth_Vector new_velocity = { 0 };
+    Mth_Vector_Mult(&new_velocity, &this->feeler.normal, 2.0f * Mth_DotProduct(&this->object->velocity, &this->feeler.normal)); // new_velocity = normal * dot
+    Mth_Vector_Sub(&new_velocity, &this->object->velocity, &new_velocity); // new_velocity = object.velocity - new_velocity
 
     float speed = Mth_Vector_Length(&new_velocity);
 	if (speed > 0.001f) {
         float min_exit_speed = Script_GetFloat(0xb78542c2/*Physics_Wallpush_Min_Exit_Speed*/);
         float speed_loss = Script_GetFloat(0x1112fb1c/*Physics_Wallpush_Speed_Loss*/);
         float mult = fmax(min_exit_speed, speed - speed_loss) / speed;
-        new_velocity = Mth_Vector_Mult(&new_velocity, mult);
+        Mth_Vector_Mult(&new_velocity, &new_velocity, mult); // new_velocity *= mult
     } else {
         float min_exit_speed = Script_GetFloat(0xb78542c2/*Physics_Wallpush_Min_Exit_Speed*/);
-        new_velocity = Mth_Vector_Mult(&this->object->matrix.z, min_exit_speed);
+        Mth_Vector_Mult(&new_velocity, &this->object->matrix.z, min_exit_speed); // new_velocity = mat.z * min_exit_speed
     }
 
     Mth_Vector_RotateToPlane(&new_velocity, &this->current_normal);
