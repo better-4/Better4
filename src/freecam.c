@@ -29,13 +29,6 @@ void translate_local(Gfx_Camera *camera, float x, float y, float z) {
     Mth_Matrix *mat = Gfx_Camera_GetMatrix(camera);
     Mth_Vector *pos = Gfx_Camera_GetPos(camera);
 
-    logDebug("@@@@@@@@");
-    logDebug("---- pos ----");
-    print_vector(pos);
-
-    logDebug("---- mat ----");
-    print_matrix(mat);
-
     Mth_Vector trans = { 0 };
     trans.x = x;
     trans.y = y;
@@ -43,15 +36,7 @@ void translate_local(Gfx_Camera *camera, float x, float y, float z) {
 
     Mth_Vector out = { 0 };
     Mth_Matrix_MultVec(&out, mat, &trans); // out = trans * mat
-
-    logDebug("---- trans ----");
-    print_vector(&out);
-
     Mth_Vector_Add(&out, &out, pos); // out += pos
-
-    logDebug("---- out ----");
-    print_vector(&out);
-    logDebug("@@@@@@@@");
 
     Gfx_Camera_SetPos(camera, &out);
 }
