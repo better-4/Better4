@@ -1,6 +1,7 @@
 #include "cfuncs.h"
 
 #include "decomp/Tmr.h"
+#include "freecam.h"
 #include "input.h"
 #include "load.h"
 #include "log.h"
@@ -8,7 +9,6 @@
 #include "online/client.h"
 #include "online/host_options.h"
 #include "online/lobby_list.h"
-#include "online/net_handlers.h"
 #include "online/player_list.h"
 #include "online/server.h"
 #include "online/server_list.h"
@@ -25,7 +25,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 51
+#define BETTER4_NUM_CFUNCS 54
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -103,6 +103,9 @@ void addCFuncs() {
 	addCFunc("LogWarning", (void *)CFunc_LogWarning);
 	addCFunc("LogInfo", (void *)CFunc_LogInfo);
 	addCFunc("LogDebug", (void *)CFunc_LogDebug);
+	addCFunc("SetFreecamControls", (void *)CFunc_SetFreecamControls);
+	addCFunc("SetFreecamMoveSpeed", (void *)CFunc_SetFreecamMoveSpeed);
+	addCFunc("SetFreecamLookSpeed", (void *)CFunc_SetFreecamLookSpeed);
 }
 
 void printCFuncs() {

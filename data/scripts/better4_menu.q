@@ -473,6 +473,8 @@ script better4_camera_menu
   better4_menu_spacer
   better4_create_menu_control better4_control_aspect_ratio
   better4_create_menu_control better4_control_fov
+  better4_create_menu_control better4_control_cameratoggle
+  better4_create_menu_control better4_control_freecamcontrols
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript

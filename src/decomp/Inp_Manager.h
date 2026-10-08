@@ -129,14 +129,15 @@ typedef struct Inp_Data_Analog {
 
 typedef struct Inp_Data {
     Inp_Data_Analog analog; // 0x0, size 0x10
-    uint32_t button_flags; // 0x14, digital
-    uint32_t makes_flags; // 0x1d
+    uint32_t button_flags; // 0x14, digital, button is currently pressed
+    uint32_t makes_flags; // 0x1d, digital, button was just pressed (only 1 for one frame)
     uint32_t breaks_flags; // 0x21
     uint32_t new;
     uint32_t cur;
 } Inp_Data;
 
 uint32_t Inp_Data_ButtonPressed(Inp_Data *this, uint32_t flag);
+uint32_t Inp_Data_ButtonJustPressed(Inp_Data *this, uint32_t flag);
 
 typedef struct Inp_Server {
     uint8_t unk[0x44];

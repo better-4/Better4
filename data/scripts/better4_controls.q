@@ -628,7 +628,7 @@ better4_control_aspect_ratio = {
   ini_key = "AspectRatio"
   help = "Change the aspect ratio. 'Auto' calculates the optimal aspect ratio from the window resolution."
   options = [
-    { text = "Auto" value = 0 } // Doesn't use value
+    { text = "Auto" value = 0 }
     { text = "16:9" value = 1.77778 }
     { text = "16:10" value = 1.6 }
     { text = "4:3" value = 1.33333 }
@@ -642,6 +642,37 @@ script better4_change_aspect_ratio
   else
     SetScreen Aspect = better4_control_aspect_ratio_value
   endif
+endscript
+
+better4_control_cameratoggle_index = 0
+better4_control_cameratoggle = {
+  id = better4_control_cameratoggle_id
+  index_name = better4_control_cameratoggle_index
+  text = "Camera Toggle"
+  ini_key = "CameraToggle"
+  help = "Change the action performed when pressing the camera toggle button."
+  options = [
+    { text = "Camera Toggle" }
+    { text = "Freecam" }
+  ]
+}
+
+better4_control_freecamcontrols_index = 0
+better4_control_freecamcontrols = {
+  id = better4_control_freecamcontrols_id
+  index_name = better4_control_freecamcontrols_index
+  text = "Freecam Controls"
+  ini_key = "FreecamControls"
+  help = "Change the control scheme used when in freecam mode."
+  options = [
+    { text = "Better4" }
+    { text = "Vanilla" }
+  ]
+  change_script = better4_control_freecamcontrols_change
+}
+
+script better4_control_freecamcontrols_change
+  SetFreecamControls index = better4_control_freecamcontrols_index
 endscript
 
 better4_control_extratrick_sound_index = 0
@@ -1062,6 +1093,8 @@ script better4_controls_init
   better4_control_init better4_control_buttonsfont
   better4_control_init better4_control_fov
   better4_control_init better4_control_aspect_ratio
+  better4_control_init better4_control_cameratoggle
+  better4_control_init better4_control_freecamcontrols
   better4_control_init better4_control_chat_size
   better4_control_init better4_control_chat_duration
   better4_control_init better4_control_pressure
