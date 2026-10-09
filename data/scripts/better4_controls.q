@@ -953,12 +953,12 @@ better4_goalpts_scale_large = 0.75
 better4_goalpts_scale_off = 0
 better4_goalpts_scale = better4_goalpts_scale_large
 
-better4_goalpts_pos_small = (495, 31)
+better4_goalpts_pos_small = (513, 36)
 better4_goalpts_pos_medium = (532, 39)
 better4_goalpts_pos_large = (562, 43)
 better4_goalpts_pos = better4_goalpts_pos_large
 
-better4_cash_pos_small = (546, 28)
+better4_cash_pos_small = (504, 29)
 better4_cash_pos_medium = (520, 28)
 better4_cash_pos_large = (546, 28)
 better4_cash_pos = better4_cash_pos_large
