@@ -8,6 +8,10 @@ uint32_t Inp_Data_ButtonJustPressed(Inp_Data *this, uint32_t flag) {
     return this->makes_flags & flag;
 }
 
+uint32_t Inp_Data_ButtonJustReleased(Inp_Data *this, uint32_t flag) {
+    return this->breaks_flags & flag;
+}
+
 Inp_Manager *Inp_Manager_Instance() {
     return *(Inp_Manager **)0x005cd264;
 }

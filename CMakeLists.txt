@@ -13,6 +13,8 @@ if(UNISPY_WINSOCK2)
 endif()
 
 add_library(better4 SHARED
+    "${SRC}/autorepeat.c"
+    "${SRC}/autorepeat.h"
     "${SRC}/cfuncs.c"
     "${SRC}/cfuncs.h"
     "${SRC}/freecam.c"
