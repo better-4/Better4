@@ -204,6 +204,9 @@ void patchPoolSizes() {
 	patchDWord(0x00534380 + 1, 0xf4c040); // Script size: 0x3d3010 (3.8 MB) -> 0xf4c040 (15.3 MB)
 	patchDWord(0x00534557 + 1, 0x1b7740); // skater_geom size: 0x6ddd0 (439 KB) -> 0x1b7740 (1.7 MB)
 
+	// Mem::Manager::InitSkaterHeaps (0x00534610)
+	patchDWord(0x0053470a + 1, 0x1b7740); // skaterGeomX size: 0x6ddd0 (439 KB) -> 0x1b7740 (1.7 MB)
+
 	// Increase the size of the pools in the `Script` heap.
 	// Each type of object (e.g. `CComponent`) may only have N (e.g. 70,000) instances allocated at once.
 	// Script::AllocatePools (0x0040b780)
