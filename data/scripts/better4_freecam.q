@@ -32,7 +32,7 @@ script better4_freecam_reset_defaults
 endscript
 
 script better4_enter_freecam
-  if ShouldEndRun
+  if ( ( InNetGame ) and ( ShouldEndRun ) )
     LogInfo "better4_enter_freecam: preventing freecam in end of run"
     return
   endif
@@ -323,7 +323,7 @@ script better4_freecam_apply_fov
 endscript
 
 script better4_freecam_check_end_run
-  if ShouldEndRun
+  if ( ( InNetGame ) and ( ShouldEndRun ) )
     LogDebug "better4_freecam_check_end_run: ending run since freecam is on"
     better4_exit_freecam
     ForceEndOfRun
