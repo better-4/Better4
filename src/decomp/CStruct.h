@@ -37,10 +37,12 @@ void CStruct_AddInteger(CStruct *this, uint32_t checksum, int value);
 void CStruct_AddString(CStruct *this, uint32_t checksum, char *value);
 void CStruct_AddStructure(CStruct *this, uint32_t checksum, CStruct *value);
 void CStruct_AppendStructure(CStruct *this, CStruct *other);
+int CStruct_GetArray(CStruct *this, uint32_t checksum, struct CArray **ret, int assert);
 int CStruct_GetChecksum(CStruct *this, uint32_t checksum, uint32_t *ret, int assert);
 int CStruct_GetFloat(CStruct *this, uint32_t checksum, float *ret, int assert);
 int CStruct_GetInteger(CStruct *this, uint32_t checksum, int *ret, int assert);
 int CStruct_GetString(CStruct *this, uint32_t checksum, const char **ret, int assert);
+int CStruct_GetStructure(CStruct *this, uint32_t checksum, CStruct **ret, int assert);
 void CStruct_RemoveComponent(CStruct *this, uint32_t checksum);
 
 #endif

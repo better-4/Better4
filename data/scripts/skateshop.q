@@ -1745,10 +1745,10 @@ script cas_catchup_trickslots
     if ( <num_specials_awarded> > 0 )
        <cas_desired_total> = ( <cas_desired_total> + <num_specials_awarded> )
     endif
-    if ( <cas_desired_total> > 11 )
-       <cas_desired_total> = 11
+    // b4: Award an extra special for skaters with all 11 unlocked (12 max)
+    if not ( <cas_desired_total> < 11 )
+       <cas_desired_total> = 12
     endif
-    <cas_desired_total> = 12
     if ( <cas_desired_total> < <cas_current_num_specials> )
        <index> = <cas_desired_total>
        <num_to_remove> = ( <cas_current_num_specials> - <cas_desired_total> )
@@ -1757,6 +1757,7 @@ script cas_catchup_trickslots
          <index> = ( <index> + 1 )
       repeat <num_to_remove>
     endif
+    LogDebug "Setting max_specials=%d" d = <cas_desired_total>
     SetSkaterProfileInfo player = <currentSkaterProfileIndex> params = { max_specials = <cas_desired_total> }
   endif
 endscript

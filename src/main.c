@@ -9,8 +9,9 @@
 #include "updater.h"
 #include "wallpush.h"
 
-#include "decomp/Gfx_Camera.h"
-#include "decomp/Obj_CSkater.h"
+#include "decomp/common.h"
+#include "decomp/CArray.h"
+#include "decomp/CStruct.h"
 #include "decomp/Obj_CSkaterCareer.h"
 
 #include "partymod-thps4/src/main.h"
@@ -221,6 +222,85 @@ void patchPoolSizes() {
 	patchDWord(0x0040b89a + 1, 0x6b6c0); // AllocatePermanentStringHeap max_size: 0x1adb0 (107.4 KB) -> 0x6b6c0 (429.7 KB)
 }
 
+int __fastcall Obj_CSkaterProfile_GetNumSpecialTrickSlots(void *this) {
+	static int (__fastcall *_GetNumSpecialTrickSlots)(void *) = (void *)0x004dee80;
+	int slots = _GetNumSpecialTrickSlots(this);
+	logDebug("Obj::CSkaterProfile::GetNumSpecialTrickSlots: this=%p slots=%d", this, slots);
+	return slots;
+}
+
+void __fastcall Obj_CSkaterProfile_GetSpecialTrickInfo(void *this, unused_t _, void *profile, uint32_t index) {
+	static void (__fastcall *_GetSpecialTrickInfo)(void *, unused_t, void *, uint32_t) = (void *)0x004deea0;
+	logDebug("Obj::CSkaterProfile::GetSpecialTrickInfo: this=%p index=%d", this, index);
+	_GetSpecialTrickInfo(this, UNUSED, profile, index);
+}
+
+uint8_t __fastcall Game_CGoal_AddTempSpecialTrick(void *this) {
+	static uint8_t (__fastcall *_GetSpecialTrickInfo)(void *) = (void *)0x004e86d0;
+	logDebug("Game::CGoal::AddTempSpecialTrick: this=%p", this);
+	return _GetSpecialTrickInfo(this);
+}
+
+void resize_specials(CArray *specials) {
+	if (specials->size < 13) {
+		CStruct *tmp_specials[12];
+
+		for (int i = 0; i < specials->size; i++) {
+			tmp_specials[i] = CArray_Get(specials, i);
+			logDebug("tmp_specials[%d]=%p", i, tmp_specials[i]);
+		}
+		logDebug("setting specials array size to 13");
+		CArray_SetSizeAndType(specials, 13, specials->type);
+
+		for (int i = 0; i < 12; i++) {
+			if (tmp_specials[i]) {
+				logDebug("setting specials[%d]=%p", i, tmp_specials[i]);
+				CArray_SetStructure(specials, i, tmp_specials[i]);
+			}
+		}
+
+		CStruct *unassigned_slot = CStruct_New();
+		CStruct_AddChecksum(unassigned_slot, 0x5b077ce1/*trickname*/, 0xf60c9090/*unassigned*/);
+		CStruct_AddChecksum(unassigned_slot, 0xa92a2280/*trickslot*/, 0xf60c9090/*unassigned*/);
+
+		CArray_SetStructure(specials, 12, unassigned_slot);
+	}
+}
+
+void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_t _, CStruct *struc) {
+	static void (__fastcall *_LoadCASProfileInfo)(void *, unused_t, CStruct *) = (void *)0x004af010;
+	logDebug("Obj::CPlayerProfileManager::LoadCASProfileInfo: this=%p", this);
+	CStruct *custom;
+	if (CStruct_GetStructure(struc, 0xa7be964/*custom*/, &custom, 0)) {
+		CStruct *info;
+		if (CStruct_GetStructure(custom, 0x3476cea8/*info*/, &info, 0)) {
+			logDebug("got info");
+			CStruct *specials_struc;
+			if (CStruct_GetStructure(info, 0xddbee809/*specials*/, &specials_struc, 0)) {
+				logDebug("got specials struct");
+				logDebug("==== BEFORE ====");
+				CFunc_PrintStruct(specials_struc, 0);
+				CArray *specials;
+				if (CStruct_GetArray(specials_struc, 0, &specials, 0)) {
+					resize_specials(specials);
+				}
+				logDebug("==== AFTER =====");
+				CFunc_PrintStruct(specials_struc, 0);
+			}
+		}
+	}
+
+	_LoadCASProfileInfo(this, UNUSED, struc);
+}
+
+void patchTest() {
+	patchCall(0x004e8e8e, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo);
+	patchCall(0x004e8e77, (void *)Obj_CSkaterProfile_GetNumSpecialTrickSlots);
+	patchJmp(0x004f173f, (void *)Game_CGoal_AddTempSpecialTrick);
+	patchJmp(0x004f174b, (void *)Game_CGoal_AddTempSpecialTrick);
+	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
+}
+
 void patchBetter4() {
 	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
@@ -242,6 +322,7 @@ void patchBetter4() {
 	patchObserve();
 	patchMemberFunctions();
 	patchFreecam();
+	patchTest();
 }
 
 void better4Main() {
