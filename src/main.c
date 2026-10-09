@@ -222,25 +222,6 @@ void patchPoolSizes() {
 	patchDWord(0x0040b89a + 1, 0x6b6c0); // AllocatePermanentStringHeap max_size: 0x1adb0 (107.4 KB) -> 0x6b6c0 (429.7 KB)
 }
 
-int __fastcall Obj_CSkaterProfile_GetNumSpecialTrickSlots(void *this) {
-	static int (__fastcall *_GetNumSpecialTrickSlots)(void *) = (void *)0x004dee80;
-	int slots = _GetNumSpecialTrickSlots(this);
-	logDebug("Obj::CSkaterProfile::GetNumSpecialTrickSlots: this=%p slots=%d", this, slots);
-	return slots;
-}
-
-void __fastcall Obj_CSkaterProfile_GetSpecialTrickInfo(void *this, unused_t _, void *profile, uint32_t index) {
-	static void (__fastcall *_GetSpecialTrickInfo)(void *, unused_t, void *, uint32_t) = (void *)0x004deea0;
-	logDebug("Obj::CSkaterProfile::GetSpecialTrickInfo: this=%p index=%d", this, index);
-	_GetSpecialTrickInfo(this, UNUSED, profile, index);
-}
-
-uint8_t __fastcall Game_CGoal_AddTempSpecialTrick(void *this) {
-	static uint8_t (__fastcall *_GetSpecialTrickInfo)(void *) = (void *)0x004e86d0;
-	logDebug("Game::CGoal::AddTempSpecialTrick: this=%p", this);
-	return _GetSpecialTrickInfo(this);
-}
-
 void resize_specials(CArray *specials) {
 	if (specials->size < 13) {
 		logInfo("resizing specials from 12 to 13");
@@ -270,12 +251,11 @@ void resize_specials(CArray *specials) {
 
 void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_t _, CStruct *struc) {
 	static void (__fastcall *_LoadCASProfileInfo)(void *, unused_t, CStruct *) = (void *)0x004af010;
-	logDebug("Obj::CPlayerProfileManager::LoadCASProfileInfo: this=%p", this);
+
 	CStruct *custom;
 	if (CStruct_GetStructure(struc, 0xa7be964/*custom*/, &custom, 0)) {
 		CStruct *info;
 		if (CStruct_GetStructure(custom, 0x3476cea8/*info*/, &info, 0)) {
-			logDebug("got info");
 			CStruct *specials_struc;
 			if (CStruct_GetStructure(info, 0xddbee809/*specials*/, &specials_struc, 0)) {
 				CFunc_PrintStruct(specials_struc, 0);
@@ -291,10 +271,6 @@ void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_
 }
 
 void patchTwelveSpecials() {
-	patchCall(0x004e8e8e, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo);
-	patchCall(0x004e8e77, (void *)Obj_CSkaterProfile_GetNumSpecialTrickSlots);
-	patchJmp(0x004f173f, (void *)Game_CGoal_AddTempSpecialTrick);
-	patchJmp(0x004f174b, (void *)Game_CGoal_AddTempSpecialTrick);
 	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
 	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
 

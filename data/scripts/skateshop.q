@@ -1757,7 +1757,6 @@ script cas_catchup_trickslots
          <index> = ( <index> + 1 )
       repeat <num_to_remove>
     endif
-    LogDebug "Setting max_specials=%d" d = <cas_desired_total>
     SetSkaterProfileInfo player = <currentSkaterProfileIndex> params = { max_specials = <cas_desired_total> }
   endif
 endscript
