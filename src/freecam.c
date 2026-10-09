@@ -1,5 +1,6 @@
 #include "freecam.h"
 
+#include "autorepeat.h"
 #include "decomp/CScript.h"
 #include "decomp/Gfx_Camera.h"
 #include "decomp/Inp_Manager.h"
@@ -173,32 +174,32 @@ void do_better_freecam_logic(Gfx_Camera *camera) {
         rotate_z(camera, -1.0);
     }
 
-    uint32_t up_pressed = Inp_Data_ButtonJustPressed(inp_data, FLAG_D_UP);
+    uint32_t up_pressed = Autorepeat_ButtonPressed(inp_data, D_UP);
     if (up_pressed) {
         increase_move_speed();
     }
 
-    uint32_t down_pressed = Inp_Data_ButtonJustPressed(inp_data, FLAG_D_DOWN);
+    uint32_t down_pressed = Autorepeat_ButtonPressed(inp_data, D_DOWN);
     if (down_pressed) {
         decrease_move_speed();
     }
 
-    uint32_t right_pressed = Inp_Data_ButtonJustPressed(inp_data, FLAG_D_RIGHT);
+    uint32_t right_pressed = Autorepeat_ButtonPressed(inp_data, D_RIGHT);
     if (right_pressed) {
         increase_look_speed();
     }
 
-    uint32_t left_pressed = Inp_Data_ButtonJustPressed(inp_data, FLAG_D_LEFT);
+    uint32_t left_pressed = Autorepeat_ButtonPressed(inp_data, D_LEFT);
     if (left_pressed) {
         decrease_look_speed();
     }
 
-    uint32_t x_pressed = Inp_Data_ButtonJustPressed(inp_data, FLAG_D_X);
+    uint32_t x_pressed = Autorepeat_ButtonPressed(inp_data, D_X);
     if (x_pressed) {
         increase_fov();
     }
 
-    uint32_t circle_pressed = Inp_Data_ButtonJustPressed(inp_data, FLAG_D_CIRCLE);
+    uint32_t circle_pressed = Autorepeat_ButtonPressed(inp_data, D_CIRCLE);
     if (circle_pressed) {
         decrease_fov();
     }

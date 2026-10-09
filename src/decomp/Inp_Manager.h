@@ -138,6 +138,7 @@ typedef struct Inp_Data {
 
 uint32_t Inp_Data_ButtonPressed(Inp_Data *this, uint32_t flag);
 uint32_t Inp_Data_ButtonJustPressed(Inp_Data *this, uint32_t flag);
+uint32_t Inp_Data_ButtonJustReleased(Inp_Data *this, uint32_t flag);
 
 typedef struct Inp_Server {
     uint8_t unk[0x44];
