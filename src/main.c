@@ -243,6 +243,7 @@ uint8_t __fastcall Game_CGoal_AddTempSpecialTrick(void *this) {
 
 void resize_specials(CArray *specials) {
 	if (specials->size < 13) {
+		logInfo("resizing specials from 12 to 13");
 		CStruct *tmp_specials[12];
 
 		for (int i = 0; i < specials->size; i++) {
@@ -277,15 +278,11 @@ void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_
 			logDebug("got info");
 			CStruct *specials_struc;
 			if (CStruct_GetStructure(info, 0xddbee809/*specials*/, &specials_struc, 0)) {
-				logDebug("got specials struct");
-				logDebug("==== BEFORE ====");
 				CFunc_PrintStruct(specials_struc, 0);
 				CArray *specials;
 				if (CStruct_GetArray(specials_struc, 0, &specials, 0)) {
 					resize_specials(specials);
 				}
-				logDebug("==== AFTER =====");
-				CFunc_PrintStruct(specials_struc, 0);
 			}
 		}
 	}
@@ -293,12 +290,19 @@ void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_
 	_LoadCASProfileInfo(this, UNUSED, struc);
 }
 
-void patchTest() {
+void patchTwelveSpecials() {
 	patchCall(0x004e8e8e, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo);
 	patchCall(0x004e8e77, (void *)Obj_CSkaterProfile_GetNumSpecialTrickSlots);
 	patchJmp(0x004f173f, (void *)Game_CGoal_AddTempSpecialTrick);
 	patchJmp(0x004f174b, (void *)Game_CGoal_AddTempSpecialTrick);
 	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
+	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
+
+	// Obj::CSkater::UpdateTrickMappings (0x004cda50)
+	patchByte(0x004cdc11 + 2, 13);
+
+	// Game::CGoal::RemoveTempSpecialTrick (0x004e8a30)
+	patchByte(0x004e8a9e + 2, 13);
 }
 
 void patchBetter4() {
@@ -322,7 +326,7 @@ void patchBetter4() {
 	patchObserve();
 	patchMemberFunctions();
 	patchFreecam();
-	patchTest();
+	patchTwelveSpecials();
 }
 
 void better4Main() {
