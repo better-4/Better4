@@ -15,7 +15,7 @@
 #include "version.h"
 #include "wallpush.h"
 
-#include <partymod-thps4/src/patch.h>
+#include "partymod-thps4/src/patch.h"
 
 #include <string.h>
 #include <windows.h>
