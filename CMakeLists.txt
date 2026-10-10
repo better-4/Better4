@@ -15,6 +15,8 @@ endif()
 add_library(better4 SHARED
     "${SRC}/autorepeat.c"
     "${SRC}/autorepeat.h"
+    "${SRC}/cas.c"
+    "${SRC}/cas.h"
     "${SRC}/cfuncs.c"
     "${SRC}/cfuncs.h"
     "${SRC}/freecam.c"

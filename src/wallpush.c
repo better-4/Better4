@@ -12,7 +12,7 @@
 #include "input.h"
 #include "log.h"
 
-#include <partymod-thps4/src/patch.h>
+#include "partymod-thps4/src/patch.h"
 
 #include <math.h>
 #include <stdint.h>

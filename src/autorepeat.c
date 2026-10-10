@@ -11,11 +11,10 @@
 int key_repeat_times[MAX_DIGITAL_EVENTS] = { -1 };
 
 uint32_t Autorepeat_ButtonPressed(Inp_Data *inp_data, uint32_t index) {
+    // Must be called every frame
     int now = Tmr_GetTime();
     uint32_t flag = 1 << index;
     int *key_repeat_time = &key_repeat_times[index];
-
-    // logDebug("Autorepeat_ButtonPressed: index=%d flag=%x now=%d key_repeat_time=%d", index, flag, now, *key_repeat_time);
 
     if (Inp_Data_ButtonJustPressed(inp_data, flag)) {
         *key_repeat_time = now + AUTOREPEAT_DELAY_MS;
