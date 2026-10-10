@@ -38,15 +38,37 @@ void resize_specials(CArray *specials) {
 	}
 }
 
-void add_l_accessory(CStruct *appearance, uint32_t desc_id) {
-    CStruct *accessories_l = CStruct_New();
-    CStruct_AddChecksum(accessories_l, 0x4bb2084e/*desc_id*/, desc_id);
+CStruct *create_accessories_struct(CStruct *accessories, uint32_t desc_id) {
+    CStruct *out = CStruct_New();
+    CStruct_AddChecksum(out, 0x4bb2084e/*desc_id*/, desc_id);
+
+    int use_default_hsv = 0;
+    int h = 0;
+    int s = 0;
+    int v = 0;
+
+	if (
+        CStruct_GetInteger(accessories, 0x97dbdde6/*use_default_hsv*/, &use_default_hsv, 0)
+        && CStruct_GetInteger(accessories, 0x6e94f918/*h*/, &h, 0)
+        && CStruct_GetInteger(accessories, 0xe4f130f4/*s*/, &s, 0)
+        && CStruct_GetInteger(accessories, 0x949bc47b/*v*/, &v, 0)
+    ) {
+        CStruct_AddInteger(out, 0x97dbdde6/*use_default_hsv*/, use_default_hsv);
+        CStruct_AddInteger(out, 0x6e94f918/*h*/, h);
+        CStruct_AddInteger(out, 0xe4f130f4/*s*/, s);
+        CStruct_AddInteger(out, 0x949bc47b/*v*/, v);
+	}
+
+    return out;
+}
+
+void add_l_accessory(CStruct *appearance, uint32_t desc_id, CStruct *accessories) {
+    CStruct *accessories_l = create_accessories_struct(accessories, desc_id);
     CStruct_AddStructure(appearance, 0x1f0476b7/*accessoriesL*/, accessories_l);
 }
 
-void add_r_accessory(CStruct *appearance, uint32_t desc_id) {
-    CStruct *accessories_r = CStruct_New();
-    CStruct_AddChecksum(accessories_r, 0x4bb2084e/*desc_id*/, desc_id);
+void add_r_accessory(CStruct *appearance, uint32_t desc_id, CStruct *accessories) {
+    CStruct *accessories_r = create_accessories_struct(accessories, desc_id);
     CStruct_AddStructure(appearance, 0xe50b4bd4/*accessoriesR*/, accessories_r);
 }
 
@@ -70,73 +92,73 @@ void fix_accessories(CStruct *appearance) {
             case 0x2f0beb57:
                 // "Wrist Band R" (0x2f0beb57) -> R "Wrist Band R" (0x2f0beb57)
                 logInfo("fix_accessories: converting \"Wrist Band R\"");
-                add_r_accessory(appearance, 0x2f0beb57);
+                add_r_accessory(appearance, 0x2f0beb57, accessories);
                 break;
             case 0xd504d634:
                 // "Wrist Band L" (0xd504d634) -> L "Wrist Band L" (0xd504d634)
                 logInfo("fix_accessories: converting \"Wrist Band L\"");
-                add_l_accessory(appearance, 0xd504d634);
+                add_l_accessory(appearance, 0xd504d634, accessories);
                 break;
             case 0x96f5d000:
                 // "Wrist Bands" (0x96f5d000) -> R "Wrist Band R" (0x2f0beb57), L "Wrist Band L" (0xd504d634)
                 logInfo("fix_accessories: converting \"Wrist Bands\"");
-                add_r_accessory(appearance, 0x2f0beb57);
-                add_l_accessory(appearance, 0xd504d634);
+                add_r_accessory(appearance, 0x2f0beb57, accessories);
+                add_l_accessory(appearance, 0xd504d634, accessories);
                 break;
             case 0xc10f603d:
                 // "Koston band" (0xc10f603d) -> L "Koston band L" (0xf6dae138)
                 logInfo("fix_accessories: converting \"Koston band\"");
-                add_l_accessory(appearance, 0xf6dae138);
+                add_l_accessory(appearance, 0xf6dae138, accessories);
                 break;
             case 0x3f4e38f1:
                 // "Wrist Watch R" (0x3f4e38f1) -> R "Wrist Watch R" (0x3f4e38f1)
                 logInfo("fix_accessories: converting \"Wrist Watch R\"");
-                add_r_accessory(appearance, 0x3f4e38f1);
+                add_r_accessory(appearance, 0x3f4e38f1, accessories);
                 break;
             case 0xc5410592:
                 // "Wrist Watch L" (0xc5410592) -> L "Wrist Watch L" (0xc5410592)
                 logInfo("fix_accessories: converting \"Wrist Watch L\"");
-                add_l_accessory(appearance, 0xc5410592);
+                add_l_accessory(appearance, 0xc5410592, accessories);
                 break;
             case 0x8a030a7b:
                 // "Gold Watch R" (0x8a030a7b) -> R "Gold Watch R" (0x8a030a7b)
                 logInfo("fix_accessories: converting \"Gold Watch R\"");
-                add_r_accessory(appearance, 0x8a030a7b);
+                add_r_accessory(appearance, 0x8a030a7b, accessories);
                 break;
             case 0x700c3718:
                 // "Gold Watch L" (0x700c3718) -> L "Gold Watch L" (0x700c3718)
                 logInfo("fix_accessories: converting \"Gold Watch L\"");
-                add_l_accessory(appearance, 0x700c3718);
+                add_l_accessory(appearance, 0x700c3718, accessories);
                 break;
             case 0x19e833df:
                 // "Rocker Watch" (0x19e833df) -> R "Rocker Watch R" (0x92ff959c)
                 logInfo("fix_accessories: converting \"Rocker Watch\"");
-                add_r_accessory(appearance, 0x92ff959c);
+                add_r_accessory(appearance, 0x92ff959c, accessories);
                 break;
             case 0x2e8cb94a:
                 // "Bracelet 1" (0x2e8cb94a) -> R "Bracelet 1" (0x2e8cb94a)
                 logInfo("fix_accessories: converting \"Bracelet 1\"");
-                add_r_accessory(appearance, 0x2e8cb94a);
+                add_r_accessory(appearance, 0x2e8cb94a, accessories);
                 break;
             case 0xb785e8f0:
                 // "Bracelet 2" (0xb785e8f0) -> R "Bracelet 2" (0xb785e8f0)
                 logInfo("fix_accessories: converting \"Bracelet 2\"");
-                add_r_accessory(appearance, 0xb785e8f0);
+                add_r_accessory(appearance, 0xb785e8f0, accessories);
                 break;
             case 0xc082d866:
                 // "Bracelet 3" (0xc082d866) -> R "Bracelet 3" (0xc082d866)
                 logInfo("fix_accessories: converting \"Bracelet 3\"");
-                add_r_accessory(appearance, 0xc082d866);
+                add_r_accessory(appearance, 0xc082d866, accessories);
                 break;
             case 0x5ee64dc5:
                 // "Bracelet 4" (0x5ee64dc5) -> R "Bracelet 4" (0x5ee64dc5)
                 logInfo("fix_accessories: converting \"Bracelet 4\"");
-                add_r_accessory(appearance, 0x5ee64dc5);
+                add_r_accessory(appearance, 0x5ee64dc5, accessories);
                 break;
             case 0x2a4c8933:
                 // "Wrist Tape" (0x2a4c8933) -> R "Wrist Tape R" (0x4b80404a)
                 logInfo("fix_accessories: converting \"Wrist Tape\"");
-                add_r_accessory(appearance, 0x4b80404a);
+                add_r_accessory(appearance, 0x4b80404a, accessories);
                 break;
             }
         }
