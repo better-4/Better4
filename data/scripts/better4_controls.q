@@ -466,7 +466,7 @@ better4_control_wallridebail = {
   value_name = better4_control_wallridebail_value
   text = "Wallride Bail"
   ini_key = "WallrideBail"
-  help = "Toggle whether doing a trick into a wallride causes the skater to bail. 'Off' enables THUG1-style boostplants."
+  help = "Toggle whether doing a trick into a wallride causes the skater to bail."
   options = [
     { text = "Off" value = off }
     { text = "On" value = on }
@@ -1034,7 +1034,7 @@ better4_control_respawn_on_newrun = {
   ]
 }
 
-better4_control_updatedcollision_index = 1
+better4_control_updatedcollision_index = 0
 better4_control_updatedcollision = {
   id = better4_control_updatedcollision_id
   index_name = better4_control_updatedcollision_index
