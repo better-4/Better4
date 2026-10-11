@@ -97,6 +97,32 @@ __asm and_success: \
 	__asm ret 0x08 \
 }
 
+#define clear_check_button_asm(SUCCESS, FAIL, CLEAR, OFFSET) __asm { \
+	__asm push eax \
+	__asm push ebx \
+	__asm mov eax, comp \
+	__asm mov ebx, CLEAR \
+	__asm mov byte ptr [eax + ebx], 0 \
+	__asm mov ebx, OFFSET \
+	__asm mov bl, byte ptr [eax + ebx] \
+	__asm test bl, bl \
+	__asm jnz clear_success \
+	__asm pop ebx \
+	__asm pop eax \
+	__asm mov esp, ebp \
+	__asm pop ebp \
+	__asm push FAIL \
+	__asm ret 0x08 \
+	\
+	__asm clear_success: \
+	__asm pop ebx \
+	__asm pop eax \
+	__asm mov esp, ebp \
+	__asm pop ebp \
+	__asm push SUCCESS \
+	__asm ret 0x08 \
+}
+
 
 int spine_transfer_control_index = 0;
 uint32_t offset_spine_1 = OFFSET_R2_HELD;
@@ -265,8 +291,12 @@ int __cdecl CFunc_SetSpinKeysControl(void *params) {
 	return 1;
 }
 
-void __stdcall leftspin_held_check1(void* comp) {
-	check_button_asm(0x004b816a, 0x004b816a, offset_leftspin_held);
+void __stdcall tap_left(void* comp) {
+	clear_check_button_asm(0x004b815a, 0x004b8148, offset_leftspin_trigger, offset_rightspin_held);
+}
+
+void __stdcall tap_right(void* comp) {
+	clear_check_button_asm(0x004b8187, 0x004b8175, offset_rightspin_trigger, offset_leftspin_held);
 }
 
 void __stdcall leftspin_held_check2(void* comp) {
@@ -278,23 +308,15 @@ void __stdcall leftspin_held_check3(void* comp) {
 }
 
 void __stdcall leftspin_held_check4(void* comp) {
-	check_button_asm(0x004c0c5c, 0x004c0c6d, offset_leftspin_held);
+	check_button_asm(0x004bf80c, 0x004bf590, offset_leftspin_held);
 }
 
 void __stdcall leftspin_trigger_check1(void* comp) {
 	check_button_asm(0x004b8138, 0x004b815a, offset_leftspin_trigger);
 }
 
-void __stdcall leftspin_trigger_check2(void* comp) {
-	check_button_asm(0x004b815a, 0x004b8148, offset_leftspin_trigger);
-}
-
 void __stdcall leftspin_trigger_check3(void* comp) {
 	check_button_asm(0x004c01d9, 0x004c025b, offset_leftspin_trigger);
-}
-
-void __stdcall rightspin_held_check1(void* comp) {
-	check_button_asm(0x004b813e, 0x004b813e, offset_rightspin_held);
 }
 
 void __stdcall rightspin_held_check2(void* comp) {
@@ -306,15 +328,11 @@ void __stdcall rightspin_held_check3(void* comp) {
 }
 
 void __stdcall rightspin_held_check4(void* comp) {
-	check_button_asm(0x004bf80c, 0x004bf582, offset_rightspin_trigger);
+	check_button_asm(0x004bf80c, 0x004bf582, offset_rightspin_held);
 }
 
 void __stdcall rightspin_trigger_check1(void* comp) {
 	check_button_asm(0x004b8164, 0x004b8187, offset_rightspin_trigger);
-}
-
-void __stdcall rightspin_trigger_check2(void* comp) {
-	check_button_asm(0x004b8187, 0x004b8175, offset_rightspin_trigger);
 }
 
 void __stdcall rightspin_trigger_check3(void* comp) {
@@ -322,8 +340,8 @@ void __stdcall rightspin_trigger_check3(void* comp) {
 }
 
 void patchSpinKeys() {
-	patchByte((void*)(0x004b8164), 0x56);	// PUSH ESI
-	patchCall((void*)(0x004b8164 + 1), leftspin_held_check1);
+	patchByte((void*)(0x004b8138), 0x56);	// PUSH ESI
+	patchCall((void*)(0x004b8138 + 1), tap_left);
 
 	patchByte((void*)(0x004b8253), 0x56);	// PUSH ESI
 	patchCall((void*)(0x004b8253 + 1), leftspin_held_check2);
@@ -331,24 +349,19 @@ void patchSpinKeys() {
 	patchByte((void*)(0x004b8319), 0x56);	// PUSH ESI
 	patchCall((void*)(0x004b8319 + 1), leftspin_held_check3);
 
-	patchByte((void*)(0x004c0c52), 0x56);	// PUSH ESI
-	patchCall((void*)(0x004c0c52 + 1), leftspin_held_check4);
+	patchByte((void*)(0x004bf582), 0x56);	// PUSH ESI
+	patchCall((void*)(0x004bf582 + 1), leftspin_held_check4);
 
 	patchByte((void*)(0x004b812e), 0x56);	// PUSH ESI
 	patchCall((void*)(0x004b812e + 1), leftspin_trigger_check1);
 
-	patchByte((void*)(0x004b813e), 0x56);	// PUSH ESI
-	patchCall((void*)(0x004b813e + 1), leftspin_trigger_check2);
-
 	patchByte((void*)(0x004c01cb), 0x56);	// PUSH ESI
 	patchCall((void*)(0x004c01cb + 1), leftspin_trigger_check3);
 
-
-	patchByte((void*)(0x004b8138), 0x56);	// PUSH ESI
-	patchCall((void*)(0x004b8138 + 1), rightspin_held_check1);
+	patchByte((void*)(0x004b8164), 0x56);	// PUSH ESI
+	patchCall((void*)(0x004b8164 + 1), tap_right);
 
 	patchByte((void*)(0x004b8261), 0x56); // PUSH ESI
-	//
 	patchCall((void*)(0x004b8261 + 1), rightspin_held_check2);
 
 	patchByte((void*)(0x004b830b), 0x56);	// PUSH ESI
@@ -359,9 +372,6 @@ void patchSpinKeys() {
 
 	patchByte((void*)(0x004b815a), 0x56);	// PUSH ESI
 	patchCall((void*)(0x004b815a + 1), rightspin_trigger_check1);
-
-	patchByte((void*)(0x004b816a), 0x56);	// PUSH ESI
-	patchCall((void*)(0x004b816a + 1), rightspin_trigger_check2);
 
 	patchByte((void*)(0x004c025b), 0x56);	// PUSH ESI
 	patchCall((void*)(0x004c025b + 1), rightspin_trigger_check3);
