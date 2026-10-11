@@ -239,8 +239,14 @@ switch ($PSCmdlet.ParameterSetName) {
         }
 
         if ((Split-Path $resolvedSkate4Exe -Leaf) -ne "Skate4.exe") {
-            Write-Host "ERROR: expected Skate4.exe, but got '$(Split-Path $resolvedSkate4Exe -Leaf)'." -ForegroundColor Red
-            exit 1
+            $sibling = Join-Path (Split-Path $resolvedSkate4Exe -Parent) "Skate4.exe"
+            if (-not (Test-Path $sibling)) {
+                Write-Host "ERROR: expected Skate4.exe, but got '$(Split-Path $resolvedSkate4Exe -Leaf)'." -ForegroundColor Red
+                if (-not $Silent) { Read-Host "Press Enter to close" | Out-Null }
+                exit 1
+            }
+            Write-Host "Selected '$(Split-Path $resolvedSkate4Exe -Leaf)'; using '$sibling' instead."
+            $resolvedSkate4Exe = $sibling
         }
         if (-not (Test-Path $resolvedSkate4Exe)) {
             Write-Host "ERROR: could not find '$resolvedSkate4Exe'." -ForegroundColor Red
