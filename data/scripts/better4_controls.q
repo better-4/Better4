@@ -652,7 +652,7 @@ better4_control_cameratoggle = {
   ini_key = "CameraToggle"
   help = "Change the action performed when pressing the camera toggle button."
   options = [
-    { text = "Camera Toggle" }
+    { text = "Zoom" }
     { text = "Freecam" }
   ]
 }

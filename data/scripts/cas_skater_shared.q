@@ -586,7 +586,7 @@ accessoriesM = [
   }
   {
     desc_id = #"Bull Ring"
-    frontend_desc = 'Bull Ring (THUG2)'
+    frontend_desc = 'Bull Ring'
     mesh = "models/better4/shared/miscitems/extra_bullring_thug2.skin"
   }
 ]
@@ -599,7 +599,7 @@ accessoriesM_f = [
   }
   {
     desc_id = #"Bull Ring F"
-    frontend_desc = 'Bull Ring (THUG2)'
+    frontend_desc = 'Bull Ring'
     mesh = "models/better4/shared/miscitems/extra_bullring_thug2F.skin"
   }
 ]
