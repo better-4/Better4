@@ -296,16 +296,19 @@ endscript
 better4_freecam_fov = 0
 
 script better4_freecam_increase_fov
-  LogDebug "better4_freecam_increase_fov"
-  <new_fov> = ( better4_freecam_fov + 1 )
-  Change better4_freecam_fov = <new_fov>
-  better4_notify_fov_changed
+  if ( ( better4_control_fov_value + better4_freecam_fov ) < 177 )
+    <new_fov> = ( better4_freecam_fov + 1 )
+    Change better4_freecam_fov = <new_fov>
+    better4_notify_fov_changed
+  endif
 endscript
 
 script better4_freecam_decrease_fov
-  <new_fov> = ( better4_freecam_fov - 1 )
-  Change better4_freecam_fov = <new_fov>
-  better4_notify_fov_changed
+  if ( ( better4_control_fov_value + better4_freecam_fov ) > 1 )
+    <new_fov> = ( better4_freecam_fov - 1 )
+    Change better4_freecam_fov = <new_fov>
+    better4_notify_fov_changed
+  endif
 endscript
 
 script better4_notify_fov_changed
