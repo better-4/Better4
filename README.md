@@ -59,8 +59,7 @@ Better4 ships with THPS4 vanilla controls, but may be configured to your liking.
 * Restored unused animations:
   * Beni Fingerflip (`Edit Tricks > Grab Tricks > Benihana (Extra) / Sacktap`)
   * Nollie 360 Flip (`Edit Tricks > Flip Tricks > Varial Kickflip / 360 Flip (Nollie Fix)`)
-  * Kickflip to Indy (`Edit Tricks > Flip Tricks > Kickflip (Extra) / Double Kickflip`)
-  * Kickflip to Crail (`Edit Tricks > Flip Tricks > Kickflip (Extra) / Double Kickflip`)
+  * Kickflip to Indy / Crail (`Edit Tricks > Flip Tricks > Kickflip (Extra) / Double Kickflip`)
   * THPS3 specials (Handspring Layout, etc.)
 * Made some tricks holdable:
   * Ollie North
