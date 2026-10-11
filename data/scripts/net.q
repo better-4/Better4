@@ -1403,13 +1403,6 @@ script update_better_player_list_count
     SetScreenElementProps id = player_list_scrolling_menu reset_window
   endif
 endscript
-script better_server_list_menu_focus_item
-  if ObjectExists id = <id>
-    FireEvent type = focus target = <id>
-  else
-    back_from_better_server_list
-  endif
-endscript
 script player_list_add_item
   if ObjectExists id = <id>
     return
@@ -1766,6 +1759,8 @@ script create_network_select_games_menu
   dialog_box_exit
   Change CAME_FROM_LAN = 0
   SetNetworkMode INTERNET_MODE
+  StartBetterPlayerList
+  StartBetterServerList
   if IsInternetGameHost
     host_net_chosen
   else
@@ -3476,8 +3471,6 @@ script cancel_join_server
     CancelJoinServer
     restart_local_server
     SetNetworkMode INTERNET_MODE
-    StartBetterPlayerList
-    StartBetterServerList
   else
     LogInfo "******* in cancel_join_server 4"
     CancelJoinServer
