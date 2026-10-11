@@ -3,6 +3,7 @@
 #include "decomp/common.h"
 #include "decomp/CArray.h"
 #include "decomp/CStruct.h"
+#include "decomp/Obj_CSkaterProfile.h"
 #include "log.h"
 
 #include "partymod-thps4/src/patch.h"
@@ -204,22 +205,53 @@ void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_
 				CArray *specials = 0;
 				if (CStruct_GetArray(specials_struc, 0, &specials, 0)) {
 					resize_specials(specials);
-				}
-			}
-		}
+				} else {
+                    logWarning("Obj::CPlayerProfileManager::LoadCASProfileInfo: could not access \"custom.info.specials.0\"");
+                }
+			} else {
+                logWarning("Obj::CPlayerProfileManager::LoadCASProfileInfo: could not access \"custom.info.specials\"");
+            }
+		} else {
+            logWarning("Obj::CPlayerProfileManager::LoadCASProfileInfo: could not access \"custom.info\"");
+        }
 
 		CStruct *appearance = 0;
 		if (CStruct_GetStructure(custom, 0x554c7d6f/*appearance*/, &appearance, 0)) {
             fix_accessories(appearance);
             fix_bald(appearance);
-		}
+		} else {
+            logWarning("Obj::CPlayerProfileManager::LoadCASProfileInfo: could not access \"custom.appearance\"");
+        }
 	}
 
 	_LoadCASProfileInfo(this, UNUSED, struc);
 }
 
+void __fastcall Obj_CSkaterProfile_GetSpecialTrickInfo(Obj_CSkaterProfile *this, unused_t _, uint32_t *out, int index) {
+    static void (__fastcall *_GetSpecialTrickInfo)(Obj_CSkaterProfile *, unused_t, void *, int) = (void *)0x004deea0;
+
+	CStruct *specials_struc = 0;
+	CArray *specials = 0;
+
+	if (
+        index < 12
+        || (
+            CStruct_GetStructure(&this->info, 0xddbee809/*specials*/, &specials_struc, 0)
+            && CStruct_GetArray(specials_struc, 0, &specials, 0)
+            && index < specials->size
+        )
+    ) {
+        // Get special trick info only if the index is in-bounds
+        _GetSpecialTrickInfo(this, UNUSED, out, index);
+	} else {
+        logWarning("Obj::CSkaterProfile::GetSpecialTrickInfo: preventing out-of-bounds access at index %d", index);
+        out[0]/*trickname*/ = 0xf60c9090/*Unassigned*/;
+        out[1]/*trickslot*/ = 0xf60c9090/*Unassigned*/;
+    }
+}
+
 void patchCas() {
-	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
+    // CFuncs::s_read_game_save_info (0x00514a10)
 	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
 
 	// Obj::CSkater::UpdateTrickMappings (0x004cda50)
@@ -227,4 +259,13 @@ void patchCas() {
 
 	// Game::CGoal::RemoveTempSpecialTrick (0x004e8a30)
 	patchByte(0x004e8a9e + 2, 13);
+
+    patchCall(0x004cdbe7, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // Obj::CSkater::UpdateTrickMappings (0x004cda50)
+    patchCall(0x004e87ed, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // Game::CGoal::AddTempSpecialTrick (0x004e86d0)
+    patchCall(0x004e8a8c, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // Game::CGoal::RemoveTempSpecialTrick (0x004e8a30)
+    patchCall(0x004e8e8e, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // Game::fill_trick_and_key_combo_arrays (0x004e8df0)
+    patchCall(0x004f1980, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // ScriptGoalManager_GetTrickFromKeyCombo (0x004f17c0)
+    patchCall(0x0051d56d, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // ScriptGetKeyComboBoundToTrick (0x0051d4b0)
+    patchCall(0x0051dc72, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // ScriptGetSpecialTrickInfo (0x0051dc40)
+    patchCall(0x0051e330, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // ScriptGetKeyComboArrayFromTrickArray (0x0051e130)
 }
