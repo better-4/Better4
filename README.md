@@ -16,7 +16,7 @@ Better4 is a THPS4 modpack that includes modern gameplay and QOL features while 
 > When installing THPS4, it is recommended to not install to Program Files or any other folder which requires administrator access.
 > Ideally, place it somewhere in your user directory (e.g. `C:/Users/<you>/Games/thps4`) or C drive (e.g. `C:/Games/thps4`).
 
-First, verify THPS4 is installed. Download the [latest GitHub release](https://github.com/better-4/Better4/releases/latest), unzip it, and run `install.bat`, selecting your `Skate4.exe` file when prompted. Alternatively, you may drag and drop `Skate4.exe` from your THPS4 game directory onto `install.bat`.
+First, verify THPS4 is installed. Download the [latest GitHub release](https://github.com/better-4/Better4/releases/latest), unzip it, and run `install.bat`, selecting your `Skate4.exe` file when prompted.
 
 If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
 
