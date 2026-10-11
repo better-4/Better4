@@ -527,6 +527,9 @@ script create_pause_menu
   if IsBetterObserving
     destroy_observer_ui
   endif
+  if ( better4_in_freecam = 1 )
+    better4_exit_freecam dont_observe
+  endif
   if CustomParkMode editing
     SetParkEditorPauseMode pause
   endif

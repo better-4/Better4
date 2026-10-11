@@ -14,6 +14,7 @@ typedef struct CArray {
 
 CArray *CArray_New();
 void CArray_Free(CArray *this);
+void *CArray_Get(CArray *this, uint32_t index);
 void CArray_SetStructure(CArray *this, uint32_t index, struct CStruct *value);
 void CArray_SetSizeAndType(CArray *this, uint32_t size, uint32_t type);
 

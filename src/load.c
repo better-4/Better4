@@ -2,8 +2,8 @@
 
 #include "decomp/common.h"
 
-#include <partymod-thps4/src/hash.h>
-#include <partymod-thps4/src/patch.h>
+#include "partymod-thps4/src/hash.h"
+#include "partymod-thps4/src/patch.h"
 
 map_t *override_map;
 

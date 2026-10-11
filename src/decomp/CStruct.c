@@ -50,6 +50,11 @@ void CStruct_AppendStructure(CStruct *this, CStruct *other) {
     _AppendStructure(this, UNUSED, other);
 }
 
+int CStruct_GetArray(CStruct *this, uint32_t checksum, struct CArray **ret, int assert) {
+    static int(__fastcall* _GetArray)(CStruct *, unused_t, uint32_t, struct CArray **, int) = (void *)0x004183c0;
+    return _GetArray(this, UNUSED, checksum, ret, assert);
+}
+
 int CStruct_GetChecksum(CStruct *this, uint32_t checksum, uint32_t *ret, int assert) {
     static int(__fastcall* _GetChecksum)(CStruct *, unused_t, uint32_t, uint32_t *, int) = (void *)0x004184b0;
     return _GetChecksum(this, UNUSED, checksum, ret, assert);
@@ -68,6 +73,11 @@ int CStruct_GetInteger(CStruct *this, uint32_t checksum, int *ret, int assert) {
 int CStruct_GetString(CStruct *this, uint32_t checksum, const char **ret, int assert) {
     static int(__fastcall* _GetString)(CStruct *, unused_t, uint32_t, const char **, int) = (void *)0x00417ff0;
     return _GetString(this, UNUSED, checksum, ret, assert);
+}
+
+int CStruct_GetStructure(CStruct *this, uint32_t checksum, CStruct **ret, int assert) {
+    static int(__fastcall* _GetStructure)(CStruct *, unused_t, uint32_t, CStruct **, int) = (void *)0x00418320;
+    return _GetStructure(this, UNUSED, checksum, ret, assert);
 }
 
 void CStruct_RemoveComponent(CStruct *this, uint32_t checksum) {

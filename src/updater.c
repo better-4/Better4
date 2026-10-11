@@ -3,7 +3,7 @@
 #include "log.h"
 #include "version.h"
 
-#include <partymod-thps4/src/config.h>
+#include "partymod-thps4/src/config.h"
 
 #include <windows.h>
 #include <stdio.h>

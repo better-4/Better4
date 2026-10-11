@@ -16,6 +16,11 @@ void CArray_Free(CArray *this) {
     free(this);
 }
 
+void *CArray_Get(CArray *this, uint32_t index) {
+    static void *(__fastcall* _Get)(CArray *, unused_t, uint32_t) = (void *)0x00408850;
+    return _Get(this, UNUSED, index);
+}
+
 void CArray_SetStructure(CArray *this, uint32_t index, struct CStruct *value) {
     static void(__fastcall* _SetStructure)(CArray *, unused_t, uint32_t, struct CStruct *) = (void *)0x00408770;
     _SetStructure(this, UNUSED, index, value);

@@ -1,5 +1,7 @@
 #include "decomp/Mth.h"
 
+#include <math.h>
+
 float Mth_DegToRad(float deg) {
     return deg * 0.0174532925f;
 }

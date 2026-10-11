@@ -3,7 +3,7 @@
 #include "decomp/common.h"
 #include "decomp/Obj_CSkater.h"
 
-#include <partymod-thps4/src/patch.h>
+#include "partymod-thps4/src/patch.h"
 
 #include <stdint.h>
 

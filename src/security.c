@@ -2,7 +2,7 @@
 
 #include "log.h"
 
-#include <partymod-thps4/src/patch.h>
+#include "partymod-thps4/src/patch.h"
 
 #include <stdint.h>
 #include <string.h>
