@@ -2,6 +2,8 @@ lock_framerate = 0
 display_framerate_box = 1
 DEMO_BUILD = 0
 script load_permanent_prefiles
+  better4_controls_init
+  better4_modifiers_init
   LoadPreFile "permtex.pre"
   LoadPreFile "casfiles.pre"
   if IsNGC
@@ -9,12 +11,6 @@ script load_permanent_prefiles
   endif
 endscript
 script load_permanent_assets
-  better4_controls_init
-  better4_modifiers_init
-  LogDebug "@@ test debug int=%i" i = 3
-  LogInfo "@@ test info str=%s" s = "heyyyy"
-  LogWarning "@@ test warning"
-  LogError "@@ test error"
   SetDefaultPermanent 1
   SetReferenceChecksum 0
   LoadPreFile "anims.pre"
@@ -118,10 +114,12 @@ script startup_loading_screen
   endif
   if IsXBOX
     if CD
-      PlayMovie "movies\atvi"
-      PlayMovie "movies\aspyr"
-      PlayMovie "movies\nslogo"
-      PlayMovie "movies\intro"
+      if ( better4_control_disablemovies_value = off )
+        PlayMovie "movies\atvi"
+        PlayMovie "movies\aspyr"
+        PlayMovie "movies\nslogo"
+        PlayMovie "movies\intro"
+      endif
     endif
   endif
   if IsNGC

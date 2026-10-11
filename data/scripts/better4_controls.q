@@ -1067,6 +1067,21 @@ better4_control_boostplant = {
   ]
 }
 
+better4_control_disablemovies_index = 0
+better4_control_disablemovies_value = off
+better4_control_disablemovies = {
+  id = better4_control_disablemovies_id
+  index_name = better4_control_disablemovies_index
+  value_name = better4_control_disablemovies_value
+  text = "Disable Movies"
+  ini_key = "DisableMovies"
+  help = "Toggle whether movies play when launching the game."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -1110,6 +1125,7 @@ script better4_controls_init
   better4_control_init better4_control_updatedcollision
   better4_control_init better4_control_boostplant
   better4_control_init better4_control_directional_dropdown
+  better4_control_init better4_control_disablemovies
 endscript
 
 script better4_control_init
