@@ -20,8 +20,6 @@ First, verify THPS4 is installed. Download the [latest GitHub release](https://g
 
 If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
 
-Better4 does not modify any vanilla game files. Any game data created by the installer is contained in `**/better4/**` subdirectories, which are only referenced when `better4.exe` is run.
-
 > [!CAUTION]
 > If THPS4 is installed to Program Files (or another directory which requires admin access to write files), you must run `better4.exe` and `better4config.exe` as admin for config changes to save.
 > This may be set persistently by right-clicking on the exe and going to `Properties > Compatibility > Change settings for all users > Run this program as an administrator`.
