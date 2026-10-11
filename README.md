@@ -12,13 +12,17 @@ Better4 is a THPS4 modpack that includes modern gameplay and QOL features while 
 
 ## Installation
 
+> [!TIP]
+> When installing THPS4, it is recommended to not install to Program Files or any other folder which requires administrator access.
+> Ideally, place it somewhere in your user directory (`C:/Users/<you>/Games/thps4`) or C drive (`C:/Games/thps4`).
+
 First, verify THPS4 is installed. Download the [latest GitHub release](https://github.com/better-4/Better4/releases/latest), unzip it, and run `install.bat`, selecting your `Skate4.exe` file when prompted. Alternatively, you may drag and drop `Skate4.exe` from your THPS4 game directory onto `install.bat`.
 
 If you have an existing PARTYMOD-THPS4 installation, you may copy `partymod.ini` to `better4.ini` to reuse the same configuration. Alternatively, you may run `better4config.exe` and configure from scratch.
 
 Better4 does not modify any vanilla game files. Any game data created by the installer is contained in `**/better4/**` subdirectories, which are only referenced when `better4.exe` is run.
 
-> [!NOTE]
+> [!CAUTION]
 > If THPS4 is installed to Program Files (or another directory which requires admin access to write files), you may have to run as admin for config changes to save.
 > The installer script will prompt to re-run as admin if needed, but `better4.exe` and `better4config.exe` must be manually run as admin.
 > This may be set persistently by right-clicking on the exe and going to `Properties > Compatibility > Change settings for all users > Run this program as an administrator`.
@@ -114,6 +118,7 @@ Note that custom levels from other games may not support gaps, graffiti, CTF, or
 
 * Skater sounds do not pause when entering freecam mode
 * Some UI transitions in LAN menu may incorrectly put the player back in Internet menu
+* Some Better4 menus may go off-screen (e.g. game modifiers in host options)
 
 ## Credits
 
