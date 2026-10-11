@@ -1876,11 +1876,11 @@ script create_network_select_lan_games_menu
         { pad_back back_from_lan_game_list }
       ]
     }
-    main_menu_add_item text = "Host LAN Game" parent = actions_menu id = menu_network_select_host pad_choose_script = host_chosen highlight_bar_scale = (1.43, 1.3)
-    main_menu_add_item text = "Join LAN Game" parent = actions_menu id = menu_network_select_join pad_choose_script = join_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Host LAN Game" parent = actions_menu id = menu_network_select_host pad_choose_script = host_chosen highlight_bar_scale = (0.73, 1.3)
+    main_menu_add_item text = "Join LAN Game" parent = actions_menu id = menu_network_select_join pad_choose_script = join_chosen highlight_bar_scale = (0.73, 1.3)
     main_menu_add_item { text = 'Join IP'
       id = menu_network_select_join_ip
-      highlight_bar_scale = (1.43, 1.3)
+      highlight_bar_scale = (0.73, 1.3)
       pad_choose_script = create_network_menu_exit
       pad_choose_params = { new_menu_script = create_onscreen_keyboard
         text = ""
@@ -1892,8 +1892,8 @@ script create_network_select_lan_games_menu
         keyboard_cancel_params = { cancel }
         allow_cancel }
     }
-    main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (1.43, 1.3)
-    main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen highlight_bar_scale = (1.43, 1.3)
+    main_menu_add_item text = "Observe Game" parent = actions_menu id = menu_network_select_observe pad_choose_script = observe_chosen highlight_bar_scale = (0.73, 1.3)
+    main_menu_add_item text = "Refresh" parent = actions_menu id = menu_network_select_refresh pad_choose_script = refresh_chosen highlight_bar_scale = (0.73, 1.3)
     RunScriptOnScreenElement id = current_menu_anchor menu_onscreen
     FireEvent type = unfocus target = server_list_menu
     FireEvent type = unfocus target = server_desc_menu
@@ -3417,7 +3417,7 @@ script CreateLostConnectionDialog
 endscript
 script BackToServerListFromJoinRefusedDialog
   dialog_box_exit
-  create_network_select_games_menu
+  back_from_lan_check
 endscript
 script CreateJoinRefusedDialog
   if InNetGame

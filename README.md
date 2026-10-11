@@ -112,8 +112,8 @@ Note that custom levels from other games may not support gaps, graffiti, CTF, or
 
 ## Known Issues
 
+* Online play between different Better4 versions may cause crashes
 * Skater sounds do not pause when entering freecam mode
-* Some UI transitions in LAN menu may incorrectly put the player back in Internet menu
 * Some Better4 menus may go off-screen (e.g. game modifiers in host options)
 
 ## Credits
