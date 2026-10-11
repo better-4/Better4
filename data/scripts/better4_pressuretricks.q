@@ -33,6 +33,7 @@ script ApplyStanceToggle
       if ( in_pressure = 1 ) 
         PressureOff 
         NollieOn 
+        SetException Ex = Ollied Scr = Nollie Params = { <...> } 
       else
         if ( better4_control_pressure_value = on ) 
           PressureOn
@@ -40,6 +41,7 @@ script ApplyStanceToggle
         else
           PressureOff
           NollieOn
+          SetException Ex = Ollied Scr = Nollie Params = { <...> } 
         endif
       endif 
     endif
