@@ -21,6 +21,31 @@ balance_meter_info = {
     (60, 12)
   ]
 }
+
+thps3_meter_info = {
+  bar_positions = [
+    (320, 165)
+    (250, 224)
+  ]
+  bar_positions_mp_h = [
+    (320, 70)
+    (250, 130)
+  ]
+  bar_positions_mp_v = [
+    (140, 130)
+    (80, 224)
+  ]
+  arrow_positions = [
+    (0, -47)
+    (10, -47)
+    (20, -45)
+    (30, -41)
+    (40, -36)
+    (50, -41)
+    (60, 4)
+  ]
+}
+
 special_bar_colors = [
   [ 128 128 255 128 ]
   [ 255 128 128 128 ]
@@ -53,6 +78,13 @@ script load_permanent_textures
   LoadTexture "PanelSprites/mini_score_HUD"
   LoadTexture "PanelSprites/MemcardSprites/mem_frame_piece"
   LoadTexture "PanelSprites/MemcardSprites/mem_bg_piece"
+  
+  // Better4 Textures
+  LoadTexture "better4/PanelSprites/thug2_balancemeter"
+  LoadTexture "better4/PanelSprites/thug2_balance_arrow"
+  
+  LoadTexture "better4/PanelSprites/thps3_balancemeter"
+  LoadTexture "better4/PanelSprites/thps3_balance_arrow"
 endscript
 script hide_panel_stuff
   LogInfo "*************** HIDING PANEL STUFF *********************"
@@ -356,18 +388,21 @@ script create_panel_stuff
   reset_trick_text_appearance the_score_pot_text_id = the_score_pot_text the_trick_text_id = the_trick_text trick_text_container_id = trick_text_container
   switch better4_control_balance_index
   case 0
+    <balance_texture> = thps3_balancemeter
+	<balance_arrow> = thps3_balance_arrow
+  case 1
     <balance_texture> = balancemeter
 	<balance_arrow> = balancearrow_glow
-  case 1
-    <balance_texture> = nollie_icon
-	<balance_arrow> = nollie_icon
+  case 2
+    <balance_texture> = thug2_balancemeter
+	<balance_arrow> = thug2_balance_arrow
   endswitch
   CreateScreenElement {
     id = the_balance_meter
     type = SpriteElement
     parent = player1_panel_container
     texture = <balance_texture>
-    scale = 1.0
+    scale = better4_balance_meter_scale
     just = [ center center ]
     rgba = [ 128 128 128 0 ]
     tags = { tag_turned_on = 0 tag_mode = balance }
@@ -377,7 +412,7 @@ script create_panel_stuff
     type = SpriteElement
     parent = the_balance_meter
     texture = <balance_arrow>
-    scale = 1.0
+    scale = better4_balance_arrow_scale
     pos = (0, 0)
     just = [ center center ]
     rgba = [ 128 128 128 0 ]
@@ -935,8 +970,9 @@ script do_hide_balance_meter
   SetScreenElementProps id = { <id> child = 0 } rgba = [ 128 128 128 0 ]
 endscript
 script show_balance_meter
-  SetScreenElementProps id = <id> tags = { tag_turned_on = 1 }
-  RunScriptOnScreenElement id = <id> do_show_balance_meter params = { id = <id> }
+  SetScreenElementProps id = <id> rgba = better4_balance_meter_color tags = { tag_turned_on = 1 }
+  SetScreenElementProps id = { <id> child = 0 } rgba = better4_balance_arrow_color
+  RunScriptOnScreenElement id = <id> do_show_balance_meter params = { id = <id> }r
 endscript
 script unpause_balance_meter
   RunScriptOnScreenElement id = the_balance_meter do_show_balance_meter params = { id = the_balance_meter }

@@ -1035,8 +1035,8 @@ script better4_change_goalpts
   endif
 endscript
 
-better4_control_balance_index = 0
-better4_control_balance_value = balancemeter
+better4_control_balance_index = 1
+better4_control_balance_value = thps4
 better4_control_balance = {
   id = better4_control_balance_id
   index_name = better4_control_balance_index
@@ -1045,31 +1045,82 @@ better4_control_balance = {
   ini_key = "BalanceMeterTest"
   help = "WIP..."
   options = [
-    { text = "Default" value = balancemeter }
-    { text = "TEST TST" value = nollie_icon }
+    { text = "THPS3" value = thps3 }
+    { text = "THPS4" value = thps4 }
+    { text = "THUG2" value = thug2 }
   ]
   change_script = better4_change_balance
 }
 
+better4_balance_meter_color = better4_balance_meter_color_thps4
+better4_balance_arrow_color = better4_balance_arrow_color_thps4
+
+better4_balance_meter_scale_thps3 = 0.5
+better4_balance_arrow_scale_thps3 = 0.5
+
+better4_balance_meter_scale_default = 1.0
+better4_balance_arrow_scale_default = 1.0
+
+better4_balance_meter_scale = better4_balance_meter_scale_default
+better4_balance_arrow_scale = better4_balance_arrow_scale_default
+
+// arrow_positions_thps3 = [
+    // (0, -27)
+    // (10, -27)
+    // (20, -25)
+    // (30, -21)
+    // (40, -16)
+    // (50, -11)
+    // (60, 2)
+  // ]
+// }
+
+// arrow_positions_default = [
+    // (0, -17)
+    // (10, -17)
+    // (20, -15)
+    // (30, -11)
+    // (40, -6)
+    // (50, 1)
+    // (60, 12)
+  // ]
+// }
 script better4_change_balance
   switch better4_control_balance_index
   case 0
+    <balance_texture> = thps3_balancemeter
+	<balance_arrow> = thps3_balance_arrow
+	 Change better4_balance_meter_scale = better4_balance_meter_scale_thps3
+     Change better4_balance_arrow_scale = better4_balance_arrow_scale_thps3
+	 change balance_meter_info = thps3_meter_info
+	 set_thps3_balance_meter_colors
+  case 1
     <balance_texture> = balancemeter
 	<balance_arrow> = balancearrow_glow
-  case 1
-    <balance_texture> = nollie_icon
-	<balance_arrow> = fakie_icon
+     Change better4_balance_meter_scale = better4_balance_meter_scale_default
+     Change better4_balance_arrow_scale = better4_balance_arrow_scale_default
+	 change balance_meter_info = balance_meter_info
+	 set_thps4_balance_meter_colors
+  case 2
+    <balance_texture> = thug2_balancemeter
+	<balance_arrow> = thug2_balance_arrow
+     Change better4_balance_meter_scale = better4_balance_meter_scale_default
+     Change better4_balance_arrow_scale = better4_balance_arrow_scale_default
+	 change balance_meter_info = balance_meter_info
+	 set_thug2_balance_meter_colors
   endswitch
   if ScreenElementExists id = the_balance_meter
     SetScreenElementProps {
       id = the_balance_meter
       texture = <balance_texture>
+	  scale = better4_balance_meter_scale
     }
   endif
   if ScreenElementExists id = the_balance_meter_arrow
     SetScreenElementProps {
       id = the_balance_meter_arrow
 	  texture = <balance_arrow>
+	  scale = better4_balance_arrow_scale
     }
   endif
 endscript
