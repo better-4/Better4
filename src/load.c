@@ -153,6 +153,8 @@ void patchLoad() {
 	add_path_override("levels\\skateshop\\skateshop.scn.Xbx", "levels\\better4\\skateshop\\skateshop.scn.Xbx");
 	add_path_override("levels\\skateshop\\skateshop.tex.Xbx", "levels\\better4\\skateshop\\skateshop.tex.Xbx");
 
+	add_path_override("levels\\lon\\lon.scn.Xbx", "levels\\better4\\lon\\lon.scn.Xbx");
+
 	// patchCall(0x0040b50e, (void *)Pip_Load); // ??
 	// patchCall(0x00464cd4, (void *)Pip_Load); // ??
 	// patchCall(0x0046c78f, (void *)Pip_Load); // Nx::CScene::read_collision
