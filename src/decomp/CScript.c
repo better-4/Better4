@@ -12,6 +12,11 @@ void Script_RunScript(uint32_t checksum, struct CStruct *params, void *unk, uint
     _RunScript(checksum, params, unk, unk2, unk3);
 }
 
+struct CArray *Script_GetArray(uint32_t checksum, int assert) {
+    static struct CArray *(__cdecl *_GetArray)(uint32_t, int) = (void *)0x00419dc0;
+    return _GetArray(checksum, assert);
+}
+
 char *Script_GetLocalString(char *name) {
     static char *(__cdecl* _GetLocalString)(char *name) = (void *)0x00419ba0;
     return _GetLocalString(name);

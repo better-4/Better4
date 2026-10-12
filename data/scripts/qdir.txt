@@ -168,7 +168,7 @@ sk4_PedSecretReact.qb
 sK4_PedSkaterAI.qb
 sk4_PedTalking.qb
 sk4_PedVO.qb
-SK4_Scripts.qb
+better4/SK4_Scripts.qb
 skater.qb
 skater_misc.qb
 skater_particlesys.qb

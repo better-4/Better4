@@ -71,6 +71,8 @@ add_library(better4 SHARED
     "${SRC}/decomp/Net_Conn.h"
     "${SRC}/decomp/Net_Dispatcher.c"
     "${SRC}/decomp/Net_Dispatcher.h"
+    "${SRC}/decomp/Obj.c"
+    "${SRC}/decomp/Obj.h"
     "${SRC}/decomp/Obj_CCompositeObject.h"
     "${SRC}/decomp/Obj_CMovingObject.c"
     "${SRC}/decomp/Obj_CMovingObject.h"

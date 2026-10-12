@@ -163,6 +163,16 @@ better4_modifier_disabletrickboost = {
   #"default" = 0
 }
 
+better4_modifier_disableteleports_value = 0
+better4_modifier_disableteleports = {
+  id = better4_modifier_disableteleports_id
+  flag = 10
+  value_name = better4_modifier_disableteleports_value
+  text = "Disable Teleports"
+  help = "Toggle whether players are allowed to use teleports."
+  #"default" = 0
+}
+
 script better4_modifier_cycle
   <value> = <value_name>
   <new_value> = ( <value> + <delta> )
@@ -212,6 +222,7 @@ script better4_modifiers_init
   better4_modifier_init better4_modifier_perfectmanual
   better4_modifier_init better4_modifier_perfectskitch
   better4_modifier_init better4_modifier_disabletrickboost
+  better4_modifier_init better4_modifier_disableteleports
 endscript
 
 script better4_modifier_set
@@ -236,6 +247,8 @@ script better4_modifier_set
     <mod> = better4_modifier_perfectskitch
   case 9
     <mod> = better4_modifier_disabletrickboost
+  case 10
+    <mod> = better4_modifier_disableteleports
   endswitch
 
   AddParams <mod>

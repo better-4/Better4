@@ -1,7 +1,11 @@
 #include "cfuncs.h"
 
+#include "decomp/CArray.h"
+#include "decomp/CStruct.h"
+#include "decomp/CScript.h"
 #include "decomp/GameNet_Manager.h"
 #include "decomp/GameNet_PlayerInfo.h"
+#include "decomp/Obj.h"
 #include "decomp/Tmr.h"
 #include "freecam.h"
 #include "input.h"
@@ -20,6 +24,7 @@
 #include "partymod-thps4/src/patch.h"
 
 #include <string.h>
+#include <stdlib.h>
 #include <windows.h>
 
 // #define THPS4_CFUNC_LUT_STOP 0x005ad670
@@ -27,7 +32,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 55
+#define BETTER4_NUM_CFUNCS 56
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -109,6 +114,7 @@ void addCFuncs() {
 	addCFunc("SetFreecamMoveSpeed", (void *)CFunc_SetFreecamMoveSpeed);
 	addCFunc("SetFreecamLookSpeed", (void *)CFunc_SetFreecamLookSpeed);
 	addCFunc("IsKing", (void *)CFunc_IsKing);
+	addCFunc("RandomRestartNode", (void *)CFunc_RandomRestartNode);
 }
 
 void printCFuncs() {
@@ -299,4 +305,48 @@ int __cdecl CFunc_IsKing(CStruct* _, CScript *__) {
 	uint32_t ret = GameNet_PlayerInfo_IsKing(local_player);
 	logDebug("CFunc_IsKing: is_king=%d", ret);
 	return ret;
+}
+
+int __cdecl CFunc_RandomRestartNode(CStruct* _, CScript *script) {
+	CArray *node_array = Script_GetArray(0xc472ecc5/*NodeArray*/, 0);
+	logDebug("CFunc_RandomRestartNode: node_array=%p size=%d type=%d", node_array, node_array->size, node_array->type);
+
+	CStruct *candidates[8];
+	int num_candidates = 0;
+
+	int node_index = -1;
+	do {
+    	node_index = Obj_GetRestartNode(0, 0, node_index);
+		if (node_index < 0) {
+			break;
+		}
+
+		CStruct *node = CArray_Get(node_array, node_index);
+
+		uint32_t type = 0;
+		if (
+			CStruct_GetChecksum(node, 0x7321a8d6/*Type*/, &type, 0)
+		    && type == 0xbae0e4da/*Multiplayer*/
+		) {
+			candidates[num_candidates++] = node;
+		}
+	} while (node_index > -1 && num_candidates < 8);
+	
+	if (num_candidates > 0) {
+		int selected_index = rand() % num_candidates;
+		CStruct *selected = candidates[selected_index];
+
+		uint32_t name = 0;
+		if (CStruct_GetChecksum(selected, 0xa1dc81f9/*Name*/, &name, 0)) {
+			logDebug("CFunc_RandomRestartNode: selected restart %d (%08x)", selected_index, name);
+			CStruct_AddChecksum(script->params, 0x7a8017ba/*node*/, name);
+		} else {
+			logWarning("CFunc_RandomRestartNode: could not get name of selected candidate node");
+		}
+
+		return 1;
+	} else {
+		logWarning("RandomRestartNode: no suitable candidate found");
+		return 0;
+	}
 }
