@@ -181,6 +181,20 @@ RUN mkdir -p "/out/data/scripts/better4" \
     && dotnet "/opt/qscripted/ThpsQScriptEd.dll" "data/scripts" "/out/data/scripts/better4"
 
 ########################################
+FROM toolchain-dotnet AS build-level-qscripts
+COPY --from=build-qscripted /opt/qscripted /opt/qscripted
+
+COPY data/levels data/levels
+RUN for d in data/levels/*/; do \
+        n=$(basename "$d"); \
+        ls "$d"*.q >/dev/null 2>&1 || continue; \
+        mkdir -p "/tmp/q/$n" "/out/data/levels/better4/$n" \
+        && cp "$d"*.q "/tmp/q/$n" \
+        && dotnet /opt/qscripted/ThpsQScriptEd.dll "/tmp/q/$n" "/out/data/levels/better4/$n" \
+        || exit 1; \
+    done
+
+########################################
 FROM toolchain AS build-anims
 COPY --from=build-nx /opt/nx /opt/nx
 
@@ -206,6 +220,7 @@ COPY data/scripts/qdir.txt /out/data/scripts/better4/qdir.txt
 COPY data/fonts /out/data/fonts/better4
 COPY data/images /out/data/images/better4
 COPY data/levels /out/data/levels/better4
+RUN find /out/data/levels/better4 -name '*.q' -delete # level qscripts compiled in build-level-qscripts stage
 COPY data/models /out/data/models/better4
 COPY data/sounds /out/data/sounds/Wav/better4
 COPY data/textures /out/data/textures/better4
@@ -217,5 +232,6 @@ COPY --from=build-config /out /
 COPY --from=build-patcher /out /
 COPY --from=build-better4 /out /
 COPY --from=build-qscripts /out /
+COPY --from=build-level-qscripts /out /
 COPY --from=build-anims /out /
 COPY --from=build-data /out /
