@@ -1,5 +1,7 @@
 #include "cfuncs.h"
 
+#include "decomp/GameNet_Manager.h"
+#include "decomp/GameNet_PlayerInfo.h"
 #include "decomp/Tmr.h"
 #include "freecam.h"
 #include "input.h"
@@ -25,7 +27,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 54
+#define BETTER4_NUM_CFUNCS 55
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -106,6 +108,7 @@ void addCFuncs() {
 	addCFunc("SetFreecamControls", (void *)CFunc_SetFreecamControls);
 	addCFunc("SetFreecamMoveSpeed", (void *)CFunc_SetFreecamMoveSpeed);
 	addCFunc("SetFreecamLookSpeed", (void *)CFunc_SetFreecamLookSpeed);
+	addCFunc("IsKing", (void *)CFunc_IsKing);
 }
 
 void printCFuncs() {
@@ -287,4 +290,13 @@ int __cdecl CFunc_GetElapsedTime(CStruct* params, CScript *script) {
     CStruct_AddInteger(out, 0x3eb3566b/*ElapsedTime*/, Tmr_ElapsedTime(start_time));
 
 	return 1;
+}
+
+int __cdecl CFunc_IsKing(CStruct* _, CScript *__) {
+	GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
+	GameNet_PlayerInfo *local_player = GameNet_Manager_GetLocalPlayer(gamenet_manager);
+
+	uint32_t ret = GameNet_PlayerInfo_IsKing(local_player);
+	logDebug("CFunc_IsKing: is_king=%d", ret);
+	return ret;
 }

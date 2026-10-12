@@ -14,6 +14,7 @@ typedef struct GameNet_PlayerInfo {
 
 uint32_t GameNet_PlayerInfo_IsObserving(GameNet_PlayerInfo *this);
 uint32_t GameNet_PlayerInfo_IsLocalPlayer(GameNet_PlayerInfo *this);
+uint32_t GameNet_PlayerInfo_IsKing(GameNet_PlayerInfo *this);
 
 void *GameNet_PlayerInfo_GetConnHandle(GameNet_PlayerInfo *this);
 

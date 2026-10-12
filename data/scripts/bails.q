@@ -213,7 +213,7 @@ script GeneralBail Friction = 18 Friction2 = 20 HeavyFriction = 100
     SetException Ex = FlailLeft Scr = BailSmack params = { SmackAnim = <SmackAnim> }
     SetException Ex = FlailRight Scr = BailSmack params = { SmackAnim = <SmackAnim> }
   endif
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   if GotParam Sound
@@ -429,7 +429,7 @@ script HitBody hitbodyframe = 15
   PlaySound random( @Hitbody03 @HitBody04 ) 
 endscript
 script BailSmack SmackAnim = SmackWall
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   TurnToFaceVelocity
@@ -472,7 +472,7 @@ script Facesmash
   SetException Ex = FlailLeft Scr = BailSmack params = { SmackAnim = Smackwallupright }
   SetException Ex = FlailRight Scr = BailSmack params = { SmackAnim = Smackwallupright }
   SetException Ex = GroundGone Scr = GroundGoneBail params = { AnimFall1 = HeadFirstFall AnimFall2 = HeadFirstSplat AnimFall3 = GetUpBackwards }
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   PlaySound Bail04
@@ -508,7 +508,7 @@ script Facesmash
   endif
   WaitAnimFinished
   ClearExceptions
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   PlayAnim Anim = GetUpFacesmash Blendperiod = 0.1
@@ -521,7 +521,7 @@ endscript
 script GroundGoneBail AnimFall1 = HeadFirstFall AnimFall2 = HeadFirstSplat
   InBail
   ClearExceptions
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   DisablePlayerInput AllowCameraControl
@@ -575,7 +575,7 @@ script NoseManualBail
   SetException Ex = FlailLeft Scr = BailSmack params = { SmackAnim = Smackwallupright }
   SetException Ex = FlailRight Scr = BailSmack params = { SmackAnim = Smackwallupright }
   SetException Ex = GroundGone Scr = GroundGoneBail params = { AnimFall1 = HeadFirstFall AnimFall2 = HeadFirstSplat AnimFall3 = GetUpBackwards }
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   PlaySound random( @BoardBail01 @boardbail02 ) 
@@ -599,7 +599,7 @@ script NoseManualBail
   WaitAnimFinished
   Obj_SpawnScript BloodPool
   ClearExceptions
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   PlayAnim Anim = GetUpForwards Blendperiod = 0.1
@@ -625,7 +625,7 @@ script ManualBail
   SetException Ex = FlailLeft Scr = BailSmack params = { SmackAnim = SmackWallFeet }
   SetException Ex = FlailRight Scr = BailSmack params = { SmackAnim = SmackWallFeet }
   SetException Ex = GroundGone Scr = GroundGoneBail params = { AnimFall1 = HeadFirstFallBack AnimFall2 = BigDrop AnimFall3 = GetUpFacing }
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   PlaySound Bail04 pitch = 80
@@ -638,7 +638,7 @@ script ManualBail
   SwitchOffBoard
   WaitAnimFinished
   ClearExceptions
-  if InSlapGame
+  if ( ( InSlapGame ) or ( IsKing ) )
     SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   endif
   PlayAnim Anim = GetUpBackwards Blendperiod = 0.1

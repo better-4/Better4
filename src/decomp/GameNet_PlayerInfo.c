@@ -10,6 +10,11 @@ uint32_t GameNet_PlayerInfo_IsLocalPlayer(GameNet_PlayerInfo *this) {
     return _IsLocalPlayer(this);
 }
 
+uint32_t GameNet_PlayerInfo_IsKing(GameNet_PlayerInfo *this) {
+    static uint32_t (__fastcall* _IsKing)(GameNet_PlayerInfo *) = (void*)0x00492b20;
+    return _IsKing(this);
+}
+
 void *GameNet_PlayerInfo_GetConnHandle(GameNet_PlayerInfo *this) {
     static uint32_t (__fastcall* _GetConnHandle)(GameNet_PlayerInfo *) = (void*)0x00492bd0;
     return _GetConnHandle(this);

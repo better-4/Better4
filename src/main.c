@@ -13,6 +13,9 @@
 #include "decomp/common.h"
 #include "decomp/CArray.h"
 #include "decomp/CStruct.h"
+#include "decomp/GameNet_PlayerInfo.h"
+#include "decomp/Net_App.h"
+#include "decomp/Net_Dispatcher.h"
 #include "decomp/Obj_CSkaterCareer.h"
 
 #include "partymod-thps4/src/main.h"
@@ -222,6 +225,28 @@ void patchPoolSizes() {
 	patchDWord(0x0040b89a + 1, 0x6b6c0); // AllocatePermanentStringHeap max_size: 0x1adb0 (107.4 KB) -> 0x6b6c0 (429.7 KB)
 }
 
+
+int __fastcall ScriptInSlapGame_Wrapper(GameNet_PlayerInfo *player_info) {
+	static int (__cdecl *_InSlapGame)(void *, void *) = (void *)0x0050ef00;
+	
+	if (GameNet_PlayerInfo_IsKing(player_info)) {
+		return 1;
+	} else {
+		return _InSlapGame(0, 0);
+	}
+}
+
+void patchKoth() {
+	patchByte(0x004ca9d8, 0x8b); // MOV ECX,ESI (to pass GameNet_PlayerInfo * to wrapper)
+	patchByte(0x004ca9d8 + 1, 0xce);
+
+	patchNop(0x004ca9da, 2); // remove push 0x0
+	patchNop(0x004ca9e1, 3); // remove ADD ESP,0x8
+
+	// patch InSlapGame call to return true if king
+	patchCall(0x004ca9dc, (void *)ScriptInSlapGame_Wrapper);
+}
+
 void patchBetter4() {
 	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
@@ -244,6 +269,7 @@ void patchBetter4() {
 	patchMemberFunctions();
 	patchFreecam();
 	patchCas();
+	patchKoth();
 }
 
 void better4Main() {
