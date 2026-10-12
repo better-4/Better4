@@ -59,7 +59,7 @@ thps2_level_info = [
   { text = "Hangar" not_focusable level_num = LevelNum_Hangar level = Load_Hangar level_info_defaults }
   { text = "School II" not_focusable level_num = LevelNum_School2 level = Load_School2 level_info_defaults }
   { text = "Marseille" not_focusable level_num = LevelNum_Marseille level = Load_Marseille level_info_defaults }
-  { text = "New York City" under_construction level_num = LevelNum_NYC level = Load_NYC level_info_defaults }
+  { text = "New York City" not_focusable level_num = LevelNum_NYC level = Load_NYC level_info_defaults }
   { text = "Venice" not_focusable level_num = LevelNum_Venice level = Load_Venice level_info_defaults }
   { text = "Skatestreet" not_focusable level_num = LevelNum_Skatestreet level = Load_Skatestreet level_info_defaults }
   { text = "Philly" not_focusable level_num = LevelNum_Philly level = Load_Philly level_info_defaults }
