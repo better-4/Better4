@@ -69,6 +69,7 @@ int __cdecl CFunc_ObserveSelf(CStruct* params) {
 	Obj_CSkaterCam_SetSkater(local_camera, local_skater);
 
 	local_observe_target = 0;
+	gamenet_manager->currently_observed_player = 0;
 	local_observing = 0;
 	voluntary_observing = 0;
 
@@ -126,6 +127,7 @@ int __cdecl CFunc_BetterObserve(CStruct* params) {
     
 	local_observing = 1;
 	local_observe_target = local_player;
+	gamenet_manager->currently_observed_player = local_player;
 	voluntary_observing = 1;
 	return 1;
 }
@@ -140,6 +142,7 @@ int __cdecl CFunc_ObserveAfter0(CStruct* params) {
 
 	local_observing = 1;
 	local_observe_target = local_player;
+	gamenet_manager->currently_observed_player = local_observe_target;
 	voluntary_observing = 0;
 	return 1;
 }
@@ -210,6 +213,7 @@ int ObserveCamCycle (int direction) {
 	Obj_CSkaterCam_SetSkater(local_camera, target_skater);
 
 	local_observe_target = target_player;
+	gamenet_manager->currently_observed_player = local_observe_target;
 
 	return 1;
 }
@@ -220,25 +224,13 @@ int __cdecl CFunc_GetObsPlayerName(CStruct *params, CScript *script) {
     return 1;
 }
 
-GameNet_PlayerInfo *__fastcall GameNet_Manager_GetCurrentlyObservedPlayer(GameNet_Manager *this) {
-    static GameNet_PlayerInfo *(__fastcall* _GetCurrentlyObservedPlayer)(GameNet_Manager *) = (void *)0x004886b0;
-
-	GameNet_PlayerInfo *player;
-
-	if (local_observe_target) {
-		player = local_observe_target;
-	} else {
-		player = _GetCurrentlyObservedPlayer(this);
-	}
-
-	return player;
+void *__fastcall Tsk_Task_Task(void *this, unused_t _, int priority) {
+	static void *(__fastcall *_Task)(void *, unused_t, int) = (void *)0x00405940;
+	return _Task(this, UNUSED, 1001);
 }
 
 void patchObserve() {
-	// GameNet::PlayerInfo::SetSkater (0x00491410)
-	patchCall(0x0049142d, (void *)GameNet_Manager_GetCurrentlyObservedPlayer);
-	// Obj::CSkater::s_display_code (0x004b5120)
-	patchCall(0x004b51d7, (void *)GameNet_Manager_GetCurrentlyObservedPlayer);
-	// Mdl::Skate::handle_anims (0x004fe1c0)
-	patchCall(0x004fe279, (void *)GameNet_Manager_GetCurrentlyObservedPlayer);
+	// Create task for `Obj::CSkater::s_client_logic_code` with priority 1001 instead of 0
+	// This makes it run before the camera update, so obs camera doesn't lag behind by one frame.
+	patchCall(0x004cd1a3, (void *)Tsk_Task_Task);
 }

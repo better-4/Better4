@@ -18,7 +18,8 @@ typedef struct GameNet_Manager {
     Net_App *client; // 0x10
     uint8_t unk2[0x14];
     uint32_t join_mode; // 0x28 (0=play, 1=obs)
-    uint8_t unk3[0x78];
+    uint8_t unk3[0x138];
+    GameNet_PlayerInfo *currently_observed_player; // 0x164
 } GameNet_Manager;
 
 GameNet_Manager *GameNet_Manager_Instance();
