@@ -128,6 +128,16 @@ void patchLoad() {
 	add_path_override("levels\\Streets\\Streets.scn.Xbx", "levels\\better4\\Streets\\Streets.scn.Xbx");
 	add_path_override("levels\\Streets\\Streets.tex.Xbx", "levels\\better4\\Streets\\Streets.tex.Xbx");
 
+	// THPS2
+
+	add_path_override("levels\\NY\\NY.col.Xbx", "levels\\better4\\NY\\NY.col.Xbx");
+    add_path_override("levels\\NY\\NY.scn.Xbx", "levels\\better4\\NY\\NY.scn.Xbx");
+    add_path_override("levels\\NY\\NY.tex.Xbx", "levels\\better4\\NY\\NY.tex.Xbx");
+    add_path_override("levels\\NY_Sky\\NY_Sky.col.Xbx", "levels\\better4\\NY_Sky\\NY_Sky.col.Xbx");
+    add_path_override("levels\\NY_Sky\\NY_Sky.scn.Xbx", "levels\\better4\\NY_Sky\\NY_Sky.scn.Xbx");
+    add_path_override("levels\\NY_Sky\\NY_Sky.tex.Xbx", "levels\\better4\\NY_Sky\\NY_Sky.tex.Xbx");
+
+
 	// THPS3
 
     add_path_override("levels\\Rio\\Rio.col.Xbx", "levels\\better4\\Rio\\Rio.col.Xbx");
