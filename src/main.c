@@ -6,6 +6,7 @@
 #include "online.h"
 #include "online/host_options.h"
 #include "online/net_handlers.h"
+#include "pressures.h"
 #include "security.h"
 #include "updater.h"
 #include "wallpush.h"
@@ -247,6 +248,7 @@ void patchKoth() {
 	patchCall(0x004ca9dc, (void *)ScriptInSlapGame_Wrapper);
 }
 
+
 void patchBetter4() {
 	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
@@ -270,6 +272,7 @@ void patchBetter4() {
 	patchFreecam();
 	patchCas();
 	patchKoth();
+	patchPressures();
 }
 
 void better4Main() {

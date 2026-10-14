@@ -1,7 +1,6 @@
 // from thug's `pressuretricks.qb'
 // seems like there are some unused test pressure flips (uses 360 flip animation)
 
-in_pressure = 0
 PressureTricks2 = [ 
 	{ Trigger = { AirTrickLogic , Square , Up , 300 } Trick_BS360PressureFlip } 
 	{ Trigger = { AirTrickLogic , Square , Down , 300 } Trick_FS360PressureFlip } 
@@ -15,22 +14,13 @@ Trick_BSToeFlip         = { Scr = FlipTrick Params = { Name = "BS Toe Flip " Sco
 Trick_BS360PressureFlip = { Scr = FlipTrick Params = { Name = "BS 360 Flip" Score = 200 Anim = BS360PressureFlip } } 
 Trick_FS360PressureFlip = { Scr = FlipTrick Params = { Name = "FS 360 Flip" Score = 200 Anim = FS360PressureFlip } }
 
-// pressure scripts from various thug qbs
-script PressureOn
-  Change in_pressure = 1
-endscript
-
-script PressureOff
-  Change in_pressure = 0
-endscript
-
 script ApplyStanceToggle 
   if GotParam Toggle
     if InNollie 
       PressureOff 
       NollieOff 
     else 
-      if ( in_pressure = 1 ) 
+      if InPressure
         PressureOff 
         NollieOn 
         SetException Ex = Ollied Scr = Nollie Params = { <...> } 
@@ -79,7 +69,7 @@ script Toggle_Nollie_Pressure_States
 		PressureOn 
 		SetException Ex = Ollied Scr = Ollie Params = { <...> } 
 	else 
-		if ( in_pressure = 1 ) 
+		if InPressure
 			PressureOff 
 			if GotParam Nollie 
 				NollieOn 
@@ -137,13 +127,13 @@ endscript
 
 script SetSkaterAirTricks // modified from thug (doesn't need wallplant or off board branches)
   if GotParam set_jumptricks
-    if ( in_pressure = 1 ) 
+    if InPressure
       SetQueueTricks special = SpecialTricks PressureTricks2 AirTricks Jumptricks JumpTricks0
     else 
       SetQueueTricks special = SpecialTricks AirTricks Jumptricks JumpTricks0
     endif
   else
-    if ( in_pressure = 1 ) 
+    if InPressure
       SetQueueTricks special = SpecialTricks PressureTricks2 AirTricks 
     else 
       SetQueueTricks special = SpecialTricks AirTricks 

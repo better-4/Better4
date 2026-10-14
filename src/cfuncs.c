@@ -14,6 +14,7 @@
 #include "online/player_list.h"
 #include "online/server.h"
 #include "online/server_list.h"
+#include "pressures.h"
 #include "version.h"
 #include "wallpush.h"
 
@@ -27,7 +28,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 55
+#define BETTER4_NUM_CFUNCS 58
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -109,6 +110,9 @@ void addCFuncs() {
 	addCFunc("SetFreecamMoveSpeed", (void *)CFunc_SetFreecamMoveSpeed);
 	addCFunc("SetFreecamLookSpeed", (void *)CFunc_SetFreecamLookSpeed);
 	addCFunc("IsKing", (void *)CFunc_IsKing);
+	addCFunc("InPressure", (void *)CFunc_InPressure);
+	addCFunc("PressureOn", (void *)CFunc_PressureOn);
+	addCFunc("PressureOff", (void *)CFunc_PressureOff);
 }
 
 void printCFuncs() {

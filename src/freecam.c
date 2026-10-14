@@ -9,6 +9,7 @@
 #include "decomp/Obj_CSkater.h"
 #include "decomp/Net_Dispatcher.h"
 #include "log.h"
+#include "pressures.h"
 
 static int freecam_controls_index = 0;
 

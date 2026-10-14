@@ -53,6 +53,8 @@ script load_permanent_textures
   LoadTexture "PanelSprites/mini_score_HUD"
   LoadTexture "PanelSprites/MemcardSprites/mem_frame_piece"
   LoadTexture "PanelSprites/MemcardSprites/mem_bg_piece"
+  LoadTexture "better4/PanelSprites/press_icon"
+  LoadTexture "better4/PanelSprites/swpress_icon"
 endscript
 script hide_panel_stuff
   LogInfo "*************** HIDING PANEL STUFF *********************"
