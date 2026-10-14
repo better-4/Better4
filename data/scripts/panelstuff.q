@@ -223,9 +223,9 @@ script create_panel_stuff
     parent = root_window
     id = cash_goal_sprite
     texture = cash_goal
-    scale = 1
+    scale = better4_control_goalpts_value
     just = [ left top ]
-    pos = (464, 28)
+    pos = better4_goalpts_pos
     alpha = 0
     rgba = [ 128 128 128 128 ]
     z_priority = -10
@@ -236,8 +236,8 @@ script create_panel_stuff
     id = cash_text
     font = small
     text = " "
-    scale = 0.75
-    pos = (546, 28)
+    scale = ( 0.75 * better4_control_goalpts_value )
+    pos = better4_cash_pos
     just = [ left top ]
     rgba = [ 51 72 105 128 ]
   }
@@ -246,9 +246,9 @@ script create_panel_stuff
     parent = root_window
     id = goal_points_text
     font = small
-    pos = (562, 43)
+    pos = better4_propts_pos
     just = [ left top ]
-    scale = 0.75
+    scale = ( 0.75 * better4_control_goalpts_value )
     rgba = [ 127 102 0 128 ]
     text = " "
   }
@@ -269,7 +269,7 @@ script create_panel_stuff
     font = small
     text = "0"
     scale = better4_control_specialmeter_value
-    pos = (126, 27)
+    pos = better4_specialmeter_pos
     just = [ left top ]
     rgba = [ 120 100 19 128 ]
   }

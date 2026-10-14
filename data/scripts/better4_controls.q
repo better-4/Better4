@@ -943,12 +943,28 @@ better4_control_specialmeter = {
   change_script = better4_change_specialmeter
 }
 
+better4_specialmeter_pos_small = (56, 27)
+better4_specialmeter_pos_medium = (91, 27)
+better4_specialmeter_pos_large = (126, 27)
+better4_specialmeter_pos = better4_specialmeter_pos_large
+
 script better4_change_specialmeter
+  switch better4_control_specialmeter_index
+  case 0
+    Change better4_specialmeter_pos = better4_specialmeter_pos_large
+  case 1
+    Change better4_specialmeter_pos = better4_specialmeter_pos_small
+  case 2
+    Change better4_specialmeter_pos = better4_specialmeter_pos_medium
+  case 3
+    Change better4_specialmeter_pos = better4_specialmeter_pos_large
+  endswitch
   // Player 1
   if ScreenElementExists id = the_score
     DoScreenElementMorph {
       id = the_score
       scale = better4_control_specialmeter_value
+      pos = better4_specialmeter_pos
     }
   endif
   // Player 2
@@ -956,6 +972,7 @@ script better4_change_specialmeter
     DoScreenElementMorph {
       id = ( the_score + 1 )
       scale = better4_control_specialmeter_value
+      pos = better4_specialmeter_pos
     }
   endif
 endscript
@@ -1000,6 +1017,81 @@ script better4_change_perfectlanding
     DoScreenElementMorph {
       id = perfect2
       pos = better4_perfectlanding_pos
+    }
+  endif
+endscript
+
+better4_control_goalpts_index = 3
+better4_control_goalpts_value = 1.0
+better4_control_goalpts = {
+  id = better4_control_goalpts_id
+  index_name = better4_control_goalpts_index
+  value_name = better4_control_goalpts_value
+  text = "Goal Pts. Icon"
+  ini_key = "GoalPts"
+  help = "Change the size of the cash and goal points icon."
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_goalpts
+}
+
+better4_goalpts_pos_small = (550, 28)
+better4_goalpts_pos_medium = (507, 28)
+better4_goalpts_pos_large = (464, 28)
+better4_goalpts_pos = better4_goalpts_pos_large
+
+better4_cash_pos_small = (577, 27.7)
+better4_cash_pos_medium = (563, 28)
+better4_cash_pos_large = (546, 28)
+better4_cash_pos = better4_cash_pos_large
+
+better4_propts_pos_small = (583, 32.7)
+better4_propts_pos_medium = (573, 38)
+better4_propts_pos_large = (562, 43)
+better4_propts_pos = better4_propts_pos_large
+
+script better4_change_goalpts
+  switch better4_control_goalpts_index
+  case 0
+    Change better4_goalpts_pos = better4_goalpts_pos_large
+    Change better4_cash_pos = better4_cash_pos_large
+    Change better4_propts_pos = better4_propts_pos_large
+  case 1
+    Change better4_goalpts_pos = better4_goalpts_pos_small
+    Change better4_cash_pos = better4_cash_pos_small
+    Change better4_propts_pos = better4_propts_pos_small
+  case 2
+    Change better4_goalpts_pos = better4_goalpts_pos_medium
+    Change better4_cash_pos = better4_cash_pos_medium
+    Change better4_propts_pos = better4_propts_pos_medium
+  case 3
+    Change better4_goalpts_pos = better4_goalpts_pos_large
+    Change better4_cash_pos = better4_cash_pos_large
+    Change better4_propts_pos = better4_propts_pos_large
+  endswitch
+  if ScreenElementExists id = cash_goal_sprite
+    DoScreenElementMorph {
+      id = cash_goal_sprite
+      scale = better4_control_goalpts_value
+      pos = better4_goalpts_pos
+    }
+  endif
+  if ScreenElementExists id = cash_text
+    DoScreenElementMorph {
+      id = cash_text
+      scale = ( 0.75 * better4_control_goalpts_value )
+      pos = better4_cash_pos
+    }
+  endif
+  if ScreenElementExists id = goal_points_text
+    DoScreenElementMorph {
+      id = goal_points_text
+      scale = ( 0.75 * better4_control_goalpts_value )
+      pos = better4_propts_pos
     }
   endif
 endscript
@@ -1120,6 +1212,7 @@ script better4_controls_init
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter
   better4_control_init better4_control_perfectlanding
+  better4_control_init better4_control_goalpts
   better4_control_init better4_control_menudemo
   better4_control_init better4_control_respawn_on_newrun
   better4_control_init better4_control_updatedcollision
