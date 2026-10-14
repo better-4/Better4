@@ -248,6 +248,24 @@ void patchKoth() {
 	patchCall(0x004ca9dc, (void *)ScriptInSlapGame_Wrapper);
 }
 
+uint32_t __fastcall Script_CStruct_GetString_Wrapper(CStruct *this, unused_t _, uint32_t checksum, const char ** out, int assert) {
+	static int(__fastcall* _GetString)(CStruct *, unused_t, uint32_t, const char **, int) = (void *)0x00417f70;
+
+	// Use displayname instead of name if specified, for Benihana (extras) etc.
+	if (CStruct_GetString(this, 0x38e23359/*displayname*/, out, assert)) {
+		return 1;
+	} else {
+		return _GetString(this, UNUSED, checksum, out, assert);
+	}
+}
+
+void patchTrickDisplayNames() {
+	patchCall(0x0051db63, (void *)Script_CStruct_GetString_Wrapper);
+	patchCall(0x0051dc08, (void *)Script_CStruct_GetString_Wrapper);
+	patchCall(0x004f1870, (void *)Script_CStruct_GetString_Wrapper);
+	patchCall(0x004f1927, (void *)Script_CStruct_GetString_Wrapper);
+	patchCall(0x004f19e2, (void *)Script_CStruct_GetString_Wrapper);
+}
 
 void patchBetter4() {
 	logInfo("Initializing Better4 patches, using config=%s", configFile);
@@ -273,6 +291,7 @@ void patchBetter4() {
 	patchCas();
 	patchKoth();
 	patchPressures();
+	patchTrickDisplayNames();
 }
 
 void better4Main() {
