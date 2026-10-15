@@ -1455,6 +1455,11 @@ skater_m_torso = [
     is_long_sleeve
   }
   {
+    desc_id = #"Burnquist Shirt beta"
+    frontend_desc = 'Burnquist Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_burnquist_beta.skin"
+  }
+  {
     desc_id = #"Caballero Shirt"
     frontend_desc = 'Caballero Shirt'
     mesh = "models/skater_m/shirt_tshirt.skin"
@@ -1530,6 +1535,11 @@ skater_m_torso = [
     replace2 = "CS_NH_undershirt.png"
     with2 = "textures/skater_m/CS_NN_lasek_ushirt"
     is_long_sleeve
+  }
+  {
+    desc_id = #"Lasek Shirt beta"
+    frontend_desc = 'Lasek Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_lasek_beta.skin"
   }
   {
     desc_id = #"Margera Shirt"
