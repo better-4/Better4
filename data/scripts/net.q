@@ -3894,7 +3894,7 @@ script create_score_menu
       font = small
       just = [ left top ]
       pos = (45, 60)
-      scale = 0.9
+      scale = ( 0.9 * better4_control_playerlist_value )
       padding_scale = 1
       internal_scale = 1
       internal_just = [ left top ]

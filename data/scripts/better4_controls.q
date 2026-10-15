@@ -1096,6 +1096,33 @@ script better4_change_goalpts
   endif
 endscript
 
+better4_control_playerlist_index = 3
+better4_control_playerlist_value = 1.0
+better4_control_playerlist = {
+  id = better4_control_playerlist_id
+  index_name = better4_control_playerlist_index
+  value_name = better4_control_playerlist_value
+  text = "Player List"
+  ini_key = "Player List"
+  help = "Change the size of the player list in net games."
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_playerlist
+}
+
+script better4_change_playerlist
+  if ScreenElementExists id = net_score_vmenu
+    DoScreenElementMorph {
+      id = net_score_vmenu
+      scale = ( 0.9 * better4_control_playerlist_value )
+    }
+  endif
+endscript
+
 better4_control_menudemo_index = 1
 better4_control_menudemo_value = on
 better4_control_menudemo = {
@@ -1243,6 +1270,7 @@ script better4_controls_init
   better4_control_init better4_control_specialmeter
   better4_control_init better4_control_perfectlanding
   better4_control_init better4_control_goalpts
+  better4_control_init better4_control_playerlist
   better4_control_init better4_control_menudemo
   better4_control_init better4_control_respawn_on_newrun
   better4_control_init better4_control_updatedcollision
