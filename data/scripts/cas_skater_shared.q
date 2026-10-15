@@ -894,6 +894,12 @@ shoes = [
     is_clowny
     unlock_flag = CAS_UNLOCK_18
   }
+  {
+    desc_id = #"Clown Boots 2"
+    frontend_desc = 'Clown Shoes 2'
+    mesh = "models/better4/shared/shoes/shoe_clown02.skin"
+    is_clowny
+  }
 ]
 left_bicep_tattoo = [
   {

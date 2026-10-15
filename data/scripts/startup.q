@@ -146,6 +146,7 @@ script startup_loading_screen
       DisplayLoadingScreen "loadscrn"
     endif
   endif
+  LoadSound "better4\ExtraTrick\extratrick_thug" FLAG_PERM
 endscript
 All_Levels_Unlocked = 1
 bootstrap_build = 0

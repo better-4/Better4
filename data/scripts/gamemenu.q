@@ -617,6 +617,14 @@ script create_pause_menu
       endif
     endif
     if GoalManager_CanRetryGoal
+        IF GoalManager_GoalIsActive name = kon_goal_tour
+        make_sprite_menu_item text = "End Goal Early" id = menu_end_run2 pad_choose_script = Kon_Goal_Tour_Expire_3
+        make_text_sprite texture = PA_end parent = menu_end_run2
+      endif
+      IF GoalManager_GoalIsActive name = Alc_Goal_Gaps6
+        make_sprite_menu_item text = "End Goal Early" id = menu_end_run2 pad_choose_script = Alc_Goal_Gaps6_End_Early
+        make_text_sprite texture = PA_end parent = menu_end_run2
+      endif
       make_sprite_menu_item text = "Retry Last Goal" id = menu_retry_goal pad_choose_script = menu_select pad_choose_params = { stop_streams menu_select_script = RetryCurrentGoal }
       make_text_sprite texture = PA_retry parent = menu_retry_goal
     endif

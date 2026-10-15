@@ -80,7 +80,7 @@ goal_tetris.qb
 goal_tips.qb
 goal_tour.qb
 goal_trickspot.qb
-goal_utilities.qb
+better4/goal_utilities.qb
 graffiti.qb
 better4/grindlist.qb
 better4/grindscripts.qb
@@ -174,7 +174,7 @@ skater_misc.qb
 skater_particlesys.qb
 skater_procanim.qb
 better4/skater_profile.qb
-better4/skater_sfx.qb
+skater_sfx.qb
 skater_shoppingcart.qb
 better4/skateshop.qb
 skeleton.qb

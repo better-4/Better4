@@ -1096,6 +1096,33 @@ script better4_change_goalpts
   endif
 endscript
 
+better4_control_playerlist_index = 3
+better4_control_playerlist_value = 1.0
+better4_control_playerlist = {
+  id = better4_control_playerlist_id
+  index_name = better4_control_playerlist_index
+  value_name = better4_control_playerlist_value
+  text = "Player List"
+  ini_key = "Player List"
+  help = "Change the size of the player list in net games."
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_playerlist
+}
+
+script better4_change_playerlist
+  if ScreenElementExists id = net_score_vmenu
+    DoScreenElementMorph {
+      id = net_score_vmenu
+      scale = ( 0.9 * better4_control_playerlist_value )
+    }
+  endif
+endscript
+
 better4_control_menudemo_index = 1
 better4_control_menudemo_value = on
 better4_control_menudemo = {
@@ -1174,6 +1201,36 @@ better4_control_disablemovies = {
   ]
 }
 
+better4_control_skipsave_index = 0
+better4_control_skipsave_value = off
+better4_control_skipsave = {
+  id = better4_control_skipsave_id
+  index_name = better4_control_skipsave_index
+  value_name = better4_control_skipsave_value
+  text = "Skip Save"
+  ini_key = "SkipSave"
+  help = "Toggle whether the 'Do you want to save?' dialog appears after completing a goal."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
+better4_control_skipstats_index = 0
+better4_control_skipstats_value = off
+better4_control_skipstats = {
+  id = better4_control_skipstats_id
+  index_name = better4_control_skipstats_index
+  value_name = better4_control_skipstats_value
+  text = "Skip Stats"
+  ini_key = "SkipStats"
+  help = "Toggle whether the stats menu appears after obtaining a stat point."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -1213,12 +1270,15 @@ script better4_controls_init
   better4_control_init better4_control_specialmeter
   better4_control_init better4_control_perfectlanding
   better4_control_init better4_control_goalpts
+  better4_control_init better4_control_playerlist
   better4_control_init better4_control_menudemo
   better4_control_init better4_control_respawn_on_newrun
   better4_control_init better4_control_updatedcollision
   better4_control_init better4_control_boostplant
   better4_control_init better4_control_directional_dropdown
   better4_control_init better4_control_disablemovies
+  better4_control_init better4_control_skipsave
+  better4_control_init better4_control_skipstats
 endscript
 
 script better4_control_init

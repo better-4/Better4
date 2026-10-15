@@ -82,7 +82,7 @@ Trick_Roastbeef = { Scr = GrabTrick params = { name = 'RoastBeef' Score = 1150 A
 Extra_ShiftyCannonball = [ { Trigger_Extra_Grab Params = { Name = 'Shifty Cannonball' Score = 900 TweakTrick = GRABTWEAK_SMALL Anim = ShiftyCannonball Idle = ShiftyCannonball_Idle Speed = 1.0 IsExtra } } ]
 Trick_Varial = { Scr = FlipTrick params = { name = 'Varial' Score = 900 Anim = BigVarial BoardRotate } }
 Trick_VarialKickflip2 = { Scr = FlipTrick params = { name = 'Varial Kickflip' Score = 300 Anim = VarialKickflip BoardRotate Nollie = NollieVarialKickflip ExtraTricks = Extra_VarialKickflip2 TreNollieFix } }
-Extra_VarialKickflip2 = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip (Nollie Fix)' displayname = '360 Flip' Score = 500 Anim = _360Flip Nollie = Nollie360Flip IsExtra UseCurrent TreNollieFix } } ]
+Extra_VarialKickflip2 = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip' displayname = '360 Flip (Nollie Fix)' Score = 500 Anim = _360Flip Nollie = Nollie360Flip IsExtra UseCurrent TreNollieFix } } ]
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
 Trick_FingerFlipAirWalk = { Scr = FlipTrick params = { name = 'Fingerflip Airwalk' Score = 1500 Anim = FingerFlipAirWalk IsSpecial BoardRotate speed = 1.15 trickslack = 30 } }
 Trick_Jackass = { Scr = FlipTrick params = { name = 'The Jackass' Score = 1500 Anim = Jackass IsSpecial speed = 1 MaxSpeed = 1.2 trickslack = 20 Bloodframe = 1 } }
@@ -115,7 +115,7 @@ Trick_BackfootKickflip = { Scr = FlipTrick params = { name = 'Back Foot Kickflip
 Extra_DBackfootKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double B.F. Kickflip' displayname = 'Double Back Foot Flip' Score = 500 Anim = DoubleNollieKickflip IsExtra UseCurrent } } ]
 Trick_BackfootHeelflip = { Scr = FlipTrick params = { name = 'Back Foot Heelflip' Score = 150 Anim = NollieHeelflip Nollie = Heelflip ExtraTricks = Extra_DBackfootHeelflip } }
 Extra_DBackfootHeelflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double B.F. Heelflip' displayname = 'Double Back Foot Heelflip' Score = 500 Anim = DoubleNollieHeelflip IsExtra UseCurrent } } ]
-Trick_Kickflip_Extra = { Scr = FlipTrick params = { name = 'Kickflip (Extra)' displayname = 'Kickflip' Score = 100 Anim = Kickflip Nollie = NollieKickflip ExtraTricks = KickflipExtrasExtended } }
+Trick_Kickflip_Extra = { Scr = FlipTrick params = { name = 'Kickflip' displayname = 'Kickflip (Extra)' Score = 100 Anim = Kickflip Nollie = NollieKickflip ExtraTricks = KickflipExtrasExtended } }
 Trick_Kickflip = { Scr = FlipTrick params = { name = 'Kickflip' Score = 100 Anim = Kickflip Nollie = NollieKickflip ExtraTricks = KickflipExtras } }
 DoubleKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Kickflip' Score = 500 Anim = DoubleKickflip ExtraTricks = TripleKickflip IsExtra trickslack = 15 UseCurrent } } ]
 TripleKickflip = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Triple Kickflip' Score = 1000 Anim = TripleKickflip IsExtra speed = 1 UseCurrent } } ]
@@ -147,7 +147,7 @@ Trick_Cannonball = { Scr = GrabTrick params = { name = 'Cannonball' Score = 250 
 Extra_CannonballFingerflip = [ { Trigger_Extra_Grab params = { name = 'Fingerflip Cannonball' Score = 500 TweakTrick = GRABTWEAK_SMALL Anim = Cannonballfingerflip BackwardsAnim = Cannonball Idle = Cannonball_Idle speed = 1.4 IsExtra } } ]
 Trick_Stalefish = { Scr = GrabTrick params = { name = 'Stalefish' Score = 350 Anim = Stalefish Idle = Stalefish_Idle ExtraTricks = Trick_Stalefish_Layback } }
 Trick_Stalefish_Layback = [ { Trigger_Extra_Grab params = { name = 'Stalefish Tweak' Score = 400 Anim = Stalefish_Layback Idle = Stalefish_Layback_Idle IsExtra } } ]
-Trick_Benihana_Extra = { Scr = GrabTrick params = { name = 'Benihana (Extra)' displayname = 'Benihana'  Score = 300 Anim = Benihana Idle = Benihana_Idle OutAnim = Benihana_Out ExtraTricks = Sacktap ForceInit ExtraTricks = BenihanaExtras } }
+Trick_Benihana_Extra = { Scr = GrabTrick params = { name = 'Benihana' displayname = 'Benihana (Extra)'  Score = 300 Anim = Benihana Idle = Benihana_Idle OutAnim = Benihana_Out ExtraTricks = Sacktap ForceInit ExtraTricks = BenihanaExtras } }
 Trick_Benihana = { Scr = GrabTrick params = { name = 'Benihana'  Score = 300 Anim = Benihana Idle = Benihana_Idle OutAnim = Benihana_Out ExtraTricks = Sacktap ForceInit ExtraTricks = Trick_Sacktap } }
 Trick_Sacktap = [ { Trigger_Extra_Grab params = { name = 'Sacktap' Score = 1500 Anim = Sacktap_Init Idle = Sacktap_Range OutAnim = Sacktap_out speed = 1.5 ForceInit trickslack = 20 IsExtra } } ]
 Trick_Crossbone = { Scr = GrabTrick params = { name = 'Crossbone' Score = 350 Anim = Crossbone Idle = Crossbone_Idle ExtraTricks = Trick_CrookedCop } }
@@ -295,10 +295,6 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
     SetExtraTricks tricks = <ExtraTricks> duration = 15
   endif
   Wait 15 frames
-  if gotparam displayname
-    RemoveParameter name
-	name = <displayname>
-  endif
   SetTrickName <name>
   SetTrickScore <Score>
   Display
@@ -422,10 +418,6 @@ script GrabTrick speed = 1.0 x = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIU
     PlaySound headsmackB
   endif
   WaitAnim 50 percent
-  if gotparam displayname
-    RemoveParameter name
-	name = <displayname>
-  endif
   SetTrickName <name>
   SetTrickScore <Score>
   Display
