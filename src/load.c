@@ -155,6 +155,10 @@ void patchLoad() {
 
 	add_path_override("levels\\lon\\lon.scn.Xbx", "levels\\better4\\lon\\lon.scn.Xbx");
 
+	// CAS Stuff
+
+	add_path_override("models\\Skater_m\\hat_beret.tex.Xbx", "models\\better4\\replacements\\hat_beret.tex.Xbx");
+
 	// patchCall(0x0040b50e, (void *)Pip_Load); // ??
 	// patchCall(0x00464cd4, (void *)Pip_Load); // ??
 	// patchCall(0x0046c78f, (void *)Pip_Load); // Nx::CScene::read_collision
@@ -169,13 +173,13 @@ void patchLoad() {
 	patchCall(0x00538e43, (void *)File_Open); // Pip::Load
 	patchCall(0x00447203, (void *)File_Open); // Nx::CEngine::s_plat_load_scene
 	patchCall(0x00439f5d, (void *)File_Open); // NxXbox::LoadTextureFile
-	// patchCall(0x004358df, (void *)File_Open); // ??
-	// patchCall(0x00438608, (void *)File_Open); // ??
-	// patchCall(0x00445ed2, (void *)File_Open); // ??
-	// patchCall(0x0044ae41, (void *)File_Open); // ??
-	// patchCall(0x0045bcce, (void *)File_Open); // ??
-	// patchCall(0x0045bd0e, (void *)File_Open); // ??
-	// patchCall(0x0045c52b, (void *)File_Open); // ??
+	patchCall(0x004358df, (void *)File_Open); // ??
+	patchCall(0x00438608, (void *)File_Open); // ??
+	patchCall(0x00445ed2, (void *)File_Open); // ??
+	patchCall(0x0044ae41, (void *)File_Open); // ??
+	patchCall(0x0045bcce, (void *)File_Open); // ??
+	patchCall(0x0045bd0e, (void *)File_Open); // ??
+	patchCall(0x0045c52b, (void *)File_Open); // ??
 	// patchCall(0x00479c5f, (void *)File_Open); // ??
 	// patchCall(0x00520789, (void *)File_Open); // ??
 	// patchCall(0x005207c9, (void *)File_Open); // ??
