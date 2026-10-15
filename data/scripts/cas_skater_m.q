@@ -1493,9 +1493,25 @@ skater_m_torso = [
     with1 = "textures/logos/Sht_KostonF01"
   }
   {
+    desc_id = #"Koston Shirt beta"
+    frontend_desc = 'Koston Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_koston_Beta.skin"
+  }  
+  {
     desc_id = #"Hawk Shirt"
     frontend_desc = 'Hawk Shirt'
     mesh = "models/skater_m/shirt_hawk.skin"
+    is_long_sleeve
+  }
+  {
+    desc_id = #"Hawk Shirt beta"
+    frontend_desc = 'Hawk Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_hawk_beta.skin"
+  }
+  {
+    desc_id = #"Hawk Shirt Alt. beta"
+    frontend_desc = 'Hawk Alt Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_hawkalt_beta.skin"
     is_long_sleeve
   }
   {
@@ -1548,6 +1564,12 @@ skater_m_torso = [
     desc_id = #"Thomas Shirt"
     frontend_desc = 'Thomas Shirt'
     mesh = "models/skater_m/shirt_thomas.skin"
+    is_long_sleeve
+  }
+  {
+    desc_id = #"Thomas Shirt beta"
+    frontend_desc = 'Thomas Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_thomas_beta.skin"
     is_long_sleeve
   }
   {
@@ -1687,6 +1709,11 @@ skater_m_legs = [
     replace = "CS_NH_regular_pants.png"
     with = "textures/skater_m/CS_JB_pants_plaidpunk"
   }
+  {
+    desc_id = #"Hawk Shorts"
+    frontend_desc = 'Hawk Shorts (Beta)'
+    mesh = "models/better4/skater_m/pant_hawkshorts.skin"
+   }
   {
     desc_id = #"Hawk Pants"
     frontend_desc = 'Hawk Pants'
