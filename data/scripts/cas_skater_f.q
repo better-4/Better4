@@ -463,6 +463,11 @@ skater_f_torso = [
     mesh = "models/skater_f/shirt_steamer.skin"
   }
   {
+    desc_id = #"Steamer shirt beta"
+    frontend_desc = 'Steamer Shirt (Beta)'
+    mesh = "models/better4/skater_f/shirt_steamer_beta.skin"
+  }
+  {
     desc_id = #"Tube Top"
     frontend_desc = 'Tube Top'
     mesh = "models/skater_f/shirt_jennatube.skin"
