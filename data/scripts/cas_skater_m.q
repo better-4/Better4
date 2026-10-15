@@ -1484,6 +1484,11 @@ skater_m_torso = [
     with2 = "textures/logos/sht_flip01"
   }
   {
+    desc_id = #"Glifberg Shirt beta"
+    frontend_desc = 'Glifberg Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_glifberg_beta.skin"
+  }
+  {
     desc_id = #"Koston Shirt"
     frontend_desc = 'Koston Shirt'
     mesh = "models/skater_m/shirt_tshirt.skin"
