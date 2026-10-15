@@ -1174,6 +1174,36 @@ better4_control_disablemovies = {
   ]
 }
 
+better4_control_skipsave_index = 0
+better4_control_skipsave_value = off
+better4_control_skipsave = {
+  id = better4_control_skipsave_id
+  index_name = better4_control_skipsave_index
+  value_name = better4_control_skipsave_value
+  text = "Skip Save"
+  ini_key = "SkipSave"
+  help = "Toggle whether the 'Do you want to save?' dialog appears after completing a goal."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
+better4_control_skipstats_index = 0
+better4_control_skipstats_value = off
+better4_control_skipstats = {
+  id = better4_control_skipstats_id
+  index_name = better4_control_skipstats_index
+  value_name = better4_control_skipstats_value
+  text = "Skip Stats"
+  ini_key = "SkipStats"
+  help = "Toggle whether the stats menu appears after obtaining a stat point."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 script better4_controls_init
   // TODO (ellie): Figure out why ForEachIn doesn't work with array of names
   better4_control_init better4_control_spinkeys
@@ -1219,6 +1249,8 @@ script better4_controls_init
   better4_control_init better4_control_boostplant
   better4_control_init better4_control_directional_dropdown
   better4_control_init better4_control_disablemovies
+  better4_control_init better4_control_skipsave
+  better4_control_init better4_control_skipstats
 endscript
 
 script better4_control_init

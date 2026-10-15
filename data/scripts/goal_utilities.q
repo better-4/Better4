@@ -1726,25 +1726,25 @@ script goal_give_rewards
       ForEachIn master_skater_list do = goal_award_stat_point
     repeat <reward_stat>
     goal_got_stat reward_stat = <reward_stat>
-	if not GotParam better4_skip_stats // Better4 setting param that skips the stats screen when you get a stat point. Message still appears reguardless.
-	  WaitForEvent type = goal_got_reward_done
-    DebugFn 765
-    add_pause_menu_textures_to_vram
-    create_stats_menu {
-      pad_start = goal_stats_menu_exit
-      pad_back_script = goal_stats_menu_exit
-      done_button_pad_choose_script = goal_stats_menu_exit
-      update_all_skaters = update_all_skaters
-    }
-    kill_start_key_binding
-    SetScreenElementProps {
-      id = stats_menu
-      event_handlers = [ { pad_back goal_stats_menu_exit } ]
-      replace_handlers
-    }
-    WaitForEvent type = goal_stats_menu_done
-    DebugFn 766
-	endif
+    if ( better4_control_skipstats_value = off ) // Better4 setting param that skips the stats screen when you get a stat point. Message still appears regardless.
+      WaitForEvent type = goal_got_reward_done
+      DebugFn 765
+      add_pause_menu_textures_to_vram
+      create_stats_menu {
+        pad_start = goal_stats_menu_exit
+        pad_back_script = goal_stats_menu_exit
+        done_button_pad_choose_script = goal_stats_menu_exit
+        update_all_skaters = update_all_skaters
+      }
+      kill_start_key_binding
+      SetScreenElementProps {
+        id = stats_menu
+        event_handlers = [ { pad_back goal_stats_menu_exit } ]
+        replace_handlers
+      }
+      WaitForEvent type = goal_stats_menu_done
+      DebugFn 766
+    endif
   endif
   if GotParam awarded_goal_point
     GoalManager_GetNumberOfGoalPoints total
@@ -1766,7 +1766,7 @@ script goal_give_rewards
   if GotParam volume
     SetMusicVolume ( <volume> * 10 )
   endif
-  if not GotParam better4_skip_save // Better4 setting param that skips the save prompt when you complete a goal
+  if ( better4_control_skipsave_value = off ) // Better4 setting param that skips the save prompt when you complete a goal
     goal_want_to_save
     WaitForEvent type = goal_wait_for_save
   endif
