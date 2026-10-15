@@ -1478,6 +1478,11 @@ skater_m_torso = [
     mesh = "models/skater_m/shirt_campbell.skin"
   }
   {
+    desc_id = #"Campbell Shirt beta"
+    frontend_desc = 'Campbell Shirt (Beta)'
+    mesh = "models/better4/skater_m/shirt_campbell_beta.skin"
+  }
+  {
     desc_id = #"Glifberg Shirt"
     frontend_desc = 'Glifberg Shirt'
     mesh = "models/skater_m/shirt_tshirt.skin"

@@ -482,6 +482,16 @@ skater_f_torso = [
     frontend_desc = 'Glifberg Shirt (Beta)'
     mesh = "models/better4/skater_f/shirt_glifberg_beta.skin"
   }  
+  {
+    desc_id = #"Campbell Shirt F"
+    frontend_desc = 'Campbell Shirt'
+    mesh = "models/better4/skater_f/shirt_campbell_F.skin"
+  }
+  {
+    desc_id = #"Campbell Shirt beta F"
+    frontend_desc = 'Campbell Shirt (Beta)'
+    mesh = "models/better4/skater_f/shirt_campbell_beta.skin"
+  }  
 ]
 skater_f_legs = [
   {
