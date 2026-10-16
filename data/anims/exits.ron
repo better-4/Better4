@@ -1,0 +1,17 @@
+// Where each converted trick is cut into the game.
+//
+// The target pose cannot be derived from the animation data: it depends on which animation
+// the script hands over to, which frame of that animation is showing, and whether the stance
+// mirror toggles at the same instant.
+//
+// blend_frames is optional and defaults to 25.
+//
+{
+    "Wallpush_Standing": (exit: Ground, blend_frames: None),
+    "Wallpush_Crouched": (
+        exit: Anim(anim: "CrouchIdle2", frame: 0, mirror: true, motion: true),
+        blend_frames: None,
+    ),
+    "Wallpush_NoseManual": (exit: Manual, blend_frames: None),
+    "Wallpush_Manual": (exit: NoseManual, blend_frames: None),
+}
