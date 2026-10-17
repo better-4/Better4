@@ -1,5 +1,6 @@
 #include "cas.h"
 #include "cfuncs.h"
+#include "debug.h"
 #include "freecam.h"
 #include "input.h"
 #include "log.h"
@@ -292,6 +293,8 @@ void patchBetter4() {
 	patchKoth();
 	patchPressures();
 	patchTrickDisplayNames();
+
+	initDebugConsole();
 }
 
 void better4Main() {
@@ -305,6 +308,8 @@ void better4Main() {
 
 	patchBetter4();
 	partyMain(configFile);
+
+	patchDebugConsole();
 }
 
 __declspec(dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {

@@ -1,5 +1,7 @@
 #include "cfuncs.h"
 
+#include "debug.h"
+
 #include "decomp/GameNet_Manager.h"
 #include "decomp/GameNet_PlayerInfo.h"
 #include "decomp/Tmr.h"
@@ -28,7 +30,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 58
+#define BETTER4_NUM_CFUNCS 59
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -113,6 +115,7 @@ void addCFuncs() {
 	addCFunc("InPressure", (void *)CFunc_InPressure);
 	addCFunc("PressureOn", (void *)CFunc_PressureOn);
 	addCFunc("PressureOff", (void *)CFunc_PressureOff);
+	addCFunc("Better4DebugPrint", (void *)CFunc_Better4DebugPrint);
 }
 
 void printCFuncs() {
