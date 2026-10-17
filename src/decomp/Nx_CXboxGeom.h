@@ -3,8 +3,12 @@
 
 #include "decomp/Image_RGBA.h"
 
+#define MAX_PASSES 4
+
 typedef struct NxXbox_sMaterial {
-    uint8_t wip;
+    uint32_t checksum;
+    uint32_t name_checksum;
+    uint32_t passes;
 } NxXbox_sMaterial;
 
 typedef struct NxXbox_sMesh {
@@ -15,7 +19,9 @@ typedef struct NxXbox_sMesh {
     // 0x80: float material_color_override_2
     uint8_t unk[0x18];
     uint32_t flags; // 0x18
-    uint8_t unk2[0x5c];
+    uint8_t unk2[0xc];
+    NxXbox_sMaterial *material; // 0x28
+    uint8_t unk3[0x4c];
     float material_color_override_0; // 0x78
     float material_color_override_1; // 0x7c
     float material_color_override_2; // 0x80

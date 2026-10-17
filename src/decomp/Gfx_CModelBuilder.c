@@ -29,19 +29,20 @@ uint32_t Gfx_CModelBuilder_testingthings(Gfx_CModelBuilder *this, uint32_t part)
 }
 
 // Originally a member function in Gfx::CModelBuilder::CallMemberFunction (0x004606d0)
-void __stdcall Gfx_CModelBuilder_GeomModulateColor(Gfx_CModelBuilder *builder, CStruct *struc) {
+void __stdcall Gfx_CModelBuilder_GeomModulateColor(Gfx_CModelBuilder *this, CStruct *struc) {
 	uint32_t part = 0;
-	// logDebug("==== GEOM MODULATE COLOR ====");
+
 	CStruct_GetChecksum(struc, 0xb6f08f39/*part*/, &part, 0);
 
-    Gfx_CModelBuilder_geom_modulate_color(builder, part);
-    // CArray *materials = 0;
-    // if (CStruct_GetArray(struc, 0x64e8e94a/*materials*/, &materials, 0)) {
-    //     // logDebug("Gfx::CModelBuilder::GeomModulateColor: part %#08x has materials", part);
-    //
-    // } else {
-    //     Gfx_CModelBuilder_geom_modulate_color(builder, part);
-    // }
+    CArray *materials = 0;
+    if (CStruct_GetArray(struc, 0x64e8e94a/*materials*/, &materials, 0)) {
+        // logDebug("Gfx::CModelBuilder::GeomModulateColor: part %#08x has materials", part);
+        Gfx_CModelBuilder_geom_modulate_color(this, part);
+    } else {
+        static uint32_t (__fastcall *_geom_modulate_color)(Gfx_CModelBuilder *, unused_t, uint32_t) = (void *)0x00461010;
+        _geom_modulate_color(this, UNUSED, part);
+        // Gfx_CModelBuilder_geom_modulate_color(this, part);
+    }
 }
 
 uint32_t Gfx_CModelBuilder_geom_modulate_color(Gfx_CModelBuilder *this, uint32_t part) {
