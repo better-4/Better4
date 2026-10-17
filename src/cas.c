@@ -8,10 +8,6 @@
 
 #include "partymod-thps4/src/patch.h"
 
-// TODO (ellie): find somewhere else to put this
-typedef int(__cdecl* CFunc_PrintStruct_t)(CStruct *, int);
-static CFunc_PrintStruct_t CFunc_PrintStruct = (CFunc_PrintStruct_t)0x0041a4c0;
-
 void resize_specials(CArray *specials) {
 	if (specials->size < 13) {
 		logInfo("resizing specials from 12 to 13");

@@ -62,6 +62,8 @@ add_library(better4 SHARED
     "${SRC}/decomp/GameNet_PlayerInfo.h"
     "${SRC}/decomp/Gfx_Camera.c"
     "${SRC}/decomp/Gfx_Camera.h"
+    "${SRC}/decomp/Gfx_CModelBuilder.c"
+    "${SRC}/decomp/Gfx_CModelBuilder.h"
     "${SRC}/decomp/Inp_Manager.c"
     "${SRC}/decomp/Inp_Manager.h"
     "${SRC}/decomp/Lst_Search.c"
