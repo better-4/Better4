@@ -50,6 +50,11 @@ void CStruct_AppendStructure(CStruct *this, CStruct *other) {
     _AppendStructure(this, UNUSED, other);
 }
 
+uint32_t CStruct_ContainsComponentNamed(CStruct *this, uint32_t checksum) {
+    static uint32_t(__fastcall* _ContainsComponentNamed)(CStruct *, unused_t, uint32_t) = (void *)0x004186a0;
+    return _ContainsComponentNamed(this, UNUSED, checksum);
+}
+
 int CStruct_GetArray(CStruct *this, uint32_t checksum, struct CArray **ret, int assert) {
     static int(__fastcall* _GetArray)(CStruct *, unused_t, uint32_t, struct CArray **, int) = (void *)0x004183c0;
     return _GetArray(this, UNUSED, checksum, ret, assert);
