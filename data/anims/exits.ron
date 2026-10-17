@@ -2,10 +2,7 @@
 //
 // The target pose cannot be derived from the animation data: it depends on which animation
 // the script hands over to, which frame of that animation is showing, and whether the stance
-// mirror toggles at the same instant.
-//
-// blend_frames is optional and defaults to 25.
-//
+// mirror toggles at the same instant (blend_frames is optional and defaults to 25).
 {
     "Wallpush_Standing": (exit: Ground, blend_frames: None),
     "Wallpush_Crouched": (
