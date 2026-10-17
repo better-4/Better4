@@ -15,6 +15,7 @@
 #include "decomp/CArray.h"
 #include "decomp/CStruct.h"
 #include "decomp/GameNet_PlayerInfo.h"
+#include "decomp/Gfx_CModelBuilder.h"
 #include "decomp/Net_App.h"
 #include "decomp/Net_Dispatcher.h"
 #include "decomp/Obj_CSkaterCareer.h"
@@ -267,6 +268,34 @@ void patchTrickDisplayNames() {
 	patchCall(0x004f19e2, (void *)Script_CStruct_GetString_Wrapper);
 }
 
+// TODO (ellie): find somewhere else to put this
+typedef int(__cdecl* CFunc_PrintStruct_t)(CStruct *, int);
+static CFunc_PrintStruct_t CFunc_PrintStruct = (CFunc_PrintStruct_t)0x0041a4c0;
+
+void __stdcall GeomModulateColor(Gfx_CModelBuilder *builder, CStruct *struc) {
+	uint32_t part = 0;
+	// logDebug("==== GEOM MODULATE COLOR ====");
+	CStruct_GetChecksum(struc, 0xb6f08f39/*part*/, &part, 0);
+	Gfx_CModelBuilder_geom_modulate_color(builder, part);
+}
+
+__declspec(naked) void callGeomModulateColor() {
+	__asm {
+		push dword ptr [esp + 0x30] // entry in master_editable_list
+		push esi
+		call GeomModulateColor
+		pop edi
+		mov al, 0x1
+		pop esi
+		add esp, 0x20
+		ret 0xc
+	}
+}
+
+void patchSleeveColors() {
+	patchJmp(0x004609a8, (void *)callGeomModulateColor);
+}
+
 void patchBetter4() {
 	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
@@ -292,6 +321,7 @@ void patchBetter4() {
 	patchKoth();
 	patchPressures();
 	patchTrickDisplayNames();
+	patchSleeveColors();
 }
 
 void better4Main() {
