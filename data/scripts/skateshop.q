@@ -660,6 +660,16 @@ script launch_main_menu
   remove_pause_menu_textures_from_vram
   create_main_menu
 endscript
+
+script better4_startup_level_jump
+  if CustomSkaterFilenameDefined
+    load_pro_skater name = custom
+    cas_post_load
+  endif
+  SetGameType freeskate
+  SetCurrentGameType
+  level_select_change_level level = <level>
+endscript
 script start_internet_game
   memcard_menus_cleanup
   add_main_menu_textures_to_vram
@@ -677,6 +687,11 @@ script start_internet_game
   select_xbox_multiplayer { change_gamemode = change_gamemode_net }
 endscript
 script create_main_menu
+  // [Miscellaneous] StartupLevel in better4.ini drops straight into a level.
+  if Better4GetStartupLevel
+    better4_startup_level_jump level = <level>
+    return
+  endif
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif

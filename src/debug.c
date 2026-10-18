@@ -25,8 +25,7 @@
 
 extern char configFile[1024];
 
-// Set by the game when its own on-screen keyboard is up (partymod reads the
-// same byte). The overlay stays out of the way while that is showing.
+// Set by the game when its own on-screen keyboard is up.
 static uint8_t *keyboard_on_screen = (uint8_t *)0x00ab5bae;
 
 // Where partymod installs processController; re-pointed at our wrapper so the
@@ -1274,9 +1273,9 @@ void __cdecl better4ProcessController(device *dev) {
 }
 
 // Resolves `[Miscellaneous] ConsoleKey` to a scancode.
-static void read_toggle_key() {
-    char value[64] = "";
-    GetPrivateProfileStringA("Miscellaneous", "ConsoleKey", "", value, sizeof(value), configFile);
+static int read_ini_string(const char *key, char *out, size_t out_size) {
+    char value[128] = "";
+    GetPrivateProfileStringA("Miscellaneous", key, "", value, sizeof(value), configFile);
 
     char *comment = strchr(value, ';');
     if (comment) {
@@ -1294,6 +1293,16 @@ static void read_toggle_key() {
     }
 
     if (!*start) {
+        return 0;
+    }
+
+    strncpy_s(out, out_size, start, _TRUNCATE);
+    return 1;
+}
+
+static void read_toggle_key() {
+    char start[64];
+    if (!read_ini_string("ConsoleKey", start, sizeof(start))) {
         return;
     }
 
@@ -1307,7 +1316,46 @@ static void read_toggle_key() {
     console_toggle_key = scancode;
 }
 
+// `[Miscellaneous] StartupLevel` -- boot straight into a level instead of the
+// skateshop.
+static char startup_level[64];
+
+// Resolves the configured name to a level load script, matching `map` so that
+// either the display name or the load script works:
+//
+//   StartupLevel=Rio
+//   StartupLevel=Load_Rio
+//
+// Returns 0 if nothing is configured.
+static uint32_t resolve_startup_level() {
+    if (!*startup_level) {
+        return 0;
+    }
+
+    level_scan();
+
+    for (int i = 0; i < level_count; i++) {
+        if (!_stricmp(levels[i].name, startup_level)) {
+            return levels[i].load;
+        }
+    }
+    for (int i = 0; i < level_count; i++) {
+        if (contains_nocase(levels[i].name, startup_level)) {
+            return levels[i].load;
+        }
+    }
+
+    logWarning("StartupLevel \"%s\" is not a known level name, using it as a "
+               "load script", startup_level);
+    return better4Checksum(startup_level);
+}
+
 void initDebugConsole() {
+    read_ini_string("StartupLevel", startup_level, sizeof(startup_level));
+    if (*startup_level) {
+        logInfo("StartupLevel is \"%s\"", startup_level);
+    }
+
     debug_enabled = getIniBool("Miscellaneous", "Debug", 0, configFile);
     logInfo("Debug console %s", debug_enabled ? "enabled" : "disabled");
 
@@ -1336,6 +1384,26 @@ void patchDebugConsole() {
 
 // Called once per level by better4_debug_map_scan, so the level tables stay in
 // script and C just keeps what it is handed.
+int __cdecl CFunc_Better4GetStartupLevel(CStruct *params, CScript *script) {
+    static int consumed;
+    if (consumed) {
+        return 0;
+    }
+
+    uint32_t load = resolve_startup_level();
+    if (!load) {
+        return 0;
+    }
+
+    consumed = 1;
+
+    CStruct *out = CScript_GetParams(script);
+    CStruct_AddChecksum(out, 0x651533ec/*level*/, load);
+
+    logInfo("StartupLevel resolved to %#010x", load);
+    return 1;
+}
+
 int __cdecl CFunc_Better4DebugConsoleAlive(CStruct *params, CScript *script) {
     console_alive = 1;
     return 1;

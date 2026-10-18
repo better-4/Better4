@@ -24,5 +24,6 @@ void patchDebugConsole();
 int __cdecl CFunc_Better4DebugPrint(CStruct *params, CScript *script);
 int __cdecl CFunc_Better4DebugAddLevel(CStruct *params, CScript *script);
 int __cdecl CFunc_Better4DebugConsoleAlive(CStruct *params, CScript *script);
+int __cdecl CFunc_Better4GetStartupLevel(CStruct *params, CScript *script);
 
 #endif

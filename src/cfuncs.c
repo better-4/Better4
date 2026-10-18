@@ -31,7 +31,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 62
+#define BETTER4_NUM_CFUNCS 63
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -45,6 +45,12 @@ void initCFuncs() {
 
 int cfunc_index = THPS4_NUM_CFUNCS;
 void addCFunc(const char *name, void *func) {
+    if (cfunc_index >= NUM_CFUNCS) {
+        logError("CFunc table full at %d entries; raise BETTER4_NUM_CFUNCS to "
+                 "register \"%s\"", NUM_CFUNCS, name);
+        return;
+    }
+
     CFunc *cfunc = &cfuncs[cfunc_index++];
     cfunc->name = name;
     cfunc->func = func;
@@ -119,6 +125,7 @@ void addCFuncs() {
 	addCFunc("Better4DebugPrint", (void *)CFunc_Better4DebugPrint);
 	addCFunc("Better4DebugAddLevel", (void *)CFunc_Better4DebugAddLevel);
 	addCFunc("Better4DebugConsoleAlive", (void *)CFunc_Better4DebugConsoleAlive);
+	addCFunc("Better4GetStartupLevel", (void *)CFunc_Better4GetStartupLevel);
 	addCFunc("GetMostRecentCAS", (void *)CFunc_GetMostRecentCAS);
 }
 
