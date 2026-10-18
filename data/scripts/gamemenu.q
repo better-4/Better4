@@ -1697,6 +1697,11 @@ endscript
 script create_level_select_menu pad_back_script = level_select_menu_exit
   SetScreenElementLock id = root_window off
   pulse_blur
+  if LevelIs load_skateshop
+	if not IsAlive name = TRG_Cab_Sign
+      Create name = TRG_Cab_Sign
+	endif
+  endif
   if GotParam from_server_options
     change_gamemode_net
     net_pad_back = 0
@@ -2331,6 +2336,7 @@ script level_select_menu_add_item
       endif
     endif
   endif
+  <dest> = <taxi_tex>
   CreateScreenElement {
     type = ContainerElement
     parent = current_menu
@@ -2340,7 +2346,7 @@ script level_select_menu_add_item
       { pad_start generic_menu_pad_choose_sound }
       { pad_choose <pad_choose_script> params = <pad_choose_params> }
       { pad_start <pad_choose_script> params = <pad_choose_params> }
-      { focus level_select_menu_focus params = <...> }
+      { focus level_select_menu_focus params = { dest = <taxi_tex>} }
       { unfocus level_select_menu_unfocus params = { rgba = <rgba> } }
     ]
     replace_handlers
@@ -2403,6 +2409,11 @@ script level_select_menu_exit
   endif
   remove_level_select_menu_textures_from_vram
   if LevelIs load_skateshop
+	KillSpawnedScript name = skateshop_replace_taxi_sign_texture
+	KillSpawnedScript name = skateshop_replace_taxi_service_texture
+	if IsAlive TRG_Cab_Sign
+      Kill name = TRG_Cab_Sign
+	endif
     GoalManager_HideGoalPoints
     if GotParam from_server_options
       if ( <net_pad_back> = 0 )
@@ -2443,8 +2454,23 @@ script level_select_menu_exit
     endif
   endif
 endscript
+
+
+script skateshop_replace_taxi_sign_texture
+  Wait 1 gameframe
+  Obj_ReplaceTexture src = "DM_thps4_board01.png" dest = <dest>
+endscript
+
+script skateshop_replace_taxi_service_texture
+  Wait 1 gameframe
+  Obj_ReplaceTexture src = "cw_ss_generic_griptape_01.png" dest = <dest>
+endscript
+
+
 script level_select_menu_focus
   GetTags
+  KillSpawnedScript name = skateshop_replace_taxi_sign_texture
+  KillSpawnedScript name = skateshop_replace_taxi_service_texture
   SetScreenElementProps {
     id = { <id> child = 0 }
     rgba = [ 128 118 0 128 ]
@@ -2461,8 +2487,13 @@ script level_select_menu_focus
     rgba = [ 128 128 128 50 ]
   }
   if LevelIs load_skateshop
-    Kill prefix = "Cab_sign_"
-    Create name = <taxi_id>
+    if GotParam dest
+      RunScriptOnObject id = TRG_Cab_Sign skateshop_replace_taxi_sign_texture params = { dest = <dest> }
+      // RunScriptOnObject id = TRG_Cab_Sign skateshop_replace_taxi_service_texture params = { dest = "textures\better4\boards\ducky1" }
+    endif
+	if GotParam off_duty
+	  RunScriptOnObject id = TRG_Cab_Sign skateshop_replace_taxi_service_texture params = { dest = "textures\better4\boards\ducky1" }
+	endif
   endif
   RunScriptOnScreenElement id = level_select_anchor_info level_select_hide_info
   if ( <locked> = 1 )
@@ -2472,20 +2503,20 @@ script level_select_menu_focus
       else
          <info_text> = "Buy this level in the secrets shop."
       endif
-      if LevelIs load_skateshop
-        Kill prefix = "Cab_sign_"
-        Create name = Cab_sign_11_Locked
-      endif
+      // if LevelIs load_skateshop
+        // Kill prefix = "Cab_sign_"
+        // Create name = Cab_sign_11_Locked
+      // endif
     else
       if ( <points_to_unlock> > 1 )
          <points_text> = "Points"
       else
          <points_text> = "Point"
       endif
-      if LevelIs load_skateshop
-        Kill prefix = "Cab_sign_"
-        Create name = Cab_sign_11_Locked
-      endif
+      // if LevelIs load_skateshop
+        // Kill prefix = "Cab_sign_"
+        // Create name = Cab_sign_11_Locked
+      // endif
       GoalManager_GetNumberOfGoalPoints total
        <total_goal_points> = <goal_points>
       GoalManager_GetNumberOfGoalPoints
@@ -3147,16 +3178,16 @@ e3_level_select_menu_level_info = [
   { text = "Zoo" level_num = 7 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = Load_Zoo taxi_id = Cab_sign_7_Zoo }
 ]
 level_select_menu_level_info = [
-  { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_id = Cab_sign_1_College }
-  { text = "San Francisco" level_num = 2 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SF2 level = Load_SF2 taxi_id = Cab_sign_2_San_Fran }
-  { text = "Alcatraz" level_num = 3 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ALC level = Load_Alc taxi_id = Cab_sign_3_Alcatraz }
-  { text = "Kona" level_num = 4 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_KON level = Load_Kon taxi_id = Cab_sign_4_Kona PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
-  { text = "Shipyard" level_num = 5 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_JNK level = Load_Jnk taxi_id = Cab_sign_5_Shipyard PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
-  { text = "London" level_num = 6 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_LON level = Load_Lon taxi_id = Cab_sign_6_London PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
-  { text = "Zoo" level_num = 7 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = Load_Zoo taxi_id = Cab_sign_7_Zoo PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
-  { text = "Carnival" level_num = 8 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_CNV level = Load_Cnv taxi_id = Cab_sign_8_Carnival }
-  { text = "Chicago" level_num = 9 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_HOF level = Load_Hof taxi_id = Cab_sign_9_Chicago }
-  { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_CPK level = Load_Sk4Ed_gameplay taxi_id = Cab_sign_10_Custom }
+  { text = "College" level_num = 1 points_to_unlock = 0 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SCH level = load_sch taxi_tex = "images\better4\taxi_signs\thps4\college" }
+  { text = "San Francisco" level_num = 2 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_SF2 level = Load_SF2 taxi_tex = "images\better4\taxi_signs\thps4\sanfran" }
+  { text = "Alcatraz" level_num = 3 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ALC level = Load_Alc taxi_tex = "images\better4\taxi_signs\thps4\alcatraz" }
+  { text = "Kona" level_num = 4 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_KON level = Load_Kon taxi_tex = "images\better4\taxi_signs\thps4\kona" PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
+  { text = "Shipyard" level_num = 5 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_JNK level = Load_Jnk taxi_tex = "images\better4\taxi_signs\thps4\shipyard" PreReq_flags = [ LEVEL_UNLOCKED_SCH LEVEL_UNLOCKED_SF2 LEVEL_UNLOCKED_ALC ] PreReq_message = "Visit Alcatraz and San Francisco first." }
+  { text = "London" level_num = 6 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_LON level = Load_Lon taxi_tex = "images\better4\taxi_signs\thps4\london" PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
+  { text = "Zoo" level_num = 7 points_to_unlock = 8 num_am_goals = 16 num_goals = 21 flag = LEVEL_UNLOCKED_ZOO level = Load_Zoo taxi_tex = "images\better4\taxi_signs\thps4\zoo" PreReq_flags = [ LEVEL_UNLOCKED_KON LEVEL_UNLOCKED_JNK ] PreReq_message = "Visit Kona and the Shipyard first." }
+  { text = "Carnival" level_num = 8 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_CNV level = Load_Cnv taxi_tex = "images\better4\taxi_signs\thps4\carnival" }
+  { text = "Chicago" level_num = 9 points_to_unlock = -1 num_am_goals = 14 num_goals = 14 flag = LEVEL_UNLOCKED_HOF level = Load_Hof taxi_tex = "images\better4\taxi_signs\thps4\chicago" }
+  { text = "Created Park" level_num = 10 points_to_unlock = 0 num_goals = 0 flag = LEVEL_UNLOCKED_CPK level = Load_Sk4Ed_gameplay taxi_tex = "images\better4\taxi_signs\thps4\custom" }
   // { text = "MotoX" level_num = 11 points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH level = Load_Motox taxi_id = Cab_sign_10_Custom }
 ]
 level_select_menu_level_info_unlock = [

@@ -41,18 +41,19 @@ LevelNum_LA = 12
 LevelNum_Tokyo = 38
 LevelNum_CruiseShip = 39
 
-level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_id = Cab_sign_11_Locked }
+level_info_defaults = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH }
+level_info_defaults_nosign = { points_to_unlock = 0 num_am_goals = 0 num_goals = 0 flag = LEVEL_UNLOCKED_SCH taxi_tex = "textures\better4\cab_test" off_duty }
 
 thps_level_info = [
-  { text = "Warehouse" level_num = LevelNum_Ware level = Load_Ware level_info_defaults }
-  { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults }
-  { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults }
-  { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults }
-  { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults }
-  { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults }
-  { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults }
-  { text = "Streets" under_construction level_num = LevelNum_Streets level = Load_Streets level_info_defaults }
-  { text = "Roswell" not_focusable level_num = LevelNum_Roswell level = Load_Roswell level_info_defaults }
+  { text = "Warehouse" level_num = LevelNum_Ware level = Load_Ware level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\ware" }
+  { text = "School" not_focusable level_num = LevelNum_School level = Load_School level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\school" }
+  { text = "Mall" not_focusable level_num = LevelNum_Mall level = Load_Mall level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\mall" }
+  { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\vans" }
+  { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\downtown" }
+  { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\dhj" }
+  { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\burnside" }
+  { text = "Streets" under_construction level_num = LevelNum_Streets level = Load_Streets level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\streets" }
+  { text = "Roswell" not_focusable level_num = LevelNum_Roswell level = Load_Roswell level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\roswell" }
 ]
 
 thps2_level_info = [
