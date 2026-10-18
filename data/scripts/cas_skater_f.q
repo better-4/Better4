@@ -497,6 +497,12 @@ skater_f_torso = [
     frontend_desc = 'Campbell Shirt (Beta)'
     mesh = "models/better4/skater_f/shirt_campbell_beta.skin"
   }  
+  {
+    desc_id = #"Rowley Jacket"
+    frontend_desc = 'Rowley Jacket'
+    mesh = "models/better4/skater_f/THPS4_Rowley_Jacket_F.skin"
+    is_long_sleeve
+  }
 ]
 skater_f_legs = [
   {
