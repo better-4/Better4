@@ -2242,7 +2242,7 @@ net_status_nat_neg_failed = "Failed to connect to server. Refresh your server li
 net_status_join_failed = "Failed to join game.  Refresh your game list and try again."
 
 script show_nat_start_dialog
-  PauseMusicAndStreams
+  PauseStreamsKeepMusic
   create_dialog_box {
     title = net_status_msg
     text = net_status_locating
@@ -3201,7 +3201,7 @@ script chosen_start_game
   endif
 endscript
 script network_options_selected
-  PauseMusicAndStreams 1
+  PauseStreamsKeepMusic
   launch_network_host_options_menu
 endscript
 script network_game_options_selected

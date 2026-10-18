@@ -552,21 +552,21 @@ script create_pause_menu
   else
     if CustomParkMode editing
       parked_setup_main_menu
-      PauseMusicAndStreams 1
+      PauseStreamsKeepMusic
       return
     endif
     if CustomParkMode testing
       parked_setup_test_play_menu
-      PauseMusicAndStreams 1
+      PauseStreamsKeepMusic
       return
     endif
     if InSplitScreenGame
       create_mp_pause_menu
-      PauseMusicAndStreams 1
+      PauseStreamsKeepMusic
       return
     endif
   endif
-  PauseMusicAndStreams 1
+  PauseStreamsKeepMusic
   if GotParam no_exit
     make_new_sprite_menu menu_id = pause_menu vmenu_id = pause_vmenu pad_back_script = nullscript
   else
@@ -4278,7 +4278,7 @@ script create_sound_options_menu
   endif
   sound_options_show_levels
   RunScriptOnScreenElement id = current_menu_anchor animate_in
-  PauseMusic
+  RestoreMenuMusic
 endscript
 script sound_options_exit
   if ObjectExists id = current_menu_anchor
@@ -4290,7 +4290,7 @@ script sound_options_exit
   endif
   if GotParam from_options
     add_pause_menu_textures_to_vram
-    PauseMusic 1
+    RestoreMenuMusic
     create_options_menu
   else
     PauseMusic 0
@@ -5057,7 +5057,7 @@ script change_track_state
   GetTags
   if TrackEnabled <index>
     ChangeTrackState <index> off
-    PauseMusic 1
+    RestoreMenuMusic
     SetScreenElementProps id = { <id> child = 1 } text = "off"
   else
     ChangeTrackState <index> on
@@ -5072,17 +5072,15 @@ script preview_music_track
   endif
   if MusicIsPaused
     PauseMusic 0
-    StopMusic
-    Wait 0.5 second
-    GetValueFromVolume cdvol
-    if ( <value> = 0 )
-      SetCDToMusic
-      SetMusicVolume 50
-    endif
-    PlayTrack <index>
-  else
-    PauseMusic 1
   endif
+  StopMusic
+  Wait 0.5 second
+  GetValueFromVolume cdvol
+  if ( <value> = 0 )
+    SetCDToMusic
+    SetMusicVolume 50
+  endif
+  PlayTrack <index>
 endscript
 script playlist_menu_focus
   GetTags
@@ -5100,7 +5098,7 @@ script playlist_menu_unfocus
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_down
   RunScriptOnScreenElement id = { <id> child = 1 } do_scale_down
   SetScreenElementProps { id = { <id> child = 2 } rgba = [ 128 128 128 0 ] }
-  PauseMusic 1
+  RestoreMenuMusic
 endscript
 script menu_music_level_focus
   PauseMusic 0
@@ -5108,7 +5106,7 @@ script menu_music_level_focus
 endscript
 script menu_music_level_unfocus
   menu_sound_level_unfocus <...>
-  PauseMusic 1
+  RestoreMenuMusic
 endscript
 script skip_track_focus
   PauseMusic 0
@@ -5116,7 +5114,7 @@ script skip_track_focus
 endscript
 script skip_track_unfocus
   main_menu_unfocus <...>
-  PauseMusic 1
+  RestoreMenuMusic
 endscript
 script menu_sound_level_focus
   GetTags
@@ -5227,7 +5225,7 @@ script focus_skip_track
 endscript
 script unfocus_skip_track
   do_scale_down
-  PauseMusic 1
+  RestoreMenuMusic
 endscript
 script skip_track
   skiptrack

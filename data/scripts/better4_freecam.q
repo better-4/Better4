@@ -44,7 +44,7 @@ script better4_enter_freecam
   endif
 
   EnableActuators 0
-  PauseMusicAndStreams
+  PauseStreamsKeepMusic
   PlaySound MenuBack vol = 50
   SetViewMode 1
   hide_panel_stuff

@@ -2241,13 +2241,13 @@ script skateshop_practice_start_pressed
   unhide_root_window
   GetTags
   if ChecksumEquals a = <menu_state> b = on
-    PauseMusicAndStreams 0
+    UnPauseMusicAndStreams
     UnPauseGame
     exit_pause_menu
   endif
   if ChecksumEquals a = <menu_state> b = off
     LogInfo "-------------------- PAUSING GAME ----------------------"
-    PauseMusicAndStreams 1
+    PauseStreamsKeepMusic
     PauseGame
     pause_trick_text
     pause_balance_meter
