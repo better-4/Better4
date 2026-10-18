@@ -290,24 +290,31 @@ switch ($PSCmdlet.ParameterSetName) {
                 Write-Host "  $fileName (already exists, skipping)"
                 continue
             }
+            $srcPath = Join-Path $PSScriptRoot $fileName
+            if ([IO.Path]::GetFullPath($srcPath) -ieq [IO.Path]::GetFullPath($destPath)) {
+                Write-Host "  $fileName (already in place)"
+                continue
+            }
             Write-Host "  $fileName"
             try {
                 New-Item -ItemType Directory -Path (Split-Path $destPath -Parent) -Force | Out-Null
-                Copy-Item -Path (Join-Path $PSScriptRoot $fileName) -Destination $destPath -Force -ErrorAction Stop
+                Copy-Item -Path $srcPath -Destination $destPath -Force -ErrorAction Stop
             } catch {
-                Exit-InstallError "could not update '$fileName' - close Better4.exe first, then try again."
+                Exit-InstallError "could not update '$fileName' - $($_.Exception.Message)"
             }
         }
 
         $dataDir = Join-Path $PSScriptRoot "data"
-        if (Test-Path $dataDir -PathType Container) {
+        $destDataDir = Join-Path $TargetDir "data"
+        if ([IO.Path]::GetFullPath($dataDir) -ieq [IO.Path]::GetFullPath($destDataDir)) {
+            Write-Host "  data\* (already in place)"
+        } elseif (Test-Path $dataDir -PathType Container) {
             Write-Host "  data\*"
-            $destDataDir = Join-Path $TargetDir "data"
             New-Item -ItemType Directory -Path $destDataDir -Force | Out-Null
             try {
                 Copy-Item -Path (Join-Path $dataDir '*') -Destination $destDataDir -Recurse -Force -ErrorAction Stop
             } catch {
-                Exit-InstallError "could not update game data - close Better4.exe first, then try again."
+                Exit-InstallError "could not update game data - $($_.Exception.Message))"
             }
         }
 
@@ -324,7 +331,7 @@ switch ($PSCmdlet.ParameterSetName) {
                 Move-Item $exePath $backupPath -Force -ErrorAction Stop
             } catch {
                 Pop-Location
-                Exit-InstallError "could not back up Better4.exe - close Better4.exe first, then try again."
+                Exit-InstallError "could not back up Better4.exe - $($_.Exception.Message))"
             }
             $hadBackup = $true
         }
