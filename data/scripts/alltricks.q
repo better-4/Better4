@@ -3,7 +3,7 @@ ConfigurableTricks = [
   Trick_180Varial
   Trick_2KickMadonnaFlip
   Trick_360FlipNoseManual
-  Trick_360GhettoBird
+  Trick_GhettoBird
   Trick_360Varial
   Trick_360VarialMcTwist
   Trick_4thofJuly
@@ -81,7 +81,7 @@ ConfigurableTricks = [
   Trick_FSShifty
   Trick_FSShoveIt
   Trick_Gazelle
-  Trick_GhettoBird
+  Trick_GhettoBird2
   Trick_GrappleGrab
   Trick_GrindOverturn
   Trick_Gturn

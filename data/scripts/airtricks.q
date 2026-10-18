@@ -44,7 +44,7 @@ Trick_Bodywrap540 = { Scr = FlipTrick params = { name = 'Bodywrap 540' Score = 4
 Trick_Indy900 = { Scr = FlipTrick params = { name = 'Indy 900' Score = 11000 Anim = Indy900 IsSpecial BoardRotate trickslack = 20 RotateAfter NoSpin speed = 1.2 MaxSpeed = 1.3 } }
 Trick_SitDownAir = { Scr = GrabTrick params = { name = 'Sit Down Air' Score = 1200 Anim = SitDownAir_Init Idle = SitDownAir_Idle IsSpecial WaitPercent = 80 } }
 Trick_ChompOnThis = { Scr = GrabTrick params = { name = 'Chomp On This' Score = 1000 Anim = ChompOnThis_Init Idle = ChompOnThis_Idle OutAnim = ChompOnThis_Out IsSpecial MaxSpeed = 0.9 ForceInit Stream = ChompOnThis SpecialItem_details = PizzaBox_details speed = 0.9 } }
-Trick_360GhettoBird = { Scr = FlipTrick params = { name = '360 Ghetto Bird' Score = 3500 Anim = GhettoBird2 IsSpecial BoardRotate trickslack = 20 NoSpin speed = 1.0 } }
+Trick_GhettoBird = { Scr = FlipTrick params = { name = '360 Ghetto Bird' Score = 3500 Anim = GhettoBird2 IsSpecial BoardRotate trickslack = 20 NoSpin speed = 1.0 } }
 Trick_BackFootNosegrab = { Scr = GrabTrick params = { name = 'Backfoot Flip Nosegrab' Score = 1200 Anim = BackFootNosegrab_init Idle = BackFootNosegrab_idle OutAnim = BackFootNosegrab_Out ForceInit IsSpecial speed = 1.0 } }
 Trick_MightAsWellJump = { Scr = GrabTrick params = { name = 'Might As Well Jump' speed = 1.75 Score = 1750 Anim = MightAsWellJump_Init Idle = MightAsWellJump_Idle OutAnim = MightAsWellJump_Out IsSpecial ForceInit SpecialSounds = Jamie_JumpSounds SpecialItem_details = bustedboard_jump_details trickslack = 20 } }
 Trick_BigSpinShifty = { Scr = GrabTrick params = { name = 'BigSpin Shifty' Score = 1500 speed = 1.2 Anim = FSBigSpinShifty_Init Idle = FSBigSpinShifty_Idle OutAnim = FSBigSpinShifty_Out IsSpecial ForceInit FlipAfter } }
@@ -77,7 +77,7 @@ Trick_Berzerker = { Scr = FlipTrick params = { name = 'The Berzerker' Score = 25
 Trick_ClawPunch = { Scr = FlipTrick params = { name = 'Claw Punch' Score = 3000 Anim = ClawPunch IsSpecial speed = 1.0 trickslack = 20 } }
 Trick_LayoutFlip = { Scr = FlipTrick Params = { Name = 'Layout Flip' Score = 1600 Anim = Layout IsSpecial trickslack = 20 Speed = 1 maxspeed = 1.2 } }
 Trick_540BoardVarial = { Scr = FlipTrick Params = { Name = '540 Board Varial' Score = 1200 Anim = _540BoardVarial IsSpecial boardrotate Speed = 0.75 trickslack = 25 } }
-Trick_GhettoBird = { Scr = FlipTrick Params = { Name = 'Ghetto Bird' Score = 2500 Anim = GhettoBird IsSpecial boardrotate FlipAfter RotateBS trickslack = 20 NoSpin Speed = 1.0 } }
+Trick_GhettoBird2 = { Scr = FlipTrick Params = { Name = 'Ghetto Bird' Score = 2500 Anim = GhettoBird IsSpecial boardrotate FlipAfter RotateBS trickslack = 20 NoSpin Speed = 1.0 } }
 Trick_Roastbeef = { Scr = GrabTrick params = { name = 'RoastBeef' Score = 1150 Anim = Roastbeef Idle = Roastbeef_Idle TweakTrick = 50 speed = 1.0 ExtraTricks = Extra_ShiftyCannonball } }
 Extra_ShiftyCannonball = [ { Trigger_Extra_Grab Params = { Name = 'Shifty Cannonball' Score = 900 TweakTrick = GRABTWEAK_SMALL Anim = ShiftyCannonball Idle = ShiftyCannonball_Idle Speed = 1.0 IsExtra } } ]
 Trick_Varial = { Scr = FlipTrick params = { name = 'Varial' Score = 900 Anim = BigVarial BoardRotate } }
@@ -205,7 +205,7 @@ Trigger_Extra_Grab = { Trigger = { Press Circle 300 } Scr = GrabTrick }
 Trigger_Extra_Flip = { Trigger = { Press Square 300 } Scr = FlipTrick }
 KickflipExtrasExtended =
 [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = 'Double Kickflip' Score = 500 Anim = DoubleKickflip ExtraTricks = TripleKickflip speed = 1 IsExtra UseCurrent } }
-  { Trigger = { AirTrickLogic Circle Down 300 } Scr = FlipGrabBlend params = { name = 'Kickflip to Indy' Score = 400 Anim1 = KickFlipBlendFS Anim2 = Indy IsExtra } }
+  { Trigger = { AirTrickLogic Circle Right 300 } Scr = FlipGrabBlend params = { name = 'Kickflip to Indy' Score = 400 Anim1 = KickFlipBlendFS Anim2 = Indy IsExtra } }
   { Trigger = { AirTrickLogic Circle Up 300 } Scr = FlipGrabBlend params = { name = 'Kickflip to Crail' Score = 400 Anim1 = KickFlipBlendFS Anim2 = Crail IsExtra GrabStart = 5 speed = 1 } }
 ]
 KickflipExtras =
