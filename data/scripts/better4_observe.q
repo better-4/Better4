@@ -52,13 +52,6 @@ script QuitBetterObservivng
   endif
 endscript
 
-script ObserveActionEnter
-  if not IsBetterObserving
-    ObserveAfter0
-    create_observer_ui
-  endif
-endscript
-
 script ObserveActionNext
   ObserveNext
   update_obs_player_name
@@ -163,15 +156,6 @@ script create_observer_ui
      parent = root_window
   }
   display_obs_player_name
-endscript
-
-script set_observe_prompt_event
-  SetScreenElementProps {
-    id = root_window
-    event_handlers = [
-      { pad_choose ObserveActionEnter params = { } }
-    ]
-  }
 endscript
 
 script destroy_observer_ui
