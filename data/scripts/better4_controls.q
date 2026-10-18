@@ -96,6 +96,8 @@ PowerslideR2 = [ { Trigger = { HoldThree R2 R2 R2 } Scr = ToggleSwitchRegular pa
 PowerslideL2 = [ { Trigger = { HoldThree L2 L2 L2 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
 PowerslideR1 = [ { Trigger = { HoldThree R1 R1 R1 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
 PowerslideL1 = [ { Trigger = { HoldThree L1 L1 L1 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
+PowerslideDownDownR2 = [ { Trigger = { TripleInOrder , a = Down , b = Down , R2 , 333 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
+PowerslideDownDownR1 = [ { Trigger = { TripleInOrder , a = Down , b = Down , R1 , 333 } Scr = ToggleSwitchRegular params = { PowerSlide } } ]
 
 better4_control_powerslide_index = 0
 better4_control_powerslide_value = PowerslideVanilla
@@ -115,6 +117,8 @@ better4_control_powerslide = {
     { text = "\bg" value = PowerslideL2 } // L2
     { text = "\bf" value = PowerslideR1 } // R1
     { text = "\be" value = PowerslideL1 } // L1
+    { text = "\b4+\b4+\bh" value = PowerslideDownDownR2 } // Down+Down+R2
+    { text = "\b4+\b4+\bf" value = PowerslideDownDownR1 } // Down+Down+R1
   ]
 }
 
