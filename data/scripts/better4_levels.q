@@ -57,16 +57,16 @@ thps_level_info = [
 ]
 
 thps2_level_info = [
-  { text = "Hangar" not_focusable level_num = LevelNum_Hangar level = Load_Hangar level_info_defaults }
-  { text = "School II" not_focusable level_num = LevelNum_School2 level = Load_School2 level_info_defaults }
-  { text = "Marseille" not_focusable level_num = LevelNum_Marseille level = Load_Marseille level_info_defaults }
-  { text = "New York City" under_construction level_num = LevelNum_NYC level = Load_NYC level_info_defaults }
-  { text = "Venice" not_focusable level_num = LevelNum_Venice level = Load_Venice level_info_defaults }
-  { text = "Skatestreet" not_focusable level_num = LevelNum_Skatestreet level = Load_Skatestreet level_info_defaults }
-  { text = "Philly" not_focusable level_num = LevelNum_Philly level = Load_Philly level_info_defaults }
-  { text = "Bullring" not_focusable level_num = LevelNum_Bullring level = Load_Bullring level_info_defaults }
-  { text = "Skate Heaven" not_focusable level_num = LevelNum_Heaven level = Load_Heaven level_info_defaults }
-  { text = "Chopper Drop" not_focusable level_num = LevelNum_Chopper level = Load_Chopper level_info_defaults }
+  { text = "Hangar" not_focusable level_num = LevelNum_Hangar level = Load_Hangar level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\hangar" }
+  { text = "School II" not_focusable level_num = LevelNum_School2 level = Load_School2 level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\school2" }
+  { text = "Marseille" not_focusable level_num = LevelNum_Marseille level = Load_Marseille level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\marseille" }
+  { text = "New York City" under_construction level_num = LevelNum_NYC level = Load_NYC level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\nyc" }
+  { text = "Venice" not_focusable level_num = LevelNum_Venice level = Load_Venice level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\venice" }
+  { text = "Skatestreet" not_focusable level_num = LevelNum_Skatestreet level = Load_Skatestreet level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\skatestreet" }
+  { text = "Philly" not_focusable level_num = LevelNum_Philly level = Load_Philly level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\philly" }
+  { text = "Bullring" not_focusable level_num = LevelNum_Bullring level = Load_Bullring level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\bullring" }
+  { text = "Skate Heaven" not_focusable level_num = LevelNum_Heaven level = Load_Heaven level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\heaven" }
+  { text = "Chopper Drop" not_focusable level_num = LevelNum_Chopper level = Load_Chopper level_info_defaults taxi_tex = "images\better4\taxi_signs\thps2\chopper" }
 ]
 
 thps3_level_info = [
