@@ -11,4 +11,16 @@
     ),
     "Wallpush_NoseManual": (exit: Manual, blend_frames: None),
     "Wallpush_Manual": (exit: NoseManual, blend_frames: None),
+
+    // Both pressure flips are air tracks that either go to `StretchLegsInit` or `AirIdle`.
+    // They have the same starting pose, so one target covers both. Mirror follows the trick
+    // itself, the 180 has FlipAfter, the toe flip doesn't.
+    "BS180PressureFlip": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    ),
+    "BSToeFlip": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: false, motion: false),
+        blend_frames: Some(9),
+    ),
 }
