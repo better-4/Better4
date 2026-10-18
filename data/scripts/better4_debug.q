@@ -6,6 +6,7 @@ endscript
 better4_console_pos = (8, 8)
 better4_console_scale = (156, 58)
 better4_console_rgba = [ 0 0 0 110 ]
+better4_console_font = small
 better4_console_text_scale = 0.55
 better4_console_rows_pos = (16, 12)
 better4_console_input_pos = (16, 220)
@@ -65,7 +66,7 @@ script better4_console_create
     type = VMenu
     parent = better4_console_anchor
     id = better4_console_rows
-    font = small
+    font = better4_console_font
     pos = (better4_console_rows_pos)
     just = [ left top ]
     internal_just = [ left top ]
@@ -76,7 +77,7 @@ script better4_console_create
     type = TextElement
     parent = better4_console_anchor
     id = better4_console_input
-    font = small
+    font = better4_console_font
     text = ">"
     pos = (better4_console_input_pos)
     scale = (better4_console_text_scale)
@@ -85,6 +86,13 @@ script better4_console_create
     not_focusable
     z_priority = 103
   }
+endscript
+
+// Liveness check so console isn't blocking input on map change.
+script better4_console_ping
+  if ObjectExists id = better4_console_anchor
+    Better4DebugConsoleAlive
+  endif
 endscript
 
 script better4_console_destroy
@@ -107,9 +115,9 @@ script better4_console_add_row text = ""
   CreateScreenElement {
     type = TextElement
     parent = <id>
-    font = small
+    font = better4_console_font
     text = <text>
-    scale = 0.55
+    scale = (better4_console_text_scale)
     pos = (0, 0)
     just = [ left top ]
     rgba = [ 128 128 128 100 ]
@@ -143,8 +151,58 @@ script better4_debug_run_script
   if ScriptExists <scriptname>
     <scriptname> <...>
   else
-    better4_debug_print text = "\c2no such script"
+    better4_debug_print text = "\c3not a script - trying as a function"
+    <scriptname> <...>
   endif
+endscript
+
+// Runs a name in the skater's context.
+script better4_debug_skater_run
+  if not GotParam membername
+    return
+  endif
+  MakeSkaterGoto better4_debug_skater_trigger params = <...>
+endscript
+
+script better4_debug_skater_trigger
+  <membername> <...>
+endscript
+
+// `map` / `map <name>`.
+script better4_debug_map_add_one
+  if GotParam not_focusable
+    return
+  endif
+  if not GotParam level
+    return
+  endif
+  Better4DebugAddLevel text = <text> level = <level>
+endscript
+
+script better4_debug_map_scan_array
+  GetArraySize <maplist>
+  <index> = 0
+  begin
+    if ( <index> = <array_size> )
+      break
+    endif
+    better4_debug_map_add_one ( <maplist> [ <index> ] )
+    <index> = ( <index> + 1 )
+  repeat
+endscript
+
+script better4_debug_map_scan
+  better4_debug_map_scan_array maplist = level_select_menu_level_info
+  better4_debug_map_scan_array maplist = thps_level_info
+  better4_debug_map_scan_array maplist = thps2_level_info
+  better4_debug_map_scan_array maplist = thps3_level_info
+endscript
+
+script better4_debug_map_go
+  if not GotParam level
+    return
+  endif
+  level_select_change_level level = <level>
 endscript
 
 // `anim_play <name>`. PlayAnim is a skater member function, not a CFunc, so it
@@ -152,6 +210,10 @@ endscript
 script better4_debug_anim_play animspeed = 1.0
   if not GotParam animname
     return
+  endif
+  // Only a subset of the installed anims is loaded at a time.
+  if GotParam animfile
+    LoadAnim name = <animfile> descChecksum = <animname>
   endif
   MakeSkaterGoto better4_debug_anim_trigger params = { animname = <animname> animspeed = <animspeed> }
 endscript

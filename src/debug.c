@@ -37,6 +37,8 @@ static uint8_t *keyboard_on_screen = (uint8_t *)0x00ab5bae;
 typedef int(__cdecl* CFunc_Change_t)(CStruct *);
 static CFunc_Change_t CFunc_Change = (CFunc_Change_t)0x0050f630;
 
+static int console_alive;
+
 static int debug_enabled = 0;
 
 // Toggles the overlay. Override with `[Miscellaneous] ConsoleKey` in the ini.
@@ -187,6 +189,13 @@ static void console_sync_rows() {
     }
 
     rendered_total = scrollback_total;
+}
+
+// Check if console is open.
+static int console_elements_exist() {
+    console_alive = 0;
+    console_run(0xdd0eea91/*better4_console_ping*/);
+    return console_alive;
 }
 
 static void console_sync_input() {
@@ -382,28 +391,173 @@ static int cmd_get(int argc, char **argv, int *quoted) {
     return 1;
 }
 
-// The anims Better4 itself loads, from the LoadAnim calls in better4_anims.q.
-static const char *better4_anim_names[] = {
-    "ACAir_Idle", "ACAir_Init", "ACAir_Out", "BS180PressureFlip", "BS360PressureFlip",
-    "BSToeFlip", "Berzerker", "ClawDrag_Idle", "ClawDrag_Init", "ClawPunch",
-    "CrouchToPressure", "DrunkGrind_Idle", "DrunkGrind_Init", "DuckDive_Idle",
-    "DuckDive_Init", "DuckDive_Out", "Eyeball_Idle", "Eyeball_Init", "FS360PressureFlip",
-    "FSDarkSlide_Init", "FSDarkSlide_Out", "FSDarkSlide_Range", "HTeethSweeper_Init",
-    "HTeethSweeper_Out", "HTeethSweeper_Range", "Maul", "MaulForceGrab_Idle",
-    "MaulForceGrab_Init", "MaulForceGrab_Out", "MaulNinjaManual_Idle",
-    "MaulNinjaManual_Init", "MaulRollGrind_Idle", "MaulRollGrind_Init",
-    "PaddleGrind_Idle", "PaddleGrind_Init", "PaddleGrind_Out", "PizzaGuy_Idle",
-    "PizzaGuy_Init", "PizzaGuy_Out", "PreviewDeck", "RoastBeef", "RoastBeef_Idle",
-    "RodeoClown_Idle", "RodeoClown_Init", "RodeoClown_Out", "SkateToPressure",
-    "Sobriety_Init", "Sobriety_Range", "Spacewalk", "SpacewalkFromManual",
-    "SpacewalkToManual", "Summoner_Idle", "Summoner_Init", "Summoner_Out",
-    "VisitingHome_Idle", "VisitingHome_Init", "VisitingHome_Out", "Wallpush_Crouched",
-    "Wallpush_Manual", "Wallpush_NoseManual", "Wallpush_Standing", "WorkForFood_Idle",
-    "WorkForFood_Init", "XArm_Init", "XArm_Out", "XArm_Range", "XBonePile_Idle",
-    "XBonePile_Init", "XBonePile_Out", "XHeart_Idle", "XHeart_Init", "XHeart_Out",
-    "XJuggle_Idle", "XJuggle_Init", "XJuggle_Out", "XSpin_Idle", "XSpin_Init",
-    "XSpin_Out", "ZZZZManual_idle", "ZZZZManual_init",
-};
+// The skater's anims, scanned from the installed assets rather than listed
+// here.
+#define ANIM_MAX 2048
+#define ANIM_NAME_MAX 64
+
+#define ANIM_HUMAN_BONES 50
+#define ANIM_BONE_COUNT_OFFSET 12
+
+typedef struct {
+    char name[ANIM_NAME_MAX];
+    const char *category; // folder it came from, e.g. "skater_grind"
+} AnimEntry;
+
+static AnimEntry anims[ANIM_MAX];
+static int anim_count;
+static int anims_scanned;
+
+static char anim_categories[64][64];
+static int anim_category_count;
+
+static int anim_name_from_file(const char *file, char *out, size_t out_size) {
+    size_t len = strlen(file);
+
+    if (len > 4 && !_strnicmp(file + len - 4, ".dat", 4)) {
+        len -= 4;
+    } else if (len > 3 && !_strnicmp(file + len - 3, ".da", 3)) {
+        len -= 3;
+    } else if (len > 2 && !_strnicmp(file + len - 2, ".d", 2)) {
+        len -= 2;
+    }
+
+    if (len > 4 && !_strnicmp(file + len - 4, ".ska", 4)) {
+        len -= 4;
+    } else if (len > 3 && !_strnicmp(file + len - 3, "ska", 3)) {
+        len -= 3;
+    } else {
+        return 0; // not an anim file
+    }
+
+    if (len == 0 || len >= out_size) {
+        return 0;
+    }
+
+    memcpy(out, file, len);
+    out[len] = '\0';
+    return 1;
+}
+
+// Reads the bone count from a .ska header, or 0 if it cannot be read.
+static uint32_t anim_bone_count(const char *path) {
+    uint8_t header[16];
+
+    FILE *file = 0;
+    if (fopen_s(&file, path, "rb") || !file) {
+        return 0;
+    }
+
+    size_t read = fread(header, 1, sizeof(header), file);
+    fclose(file);
+
+    if (read < sizeof(header)) {
+        return 0;
+    }
+    return *(uint32_t *)(header + ANIM_BONE_COUNT_OFFSET);
+}
+
+static void anim_scan_folder(const char *anims_dir, const char *folder) {
+    if (anim_category_count >= (int)(sizeof(anim_categories) / sizeof(anim_categories[0]))) {
+        return;
+    }
+
+    const char *category = anim_categories[anim_category_count];
+    strncpy_s(anim_categories[anim_category_count], sizeof(anim_categories[0]), folder, _TRUNCATE);
+
+    char pattern[MAX_PATH];
+    sprintf_s(pattern, sizeof(pattern), "%s\\%s\\*", anims_dir, folder);
+
+    WIN32_FIND_DATAA find;
+    HANDLE handle = FindFirstFileA(pattern, &find);
+    if (handle == INVALID_HANDLE_VALUE) {
+        return;
+    }
+
+    int kept = 0;
+
+    do {
+        if (find.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+            continue;
+        }
+        if (anim_count >= ANIM_MAX) {
+            break;
+        }
+
+        char name[ANIM_NAME_MAX];
+        if (!anim_name_from_file(find.cFileName, name, sizeof(name))) {
+            continue;
+        }
+
+        char path[MAX_PATH];
+        sprintf_s(path, sizeof(path), "%s\\%s\\%s", anims_dir, folder, find.cFileName);
+        if (anim_bone_count(path) != ANIM_HUMAN_BONES) {
+            continue;
+        }
+
+        int duplicate = 0;
+        for (int i = 0; i < anim_count; i++) {
+            if (!_stricmp(anims[i].name, name)) {
+                duplicate = 1;
+                break;
+            }
+        }
+        if (duplicate) {
+            continue;
+        }
+
+        strncpy_s(anims[anim_count].name, ANIM_NAME_MAX, name, _TRUNCATE);
+        anims[anim_count].category = category;
+        anim_count++;
+        kept++;
+    } while (FindNextFileA(handle, &find));
+
+    FindClose(handle);
+
+    // Only claim the category slot if something in it was actually usable.
+    if (kept) {
+        anim_category_count++;
+    }
+}
+
+static void anim_scan() {
+    if (anims_scanned) {
+        return;
+    }
+    anims_scanned = 1;
+
+    char anims_dir[MAX_PATH];
+    strncpy_s(anims_dir, sizeof(anims_dir), configFile, _TRUNCATE);
+    char *slash = strrchr(anims_dir, '\\');
+    if (!slash) {
+        logWarning("anim scan: cannot find the game directory from %s", configFile);
+        return;
+    }
+    strncpy_s(slash + 1, sizeof(anims_dir) - (slash + 1 - anims_dir), "data\\anims", _TRUNCATE);
+
+    char pattern[MAX_PATH];
+    sprintf_s(pattern, sizeof(pattern), "%s\\*", anims_dir);
+
+    WIN32_FIND_DATAA find;
+    HANDLE handle = FindFirstFileA(pattern, &find);
+    if (handle == INVALID_HANDLE_VALUE) {
+        logWarning("anim scan: nothing under %s", anims_dir);
+        return;
+    }
+
+    do {
+        if (!(find.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+            continue;
+        }
+        if (!strcmp(find.cFileName, ".") || !strcmp(find.cFileName, "..")) {
+            continue;
+        }
+        anim_scan_folder(anims_dir, find.cFileName);
+    } while (FindNextFileA(handle, &find));
+
+    FindClose(handle);
+    logInfo("anim scan: %d anims across %d folders", anim_count, anim_category_count);
+}
 
 // Case-insensitive substring match, for filtering listings.
 static int contains_nocase(const char *haystack, const char *needle) {
@@ -419,18 +573,50 @@ static int contains_nocase(const char *haystack, const char *needle) {
     return 0;
 }
 
+// Summarizes anims by folder.
 static int cmd_anim_list(int argc, char **argv, int *quoted) {
-    const char *filter = argc > 1 ? argv[1] : 0;
-    int total = sizeof(better4_anim_names) / sizeof(better4_anim_names[0]);
+    anim_scan();
 
-    // Pack several names per row rather than one each, so a filtered search
-    // fits on screen instead of pushing itself out of the scrollback.
+    if (anim_count == 0) {
+        better4DebugPrint("\\c2no anims found under data\\\\anims");
+        return 1;
+    }
+
+    if (argc < 2) {
+        for (int c = 0; c < anim_category_count; c++) {
+            const char *category = anim_categories[c];
+            int n = 0;
+            for (int i = 0; i < anim_count; i++) {
+                if (anims[i].category == category) {
+                    n++;
+                }
+            }
+            if (n) {
+                better4DebugPrint("\\c1%-22s\\c0 %d", category, n);
+            }
+        }
+        better4DebugPrint("\\c1%d anims\\c0 - anim_list <filter> to search, anim_play <name>",
+                          anim_count);
+        return 1;
+    }
+
+    const char *filter = argv[1];
+
+    // Pack several names per row so a search fits on screen instead of pushing
+    // itself out of the scrollback.
     char line[CONSOLE_MAX_LINE] = "";
     int shown = 0;
+    int truncated = 0;
 
-    for (int i = 0; i < total; i++) {
-        const char *name = better4_anim_names[i];
-        if (filter && !contains_nocase(name, filter)) {
+    for (int i = 0; i < anim_count; i++) {
+        const char *name = anims[i].name;
+        if (!contains_nocase(name, filter) && !contains_nocase(anims[i].category, filter)) {
+            continue;
+        }
+
+        shown++;
+        if (shown > CONSOLE_SCROLLBACK / 2) {
+            truncated++;
             continue;
         }
 
@@ -442,20 +628,132 @@ static int cmd_anim_list(int argc, char **argv, int *quoted) {
             strcat_s(line, sizeof(line), "  ");
         }
         strcat_s(line, sizeof(line), name);
-        shown++;
     }
 
     if (*line) {
         better4DebugPrint("%s", line);
     }
 
-    if (filter) {
-        better4DebugPrint("\\c1%d of %d anims matching \\c6%s", shown, total, filter);
+    if (truncated) {
+        better4DebugPrint("\\c1%d of %d matching \\c6%s\\c0 (%d not shown, narrow the filter)",
+                          shown - truncated, anim_count, filter, truncated);
     } else {
-        better4DebugPrint("\\c1%d anims\\c0 - anim_play <name>, anim_list <filter>", shown);
+        better4DebugPrint("\\c1%d of %d anims matching \\c6%s", shown, anim_count, filter);
     }
     return 1;
 }
+
+// Builds `k=v` and bare-flag arguments into a param struct.
+static void add_script_params(CStruct *params, int argc, char **argv, int *quoted, int first) {
+    for (int i = first; i < argc; i++) {
+        char *equals = quoted[i] ? 0 : strchr(argv[i], '=');
+        if (equals) {
+            *equals = '\0';
+            add_value(params, better4Checksum(argv[i]), equals + 1, 0);
+        } else {
+            CStruct_AddInteger(params, better4Checksum(argv[i]), 1);
+        }
+    }
+}
+
+// Levels, filled in by better4_debug_map_scan calling CFunc_Better4DebugAddLevel.
+#define LEVEL_MAX 64
+
+typedef struct {
+    char name[48];     // display name, e.g. "Rio"
+    uint32_t load;     // its load script, e.g. Load_Rio
+} LevelEntry;
+
+static LevelEntry levels[LEVEL_MAX];
+static int level_count;
+static int levels_scanned;
+
+static void level_scan() {
+    if (levels_scanned) {
+        return;
+    }
+    levels_scanned = 1;
+
+    level_count = 0;
+    Script_RunScript(0xe88d234f/*better4_debug_map_scan*/, 0, 0, 0, 0);
+    logInfo("map scan: %d levels", level_count);
+}
+
+static int cmd_map(int argc, char **argv, int *quoted) {
+    level_scan();
+
+    if (level_count == 0) {
+        better4DebugPrint("\\c2no levels found");
+        return 1;
+    }
+
+    if (argc < 2) {
+        char line[CONSOLE_MAX_LINE] = "";
+        for (int i = 0; i < level_count; i++) {
+            if (strlen(line) + strlen(levels[i].name) + 3 > CONSOLE_WRAP_COLS) {
+                better4DebugPrint("%s", line);
+                line[0] = '\0';
+            }
+            if (*line) {
+                strcat_s(line, sizeof(line), " | ");
+            }
+            strcat_s(line, sizeof(line), levels[i].name);
+        }
+        if (*line) {
+            better4DebugPrint("%s", line);
+        }
+        better4DebugPrint("\\c1%d levels\\c0 - map <name>", level_count);
+        return 1;
+    }
+
+    // Exact match first, so "rio" cannot be beaten to it by a longer name that
+    // merely contains it.
+    const LevelEntry *match = 0;
+    for (int i = 0; i < level_count; i++) {
+        if (!_stricmp(levels[i].name, argv[1])) {
+            match = &levels[i];
+            break;
+        }
+    }
+    if (!match) {
+        int matches = 0;
+        for (int i = 0; i < level_count; i++) {
+            if (contains_nocase(levels[i].name, argv[1])) {
+                match = &levels[i];
+                matches++;
+            }
+        }
+        if (matches > 1) {
+            better4DebugPrint("\\c2%s is ambiguous - be more specific", argv[1]);
+            return 1;
+        }
+    }
+    if (!match) {
+        better4DebugPrint("\\c2no level matching \\c0%s\\c2 - try just 'map'", argv[1]);
+        return 1;
+    }
+
+    better4DebugPrint("\\c1loading \\c6%s", match->name);
+
+    CStruct *params = CStruct_New();
+    CStruct_AddChecksum(params, 0x651533ec/*level*/, match->load);
+    Script_RunScript(0x65cc4837/*better4_debug_map_go*/, params, 0, 0, 0);
+    CStruct_Free(params);
+    return 1;
+}
+
+static int cmd_skater(int argc, char **argv, int *quoted) {
+    CStruct *params = CStruct_New();
+    CStruct_AddChecksum(params, 0xdd13b858/*membername*/, better4Checksum(argv[1]));
+    add_script_params(params, argc, argv, quoted, 2);
+
+    Script_RunScript(0x71e1e6fd/*better4_debug_skater_run*/, params, 0, 0, 0);
+    CStruct_Free(params);
+
+    better4DebugPrint("\\c1%s\\c0 on the skater", argv[1]);
+    return 1;
+}
+
 
 static int game_paused;
 
@@ -503,29 +801,45 @@ static int cmd_anim_speed(int argc, char **argv, int *quoted) {
 }
 
 static int cmd_anim_play(int argc, char **argv, int *quoted) {
+    anim_scan();
+
+    // Only a subset of the installed anims is loaded at any time, so look the
+    // name up and hand the script its file path.
+    const AnimEntry *entry = 0;
+    for (int i = 0; i < anim_count; i++) {
+        if (!_stricmp(anims[i].name, argv[1])) {
+            entry = &anims[i];
+            break;
+        }
+    }
+
     CStruct *params = CStruct_New();
     CStruct_AddChecksum(params, 0x6c2bfb7f/*animname*/, better4Checksum(argv[1]));
     CStruct_AddFloat(params, 0xf4cfd066/*animspeed*/, anim_speed);
+
+    char file[MAX_PATH];
+    if (entry) {
+        sprintf_s(file, sizeof(file), "anims\\%s\\%s.ska", entry->category, entry->name);
+        CStruct_AddString(params, 0xbe97b369/*animfile*/, file);
+    }
+
     Script_RunScript(0x826f3351/*better4_debug_anim_play*/, params, 0, 0, 0);
     CStruct_Free(params);
 
-    better4DebugPrint("\\c1playing \\c6%s\\c0 at \\c6%gx", argv[1], anim_speed);
+    if (entry) {
+        better4DebugPrint("\\c1playing \\c6%s\\c0 from \\c6%s\\c0 at \\c6%gx",
+                          entry->name, entry->category, anim_speed);
+    } else {
+        better4DebugPrint("\\c1playing \\c6%s\\c0 at \\c6%gx \\c3(not found on disk)",
+                          argv[1], anim_speed);
+    }
     return 1;
 }
 
 static int cmd_script(int argc, char **argv, int *quoted) {
     CStruct *params = CStruct_New();
     CStruct_AddChecksum(params, 0xeca9617c/*scriptname*/, better4Checksum(argv[1]));
-
-    for (int i = 2; i < argc; i++) {
-        char *equals = quoted[i] ? 0 : strchr(argv[i], '=');
-        if (equals) {
-            *equals = '\0';
-            add_value(params, better4Checksum(argv[i]), equals + 1, 0);
-        } else {
-            CStruct_AddInteger(params, better4Checksum(argv[i]), 1);
-        }
-    }
+    add_script_params(params, argc, argv, quoted, 2);
 
     Script_RunScript(0xa48a0213/*better4_debug_run_script*/, params, 0, 0, 0);
     CStruct_Free(params);
@@ -539,8 +853,10 @@ static const ConsoleCommand commands[] = {
     { "checksum", 1,  1, cmd_checksum, "checksum <name>",          "print the q script checksum of a name" },
     { "set",      2,  2, cmd_set,      "set <global> <value>",     "set a q script global, e.g. set hidehud 1" },
     { "get",      1,  1, cmd_get,      "get <global>",             "print a numeric q script global" },
-    { "script",   1, -1, cmd_script,   "script <name> [k=v|flag]", "run a q script, e.g. script console_hide" },
-    { "anim_list", 0, 1, cmd_anim_list, "anim_list [filter]",      "list the anims Better4 loads" },
+    { "script",   1, -1, cmd_script,   "script <name> [k=v|flag]", "run a script or CFunc, e.g. script console_hide" },
+    { "skater",   1, -1, cmd_skater,   "skater <name> [k=v|flag]", "run a skater member function, e.g. skater SetRollingFriction 100" },
+    { "map",      0,  1, cmd_map,      "map [name]",               "list levels, or switch to one, e.g. map rio" },
+    { "anim_list", 0, 1, cmd_anim_list, "anim_list [filter]",      "list anims that fit the skater rig" },
     { "anim_play", 1, 1, cmd_anim_play, "anim_play <name>",        "play an anim on the skater, e.g. anim_play Spacewalk" },
     { "anim_speed",0, 1, cmd_anim_speed,"anim_speed [multiplier]", "playback speed for anim_play, e.g. anim_speed 0.25" },
     { "pause",     0, 1, cmd_pause,     "pause [on|off]",          "freeze the game; anims do not advance while paused" },
@@ -905,6 +1221,13 @@ void __cdecl better4ProcessController(device *dev) {
         return;
     }
 
+    if (!console_elements_exist()) {
+        logInfo("console: overlay was destroyed externally, closing");
+        console_open = 0;
+        rows_rendered = 0;
+        return;
+    }
+
     if (want_submit) {
         want_submit = 0;
         console_submit();
@@ -977,6 +1300,39 @@ void patchDebugConsole() {
     patchThisToCdecl((void *)THPS4_PROCESS_CONTROLLER, (void *)better4ProcessController);
 
     logInfo("Debug console overlay installed (toggle: ` )");
+}
+
+// Called once per level by better4_debug_map_scan, so the level tables stay in
+// script and C just keeps what it is handed.
+int __cdecl CFunc_Better4DebugConsoleAlive(CStruct *params, CScript *script) {
+    console_alive = 1;
+    return 1;
+}
+
+int __cdecl CFunc_Better4DebugAddLevel(CStruct *params, CScript *script) {
+    const char *text = 0;
+    uint32_t load = 0;
+
+    if (!CStruct_GetString(params, 0xc4745838/*text*/, &text, 0)
+        || !CStruct_GetChecksum(params, 0x651533ec/*level*/, &load, 0)) {
+        return 0;
+    }
+
+    if (level_count >= LEVEL_MAX) {
+        return 0;
+    }
+
+    // Better4 relists some vanilla levels; keep the first.
+    for (int i = 0; i < level_count; i++) {
+        if (levels[i].load == load) {
+            return 1;
+        }
+    }
+
+    strncpy_s(levels[level_count].name, sizeof(levels[0].name), text, _TRUNCATE);
+    levels[level_count].load = load;
+    level_count++;
+    return 1;
 }
 
 int __cdecl CFunc_Better4DebugPrint(CStruct *params, CScript *script) {
