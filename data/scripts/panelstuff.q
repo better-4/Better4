@@ -196,7 +196,7 @@ script create_panel_stuff
     parent = root_window
     font = newtimerfont
     text = ""
-    scale = <timer_scale>
+    scale = ( <timer_scale> * better4_control_timer_value )
     pos = <timer_pos>
     just = [ center top ]
     rgba = [ 26 51 83 100 ]

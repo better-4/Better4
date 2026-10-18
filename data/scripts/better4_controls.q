@@ -1123,6 +1123,33 @@ script better4_change_playerlist
   endif
 endscript
 
+better4_control_timer_index = 3
+better4_control_timer_value = 1.0
+better4_control_timer = {
+  id = better4_control_timer_id
+  index_name = better4_control_timer_index
+  value_name = better4_control_timer_value
+  text = "Timer"
+  ini_key = "Timer"
+  help = "Change the size of the timer displayed at the top of the screen."
+  options = [
+    { text = "Off" value = off }
+    { text = "Small" value = 0.33 }
+    { text = "Medium" value = 0.67 }
+    { text = "Large" value = 1.0 }
+  ]
+  change_script = better4_change_timer
+}
+
+script better4_change_timer
+  if ScreenElementExists id = the_time
+    DoScreenElementMorph {
+      id = the_time
+      scale = ( 1.3 * better4_control_timer_value )
+    }
+  endif
+endscript
+
 better4_control_menudemo_index = 1
 better4_control_menudemo_value = on
 better4_control_menudemo = {
@@ -1271,6 +1298,7 @@ script better4_controls_init
   better4_control_init better4_control_perfectlanding
   better4_control_init better4_control_goalpts
   better4_control_init better4_control_playerlist
+  better4_control_init better4_control_timer
   better4_control_init better4_control_menudemo
   better4_control_init better4_control_respawn_on_newrun
   better4_control_init better4_control_updatedcollision
