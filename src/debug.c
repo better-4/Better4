@@ -21,8 +21,7 @@
 #define CONSOLE_HISTORY 32
 #define CONSOLE_VISIBLE_ROWS 14
 
-// Rows are plain TextElements, so they do not wrap.
-#define CONSOLE_WRAP_COLS 100
+#define CONSOLE_WRAP_COLS 80
 
 extern char configFile[1024];
 
@@ -85,24 +84,41 @@ static void scrollback_push(const char *text) {
     scrollback_total++;
 }
 
+// Byte offset at which `cols` *visible* characters have been consumed.
+static size_t offset_for_columns(const char *p, size_t cols) {
+    size_t i = 0;
+    size_t visible = 0;
+
+    while (p[i] && visible < cols) {
+        if (p[i] == '\\' && p[i + 1] == 'c' && p[i + 2]) {
+            i += 3;
+            continue;
+        }
+        i++;
+        visible++;
+    }
+
+    return i;
+}
+
 static void scrollback_add(const char *text) {
     char rest[CONSOLE_MAX_LINE];
     strncpy_s(rest, sizeof(rest), text, _TRUNCATE);
 
     char *p = rest;
     while (1) {
-        size_t len = strlen(p);
-        if (len <= CONSOLE_WRAP_COLS) {
+        size_t cut = offset_for_columns(p, CONSOLE_WRAP_COLS);
+        if (!p[cut]) {
             scrollback_push(p);
             return;
         }
 
-        int split = CONSOLE_WRAP_COLS;
-        for (int i = CONSOLE_WRAP_COLS; i > CONSOLE_WRAP_COLS / 2; i--) {
-            if (p[i] == ' ') {
-                split = i;
-                break;
-            }
+        size_t split = cut;
+        while (split > cut / 2 && p[split] != ' ') {
+            split--;
+        }
+        if (p[split] != ' ') {
+            split = cut;
         }
 
         char saved = p[split];
@@ -259,10 +275,11 @@ static int tokenize(char *line, char **argv, int *quoted, int max) {
             break;
         }
 
-        if (*p == '"') {
+        if (*p == '"' || *p == '\'') {
+            char quote = *p;
             argv[argc] = ++p;
             quoted[argc] = 1;
-            while (*p && *p != '"') {
+            while (*p && *p != quote) {
                 p++;
             }
         } else {
@@ -695,7 +712,7 @@ static int cmd_map(int argc, char **argv, int *quoted) {
                 line[0] = '\0';
             }
             if (*line) {
-                strcat_s(line, sizeof(line), " | ");
+                strcat_s(line, sizeof(line), " / ");
             }
             strcat_s(line, sizeof(line), levels[i].name);
         }
@@ -755,6 +772,13 @@ static int cmd_skater(int argc, char **argv, int *quoted) {
 }
 
 
+// `quit` and `exit` are the same command.
+static int cmd_quit(int argc, char **argv, int *quoted) {
+    logInfo("console: quitting");
+    console_run(0x7b42337a/*better4_debug_quit*/);
+    return 1;
+}
+
 static int game_paused;
 
 static int cmd_pause(int argc, char **argv, int *quoted) {
@@ -764,7 +788,7 @@ static int cmd_pause(int argc, char **argv, int *quoted) {
         } else if (!_stricmp(argv[1], "on") || !strcmp(argv[1], "1")) {
             game_paused = 1;
         } else {
-            better4DebugPrint("\\c2usage: \\c0pause [on|off]");
+            better4DebugPrint("\\c2usage: \\c0pause (on/off)");
             return 1;
         }
     } else {
@@ -847,19 +871,21 @@ static int cmd_script(int argc, char **argv, int *quoted) {
 }
 
 static const ConsoleCommand commands[] = {
-    { "help",     0,  1, cmd_help,     "help [command]",           "list commands, or describe one" },
+    { "help",     0,  1, cmd_help,     "help (command)",           "list commands, or describe one" },
     { "echo",     1, -1, cmd_echo,     "echo <text>",              "print text back to the console" },
     { "clear",    0,  0, cmd_clear,    "clear",                    "clear the console" },
     { "checksum", 1,  1, cmd_checksum, "checksum <name>",          "print the q script checksum of a name" },
     { "set",      2,  2, cmd_set,      "set <global> <value>",     "set a q script global, e.g. set hidehud 1" },
     { "get",      1,  1, cmd_get,      "get <global>",             "print a numeric q script global" },
-    { "script",   1, -1, cmd_script,   "script <name> [k=v|flag]", "run a script or CFunc, e.g. script console_hide" },
-    { "skater",   1, -1, cmd_skater,   "skater <name> [k=v|flag]", "run a skater member function, e.g. skater SetRollingFriction 100" },
-    { "map",      0,  1, cmd_map,      "map [name]",               "list levels, or switch to one, e.g. map rio" },
-    { "anim_list", 0, 1, cmd_anim_list, "anim_list [filter]",      "list anims that fit the skater rig" },
+    { "script",   1, -1, cmd_script,   "script <name> (k=v/flag)", "run a script or CFunc, e.g. script console_hide" },
+    { "skater",   1, -1, cmd_skater,   "skater <name> (k=v/flag)", "run a skater member function, e.g. skater SetRollingFriction 100" },
+    { "map",      0,  1, cmd_map,      "map (name)",               "list levels, or switch to one, e.g. map rio" },
+    { "anim_list", 0, 1, cmd_anim_list, "anim_list (filter)",      "list anims that fit the skater rig" },
     { "anim_play", 1, 1, cmd_anim_play, "anim_play <name>",        "play an anim on the skater, e.g. anim_play Spacewalk" },
-    { "anim_speed",0, 1, cmd_anim_speed,"anim_speed [multiplier]", "playback speed for anim_play, e.g. anim_speed 0.25" },
-    { "pause",     0, 1, cmd_pause,     "pause [on|off]",          "freeze the game; anims do not advance while paused" },
+    { "anim_speed",0, 1, cmd_anim_speed,"anim_speed (multiplier)", "playback speed for anim_play, e.g. anim_speed 0.25" },
+    { "pause",     0, 1, cmd_pause,     "pause (on/off)",          "freeze the game, anims do not advance while paused" },
+    { "quit",      0, 0, cmd_quit,      "quit",                    "close the game immediately, without saving" },
+    { "exit",      0, 0, cmd_quit,      "exit",                    "same as quit" },
 };
 
 static const ConsoleCommand *get_command(int index) {
@@ -1145,7 +1171,13 @@ static int SDLCALL consoleEventFilter(void *userdata, SDL_Event *event) {
             if (input_len + 1 >= CONSOLE_INPUT_MAX) {
                 break;
             }
-            input_line[input_len++] = *c;
+
+            // The small font has no glyph for `"`, so typing one would show a
+            // missing-glyph box. Substitute `'`, which the tokenizer accepts as
+            // an equivalent delimiter.
+            char typed = (*c == '"') ? '\'' : *c;
+
+            input_line[input_len++] = typed;
             input_line[input_len] = '\0';
             input_dirty = 1;
         }

@@ -6,7 +6,6 @@ endscript
 better4_console_pos = (8, 8)
 better4_console_scale = (156, 58)
 better4_console_rgba = [ 0 0 0 110 ]
-better4_console_font = small
 better4_console_text_scale = 0.55
 better4_console_rows_pos = (16, 12)
 better4_console_input_pos = (16, 220)
@@ -66,7 +65,7 @@ script better4_console_create
     type = VMenu
     parent = better4_console_anchor
     id = better4_console_rows
-    font = better4_console_font
+    font = small
     pos = (better4_console_rows_pos)
     just = [ left top ]
     internal_just = [ left top ]
@@ -77,7 +76,7 @@ script better4_console_create
     type = TextElement
     parent = better4_console_anchor
     id = better4_console_input
-    font = better4_console_font
+    font = small
     text = ">"
     pos = (better4_console_input_pos)
     scale = (better4_console_text_scale)
@@ -115,7 +114,7 @@ script better4_console_add_row text = ""
   CreateScreenElement {
     type = TextElement
     parent = <id>
-    font = better4_console_font
+    font = small
     text = <text>
     scale = (better4_console_text_scale)
     pos = (0, 0)
@@ -221,6 +220,11 @@ endscript
 script better4_debug_anim_trigger
   SetRollingFriction 100
   PlayAnim Anim = <animname> speed = <animspeed> cycle
+endscript
+
+// `quit` / `exit` exit the game.
+script better4_debug_quit
+  QuitGame
 endscript
 
 // `pause` -- a plain PauseGame toggle.
