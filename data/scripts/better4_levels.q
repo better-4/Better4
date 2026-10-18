@@ -32,7 +32,7 @@ LevelNum_Chopper = 33
 
 // THPS3
 LevelNum_Foundry = 34
-LevelNum_Canada = 35
+LevelNum_Can = 35
 LevelNum_Rio = 16
 LevelNum_Suburbia = 36
 LevelNum_AP = 14
@@ -70,7 +70,7 @@ thps2_level_info = [
 
 thps3_level_info = [
   { text = "Foundry" not_focusable level_num = LevelNum_Foundry level = Load_Foundry level_info_defaults }
-  { text = "Canada" not_focusable level_num = LevelNum_Canada level = Load_Canada level_info_defaults }
+  { text = "Canada" under_construction level_num = LevelNum_Can level = Load_Can level_info_defaults }
   { text = "Rio" under_construction level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
   { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults }
   { text = "Airport" under_construction level_num = LevelNum_AP level = Load_AP level_info_defaults }
@@ -249,6 +249,29 @@ level_ny = {
 }
 
 // THPS3
+
+script Load_Can
+  load_level level_Can
+endscript
+
+level_Can = {
+  structure_name = level_Can
+  load_script = Load_Can
+  name = "Canada"
+  level = "Can"
+  qb = "levels\Can\Can.qb"
+ // level_qb = "levels\better4\Can\Can_scripts.qb"
+  sky = "Can_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "loadscrn_generic"
+  startup_script = Can_Startup
+  goals_script = Can_goals
+  setup_script = Can_setup
+  level_number = LevelNum_Can
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
 
 script Load_Rio
   load_level level_Rio
