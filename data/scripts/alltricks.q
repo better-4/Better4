@@ -29,6 +29,7 @@ ConfigurableTricks = [
   Trick_BetweenLegsSlam
   Trick_BetweenTheLegs
   Trick_BigHitter
+  Trick_BigSpinFlip
   Trick_BigSpinFliptoTail
   Trick_BigSpinShifty
   Trick_BloodyEddie
@@ -37,6 +38,8 @@ ConfigurableTricks = [
   Trick_Boneless
   Trick_BoomBox
   Trick_Breakdance
+  Trick_BSBigSpin
+  Trick_BSFlip
   Trick_BSFootplant
   Trick_BSNoseComply
   Trick_Burntwist
@@ -78,6 +81,8 @@ ConfigurableTricks = [
   Trick_FroggyGrind
   Trick_FS540
   Trick_FS540HeelFlip
+  Trick_FSBigSpin
+  Trick_FSFlip
   Trick_FSShifty
   Trick_FSShoveIt
   Trick_Gazelle
@@ -147,6 +152,7 @@ ConfigurableTricks = [
   Trick_NoseManual
   Trick_Nosepick
   Trick_NoseSlideLipSlide
+  Trick_OldSkoolKickflip
   Trick_OllieAirwalk
   Trick_OllieNorth
   Trick_OneFootBlunt

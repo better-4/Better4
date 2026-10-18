@@ -137,6 +137,13 @@ Trick_SalFlip = { Scr = FlipTrick params = { name = 'Sal Flip' Score = 900 Anim 
 Extra_DoubleSalFlip = [ { Trigger_Extra_Flip params = { name = '360 Sal Flip' Score = 1000 Anim = DoubleSalFlip trickslack = 25 speed = 1.25 } } ]
 Trick_180Varial = { Scr = FlipTrick params = { name = '180 Varial' Score = 700 Anim = _180Varial BoardRotate speed = 1.15 trickslack = 25 ExtraTricks = Trick_360Varial } }
 Trick_360Varial = [ { Trigger_Extra_Flip params = { name = '360 Varial' Score = 900 Anim = _360Varial speed = 0.9 trickslack = 25 BoardRotate IsExtra UseCurrent } } ]
+Trick_OldSkoolKickflip = { Scr = FlipTrick Params = { Name = "Old Sk00l Kickflip" Score = 300 Speed = 1.2 Anim = KickFlipOldSkool FlipAfter Nollie = NollieKickflip ExtraTricks = DoubleKickflip } }
+Trick_BigSpinFlip = { Scr = FlipTrick Params = { Name = "Bigspin Flip" Score = 500 Anim = BigSpinFlip BoardRotate FlipAfter Speed = 1.5 maxspeed = 1.5 ExtraTricks = Extra_VarialKickflip } }
+Trick_FSFlip = { Scr = FlipTrick Params = { Name = "FS Flip" Score = 500 Anim = FSFlip BoardRotate FlipAfter maxspeed = 1.5 ExtraTricks = Extra_VarialKickflip } }
+Trick_BSFlip = { Scr = FlipTrick Params = { Name = "BS Flip" Score = 500 Anim = BSFlip BoardRotate FlipAfter maxspeed = 1.5 ExtraTricks = Extra_VarialKickflip } }
+// NOTE (ellie): FS and BS animations are swapped in thug. We could rename the animation files themselves but it's easy enough to do it here instead
+Trick_FSBigSpin = { Scr = FlipTrick Params = { Name = "FS Bigspin" Score = 500 Anim = BSBigSpin Speed = 1.2 FlipAfter maxspeed = 2 ExtraTricks = Extra540ShoveIt } }
+Trick_BSBigSpin = { Scr = FlipTrick Params = { Name = "BS Bigspin" Score = 500 Anim = FSBigSpin Speed = 1.4 FlipAfter maxspeed = 2 ExtraTricks = ExtraFS540ShoveIt } }
 Trick_Japan = { Scr = GrabTrick params = { name = 'Japan' Score = 350 Anim = JapanAir Idle = JapanAir_Idle ExtraTricks = Trick_OneFootJapan } }
 Trick_OneFootJapan = [ { Trigger_Extra_Grab params = { name = 'One Foot Japan' Score = 800 TweakTrick = GRABTWEAK_LARGE Anim = OneFootJapan speed = 1.3 Idle = OneFootJapan_Idle WaitPercent = 70 IsExtra } } ]
 Trick_Crail = { Scr = GrabTrick params = { name = 'Crail Grab' Score = 350 Anim = Crail Idle = Crail_Idle ExtraTricks = Extra_TuckKnee } }
@@ -217,6 +224,7 @@ BenihanaExtras =
   { Trigger = { Press Square 500 } Scr = FlipTrick params = { name = 'Beni Fingerflip' Score = 1000 Anim = BenihanaFingerflip IsExtra } }
   { Trigger = { Press Circle 300 } Scr = GrabTrick params params = { name = 'Sacktap' Score = 1500 Anim = Sacktap_Init Idle = Sacktap_Range OutAnim = Sacktap_out speed = 1.5 ForceInit trickslack = 20 IsExtra } }
 ]
+
 COOL_SPECIAL_TRICKS = 0
 script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
   SetTags state = skater_inflip

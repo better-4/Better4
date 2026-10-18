@@ -23,4 +23,28 @@
         exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: false, motion: false),
         blend_frames: Some(9),
     ),
+    "BigSpinFlip": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    ),
+    "BSBigSpin": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    ),
+    "BSFlip": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    ),
+    "FSBigSpin": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    ),
+    "FSFlip": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    ),
+    "KickFlipOldSkool": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    ),
 }
