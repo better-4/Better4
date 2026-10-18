@@ -1626,6 +1626,13 @@ skater_m_torso = [
     replace = "CS_NH_logo_none.png"
     with = "textures/logos/Sht_activision01"
   }
+  {
+    desc_id = #"T-Shirt Layered"
+    frontend_desc = 'T-Shirt Layered'
+    mesh = "models/better4/skater_m/shirt_layered.skin"
+    multicolor = 1
+    supports_logo
+  }
 ]
 skater_m_legs = [
   {

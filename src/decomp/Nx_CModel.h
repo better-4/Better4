@@ -1,6 +1,7 @@
 #ifndef _DECOMP_NX_CMODEL_H_
 #define _DECOMP_NX_CMODEL_H_
 
+#include "decomp/CArray.h"
 #include "decomp/Nx_CXboxGeom.h"
 
 #include <stdint.h>
@@ -23,5 +24,6 @@ typedef struct Nx_CModel {
 
 uint8_t Nx_CModel_ClearColor(Nx_CModel *this, uint32_t part);
 uint32_t Nx_CModel_ModulateColor(Nx_CModel *this, uint32_t part, float h, float s, float v);
+uint32_t Nx_CModel_SetColor(Nx_CModel *this, uint32_t part, CArray *materials, float h, float s, float v);
 
 #endif

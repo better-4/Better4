@@ -6,9 +6,17 @@
 #define MAX_PASSES 4
 
 typedef struct NxXbox_sMaterial {
-    uint32_t checksum;
-    uint32_t name_checksum;
-    uint32_t passes;
+    uint32_t checksum; // 0x0
+    uint32_t num_passes; // 0x4
+    uint8_t unk[0x2];
+    uint8_t uv_wibble; // 0xa
+    uint8_t unk2[0xd];
+    uint32_t flags[MAX_PASSES]; // 0x18
+    // 0x28: NxXbox_sTexture *textures[MAX_PASSES]
+    uint8_t unk3[0x1c];
+    float colors[MAX_PASSES][4];
+    // 0x38: float colors[MAX_PASSES][4]
+    // 0xd0: uint32_t num_wibble_vc_anims
 } NxXbox_sMaterial;
 
 typedef struct NxXbox_sMesh {
@@ -59,5 +67,6 @@ typedef struct Nx_CXboxGeom {
 } Nx_CXboxGeom;
 
 void Nx_CXboxGeom_plat_set_color(Nx_CXboxGeom *this, Image_RGBA color);
+void Nx_CXboxGeom_plat_set_material_color(Nx_CXboxGeom *this, uint32_t mat_checksum, int pass, Image_RGBA color);
 
 #endif

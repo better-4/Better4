@@ -56,12 +56,13 @@ master_editable_list = [
   { part = skater_f_elbowpads text = "F ELBOWPADS" male = 0 female = 1 submenu = elbowpads_menu colormenu = elbowpads_color_menu }
 	{
     part = sleeves
+    geom = [ skater_m_torso skater_f_torso ]
     male = 1
     female = 1
     colormenu = sleeve_color_menu
-    // materials = [
-    //   { tshirt_long 0 }
-    // ]
+    materials = [
+      { tshirt_long 0 }
+    ]
   }
   { part = shoes text = "SHOES" male = 1 female = 1 submenu = shoes_menu colormenu = shoe_color_menu }
   { part = front_logo text = "FRONT LOGO" male = 1 female = 1 submenu = front_logo_menu }

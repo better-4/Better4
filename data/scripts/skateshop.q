@@ -3348,7 +3348,6 @@ script check_if_part_colorable
 endscript
 
 script check_if_sleeve_colorable
-  return is_enabled = 1
 	check_if_part_colorable <...>
 	
 	if ( <is_enabled> = 0 )
