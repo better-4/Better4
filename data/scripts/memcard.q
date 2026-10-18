@@ -1767,7 +1767,7 @@ script Load
     mem_card_message_pause XSkips NoTimerReset NoCardRemovalCheck
     switch <file_type>
     case OptionsAndPros
-      MaybeLoadCustomSkater
+      //MaybeLoadCustomSkater
       career_post_load
     case Replay
       memcard_menus_cleanup
@@ -1795,18 +1795,35 @@ script Load
   endif
 endscript
 script MaybeLoadCustomSkater
-  if not CurrentSkaterIsPro
-    if CustomSkaterFilenameDefined
-      GetCustomSkaterFilename
+  if GetMostRecentCAS
+    DisableReset
+    if MemCardFileExists name = <CASFileName> type = Cas
+      ResetTimer
+      mcmess_AutoLoadingCas filename = <CASFileName>
+      printf "this is auto loading the cas!"
+      printf "cas being loaded : %s" s = <CASFileName>
       DisableReset
-      if MemCardFileExists name = <CASFileName> type = Cas
-        ResetTimer
-        mcmess_AutoLoadingCas filename = <CASFileName>
+      LoadFromMemoryCard name = <CASFileName> type = Cas
+      mem_card_message_pause XSkips NoTimerReset
+    else
+      SetCustomSkaterFilename "Unimplemented"
+    endif
+  else
+    LogInfo "no recent cas found, doing vanilla routine"
+    if not CurrentSkaterIsPro
+      if CustomSkaterFilenameDefined
         DisableReset
-        LoadFromMemoryCard name = <CASFileName> type = Cas
-        mem_card_message_pause XSkips NoTimerReset
-      else
-        SetCustomSkaterFilename "Unimplemented"
+        if MemCardFileExists name = <CASFileName> type = Cas
+          ResetTimer
+          mcmess_AutoLoadingCas filename = <CASFileName>
+          printf "this is auto loading the cas!"
+          printf "cas being loaded : %s" s = <CASFileName>
+          DisableReset
+          LoadFromMemoryCard name = <CASFileName> type = Cas
+          mem_card_message_pause XSkips NoTimerReset
+        else
+          SetCustomSkaterFilename "Unimplemented"
+        endif
       endif
     endif
   endif

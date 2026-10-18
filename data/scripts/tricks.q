@@ -1276,10 +1276,11 @@ script EndOfRun
         if not GotParam FromTaxiGuy
           if not GameModeEquals is_goal_attack
             if not IsBetterObserving
-              if not ObjectExists id = dialog_box_anchor
-                create_net_panel_message text = "Press \b3 to observe" style = generic_net_panel_message
-                set_observe_prompt_event
-              endif
+              dialog_box_exit
+              exit_pause_menu
+              ObserveAfter0
+              create_net_panel_message text = "Press \b3 to observe" style = generic_net_panel_message
+              create_observer_ui
             endif
           endif
         endif

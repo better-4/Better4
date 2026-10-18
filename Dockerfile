@@ -200,6 +200,7 @@ COPY --from=build-nx /opt/nx /opt/nx
 
 COPY data/anims data/anims
 COPY vendor/nx/assets/stdkey vendor/nx/assets/stdkey
+COPY vendor/nx/assets/anim/thps4 vendor/nx/assets/anim/thps4
 
 RUN mkdir -p "/out/data/anims/better4" \
     && /opt/nx/nx-cli anim convert-bulk \
@@ -207,6 +208,10 @@ RUN mkdir -p "/out/data/anims/better4" \
          --in-game thug --out-game thps4 \
          --qkeys vendor/nx/assets/stdkey/thug/standardkeyQ.bin \
          --tkeys vendor/nx/assets/stdkey/thug/standardkeyT.bin \
+         --exits data/anims/exits.ron \
+         --target-anims vendor/nx/assets/anim/thps4 \
+         --target-qkeys vendor/nx/assets/stdkey/thps4/standardkeyQ.bin \
+         --target-tkeys vendor/nx/assets/stdkey/thps4/standardkeyT.bin \
     && cp data/anims/*.dat /out/data/anims/better4
 
 ########################################

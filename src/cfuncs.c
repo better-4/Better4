@@ -19,6 +19,7 @@
 #include "pressures.h"
 #include "version.h"
 #include "wallpush.h"
+#include "directory_list.h"
 
 #include "partymod-thps4/src/patch.h"
 
@@ -30,7 +31,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 61
+#define BETTER4_NUM_CFUNCS 62
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -118,6 +119,7 @@ void addCFuncs() {
 	addCFunc("Better4DebugPrint", (void *)CFunc_Better4DebugPrint);
 	addCFunc("Better4DebugAddLevel", (void *)CFunc_Better4DebugAddLevel);
 	addCFunc("Better4DebugConsoleAlive", (void *)CFunc_Better4DebugConsoleAlive);
+	addCFunc("GetMostRecentCAS", (void *)CFunc_GetMostRecentCAS);
 }
 
 void printCFuncs() {

@@ -21,6 +21,8 @@ add_library(better4 SHARED
     "${SRC}/cfuncs.h"
     "${SRC}/debug.c"
     "${SRC}/debug.h"
+    "${SRC}/directory_list.c"
+    "${SRC}/directory_list.h"
     "${SRC}/freecam.c"
     "${SRC}/freecam.h"
     "${SRC}/input.c"

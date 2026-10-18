@@ -20,6 +20,13 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\FSDarkSlide_Init.ska" descChecksum = FSDarkSlide_Init
   LoadAnim name = "anims\better4\FSDarkSlide_Range.ska" descChecksum = FSDarkSlide_Range
   LoadAnim name = "anims\better4\FSDarkSlide_Out.ska" descChecksum = FSDarkSlide_Out
+
+  LoadAnim name = "anims\better4\BigSpinFlip.ska" descChecksum = BigSpinFlip
+  LoadAnim name = "anims\better4\BSBigSpin.ska" descChecksum = BSBigSpin
+  LoadAnim name = "anims\better4\BSFlip.ska" descChecksum = BSFlip
+  LoadAnim name = "anims\better4\FSBigSpin.ska" descChecksum = FSBigSpin
+  LoadAnim name = "anims\better4\FSFlip.ska" descChecksum = FSFlip
+  LoadAnim name = "anims\better4\KickFlipOldSkool.ska" descChecksum = KickFlipOldSkool
 endscript
 
 script better4_load_anims_th3

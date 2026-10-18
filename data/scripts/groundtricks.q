@@ -201,7 +201,7 @@ script ToggleNollieRegular // pressure piggbacks off nollie system
   ApplyStanceToggle <...>
   if not GotParam DontDoAnimation // prevents re-doing animation you are already in
     if not InNollie
-      if ( in_pressure = 0 ) // regular stance branch
+      if not InPressure // regular stance branch
         if Crouched
           PlayAnim Anim = CrouchToNollie BlendPeriod = 0.1 backwards
         else
@@ -298,7 +298,7 @@ script Ollie OutSpeed = 1
     endif
     DoNextTrick
   endif
-  if ( in_pressure = 1 )
+  if InPressure
     SetTrickName 'Pressure'
     SetTrickScore 200
     Display

@@ -1,0 +1,1270 @@
+common_hatlogo_params =
+{
+  replace = "Hat_logo_none.png"
+  in = all
+}
+common_frontlogo_params =
+{
+  replace = "CS_NH_logo_none.png"
+  in = all
+}
+common_backlogo_params =
+{
+  replace = "CS_NH_logo_none2.png"
+  in = all
+}
+hat_logo = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+  }
+  {
+    desc_id = 411VM
+    frontend_desc = '411VM'
+    common_hatlogo_params
+    with = "textures/logos/Hat_411vm01"
+    sponsor = _411vm
+  }
+  {
+    desc_id = Activision
+    frontend_desc = 'Activision'
+    common_hatlogo_params
+    with = "textures/logos/Hat_Activision01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = Adio
+    frontend_desc = 'Adio'
+    common_hatlogo_params
+    with = "textures/logos/Hat_Adio01"
+    sponsor = Adio
+  }
+  {
+    desc_id = Axion
+    frontend_desc = 'Axion'
+    common_hatlogo_params
+    with = "textures/logos/Hat_Axion01"
+    sponsor = Axion
+  }
+  {
+    desc_id = Baker
+    frontend_desc = 'Baker'
+    common_hatlogo_params
+    with = "textures/logos/Hat_baker01"
+    sponsor = Baker
+  }
+  {
+    desc_id = Billabong
+    frontend_desc = 'Billabong'
+    common_hatlogo_params
+    with = "textures/logos/Hat_billabong01"
+    sponsor = Billabong
+  }
+  {
+    desc_id = Birdhouse
+    frontend_desc = 'Birdhouse'
+    common_hatlogo_params
+    with = "textures/logos/Hat_birdhouse01"
+    sponsor = Birdhouse
+  }
+  {
+    desc_id = Bootleg
+    frontend_desc = 'Bootleg'
+    common_hatlogo_params
+    with = "textures/logos/Hat_bootleg01"
+    sponsor = Bootleg
+  }
+  {
+    desc_id = Brigade
+    frontend_desc = 'Brigade'
+    common_hatlogo_params
+    with = "textures/logos/Hat_brigade01"
+    sponsor = Brigade
+  }
+  {
+    desc_id = Circa
+    frontend_desc = 'Circa'
+    common_hatlogo_params
+    with = "textures/logos/Hat_circa01"
+    sponsor = Circa
+  }
+  {
+    desc_id = #"City Stars"
+    frontend_desc = 'City Stars'
+    common_hatlogo_params
+    with = "textures/logos/Hat_citystars01"
+    sponsor = citystars
+  }
+  {
+    desc_id = CKY
+    frontend_desc = 'CKY'
+    common_hatlogo_params
+    with = "textures/logos/Hat_cky01"
+    sponsor = CKY
+  }
+  {
+    desc_id = Dolby
+    frontend_desc = 'Dolby'
+    common_hatlogo_params
+    with = "textures/logos/Hat_dolby01"
+    sponsor = Dolby
+  }
+  {
+    desc_id = Element
+    frontend_desc = 'Element'
+    common_hatlogo_params
+    with = "textures/logos/Hat_element01"
+    sponsor = Element
+  }
+  {
+    desc_id = Emerica
+    frontend_desc = 'Emerica'
+    common_hatlogo_params
+    with = "textures/logos/Hat_emerica01"
+    sponsor = Emerica
+  }
+  {
+    desc_id = Enjoi
+    frontend_desc = 'Enjoi'
+    common_hatlogo_params
+    with = "textures/logos/Hat_enjoi01"
+    sponsor = Enjoi
+  }
+  {
+    desc_id = Es
+    frontend_desc = 'Es'
+    common_hatlogo_params
+    with = "textures/logos/Hat_es01"
+    sponsor = Es
+  }
+  {
+    desc_id = Etnies
+    frontend_desc = 'Etnies'
+    common_hatlogo_params
+    with = "textures/logos/Hat_etnies01"
+    sponsor = Etnies
+  }
+  {
+    desc_id = Faction
+    frontend_desc = 'Faction'
+    common_hatlogo_params
+    with = "textures/logos/Hat_faction01"
+    sponsor = Faction
+  }
+  {
+    desc_id = Firm
+    frontend_desc = 'The Firm'
+    common_hatlogo_params
+    with = "textures/logos/Hat_firm01"
+    sponsor = Firm
+  }
+  {
+    desc_id = Flip
+    frontend_desc = 'Flip'
+    common_hatlogo_params
+    with = "textures/logos/Hat_flip01"
+    sponsor = Flip
+  }
+  {
+    desc_id = #"Four Star"
+    frontend_desc = 'Four Star'
+    common_hatlogo_params
+    with = "textures/logos/Hat_fourstar01"
+    sponsor = fourstar
+  }
+  {
+    desc_id = Genetic
+    frontend_desc = 'Genetic'
+    common_hatlogo_params
+    with = "textures/logos/Hat_genetic01"
+    sponsor = Genetic
+  }
+  {
+    desc_id = Girl
+    frontend_desc = 'Girl'
+    common_hatlogo_params
+    with = "textures/logos/Hat_girl01"
+    sponsor = Girl
+  }
+  {
+    desc_id = Globe
+    frontend_desc = 'Globe'
+    common_hatlogo_params
+    with = "textures/logos/Hat_globe01"
+    sponsor = Globe
+  }
+  {
+    desc_id = #"Hawk Clothing"
+    frontend_desc = 'Hawk Clothing'
+    common_hatlogo_params
+    with = "textures/logos/Hat_hawkc01"
+    sponsor = hawkapp
+  }
+  {
+    desc_id = #"Hawk Shoes"
+    frontend_desc = 'Hawk Shoes'
+    common_hatlogo_params
+    with = "textures/logos/Hat_hawks01"
+    sponsor = hawkshoes
+  }
+  {
+    desc_id = Hurley
+    frontend_desc = 'Hurley'
+    common_hatlogo_params
+    with = "textures/logos/Hat_hurley01"
+    sponsor = Hurley
+  }
+  {
+    desc_id = Independent
+    frontend_desc = 'Independent'
+    common_hatlogo_params
+    with = "textures/logos/Hat_independent01"
+    sponsor = Independent
+  }
+  {
+    desc_id = Melodia
+    frontend_desc = 'Melodia'
+    common_hatlogo_params
+    with = "textures/logos/Hat_melodia01"
+    sponsor = Melodia
+  }
+  {
+    desc_id = Monster
+    frontend_desc = 'Monster'
+    common_hatlogo_params
+    with = "textures/logos/Hat_monster01"
+    sponsor = Monster
+  }
+  {
+    desc_id = Muskabeatz
+    frontend_desc = 'Muskabeatz'
+    common_hatlogo_params
+    with = "textures/logos/Hat_muskabeatz01"
+    sponsor = Muskabeatz
+  }
+  {
+    desc_id = neversoft
+    frontend_desc = 'Neversoft'
+    common_hatlogo_params
+    with = "textures/logos/Hat_Neversoft01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = Nokia
+    frontend_desc = 'Nokia'
+    common_hatlogo_params
+    with = "textures/logos/Hat_Nokia01"
+    sponsor = Nokia
+  }
+  {
+    desc_id = #"O2 Sports"
+    frontend_desc = 'O2 Sports'
+    common_hatlogo_params
+    with = "textures/logos/Hat_o201"
+    sponsor = neversoft
+  }
+  {
+    desc_id = #"Old Star"
+    frontend_desc = 'Old Star'
+    common_hatlogo_params
+    with = "textures/logos/Hat_oldstar01"
+    sponsor = oldstar
+  }
+  {
+    desc_id = Quiksilver
+    frontend_desc = 'Quiksilver'
+    common_hatlogo_params
+    with = "textures/logos/Hat_quiksilver01"
+    sponsor = Quiksilver
+  }
+  {
+    desc_id = Ricta
+    frontend_desc = 'Ricta'
+    common_hatlogo_params
+    with = "textures/logos/Hat_ricta01"
+    sponsor = Ricta
+  }
+  {
+    desc_id = Sessions
+    frontend_desc = 'Sessions'
+    common_hatlogo_params
+    with = "textures/logos/Hat_sessions01"
+    sponsor = Sessions
+  }
+  {
+    desc_id = #"Shorty's"
+    frontend_desc = 'Shorty\'s'
+    common_hatlogo_params
+    with = "textures/logos/Hat_shortys01"
+    sponsor = shortys
+  }
+  {
+    desc_id = Skatelab
+    frontend_desc = 'Skatelab'
+    common_hatlogo_params
+    with = "textures/logos/Hat_skatelab01"
+    sponsor = tensor
+  }
+  {
+    desc_id = tensor
+    frontend_desc = 'Tensor'
+    common_hatlogo_params
+    with = "textures/logos/Hat_tensor01"
+    sponsor = tensor
+  }
+  {
+    desc_id = THPS1
+    frontend_desc = 'THPS1'
+    common_hatlogo_params
+    with = "textures/logos/Hat_THPS101"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS2
+    frontend_desc = 'THPS2'
+    common_hatlogo_params
+    with = "textures/logos/Hat_THPS201"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS3
+    frontend_desc = 'THPS3'
+    common_hatlogo_params
+    with = "textures/logos/Hat_THPS301"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS4
+    frontend_desc = 'THPS4'
+    common_hatlogo_params
+    with = "textures/logos/Hat_thps401"
+    sponsor = neversoft
+  }
+  {
+    desc_id = TSA
+    frontend_desc = 'TSA'
+    common_hatlogo_params
+    with = "textures/logos/Hat_tsa01"
+    sponsor = TSA
+  }
+  {
+    desc_id = Vans
+    frontend_desc = 'Vans'
+    common_hatlogo_params
+    with = "textures/logos/Hat_vans01"
+    sponsor = Vans
+    only_with = [ rowley caballero ]
+  }
+  {
+    desc_id = Volcom
+    frontend_desc = 'Volcom'
+    common_hatlogo_params
+    with = "textures/logos/Hat_volcom01"
+    sponsor = Volcom
+  }
+  {
+    desc_id = Zero
+    frontend_desc = 'Zero'
+    common_hatlogo_params
+    with = "textures/logos/Hat_zero01"
+    sponsor = Zero
+  }
+  {
+    desc_id = #"I Eat Dirt"
+    frontend_desc = 'I Eat Dirt'
+    common_hatlogo_params
+    with = "textures/logos/Hat_ieatdirt01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = #"Shins hat logo"
+    frontend_desc = 'Shin\'s'
+    common_hatlogo_params
+    with = "textures/better4/logos/o_hat"
+  }  
+]
+front_logo = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+  }
+  {
+    desc_id = 411VM
+    frontend_desc = '411VM'
+    common_frontlogo_params
+    with = "textures/logos/Sht_411vm01"
+    sponsor = _411vm
+  }
+  {
+    desc_id = Activision
+    frontend_desc = 'Activision'
+    common_frontlogo_params
+    with = "textures/logos/Sht_Activision01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = Adio
+    frontend_desc = 'Adio'
+    common_frontlogo_params
+    with = "textures/logos/Sht_Adio01"
+    sponsor = Adio
+  }
+  {
+    desc_id = Axion
+    frontend_desc = 'Axion'
+    common_frontlogo_params
+    with = "textures/logos/Sht_Axion01"
+    sponsor = Axion
+  }
+  {
+    desc_id = Baker
+    frontend_desc = 'Baker'
+    common_frontlogo_params
+    with = "textures/logos/Sht_baker01"
+    sponsor = Baker
+  }
+  {
+    desc_id = Billabong
+    frontend_desc = 'Billabong'
+    common_frontlogo_params
+    with = "textures/logos/Sht_billabong01"
+    sponsor = Billabong
+  }
+  {
+    desc_id = Birdhouse
+    frontend_desc = 'Birdhouse'
+    common_frontlogo_params
+    with = "textures/logos/Sht_birdhouse01"
+    sponsor = Birdhouse
+  }
+  {
+    desc_id = Bootleg
+    frontend_desc = 'Bootleg'
+    common_frontlogo_params
+    with = "textures/logos/Sht_bootleg01"
+    sponsor = Bootleg
+  }
+  {
+    desc_id = Brigade
+    frontend_desc = 'Brigade'
+    common_frontlogo_params
+    with = "textures/logos/Sht_brigade01"
+    sponsor = Brigade
+  }
+  {
+    desc_id = Circa
+    frontend_desc = 'Circa'
+    common_frontlogo_params
+    with = "textures/logos/Sht_circa01"
+    sponsor = Circa
+  }
+  {
+    desc_id = #"City Stars"
+    frontend_desc = 'City Stars'
+    common_frontlogo_params
+    with = "textures/logos/Sht_citystars01"
+    sponsor = citystars
+  }
+  {
+    desc_id = CKY
+    frontend_desc = 'CKY'
+    common_frontlogo_params
+    with = "textures/logos/Sht_cky01"
+    sponsor = CKY
+  }
+  {
+    desc_id = Dolby
+    frontend_desc = 'Dolby'
+    common_frontlogo_params
+    with = "textures/logos/Sht_dolby01"
+    sponsor = Dolby
+  }
+  {
+    desc_id = Element
+    frontend_desc = 'Element'
+    common_frontlogo_params
+    with = "textures/logos/Sht_element01"
+    sponsor = Element
+  }
+  {
+    desc_id = Emerica
+    frontend_desc = 'Emerica'
+    common_frontlogo_params
+    with = "textures/logos/Sht_emerica01"
+    sponsor = Emerica
+  }
+  {
+    desc_id = Enjoi
+    frontend_desc = 'Enjoi'
+    common_frontlogo_params
+    with = "textures/logos/Sht_enjoi01"
+    sponsor = Enjoi
+  }
+  {
+    desc_id = Es
+    frontend_desc = 'Es'
+    common_frontlogo_params
+    with = "textures/logos/Sht_es01"
+    sponsor = Es
+  }
+  {
+    desc_id = Etnies
+    frontend_desc = 'Etnies'
+    common_frontlogo_params
+    with = "textures/logos/Sht_etnies01"
+    sponsor = Etnies
+  }
+  {
+    desc_id = Faction
+    frontend_desc = 'Faction'
+    common_frontlogo_params
+    with = "textures/logos/Sht_faction01"
+    sponsor = Faction
+  }
+  {
+    desc_id = Firm
+    frontend_desc = 'The Firm'
+    common_frontlogo_params
+    with = "textures/logos/Sht_firm01"
+    sponsor = Firm
+  }
+  {
+    desc_id = Flip
+    frontend_desc = 'Flip'
+    common_frontlogo_params
+    with = "textures/logos/Sht_flip01"
+    sponsor = Flip
+  }
+  {
+    desc_id = #"Four Star"
+    frontend_desc = 'Four Star'
+    common_frontlogo_params
+    with = "textures/logos/Sht_fourstar01"
+    sponsor = fourstar
+  }
+  {
+    desc_id = Genetic
+    frontend_desc = 'Genetic'
+    common_frontlogo_params
+    with = "textures/logos/Sht_genetic01"
+    sponsor = Genetic
+  }
+  {
+    desc_id = Girl
+    frontend_desc = 'Girl'
+    common_frontlogo_params
+    with = "textures/logos/Sht_girl01"
+    sponsor = Girl
+  }
+  {
+    desc_id = Globe
+    frontend_desc = 'Globe'
+    common_frontlogo_params
+    with = "textures/logos/Sht_globe01"
+    sponsor = Globe
+  }
+  {
+    desc_id = #"Hawk Clothing"
+    frontend_desc = 'Hawk Clothing'
+    common_frontlogo_params
+    with = "textures/logos/Sht_hawkc01"
+    sponsor = hawkapp
+  }
+  {
+    desc_id = #"Hawk Shoes"
+    frontend_desc = 'Hawk Shoes'
+    common_frontlogo_params
+    with = "textures/logos/Sht_hawks01"
+    sponsor = hawkshoes
+  }
+  {
+    desc_id = Hurley
+    frontend_desc = 'Hurley'
+    common_frontlogo_params
+    with = "textures/logos/Sht_hurley01"
+    sponsor = Hurley
+  }
+  {
+    desc_id = Independent
+    frontend_desc = 'Independent'
+    common_frontlogo_params
+    with = "textures/logos/Sht_independent01"
+    sponsor = Independent
+  }
+  {
+    desc_id = Melodia
+    frontend_desc = 'Melodia'
+    common_frontlogo_params
+    with = "textures/logos/Sht_melodia01"
+    sponsor = Melodia
+  }
+  {
+    desc_id = Monster
+    frontend_desc = 'Monster'
+    common_frontlogo_params
+    with = "textures/logos/Sht_monster01"
+    sponsor = Monster
+  }
+  {
+    desc_id = Muskabeatz
+    frontend_desc = 'Muskabeatz'
+    common_frontlogo_params
+    with = "textures/logos/Sht_muskabeatz01"
+    sponsor = Muskabeatz
+  }
+  {
+    desc_id = neversoft
+    frontend_desc = 'Neversoft'
+    common_frontlogo_params
+    with = "textures/logos/Sht_Neversoft01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = Nokia
+    frontend_desc = 'Nokia'
+    common_frontlogo_params
+    with = "textures/logos/Sht_Nokia01"
+    sponsor = Nokia
+  }
+  {
+    desc_id = Nokia2
+    frontend_desc = 'Nokia 2'
+    common_frontlogo_params
+    with = "textures/logos/Sht_Nokia02"
+    sponsor = Nokia
+  }
+  {
+    desc_id = #"O2 Sports"
+    frontend_desc = 'O2 Sports'
+    common_frontlogo_params
+    with = "textures/logos/Sht_o201"
+    sponsor = neversoft
+  }
+  {
+    desc_id = #"Old Star"
+    frontend_desc = 'Old Star'
+    common_frontlogo_params
+    with = "textures/logos/Sht_oldstar01"
+    sponsor = oldstar
+  }
+  {
+    desc_id = Quiksilver
+    frontend_desc = 'Quiksilver'
+    common_frontlogo_params
+    with = "textures/logos/Sht_quiksilver01"
+    sponsor = Quiksilver
+  }
+  {
+    desc_id = Ricta
+    frontend_desc = 'Ricta'
+    common_frontlogo_params
+    with = "textures/logos/Sht_ricta01"
+    sponsor = Ricta
+  }
+  {
+    desc_id = Sessions
+    frontend_desc = 'Sessions'
+    common_frontlogo_params
+    with = "textures/logos/Sht_sessions01"
+    sponsor = Sessions
+  }
+  {
+    desc_id = #"Shorty's"
+    frontend_desc = 'Shorty\'s'
+    common_frontlogo_params
+    with = "textures/logos/Sht_shortys01"
+    sponsor = shortys
+  }
+  {
+    desc_id = Skatelab
+    frontend_desc = 'Skatelab'
+    common_frontlogo_params
+    with = "textures/logos/Sht_skatelab01"
+    sponsor = shortys
+  }
+  {
+    desc_id = tensor
+    frontend_desc = 'Tensor'
+    common_frontlogo_params
+    with = "textures/logos/Sht_tensor01"
+    sponsor = tensor
+  }
+  {
+    desc_id = THPS1
+    frontend_desc = 'THPS1'
+    common_frontlogo_params
+    with = "textures/logos/Sht_THPS101"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS2
+    frontend_desc = 'THPS2'
+    common_frontlogo_params
+    with = "textures/logos/Sht_THPS201"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS3
+    frontend_desc = 'THPS3'
+    common_frontlogo_params
+    with = "textures/logos/Sht_THPS301"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS4
+    frontend_desc = 'THPS4'
+    common_frontlogo_params
+    with = "textures/logos/Sht_thps401"
+    sponsor = neversoft
+  }
+  {
+    desc_id = TSA
+    frontend_desc = 'TSA'
+    common_frontlogo_params
+    with = "textures/logos/Sht_tsa01"
+    sponsor = TSA
+  }
+  {
+    desc_id = Vans
+    frontend_desc = 'Vans'
+    common_frontlogo_params
+    with = "textures/logos/Sht_vans01"
+    sponsor = Vans
+  }
+  {
+    desc_id = Volcom
+    frontend_desc = 'Volcom'
+    common_frontlogo_params
+    with = "textures/logos/Sht_volcom01"
+    sponsor = Volcom
+  }
+  {
+    desc_id = Zero
+    frontend_desc = 'Zero'
+    common_frontlogo_params
+    with = "textures/logos/Sht_zero01"
+    sponsor = Zero
+  }
+  {
+    desc_id = #"I Eat Dirt"
+    frontend_desc = 'I Eat Dirt'
+    common_frontlogo_params
+    with = "textures/logos/Sht_ieatdirt01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = #"Junnosuke"
+    frontend_desc = 'Junnosuke\'s logo'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_y_logo1"
+  }
+  {
+    desc_id = #"Shin 1"
+    frontend_desc = 'Shin\'s logo 1'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_o_logo1"
+  }
+  {
+    desc_id = #"Shin 2"
+    frontend_desc = 'Shin\'s logo 2'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_o_logo2"
+  }
+  {
+    desc_id = #"Shin 3"
+    frontend_desc = 'Shin\'s logo 3'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_o_logo4"
+  }
+  {
+    desc_id = #"Hiroki 1"
+    frontend_desc = 'Hiroki\'s logo 1'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_s_logo1"
+  } 
+  {
+    desc_id = #"Hiroki 2"
+    frontend_desc = 'Hiroki\'s logo 2'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_s_logo2"
+  }
+  {
+    desc_id = #"Hiroki 3"
+    frontend_desc = 'Hiroki\'s logo 3'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_s_logo3"
+  }
+  {
+    desc_id = #"Hiroki 4"
+    frontend_desc = 'Hiroki\'s logo 4'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_s_logo4"
+  } 
+  {
+    desc_id = #"Success 1"
+    frontend_desc = 'Success 1'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_sp_logo1"
+  } 
+  {
+    desc_id = #"Success 2"
+    frontend_desc = 'Success 2'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_sp_logo2"
+  }
+  {
+    desc_id = #"Success 3"
+    frontend_desc = 'Success 3'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_sp_logo3"
+  }
+  {
+    desc_id = #"Success 4"
+    frontend_desc = 'Success 4'
+    common_frontlogo_params
+    with = "textures/better4/logos/sht_sp_logo4"
+  }  
+]
+back_logo = [
+  {
+    desc_id = None
+    frontend_desc = 'None'
+  }
+  {
+    desc_id = 411VM
+    frontend_desc = '411VM'
+    common_backlogo_params
+    with = "textures/logos/Sht_411vm01"
+    sponsor = _411vm
+  }
+  {
+    desc_id = Activision
+    frontend_desc = 'Activision'
+    common_backlogo_params
+    with = "textures/logos/Sht_Activision01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = Adio
+    frontend_desc = 'Adio'
+    common_backlogo_params
+    with = "textures/logos/Sht_Adio01"
+    sponsor = Adio
+  }
+  {
+    desc_id = Axion
+    frontend_desc = 'Axion'
+    common_backlogo_params
+    with = "textures/logos/Sht_Axion01"
+    sponsor = Axion
+  }
+  {
+    desc_id = Baker
+    frontend_desc = 'Baker'
+    common_backlogo_params
+    with = "textures/logos/Sht_baker01"
+    sponsor = Baker
+  }
+  {
+    desc_id = Billabong
+    frontend_desc = 'Billabong'
+    common_backlogo_params
+    with = "textures/logos/Sht_billabong01"
+    sponsor = Billabong
+  }
+  {
+    desc_id = Birdhouse
+    frontend_desc = 'Birdhouse'
+    common_backlogo_params
+    with = "textures/logos/Sht_birdhouse01"
+    sponsor = Birdhouse
+  }
+  {
+    desc_id = Bootleg
+    frontend_desc = 'Bootleg'
+    common_backlogo_params
+    with = "textures/logos/Sht_bootleg01"
+    sponsor = Bootleg
+  }
+  {
+    desc_id = Brigade
+    frontend_desc = 'Brigade'
+    common_backlogo_params
+    with = "textures/logos/Sht_brigade01"
+    sponsor = Brigade
+  }
+  {
+    desc_id = Circa
+    frontend_desc = 'Circa'
+    common_backlogo_params
+    with = "textures/logos/Sht_circa01"
+    sponsor = Circa
+  }
+  {
+    desc_id = #"City Stars"
+    frontend_desc = 'City Stars'
+    common_backlogo_params
+    with = "textures/logos/Sht_citystars01"
+    sponsor = citystars
+  }
+  {
+    desc_id = CKY
+    frontend_desc = 'CKY'
+    common_backlogo_params
+    with = "textures/logos/Sht_cky01"
+    sponsor = CKY
+  }
+  {
+    desc_id = Dolby
+    frontend_desc = 'Dolby'
+    common_backlogo_params
+    with = "textures/logos/Sht_dolby01"
+    sponsor = Dolby
+  }
+  {
+    desc_id = Element
+    frontend_desc = 'Element'
+    common_backlogo_params
+    with = "textures/logos/Sht_element01"
+    sponsor = Element
+  }
+  {
+    desc_id = Emerica
+    frontend_desc = 'Emerica'
+    common_backlogo_params
+    with = "textures/logos/Sht_emerica01"
+    sponsor = Emerica
+  }
+  {
+    desc_id = Enjoi
+    frontend_desc = 'Enjoi'
+    common_backlogo_params
+    with = "textures/logos/Sht_enjoi01"
+    sponsor = Enjoi
+  }
+  {
+    desc_id = Es
+    frontend_desc = 'Es'
+    common_backlogo_params
+    with = "textures/logos/Sht_es01"
+    sponsor = Es
+  }
+  {
+    desc_id = Etnies
+    frontend_desc = 'Etnies'
+    common_backlogo_params
+    with = "textures/logos/Sht_etnies01"
+    sponsor = Etnies
+  }
+  {
+    desc_id = Faction
+    frontend_desc = 'Faction'
+    common_backlogo_params
+    with = "textures/logos/Sht_faction01"
+    sponsor = Faction
+  }
+  {
+    desc_id = Firm
+    frontend_desc = 'The Firm'
+    common_backlogo_params
+    with = "textures/logos/Sht_firm01"
+    sponsor = Firm
+  }
+  {
+    desc_id = Flip
+    frontend_desc = 'Flip'
+    common_backlogo_params
+    with = "textures/logos/Sht_flip01"
+    sponsor = Flip
+  }
+  {
+    desc_id = #"Four Star"
+    frontend_desc = 'Four Star'
+    common_backlogo_params
+    with = "textures/logos/Sht_fourstar01"
+    sponsor = fourstar
+  }
+  {
+    desc_id = Genetic
+    frontend_desc = 'Genetic'
+    common_backlogo_params
+    with = "textures/logos/Sht_genetic01"
+    sponsor = Genetic
+  }
+  {
+    desc_id = Girl
+    frontend_desc = 'Girl'
+    common_backlogo_params
+    with = "textures/logos/Sht_girl01"
+    sponsor = Girl
+  }
+  {
+    desc_id = Globe
+    frontend_desc = 'Globe'
+    common_backlogo_params
+    with = "textures/logos/Sht_globe01"
+    sponsor = Globe
+  }
+  {
+    desc_id = #"Hawk Clothing"
+    frontend_desc = 'Hawk Clothing'
+    common_backlogo_params
+    with = "textures/logos/Sht_hawkc01"
+    sponsor = hawkapp
+  }
+  {
+    desc_id = #"Hawk Shoes"
+    frontend_desc = 'Hawk Shoes'
+    common_backlogo_params
+    with = "textures/logos/Sht_hawks01"
+    sponsor = hawkshoes
+  }
+  {
+    desc_id = Hurley
+    frontend_desc = 'Hurley'
+    common_backlogo_params
+    with = "textures/logos/Sht_hurley01"
+    sponsor = Hurley
+  }
+  {
+    desc_id = Independent
+    frontend_desc = 'Independent'
+    common_backlogo_params
+    with = "textures/logos/Sht_independent01"
+    sponsor = Independent
+  }
+  {
+    desc_id = Melodia
+    frontend_desc = 'Melodia'
+    common_backlogo_params
+    with = "textures/logos/Sht_melodia01"
+    sponsor = Melodia
+  }
+  {
+    desc_id = Monster
+    frontend_desc = 'Monster'
+    common_backlogo_params
+    with = "textures/logos/Sht_monster01"
+    sponsor = Monster
+  }
+  {
+    desc_id = Muskabeatz
+    frontend_desc = 'Muskabeatz'
+    common_backlogo_params
+    with = "textures/logos/Sht_muskabeatz01"
+    sponsor = Muskabeatz
+  }
+  {
+    desc_id = neversoft
+    frontend_desc = 'Neversoft'
+    common_backlogo_params
+    with = "textures/logos/Sht_Neversoft01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = Nokia
+    frontend_desc = 'Nokia'
+    common_backlogo_params
+    with = "textures/logos/Sht_Nokia01"
+    sponsor = Nokia
+  }
+  {
+    desc_id = Nokia2
+    frontend_desc = 'Nokia 2'
+    common_backlogo_params
+    with = "textures/logos/Sht_Nokia02"
+    sponsor = Nokia
+  }
+  {
+    desc_id = #"O2 Sports"
+    frontend_desc = 'O2 Sports'
+    common_backlogo_params
+    with = "textures/logos/Sht_o201"
+    sponsor = neversoft
+  }
+  {
+    desc_id = #"Old Star"
+    frontend_desc = 'Old Star'
+    common_backlogo_params
+    with = "textures/logos/Sht_oldstar01"
+    sponsor = oldstar
+  }
+  {
+    desc_id = Quiksilver
+    frontend_desc = 'Quiksilver'
+    common_backlogo_params
+    with = "textures/logos/Sht_quiksilver01"
+    sponsor = Quiksilver
+  }
+  {
+    desc_id = Ricta
+    frontend_desc = 'Ricta'
+    common_backlogo_params
+    with = "textures/logos/Sht_ricta01"
+    sponsor = Ricta
+  }
+  {
+    desc_id = Sessions
+    frontend_desc = 'Sessions'
+    common_backlogo_params
+    with = "textures/logos/Sht_sessions01"
+    sponsor = Sessions
+  }
+  {
+    desc_id = #"Shorty's"
+    frontend_desc = 'Shorty\'s'
+    common_backlogo_params
+    with = "textures/logos/Sht_shortys01"
+    sponsor = shortys
+  }
+  {
+    desc_id = Skatelab
+    frontend_desc = 'Skatelab'
+    common_backlogo_params
+    with = "textures/logos/Sht_skatelab01"
+    sponsor = tensor
+  }
+  {
+    desc_id = tensor
+    frontend_desc = 'Tensor'
+    common_backlogo_params
+    with = "textures/logos/Sht_tensor01"
+    sponsor = tensor
+  }
+  {
+    desc_id = THPS1
+    frontend_desc = 'THPS1'
+    common_backlogo_params
+    with = "textures/logos/Sht_THPS101"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS2
+    frontend_desc = 'THPS2'
+    common_backlogo_params
+    with = "textures/logos/Sht_THPS201"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS3
+    frontend_desc = 'THPS3'
+    common_backlogo_params
+    with = "textures/logos/Sht_THPS301"
+    sponsor = neversoft
+  }
+  {
+    desc_id = THPS4
+    frontend_desc = 'THPS4'
+    common_backlogo_params
+    with = "textures/logos/Sht_thps401"
+    sponsor = neversoft
+  }
+  {
+    desc_id = TSA
+    frontend_desc = 'TSA'
+    common_backlogo_params
+    with = "textures/logos/Sht_tsa01"
+    sponsor = TSA
+  }
+  {
+    desc_id = Vans
+    frontend_desc = 'Vans'
+    common_backlogo_params
+    with = "textures/logos/Sht_vans01"
+    sponsor = Vans
+  }
+  {
+    desc_id = Volcom
+    frontend_desc = 'Volcom'
+    common_backlogo_params
+    with = "textures/logos/Sht_volcom01"
+    sponsor = Volcom
+  }
+  {
+    desc_id = Zero
+    frontend_desc = 'Zero'
+    common_backlogo_params
+    with = "textures/logos/Sht_zero01"
+    sponsor = Zero
+  }
+  {
+    desc_id = #"I Eat Dirt"
+    frontend_desc = 'I Eat Dirt'
+    common_backlogo_params
+    with = "textures/logos/Sht_ieatdirt01"
+    sponsor = neversoft
+  }
+  {
+    desc_id = #"Junnosuke"
+    frontend_desc = 'Junnosuke\'s logo'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_y_logo1"
+  }
+  {
+    desc_id = #"Shin 1"
+    frontend_desc = 'Shin\'s logo 1'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_o_logo1"
+  }
+  {
+    desc_id = #"Shin 2"
+    frontend_desc = 'Shin\'s logo 2'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_o_logo2"
+  }
+  {
+    desc_id = #"Shin 3"
+    frontend_desc = 'Shin\'s logo 3'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_o_logo4"
+  }
+  {
+    desc_id = #"Hiroki 1"
+    frontend_desc = 'Hiroki\'s logo 1'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_s_logo1"
+  } 
+  {
+    desc_id = #"Hiroki 2"
+    frontend_desc = 'Hiroki\'s logo 2'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_s_logo2"
+  }
+  {
+    desc_id = #"Hiroki 3"
+    frontend_desc = 'Hiroki\'s logo 3'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_s_logo3"
+  }
+  {
+    desc_id = #"Hiroki 4"
+    frontend_desc = 'Hiroki\'s logo 4'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_s_logo4"
+  } 
+  {
+    desc_id = #"Success 1"
+    frontend_desc = 'Success 1'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_sp_logo1"
+  } 
+  {
+    desc_id = #"Success 2"
+    frontend_desc = 'Success 2'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_sp_logo2"
+  }
+  {
+    desc_id = #"Success 3"
+    frontend_desc = 'Success 3'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_sp_logo3"
+  }
+  {
+    desc_id = #"Success 4"
+    frontend_desc = 'Success 4'
+    common_backlogo_params
+    with = "textures/better4/logos/sht_sp_logo4"
+  }  
+]
+helmet_logo = hat_logo
