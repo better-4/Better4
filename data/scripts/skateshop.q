@@ -3080,7 +3080,7 @@ script edit_skater_create_main_menu
   edit_skater_menu_add_item {
     text = 'Torso Options'
     pad_choose_script = edit_skater_create_options_menu
-    pad_choose_params = { options_array = edit_skater_torso_options cam_anim = SS_Appearance_Torso from_level_1 }
+    pad_choose_params = { options_array = edit_skater_torso_options cam_anim = SS_Appearance_Torso from_level_1 b4test }
     focus_script = edit_skater_menu_focus_with_icon
     unfocus_script = edit_skater_menu_unfocus_with_icon
     child_texture = ED_torso
@@ -3437,6 +3437,14 @@ script edit_skater_create_options_menu
       endif
       check_option_is_visible ( <options_array> [ <index> ] )
       if not ( <is_visible> = 0 )
+        // NOTE (ellie): remove before final merge
+        if GotParam categories
+          <pad_choose_script> = better4_create_cas_part_menu
+          <pad_choose_params> = { categories = <categories> }
+        else
+          <pad_choose_script> = edit_skater_create_cas_menu
+          <pad_choose_params> = {}
+        endif
         edit_skater_menu_add_item {
           ( <options_array> [ <index> ] )
           tab = tab2
@@ -3446,6 +3454,8 @@ script edit_skater_create_options_menu
           cam_anim = <cam_anim>
           should_add_reset_tattoos = <should_add_reset_tattoos>
           should_add_reset_scaling = <should_add_reset_scaling>
+          pad_choose_script = <pad_choose_script>
+          pad_choose_params = <pad_choose_params>
         }
       endif
        <index> = ( <index> + 1 )
@@ -3986,7 +3996,12 @@ script edit_skater_create_secret_gear_menu
   }
   FireEvent type = focus target = current_menu
 endscript
-script edit_skater_create_scrolling_menu
+script edit_skater_create_scrolling_menu {
+  pad_left_script = nullscript
+  pad_left_params = {}
+  pad_right_script = nullscript
+  pad_right_params = {}
+}
   switch <tab>
   case tab2
      <menu_offset> = (134, 25)
@@ -4043,6 +4058,8 @@ script edit_skater_create_scrolling_menu
       { pad_down generic_menu_up_or_down_sound params = { Down } }
       { pad_back generic_menu_pad_back_sound }
       { pad_back <pad_back_script> params = <pad_back_params> }
+      { pad_left <pad_left_script> params = <pad_left_params> }
+      { pad_right <pad_right_script> params = <pad_right_params> }
     ]
   }
   if LevelIs load_skateshop
