@@ -140,11 +140,12 @@ script create_observer_ui
   SetScreenElementProps {
     id = root_window
     event_handlers = [
-      { pad_left    ObserveActionPrev        params = { } }
-      { pad_right   ObserveActionNext        params = { } }
-      { pad_square  ObserveActionToggleHUD  params = { } }
-      { pad_space  ObserveActionToggleNames  params = { } }
-      { pad_choose  ObserveActionNext        params = { } }
+      { pad_left    ObserveActionPrev         params = { } }
+      { pad_right   ObserveActionNext         params = { } }
+      { pad_square  ObserveActionToggleHUD    params = { } }
+      { pad_space   ObserveActionToggleNames  params = { } }
+      { pad_choose  ObserveActionNext         params = { } }
+      { pad_back    ObserveActionPrev         params = { } }
     ]
   }
    create_helper_text_observe { 
@@ -170,8 +171,9 @@ script destroy_observer_ui
       { pad_left    null_script }
       { pad_right   null_script }
       { pad_square  null_script }
-      { pad_space  null_script }
+      { pad_space   null_script }
       { pad_choose  null_script }
+      { pad_back    null_script }
     ]
     replace_handlers
   }
@@ -191,8 +193,9 @@ script restore_rank_screen_events
       { pad_left    null_script }
       { pad_right   null_script }
       { pad_square  restart_game_rank_screen }
-      { pad_space  null_script }
+      { pad_space   null_script }
       { pad_choose  close_rankings }
+      { pad_back    null_script }
     ]
     replace_handlers
   }
