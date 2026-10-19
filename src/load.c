@@ -167,8 +167,6 @@ void patchLoad() {
 
 	// CAS Stuff
 
-	add_path_override("models\\Skater_m\\hat_beret.tex.Xbx", "models\\better4\\replacements\\hat_beret.tex.Xbx");
-
 	// patchCall(0x0040b50e, (void *)Pip_Load); // ??
 	// patchCall(0x00464cd4, (void *)Pip_Load); // ??
 	// patchCall(0x0046c78f, (void *)Pip_Load); // Nx::CScene::read_collision
