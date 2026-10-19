@@ -10,20 +10,7 @@ master_editable_list = [
   { part = ped_board use_pedpre text = "PED BOARD" submenu = deck_graphic_menu }
   { part = body text = "BODY" male = 0 female = 0 }
   { part = skater_m_head text = "M HEADS" male = 1 female = 0 submenu = face_menu preview_menu = 1 }
-  {
-    part = skater_m_torso
-    text = "M TORSOS"
-    male = 1
-    female = 0
-    submenu = shirt_style_menu
-    colormenu = shirt_color_menu
-		materials = [
-			{ tshirt_shirt 0 }
-			{ tshirt_shirt 1 }
-			{ tshirt_shirt 2 }
-			{ tshirt_sleeve 0 }
-		]
-  }
+  { part = skater_m_torso text = "M TORSOS" male = 1 female = 0 submenu = shirt_style_menu colormenu = shirt_color_menu }
   { part = skater_m_legs text = "M LEGS" male = 1 female = 0 submenu = pants_menu colormenu = pants_color_menu }
   { part = skater_m_hair text = "M HAIR" male = 1 female = 0 submenu = hair_menu preview_menu = 1 colormenu = hair_color_menu }
   { part = skater_m_hat_hair text = "M HAT HAIR" male = 1 female = 0 submenu = hat_hair_menu preview_menu = 1 colormenu = hat_hair_color_menu }
@@ -33,20 +20,7 @@ master_editable_list = [
   { part = skater_m_socks text = "M SOCKS" male = 1 female = 0 submenu = socks_menu colormenu = socks_color_menu }
   { part = skater_m_elbowpads text = "M ELBOWPADS" male = 1 female = 0 submenu = elbowpads_menu colormenu = elbowpads_color_menu }
   { part = skater_f_head text = "F HEADS" male = 0 female = 1 submenu = face_menu preview_menu = 1 }
-  {
-    part = skater_f_torso
-    text = "F TORSOS"
-    male = 0
-    female = 1
-    submenu = shirt_style_menu
-    colormenu = shirt_color_menu
-		materials = [
-			{ tshirt_shirt 0 }
-			{ tshirt_shirt 1 }
-			{ tshirt_shirt 2 }
-			{ tshirt_sleeve 0 }
-		]
-  }
+  { part = skater_f_torso text = "F TORSOS" male = 0 female = 1 submenu = shirt_style_menu colormenu = shirt_color_menu }
   { part = skater_f_legs text = "F LEGS" male = 0 female = 1 submenu = pants_menu colormenu = pants_color_menu }
   { part = skater_f_hair text = "F HAIR" male = 0 female = 1 submenu = hair_menu preview_menu = 1 colormenu = hair_color_menu }
   { part = skater_f_hat_hair text = "F HAT HAIR" male = 0 female = 1 submenu = hat_hair_menu preview_menu = 1 colormenu = hat_hair_color_menu }
@@ -56,7 +30,7 @@ master_editable_list = [
   { part = skater_f_elbowpads text = "F ELBOWPADS" male = 0 female = 1 submenu = elbowpads_menu colormenu = elbowpads_color_menu }
 	{
     part = sleeves
-    geom = [ skater_m_torso skater_f_torso ]
+    parent = [ skater_m_torso skater_f_torso ]
     male = 1
     female = 1
     colormenu = sleeve_color_menu

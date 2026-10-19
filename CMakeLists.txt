@@ -88,8 +88,6 @@ add_library(better4 SHARED
     "${SRC}/decomp/Net_Dispatcher.h"
     "${SRC}/decomp/Nx_CModel.c"
     "${SRC}/decomp/Nx_CModel.h"
-    "${SRC}/decomp/Nx_CGeom.c"
-    "${SRC}/decomp/Nx_CGeom.h"
     "${SRC}/decomp/Nx_CXboxGeom.c"
     "${SRC}/decomp/Nx_CXboxGeom.h"
     "${SRC}/decomp/Obj_CCompositeObject.h"

@@ -23,7 +23,7 @@ typedef struct Nx_CModel {
 } Nx_CModel;
 
 uint8_t Nx_CModel_ClearColor(Nx_CModel *this, uint32_t part);
-uint32_t Nx_CModel_ModulateColor(Nx_CModel *this, uint32_t part, float h, float s, float v);
-uint32_t Nx_CModel_SetColor(Nx_CModel *this, uint32_t part, CArray *materials, float h, float s, float v);
+// uint32_t Nx_CModel_ModulateColor(Nx_CModel *this, uint32_t part, float h, float s, float v);
+uint32_t Nx_CModel_SetSecondaryColor(Nx_CModel *this, uint32_t part, float h, float s, float v);
 
 #endif

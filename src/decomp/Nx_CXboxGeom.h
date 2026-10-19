@@ -4,6 +4,7 @@
 #include "decomp/Image_RGBA.h"
 
 #define MAX_PASSES 4
+#define MATFLAGS_B4_SECONDARY (1 << 30)
 
 typedef struct NxXbox_sMaterial {
     uint32_t checksum; // 0x0
@@ -66,7 +67,7 @@ typedef struct Nx_CXboxGeom {
     NxXbox_CInstance *instance; // 0x44
 } Nx_CXboxGeom;
 
-void Nx_CXboxGeom_plat_set_color(Nx_CXboxGeom *this, Image_RGBA color);
-void Nx_CXboxGeom_plat_set_material_color(Nx_CXboxGeom *this, uint32_t mat_checksum, int pass, Image_RGBA color);
+// void Nx_CXboxGeom_plat_set_color(Nx_CXboxGeom *this, Image_RGBA color);
+void Nx_CXboxGeom_plat_set_secondary_color(Nx_CXboxGeom *this, Image_RGBA color);
 
 #endif
