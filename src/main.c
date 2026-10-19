@@ -1,6 +1,7 @@
 #include "cas.h"
 #include "cfuncs.h"
 #include "debug/console.h"
+#include "debug/draw.h"
 #include "debug/startup_level.h"
 #include "freecam.h"
 #include "input.h"
@@ -312,6 +313,7 @@ void better4Main() {
 	partyMain(configFile);
 
 	patchDebugConsole();
+	patchDebugDraw();
 }
 
 __declspec(dllexport) BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {

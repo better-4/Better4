@@ -27,6 +27,8 @@ add_library(better4 SHARED
     "${SRC}/debug/console.h"
     "${SRC}/debug/discovery.c"
     "${SRC}/debug/discovery.h"
+    "${SRC}/debug/draw.c"
+    "${SRC}/debug/draw.h"
     "${SRC}/debug/startup_level.c"
     "${SRC}/debug/startup_level.h"
     "${SRC}/directory_list.c"

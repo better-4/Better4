@@ -3,6 +3,7 @@
 #include "debug/common.h"
 #include "debug/console.h"
 #include "debug/discovery.h"
+#include "debug/draw.h"
 
 #include "log.h"
 
@@ -402,6 +403,106 @@ static int cmd_anim_play(int argc, char **argv, int *quoted) {
     return 1;
 }
 
+// Reads an on/off argument.
+static int parse_toggle(const char *arg, int current) {
+    if (!arg) {
+        return !current;
+    }
+    if (!_stricmp(arg, "on") || !strcmp(arg, "1")) {
+        return 1;
+    }
+    if (!_stricmp(arg, "off") || !strcmp(arg, "0")) {
+        return 0;
+    }
+    return -1;
+}
+
+static void print_debug_feature(const Better4DebugFeature *feature) {
+    better4DebugPrint("\\c1debug_%-10s \\c6%-3s\\c0 %s", feature->name,
+                      feature->enabled ? "on" : "off", feature->help);
+}
+
+// Backs both `debug <feature> (on/off)` and the flat `debug_<feature>` spelling.
+static int cmd_debug(int argc, char **argv, int *quoted) {
+    const char *name = 0;
+    int state_arg = 2;
+
+    if (!_strnicmp(argv[0], "debug_", 6)) {
+        name = argv[0] + 6;
+        state_arg = 1;
+    } else if (argc > 1) {
+        name = argv[1];
+    }
+
+    if (!name) {
+        for (int i = 0; i < better4DebugFeatureCount(); i++) {
+            print_debug_feature(better4DebugFeatureAt(i));
+        }
+        better4DebugPrint("\\c3debug <feature> (on/off), or debug off to clear every overlay");
+        return 1;
+    }
+
+    if (!_stricmp(name, "off")) {
+        for (int i = 0; i < better4DebugFeatureCount(); i++) {
+            better4DebugFeatureAt(i)->enabled = 0;
+        }
+        better4DebugDrawClear();
+        better4DebugPrint("\\c1every debug overlay off");
+        return 1;
+    }
+
+    Better4DebugFeature *feature = better4DebugFeatureFind(name);
+    if (!feature) {
+        better4DebugPrint("\\c2no debug overlay called \\c0%s\\c2 - try just 'debug'", name);
+        return 1;
+    }
+
+    int enabled = parse_toggle(argc > state_arg ? argv[state_arg] : 0, feature->enabled);
+    if (enabled < 0) {
+        better4DebugPrint("\\c2usage: \\c0debug %s (on/off)", feature->name);
+        return 1;
+    }
+
+    feature->enabled = enabled;
+    if (!enabled) {
+        better4DebugDrawClear();
+    }
+
+    print_debug_feature(feature);
+    return 1;
+}
+
+// Drops a marker where the skater is standing.
+static int cmd_debug_mark(int argc, char **argv, int *quoted) {
+    Mth_Vector pos;
+    if (!better4DebugSkaterPos(&pos)) {
+        better4DebugPrint("\\c2no skater to mark - load a level first");
+        return 1;
+    }
+
+    float radius = 24.0f;
+    if (argc > 1) {
+        char *end = 0;
+        radius = (float)strtod(argv[1], &end);
+        if (!*argv[1] || *end || radius <= 0.0f) {
+            better4DebugPrint("\\c2debug_mark wants a radius, e.g. debug_mark 48");
+            return 1;
+        }
+    }
+
+    better4DebugStar(&pos, radius, BETTER4_RGB(255, 0, 255), BETTER4_DRAW_UNTIL_WRAP);
+    better4DebugCircle(&pos, 16, radius, BETTER4_RGB(255, 0, 255), BETTER4_DRAW_UNTIL_WRAP);
+    better4DebugPrint("\\c1marked \\c6%.1f %.1f %.1f\\c0 - %d lines up", pos.x, pos.y, pos.z,
+                      better4DebugDrawLineCount());
+    return 1;
+}
+
+static int cmd_debug_clear(int argc, char **argv, int *quoted) {
+    better4DebugDrawClear();
+    better4DebugPrint("\\c1debug lines cleared");
+    return 1;
+}
+
 static int cmd_script(int argc, char **argv, int *quoted) {
     CStruct *params = CStruct_New();
     CStruct_AddChecksum(params, 0xeca9617c/*scriptname*/, better4Checksum(argv[1]));
@@ -426,6 +527,10 @@ static const ConsoleCommand commands[] = {
     { "anim_play", 1, 1, cmd_anim_play, "anim_play <name>",        "play an anim on the skater, e.g. anim_play Spacewalk" },
     { "anim_speed",0, 1, cmd_anim_speed,"anim_speed (multiplier)", "playback speed for anim_play, e.g. anim_speed 0.25" },
     { "pause",     0, 1, cmd_pause,     "pause (on/off)",          "freeze the game, anims do not advance while paused" },
+    { "debug",        0, 2, cmd_debug,       "debug (feature) (on/off)", "list the debug overlays, or turn one on" },
+    { "debug_skater", 0, 1, cmd_debug,       "debug_skater (on/off)",    "draw the skater's axes, velocity and contact normal" },
+    { "debug_mark",   0, 1, cmd_debug_mark,  "debug_mark (radius)",      "drop a marker where the skater is standing" },
+    { "debug_clear",  0, 0, cmd_debug_clear, "debug_clear",              "erase every debug line on screen" },
     { "quit",      0, 0, cmd_quit,      "quit",                    "close the game immediately, without saving" },
     { "exit",      0, 0, cmd_quit,      "exit",                    "same as quit" },
 };
