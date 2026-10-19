@@ -270,7 +270,24 @@ level_Can = {
   level_number = LevelNum_Can
   temp_script = load_cameras_and_terrains
   // extranetanimsscript = load_level_anims
-  level_defaults
+  loading_time = 1
+  default_stats = 10
+  ambient_red = 69
+  ambient_green = 72
+  ambient_blue = 79
+  ambient_mod_factor = 0.3
+  heading_0 = -50.0
+  pitch_0 = -127.0
+  red_0 = 167
+  green_0 = 175
+  blue_0 = 197
+  mod_factor_0 = 1.4
+  heading_1 = 50.0
+  pitch_1 = -117.0
+  red_1 = 55
+  green_1 = 58
+  blue_1 = 61
+  mod_factor_1 = 0.2
 }
 
 script Load_Rio

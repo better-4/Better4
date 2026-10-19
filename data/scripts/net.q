@@ -37,6 +37,7 @@ level_info = [
   { name = "Rio" checksum = Load_Rio }
   { name = "Streets" checksum = Load_Streets }
   { name = "New York City" checksum = Load_NYC }
+  { name = "Canada" checksum = Load_Can }
   // keep moto and created park at bottom so that they're excluded from random lvl
   { name = "Created Park" checksum = load_Sk4Ed_gameplay }
   { name = "MotoX" checksum = Load_Motox }
