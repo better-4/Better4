@@ -1,6 +1,7 @@
 #include "cas.h"
 #include "cfuncs.h"
-#include "debug.h"
+#include "debug/console.h"
+#include "debug/startup_level.h"
 #include "freecam.h"
 #include "input.h"
 #include "log.h"
@@ -294,6 +295,7 @@ void patchBetter4() {
 	patchPressures();
 	patchTrickDisplayNames();
 
+	initStartupLevel();
 	initDebugConsole();
 }
 

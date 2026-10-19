@@ -1,6 +1,8 @@
 #include "cfuncs.h"
 
-#include "debug.h"
+#include "debug/console.h"
+#include "debug/discovery.h"
+#include "debug/startup_level.h"
 
 #include "decomp/GameNet_Manager.h"
 #include "decomp/GameNet_PlayerInfo.h"
