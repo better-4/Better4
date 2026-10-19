@@ -403,7 +403,8 @@ static int cmd_anim_play(int argc, char **argv, int *quoted) {
     return 1;
 }
 
-// Reads an on/off argument.
+// Reads an on/off argument, defaulting to a flip when it is absent. Returns -1
+// if the argument is neither.
 static int parse_toggle(const char *arg, int current) {
     if (!arg) {
         return !current;
@@ -465,6 +466,8 @@ static int cmd_debug(int argc, char **argv, int *quoted) {
 
     feature->enabled = enabled;
     if (!enabled) {
+        // Drop whatever it emitted rather than leaving the last frame of it up
+        // until the ring wraps.
         better4DebugDrawClear();
     }
 
@@ -472,7 +475,8 @@ static int cmd_debug(int argc, char **argv, int *quoted) {
     return 1;
 }
 
-// Drops a marker where the skater is standing.
+// Drops a marker where the skater is standing. Handy on its own, and the
+// quickest way to confirm the line renderer is alive.
 static int cmd_debug_mark(int argc, char **argv, int *quoted) {
     Mth_Vector pos;
     if (!better4DebugSkaterPos(&pos)) {
@@ -529,6 +533,8 @@ static const ConsoleCommand commands[] = {
     { "pause",     0, 1, cmd_pause,     "pause (on/off)",          "freeze the game, anims do not advance while paused" },
     { "debug",        0, 2, cmd_debug,       "debug (feature) (on/off)", "list the debug overlays, or turn one on" },
     { "debug_skater", 0, 1, cmd_debug,       "debug_skater (on/off)",    "draw the skater's axes, velocity and contact normal" },
+    { "debug_rails",  0, 1, cmd_debug,       "debug_rails (on/off)",     "draw the level's rail graph" },
+    { "debug_bones",  0, 1, cmd_debug,       "debug_bones (on/off)",     "draw the skater's skeleton" },
     { "debug_mark",   0, 1, cmd_debug_mark,  "debug_mark (radius)",      "drop a marker where the skater is standing" },
     { "debug_clear",  0, 0, cmd_debug_clear, "debug_clear",              "erase every debug line on screen" },
     { "quit",      0, 0, cmd_quit,      "quit",                    "close the game immediately, without saving" },

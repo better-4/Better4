@@ -31,6 +31,9 @@ void better4DebugBox(const Mth_Vector *min, const Mth_Vector *max, uint32_t rgb,
 // `m`'s three axes drawn at `at` in red/green/blue.
 void better4DebugAxes(const Mth_Matrix *m, const Mth_Vector *at, float length, int frames);
 
+// Draw subsequently added lines with the depth test off, so they show through.
+void better4DebugDrawOnTop(int on_top);
+
 void better4DebugDrawClear(void);
 int better4DebugDrawLineCount(void);
 
