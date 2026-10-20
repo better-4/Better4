@@ -24,7 +24,7 @@ script better4_create_cas_part_menu
     RemoveParameter preview_menu
     RemoveParameter submenu
     AddParams ( master_editable_list [ <index> ] )
-     <shouldDisplayList> = 0
+    <shouldDisplayList> = 0
 
     if ( <is_male> = 1 )
       if GotParam male
@@ -64,6 +64,26 @@ script better4_create_cas_part_menu
       z_priority = 10
       not_focusable
     }
+    CreateScreenElement {
+      type = SpriteElement
+      id = edit_skater_category_left
+      parent = edit_skater_anchor_middle
+      pos = ( <pos> - (41, 0) )
+      scale = (0.7, 0.7)
+      texture = left_arrow
+      rgba = [ 128 128 128 100 ]
+      z_priority = 10
+    }
+    CreateScreenElement {
+      type = SpriteElement
+      id = edit_skater_category_right
+      parent = edit_skater_anchor_middle
+      pos = ( <pos> + (41, 0) )
+      scale = (0.7, 0.7)
+      texture = right_arrow
+      rgba = [ 128 128 128 100 ]
+      z_priority = 10
+    }
     edit_skater_create_scrolling_menu {
       tab = tab3
       pad_back_script = edit_skater_create_options_menu
@@ -91,12 +111,9 @@ script better4_create_cas_part_category
     SetScreenElementProps id = edit_skater_category text = <label>
   endif
 
-  LogInfo "@@ 3"
   GetArraySize <items>
-  LogInfo "@@ 4"
   <item_index> = 0
   begin
-    LogInfo "@@ 5"
     edit_skater_possibly_add_cas_item {
       ( <items> [ <item_index> ] )
       part = <part>
@@ -104,11 +121,9 @@ script better4_create_cas_part_category
       flags = <flags>
       index = <index>
     }
-    LogInfo "@@ 6"
     <item_index> = ( <item_index> + 1 )
   repeat <array_size>
 
-  LogInfo "@@ 7"
   edit_skater_menu_add_item {
     text = 'Done'
     tab = tab3
@@ -122,9 +137,15 @@ script better4_create_cas_part_category
   }
 
   FireEvent type = focus target = current_menu
+  generic_menu_update_arrows {
+    up_arrow_id = edit_skater_menu_up_arrow
+    down_arrow_id = edit_skater_menu_down_arrow
+  }
 endscript
 
 script better4_cas_category_left
+  generic_menu_up_or_down_sound Down
+  RunScriptOnScreenElement id = edit_skater_category_left menu_blink_arrow
   <new_index> = better4_cas_category_index
   if ( <new_index> > 0 )
     <new_index> = ( <new_index> - 1 )
@@ -132,12 +153,13 @@ script better4_cas_category_left
     GetArraySize <categories>
     <new_index> = ( <array_size> - 1 )
   endif
-  LogInfo "LEFT PRESSED changed index from %a to %b" a = better4_cas_category_index b = <new_index>
   Change better4_cas_category_index = <new_index>
   better4_create_cas_part_category <...>
 endscript
 
 script better4_cas_category_right
+  generic_menu_up_or_down_sound Up
+  RunScriptOnScreenElement id = edit_skater_category_right menu_blink_arrow
   <new_index> = better4_cas_category_index
   GetArraySize <categories>
   if ( <new_index> < ( <array_size> - 1 ) )
@@ -145,7 +167,6 @@ script better4_cas_category_right
   else
     <new_index> = 0
   endif
-  LogInfo "RIGHT PRESSED changed index from %a to %b" a = better4_cas_category_index b = <new_index>
   Change better4_cas_category_index = <new_index>
   better4_create_cas_part_category <...>
 endscript

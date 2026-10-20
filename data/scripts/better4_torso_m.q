@@ -1,13 +1,32 @@
+// How to categorize a new part:
+//
+// 1. In `master_editable_list` (cas_parts.q), find the part you want to add a category for, and add a
+// `categories = ...` field. This field must be the name of an array containing multiple categories.
+// This must be set for both M and F parts of the same type, since they will use the same part options (see #2).
+//
+// 2. In part options (skateshop.q, e.g. `edit_skater_torso_options`), set the `categorized` flag.
+// This tells the menu to use the new category menu layout instead of the original scrolling menu.
+//
+// How to add an item to a category:
+//
+// 1. Add it to the base part list (e.g. `skater_m_torso`), then add its `desc_id` and `frontend_desc` as a new
+// entry in the correct category (or add a new category).
+//
+// 2. See below for an example of what categories look like. Note that THPS4 should always be the first category,
+// and changing categories left goes to the last entry in the list. Therefore, for it to maintain series order,
+// the order should be something like `[thps4, thug, thug2, thps3, thps4 beta]` etc. It is backwards-compatibility safe to
+// move the categories around, so don't worry too much.
+
 better4_skater_m_torso_categories = [
     better4_skater_m_torso_thps4
-    better4_skater_m_torso_thps3
+    better4_skater_m_torso_beta
 ]
 
 better4_skater_m_torso_thps4 = {
   label = "THPS4"
   items = [
     {
-      desc_id = #"Shirtless"
+      desc_id = Shirtless
       frontend_desc = 'Shirtless'
     }
     {
@@ -18,12 +37,10 @@ better4_skater_m_torso_thps4 = {
       desc_id = #"Camo Shirt"
       frontend_desc = 'Camo Shirt'
     }
-  ]
-}
-
-better4_skater_m_torso_thps3 = {
-  label = "THPS3"
-  items = [
+    {
+      desc_id = #"Plaid Shirt"
+      frontend_desc = 'Plaid Shirt'
+    }
     {
       desc_id = #"Stripe Shirt 1"
       frontend_desc = 'Stripe Shirt 1'
@@ -35,6 +52,232 @@ better4_skater_m_torso_thps3 = {
     {
       desc_id = #"Stripe Shirt 3"
       frontend_desc = 'Stripe Shirt 3'
+    }
+    {
+      desc_id = #"Tie Dye"
+      frontend_desc = 'Tie Dye'
+    }
+    {
+      desc_id = #"Button Shirt"
+      frontend_desc = 'Button Shirt'
+    }
+    {
+      desc_id = #"Open Shirt"
+      frontend_desc = 'Open Shirt'
+    }
+    {
+      desc_id = #"Long Sleeve"
+      frontend_desc = 'Long Sleeve'
+    }
+    {
+      desc_id = #"Long Sleeve Stripe"
+      frontend_desc = 'Long Sleeve Stripe'
+    }
+    {
+      desc_id = #"LS Button Shirt"
+      frontend_desc = 'LS Button Shirt'
+    }
+    {
+      desc_id = #"LS Open Shirt"
+      frontend_desc = 'LS Open Shirt'
+    }
+    {
+      desc_id = #"LS Shirtless"
+      frontend_desc = 'LS Shirtless'
+    }
+    {
+      desc_id = #"LS Flannel Shirt"
+      frontend_desc = 'LS Flannel Shirt'
+    }
+    {
+      desc_id = #"Flannel Shirtless"
+      frontend_desc = 'Flannel Shirtless'
+    }
+    {
+      desc_id = Tanktop
+      frontend_desc = 'Tanktop'
+    }
+    {
+      desc_id = #"Basketball Jersey"
+      frontend_desc = 'Basketball Jersey'
+    }
+    {
+      desc_id = #"Hoody Up"
+      frontend_desc = 'Hoody Up'
+    }
+    {
+      desc_id = #"Hoody Up Stripe"
+      frontend_desc = 'Hoody Up Stripe'
+    }
+    {
+      desc_id = #"Hoody Down"
+      frontend_desc = 'Hoody Down'
+    }
+    {
+      desc_id = #"Hoody Down Stripe"
+      frontend_desc = 'Hoody Down Stripe'
+    }
+    {
+      desc_id = #"Denim Vest"
+      frontend_desc = 'Denim Vest'
+    }
+    {
+      desc_id = #"Leather Vest"
+      frontend_desc = 'Leather Vest'
+    }
+    {
+      desc_id = #"Baggy Vest"
+      frontend_desc = 'Baggy Vest'
+    }
+    {
+      desc_id = #"Camo Vest"
+      frontend_desc = 'Camo Vest'
+    }
+    {
+      desc_id = #"Padded Vest"
+      frontend_desc = 'Padded Vest'
+    }
+    {
+      desc_id = #"Flak Vest"
+      frontend_desc = 'Flak Vest'
+    }
+    {
+      desc_id = #"Snow Jacket"
+      frontend_desc = 'Snow Jacket'
+    }
+    {
+      desc_id = #"Padded Jacket"
+      frontend_desc = 'Padded Jacket'
+    }
+    {
+      desc_id = #"Leather Jacket"
+      frontend_desc = 'Leather Jacket'
+    }
+    {
+      desc_id = Windbreaker
+      frontend_desc = 'Windbreaker'
+    }
+    {
+      desc_id = Sweater
+      frontend_desc = 'Sweater'
+    }
+    {
+      desc_id = #"Football Jersey"
+      frontend_desc = 'Football Jersey'
+    }
+    {
+      desc_id = #"Officer Dick Shirt"
+      frontend_desc = 'Officer Dick Shirt'
+    }
+    {
+      desc_id = #"Ollie Coat"
+      frontend_desc = 'Ollie Coat'
+    }
+    {
+      desc_id = #"Burnquist Shirt"
+      frontend_desc = 'Burnquist Shirt'
+    }
+    {
+      desc_id = #"Caballero Shirt"
+      frontend_desc = 'Caballero Shirt'
+    }
+    {
+      desc_id = #"Campbell Shirt"
+      frontend_desc = 'Campbell Shirt'
+    }
+    {
+      desc_id = #"Glifberg Shirt"
+      frontend_desc = 'Glifberg Shirt'
+    }
+    {
+      desc_id = #"Koston Shirt"
+      frontend_desc = 'Koston Shirt'
+    }
+    {
+      desc_id = #"Hawk Shirt"
+      frontend_desc = 'Hawk Shirt'
+    }
+    {
+      desc_id = #"Lasek Shirt"
+      frontend_desc = 'Lasek Shirt'
+    }
+    {
+      desc_id = #"Margera Shirt"
+      frontend_desc = 'Margera Shirt'
+    }
+    {
+      desc_id = #"mullen shirt"
+      frontend_desc = 'Mullen Shirt'
+    }
+    {
+      desc_id = #"Muska Tanktop"
+      frontend_desc = 'Muska Tanktop'
+    }
+    {
+      desc_id = #"Reynolds Jacket"
+      frontend_desc = 'Reynolds Jacket'
+    }
+    {
+      desc_id = #"Rowley Jacket"
+      frontend_desc = 'Rowley Jacket'
+    }
+    {
+      desc_id = #"Thomas Shirt"
+      frontend_desc = 'Thomas Shirt'
+    }
+    {
+      desc_id = #"Vallely Shirt"
+      frontend_desc = 'Vallely Shirt'
+    }
+    {
+      desc_id = #"Neversoft Shirt"
+      frontend_desc = 'Neversoft Shirt'
+    }
+    {
+      desc_id = #"ATVI Shirt"
+      frontend_desc = 'ATVI Shirt'
+    }
+  ]
+}
+
+better4_skater_m_torso_beta = {
+  label = "Beta"
+  items = [
+    {
+      desc_id = Shirtless
+      frontend_desc = 'Shirtless'
+    }
+    {
+      desc_id = #"Burnquist Shirt beta"
+      frontend_desc = 'Burnquist Shirt'
+    }
+    {
+      desc_id = #"Campbell Shirt beta"
+      frontend_desc = 'Campbell Shirt'
+    }
+    {
+      desc_id = #"Glifberg Shirt beta"
+      frontend_desc = 'Glifberg Shirt'
+    }
+    {
+      desc_id = #"Koston Shirt beta"
+      frontend_desc = 'Koston Shirt'
+    }
+    {
+      desc_id = #"Hawk Shirt beta"
+      frontend_desc = 'Hawk Shirt'
+    }
+    {
+      desc_id = #"Hawk Shirt Alt. beta"
+      frontend_desc = 'Hawk Alt Shirt'
+    }
+    {
+      desc_id = #"Lasek Shirt beta"
+      frontend_desc = 'Lasek Shirt'
+    }
+    {
+      desc_id = #"Thomas Shirt beta"
+      frontend_desc = 'Thomas Shirt'
     }
   ]
 }
