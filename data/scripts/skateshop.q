@@ -3437,13 +3437,13 @@ script edit_skater_create_options_menu
       endif
       check_option_is_visible ( <options_array> [ <index> ] )
       if not ( <is_visible> = 0 )
-        // <option> = ( <options_array> [ <index> ] )
+        <option> = ( <options_array> [ <index> ] )
         // AddParams <option>
         // NOTE (ellie): remove before final merge or make cleaner?
         // if GotParam categorized
         //   <pad_choose_script> = better4_create_cas_part_menu
         // else
-          <pad_choose_script> = edit_skater_create_cas_menu
+          // <pad_choose_script> = edit_skater_create_cas_menu
         // endif
         edit_skater_menu_add_item {
           ( <options_array> [ <index> ] )
@@ -3815,6 +3815,7 @@ script perform_skater_sexchange
   endif
 endscript
 script edit_skater_create_cas_menu
+  LogInfo "EDIT_SKATER_CREATE_CAS_MENU"
   edit_skater_create_menu_block tab_texture = tab3 middle_texture = repeat_piece3 bottom_texture = menu_bottom
    <pad_back_params> = { options_array = <options_array> cam_anim = <cam_anim> should_add_reset_tattoos = <should_add_reset_tattoos> should_add_reset_scaling = <should_add_reset_scaling> }
   if GotParam cam_anim_sub
@@ -3868,6 +3869,8 @@ script edit_skater_create_cas_menu
     if GotParam colormenu
       if ( <colormenu> = <current_submenu> )
         if not ( <shouldDisplayList> = 0 )
+          LogInfo "Creating colormenu for text=%t" t = <text>
+          LogInfo "Creating colormenu for part=%p" p = <part>
           if ScreenElementExists id = edit_skater_menu_up_arrow
             DoScreenElementMorph {
               id = edit_skater_menu_up_arrow
