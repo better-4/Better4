@@ -217,24 +217,27 @@ skater_f_torso = [
   {
     desc_id = #"T-shirt"
     frontend_desc = 'T-Shirt'
-    mesh = "models/skater_f/shirt_tshirt.skin"
+    mesh = "models/better4/skater_f/shirt_tshirt.skin"
     supports_logo
+    multicolor
   }
   {
     desc_id = #"Camo T-shirt"
     frontend_desc = 'Camo T-Shirt'
-    mesh = "models/skater_f/shirt_tshirt.skin"
+    mesh = "models/better4/skater_f/shirt_tshirt.skin"
     replace = "CS_JB_F_shirt_tshirt.png"
     with = "textures/skater_m/CS_JB_F_shirt_tshirt_camo"
     replace1 = "CS_JB_F_sleeve_tshirt.png"
     with1 = "textures/skater_m/CS_JB_F_sleeve_tshirt_camo"
+    multicolor
   }
   {
     desc_id = #"Sport T-shirt"
     frontend_desc = 'Sport T-Shirt'
-    mesh = "models/skater_f/shirt_tshirt.skin"
+    mesh = "models/better4/skater_f/shirt_tshirt.skin"
     replace = "CS_JB_F_sleeve_tshirt.png"
     with = "textures/skater_m/CS_JB_F_sleeve_tshirt_sport"
+    multicolor
   }
   {
     desc_id = #"Tanktop short"
@@ -279,62 +282,69 @@ skater_f_torso = [
   {
     desc_id = #"V-Neck"
     frontend_desc = 'V-Neck'
-    mesh = "models/skater_f/shirt_SSVneck.skin"
+    mesh = "models/better4/skater_f/shirt_SSVneck.skin"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"V-Neck Tie-Die"
     frontend_desc = 'V-Neck Tie-Dye'
-    mesh = "models/skater_f/shirt_SSVneck.skin"
+    mesh = "models/better4/skater_f/shirt_SSVneck.skin"
     replace = "CS_JB_F_shirt_vneck.png"
     with = "textures/skater_m/CS_JB_F_shirt_vneck_tiedye"
     replace1 = "CS_JB_F_sleeve_vneck.png"
     with1 = "textures/skater_m/CS_JB_F_sleeve_vneck_tiedye"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"V-Neck Dip-Dye"
     frontend_desc = 'V-Neck Dip-Dye'
-    mesh = "models/skater_f/shirt_SSVneck.skin"
+    mesh = "models/better4/skater_f/shirt_SSVneck.skin"
     replace = "CS_JB_F_shirt_vneck.png"
     with = "textures/skater_m/CS_JB_F_shirt_vneck_dye"
     replace1 = "CS_JB_F_sleeve_vneck.png"
     with1 = "textures/skater_m/CS_JB_F_sleeve_vneck_dye"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"V-Neck Floral"
     frontend_desc = 'V-Neck Floral'
-    mesh = "models/skater_f/shirt_SSVneck.skin"
+    mesh = "models/better4/skater_f/shirt_SSVneck.skin"
     replace = "CS_JB_F_shirt_vneck.png"
     with = "textures/skater_m/CS_JB_F_shirt_vneck_floral"
     replace1 = "CS_JB_F_sleeve_vneck.png"
     with1 = "textures/skater_m/CS_JB_F_sleeve_vneck_floral"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"V-Neck Stripes"
     frontend_desc = 'V-Neck Stripes'
-    mesh = "models/skater_f/shirt_SSVneck.skin"
+    mesh = "models/better4/skater_f/shirt_SSVneck.skin"
     replace = "CS_JB_F_shirt_vneck.png"
     with = "textures/skater_m/CS_JB_F_shirt_vneck_stripes"
     replace1 = "CS_JB_F_sleeve_vneck.png"
     with1 = "textures/skater_m/CS_JB_F_sleeve_vneck_stripes"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"V-Neck Flower"
     frontend_desc = 'V-Neck Flower'
-    mesh = "models/skater_f/shirt_SSVneck.skin"
+    mesh = "models/better4/skater_f/shirt_SSVneck.skin"
     replace = "CS_JB_F_shirt_vneck.png"
     with = "textures/skater_m/CS_JB_F_shirt_vneck_flower"
     shows_panties
+    multicolor
   }
   {
     desc_id = Jersey
     frontend_desc = 'Jersey'
-    mesh = "models/skater_f/shirt_jersey.skin"
+    mesh = "models/better4/skater_f/shirt_jersey.skin"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"RS Blouse"
@@ -371,53 +381,60 @@ skater_f_torso = [
   {
     desc_id = #"Denim Jacket"
     frontend_desc = 'Denim Jacket'
-    mesh = "models/skater_f/shirt_denimjacket.skin"
+    mesh = "models/better4/skater_f/shirt_denimjacket.skin"
     shows_panties
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Baggy Vest"
     frontend_desc = 'Baggy Vest'
-    mesh = "models/skater_f/shirt_baggyvest.skin"
+    mesh = "models/better4/skater_f/shirt_baggyvest.skin"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"Sniper Vest"
     frontend_desc = 'Sniper Vest'
-    mesh = "models/skater_f/shirt_baggyvest.skin"
+    mesh = "models/better4/skater_f/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest.png"
     with = "textures/skater_m/CS_NH_baggyvest_flak"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"Leather Vest"
     frontend_desc = 'Leather Vest'
-    mesh = "models/skater_f/shirt_baggyvest.skin"
+    mesh = "models/better4/skater_f/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest.png"
     with = "textures/skater_m/CS_NH_leathervest"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"Padded Vest"
     frontend_desc = 'Padded Vest'
-    mesh = "models/skater_f/shirt_baggyvest.skin"
+    mesh = "models/better4/skater_f/shirt_baggyvest.skin"
     replace = "CS_NH_baggyvest.png"
     with = "textures/skater_m/CS_NH_baggyvest_padded"
     shows_panties
+    multicolor
   }
   {
     desc_id = #"Snow Jacket"
     frontend_desc = 'Snow Jacket'
-    mesh = "models/skater_f/shirt_snowjacket.skin"
+    mesh = "models/better4/skater_f/shirt_snowjacket.skin"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Padded Jacket"
     frontend_desc = 'Padded Jacket'
-    mesh = "models/skater_f/shirt_snowjacket.skin"
+    mesh = "models/better4/skater_f/shirt_snowjacket.skin"
     replace = "CS_JB_F_shirt_snowjacket.png"
     with = "textures/skater_m/CS_NH_snowjacket_padded"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Hoody Up"
@@ -502,6 +519,7 @@ skater_f_torso = [
     frontend_desc = 'Rowley Jacket'
     mesh = "models/better4/skater_f/THPS4_Rowley_Jacket_F.skin"
     is_long_sleeve
+    multicolor
   }
 ]
 skater_f_legs = [

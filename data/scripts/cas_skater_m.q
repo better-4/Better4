@@ -1158,60 +1158,67 @@ skater_m_torso = [
   {
     desc_id = #"T-shirt"
     frontend_desc = 'T-shirt'
-    mesh = "models/skater_m/shirt_tshirt.skin"
+    mesh = "models/better4/skater_m/shirt_tshirt.skin"
     supports_logo
+    multicolor
   }
   {
     desc_id = #"Camo Shirt"
     frontend_desc = 'Camo Shirt'
-    mesh = "models/skater_m/shirt_tshirt.skin"
+    mesh = "models/better4/skater_m/shirt_tshirt.skin"
     replace = "CS_NH_shirt.png"
     with = "textures/skater_m/CS_NH_shirt_camo"
     replace1 = "CS_NH_sleeve_short.png"
     with1 = "textures/skater_m/CS_NH_sleeve_short_camo"
+    multicolor
   }
   {
     desc_id = #"Plaid Shirt"
     frontend_desc = 'Plaid Shirt'
-    mesh = "models/skater_m/shirt_tshirt.skin"
+    mesh = "models/better4/skater_m/shirt_tshirt.skin"
     replace = "CS_NH_shirt.png"
     with = "textures/skater_m/CS_JB_shirt_plaid"
     replace1 = "CS_NH_sleeve_short.png"
     with1 = "textures/skater_m/CS_JB_sleeve_short_plaid"
+    multicolor
   }
   {
     desc_id = #"Stripe Shirt 1"
     frontend_desc = 'Stripe Shirt 1'
-    mesh = "models/skater_m/shirt_tshirt.skin"
+    mesh = "models/better4/skater_m/shirt_tshirt.skin"
     replace = "CS_NH_shirt.png"
     with = "textures/skater_m/CS_NH_shirt_stripe"
+    multicolor
   }
   {
     desc_id = #"Stripe Shirt 2"
     frontend_desc = 'Stripe Shirt 2'
-    mesh = "models/skater_m/shirt_tshirt.skin"
+    mesh = "models/better4/skater_m/shirt_tshirt.skin"
     replace = "CS_NH_shirt.png"
     with = "textures/skater_m/CS_JB_shirt_stripe2"
     replace1 = "CS_NH_sleeve_short.png"
     with1 = "textures/skater_m/CS_JB_sleeve_short_stripe2"
+    multicolor
   }
   {
     desc_id = #"Stripe Shirt 3"
     frontend_desc = 'Stripe Shirt 3'
-    mesh = "models/skater_m/shirt_tshirt.skin"
+    mesh = "models/better4/skater_m/shirt_tshirt.skin"
     replace = "CS_NH_shirt.png"
     with = "textures/skater_m/CS_JB_shirt_stripe3"
     replace1 = "CS_NH_sleeve_short.png"
     with1 = "textures/skater_m/CS_JB_sleeve_short_stripe3"
+    multicolor
   }
   {
     desc_id = #"Tie Dye"
     frontend_desc = 'Tie Dye'
-    mesh = "models/skater_m/shirt_tshirt.skin"
+    mesh = "models/better4/skater_m/shirt_tshirt.skin"
     replace = "CS_NH_shirt.png"
     with = "textures/skater_m/CS_JB_shirt_tiedye"
     replace1 = "CS_NH_sleeve_short.png"
     with1 = "textures/skater_m/CS_JB_sleeve_short_tiedye"
+    multicolor
   }
   {
     desc_id = #"Button Shirt"
@@ -1228,17 +1235,19 @@ skater_m_torso = [
   {
     desc_id = #"Long Sleeve"
     frontend_desc = 'Long Sleeve'
-    mesh = "models/skater_m/shirt_T_longsleeve.skin"
+    mesh = "models/better4/skater_m/shirt_T_longsleeve.skin"
     supports_logo
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Long Sleeve Stripe"
     frontend_desc = 'Long Sleeve Stripe'
-    mesh = "models/skater_m/shirt_T_longsleeve.skin"
+    mesh = "models/better4/skater_m/shirt_T_longsleeve.skin"
     replace = "CS_JB_shirt_Tlongsleeve.png"
     with = "textures/skater_m/CS_JB_shirt_TLSstripe"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"LS Button Shirt"
@@ -1392,24 +1401,27 @@ skater_m_torso = [
   {
     desc_id = #"Snow Jacket"
     frontend_desc = 'Snow Jacket'
-    mesh = "models/skater_m/shirt_snowjacket.skin"
+    mesh = "models/better4/skater_m/shirt_snowjacket.skin"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Padded Jacket"
     frontend_desc = 'Padded Jacket'
-    mesh = "models/skater_m/shirt_snowjacket.skin"
+    mesh = "models/better4/skater_m/shirt_snowjacket.skin"
     replace = "CS_JB_shirt_snowjacket.png"
     with = "textures/skater_m/CS_JB_shirt_snowjacket_padded"
     replace1 = "CS_JB_sleeve_snowjacket.png"
     with1 = "textures/skater_m/CS_JB_sleeve_snowjacket_padded"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Leather Jacket"
     frontend_desc = 'Leather Jacket'
-    mesh = "models/skater_m/shirt_leatherjacket.skin"
+    mesh = "models/better4/skater_m/shirt_leatherjacket.skin"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = Windbreaker
@@ -1571,14 +1583,16 @@ skater_m_torso = [
   {
     desc_id = #"Reynolds Jacket"
     frontend_desc = 'Reynolds Jacket'
-    mesh = "models/skater_m/shirt_reynolds_jacket.skin"
+    mesh = "models/better4/skater_m/shirt_reynolds_jacket.skin"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Rowley Jacket"
     frontend_desc = 'Rowley Jacket'
-    mesh = "models/skater_m/shirt_rowley_jacket.skin"
+    mesh = "models/better4/skater_m/shirt_rowley_jacket.skin"
     is_long_sleeve
+    multicolor
   }
   {
     desc_id = #"Thomas Shirt"
