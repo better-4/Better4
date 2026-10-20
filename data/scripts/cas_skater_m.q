@@ -1527,8 +1527,9 @@ skater_m_torso = [
   {
     desc_id = #"Hawk Shirt"
     frontend_desc = 'Hawk Shirt'
-    mesh = "models/skater_m/shirt_hawk.skin"
+    mesh = "models/better4/skater_m/shirt_hawk.skin"
     is_long_sleeve
+	multicolor
   }
   {
     desc_id = #"Hawk Shirt beta"
