@@ -2241,13 +2241,13 @@ script skateshop_practice_start_pressed
   unhide_root_window
   GetTags
   if ChecksumEquals a = <menu_state> b = on
-    PauseMusicAndStreams 0
+    UnPauseMusicAndStreams
     UnPauseGame
     exit_pause_menu
   endif
   if ChecksumEquals a = <menu_state> b = off
     LogInfo "-------------------- PAUSING GAME ----------------------"
-    PauseMusicAndStreams 1
+    PauseStreamsKeepMusic
     PauseGame
     pause_trick_text
     pause_balance_meter
@@ -3346,6 +3346,37 @@ script check_if_part_colorable
   endif
   return is_enabled = <retVal>
 endscript
+
+script check_if_sleeve_colorable
+	check_if_part_colorable <...>
+	
+	if ( <is_enabled> = 0 )
+		return is_enabled = <is_enabled>
+	endif
+
+	if GotParam parts
+		GetArraySize <parts>
+		<index> = 0
+		begin
+			GetCurrentSkaterProfileIndex
+			if GetPlayerAppearancePart player = <currentSkaterProfileIndex> part = ( <parts> [<index>] )
+				GetActualCASOptionStruct part = ( <parts> [<index>] ) desc_id = <desc_id>
+				if GotParam multicolor
+					<ret_val> = <multicolor>
+					break
+				else
+					<ret_val> = 0
+					break
+				endif
+			endif
+			
+			<index> = ( <index> + 1 )
+		repeat <array_size>
+	endif
+	
+	return is_enabled = <ret_val>
+endscript
+
 script check_option_is_enabled
    <ret_val> = 1
   if GotParam is_enabled_script
@@ -5146,6 +5177,14 @@ edit_skater_torso_options = [
     is_visible_script = check_if_group_editable
     is_visible_params = { group = torso_items }
     is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ skater_m_torso skater_f_torso ] }
+  }
+  {
+    text = 'Sleeve Color'
+    submenu = sleeve_color_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = torso_items }
+    is_enabled_script = check_if_sleeve_colorable
     is_enabled_params = { parts = [ skater_m_torso skater_f_torso ] }
   }
   {

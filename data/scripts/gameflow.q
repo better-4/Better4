@@ -201,7 +201,9 @@ script GameFlow_StartRun
     LogInfo "starting a run....skip tracks and crank up the music"
     if GameModeEquals is_horse
     else
-      SkipMusicTrack
+      if not IsTrue ALWAYSPLAYMUSIC
+        SkipMusicTrack
+      endif
     endif
     if IsCareerMode
       if IsTrue ALWAYSPLAYMUSIC

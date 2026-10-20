@@ -39,6 +39,19 @@ script UnPauseMusicAndStreams
   PauseMusic 0
   PauseStream 0
 endscript
+script PauseStreamsKeepMusic
+  PauseStream 1
+  if not IsTrue ALWAYSPLAYMUSIC
+    PauseMusic 1
+  endif
+endscript
+script RestoreMenuMusic
+  if IsTrue ALWAYSPLAYMUSIC
+    PauseMusic 0
+  else
+    PauseMusic 1
+  endif
+endscript
 script do_backend_retry
   GoalManager_UninitializeAllGoals
   if InNetGame
@@ -133,7 +146,7 @@ script test_fragmentation
   repeat
 endscript
 script RefreshGameMenu_Replay
-  PauseMusicAndStreams
+  PauseStreamsKeepMusic
   AddLine parent = game_menu id = backend_continue text = "Continue" target = "do_backend_continue" kill_menu
   AddLine parent = end_run_menu id = backend_watchreplay text = "Restart Replay" target = "WatchEndOfRunReplay" kill_menu
   if ReplayModeEquals REPLAY_MODE_PLAY_AFTER_RUN
@@ -149,7 +162,7 @@ script RefreshGameMenu
   helper_select_choose_back_centered
   if InNetGame
   else
-    PauseMusicAndStreams
+    PauseStreamsKeepMusic
   endif
   AddLine parent = game_menu id = backend_continue text = "Continue" target = "do_backend_continue" kill_menu
   if IsCareerMode
@@ -222,7 +235,7 @@ script Refresh_EndofRunMenu
   EndofRun_helper
   if InNetGame
   else
-    PauseMusicAndStreams
+    PauseStreamsKeepMusic
   endif
   if IsCareerMode
     if GetGlobalFlag flag = JUST_UNLOCKED_LEVEL

@@ -20,7 +20,7 @@ script create_edit_tricks_menu
   AssignAlias id = edit_tricks_menu_anchor alias = current_menu_anchor
   create_helper_text generic_helper_text
   if not LevelIs load_skateshop
-    PauseMusicAndStreams 1
+    PauseStreamsKeepMusic
   endif
   if GotParam from_ss_menu
     SetScreenElementProps {

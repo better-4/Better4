@@ -2475,7 +2475,7 @@ script PC_CAS_BadGuyShooting
       Obj_PlaySound Gunshot01 pitch = randomrange(90, 100) vol = randomrange(160, 180) dropoff = 900
       Obj_WaitAnimFinished
     repeat random( @3 @5 @10 @10 ) 
-    Wait random( @5 , @10 , @10 @15 @20  ) frames
+    Wait random( @5 @10 @10 @15 @20 ) frames
   repeat
 endscript
 script PC_CAS_BadGuyFall

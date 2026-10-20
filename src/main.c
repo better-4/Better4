@@ -15,6 +15,7 @@
 #include "decomp/CArray.h"
 #include "decomp/CStruct.h"
 #include "decomp/GameNet_PlayerInfo.h"
+#include "decomp/Gfx_CModelBuilder.h"
 #include "decomp/Net_App.h"
 #include "decomp/Net_Dispatcher.h"
 #include "decomp/Obj_CSkaterCareer.h"

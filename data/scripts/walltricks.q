@@ -197,6 +197,15 @@ script Ground_Wallpush
     endif
   endif
 
+  // The converted THUG Animation is closer to CrouchIdle2 in regards to the pelvis.
+  // Land the crouched branch on the pose its animation actually ends in.
+  if AnimEquals Wallpush_Crouched
+    PlayAnim Anim = CrouchIdle2 BlendPeriod = 0
+    DoNextTrick
+    DoNextManualTrick
+    Wait 1 GameFrame
+  endif
+
   Goto OnGroundAi
 endscript
 

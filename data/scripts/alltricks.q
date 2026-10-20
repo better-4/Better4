@@ -3,7 +3,7 @@ ConfigurableTricks = [
   Trick_180Varial
   Trick_2KickMadonnaFlip
   Trick_360FlipNoseManual
-  Trick_360GhettoBird
+  Trick_GhettoBird
   Trick_360Varial
   Trick_360VarialMcTwist
   Trick_4thofJuly
@@ -29,6 +29,7 @@ ConfigurableTricks = [
   Trick_BetweenLegsSlam
   Trick_BetweenTheLegs
   Trick_BigHitter
+  Trick_BigSpinFlip
   Trick_BigSpinFliptoTail
   Trick_BigSpinShifty
   Trick_BloodyEddie
@@ -37,6 +38,8 @@ ConfigurableTricks = [
   Trick_Boneless
   Trick_BoomBox
   Trick_Breakdance
+  Trick_BSBigSpin
+  Trick_BSFlip
   Trick_BSFootplant
   Trick_BSNoseComply
   Trick_Burntwist
@@ -78,10 +81,12 @@ ConfigurableTricks = [
   Trick_FroggyGrind
   Trick_FS540
   Trick_FS540HeelFlip
+  Trick_FSBigSpin
+  Trick_FSFlip
   Trick_FSShifty
   Trick_FSShoveIt
   Trick_Gazelle
-  Trick_GhettoBird
+  Trick_GhettoBird2
   Trick_GrappleGrab
   Trick_GrindOverturn
   Trick_Gturn
@@ -147,6 +152,7 @@ ConfigurableTricks = [
   Trick_NoseManual
   Trick_Nosepick
   Trick_NoseSlideLipSlide
+  Trick_OldSkoolKickflip
   Trick_OllieAirwalk
   Trick_OllieNorth
   Trick_OneFootBlunt

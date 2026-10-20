@@ -18,7 +18,7 @@ better4/casmenu.qb
 casmenu_old.qb
 casnames.qb
 casutils.qb
-cas_logos.qb
+better4/cas_logos.qb
 better4/cas_parts.qb
 cas_ped_f.qb
 cas_ped_m.qb

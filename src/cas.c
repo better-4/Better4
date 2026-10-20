@@ -3,14 +3,11 @@
 #include "decomp/common.h"
 #include "decomp/CArray.h"
 #include "decomp/CStruct.h"
+#include "decomp/Gfx_CModelBuilder.h"
 #include "decomp/Obj_CSkaterProfile.h"
 #include "log.h"
 
 #include "partymod-thps4/src/patch.h"
-
-// TODO (ellie): find somewhere else to put this
-typedef int(__cdecl* CFunc_PrintStruct_t)(CStruct *, int);
-static CFunc_PrintStruct_t CFunc_PrintStruct = (CFunc_PrintStruct_t)0x0041a4c0;
 
 void resize_specials(CArray *specials) {
 	if (specials->size < 13) {
@@ -193,6 +190,17 @@ void fix_bald(CStruct *appearance) {
     }
 }
 
+void fix_sleeves(CStruct *appearance) {
+	CStruct *sleeves = 0;
+    if (!CStruct_GetStructure(appearance, 0x1cf5719c/*sleeves*/, &sleeves, 0)) {
+        // TODO: set sleeve color to shirt color if no sleeves present?
+        logInfo("fix_sleeves: adding sleeves to cas in case they have colorable sleeves");
+        CStruct *new_sleeves = CStruct_New();
+        CStruct_AddChecksum(new_sleeves, 0x4bb2084e/*desc_id*/, 0/*None*/);
+        CStruct_AddStructure(appearance, 0x1cf5719c/*sleeves*/, new_sleeves);
+    }
+}
+
 void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_t _, CStruct *struc) {
 	static void (__fastcall *_LoadCASProfileInfo)(void *, unused_t, CStruct *) = (void *)0x004af010;
 
@@ -219,6 +227,7 @@ void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_
 		if (CStruct_GetStructure(custom, 0x554c7d6f/*appearance*/, &appearance, 0)) {
             fix_accessories(appearance);
             fix_bald(appearance);
+            fix_sleeves(appearance);
 		} else {
             logWarning("Obj::CPlayerProfileManager::LoadCASProfileInfo: could not access \"custom.appearance\"");
         }
@@ -250,6 +259,24 @@ void __fastcall Obj_CSkaterProfile_GetSpecialTrickInfo(Obj_CSkaterProfile *this,
     }
 }
 
+// TODO (ellie): find somewhere else to put this
+typedef int(__cdecl* CFunc_PrintStruct_t)(CStruct *, int);
+static CFunc_PrintStruct_t CFunc_PrintStruct = (CFunc_PrintStruct_t)0x0041a4c0;
+
+__declspec(naked) void callGeomModulateColor() {
+	__asm {
+		push dword ptr [esp + 0x30] // entry in master_editable_list
+		push esi // builder
+		call Gfx_CModelBuilder_GeomModulateColor
+        // epilog
+		pop edi
+		mov al, 0x1
+		pop esi
+		add esp, 0x20
+		ret 0xc
+	}
+}
+
 void patchCas() {
     // CFuncs::s_read_game_save_info (0x00514a10)
 	patchCall(0x00514ea8, (void *)Obj_CPlayerProfileManager_LoadCASProfileInfo);
@@ -268,4 +295,7 @@ void patchCas() {
     patchCall(0x0051d56d, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // ScriptGetKeyComboBoundToTrick (0x0051d4b0)
     patchCall(0x0051dc72, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // ScriptGetSpecialTrickInfo (0x0051dc40)
     patchCall(0x0051e330, (void *)Obj_CSkaterProfile_GetSpecialTrickInfo); // ScriptGetKeyComboArrayFromTrickArray (0x0051e130)
+
+    // Gfx::CModelBuilder::CallMemberFunction (0x004606d0)
+	patchJmp(0x004609a8, (void *)callGeomModulateColor);
 }
