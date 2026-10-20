@@ -1,6 +1,6 @@
 better4_skater_f_torso_categories = [
     better4_skater_f_torso_thps4
-    better4_skater_f_torso_thps3
+    better4_skater_f_torso_beta
 ]
 
 better4_skater_f_torso_thps4 = {
@@ -18,12 +18,6 @@ better4_skater_f_torso_thps4 = {
       desc_id = #"Camo T-shirt"
       frontend_desc = 'Camo T-Shirt'
     }
-  ]
-}
-
-better4_skater_f_torso_thps3 = {
-  label = "THPS3"
-  items = [
     {
       desc_id = #"Sport T-shirt"
       frontend_desc = 'Sport T-Shirt'
@@ -35,6 +29,148 @@ better4_skater_f_torso_thps3 = {
     {
       desc_id = Tanktop
       frontend_desc = 'Tanktop'
+    }
+    {
+      desc_id = #"Dip-Dye Tank1"
+      frontend_desc = 'Dip-dye Tank 1'
+    }
+    {
+      desc_id = #"Dip-Dye Tank2"
+      frontend_desc = 'Dip-dye Tank 2'
+    }
+    {
+      desc_id = #"Floral Tank"
+      frontend_desc = 'Floral Tank'
+    }
+    {
+      desc_id = #"V-Neck"
+      frontend_desc = 'V-Neck'
+    }
+    {
+      desc_id = #"V-Neck Tie-Die"
+      frontend_desc = 'V-Neck Tie-Dye'
+    }
+    {
+      desc_id = #"V-Neck Dip-Dye"
+      frontend_desc = 'V-Neck Dip-Dye'
+    }
+    {
+      desc_id = #"V-Neck Floral"
+      frontend_desc = 'V-Neck Floral'
+    }
+    {
+      desc_id = #"V-Neck Stripes"
+      frontend_desc = 'V-Neck Stripes'
+    }
+    {
+      desc_id = #"V-Neck Flower"
+      frontend_desc = 'V-Neck Flower'
+    }
+    {
+      desc_id = Jersey
+      frontend_desc = 'Jersey'
+    }
+    {
+      desc_id = #"RS Blouse"
+      frontend_desc = 'RS Blouse'
+    }
+    {
+      desc_id = #"RS Blouse Plaid"
+      frontend_desc = 'RS Blouse Plaid'
+    }
+    {
+      desc_id = #"LS Blouse"
+      frontend_desc = 'LS Blouse'
+    }
+    {
+      desc_id = #"LS Blouse Plaid"
+      frontend_desc = 'LS Blouse Plaid'
+    }
+    {
+      desc_id = #"Denim Jacket"
+      frontend_desc = 'Denim Jacket'
+    }
+    {
+      desc_id = #"Baggy Vest"
+      frontend_desc = 'Baggy Vest'
+    }
+    {
+      desc_id = #"Sniper Vest"
+      frontend_desc = 'Sniper Vest'
+    }
+    {
+      desc_id = #"Leather Vest"
+      frontend_desc = 'Leather Vest'
+    }
+    {
+      desc_id = #"Padded Vest"
+      frontend_desc = 'Padded Vest'
+    }
+    {
+      desc_id = #"Snow Jacket"
+      frontend_desc = 'Snow Jacket'
+    }
+    {
+      desc_id = #"Padded Jacket"
+      frontend_desc = 'Padded Jacket'
+    }
+    {
+      desc_id = #"Hoody Up"
+      frontend_desc = 'Hoody Up'
+    }
+    {
+      desc_id = #"Hoody Up Stripe"
+      frontend_desc = 'Hoody Up Stripe'
+    }
+    {
+      desc_id = #"Hoody Down"
+      frontend_desc = 'Hoody Down'
+    }
+    {
+      desc_id = #"Hoody Down Stripe"
+      frontend_desc = 'Hoody Down Stripe'
+    }
+    {
+      desc_id = #"Steamer shirt"
+      frontend_desc = 'Steamer Shirt'
+    }
+    {
+      desc_id = #"Tube Top"
+      frontend_desc = 'Tube Top'
+    }
+    {
+      desc_id = #"Campbell Shirt F"
+      frontend_desc = 'Campbell Shirt'
+    }
+    {
+      desc_id = #"Rowley Jacket"
+      frontend_desc = 'Rowley Jacket'
+    }
+  ]
+}
+
+better4_skater_f_torso_beta = {
+  label = "Beta"
+  items = [
+    {
+      desc_id = #"Steamer shirt beta"
+      frontend_desc = 'Steamer Shirt'
+    }
+    {
+      desc_id = #"Koston Shirt beta F"
+      frontend_desc = 'Koston Shirt'
+    }
+    {
+      desc_id = #"Hawk Shirt beta F"
+      frontend_desc = 'Hawk Shirt'
+    }
+    {
+      desc_id = #"Glifberg Shirt beta F"
+      frontend_desc = 'Glifberg Shirt'
+    }
+    {
+      desc_id = #"Campbell Shirt beta F"
+      frontend_desc = 'Campbell Shirt'
     }
   ]
 }
