@@ -140,6 +140,13 @@ void patchLoad() {
 
 	// THPS3
 
+    add_path_override("levels\\Can\\Can.col.Xbx", "levels\\better4\\Can\\Can.col.Xbx");
+    add_path_override("levels\\Can\\Can.scn.Xbx", "levels\\better4\\Can\\Can.scn.Xbx");
+    add_path_override("levels\\Can\\Can.tex.Xbx", "levels\\better4\\Can\\Can.tex.Xbx");
+    add_path_override("levels\\Can_Sky\\Can_Sky.col.Xbx", "levels\\better4\\Can_Sky\\Can_Sky.col.Xbx");
+    add_path_override("levels\\Can_Sky\\Can_Sky.scn.Xbx", "levels\\better4\\Can_Sky\\Can_Sky.scn.Xbx");
+    add_path_override("levels\\Can_Sky\\Can_Sky.tex.Xbx", "levels\\better4\\Can_Sky\\Can_Sky.tex.Xbx");
+	
     add_path_override("levels\\Rio\\Rio.col.Xbx", "levels\\better4\\Rio\\Rio.col.Xbx");
     add_path_override("levels\\Rio\\Rio.scn.Xbx", "levels\\better4\\Rio\\Rio.scn.Xbx");
     add_path_override("levels\\Rio\\Rio.tex.Xbx", "levels\\better4\\Rio\\Rio.tex.Xbx");
