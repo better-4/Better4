@@ -70,15 +70,15 @@ thps2_level_info = [
 ]
 
 thps3_level_info = [
-  { text = "Foundry" not_focusable level_num = LevelNum_Foundry level = Load_Foundry level_info_defaults }
-  { text = "Canada" not_focusable level_num = LevelNum_Canada level = Load_Canada level_info_defaults }
-  { text = "Rio" under_construction level_num = LevelNum_Rio level = Load_Rio level_info_defaults }
-  { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults }
-  { text = "Airport" under_construction level_num = LevelNum_AP level = Load_AP level_info_defaults }
-  { text = "Skater Island" not_focusable level_num = LevelNum_SkaterIsland level = Load_SkaterIsland level_info_defaults }
-  { text = "Los Angeles" under_construction level_num = LevelNum_LA level = Load_LA level_info_defaults  }
-  { text = "Tokyo" not_focusable level_num = LevelNum_Tokyo level = Load_Tokyo level_info_defaults }
-  { text = "Cruise Ship" not_focusable level_num = LevelNum_CruiseShip level = Load_CruiseShip level_info_defaults }
+  { text = "Foundry" not_focusable level_num = LevelNum_Foundry level = Load_Foundry level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\foundry" }
+  { text = "Canada" not_focusable level_num = LevelNum_Canada level = Load_Canada level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\can" }
+  { text = "Rio" under_construction level_num = LevelNum_Rio level = Load_Rio level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\rio" }
+  { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\sub" }
+  { text = "Airport" under_construction level_num = LevelNum_AP level = Load_AP level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\ap" }
+  { text = "Skater Island" not_focusable level_num = LevelNum_SkaterIsland level = Load_SkaterIsland level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\skaterisland" }
+  { text = "Los Angeles" under_construction level_num = LevelNum_LA level = Load_LA level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\la" }
+  { text = "Tokyo" not_focusable level_num = LevelNum_Tokyo level = Load_Tokyo level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\tok" }
+  { text = "Cruise Ship" not_focusable level_num = LevelNum_CruiseShip level = Load_CruiseShip level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\ship" }
 ]
 
 level_defaults = {
