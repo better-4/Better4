@@ -34,8 +34,9 @@ Better4 restores much of the online functionality from the PS2 version of THPS4,
 * Restored server browser, lobby user list, and peerchat
 * Restored in-game player list
 * Added observe UI, improved observing behavior
-* Added chat commands (`/obs`, `/set`, `/goto`)
+* Added chat commands (`/obs`, `/set`, `/goto`, `/warp`)
 * Added "Restart Game" option to game ranking screen
+* Added game modifier host options (disable tech, always special, etc.)
 
 ### Gameplay
 
@@ -47,6 +48,8 @@ Better4 ships with THPS4 vanilla controls, but may be configured to your liking.
 * Added spacewalk (`Control Options > In Manual > Spacewalk`)
 * Added wallpush (`Control Options > On Wall > Wallpush`)
 * Added pressure flips (`Control Options > On Ground > Pressure Stance`)
+* Added THUG BS/FS flip tricks (Old Sk00l Kickflip, BS/FS Flip, BS/FS Bigspin, Bigspin Flip)
+* Added double-tap grinds (`Control Options > On Rail > Double Tap Grinds`)
 * Added single-tap WalliePlants (`Control Options > On Wall > WalliePlant`)
 * Added configuration for boneless trick (`Edit Tricks > Jump Tricks`)
 * Added toggles for:
@@ -74,7 +77,10 @@ Note that custom levels from other games may not support gaps, graffiti, CTF, or
   * Warehouse
   * Skatepark
   * Streets
+* THPS2
+  * New York City
 * THPS3
+  * Canada
   * Rio
   * Airport
   * Los Angeles
@@ -85,6 +91,7 @@ Note that custom levels from other games may not support gaps, graffiti, CTF, or
 
 ### CAS
 
+* Added sleeve color options to many shirts
 * Unlocked full saturation/value range
 * Added X + Y + Z + XYZ sliders for all scales, widened scale range (0-200)
 * Added board scales
@@ -92,6 +99,8 @@ Note that custom levels from other games may not support gaps, graffiti, CTF, or
 * Added separate left/right accessory options
 * Added misc items (only bullring for now)
 * Added hat hair
+* Imported pro skater shirts from the PS2 beta
+* Imported THPS3JP icons
 * Restored hidden CAS items for pros, secret skaters, and neversoft devs
 * Added custom board types (banana, hoverboard, old school, ollie)
 * Added option to change CAS during gameplay (local-only, no more brbcas!)
@@ -102,7 +111,7 @@ Note that custom levels from other games may not support gaps, graffiti, CTF, or
 * Added 12th special trick slot
 * Added button to unassign trick in "Edit Tricks" menu
 * Added configuration for PS2/Xbox/PC buttons font (`HUD Options > Buttons Font`)
-* Added size customization for trick string, score, chat, etc. (`HUD Options`)
+* Added size customization for trick string, score, chat, player names, etc. (`HUD Options`)
 * Added FOV configuration (`Camera Options > FOV`)
 * Added aspect ratio configuration (`Camera Options > Aspect Ratio`)
 * Added toggle for pause-on-unfocus (`Misc > Pause On Unfocus`)
@@ -118,18 +127,21 @@ Note that custom levels from other games may not support gaps, graffiti, CTF, or
 
 ## Credits
 
-A special thank you to the following people, without whom this project would not exist:
-
-* [@zedthps](https://github.com/zedthps), [@voss10](https://github.com/voss10), [@1borgy](https://github.com/1borgy), and [@clairethps](https://github.com/clairethps) for their contributions
-* [@PARTYMANX](https://github.com/PARTYMANX) for their work on [partymod-thps4](https://github.com/PARTYMANX/partymod-thps4)
+* [@PARTYMANX](https://github.com/PARTYMANX) for their amazing work on [partymod-thps4](https://github.com/PARTYMANX/partymod-thps4), which this mod is heavily based off of
+* A special thank you to our GitHub contributors:
+  * [@zedthps](https://github.com/zedthps)
+  * [@voss10](https://github.com/voss10)
+  * [@1borgy](https://github.com/1borgy)
+  * [@clairethps](https://github.com/clairethps)
+  * [@ILC-YTP](https://github.com/ILC-YTP)
+  * [@sourcethps](https://github.com/sourcethps)
+* [@Peachboy](https://github.com/Peachboy402) for their work on loading screens
+* [@Trekeln](https://github.com/Trekeln) for their work on the Better4 logo and level taxi signs
+* [@denetii](https://github.com/denetii) for their work on [io_thps_scene](https://github.com/denetii/io_thps_scene)
 * [@DCxDemo](https://github.com/DCxDemo) for their work on [THPSQScriptEd](https://github.com/DCxDemo/LegacyTHPS/)
 * The folks at [@GameProgressive](https://github.com/GameProgressive) for their work on [UniSpySDK](https://github.com/GameProgressive/UniSpySDK)
-* [@denetii](https://github.com/denetii) for their work on [io_thps_scene](https://github.com/denetii/io_thps_scene)
-* [@Peachboy](https://github.com/Peachboy402) for their work on various loading screens
-* [@Trekeln](https://github.com/Trekeln) for their work on the Better4 logo
-* [@ILC-YTP](https://github.com/ILC-YTP) for their work on [THPS4-mods](https://github.com/ILC-YTP/THPS4-mods), specifically `Faster-SaveLoad` and `Fix-Stutter`
-* [@PunishedFiddle](https://github.com/PunishedFiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
 * [@c4marilla](https://github.com/c4marilla) for providing a 100% save file (`cam100.CAR`)
+* [@PunishedFiddle](https://github.com/PunishedFiddle) for their work on [Tony Hawk's Pro Skater 4 Gamepad Prompts](https://www.moddb.com/games/tony-hawks-pro-skater-4/downloads/tony-hawks-pro-skater-4-gamepad-prompts)
 
 ## For Developers
 
