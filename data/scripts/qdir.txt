@@ -56,7 +56,7 @@ better4/gamemode.qb
 gameoptions.qb
 better4/game_progress_menu.qb
 better4/global_flags.qb
-goalattack.qb
+better4/goalattack.qb
 goal_collect.qb
 goal_combo_scripts.qb
 goal_competition.qb
