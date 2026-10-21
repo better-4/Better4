@@ -2489,7 +2489,6 @@ script level_select_menu_focus
   if LevelIs load_skateshop
     if GotParam dest
       RunScriptOnObject id = TRG_Cab_Sign skateshop_replace_taxi_sign_texture params = { dest = <dest> }
-      // RunScriptOnObject id = TRG_Cab_Sign skateshop_replace_taxi_service_texture params = { dest = "textures\better4\boards\ducky1" }
     endif
 	if GotParam off_duty
 	  RunScriptOnObject id = TRG_Cab_Sign skateshop_replace_taxi_service_texture params = { dest = "textures\better4\boards\ducky1" }
