@@ -17,5 +17,6 @@ float Mth_Vector_Length(Mth_Vector *this);
 
 void Mth_Vector_RotateToPlane(Mth_Vector *this, Mth_Vector *normal);
 void Mth_Vector_Normalize(Mth_Vector *this);
+void Mth_Vector_NormalizeLength(Mth_Vector *this, float length);
 
 #endif

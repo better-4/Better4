@@ -29,7 +29,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 59
+#define BETTER4_NUM_CFUNCS 61
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -115,6 +115,8 @@ void addCFuncs() {
 	addCFunc("PressureOn", (void *)CFunc_PressureOn);
 	addCFunc("PressureOff", (void *)CFunc_PressureOff);
 	addCFunc("GetMostRecentCAS", (void *)CFunc_GetMostRecentCAS);
+	addCFunc("EnableFreecam", (void *)CFunc_EnableFreecam);
+	addCFunc("DisableFreecam", (void *)CFunc_DisableFreecam);
 }
 
 void printCFuncs() {

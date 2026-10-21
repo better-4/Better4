@@ -38,4 +38,6 @@ typedef struct Obj_CSkater {
     struct Obj_CSkaterCam *camera; // 0x37d4
 } Obj_CSkater;
 
+void Obj_CSkater_UpdateCamera(Obj_CSkater *this, uint8_t unk);
+
 #endif

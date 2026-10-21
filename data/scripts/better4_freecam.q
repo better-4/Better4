@@ -46,6 +46,7 @@ script better4_enter_freecam
   EnableActuators 0
   PauseStreamsKeepMusic
   PlaySound MenuBack vol = 50
+  EnableFreecam
   SetViewMode 1
   hide_panel_stuff
 
@@ -54,9 +55,10 @@ script better4_enter_freecam
     vmenu_id = better4_freecam_vmenu
     menu_title = "FREECAM"
     pos = (461, 19)
+    no_alias
   }
-  set_sub_bg pos = (541, 25) scale = (0.94, 1.1)
-  create_icon pos = (415, 25) id = better4_freecam_icon texture = PA_movie
+  set_sub_bg pos = (541, 25) scale = (0.94, 1.1) parent = better4_freecam_menu
+  create_icon pos = (415, 25) id = better4_freecam_icon texture = PA_movie parent = better4_freecam_menu
   draw_menu_box {
     delta_pos = (308, -60)
     middle_repeat = 21
@@ -66,9 +68,10 @@ script better4_enter_freecam
     scale = (0.8, 1.0)
     box_bottom_scale = (0.77, 1.0)
     box_right_offset = (-21, 0)
+    current_menu_anchor = better4_freecam_menu
   }
 
-  better4_menu_spacer
+  better4_menu_spacer parent = better4_freecam_vmenu
   switch better4_control_freecamcontrols_index
   case 0
     add_freecam_help text = "LS = Move"
@@ -95,14 +98,23 @@ script better4_enter_freecam
     vmenu_id = better4_freecam_settings_vmenu
     menu_title = "SETTINGS"
     pos = (461, 279)
+    no_alias
   }
-  set_sub_bg pos = (541, 285) scale = (0.94, 1.1)
-  create_icon pos = (415, 285) id = better4_freecam_settings_icon texture = PA_controls
+  set_sub_bg pos = (541, 285) scale = (0.94, 1.1) parent = better4_freecam_settings_menu
+  create_icon pos = (415, 285) id = better4_freecam_settings_icon texture = PA_controls parent = better4_freecam_settings_menu
 
-  better4_menu_spacer
+  better4_menu_spacer parent = better4_freecam_settings_vmenu
   add_freecam_setting "Move Speed: %d" d = better4_freecam_move_speed id = better4_freecam_setting_move_speed
   add_freecam_setting "Look Speed: %d" d = better4_freecam_look_speed id = better4_freecam_setting_look_speed
   add_freecam_setting "FOV: %d" d = ( better4_control_fov_value + better4_freecam_fov ) id = better4_freecam_setting_fov
+
+  if ObjectExists id = current_menu_anchor
+    LogInfo "current_menu_anchor exists"
+  endif
+  if ObjectExists id = dialog_box_anchor
+    LogInfo "dialog_box_anchor exists"
+  endif
+
 endscript
 
 script add_freecam_help {
@@ -158,13 +170,9 @@ script better4_exit_freecam
   UnPauseMusicAndStreams
   PlaySound MenuBack vol = 50
   SetViewMode 0
+  DisableFreecam
   show_panel_stuff
   SetScreen Angle = better4_control_fov_value
-
-  create_helper_text_no_bg {
-    helper_text_elements = []
-    parent = root_window
-  }
 
   if ObjectExists id = better4_freecam_menu
     DestroyScreenElement id = better4_freecam_menu
@@ -330,5 +338,15 @@ script better4_freecam_check_end_run
     LogDebug "better4_freecam_check_end_run: ending run since freecam is on"
     better4_exit_freecam
     ForceEndOfRun
+  endif
+endscript
+
+script better4_warp
+  skater:PlaceBeforeCamera
+  if ( better4_in_freecam = 1 )
+    better4_exit_freecam
+  endif
+  if IsBetterObserving
+    QuitBetterObserving
   endif
 endscript

@@ -11,6 +11,7 @@
 #include "log.h"
 #include "pressures.h"
 
+int freecam_enabled = 0;
 static int freecam_controls_index = 0;
 
 static float freecam_move_speed = 5.0;
@@ -311,6 +312,16 @@ void __fastcall Obj_CSkater_DoGameLogic(Obj_CSkater *this) {
 
 void patchFreecam() {
 	patchCall(0x004b3ee1, (void *)Obj_CSkater_DoGameLogic);
+}
+
+int __cdecl CFunc_EnableFreecam(CStruct *params) {
+    freecam_enabled = 1;
+    return 1;
+}
+
+int __cdecl CFunc_DisableFreecam(CStruct *params) {
+    freecam_enabled = 0;
+    return 1;
 }
 
 int __cdecl CFunc_SetFreecamControls(CStruct *params) {
