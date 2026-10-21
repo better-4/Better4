@@ -27,6 +27,7 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\FSBigSpin.ska" descChecksum = FSBigSpin
   LoadAnim name = "anims\better4\FSFlip.ska" descChecksum = FSFlip
   LoadAnim name = "anims\better4\KickFlipOldSkool.ska" descChecksum = KickFlipOldSkool
+  LoadAnim name = "anims\better4\SomiSpin.ska" descChecksum = SomiSpin
 endscript
 
 script better4_load_anims_th3

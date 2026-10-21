@@ -10,7 +10,7 @@ master_editable_list = [
   { part = ped_board use_pedpre text = "PED BOARD" submenu = deck_graphic_menu }
   { part = body text = "BODY" male = 0 female = 0 }
   { part = skater_m_head text = "M HEADS" male = 1 female = 0 submenu = face_menu preview_menu = 1 }
-  { part = skater_m_torso text = "M TORSOS" male = 1 female = 0 submenu = shirt_style_menu colormenu = shirt_color_menu }
+  { part = skater_m_torso text = "M TORSOS" male = 1 female = 0 submenu = shirt_style_menu colormenu = shirt_color_menu categories = better4_skater_m_torso_categories }
   { part = skater_m_legs text = "M LEGS" male = 1 female = 0 submenu = pants_menu colormenu = pants_color_menu }
   { part = skater_m_hair text = "M HAIR" male = 1 female = 0 submenu = hair_menu preview_menu = 1 colormenu = hair_color_menu }
   { part = skater_m_hat_hair text = "M HAT HAIR" male = 1 female = 0 submenu = hat_hair_menu preview_menu = 1 colormenu = hat_hair_color_menu }
@@ -20,7 +20,7 @@ master_editable_list = [
   { part = skater_m_socks text = "M SOCKS" male = 1 female = 0 submenu = socks_menu colormenu = socks_color_menu }
   { part = skater_m_elbowpads text = "M ELBOWPADS" male = 1 female = 0 submenu = elbowpads_menu colormenu = elbowpads_color_menu }
   { part = skater_f_head text = "F HEADS" male = 0 female = 1 submenu = face_menu preview_menu = 1 }
-  { part = skater_f_torso text = "F TORSOS" male = 0 female = 1 submenu = shirt_style_menu colormenu = shirt_color_menu }
+  { part = skater_f_torso text = "F TORSOS" male = 0 female = 1 submenu = shirt_style_menu colormenu = shirt_color_menu categories = better4_skater_f_torso_categories }
   { part = skater_f_legs text = "F LEGS" male = 0 female = 1 submenu = pants_menu colormenu = pants_color_menu }
   { part = skater_f_hair text = "F HAIR" male = 0 female = 1 submenu = hair_menu preview_menu = 1 colormenu = hair_color_menu }
   { part = skater_f_hat_hair text = "F HAT HAIR" male = 0 female = 1 submenu = hat_hair_menu preview_menu = 1 colormenu = hat_hair_color_menu }
@@ -34,13 +34,10 @@ master_editable_list = [
     male = 1
     female = 1
     colormenu = sleeve_color_menu
-    materials = [
-      { tshirt_long 0 }
-    ]
   }
   { part = shoes text = "SHOES" male = 1 female = 1 submenu = shoes_menu colormenu = shoe_color_menu }
-  { part = front_logo text = "FRONT LOGO" male = 1 female = 1 submenu = front_logo_menu }
-  { part = back_logo text = "BACK LOGO" male = 1 female = 1 submenu = back_logo_menu }
+  { part = front_logo text = "FRONT LOGO" male = 1 female = 1 submenu = front_logo_menu categories = better4_skater_shirt_logo_categories }
+  { part = back_logo text = "BACK LOGO" male = 1 female = 1 submenu = back_logo_menu categories = better4_skater_shirt_logo_categories }
   { part = glasses text = "GLASSES" male = 1 female = 1 submenu = glasses_menu preview_menu = 1 colormenu = glasses_color_menu }
   { part = hat text = "HAT" male = 1 female = 1 submenu = hats_menu preview_menu = 1 colormenu = hat_color_menu }
   { part = helmet text = "HELMET" male = 1 female = 1 submenu = helmet_menu preview_menu = 1 colormenu = helmet_color_menu }
@@ -48,8 +45,8 @@ master_editable_list = [
   { part = accessoriesR text = "ACCESSORIES RIGHT" male = 1 female = 1 submenu = accessoriesR_menu colormenu = accessoriesR_color_menu }
   { part = accessoriesM text = "ACCESSORIES MISC" male = 1 female = 0 submenu = accessoriesM_menu colormenu = accessoriesM_color_menu }
   { part = accessoriesM_f text = "ACCESSORIES F MISC" male = 0 female = 1 submenu = accessoriesM_menu colormenu = accessoriesM_color_menu }
-  { part = hat_logo text = "HAT LOGO" male = 1 female = 1 submenu = hat_logo_menu preview_menu = 1 }
-  { part = helmet_logo text = "HELMET LOGO" male = 1 female = 1 submenu = helmet_logo_menu preview_menu = 1 }
+  { part = hat_logo text = "HAT LOGO" male = 1 female = 1 submenu = hat_logo_menu preview_menu = 1 categories = better4_skater_hat_logo_categories }
+  { part = helmet_logo text = "HELMET LOGO" male = 1 female = 1 submenu = helmet_logo_menu preview_menu = 1 categories = better4_skater_hat_logo_categories }
   { part = board text = "BOARD" male = 1 female = 1 submenu = board_menu }
   { part = griptape text = "GRIPTAPE" male = 1 female = 1 submenu = grip_tape_style_menu }
   { part = deck_graphic text = "DECK GRAPHIC" male = 1 female = 1 submenu = deck_graphic_menu colormenu = wheel_color_menu }

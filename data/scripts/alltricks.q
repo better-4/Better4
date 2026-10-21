@@ -185,6 +185,7 @@ ConfigurableTricks = [
   Trick_Seatbelt
   Trick_SemiFlip
   Trick_SitDownAir
+  Trick_SomiSpin
   Trick_Spacewalk
   Trick_SplitsManual
   Trick_SprayPaintGrind

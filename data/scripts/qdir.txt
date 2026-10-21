@@ -209,3 +209,8 @@ better4/better4_griptapes.qb
 better4/better4_host_options.qb
 better4/better4_modifiers.qb
 better4/better4_freecam.qb
+better4/better4_cas_menu.qb
+better4/better4_torso_m.qb
+better4/better4_torso_f.qb
+better4/better4_shirt_logo.qb
+better4/better4_hat_logo.qb

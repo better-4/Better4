@@ -3428,6 +3428,7 @@ script edit_skater_create_options_menu
     GetArraySize <options_array>
      <index> = 0
     begin
+      RemoveParameter categorized
       RemoveParameter not_focusable
       RemoveParameter is_enabled_script
       RemoveParameter is_visible_script
@@ -3437,8 +3438,16 @@ script edit_skater_create_options_menu
       endif
       check_option_is_visible ( <options_array> [ <index> ] )
       if not ( <is_visible> = 0 )
+        <option> = ( <options_array> [ <index> ] )
+        AddParams <option>
+        // NOTE (ellie): remove before final merge or make cleaner?
+        if GotParam categorized
+          <pad_choose_script> = better4_create_cas_part_menu
+        else
+          <pad_choose_script> = edit_skater_create_cas_menu
+        endif
         edit_skater_menu_add_item {
-          ( <options_array> [ <index> ] )
+          <option>
           tab = tab2
           index = <index>
           options_array = <options_array>
@@ -3446,6 +3455,7 @@ script edit_skater_create_options_menu
           cam_anim = <cam_anim>
           should_add_reset_tattoos = <should_add_reset_tattoos>
           should_add_reset_scaling = <should_add_reset_scaling>
+          pad_choose_script = <pad_choose_script>
         }
       endif
        <index> = ( <index> + 1 )
@@ -4045,6 +4055,24 @@ script edit_skater_create_scrolling_menu
       { pad_back <pad_back_script> params = <pad_back_params> }
     ]
   }
+  if GotParam pad_left_script
+    SetScreenElementProps {
+      id = edit_skater_vmenu
+      event_handlers = [
+        { pad_left <pad_left_script> params = <pad_left_params> }
+      ]
+      replace_handlers
+    }
+  endif
+  if GotParam pad_right_script
+    SetScreenElementProps {
+      id = edit_skater_vmenu
+      event_handlers = [
+        { pad_right <pad_right_script> params = <pad_right_params> }
+      ]
+      replace_handlers
+    }
+  endif
   if LevelIs load_skateshop
     SetScreenElementProps {
       id = edit_skater_vmenu
@@ -5142,6 +5170,7 @@ edit_skater_head_options = [
     is_visible_params2 = { group = hat_items }
     is_enabled_script = check_if_part_logoable
     is_enabled_params = { parts = [ hat ] }
+    categorized
   }
   {
     text = 'Glasses'
@@ -5170,6 +5199,7 @@ edit_skater_torso_options = [
     submenu = shirt_style_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = torso_items }
+    categorized
   }
   {
     text = 'Shirt Color'
@@ -5194,6 +5224,7 @@ edit_skater_torso_options = [
     is_visible_params = { group = torso_items }
     is_enabled_script = check_if_part_logoable
     is_enabled_params = { parts = [ skater_m_torso skater_f_torso ] }
+    categorized
   }
   {
     text = 'Back Logo'
@@ -5202,6 +5233,7 @@ edit_skater_torso_options = [
     is_visible_params = { group = torso_items }
     is_enabled_script = check_if_part_back_logoable
     is_enabled_params = { parts = [ skater_m_torso skater_f_torso ] }
+    categorized
   }
   {
     text = 'Backpack'
@@ -5404,6 +5436,7 @@ edit_skater_pad_options = [
     is_enabled_script = check_if_part_logoable
     is_enabled_params = { parts = [ helmet ] }
     cam_anim_sub = SS_Appearance_Face
+    categorized
   }
   {
     text = 'Elbowpads'
