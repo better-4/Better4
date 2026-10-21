@@ -130,7 +130,7 @@ models.qb
 movies.qb
 better4/net.qb
 netmenu.qb
-netmessages.qb
+better4/netmessages.qb
 better4/netoptions.qb
 net_vault_menu.qb
 NewScreenElementTest.qb
