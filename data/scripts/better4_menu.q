@@ -18,8 +18,8 @@ script better4_main_menu_watermark
   }
 endscript
 
-script better4_menu_spacer
-  make_text_sub_menu_item text = "" not_focusable dims = (0, 10)
+script better4_menu_spacer parent = current_menu
+  make_text_sub_menu_item text = "" not_focusable dims = (0, 10) parent_menu_id = <parent>
 endscript
 
 script better4_create_menu {

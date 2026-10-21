@@ -44,3 +44,13 @@ void Mth_Vector_Normalize(Mth_Vector *this) {
     static void(__fastcall* _Normalize)(Mth_Vector *) = (void *)0x00403960;
     _Normalize(this);
 }
+
+void Mth_Vector_NormalizeLength(Mth_Vector *this, float length) {
+    float current_length = Mth_Vector_Length(this);
+    if (current_length > 0.0) {
+        float scale = length / current_length;
+        this->x *= scale;
+        this->y *= scale;
+        this->z *= scale;
+    }
+}

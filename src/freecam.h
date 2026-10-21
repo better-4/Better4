@@ -8,5 +8,7 @@ void patchFreecam();
 int __cdecl CFunc_SetFreecamControls(CStruct *params);
 int __cdecl CFunc_SetFreecamMoveSpeed(CStruct *params);
 int __cdecl CFunc_SetFreecamLookSpeed(CStruct *params);
+int __cdecl CFunc_EnableFreecam(CStruct *params);
+int __cdecl CFunc_DisableFreecam(CStruct *params);
 
 #endif

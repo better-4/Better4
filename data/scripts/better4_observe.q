@@ -48,9 +48,7 @@ script QuitBetterObserving
     destroy_observer_ui
     EnablePlayerNames
     EnableHUD
-    if not GotParam no_init
-      MakeSkaterGoto SkaterInit
-    endif
+    MakeSkaterGoto SkaterInit
   endif
 endscript
 
@@ -138,7 +136,7 @@ script destroy_obs_player_name
   endif
 endscript
 
-script create_observer_ui
+script create_observer_handlers
   SetScreenElementProps {
     id = root_window
     event_handlers = [
@@ -150,23 +148,22 @@ script create_observer_ui
       { pad_back    ObserveActionPrev         params = { } }
     ]
   }
-   create_helper_text_observe { 
-     helper_text_elements = [ 
-       { text = "\b6/\b5 = Cycle Camera" }
-       { text = "\b1 = Toggle HUD" }
-       { text = "\b0 = Toggle Player Names" }
-     ]
-     parent = root_window
-  }
-  display_obs_player_name
 endscript
 
-script destroy_observer_ui
-  create_helper_text_no_bg { 
-    helper_text_elements = [ 
+script create_observer_ui
+  create_helper_text_observe {
+    helper_text_elements = [
+      { text = "\b6/\b5 = Cycle Camera" }
+      { text = "\b1 = Toggle HUD" }
+      { text = "\b0 = Toggle Player Names" }
     ]
     parent = root_window
- }
+  }
+  display_obs_player_name
+  create_observer_handlers
+endscript
+
+script destroy_observer_handlers
   SetScreenElementProps {
     id = root_window
     event_handlers = [
@@ -179,7 +176,15 @@ script destroy_observer_ui
     ]
     replace_handlers
   }
+endscript
+
+script destroy_observer_ui
+  destroy_observer_handlers
   destroy_obs_player_name
+  create_helper_text_no_bg {
+    helper_text_elements = []
+    parent = root_window
+  }
 endscript
 
 script restart_game_rank_screen

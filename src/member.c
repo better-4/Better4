@@ -43,23 +43,27 @@ void printMemberFuncs() {
 }
 
 uint32_t PlaceBeforeCamera(Obj_CSkater *this) {
-    Gfx_Camera *camera = (Gfx_Camera *)this->camera;
-    Mth_Vector *camera_pos = Gfx_Camera_GetPos(camera);
-    Mth_Vector *camera_matrix = Gfx_Camera_GetMatrix(camera);
+    Gfx_Camera *cam = (Gfx_Camera *)this->camera;
+    Mth_Vector *cam_pos = Gfx_Camera_GetPos(cam);
+    Mth_Matrix *cam_mat = Gfx_Camera_GetMatrix(cam);
 
-    Mth_Vector_Assign(&this->object->pos, camera_pos);
-    Mth_Vector_Sub(&this->object->pos, &this->object->pos, &camera_matrix->z);
+    Mth_Vector scaled_cam_mat_z = { 0 };
+    Mth_Vector_Assign(&this->object->pos, cam_pos); // pos = cam_pos
+    Mth_Vector_Mult(&scaled_cam_mat_z, &cam_mat->z, 144); // scaled_cam_mat_z = cam_mat.z * feet(12)
+    Mth_Vector_Sub(&this->object->pos, &this->object->pos, &scaled_cam_mat_z); // pos -= scaled_cam_mat_z
+    Mth_Vector_Assign(&this->object->old_pos, &this->object->pos); // old_pos = pos
 
-    Mth_Matrix_Assign(&this->object->matrix, camera_matrix);
-    Mth_Vector_Mult(&this->object->matrix.z, &this->object->matrix.z, -1.0);
-    Mth_Vector_Mult(&this->object->matrix.x, &this->object->matrix.x, -1.0);
+    Mth_Matrix_Assign(&this->object->matrix, cam_mat); // matrix = cam_mat
+    Mth_Vector_Mult(&this->object->matrix.z, &this->object->matrix.z, -1.0); // matrix.z = -matrix.z
+    Mth_Vector_Mult(&this->object->matrix.x, &this->object->matrix.x, -1.0); // matrix.x = -matrix.x
 
-    Mth_Vector_Assign(&this->object->lerping_matrix, &this->object->matrix);
+    Mth_Matrix_Assign(&this->object->lerping_matrix, &this->object->matrix);  // ResetLerpingMatrix
 
     Mth_Vector new_velocity = { 0 };
-    Mth_Vector_Mult(&new_velocity, &camera_matrix->z, -1.0);
-    new_velocity.y = 0.0;
-    Mth_Vector_Assign(&this->object->velocity, &new_velocity);
+    Mth_Vector_Mult(&new_velocity, &cam_mat->z, -1.0); // new_velocity = -cam_mat.z
+    new_velocity.y = 0.0; // new_velocity.y = 0
+    Mth_Vector_Assign(&this->object->velocity, &new_velocity); // vel = new_velocity
+    Mth_Vector_NormalizeLength(&this->object->velocity, 10); // vel.Normalize(10)
 
     Obj_CSkater_UpdateCamera(this, 1);
 
@@ -72,12 +76,12 @@ uint32_t __fastcall Obj_CSkater_CallMemberFunction(Obj_CSkater *this, unused_t _
     switch (checksum) {
         case 0x6df82e70/*DoingBalanceTrick*/:
             logDebug("Obj::CSkater::CallMemberFunction: DoingBalanceTrick=%d", this->doing_balance_trick);
-            // return 1;
-            return this->doing_balance_trick;
+            return 1;
+            // return this->doing_balance_trick;
         case 0xd38e8b6c/*PlaceBeforeCamera*/:
             logDebug("Obj::CSkater::CallMemberFunction: PlaceBeforeCamera");
             PlaceBeforeCamera(this);
-            // return this->doing_balance_trick;
+            return 1;
     }
 
     return _CallMemberFunction(this, UNUSED, checksum, unk, unk2);

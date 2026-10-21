@@ -326,8 +326,10 @@ script make_new_menu { menu_title = "Paused"
       not_focusable
     }
   endswitch
-  AssignAlias id = <menu_id> alias = current_menu_anchor
-  AssignAlias id = <vmenu_id> alias = current_menu
+  if not GotParam no_alias
+    AssignAlias id = <menu_id> alias = current_menu_anchor
+    AssignAlias id = <vmenu_id> alias = current_menu
+  endif
   if GotParam helper_text
     create_helper_text <helper_text>
   endif
@@ -889,7 +891,6 @@ script exit_pause_menu menu_id = current_menu_anchor
   if not RunningReplay
     GoalManager_UnPauseAllGoals
   endif
-  SetViewMode 0
   if ObjectExists id = <menu_id>
     DestroyScreenElement id = <menu_id>
   endif
