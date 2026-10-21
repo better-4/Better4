@@ -229,8 +229,26 @@ void *__fastcall Tsk_Task_Task(void *this, unused_t _, int priority) {
 	return _Task(this, UNUSED, 1001);
 }
 
+void __fastcall GameNet_Manager_DropPlayer(GameNet_Manager *this, unused_t _, GameNet_PlayerInfo *player, int reason) {
+	static void (__fastcall *_DropPlayer)(GameNet_Manager *, unused_t, GameNet_PlayerInfo *, int) = (void *)0x0048a040;
+	if (player == local_observe_target) {
+		CFunc_ObserveNext(0);
+	}
+	_DropPlayer(this, UNUSED, player, reason);
+}
+
 void patchObserve() {
 	// Create task for `Obj::CSkater::s_client_logic_code` with priority 1001 instead of 0
 	// This makes it run before the camera update, so obs camera doesn't lag behind by one frame.
 	patchCall(0x004cd1a3, (void *)Tsk_Task_Task);
+
+	patchCall(0x0047d39a, (void *)GameNet_Manager_DropPlayer); // GameNet::Manager::s_handle_observe (0x0047d2e0)
+	patchCall(0x0047d4a8, (void *)GameNet_Manager_DropPlayer); // GameNet::Manager::s_handle_disconn_request (0x0047d460)
+	patchCall(0x0047ef1b, (void *)GameNet_Manager_DropPlayer); // GameNet::Manager::s_handle_fcfs_request (0x0047e430)
+	patchCall(0x004858b4, (void *)GameNet_Manager_DropPlayer); // GameNet::Manager::s_timeout_connections_code (0x004857a0)
+	patchCall(0x00488e12, (void *)GameNet_Manager_DropPlayer); // GameNet::Manager::EnterObserverMode (0x00488d50)
+	patchCall(0x0048a00c, (void *)GameNet_Manager_DropPlayer); // FUN_00489ef0 (0x00489ef0)
+	patchCall(0x0048f4e3, (void *)GameNet_Manager_DropPlayer); // ScriptKickPlayer (0x0048f410)
+	patchCall(0x0048f637, (void *)GameNet_Manager_DropPlayer); // ScriptBanPlayer (0x0048f550)
+	patchCall(0x004fe8cf, (void *)GameNet_Manager_DropPlayer); // Mdl::Skate::handle_player_quit (0x004fe8a0)
 }
