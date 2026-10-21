@@ -332,3 +332,16 @@ script better4_freecam_check_end_run
     ForceEndOfRun
   endif
 endscript
+
+script better4_warp
+  if ( better4_in_freecam = 1 )
+    better4_exit_freecam
+  endif
+  if IsBetterObserving
+    skater:PlaceBeforeCamera
+    QuitBetterObserving no_init
+    MakeSkaterGoto SkaterInit
+  else
+    skater:PlaceBeforeCamera
+  endif
+endscript

@@ -93,6 +93,7 @@ add_library(better4 SHARED
     "${SRC}/decomp/Obj_CCompositeObject.h"
     "${SRC}/decomp/Obj_CMovingObject.c"
     "${SRC}/decomp/Obj_CMovingObject.h"
+    "${SRC}/decomp/Obj_CSkater.c"
     "${SRC}/decomp/Obj_CSkater.h"
     "${SRC}/decomp/Obj_CSkaterButton.h"
     "${SRC}/decomp/Obj_CSkaterCam.c"

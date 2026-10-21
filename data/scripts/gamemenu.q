@@ -695,15 +695,15 @@ script create_pause_menu
     else
       if IsVoluntaryObserving
         if not GoalManager_HasActiveGoals
-          make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+          make_text_sub_menu_item text = "Quit Observing" id = quit_observe_temp pad_choose_script = QuitBetterObserving
         else
-          make_text_sub_menu_item text = "Rejoin Next Game" id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+          make_text_sub_menu_item text = "Rejoin Next Game" id = quit_observe_temp pad_choose_script = QuitBetterObserving
         endif
       else
         if not GoalManager_HasActiveGoals
-          make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+          make_text_sub_menu_item text = "Quit Observing" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObserving
         else
-          make_text_sub_menu_item text = "Rejoin Next Game" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObservivng
+          make_text_sub_menu_item text = "Rejoin Next Game" not_focusable id = quit_observe_temp pad_choose_script = QuitBetterObserving
         endif
       endif
     endif

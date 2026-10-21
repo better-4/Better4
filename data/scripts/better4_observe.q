@@ -32,11 +32,11 @@ script EnterBetterObserve
       restore_start_key_binding
     endif
   else
-    QuitBetterObservivng
+    QuitBetterObserving
   endif
 endscript
 
-script QuitBetterObservivng
+script QuitBetterObserving
    if GoalManager_HasActiveGoals
     QueueObserveSelf
     exit_pause_menu
@@ -48,7 +48,9 @@ script QuitBetterObservivng
     destroy_observer_ui
     EnablePlayerNames
     EnableHUD
-    MakeSkaterGoto SkaterInit
+    if not GotParam no_init
+      MakeSkaterGoto SkaterInit
+    endif
   endif
 endscript
 

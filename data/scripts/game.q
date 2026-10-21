@@ -3,14 +3,14 @@ chat_commands =
   { command_text = "/obs" command_scr = EnterBetterObserve }
   { command_text = "/set" command_scr = set_cust_command }
   { command_text = "/goto" command_scr = goto_cust_command }
-  { command_text = "/clear" command_scr = console_clear}
-  { command_text = "/warp" command_scr = create_net_panel_message params = { text = "Coming soon..." style = generic_net_panel_message } }
+  { command_text = "/clear" command_scr = console_clear }
+  { command_text = "/warp" command_scr = better4_warp }
 
   { command_text = "7obs" command_scr = EnterBetterObserve }
   { command_text = "7set" command_scr = set_cust_command }
   { command_text = "7goto" command_scr = goto_cust_command }
-  { command_text = "7clear" command_scr = console_clear}
-  { command_text = "7warp" command_scr = create_net_panel_message params = { text = "Coming soon..." style = generic_net_panel_message } }
+  { command_text = "7clear" command_scr = console_clear }
+  { command_text = "7warp" command_scr = better4_warp }
 ]
 load_icon_properties = {
   x = 50.0
