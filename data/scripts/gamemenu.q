@@ -2347,7 +2347,7 @@ script level_select_menu_add_item
       { pad_start generic_menu_pad_choose_sound }
       { pad_choose <pad_choose_script> params = <pad_choose_params> }
       { pad_start <pad_choose_script> params = <pad_choose_params> }
-      { focus level_select_menu_focus params = { dest = <taxi_tex>} }
+      { focus level_select_menu_focus params = { dest = <taxi_tex> <...> } }
       { unfocus level_select_menu_unfocus params = { rgba = <rgba> } }
     ]
     replace_handlers
