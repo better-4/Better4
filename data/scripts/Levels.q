@@ -357,12 +357,8 @@ script load_level level_number = 0
     LogDebug "load_level: running setup script"
      <setup_script>
   endif
-  if InNetGame
-    if OnServer
-      LogDebug "load_level: initializing level objects"
-      better4_lvlobjs_init
-    endif
-  endif
+  LogDebug "load_level: initializing level objects"
+  better4_lvlobjs_init
   LogDebug "load_level: unpausing game"
   UnPauseGame
 endscript
