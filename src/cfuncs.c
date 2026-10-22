@@ -29,7 +29,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 62
+#define BETTER4_NUM_CFUNCS 64
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -118,6 +118,8 @@ void addCFuncs() {
 	addCFunc("EnableFreecam", (void *)CFunc_EnableFreecam);
 	addCFunc("DisableFreecam", (void *)CFunc_DisableFreecam);
 	addCFunc("GetIniString", (void *)CFunc_GetIniString);
+	addCFunc("ChangeLevelObject", (void *)CFunc_ChangeLevelObject);
+	addCFunc("ResetLevelObjects", (void *)CFunc_ResetLevelObjects);
 }
 
 void printCFuncs() {

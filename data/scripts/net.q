@@ -118,6 +118,7 @@ script create_big_black_hiding_box
 endscript
 script quit_network_game
   better4_modifiers_init
+  better4_lvlobjs_init
   ObserveSelf
   destroy_observer_ui
   EnablePlayerNames
@@ -2214,6 +2215,7 @@ script net_chosen_join_server
     StopBetterServerList
     StopBetterPlayerList
     better4_modifiers_init
+    better4_lvlobjs_init
     JoinServer <...>
   endif
   PlaySkaterCamAnim name = SS_MenuCam play_hold
@@ -3019,7 +3021,8 @@ script create_network_host_options_menu
           text1 = "Lvl. Objs:"
           text2 = "Toggle level objects"
           id = menu_network_host_options_level_objects
-          pad_choose_script = create_pro_trick_objects_menu
+          // pad_choose_script = create_pro_trick_objects_menu
+          pad_choose_script = better4_create_lvlobjs_menu
         }
         network_host_options_menu_add_item {
           text1 = "Game Mods:"

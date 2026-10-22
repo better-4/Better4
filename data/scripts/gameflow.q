@@ -157,11 +157,7 @@ script GameFlow_StartRun
       Skater:Obj_SpawnScript CleanUp_Scuffs
     endif
   endif
-  if not IsTrue Bootstrap_Build
-    if not InNetGame
-      toggle_geo_nomenu toggle_comp_geo_params
-    endif
-  endif
+  toggle_geo_nomenu toggle_comp_geo_params
   toggle_geo_nomenu toggle_proset1_params
   toggle_geo_nomenu toggle_proset2_params
   toggle_geo_nomenu toggle_proset3_params

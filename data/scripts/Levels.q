@@ -179,6 +179,8 @@ script load_level level_number = 0
   CareerStartLevel level = <level_number>
   LogDebug "load_level: ResetLevelFlags"
   ResetLevelFlags
+  LogDebug "load_level: resetting level objects"
+  better4_lvlobjs_reset
   if ( <level_number> = LevelNum_Skateshop )
   endif
   if GotParam scnpre

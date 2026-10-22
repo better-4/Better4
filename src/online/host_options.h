@@ -26,10 +26,27 @@ enum {
     NUM_MODIFIERS,
 };
 
+enum {
+    LVLOBJ_PROSET_1,
+    LVLOBJ_PROSET_2,
+    LVLOBJ_PROSET_3,
+    LVLOBJ_PROSET_4,
+    LVLOBJ_PROSET_5,
+    LVLOBJ_PROSET_6,
+    LVLOBJ_PROSET_7,
+    LVLOBJ_COMP_GEO,
+
+    NUM_LVLOBJS,
+};
+
 typedef uint32_t GameModifiers;
+typedef uint32_t LevelObjects;
 
 void host_options_add_handlers(Net_Dispatcher *dispatcher);
 void patchHostOptions();
+
 int __cdecl CFunc_ChangeGameModifier(CStruct *params);
+int __cdecl CFunc_ChangeLevelObject(CStruct *params);
+int __cdecl CFunc_ResetLevelObjects(CStruct *params);
 
 #endif

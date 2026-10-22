@@ -4,6 +4,7 @@ DEMO_BUILD = 0
 script load_permanent_prefiles
   better4_controls_init
   better4_modifiers_init
+  better4_lvlobjs_init
   LoadPreFile "permtex.pre"
   LoadPreFile "casfiles.pre"
   if IsNGC
