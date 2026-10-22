@@ -122,13 +122,6 @@ script set_level_lights
   SetDynamicLightModulationFactor directional = 1 value = <mod_factor_1>
 endscript
 script load_level level_number = 0
-  LogDebug "@@ LOADING LEVEL %n" n = <name>
-  LogDebug "@@ 1"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 1 COMP GEO IS ON"
-  else
-    LogDebug "@@ 1 COMP GEO IS OFF"
-  endif
   RememberLevelStructureNameForReplays level_structure_name = <structure_name>
   if ( ( CD ) or ( IsTrue TestMusicFromHost ) )
     if GotParam ambient_track
@@ -182,33 +175,10 @@ script load_level level_number = 0
       DisplayLoadingScreen "loadscrn_generic"
     endif
   endif
-  LogDebug "@@ 7"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 7 COMP GEO IS ON"
-  else
-    LogDebug "@@ 7 COMP GEO IS OFF"
-  endif
-  LogDebug "@@ 8"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 8 COMP GEO IS ON"
-  else
-    LogDebug "@@ 8 COMP GEO IS OFF"
-  endif
   LogDebug "load_level: CareerStartLevel level_number=%n" n = <level_number>
   CareerStartLevel level = <level_number>
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 8.5 COMP GEO IS ON"
-  else
-    LogDebug "@@ 8.5 COMP GEO IS OFF"
-  endif
   LogDebug "load_level: ResetLevelFlags"
   ResetLevelFlags
-  LogDebug "@@ 9"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 9 COMP GEO IS ON"
-  else
-    LogDebug "@@ 9 COMP GEO IS OFF"
-  endif
   LogDebug "load_level: resetting level objects"
   better4_lvlobjs_reset
   if ( <level_number> = LevelNum_Skateshop )
@@ -216,12 +186,6 @@ script load_level level_number = 0
   if GotParam scnpre
     LogDebug "load_level: loading level scene pre file scnpre=%p" p = <scnpre>
     LoadLevelPreFile <scnpre>
-  endif
-  LogDebug "@@ 10"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 10 COMP GEO IS ON"
-  else
-    LogDebug "@@ 10 COMP GEO IS OFF"
   endif
   if GotParam sky
     LogDebug "load_level: loading sky scene sky=%s" s = <sky>
@@ -244,12 +208,6 @@ script load_level level_number = 0
     LogDebug "load_level: loading level scene level=%l" l = <level>
     LoadScene scene = <level>
   endif
-  LogDebug "@@ 11"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 11 COMP GEO IS ON"
-  else
-    LogDebug "@@ 11 COMP GEO IS OFF"
-  endif
   if GotParam level_name
     LogDebug "load_level: setting level_name=%n" n = <level_name>
     SetLevelName <level_name>
@@ -267,12 +225,6 @@ script load_level level_number = 0
       LoadLevelPreFile <pre>
     endif
   endif
-  LogDebug "@@ 12"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 12 COMP GEO IS ON"
-  else
-    LogDebug "@@ 12 COMP GEO IS OFF"
-  endif
   if GotParam qb
     if GotParam park_editor
       LogDebug "load_level: loading park editor nodearray qb=%q" q = <qb>
@@ -287,12 +239,6 @@ script load_level level_number = 0
       LoadLevelPreFile <pre>
     endif
   endif
-  LogDebug "@@ 13"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 13 COMP GEO IS ON"
-  else
-    LogDebug "@@ 13 COMP GEO IS OFF"
-  endif
   if GotParam park_editor
   else
     LogDebug "load_level: pre-loading models"
@@ -301,12 +247,6 @@ script load_level level_number = 0
   if GotParam level_qb
     LogDebug "load_level: loading level qb qb=%q" q = <level_qb>
     LoadQB <level_qb> LevelSpecific
-  endif
-  LogDebug "@@ 2"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 2 COMP GEO IS ON"
-  else
-    LogDebug "@@ 2 COMP GEO IS OFF"
   endif
   preselect_random_parts <...>
   if GotParam park_editor
@@ -411,12 +351,6 @@ script load_level level_number = 0
       LogInfo "CAREER_STARTED"
     endif
   endif
-  LogDebug "@@ 3"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 3 COMP GEO IS ON"
-  else
-    LogDebug "@@ 3 COMP GEO IS OFF"
-  endif
   LogDebug "load_level: initializing goal manager"
   init_goal_manager
   LogDebug "load_level: initializing cash icons"
@@ -427,12 +361,6 @@ script load_level level_number = 0
   endif
   LogDebug "load_level: unpausing game"
   UnPauseGame
-  LogDebug "@@ 4"
-  if GetFlag flag = FLAG_G_COMP_GEO_ON
-    LogDebug "@@ 4 COMP GEO IS ON"
-  else
-    LogDebug "@@ 4 COMP GEO IS OFF"
-  endif
 endscript
 script LoadTerrain_parked
   SetTerrainDefault
