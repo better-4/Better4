@@ -188,8 +188,6 @@ script load_level level_number = 0
   else
     LogDebug "@@ 7 COMP GEO IS OFF"
   endif
-  LogDebug "load_level: resetting level objects"
-  better4_lvlobjs_reset
   LogDebug "@@ 8"
   if GetFlag flag = FLAG_G_COMP_GEO_ON
     LogDebug "@@ 8 COMP GEO IS ON"
@@ -211,6 +209,8 @@ script load_level level_number = 0
   else
     LogDebug "@@ 9 COMP GEO IS OFF"
   endif
+  LogDebug "load_level: resetting level objects"
+  better4_lvlobjs_reset
   if ( <level_number> = LevelNum_Skateshop )
   endif
   if GotParam scnpre
