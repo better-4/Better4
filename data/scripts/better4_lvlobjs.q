@@ -160,7 +160,6 @@ script better4_lvlobj_reset
 endscript
 
 script better4_lvlobjs_reset
-  ResetLevelObjects
   better4_lvlobj_reset better4_lvlobj_compgeo
   better4_lvlobj_reset better4_lvlobj_proset1
   better4_lvlobj_reset better4_lvlobj_proset2
@@ -169,6 +168,7 @@ script better4_lvlobjs_reset
   better4_lvlobj_reset better4_lvlobj_proset5
   better4_lvlobj_reset better4_lvlobj_proset6
   better4_lvlobj_reset better4_lvlobj_proset7
+  ResetLevelObjects
 endscript
 
 script better4_lvlobj_set

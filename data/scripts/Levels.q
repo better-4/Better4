@@ -122,6 +122,12 @@ script set_level_lights
   SetDynamicLightModulationFactor directional = 1 value = <mod_factor_1>
 endscript
 script load_level level_number = 0
+  LogDebug "@@ 1"
+  if GetFlag flag = FLAG_G_COMP_GEO_ON
+    LogDebug "@@ 1 COMP GEO IS ON"
+  else
+    LogDebug "@@ 1 COMP GEO IS OFF"
+  endif
   RememberLevelStructureNameForReplays level_structure_name = <structure_name>
   if ( ( CD ) or ( IsTrue TestMusicFromHost ) )
     if GotParam ambient_track
@@ -248,6 +254,12 @@ script load_level level_number = 0
     LogDebug "load_level: loading level qb qb=%q" q = <level_qb>
     LoadQB <level_qb> LevelSpecific
   endif
+  LogDebug "@@ 2"
+  if GetFlag flag = FLAG_G_COMP_GEO_ON
+    LogDebug "@@ 2 COMP GEO IS ON"
+  else
+    LogDebug "@@ 2 COMP GEO IS OFF"
+  endif
   preselect_random_parts <...>
   if GotParam park_editor
     LoadSound "Shared\Hits\FallPungee_11"
@@ -351,6 +363,12 @@ script load_level level_number = 0
       LogInfo "CAREER_STARTED"
     endif
   endif
+  LogDebug "@@ 3"
+  if GetFlag flag = FLAG_G_COMP_GEO_ON
+    LogDebug "@@ 3 COMP GEO IS ON"
+  else
+    LogDebug "@@ 3 COMP GEO IS OFF"
+  endif
   LogDebug "load_level: initializing goal manager"
   init_goal_manager
   LogDebug "load_level: initializing cash icons"
@@ -361,6 +379,12 @@ script load_level level_number = 0
   endif
   LogDebug "load_level: unpausing game"
   UnPauseGame
+  LogDebug "@@ 4"
+  if GetFlag flag = FLAG_G_COMP_GEO_ON
+    LogDebug "@@ 4 COMP GEO IS ON"
+  else
+    LogDebug "@@ 4 COMP GEO IS OFF"
+  endif
 endscript
 script LoadTerrain_parked
   SetTerrainDefault
