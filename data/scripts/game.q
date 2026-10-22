@@ -54,9 +54,9 @@ script RestoreMenuMusic
 endscript
 script do_backend_retry
   GoalManager_UninitializeAllGoals
-  if InNetGame
-    ResetProSetFlags
-  endif
+  // if InNetGame
+  //   ResetProSetFlags
+  // endif
   SpawnScript do_screen_freeze
 endscript
 script do_screen_freeze

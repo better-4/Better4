@@ -162,16 +162,18 @@ script goal_create_proset_geom
 endscript
 
 script goal_kill_proset_geom
-  if GotParam proset_prefix
-    FormatText ChecksumName = proset_flag "FLAG_%pGEO_ON" p = <proset_prefix>
-    UnSetFlag flag = <proset_flag>
-    Kill Prefix = <proset_prefix>
-    FormatText TextName = proset_trigger_prefix "TRG_%p" p = <proset_prefix>
-    Kill Prefix = <proset_trigger_prefix>
-    GoalManager_GetProsetNotPrefix <proset_prefix>
-    Create Prefix = <proset_not_prefix>
-    FormatText TextName = proset_not_trigger_prefix "TRG_%p" p = <proset_not_prefix>
-    Create Prefix = <proset_not_trigger_prefix>
+  if not InNetGame
+    if GotParam proset_prefix
+      FormatText ChecksumName = proset_flag "FLAG_%pGEO_ON" p = <proset_prefix>
+      UnSetFlag flag = <proset_flag>
+      Kill Prefix = <proset_prefix>
+      FormatText TextName = proset_trigger_prefix "TRG_%p" p = <proset_prefix>
+      Kill Prefix = <proset_trigger_prefix>
+      GoalManager_GetProsetNotPrefix <proset_prefix>
+      Create Prefix = <proset_not_prefix>
+      FormatText TextName = proset_not_trigger_prefix "TRG_%p" p = <proset_not_prefix>
+      Create Prefix = <proset_not_trigger_prefix>
+    endif
   endif
 endscript
 
