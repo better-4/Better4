@@ -198,6 +198,11 @@ script load_level level_number = 0
   endif
   LogDebug "load_level: CareerStartLevel level_number=%n" n = <level_number>
   CareerStartLevel level = <level_number>
+  if GetFlag flag = FLAG_G_COMP_GEO_ON
+    LogDebug "@@ 8.5 COMP GEO IS ON"
+  else
+    LogDebug "@@ 8.5 COMP GEO IS OFF"
+  endif
   LogDebug "load_level: ResetLevelFlags"
   ResetLevelFlags
   LogDebug "@@ 9"
