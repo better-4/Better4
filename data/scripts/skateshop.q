@@ -687,7 +687,7 @@ script start_internet_game
   select_xbox_multiplayer { change_gamemode = change_gamemode_net }
 endscript
 script create_main_menu
-  if not better4_startup_level_done
+  if ( better4_startup_level_done = 0 )
     Change better4_startup_level_done = 1
     if GetIniString section = "Miscellaneous" key = "StartupLevel" ValueName = startup_level
       FormatText ChecksumName = level "Load_%s" s = <startup_level>
