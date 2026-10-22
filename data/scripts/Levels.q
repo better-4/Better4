@@ -175,6 +175,8 @@ script load_level level_number = 0
       DisplayLoadingScreen "loadscrn_generic"
     endif
   endif
+  LogDebug "load_level: resetting level objects"
+  better4_lvlobjs_reset
   LogDebug "load_level: CareerStartLevel level_number=%n" n = <level_number>
   CareerStartLevel level = <level_number>
   LogDebug "load_level: ResetLevelFlags"
@@ -357,8 +359,6 @@ script load_level level_number = 0
     LogDebug "load_level: running setup script"
      <setup_script>
   endif
-  LogDebug "load_level: initializing level objects"
-  better4_lvlobjs_init
   LogDebug "load_level: unpausing game"
   UnPauseGame
 endscript

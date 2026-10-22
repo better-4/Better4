@@ -176,3 +176,8 @@ int __cdecl CFunc_ChangeLevelObject(CStruct *params) {
 
     return 1;
 }
+
+int __cdecl CFunc_ResetLevelObjects(CStruct *params) {
+    level_objects = 0;
+    return 1;
+}

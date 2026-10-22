@@ -47,5 +47,6 @@ void patchHostOptions();
 
 int __cdecl CFunc_ChangeGameModifier(CStruct *params);
 int __cdecl CFunc_ChangeLevelObject(CStruct *params);
+int __cdecl CFunc_ResetLevelObjects(CStruct *params);
 
 #endif

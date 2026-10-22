@@ -151,6 +151,25 @@ script better4_lvlobjs_init
   better4_lvlobj_init better4_lvlobj_compgeo
 endscript
 
+script better4_lvlobj_reset
+  <value> = <default>
+  CastToInteger value
+  ChangeGlobal Name = <value_name> value = <value>
+  LogInfo "Resetting lvlobj %t to %v" t = <text> v = <value>
+  UnSetFlag flag = ( ( <params> ).flag )
+endscript
+
+script better4_lvlobjs_reset
+  better4_lvlobj_reset better4_lvlobj_compgeo
+  better4_lvlobj_reset better4_lvlobj_proset1
+  better4_lvlobj_reset better4_lvlobj_proset2
+  better4_lvlobj_reset better4_lvlobj_proset3
+  better4_lvlobj_reset better4_lvlobj_proset4
+  better4_lvlobj_reset better4_lvlobj_proset5
+  better4_lvlobj_reset better4_lvlobj_proset6
+  better4_lvlobj_reset better4_lvlobj_proset7
+endscript
+
 script better4_lvlobj_set
   switch <bit>
   case 0
