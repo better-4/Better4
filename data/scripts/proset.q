@@ -122,7 +122,7 @@ script create_pro_trick_objects_menu2
     ]
   }
   kill_start_key_binding
-  
+
   make_text_sub_menu_item text = "Competition Geo: OFF" id = toggle_comp_geo pad_choose_script = toggle_geo pad_choose_params = toggle_comp_geo_params focus_script = preview_geo focus_params = toggle_comp_geo_params pad_circle_script = goto_geo pad_circle_params = toggle_comp_geo_params
   check_geo toggle_comp_geo_params
 

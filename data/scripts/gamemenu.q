@@ -3311,7 +3311,7 @@ script create_options_menu
         make_text_sub_menu_item {
           text = "Pro Trick Objects"
           pad_choose_script = generic_menu_pad_choose
-          pad_choose_params = { callback = create_pro_trick_objects_menu }
+          pad_choose_params = { callback = better4_create_lvlobjs_menu }
           not_focusable
           rgba = [ 50 50 50 90 ]
         }
@@ -3320,7 +3320,7 @@ script create_options_menu
           make_text_sub_menu_item {
             text = "Pro Trick Objects"
             pad_choose_script = generic_menu_pad_choose
-            pad_choose_params = { callback = create_pro_trick_objects_menu }
+            pad_choose_params = { callback = better4_create_lvlobjs_menu }
           }
         endif
       endif
@@ -3329,7 +3329,7 @@ script create_options_menu
       make_text_sub_menu_item {
             text = "Pro Trick Objects"
             pad_choose_script = generic_menu_pad_choose
-            pad_choose_params = { callback = create_pro_trick_objects_menu }
+            pad_choose_params = { callback = better4_create_lvlobjs_menu }
           }
     endif
     
