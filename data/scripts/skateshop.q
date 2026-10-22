@@ -660,6 +660,16 @@ script launch_main_menu
   remove_pause_menu_textures_from_vram
   create_main_menu
 endscript
+better4_startup_level_done = 0
+script better4_startup_level
+  if CustomSkaterFileNameDefined
+    load_pro_skater name = custom
+    cas_post_load
+  endif
+  SetGameType <mode>
+  SetCurrentGameType
+  level_select_change_level level = <level>
+endscript
 script start_internet_game
   memcard_menus_cleanup
   add_main_menu_textures_to_vram
@@ -677,6 +687,16 @@ script start_internet_game
   select_xbox_multiplayer { change_gamemode = change_gamemode_net }
 endscript
 script create_main_menu
+  if not better4_startup_level_done
+    Change better4_startup_level_done = 1
+    if GetIniString section = "Miscellaneous" key = "StartupLevel" ValueName = startup_level
+      FormatText ChecksumName = level "Load_%s" s = <startup_level>
+      GetIniString section = "Miscellaneous" key = "StartupMode" ValueName = startup_mode fallback = "freeskate"
+      FormatText ChecksumName = mode "%s" s = <startup_mode>
+      better4_startup_level level = <level> mode = <mode>
+      return
+    endif
+  endif
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
