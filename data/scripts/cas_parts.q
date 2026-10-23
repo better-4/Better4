@@ -36,6 +36,13 @@ master_editable_list = [
     colormenu = sleeve_color_menu
   }
   { part = shoes text = "SHOES" male = 1 female = 1 submenu = shoes_menu colormenu = shoe_color_menu categories = better4_shoes_categories }
+	{
+    part = shoelaces
+    parent = [ shoes ]
+    male = 1
+    female = 1
+    colormenu = shoelace_color_menu
+  }
   { part = front_logo text = "FRONT LOGO" male = 1 female = 1 submenu = front_logo_menu categories = better4_skater_shirt_logo_categories }
   { part = back_logo text = "BACK LOGO" male = 1 female = 1 submenu = back_logo_menu categories = better4_skater_shirt_logo_categories }
   { part = glasses text = "GLASSES" male = 1 female = 1 submenu = glasses_menu preview_menu = 1 colormenu = glasses_color_menu }

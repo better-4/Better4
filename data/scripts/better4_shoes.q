@@ -297,5 +297,6 @@ shoes = [
     frontend_desc = 'Classics'
     mesh = "models/better4/shared/shoes/shoe_classics_thug.skin"
     is_clowny
+    multicolor
   }
 ]

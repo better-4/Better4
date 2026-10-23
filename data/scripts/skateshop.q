@@ -3347,7 +3347,7 @@ script check_if_part_colorable
   return is_enabled = <retVal>
 endscript
 
-script check_if_sleeve_colorable
+script check_if_secondary_colorable
 	check_if_part_colorable <...>
 	
 	if ( <is_enabled> = 0 )
@@ -5214,7 +5214,7 @@ edit_skater_torso_options = [
     submenu = sleeve_color_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = torso_items }
-    is_enabled_script = check_if_sleeve_colorable
+    is_enabled_script = check_if_secondary_colorable
     is_enabled_params = { parts = [ skater_m_torso skater_f_torso ] }
   }
   {
@@ -5342,6 +5342,15 @@ edit_skater_leg_options = [
     is_visible_script = check_if_group_editable
     is_visible_params = { group = shoes_items }
     is_enabled_script = check_if_part_colorable
+    is_enabled_params = { parts = [ shoes ] }
+    cam_anim_sub = SS_Appearance_Feet
+  }
+  {
+    text = 'Shoelace Color'
+    submenu = shoelace_color_menu
+    is_visible_script = check_if_group_editable
+    is_visible_params = { group = shoes_items }
+    is_enabled_script = check_if_secondary_colorable
     is_enabled_params = { parts = [ shoes ] }
     cam_anim_sub = SS_Appearance_Feet
   }
