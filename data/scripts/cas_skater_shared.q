@@ -900,6 +900,12 @@ shoes = [
     mesh = "models/better4/shared/shoes/shoe_clown02.skin"
     is_clowny
   }
+  {
+    desc_id = #"THUG Classics"
+    frontend_desc = 'Classics (THUG)'
+    mesh = "models/better4/shared/shoes/shoe_classics_thug.skin"
+    is_clowny
+  }
 ]
 left_bicep_tattoo = [
   {
