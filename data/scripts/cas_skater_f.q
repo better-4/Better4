@@ -382,6 +382,11 @@ skater_f_legs = [
     mesh = "models/skater_m/pant_gatheredcargo.skin"
   }
   {
+    desc_id = #"Bunched Cargos"
+    frontend_desc = 'Bunched Cargos'
+    mesh = "models/better4/skater_m/pant_gatheredcargo.skin"
+  }
+  {
     desc_id = #"Baggy Pants"
     frontend_desc = 'Baggy Pants'
     mesh = "models/skater_m/pant_baggy.skin"
