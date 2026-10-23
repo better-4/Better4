@@ -5334,6 +5334,7 @@ edit_skater_leg_options = [
     cam_anim_sub = SS_Appearance_Feet
     is_visible_script = check_if_group_editable
     is_visible_params = { group = shoes_items }
+    categorized
   }
   {
     text = 'Shoe Color'
