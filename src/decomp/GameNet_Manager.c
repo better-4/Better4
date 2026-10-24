@@ -85,7 +85,7 @@ uint32_t GameNet_Manager_InLanMode(GameNet_Manager *this) {
     return _InLanMode(this);
 }
 
-uint32_t GameNet_Manager_InNetGame(GameNet_Manager *this) {
-    static uint32_t (__fastcall* _InNetGame)(GameNet_Manager *) = (void *)0x00485ba0;
+uint8_t GameNet_Manager_InNetGame(GameNet_Manager *this) {
+    static uint8_t (__fastcall* _InNetGame)(GameNet_Manager *) = (void *)0x00485ba0;
     return _InNetGame(this);
 }

@@ -193,11 +193,20 @@ void fix_bald(CStruct *appearance) {
 void fix_sleeves(CStruct *appearance) {
 	CStruct *sleeves = 0;
     if (!CStruct_GetStructure(appearance, 0x1cf5719c/*sleeves*/, &sleeves, 0)) {
-        // TODO: set sleeve color to shirt color if no sleeves present?
         logInfo("fix_sleeves: adding sleeves to cas in case they have colorable sleeves");
         CStruct *new_sleeves = CStruct_New();
         CStruct_AddChecksum(new_sleeves, 0x4bb2084e/*desc_id*/, 0/*None*/);
         CStruct_AddStructure(appearance, 0x1cf5719c/*sleeves*/, new_sleeves);
+    }
+}
+
+void fix_shoelaces(CStruct *appearance) {
+	CStruct *shoelaces = 0;
+    if (!CStruct_GetStructure(appearance, 0xb25ecd9d/*shoelaces*/, &shoelaces, 0)) {
+        logInfo("fix_shoelaces: adding shoelaces to cas in case they have colorable shoelaces");
+        CStruct *new_shoelaces = CStruct_New();
+        CStruct_AddChecksum(new_shoelaces, 0x4bb2084e/*desc_id*/, 0/*None*/);
+        CStruct_AddStructure(appearance, 0xb25ecd9d/*shoelaces*/, new_shoelaces);
     }
 }
 
@@ -228,6 +237,7 @@ void __fastcall Obj_CPlayerProfileManager_LoadCASProfileInfo(void *this, unused_
             fix_accessories(appearance);
             fix_bald(appearance);
             fix_sleeves(appearance);
+            fix_shoelaces(appearance);
 		} else {
             logWarning("Obj::CPlayerProfileManager::LoadCASProfileInfo: could not access \"custom.appearance\"");
         }

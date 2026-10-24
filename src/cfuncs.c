@@ -29,7 +29,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 63
+#define BETTER4_NUM_CFUNCS 64
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -117,6 +117,7 @@ void addCFuncs() {
 	addCFunc("GetMostRecentCAS", (void *)CFunc_GetMostRecentCAS);
 	addCFunc("EnableFreecam", (void *)CFunc_EnableFreecam);
 	addCFunc("DisableFreecam", (void *)CFunc_DisableFreecam);
+	addCFunc("GetIniString", (void *)CFunc_GetIniString);
 	addCFunc("ChangeLevelObject", (void *)CFunc_ChangeLevelObject);
 	addCFunc("ResetLevelObjects", (void *)CFunc_ResetLevelObjects);
 }
@@ -186,6 +187,55 @@ int __cdecl CFunc_GetIniInteger(CStruct *params, CScript *script) {
 	CStruct *out = CScript_GetParams(script);
 	CStruct_AddInteger(out, value_name_checksum, ini_value);
 
+	return 1;
+}
+
+int __cdecl CFunc_GetIniString(CStruct *params, CScript *script) {
+	char *section = "";
+	if (!CStruct_GetString(params, 0xd28c8510, &section, 0)) {
+		logWarning("GetIniString missing param \"section\" (0xd28c8510)");
+		return 0;
+	}
+
+	char *key = "";
+	if (!CStruct_GetString(params, 0x756f5456, &key, 0)) {
+		logWarning("GetIniString missing param \"key\" (0x756f5456)");
+		return 0;
+	}
+
+	uint32_t value_name_checksum = 0;
+	if (!CStruct_GetChecksum(params, 0xbf4212ef, &value_name_checksum, 0)) {
+		logWarning("GetIniString missing param \"ValueName\" (0xbf4212ef)");
+		return 0;
+	}
+
+	char *fallback = "";
+	CStruct_GetString(params, 0xcee685bd, &fallback, 0); // "fallback" (0xcee685bd)
+
+	char value[64] = "";
+	GetPrivateProfileStringA(section, key, fallback, value, sizeof(value), configFile);
+
+	char *comment = strchr(value, ';');
+	if (comment) {
+		*comment = '\0';
+	}
+
+	char *start = value;
+	while (*start == ' ' || *start == '\t') {
+		start++;
+	}
+	for (char *end = start + strlen(start); end > start; end--) {
+		if (end[-1] != ' ' && end[-1] != '\t') {
+			*end = '\0';
+			break;
+		}
+	}
+
+	if (!*start) {
+		return 0;
+	}
+
+	CStruct_AddString(CScript_GetParams(script), value_name_checksum, start);
 	return 1;
 }
 

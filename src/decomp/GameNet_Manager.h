@@ -44,6 +44,6 @@ Net_App *GameNet_Manager_SpawnClient(GameNet_Manager *this, uint8_t unk, uint8_t
 
 uint32_t GameNet_Manager_InInternetMode(GameNet_Manager *this);
 uint32_t GameNet_Manager_InLanMode(GameNet_Manager *this);
-uint32_t GameNet_Manager_InNetGame(GameNet_Manager *this);
+uint8_t GameNet_Manager_InNetGame(GameNet_Manager *this);
 
 #endif

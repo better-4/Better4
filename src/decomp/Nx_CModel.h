@@ -19,7 +19,7 @@ typedef struct Nx_CModel {
     uint8_t unk2[0x58];
     uint32_t geom_names[MAX_GEOMS]; // 0xb4, size 0x48
     uint8_t unk3[0xc];
-    uint32_t num_geoms; // 0x108
+    uint16_t num_geoms; // 0x108
 } Nx_CModel;
 
 uint8_t Nx_CModel_ClearColor(Nx_CModel *this, uint32_t part);
