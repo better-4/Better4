@@ -8,7 +8,7 @@
 #include "decomp/Net_Dispatcher.h"
 
 static GameModifiers game_modifiers = 0;
-static GameModifiers level_objects = 0;
+static LevelObjects level_objects = 0;
 
 void notify_game_modifiers() {
     GameNet_Manager *gamenet_manager = GameNet_Manager_Instance();
@@ -89,22 +89,39 @@ void host_options_add_handlers(Net_Dispatcher *dispatcher) {
     Net_Dispatcher_AddHandler(dispatcher, MSG_ID_LEVEL_OBJECTS, handle_change_level_objects, 0, 0, 0x80);
 }
 
+// Wrapper for GameNet::Manager::InNetGame call at 0x004c91d6; return 0 if not in net game or if modifier is set
+uint32_t __fastcall GameNet_Manager_InNetGame_CheckAlwaysSpecial(GameNet_Manager *this) {
+    return GameNet_Manager_InNetGame(this) && !(game_modifiers & (1 << MODIFIER_ALWAYS_SPECIAL));
+}
+
+// Wrapper for GameNet::Manager::InNetGame call at 0x004c48e7; return 0 if not in net game or if modifier is set
+uint32_t __fastcall GameNet_Manager_InNetGame_CheckPerfectRail(GameNet_Manager *this) {
+    return GameNet_Manager_InNetGame(this) && !(game_modifiers & (1 << MODIFIER_PERFECT_RAIL));
+}
+
+// Wrapper for GameNet::Manager::InNetGame call at 0x004c0067; return 0 if not in net game or if modifier is set
+uint32_t __fastcall GameNet_Manager_InNetGame_CheckPerfectSkitch(GameNet_Manager *this) {
+    return GameNet_Manager_InNetGame(this) && !(game_modifiers & (1 << MODIFIER_PERFECT_SKITCH));
+}
+
+// Wrapper for GameNet::Manager::InNetGame call at 0x004c00d8; return 0 if not in net game or if modifier is set
+uint32_t __fastcall GameNet_Manager_InNetGame_CheckPerfectManual(GameNet_Manager *this) {
+    return GameNet_Manager_InNetGame(this) && !(game_modifiers & (1 << MODIFIER_PERFECT_MANUAL));
+}
+
 void patchHostOptions() {
     // GameNet::Manager::SpawnServer (0x004869a0)
     patchDWord(0x00486abd + 1, (void *)GameNet_Manager_s_handle_ready_response);
 
-    // XXX (ellie): Technically this allows people to cheat in online lobbies - would be
-    // more proper to instead check if the modifier is enabled when in net game.
-
     // Obj::CSkater::DoGameLogic (0x004c8ed0)
-    patchNop(0x004c91dd, 2); // Don't disallow CHEAT_ALWAYS_SPECIAL in net games
+    patchCall(0x004c91d6, (void *)GameNet_Manager_InNetGame_CheckAlwaysSpecial);
 
     // Obj::CSkater::DoRailPhysics (0x004c4030)
-    patchNop(0x004c48ee, 2); // Don't disallow CHEAT_PERFECT_RAIL in net games
+    patchCall(0x004c48e7, (void *)GameNet_Manager_InNetGame_CheckPerfectRail);
 
     // Obj::CSkater::DoOnGroundPhysics (0x004bfe30)
-    patchNop(0x004c006e, 6); // Don't disallow CHEAT_PERFECT_SKITCH in net games
-    patchNop(0x004c00df, 2); // Don't disallow CHEAT_PERFECT_MANUAL in net games
+    patchCall(0x004c0067, (void *)GameNet_Manager_InNetGame_CheckPerfectSkitch);
+    patchCall(0x004c00d8, (void *)GameNet_Manager_InNetGame_CheckPerfectManual);
 }
 
 int __cdecl CFunc_ChangeGameModifier(CStruct *params) {
