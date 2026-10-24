@@ -114,7 +114,7 @@ better4_shoes_thug = {
     }
     {
       desc_id = #"THUG Classics"
-      frontend_desc = 'Classics'
+      frontend_desc = 'Classic'
     }
   ]
 }
@@ -294,9 +294,8 @@ shoes = [
   }
   {
     desc_id = #"THUG Classics"
-    frontend_desc = 'Classics'
+    frontend_desc = 'Classic'
     mesh = "models/better4/shared/shoes/shoe_classics_thug.skin"
-    is_clowny
     multicolor
   }
 ]
