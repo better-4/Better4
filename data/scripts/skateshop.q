@@ -5201,6 +5201,7 @@ edit_skater_head_options = [
     is_visible_params2 = { group = glasses_items }
     is_enabled_script = check_if_group_editable
     is_enabled_params = { parts = [ Glasses ] }
+    categorized
   }
   {
     text = 'Glasses Color'

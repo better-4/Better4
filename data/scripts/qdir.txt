@@ -216,3 +216,4 @@ better4/better4_shirt_logo.qb
 better4/better4_hat_logo.qb
 better4/better4_lvlobjs.qb
 better4/better4_shoes.qb
+better4/better4_glasses.qb
