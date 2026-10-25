@@ -636,6 +636,7 @@ better4_control_aspect_ratio = {
     { text = "16:9" value = 1.77778 }
     { text = "16:10" value = 1.6 }
     { text = "4:3" value = 1.33333 }
+    { text = "6:5" value = 1.2 }
   ]
   change_script = better4_change_aspect_ratio
 }
