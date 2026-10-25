@@ -56,7 +56,7 @@ void *__cdecl Pip_Unload(char *path) {
 void *__cdecl File_Open(char *path, char *mode) {
     static void *(__cdecl* _Open)(char *, char *) = (void *)0x00536250;
 
-	logDebug("File::Open: \"%s\"", path);
+	// logDebug("File::Open: \"%s\"", path);
 	void *ret;
 	char *override = map_get(override_map, path, strlen(path));
 
