@@ -28,6 +28,9 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\FSFlip.ska" descChecksum = FSFlip
   LoadAnim name = "anims\better4\KickFlipOldSkool.ska" descChecksum = KickFlipOldSkool
   LoadAnim name = "anims\better4\SomiSpin.ska" descChecksum = SomiSpin
+  LoadAnim name = "anims\better4\HandStandCasper_Init.ska" descChecksum = HandStandCasper_Init
+  LoadAnim name = "anims\better4\HandStandCasper_Out.ska" descChecksum = HandStandCasper_Out
+  LoadAnim name = "anims\better4\HandStandCasper_Range.ska" descChecksum = HandStandCasper_Range
 endscript
 
 script better4_load_anims_th3
