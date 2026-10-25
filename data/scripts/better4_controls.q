@@ -412,6 +412,26 @@ better4_control_doubletapgrinds = {
   ]
 }
 
+better4_control_grindcooldown_index = 0
+better4_control_grindcooldown_value = 500
+better4_control_grindcooldown = {
+  id = better4_control_grindcooldown_id
+  index_name = better4_control_grindcooldown_index
+  value_name = better4_control_grindcooldown_value
+  text = "Grind Cooldown"
+  ini_key = "grindcooldown"
+  help = "Change the length of the cooldown period between ending a grind and starting the next one."
+  options = [
+    { text = "Vanilla" value = 500 }
+    { text = "Fast" value = 100 }
+  ]
+  change_script = better4_control_grindcooldown_change
+}
+
+script better4_control_grindcooldown_change
+  Change Rail_minimum_rerail_time = better4_control_grindcooldown_value
+endscript
+
 better4_control_pressure_index = 0
 better4_control_pressure_value = off
 better4_control_pressure = {
@@ -1280,6 +1300,7 @@ script better4_controls_init
   better4_control_init better4_control_liptricks
   better4_control_init better4_control_railspin
   better4_control_init better4_control_doubletapgrinds
+  better4_control_init better4_control_grindcooldown
   better4_control_init better4_control_wallieplant
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
