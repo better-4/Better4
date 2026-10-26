@@ -304,6 +304,7 @@ void patchBetter4() {
 	patchPressures();
 	patchTrickDisplayNames();
 	patchQbStartupLogging();
+	patchQuickRegrind();
 }
 
 void better4Main() {
