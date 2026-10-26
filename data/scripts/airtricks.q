@@ -66,6 +66,7 @@ Trick_HeelFlipHandflip = { Scr = FlipTrick params = { name = 'Heelflip Handflip'
 Trick_540TailWhip = { Scr = FlipTrick params = { name = '540 TailWhip' Score = 2000 Anim = _540TailWhip IsSpecial BoardRotate speed = 1.1 MaxSpeed = 1.2 trickslack = 15 } }
 Trick_Gazelle = { Scr = FlipTrick params = { name = 'Gazelle Underflip' Score = 3500 Anim = GazelleUnderflip IsSpecial BoardRotate trickslack = 20 NoSpin } }
 HIGHSPEED = 1.0
+
 Trick_Layout = { Scr = FlipTrick params = { name = 'Handspring Layout' Score = 3000 Anim = Maul IsSpecial speed = 1.0 trickslack = 30 Spinslack = 25 } }
 Trick_MaulForceGrab = { Scr = GrabTrick params = { name = 'Force Grab' Score = 1300 Anim = MaulForceGrab_Init Idle = MaulForceGrab_Idle OutAnim = MaulForceGrab_Out IsSpecial ForceInit } }
 Trick_RodeoClown = { Scr = GrabTrick params = { name = 'Rodeo Clown' Score = 1500 Anim = RodeoClown_Init Idle = RodeoClown_Idle OutAnim = RodeoClown_Out NoSpin IsSpecial ForceInit Rotate x = -360 duration = 1 } }
@@ -83,7 +84,14 @@ Extra_ShiftyCannonball = [ { Trigger_Extra_Grab Params = { Name = 'Shifty Cannon
 Trick_Varial = { Scr = FlipTrick params = { name = 'Varial' Score = 900 Anim = BigVarial BoardRotate } }
 Trick_VarialKickflip2 = { Scr = FlipTrick params = { name = 'Varial Kickflip' Score = 300 Anim = VarialKickflip BoardRotate Nollie = NollieVarialKickflip ExtraTricks = Extra_VarialKickflip2 TreNollieFix } }
 Extra_VarialKickflip2 = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip' displayname = '360 Flip (Nollie Fix)' Score = 500 Anim = _360Flip Nollie = Nollie360Flip IsExtra UseCurrent TreNollieFix } } ]
-Trick_SomiSpin = { Scr = FlipTrick Params = {Name = 'Somi Spin' Speed = 0.9 Score = 3500 Anim = SomiSpin IsSpecial trickslack = 25 } }
+Trick_SomiSpin = { Scr = FlipTrick Params = { Name = 'Somi Spin' Speed = 0.9 Score = 3500 Anim = SomiSpin IsSpecial trickslack = 25 } }
+Trick_Salute = { Scr = GrabTrick Params = { name = 'Salute!!!' Score = 1000 Anim = Salute_Init Idle = Salute_Idle IsSpecial ForceInit } }
+Trick_360VarialHeelflipLien= { Scr = FlipTrick Params = { Name = '360 Varial Heelflip Lien' Score = 1500 Anim = _540varielheelfliplien IsSpecial boardrotate trickslack = 20 Speed = 1.2 maxspeed = 1.3 } }
+Trick_VHeelFlipToJudo = { Scr = FlipTrick Params = { Name = 'Varial Heelflip Judo' Score = 2500 Anim = HeelFlipToJudo RotateAfter Speed = 1.0  IsSpecial trickslack = 25 } }
+Trick_360ShuvitRewind = { Scr = FlipTrick Params = { Name = '360 Shove-It Rewind' Score = 1500 anim = ShoveItRewind trickslack = 25 Speed = 1.0 IsSpecial } }
+Trick_BodyVarial = { Scr = FlipTrick Params = { Name = 'Body Varial' Score = 200 anim = SexChange trickslack = 10 Speed = 1.700 maxspeed = 1.700 FlipAfter } }
+
+
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
 Trick_FingerFlipAirWalk = { Scr = FlipTrick params = { name = 'Fingerflip Airwalk' Score = 1500 Anim = FingerFlipAirWalk IsSpecial BoardRotate speed = 1.15 trickslack = 30 } }
 Trick_Jackass = { Scr = FlipTrick params = { name = 'The Jackass' Score = 1500 Anim = Jackass IsSpecial speed = 1 MaxSpeed = 1.2 trickslack = 20 Bloodframe = 1 } }
@@ -240,6 +248,9 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
       speed = 1.3
     endif
   endif
+  // if GotParam UseGrabScript
+	// GotoPreserveParams GrabTrick
+  // endif
   ClearTricksFrom Jumptricks Jumptricks0 Jumptricks
   CheckForOllie
   KillExtraTricks

@@ -27,10 +27,30 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\FSBigSpin.ska" descChecksum = FSBigSpin
   LoadAnim name = "anims\better4\FSFlip.ska" descChecksum = FSFlip
   LoadAnim name = "anims\better4\KickFlipOldSkool.ska" descChecksum = KickFlipOldSkool
+  
   LoadAnim name = "anims\better4\SomiSpin.ska" descChecksum = SomiSpin
+
   LoadAnim name = "anims\better4\HandStandCasper_Init.ska" descChecksum = HandStandCasper_Init
   LoadAnim name = "anims\better4\HandStandCasper_Out.ska" descChecksum = HandStandCasper_Out
   LoadAnim name = "anims\better4\HandStandCasper_Range.ska" descChecksum = HandStandCasper_Range
+
+  LoadAnim name = "anims\better4\Salute_Init.ska" descChecksum = Salute_Init
+  LoadAnim name = "anims\better4\Salute_Idle.ska" descChecksum = Salute_Idle
+    
+  LoadAnim name = "anims\better4\_540VarielHeelflipLien.ska" descChecksum = _540VarielHeelflipLien
+
+  LoadAnim name = "anims\better4\MixItUp_Init.ska" descChecksum = MixItUp_Init
+  LoadAnim name = "anims\better4\MixItUp_Idle.ska" descChecksum = MixItUp_Idle
+  LoadAnim name = "anims\better4\MixItUp_Out.ska" descChecksum = MixItUp_Out
+  
+  LoadAnim name = "anims\better4\HeelFlipToJudo.ska" descChecksum = HeelFlipToJudo
+  LoadAnim name = "anims\better4\ShoveItRewind.ska" descChecksum = ShoveItRewind
+  LoadAnim name = "anims\better4\SexChange.ska" descChecksum = SexChange
+  
+  LoadAnim name = "anims\better4\_3DScaryGrind_Init.ska" descChecksum = _3DScaryGrind_Init
+  LoadAnim name = "anims\better4\_3DScaryGrind_Range.ska" descChecksum = _3DScaryGrind_Range
+  LoadAnim name = "anims\better4\_3DScaryGrind_Out.ska" descChecksum = _3DScaryGrind_Out
+
 endscript
 
 script better4_load_anims_th3
@@ -117,11 +137,11 @@ script better4_anim_trigger
   SetRollingFriction 100
   switch <index>
   case 0
-    PlayAnim Anim = TestAnim cycle
+    PlayAnim Anim = _540VarielHeelflipLien cycle
   case 1
-    PlayAnim Anim = StandIdleA cycle
+    PlayAnim Anim = _360VarialHeelFlipLien_Idle cycle
   case 2
-    PlayAnim Anim = StandIdleB cycle
+    PlayAnim Anim = _360VarialHeelFlipLien_Out cycle
   case 3
     PlayAnim Anim = StandIdleC cycle
   endswitch

@@ -1379,3 +1379,14 @@ script Trick_GrindOverturnTap_FS_180
   BoardRotateAfter
   Goto Trick_GrindOverturnTap_FS Params = { NoBlend = yes }
 endscript
+
+script Trick_3DScaryGrind2 
+  Grind { Name = 'Scary Grind' Score = 800 initanim = _3DScaryGrind_Init Anim = _3DScaryGrind_Range OutAnim = _3DScaryGrind_Out Stream = ClassicMonster01 Type = Grind NoBlend = yes 
+  GrindBail = BackwardsGrindBails IsSpecial OutAnimOnOllie Extratricks = Extra_BS_Grinds IsExtra = <IsExtra> } 
+endscript
+
+script Trick_3DScaryGrind2_180 
+  Rotate 
+  BoardRotateAfter 
+  Goto Trick_3DScaryGrind2 Params = { NoBlend = yes } 
+endscript
