@@ -865,6 +865,7 @@ script exit_pause_menu menu_id = current_menu_anchor
   if not RunningReplay
     UnPauseGame
   endif
+  better4_clear_pause_menu_active
   PauseStream 0
   if GoalManager_HasActiveGoals
     PauseMusic 0

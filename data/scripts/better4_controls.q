@@ -785,7 +785,14 @@ better4_control_musicwhenpaused = {
     { text = "On" value = on }
     { text = "Off" value = off }
   ]
+  change_script = better4_change_musicwhenpaused
 }
+
+script better4_change_musicwhenpaused
+  if IsTrue better4_pause_menu_active
+    better4_apply_pause_menu_music
+  endif
+endscript
 
 better4_control_chat_size_index = 2
 better4_control_chat_size_value = 2

@@ -4,6 +4,7 @@ AlwaysDump = 0
 script cleanup_before_loading_level
   LogInfo "*********************** cleanup_before_loading_level"
   Cleanup
+  better4_clear_pause_menu_active
   StopMusic
   PauseMusic
   ClearMusicTrackList

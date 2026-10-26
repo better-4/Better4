@@ -36,6 +36,7 @@ script PauseMusicAndStreams
   PauseStream 1
 endscript
 script UnPauseMusicAndStreams
+  better4_clear_pause_menu_active
   PauseMusic 0
   PauseStream 0
 endscript
@@ -45,19 +46,36 @@ script PauseStreamsKeepMusic
     PauseMusic 1
   endif
 endscript
+better4_pause_menu_active = 0
+better4_pause_menu_had_music = 0
 script PauseStreamsPauseMenu
-  if ( better4_control_musicwhenpaused_value = on )
-    PauseStreamsKeepMusic
+  Change better4_pause_menu_active = 1
+  if MusicIsPaused
+    Change better4_pause_menu_had_music = 0
   else
-    PauseMusicAndStreams
+    Change better4_pause_menu_had_music = 1
   endif
+  PauseStream 1
+  better4_apply_pause_menu_music
+endscript
+script better4_apply_pause_menu_music
+  if ( better4_control_musicwhenpaused_value = on )
+    if IsTrue better4_pause_menu_had_music
+      PauseMusic 0
+    endif
+  else
+    PauseMusic 1
+  endif
+endscript
+script better4_clear_pause_menu_active
+  Change better4_pause_menu_active = 0
 endscript
 better4_music_was_paused = 0
 script better4_remember_music_state
   if MusicIsPaused
-    ChangeGlobal Name = better4_music_was_paused value = 1
+    Change better4_music_was_paused = 1
   else
-    ChangeGlobal Name = better4_music_was_paused value = 0
+    Change better4_music_was_paused = 0
   endif
 endscript
 script RestoreMenuMusic
