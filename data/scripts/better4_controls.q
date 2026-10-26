@@ -772,6 +772,21 @@ better4_control_skatervoice = {
   ]
 }
 
+better4_control_musicwhenpaused_index = 1
+better4_control_musicwhenpaused_value = off
+better4_control_musicwhenpaused = {
+  id = better4_control_musicwhenpaused_id
+  index_name = better4_control_musicwhenpaused_index
+  value_name = better4_control_musicwhenpaused_value
+  text = "Music When Paused"
+  ini_key = "MusicWhenPaused"
+  help = "Toggle whether the soundtrack keeps playing while the game is paused. Music always keeps playing between runs."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }
+  ]
+}
+
 better4_control_chat_size_index = 2
 better4_control_chat_size_value = 2
 better4_control_chat_size = {
@@ -1318,6 +1333,7 @@ script better4_controls_init
   better4_control_init better4_control_extratrick_sound
   better4_control_init better4_control_specialtrick_sound
   better4_control_init better4_control_skatervoice
+  better4_control_init better4_control_musicwhenpaused
   better4_control_init better4_control_trickstring
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter

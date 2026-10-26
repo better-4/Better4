@@ -416,6 +416,7 @@ script better4_sound_menu
   better4_create_menu_control better4_control_extratrick_sound
   better4_create_menu_control better4_control_specialtrick_sound
   better4_create_menu_control better4_control_skatervoice
+  better4_create_menu_control better4_control_musicwhenpaused
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
 endscript

@@ -45,11 +45,26 @@ script PauseStreamsKeepMusic
     PauseMusic 1
   endif
 endscript
-script RestoreMenuMusic
-  if IsTrue ALWAYSPLAYMUSIC
-    PauseMusic 0
+script PauseStreamsPauseMenu
+  if ( better4_control_musicwhenpaused_value = on )
+    PauseStreamsKeepMusic
   else
+    PauseMusicAndStreams
+  endif
+endscript
+better4_music_was_paused = 0
+script better4_remember_music_state
+  if MusicIsPaused
+    ChangeGlobal Name = better4_music_was_paused value = 1
+  else
+    ChangeGlobal Name = better4_music_was_paused value = 0
+  endif
+endscript
+script RestoreMenuMusic
+  if IsTrue better4_music_was_paused
     PauseMusic 1
+  else
+    PauseMusic 0
   endif
 endscript
 script do_backend_retry

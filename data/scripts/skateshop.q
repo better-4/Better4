@@ -2267,7 +2267,7 @@ script skateshop_practice_start_pressed
   endif
   if ChecksumEquals a = <menu_state> b = off
     LogInfo "-------------------- PAUSING GAME ----------------------"
-    PauseStreamsKeepMusic
+    PauseStreamsPauseMenu
     PauseGame
     pause_trick_text
     pause_balance_meter
