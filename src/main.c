@@ -268,6 +268,16 @@ void patchTrickDisplayNames() {
 	patchCall(0x004f19e2, (void *)Script_CStruct_GetString_Wrapper);
 }
 
+void __cdecl Script_LoadQB_(char *param_1, int param_2) {
+	static void (__cdecl *_LoadQB)(uint8_t *, int) = (void *)0x0040b4c0;
+	logDebug("Script::LoadQB: param_1=%s param_2=%d", param_1, param_2);
+	_LoadQB(param_1, param_2);
+}
+
+void patchQbStartupLogging() {
+	patchCall(0x00512045, (void *)Script_LoadQB_);
+}
+
 void patchBetter4() {
 	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
@@ -293,6 +303,7 @@ void patchBetter4() {
 	patchKoth();
 	patchPressures();
 	patchTrickDisplayNames();
+	patchQbStartupLogging();
 }
 
 void better4Main() {
