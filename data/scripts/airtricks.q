@@ -89,7 +89,7 @@ Trick_Salute = { Scr = GrabTrick Params = { name = 'Salute!!!' Score = 1000 Anim
 Trick_360VarialHeelflipLien= { Scr = FlipTrick Params = { Name = '360 Varial Heelflip Lien' Score = 1500 Anim = _540varielheelfliplien IsSpecial boardrotate trickslack = 20 Speed = 1.2 maxspeed = 1.3 } }
 Trick_VHeelFlipToJudo = { Scr = FlipTrick Params = { Name = 'Varial Heelflip Judo' Score = 2500 Anim = HeelFlipToJudo RotateAfter Speed = 1.0  IsSpecial trickslack = 25 } }
 Trick_360ShuvitRewind = { Scr = FlipTrick Params = { Name = '360 Shove-It Rewind' Score = 1500 anim = ShoveItRewind trickslack = 25 Speed = 1.0 IsSpecial } }
-Trick_BodyVarial = { Scr = FlipTrick Params = { Name = 'Body Varial' Score = 200 anim = SexChange trickslack = 10 Speed = 1.700 maxspeed = 1.700 FlipAfter } }
+Trick_BodyVarial = { Scr = FlipTrick Params = { Name = 'Body Varial' Score = 500 anim = SexChange trickslack = 10 Speed = 1.0 FlipAfter } }
 
 
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
