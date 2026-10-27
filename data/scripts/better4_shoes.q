@@ -1,4 +1,5 @@
 better4_shoes_categories = [
+    better4_shoes_thps3
     better4_shoes_thps4
     better4_shoes_thug
 ]
@@ -115,6 +116,96 @@ better4_shoes_thug = {
     {
       desc_id = #"THUG Classics"
       frontend_desc = 'Classic'
+    }
+  ]
+}
+
+better4_shoes_thps3 = {
+  label = "THPS3"
+  items = [
+    {
+      desc_id = #"Hawk Shoe TH3"
+      frontend_desc = 'Hawk\'s'
+    }
+    {
+      desc_id = #"Caballero Shoe TH3"
+      frontend_desc = 'Caballero\'s'
+    }
+    {
+      desc_id = #"Campbell Shoe TH3"
+      frontend_desc = 'Campbell\'s'
+    }
+    {
+      desc_id = #"Glifberg Shoe TH3"
+      frontend_desc = 'Glifberg\'s'
+    }
+    {
+      desc_id = #"Hiroki Shoe TH3"
+      frontend_desc = 'Hiroki\'s'
+    }
+    {
+      desc_id = #"Junnosuke Shoe TH3"
+      frontend_desc = 'Junnosuke\'s'
+    }
+    {
+      desc_id = #"Koston Shoe TH3"
+      frontend_desc = 'Koston\'s'
+    }
+    {
+      desc_id = #"Lasek Shoe TH3"
+      frontend_desc = 'Lasek\'s'
+    }
+    {
+      desc_id = #"Margera Shoe TH3"
+      frontend_desc = 'Margera\'s'
+    }
+    {
+      desc_id = #"Mullen Shoe TH3"
+      frontend_desc = 'Mullen\'s'
+    }
+    {
+      desc_id = #"Muska Shoe TH3"
+      frontend_desc = 'Muska\'s'
+    }
+    {
+      desc_id = #"Reynolds Shoe TH3"
+      frontend_desc = 'Reynolds\''
+    }
+    {
+      desc_id = #"Rowley Shoe TH3"
+      frontend_desc = 'Rowley\'s'
+    }
+    {
+      desc_id = #"Rowley Shoe TH3 beta"
+      frontend_desc = 'Rowley\'s (Beta)'
+    }
+    {
+      desc_id = #"Shin Shoe TH3"
+      frontend_desc = 'Shin\'s'
+    }
+    {
+      desc_id = #"Steamer Shoe TH3"
+      frontend_desc = 'Steamer\'s'
+    }
+    {
+      desc_id = #"Steamer White TH3"
+      frontend_desc = 'Steamer White'
+    }
+    {
+      desc_id = #"Thomas Shoe TH3"
+      frontend_desc = 'Thomas\''
+    }
+    {
+      desc_id = #"Generic 1 TH3"
+      frontend_desc = 'Generic 1'
+    }
+    {
+      desc_id = #"Generic 2 TH3"
+      frontend_desc = 'Generic 2'
+    }
+    {
+      desc_id = #"Generic 3 TH3"
+      frontend_desc = 'Generic 3'
     }
   ]
 }
@@ -286,6 +377,7 @@ shoes = [
     is_clowny
     unlock_flag = CAS_UNLOCK_18
   }
+  // THUG
   {
     desc_id = #"Clown Boots 2"
     frontend_desc = 'Clown Shoes 2'
@@ -297,5 +389,111 @@ shoes = [
     frontend_desc = 'Classic'
     mesh = "models/better4/shared/shoes/shoe_classics_thug.skin"
     multicolor
+  }
+  // THPS3
+  {
+    desc_id = #"Hawk Shoe TH3"
+    frontend_desc = 'Hawk\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_hawk_shoes.skin"
+  }
+  {
+    desc_id = #"Caballero Shoe TH3"
+    frontend_desc = 'Caballero\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_caballero_shoes.skin"
+  }
+  {
+    desc_id = #"Campbell Shoe TH3"
+    frontend_desc = 'Campbell\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_campbell_shoes.skin"
+  }
+  {
+    desc_id = #"Glifberg Shoe TH3"
+    frontend_desc = 'Glifberg\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_glifberg_shoes.skin"
+  }
+  {
+    desc_id = #"Hiroki Shoe TH3"
+    frontend_desc = 'Hiroki\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_saegusa_shoes.skin"
+  }
+  {
+    desc_id = #"Junnosuke Shoe TH3"
+    frontend_desc = 'Junnosuke\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_junnosuke_shoes.skin"
+  }
+  {
+    desc_id = #"Koston Shoe TH3"
+    frontend_desc = 'Koston\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_koston_shoes.skin"
+  }
+  {
+    desc_id = #"Lasek Shoe TH3"
+    frontend_desc = 'Lasek\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_lasek_shoes.skin"
+  }
+  {
+    desc_id = #"Margera Shoe TH3"
+    frontend_desc = 'Margera\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_margera_shoes.skin"
+  }
+  {
+    desc_id = #"Mullen Shoe TH3"
+    frontend_desc = 'Mullen\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_mullen_shoes.skin"
+  }
+  {
+    desc_id = #"Muska Shoe TH3"
+    frontend_desc = 'Muska\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_muska_shoes.skin"
+  }
+  {
+    desc_id = #"Reynolds Shoe TH3"
+    frontend_desc = 'Reynolds\''
+    mesh = "models/better4/shared/shoes/thps3/th3_reynolds_shoes.skin"
+  }
+  {
+    desc_id = #"Rowley Shoe TH3"
+    frontend_desc = 'Rowley\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_rowley_shoes.skin"
+  }
+  {
+    desc_id = #"Rowley Shoe TH3 beta"
+    frontend_desc = 'Rowley\'s (Beta)'
+    mesh = "models/better4/shared/shoes/thps3/th3_rowley_beta_shoes.skin"
+  }
+  {
+    desc_id = #"Shin Shoe TH3"
+    frontend_desc = 'Shin\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_okada_shoes.skin"
+  }
+  {
+    desc_id = #"Steamer Shoe TH3"
+    frontend_desc = 'Steamer\'s'
+    mesh = "models/better4/shared/shoes/thps3/th3_steamer_shoes.skin"
+  }
+  {
+    desc_id = #"Steamer White TH3"
+    frontend_desc = 'Steamer White'
+    mesh = "models/better4/shared/shoes/thps3/th3_steamer_alt_shoes.skin"
+  }
+  {
+    desc_id = #"Thomas Shoe TH3"
+    frontend_desc = 'Thomas\''
+    mesh = "models/better4/shared/shoes/thps3/th3_thomas_shoes.skin"
+  }
+  {
+    desc_id = #"Generic 1 TH3"
+    frontend_desc = 'Generic 1'
+    mesh = "models/better4/shared/shoes/thps3/th3_generic1_shoes.skin"
+  }
+  {
+    desc_id = #"Generic 2 TH3"
+    frontend_desc = 'Generic 2'
+    mesh = "models/better4/shared/shoes/thps3/th3_generic2_shoes.skin"
+  }
+  {
+    desc_id = #"Generic 3 TH3"
+    frontend_desc = 'Generic 3'
+    mesh = "models/better4/shared/shoes/thps3/th3_generic3_shoes.skin"
   }
 ]
