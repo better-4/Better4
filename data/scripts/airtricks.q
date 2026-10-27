@@ -411,7 +411,7 @@ script GrabTrick speed = 1.0 x = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIU
     Obj_KillSpawnedScript name = JumpJets
     Obj_SpawnScript JumpJets
   endif
-  if GotParam Stream
+  if ( ( GotParam Stream ) and ( better4_control_specialsfx_value = on ))
     Obj_PlayStream <Stream>
   endif
   if GotParam Bloodframe
