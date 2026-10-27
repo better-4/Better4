@@ -3657,7 +3657,7 @@ script alc_gaps5_GotTrick06
   GoalManager_SetGoalFlag name = Alc_Goal_Gaps5 got_06 1
   GetKeyComboArrayFromTrickArray tricks = [ Trick_BackFootNosegrab ]
    <combo_1> = ( ( goal_tetris_trick_text.( <keycombos> [ 0 ] ) ) )
-  FormatText TextName = tricks "Now tranfer from the water tower to the pools with a special trick!:\nBackfoot Flip Nosegrab\n%a" a = <combo_1>
+  FormatText TextName = tricks "Now transfer from the water tower to the pools with a special trick!:\nBackfoot Flip Nosegrab\n%a" a = <combo_1>
   create_panel_block id = current_goal text = <tricks> style = panel_message_goal
   Die
 endscript
@@ -4620,7 +4620,7 @@ script alc_Gap_RoofToWall
 endscript
 script alc_Gap_RoofToWallEnd
   if TriggerType [ TRIGGER_LAND_ON TRIGGER_SKATE_ONTO ]
-    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Excercise Yard Wall"
+    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Exercise Yard Wall"
   endif
 endscript
 script alc_Gap_Bleachers
