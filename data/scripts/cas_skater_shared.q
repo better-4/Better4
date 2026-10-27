@@ -1685,3 +1685,17 @@ right_leg_tattoo = [
     in = body
   }
 ]
+
+sleeves = [
+  {
+    desc_id = #"None"
+    frontend_desc = 'None'
+  }
+]
+
+shoelaces = [
+  {
+    desc_id = #"None"
+    frontend_desc = 'None'
+  }
+]

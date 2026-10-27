@@ -11,6 +11,8 @@ appearance_burnquist =
   shoes = { desc_id = #"Burnquist Shoe" }
   Glasses = { desc_id = #"Burnquist Glasses" }
   body_shape = hawk_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_caballero =
 {
@@ -24,6 +26,8 @@ appearance_caballero =
   shoes = { desc_id = #"Caballero Shoe" }
   skater_m_socks = { desc_id = Medium }
   body_shape = caballero_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_campbell =
 {
@@ -37,6 +41,8 @@ appearance_campbell =
   skater_m_legs = { desc_id = #"Campbell Pants" }
   shoes = { desc_id = #"campbell Shoe" }
   body_shape = campbell_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_glifberg =
 {
@@ -49,6 +55,8 @@ appearance_glifberg =
   skater_m_legs = { desc_id = #"Glifberg Pants" }
   shoes = { desc_id = #"Glifberg Shoe" }
   body_shape = glifberg_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_hawk =
 {
@@ -61,6 +69,8 @@ appearance_hawk =
   skater_m_legs = { desc_id = #"Hawk Pants" }
   shoes = { desc_id = #"Hawk Shoe" }
   body_shape = hawk_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_koston =
 {
@@ -75,6 +85,8 @@ appearance_koston =
   skater_m_legs = { desc_id = #"Koston Pants" }
   shoes = { desc_id = #"Koston Shoe" }
   body_shape = koston_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_lasek =
 {
@@ -88,6 +100,8 @@ appearance_lasek =
   skater_m_legs = { desc_id = #"Lasek Pants" }
   shoes = { desc_id = #"Lasek Shoe" }
   body_shape = lasek_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_margera =
 {
@@ -100,6 +114,8 @@ appearance_margera =
   skater_m_legs = { desc_id = #"Margera Pants" }
   shoes = { desc_id = #"Margera Shoe" }
   body_shape = margera_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_mullen =
 {
@@ -112,6 +128,8 @@ appearance_mullen =
   skater_m_legs = { desc_id = #"Cargo Pants" }
   shoes = { desc_id = #"Mullen Shoe" }
   body_shape = mullen_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_muska =
 {
@@ -124,6 +142,8 @@ appearance_muska =
   skater_m_legs = { desc_id = #"Muska Pants" }
   shoes = { desc_id = #"Muska Shoe" }
   body_shape = muska_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_reynolds =
 {
@@ -136,6 +156,8 @@ appearance_reynolds =
   skater_m_legs = { desc_id = #"Reynolds Pants" }
   shoes = { desc_id = #"Reynolds Shoe" }
   body_shape = hawk_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_rowley =
 {
@@ -149,6 +171,8 @@ appearance_rowley =
   skater_m_legs = { desc_id = #"Rowley Pants" }
   shoes = { desc_id = #"Rowley Shoe" }
   body_shape = rowley_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_steamer =
 {
@@ -161,6 +185,8 @@ appearance_steamer =
   skater_f_legs = { desc_id = #"Steamer Pants" }
   shoes = { desc_id = #"Steamer Shoe" }
   body_shape = steamer_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_thomas =
 {
@@ -174,6 +200,8 @@ appearance_thomas =
   shoes = { desc_id = #"Thomas Shoe" }
   chest_tattoo = { desc_id = #"Thomas 1" }
   body_shape = thomas_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_eddie =
 {
@@ -182,12 +210,16 @@ appearance_eddie =
   deck_graphic = { desc_id = #"Eddie 1" }
   griptape = { desc_id = #"Generic 9" }
   body_shape = eddie_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_jango =
 {
   body = { desc_id = JANGO }
   board = { desc_id = Hover }
   deck_graphic = { desc_id = #"Jango 1" }
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_vallely =
 {
@@ -202,6 +234,8 @@ appearance_vallely =
   right_bicep_tattoo = { desc_id = #"Tattoo 9" }
   shoes = { desc_id = #"Vallely Shoe" }
   accessoriesR = { desc_id = #"Wrist Tape R" }
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_jenna =
 {
@@ -211,6 +245,8 @@ appearance_jenna =
   skater_f_legs = { desc_id = #"Shorts Daisy" }
   shoes = { desc_id = #"High Heels" }
   body_shape = jenna_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_custom_skater_male =
 {
@@ -228,6 +264,8 @@ appearance_custom_skater_male =
   board = { desc_id = #"Default" }
   deck_graphic = { desc_id = #"CAS 1" }
   griptape = { desc_id = #"Generic 1" }
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_custom_skater_female =
 {
@@ -247,6 +285,8 @@ appearance_custom_skater_female =
   hat = { desc_id = None }
   shoes = { desc_id = #"Burnquist Shoe" }
   body_shape = female_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 body = [
   {

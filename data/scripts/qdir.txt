@@ -90,7 +90,7 @@ better4/helper_text.qb
 high_scores_menu.qb
 horse.qb
 iniskater.qb
-iniskater_exceptions.qb
+better4/iniskater_exceptions.qb
 iniskater_f.qb
 iniskater_secret.qb
 iniskater_shared.qb
