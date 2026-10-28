@@ -5319,6 +5319,7 @@ edit_skater_leg_options = [
     submenu = pants_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = legs_items }
+    categorized
   }
   {
     text = 'Pants Color'
