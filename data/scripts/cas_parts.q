@@ -11,7 +11,7 @@ master_editable_list = [
   { part = body text = "BODY" male = 0 female = 0 }
   { part = skater_m_head text = "M HEADS" male = 1 female = 0 submenu = face_menu preview_menu = 1 }
   { part = skater_m_torso text = "M TORSOS" male = 1 female = 0 submenu = shirt_style_menu colormenu = shirt_color_menu categories = better4_skater_m_torso_categories }
-  { part = skater_m_legs text = "M LEGS" male = 1 female = 0 submenu = pants_menu colormenu = pants_color_menu }
+  { part = skater_m_legs text = "M LEGS" male = 1 female = 0 submenu = pants_menu colormenu = pants_color_menu categories = better4_skater_m_legs_categories }
   { part = skater_m_hair text = "M HAIR" male = 1 female = 0 submenu = hair_menu preview_menu = 1 colormenu = hair_color_menu }
   { part = skater_m_hat_hair text = "M HAT HAIR" male = 1 female = 0 submenu = hat_hair_menu preview_menu = 1 colormenu = hat_hair_color_menu }
   { part = skater_m_backpack text = "BACKPACK" male = 1 female = 0 submenu = backpack_menu colormenu = pack_color_menu }
@@ -21,7 +21,7 @@ master_editable_list = [
   { part = skater_m_elbowpads text = "M ELBOWPADS" male = 1 female = 0 submenu = elbowpads_menu colormenu = elbowpads_color_menu }
   { part = skater_f_head text = "F HEADS" male = 0 female = 1 submenu = face_menu preview_menu = 1 }
   { part = skater_f_torso text = "F TORSOS" male = 0 female = 1 submenu = shirt_style_menu colormenu = shirt_color_menu categories = better4_skater_f_torso_categories }
-  { part = skater_f_legs text = "F LEGS" male = 0 female = 1 submenu = pants_menu colormenu = pants_color_menu }
+  { part = skater_f_legs text = "F LEGS" male = 0 female = 1 submenu = pants_menu colormenu = pants_color_menu categories = better4_skater_f_legs_categories }
   { part = skater_f_hair text = "F HAIR" male = 0 female = 1 submenu = hair_menu preview_menu = 1 colormenu = hair_color_menu }
   { part = skater_f_hat_hair text = "F HAT HAIR" male = 0 female = 1 submenu = hat_hair_menu preview_menu = 1 colormenu = hat_hair_color_menu }
   { part = skater_f_backpack text = "BACKPACK" male = 0 female = 1 submenu = backpack_menu colormenu = pack_color_menu }
