@@ -1,7 +1,7 @@
 better4_shoes_categories = [
-    better4_shoes_thps3
     better4_shoes_thps4
     better4_shoes_thug
+    better4_shoes_thps3
 ]
 
 better4_shoes_thps4 = {
@@ -94,10 +94,6 @@ better4_shoes_thps4 = {
     {
       desc_id = Flipflops
       frontend_desc = 'Flipflops'
-    }
-    {
-      desc_id = #"High Heels"
-      frontend_desc = 'High Heels'
     }
     {
       desc_id = #"Clown Boots"
@@ -214,113 +210,129 @@ shoes = [
   {
     desc_id = #"Hawk Shoe"
     frontend_desc = 'Hawk Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
+    multicolor
   }
   {
     desc_id = #"Burnquist Shoe"
     frontend_desc = 'Burnquist Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_burnquist_shoe"
+    multicolor
   }
   {
     desc_id = #"Caballero Shoe"
     frontend_desc = 'Caballero Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_caballero_shoe"
+    multicolor
   }
   {
     desc_id = #"Campbell Shoe"
     frontend_desc = 'Campbell Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_campbell_shoe"
+    multicolor
   }
   {
     desc_id = #"Glifberg Shoe"
     frontend_desc = 'Glifberg Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_glifberg_shoe"
+    multicolor
   }
   {
     desc_id = #"Koston Shoe"
     frontend_desc = 'Koston Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_Koston_shoe"
+    multicolor
   }
   {
     desc_id = #"Lasek Shoe"
     frontend_desc = 'Lasek Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_lasek_shoe"
+    multicolor
   }
   {
     desc_id = #"Margera Shoe"
     frontend_desc = 'Margera Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_margera_shoe"
+    multicolor
   }
   {
     desc_id = #"Mullen Shoe"
     frontend_desc = 'Mullen Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_mullen_shoe"
+    multicolor
   }
   {
     desc_id = #"Muska Shoe"
     frontend_desc = 'Muska Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_muska_shoe"
+    multicolor
   }
   {
     desc_id = #"Reynolds Shoe"
     frontend_desc = 'Reynolds Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_reynolds_shoe"
+    multicolor
   }
   {
     desc_id = #"Rowley Shoe"
     frontend_desc = 'Rowley Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_rowley_shoe"
+    multicolor
   }
   {
     desc_id = #"Steamer Shoe"
     frontend_desc = 'Steamer Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NN_Steamer_shoe"
+    multicolor
   }
   {
     desc_id = #"Thomas Shoe"
     frontend_desc = 'Thomas Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_Thomas_shoe"
+    multicolor
   }
   {
     desc_id = #"Vallely Shoe"
     frontend_desc = 'Vallely Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NN_Vallely_shoe"
     only_if_unlocked = vallely
+    multicolor
   }
   {
     desc_id = #"Black Shoe"
     frontend_desc = 'Black Shoe'
-    mesh = "models/skater_m/shoe_skate.skin"
+    mesh = "models/better4/skater_m/shoe_skate.skin"
     replace = "CS_NH_hawk_shoe.png"
     with = "textures/skater_m/CS_NH_officerdick_shoe"
+    multicolor
   }
   {
     desc_id = #"Bare Feet"
@@ -332,7 +344,8 @@ shoes = [
   {
     desc_id = #"High Tops"
     frontend_desc = 'High Tops'
-    mesh = "models/skater_m/shoe_chuck.skin"
+    mesh = "models/better4/skater_m/shoe_chuck.skin"
+    multicolor
   }
   {
     desc_id = Boots
