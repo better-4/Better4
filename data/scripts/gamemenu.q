@@ -554,21 +554,21 @@ script create_pause_menu
   else
     if CustomParkMode editing
       parked_setup_main_menu
-      PauseStreamsKeepMusic
+      PauseStreamsPauseMenu
       return
     endif
     if CustomParkMode testing
       parked_setup_test_play_menu
-      PauseStreamsKeepMusic
+      PauseStreamsPauseMenu
       return
     endif
     if InSplitScreenGame
       create_mp_pause_menu
-      PauseStreamsKeepMusic
+      PauseStreamsPauseMenu
       return
     endif
   endif
-  PauseStreamsKeepMusic
+  PauseStreamsPauseMenu
   if GotParam no_exit
     make_new_sprite_menu menu_id = pause_menu vmenu_id = pause_vmenu pad_back_script = nullscript
   else
@@ -865,6 +865,7 @@ script exit_pause_menu menu_id = current_menu_anchor
   if not RunningReplay
     UnPauseGame
   endif
+  better4_clear_pause_menu_active
   PauseStream 0
   if GoalManager_HasActiveGoals
     PauseMusic 0
@@ -4061,6 +4062,7 @@ endscript
 script create_sound_options_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
+  better4_remember_music_state
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
     Wait 1 frame
@@ -4324,7 +4326,7 @@ script sound_options_exit
     RestoreMenuMusic
     create_options_menu
   else
-    PauseMusic 0
+    RestoreMenuMusic
     create_setup_options_menu
   endif
 endscript

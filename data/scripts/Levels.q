@@ -4,6 +4,7 @@ AlwaysDump = 0
 script cleanup_before_loading_level
   LogInfo "*********************** cleanup_before_loading_level"
   Cleanup
+  better4_clear_pause_menu_active
   StopMusic
   PauseMusic
   ClearMusicTrackList
@@ -486,7 +487,7 @@ Level_Cnv = {
   qb = "levels\cnv\cnv.qb"
   colpre = "cnvcol.pre"
   pedpre = "cnvped.pre"
-  level_qb = "levels\cnv\cnv_scripts.qb"
+  level_qb = "levels\better4\cnv\cnv_scripts.qb"
   startup_script = Cnv_Startup
   goals_script = cnv_goals
   setup_script = cnv_setup

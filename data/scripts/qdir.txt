@@ -62,7 +62,7 @@ goal_combo_scripts.qb
 goal_competition.qb
 goal_counter.qb
 goal_countercombo.qb
-goal_descriptions.qb
+better4/goal_descriptions.qb
 goal_gaps.qb
 goal_highcombo.qb
 goal_horse.qb
@@ -90,7 +90,7 @@ better4/helper_text.qb
 high_scores_menu.qb
 horse.qb
 iniskater.qb
-iniskater_exceptions.qb
+better4/iniskater_exceptions.qb
 iniskater_f.qb
 iniskater_secret.qb
 iniskater_shared.qb
@@ -206,7 +206,6 @@ better4/better4_levels.qb
 better4/better4_level_menu.qb
 better4/better4_decks.qb
 better4/better4_griptapes.qb
-better4/better4_host_options.qb
 better4/better4_modifiers.qb
 better4/better4_freecam.qb
 better4/better4_cas_menu.qb
@@ -217,3 +216,7 @@ better4/better4_hat_logo.qb
 better4/better4_lvlobjs.qb
 better4/better4_shoes.qb
 better4/better4_glasses.qb
+better4/better4_legs_m.qb
+better4/better4_legs_f.qb
+better4/better4_hair_m.qb
+better4/better4_hair_f.qb

@@ -325,7 +325,7 @@ SCRIPT Sch_Goals
         goal_success_script = Sch_Goal_CounterCombo_Success
         unlocked_by_another
         use_hud_counter
-        hud_counter_caption = "Jocks Combo Clocked"
+        hud_counter_caption = "Jocks Clocked"
       }
       IF IsPS2
          <sch_goal_trickspot_goal_description> = sch_trickspot_desc_ps2
@@ -1103,7 +1103,7 @@ SCRIPT Sch_KegBO_Killer
 ENDSCRIPT
 
 SCRIPT sch_race_waypoint_1
-  create_panel_block id = current_goal text = "He's heading toward the Philosophy building" style = panel_message_goal
+  create_panel_block id = current_goal text = "He's heading towards the Philosophy building!" style = panel_message_goal
   Kill prefix = "TRG_G_RACE_SecOfficer"
   Kill prefix = "TRG_G_RACE_SecOfficer01"
   Wait 1 frame
@@ -1113,7 +1113,7 @@ SCRIPT sch_race_waypoint_1
 ENDSCRIPT
 
 SCRIPT sch_race_waypoint_2
-  create_panel_block id = current_goal text = "Now he's heading toward security" style = panel_message_goal
+  create_panel_block id = current_goal text = "Now he's heading towards security!" style = panel_message_goal
   Create name = TRG_G_RACE_Friend02
   PlayStream security_sch_goal_nav2 volume = 175
 ENDSCRIPT
@@ -1125,7 +1125,7 @@ SCRIPT sch_race_waypoint_3
 ENDSCRIPT
 
 SCRIPT sch_race_waypoint_4
-  create_panel_block id = current_goal text = "Last one in front of the parking garage" style = panel_message_goal
+  create_panel_block id = current_goal text = "There's one more in front of the parking garage!" style = panel_message_goal
   Create name = TRG_G_RACE_Friend04
   PlayStream security_sch_goal_nav4 volume = 175
 ENDSCRIPT
@@ -2027,7 +2027,7 @@ SCRIPT sch_race2_waypoint_2
 ENDSCRIPT
 
 SCRIPT sch_race2_waypoint_3
-  create_panel_block id = current_goal text = "12:00 PM\nNoseSlide the Stone Bridge Ledge" style = panel_message_goal
+  create_panel_block id = current_goal text = "12:00 PM\nNoseslide the Stone Bridge Ledge" style = panel_message_goal
   GoalManager_ReplaceTrickText name = sch_goal_race2 text = "\b0 + \b5 or \b0 + \b6"
   SpawnScript goal_wait_and_show_key_combo_text params = { text = <tricktext> }
   Kill prefix = "TRGP_G_Race2_"
@@ -2065,7 +2065,7 @@ SCRIPT sch_race2_waypoint_5
 ENDSCRIPT
 
 SCRIPT sch_race2_waypoint_6
-  create_panel_block id = current_goal text = "2:00 PM\n NoseGrind the Elementary School Rails" style = panel_message_goal
+  create_panel_block id = current_goal text = "2:00 PM\n Nosegrind the Elementary School Rails" style = panel_message_goal
   GoalManager_ReplaceTrickText name = sch_goal_race2 text = "\b0 + \b7"
   SpawnScript goal_wait_and_show_key_combo_text params = { text = <tricktext> }
   Kill prefix = "TRGP_G_Race2_"
@@ -2088,7 +2088,7 @@ SCRIPT sch_race2_waypoint_7
 ENDSCRIPT
 
 SCRIPT sch_race2_waypoint_8
-  create_panel_block id = current_goal text = "4:00 PM\nKickFlip off of any of the Information Kiosks" style = panel_message_goal
+  create_panel_block id = current_goal text = "4:00 PM\nKickflip off of any of the Information Kiosks" style = panel_message_goal
   GetKeyComboArrayFromTrickArray tricks = [ Trick_Kickflip ]
    <combo_1> = ( ( goal_tetris_trick_text.( <keycombos> [ 0 ] ) ) )
   FormatText TextName = tricks "Kickflip\n%a" a = <combo_1>
@@ -2199,7 +2199,7 @@ SCRIPT Sch_ProChallengeJamie_Got02
 ENDSCRIPT
 
 SCRIPT Sch_ProChallengeJamie_Got03
-  Sch_ProChallengeJamie_GotRaceNav race_flag = got_3 GapText = "NoseSlide Bridge Ledge"
+  Sch_ProChallengeJamie_GotRaceNav race_flag = got_3 GapText = "Noseslide Bridge Ledge"
 ENDSCRIPT
 
 SCRIPT Sch_ProChallengeJamie_Got04
@@ -2211,7 +2211,7 @@ SCRIPT Sch_ProChallengeJamie_Got05
 ENDSCRIPT
 
 SCRIPT Sch_ProChallengeJamie_Got06
-  Sch_ProChallengeJamie_GotRaceNav race_flag = got_6 GapText = "NoseGrind Elementary Rails"
+  Sch_ProChallengeJamie_GotRaceNav race_flag = got_6 GapText = "Nosegrind Elementary Rails"
 ENDSCRIPT
 
 SCRIPT Sch_ProChallengeJamie_Got07
@@ -2219,7 +2219,7 @@ SCRIPT Sch_ProChallengeJamie_Got07
 ENDSCRIPT
 
 SCRIPT Sch_ProChallengeJamie_Got08
-  Sch_ProChallengeJamie_GotRaceNav race_flag = got_8 GapText = "KickFlip Info Kiosk"
+  Sch_ProChallengeJamie_GotRaceNav race_flag = got_8 GapText = "Kickflip Info Kiosk"
 ENDSCRIPT
 
 SCRIPT Sch_ProChallengeJamie_Got09

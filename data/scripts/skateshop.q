@@ -2267,7 +2267,7 @@ script skateshop_practice_start_pressed
   endif
   if ChecksumEquals a = <menu_state> b = off
     LogInfo "-------------------- PAUSING GAME ----------------------"
-    PauseStreamsKeepMusic
+    PauseStreamsPauseMenu
     PauseGame
     pause_trick_text
     pause_balance_meter
@@ -5115,6 +5115,7 @@ edit_skater_head_options = [
     is_visible_params2 = { group = hair_items }
     is_enabled_script = check_if_group_editable
     is_enabled_params = { group = hair_items }
+    categorized
   }
   {
     text = 'Hair Color'
@@ -5319,6 +5320,7 @@ edit_skater_leg_options = [
     submenu = pants_menu
     is_visible_script = check_if_group_editable
     is_visible_params = { group = legs_items }
+    categorized
   }
   {
     text = 'Pants Color'

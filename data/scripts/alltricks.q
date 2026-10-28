@@ -97,6 +97,7 @@ ConfigurableTricks = [
   Trick_Handstand
   Trick_Handstand5050
   Trick_HandStand50Flip
+  Trick_HandStandCasper
   Trick_HandstandDoubleFlip
   Trick_HangTenNoseGrind
   Trick_Hardflip

@@ -494,7 +494,7 @@ script SF2_AddGoal_Tetris
     time = 60
     Trick_Flag = 0
     Goal_Text = "Hit the tricks into or off of the EMB ledge"
-    View_Goals_Text = "Nail the tricks they yell out"
+    View_Goals_Text = "Nail the tricks Muska yells out"
     Start_Cam_Anim = G_TETRIS_CameraStart
     success_cam_anim = G_TETRIS_CameraSuccess
     Unlocked_By_Another

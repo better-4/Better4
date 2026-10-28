@@ -167,10 +167,10 @@ script Kon_AddGoal_Collect
       Got_Pads_Helmet_2
       Got_Pads_Elbows
     ]
-    Collect_Type = "Rental Pads"
+    Collect_Type = "Rental Gear"
     Num_Flags = 3
     Use_Hud_Counter
-    Hud_Counter_Caption = "Rental Pads"
+    Hud_Counter_Caption = "Rental Gear"
     record_type = time
     Goal_Description = Kon_Collect_Desc
     Reward_Goal = Kon_Goal_Counter2 }
@@ -179,7 +179,7 @@ script Kon_AddGoal_Tetris
   AddGoal_Tetris {
     Pro_Goal
     Goal_Text = "Hit the tricks they yell out."
-    View_Goals_Text = "Show off for the locals at the tombstone"
+    View_Goals_Text = "Show off for the locals at The Tombstone"
     Trick_Flag = 0
     Intro_Node = TRG_G_TETRIS_Intro_Node
     Goal_Intro_Script = Kon_Tetris_Setup

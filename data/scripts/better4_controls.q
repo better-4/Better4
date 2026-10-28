@@ -412,6 +412,26 @@ better4_control_doubletapgrinds = {
   ]
 }
 
+better4_control_quickregrind_index = 0
+better4_control_quickregrind_value = off
+better4_control_quickregrind = {
+  id = better4_control_quickregrind_id
+  index_name = better4_control_quickregrind_index
+  value_name = better4_control_quickregrind_value
+  text = "Quick Regrind"
+  ini_key = "grindcooldown"
+  help = "Change grind cooldown behavior to enable quick regrinds after performing a dropdown."
+  options = [
+    { text = "THPS4" value = off }
+    { text = "Better4" value = on }
+  ]
+  change_script = better4_control_quickregrind_change
+}
+
+script better4_control_quickregrind_change
+  SetQuickRegrind enabled = better4_control_quickregrind_value
+endscript
+
 better4_control_pressure_index = 0
 better4_control_pressure_value = off
 better4_control_pressure = {
@@ -636,6 +656,7 @@ better4_control_aspect_ratio = {
     { text = "16:9" value = 1.77778 }
     { text = "16:10" value = 1.6 }
     { text = "4:3" value = 1.33333 }
+    { text = "6:5" value = 1.2 } // closer to ratio created by pcsx2
   ]
   change_script = better4_change_aspect_ratio
 }
@@ -745,6 +766,43 @@ better4_control_skatervoice = {
   text = "Skater Voice"
   ini_key = "SkaterVoice"
   help = "Toggle whether skater voices play when bailing."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }
+  ]
+}
+
+better4_control_musicwhenpaused_index = 1
+better4_control_musicwhenpaused_value = off
+better4_control_musicwhenpaused = {
+  id = better4_control_musicwhenpaused_id
+  index_name = better4_control_musicwhenpaused_index
+  value_name = better4_control_musicwhenpaused_value
+  text = "Music When Paused"
+  ini_key = "MusicWhenPaused"
+  help = "Toggle whether the soundtrack keeps playing while the game is paused. Music always keeps playing between runs."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }
+  ]
+  change_script = better4_change_musicwhenpaused
+}
+
+script better4_change_musicwhenpaused
+  if IsTrue better4_pause_menu_active
+    better4_apply_pause_menu_music
+  endif
+endscript
+
+better4_control_specialsfx_index = 0
+better4_control_specialsfx_value = on
+better4_control_specialsfx = {
+  id = better4_control_specialsfx_id
+  index_name = better4_control_specialsfx_index
+  value_name = better4_control_specialsfx_value
+  text = "Special SFX"
+  ini_key = "SpecialSfx"
+  help = "Toggle whether to play special sounds when performing certain special tricks (e.g. Chomp On This, Muska Beatz)."
   options = [
     { text = "On" value = on }
     { text = "Off" value = off }
@@ -1279,6 +1337,7 @@ script better4_controls_init
   better4_control_init better4_control_liptricks
   better4_control_init better4_control_railspin
   better4_control_init better4_control_doubletapgrinds
+  better4_control_init better4_control_quickregrind
   better4_control_init better4_control_wallieplant
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
@@ -1296,6 +1355,8 @@ script better4_controls_init
   better4_control_init better4_control_extratrick_sound
   better4_control_init better4_control_specialtrick_sound
   better4_control_init better4_control_skatervoice
+  better4_control_init better4_control_musicwhenpaused
+  better4_control_init better4_control_specialsfx
   better4_control_init better4_control_trickstring
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter
