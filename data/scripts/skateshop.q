@@ -5115,6 +5115,7 @@ edit_skater_head_options = [
     is_visible_params2 = { group = hair_items }
     is_enabled_script = check_if_group_editable
     is_enabled_params = { group = hair_items }
+    categorized
   }
   {
     text = 'Hair Color'
