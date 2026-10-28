@@ -218,3 +218,5 @@ better4/better4_shoes.qb
 better4/better4_glasses.qb
 better4/better4_legs_m.qb
 better4/better4_legs_f.qb
+better4/better4_hair_m.qb
+better4/better4_hair_f.qb
