@@ -110,7 +110,7 @@ script better4_create_menu {
 
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 
-  GetStackedScreenElementPos Y id = better4_scrolling_menu_title offset = (112, -3)
+  GetStackedScreenElementPos Y id = better4_scrolling_menu_title offset = (110, -3)
   CreateScreenElement {
     type = SpriteElement
     parent = better4_menu
