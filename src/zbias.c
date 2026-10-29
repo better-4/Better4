@@ -6,7 +6,6 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <windows.h>
 
@@ -21,15 +20,16 @@ static void *const set_material_calls[] = {
 
 #define MAX_ZBIAS 16
 #define MAX_ENTRIES 256
-#define MAX_LINE 256
 
-// D3DRS_ZBIAS value of 0-16.
-// data/levels/<Lvl>/<lvl>.zbias.txt
-//   # College (sch)
-//   0x1a2b3c4d  2   # We can add some comment here for material name.
+// 4 bytes material checksum + 1 byte zbias.
+#define ZB_RECORD 5
+
+// data/levels/<Lvl>/<lvl>.zb
+// uint32 material checksum (little endian), then one byte of D3DRS_ZBIAS:
+//   cd 4d 25 41 02  ->  material 0x41254dcd, bias 2
 typedef struct {
 	uint32_t checksum;
-	int bias;
+	uint8_t bias;
 } Better4ZBias;
 
 static Better4ZBias s_entries[MAX_ENTRIES];
@@ -50,7 +50,7 @@ static int lookupBias(uint32_t checksum) {
 }
 
 static void applyBias(int bias) {
-	void *device = *(void **)0x00aab478/* IDirect3DDevice8 */;
+	void *device = *(void **)0x00aab478 /* IDirect3DDevice8 */;
 	void **vtable;
 
 	if (!device) {
@@ -59,7 +59,7 @@ static void applyBias(int bias) {
 
 	vtable = *(void ***)device;
 	// `50` is the vtable entry idx of SetRenderState.
-	((SetRenderStateFn)vtable[50])(device, 47/*D3DRS_ZBIAS*/, (uint32_t)bias);
+	((SetRenderStateFn)vtable[50])(device, 47 /*D3DRS_ZBIAS*/, (uint32_t)bias);
 }
 
 void __fastcall SetMaterial_Wrapper(void *material, unused_t _) {
@@ -91,47 +91,16 @@ static void levelBaseName(const char *path, char *out, int size) {
 	out[i] = '\0';
 }
 
-static void parseLine(char *line) {
-	char checksum[32];
-	int bias = 0;
-	char *hash = strchr(line, '#');
-
-	if (hash) {
-		*hash = '\0';
-	}
-
-	if (sscanf(line, "%31s %d", checksum, &bias) != 2) {
-		return;
-	}
-
-	// Checksums only.
-	if (checksum[0] != '0' || (checksum[1] != 'x' && checksum[1] != 'X')) {
-		return;
-	}
-
-	if (bias < 0) {
-		bias = 0;
-	}
-	if (bias > MAX_ZBIAS) {
-		bias = MAX_ZBIAS;
-	}
-
-	if (s_count >= MAX_ENTRIES) {
-		return;
-	}
-
-	s_entries[s_count].checksum = (uint32_t)strtoul(checksum + 2, NULL, 16);
-	s_entries[s_count].bias = bias;
-	s_count++;
-}
-
 static void loadZbiasFile(const char *scenePath) {
+	uint8_t records[MAX_ENTRIES * ZB_RECORD];
 	char exeDirectory[MAX_PATH];
 	char level[64];
 	char path[MAX_PATH];
-	char line[MAX_LINE];
 	char *slash;
 	FILE *file;
+	size_t size;
+	size_t i;
+	uint8_t bias;
 
 	s_count = 0;
 
@@ -147,18 +116,26 @@ static void loadZbiasFile(const char *scenePath) {
 	}
 	*(slash + 1) = '\0';
 
-	sprintf(path, "%sdata\\levels\\better4\\%s\\%s.zbias.txt", exeDirectory, level, level);
+	sprintf(path, "%sdata\\levels\\better4\\%s\\%s.zb", exeDirectory, level, level);
 
-	file = fopen(path, "r");
+	file = fopen(path, "rb");
 	if (!file) {
 		return;
 	}
 
-	while (fgets(line, sizeof(line), file)) {
-		parseLine(line);
-	}
-
+	size = fread(records, 1, sizeof(records), file);
 	fclose(file);
+
+	for (i = 0; i + ZB_RECORD <= size; i += ZB_RECORD) {
+		bias = records[i + 4];
+		if (bias > MAX_ZBIAS) {
+			bias = MAX_ZBIAS;
+		}
+
+		memcpy(&s_entries[s_count].checksum, &records[i], 4);
+		s_entries[s_count].bias = bias;
+		s_count++;
+	}
 }
 
 int *__cdecl Nx_s_plat_load_scene(char *name, int param_2, void *param_3, void *param_4, void *param_5) {
