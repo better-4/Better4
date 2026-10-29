@@ -178,7 +178,7 @@ skater_sfx.qb
 skater_shoppingcart.qb
 better4/skateshop.qb
 skeleton.qb
-skutils.qb
+better4/skutils.qb
 slap.qb
 sliderbar.qb
 specialitems.qb

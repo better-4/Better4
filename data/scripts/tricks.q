@@ -1277,10 +1277,11 @@ script EndOfRun
           if not GameModeEquals is_goal_attack
             if not IsBetterObserving
               dialog_box_exit
-              exit_pause_menu
               ObserveAfter0
-              create_net_panel_message text = "Press \b3 to observe" style = generic_net_panel_message
-              create_observer_ui
+              if not ScreenElementExists id = pause_menu
+                create_net_panel_message text = "Press \b3 to observe" style = generic_net_panel_message
+                create_observer_ui
+              endif
             endif
           endif
         endif
