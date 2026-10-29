@@ -74,7 +74,9 @@ endscript
 script LoadLevel
   MemPushContext 0
   PreLevelLoad
-  ScreenElementSystemCleanup
+  if not InNetGame
+    ScreenElementSystemCleanup
+  endif
   remove_temp_textures_from_vram
   LaunchLevel <...>
   PostLevelLoad

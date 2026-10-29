@@ -3726,7 +3726,7 @@ script create_net_panel_message msg_time = 2000
   create_panel_block id = net_panel_msg <...> pos = (320, 150) rgba = [ 144 144 144 128 ] dims = (450, 0) z_priority = -10 time = <msg_time>
 endscript
 script kill_net_panel_messages
-  console_clear
+  // console_clear
   if ObjectExists id = net_panel_msg
     DestroyScreenElement id = net_panel_msg
   endif
