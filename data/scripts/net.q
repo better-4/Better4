@@ -3971,9 +3971,9 @@ script handle_keyboard_input
       endif
     else
       if GotParam got_backspace
-        keyboard_handle_backspace
+        better4_keyboard_handle_backspace
       else
-        keyboard_button_pressed <...>
+        better4_keyboard_button_pressed <...>
       endif
     endif
   endif
