@@ -47,9 +47,9 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\ShoveItRewind.ska" descChecksum = ShoveItRewind
   LoadAnim name = "anims\better4\SexChange.ska" descChecksum = SexChange
   
-  LoadAnim name = "anims\better4\_3DScaryGrind_Init.ska" descChecksum = _3DScaryGrind_Init
-  LoadAnim name = "anims\better4\_3DScaryGrind_Range.ska" descChecksum = _3DScaryGrind_Range
-  LoadAnim name = "anims\better4\_3DScaryGrind_Out.ska" descChecksum = _3DScaryGrind_Out
+  LoadAnim name = "anims\better4\Flip2Switch_Init.ska" descChecksum = Flip2Switch_Init
+  LoadAnim name = "anims\better4\Flip2Switch_Range.ska" descChecksum = Flip2Switch_Range
+  LoadAnim name = "anims\better4\Flip2Switch_Out.ska" descChecksum = Flip2Switch_Out
 
 endscript
 
@@ -137,11 +137,11 @@ script better4_anim_trigger
   SetRollingFriction 100
   switch <index>
   case 0
-    PlayAnim Anim = _540VarielHeelflipLien cycle
+    PlayAnim Anim = Flip2Switch_Init cycle
   case 1
-    PlayAnim Anim = _360VarialHeelFlipLien_Idle cycle
+    PlayAnim Anim = Flip2Switch_Range cycle
   case 2
-    PlayAnim Anim = _360VarialHeelFlipLien_Out cycle
+    PlayAnim Anim = Flip2Switch_Out cycle
   case 3
     PlayAnim Anim = StandIdleC cycle
   endswitch

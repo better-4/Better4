@@ -82,6 +82,7 @@ ConfigurableTricks = [
   Trick_FingerFlipAirWalk
   Trick_Flamingo
   Trick_FlipKickDad
+  Trick_Flip2Switch
   Trick_FroggyGrind
   Trick_FS540
   Trick_FS540HeelFlip
