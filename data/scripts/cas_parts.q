@@ -46,7 +46,7 @@ master_editable_list = [
   { part = front_logo text = "FRONT LOGO" male = 1 female = 1 submenu = front_logo_menu categories = better4_skater_shirt_logo_categories }
   { part = back_logo text = "BACK LOGO" male = 1 female = 1 submenu = back_logo_menu categories = better4_skater_shirt_logo_categories }
   { part = glasses text = "GLASSES" male = 1 female = 1 submenu = glasses_menu preview_menu = 1 colormenu = glasses_color_menu categories = better4_glasses_categories }
-  { part = hat text = "HAT" male = 1 female = 1 submenu = hats_menu preview_menu = 1 colormenu = hat_color_menu }
+  { part = hat text = "HAT" male = 1 female = 1 submenu = hats_menu preview_menu = 1 colormenu = hat_color_menu categories = better4_hat_categories }
   { part = helmet text = "HELMET" male = 1 female = 1 submenu = helmet_menu preview_menu = 1 colormenu = helmet_color_menu }
   { part = accessoriesL text = "ACCESSORIES LEFT" male = 1 female = 1 submenu = accessoriesL_menu colormenu = accessoriesL_color_menu }
   { part = accessoriesR text = "ACCESSORIES RIGHT" male = 1 female = 1 submenu = accessoriesR_menu colormenu = accessoriesR_color_menu }

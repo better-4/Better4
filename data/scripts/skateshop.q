@@ -5171,6 +5171,7 @@ edit_skater_head_options = [
     is_visible_params = { group = hat_items }
     is_visible_script2 = check_for_head_flags
     is_visible_params2 = { group = hat_items }
+    categorized
   }
   {
     text = 'Hat Color'
