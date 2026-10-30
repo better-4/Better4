@@ -37,6 +37,7 @@ script better4_create_onscreen_keyboard {
     }
   endif
   AssignAlias id = keyboard_anchor alias = current_menu_anchor
+  keyboard_anchor:SetTags better4
   if GotParam password
     keyboard_anchor:SetTags password
   endif
