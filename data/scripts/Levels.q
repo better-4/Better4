@@ -76,6 +76,10 @@ script LoadLevel
   PreLevelLoad
   if not InNetGame
     ScreenElementSystemCleanup
+  else
+    if LevelIs load_skateshop
+      ScreenElementSystemCleanup
+    endif
   endif
   remove_temp_textures_from_vram
   LaunchLevel <...>
