@@ -37,7 +37,7 @@ script better4_create_onscreen_keyboard {
     }
   endif
   AssignAlias id = keyboard_anchor alias = current_menu_anchor
-  keyboard_anchor:SetTags better4
+  keyboard_anchor:SetTags better4 max_length = <max_length>
   if GotParam password
     keyboard_anchor:SetTags password
   endif
@@ -113,6 +113,12 @@ script better4_create_onscreen_keyboard {
       not_focusable
       pos = (320, 85)
       scale = 0
+    }
+    TextElementConcatenate id = keyboard_current_string "_"
+    GetTextElementString id = keyboard_current_string
+    SetScreenElementProps {
+      id = keyboard_display_string
+      text = <string>
     }
     if GotParam allowed_characters
       keyboard_current_string:SetTags allowed_characters = <allowed_characters>
@@ -331,6 +337,8 @@ endscript
 script better4_keyboard_handle_backspace
   PlaySound menu03 vol = 60 pitch = 55
   TextElementBackspace id = keyboard_current_string
+  TextElementBackspace id = keyboard_current_string
+  TextElementConcatenate id = keyboard_current_string "_"
   GetTextElementString id = keyboard_current_string
   SetScreenElementProps {
     id = keyboard_display_string
@@ -342,19 +350,21 @@ script better4_keyboard_button_pressed
   if ( <text> = "\\\\" )
      <text> = "\\"
   endif
+  keyboard_anchor:GetTags
+  GetTextElementLength id = keyboard_current_string
   if GotParam max_length
-    GetTextElementLength id = keyboard_current_string
-    if ( <length> > ( <max_length> - 1 ) )
+    if ( <length> > ( <max_length> - 2 ) )
       PlaySound GUI_Buzzer01
       return
     endif
   endif
-  keyboard_current_string:GetTags
   if ( <text> = "\\" )
      <text> = "\\\\"
   endif
 
+  TextElementBackspace id = keyboard_current_string
   if TextElementConcatenate id = keyboard_current_string <text>
+    TextElementConcatenate id = keyboard_current_string "_"
     keyboard_anchor:GetTags
     GetScreenElementDims id = keyboard_display_string
     GetTextElementString id = keyboard_current_string

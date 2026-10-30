@@ -3963,14 +3963,17 @@ script restart_local_server
 endscript
 script handle_keyboard_input
   if ObjectExists id = keyboard_anchor
+    keyboard_anchor:GetTags
     if GotParam got_enter
+      if GotParam better4
+        TextElementBackspace id = keyboard_current_string
+      endif
       if ScreenElementExists id = keyboard_done_button
         FireEvent type = pad_choose target = keyboard_done_button
       else
         FireEvent type = pad_choose target = keyboard_anchor
       endif
     else
-      keyboard_anchor:GetTags
       if GotParam got_backspace
         if GotParam better4
           better4_keyboard_handle_backspace
