@@ -3970,10 +3970,19 @@ script handle_keyboard_input
         FireEvent type = pad_choose target = keyboard_anchor
       endif
     else
+      keyboard_anchor:GetTags
       if GotParam got_backspace
-        better4_keyboard_handle_backspace
+        if GotParam better4
+          better4_keyboard_handle_backspace
+        else
+          keyboard_handle_backspace
+        endif
       else
-        better4_keyboard_button_pressed <...>
+        if GotParam better4
+          better4_keyboard_button_pressed <...>
+        else
+          keyboard_button_pressed <...>
+        endif
       endif
     endif
   endif
