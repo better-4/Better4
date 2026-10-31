@@ -29,7 +29,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 64
+#define BETTER4_NUM_CFUNCS 65
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -120,6 +120,7 @@ void addCFuncs() {
 	addCFunc("GetIniString", (void *)CFunc_GetIniString);
 	addCFunc("ChangeLevelObject", (void *)CFunc_ChangeLevelObject);
 	addCFunc("ResetLevelObjects", (void *)CFunc_ResetLevelObjects);
+	addCFunc("SetQuickRegrind", (void *)CFunc_SetQuickRegrind);
 }
 
 void printCFuncs() {
@@ -359,4 +360,35 @@ int __cdecl CFunc_IsKing(CStruct* _, CScript *__) {
 	uint32_t ret = GameNet_PlayerInfo_IsKing(local_player);
 	logDebug("CFunc_IsKing: is_king=%d", ret);
 	return ret;
+}
+
+static int quick_regrind_enabled = 0;
+
+void __fastcall Obj_CSkater_DoOnGroundPhysics(Obj_CSkater *this) {
+	static void (__fastcall *_DoOnGroundPhysics)(Obj_CSkater *this) = (void *)0x004bfe30;
+	_DoOnGroundPhysics(this);
+
+	if (
+		quick_regrind_enabled
+		&& !*(uint8_t *)((int)this + 0x3414) // only if not tracking_vert
+	) {
+		this->rerail_time = 0;
+	}
+}
+
+int __cdecl CFunc_SetQuickRegrind(CStruct* params, CScript *__) {
+	float enabled;
+	if (!CStruct_GetFloat(params, 0xaf06447b/*enabled*/, &enabled, 0)) {
+		logWarning("SetQuickRegrind missing param \"enabled\" (0xaf06447b)");
+		return 0;
+	}
+
+	quick_regrind_enabled = (int)enabled;
+    logInfo("Set quick_regrind_enabled=%d", quick_regrind_enabled);
+
+	return 1;
+}
+
+void patchQuickRegrind() {
+	patchCall(0x004c9ad5, (void *)Obj_CSkater_DoOnGroundPhysics);
 }

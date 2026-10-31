@@ -642,7 +642,7 @@ script Alc_Goal_Race2_DeactivateSpawn
 endscript
 script alc_race2_waypoint_01
   alc_MakeSkaterStand
-  create_panel_block id = current_goal text = "Hold up (\b7) to skitch on Ranger Ron's car!" style = panel_message_goal
+  create_panel_block id = current_goal text = "Hold or press up (\b7) to skitch on Ranger Ron's car!" style = panel_message_goal
   StopStream
   random( @
   PlayStream ranger_alc_goal_race2_skitchreq01 vol = 200
@@ -926,7 +926,7 @@ script alc_Race2_SkitchChecker
   begin
     begin
       if not QueryFlag FLAG_CAR_SKITCH name = TRG_G_Race2_Tram01
-        create_panel_block id = current_goal text = "You let go! Hold up (\b7) to skitch" style = panel_message_goal
+        create_panel_block id = current_goal text = "You let go! Hold or press up (\b7) to skitch" style = panel_message_goal
         Alc_Race2_PointArrowToTram
         StopStream
         random( @
@@ -2560,7 +2560,7 @@ script alc_Race_waypoint_5
   Create name = TRG_G_race_RaceArrow05
 endscript
 script alc_Race_waypoint_6
-  GoalManager_ReplaceTrickText name = alc_goal_race text = "Bluntslide (\b4\b4+\b0) on the Watertower/Smokestack Highwire"
+  GoalManager_ReplaceTrickText name = alc_goal_race text = "Bluntslide (\b4\b4+\b0) on the Water tower/Smokestack Highwire"
   create_panel_block id = current_goal text = <tricktext> style = panel_message_goal
   Kill prefix = "TRG_G_race_RaceArrow"
   Wait 1 frame
@@ -2693,7 +2693,7 @@ script alc_goal_gaps2_gotgap00
     if skater:Skitching
       alc_Goal_Gaps2_Cheating
     else
-      create_panel_block id = current_goal text = "Manualling the Switchbacks\nHere we go!" style = panel_message_goal
+      create_panel_block id = current_goal text = "Manualing the Switchbacks.\nHere we go!" style = panel_message_goal
     endif
   endif
 endscript
@@ -2790,7 +2790,7 @@ script Alc_AddGoal_Gaps4
     pro_specific_challenge
     unlocked_by_another
     pro_challenge_title = "Shopping Cart Slam"
-    pro_challenge_text = "Whether it's on the big screen or in his homebrew CKY movies, Bam's one seriously messed up dude. Fat suits, tree smashing, jumping off buildings, medievel jousting, - it's all in a day's twisted work for Bam."
+    pro_challenge_text = "Whether it's on the big screen or in his homebrew CKY movies, Bam's one seriously messed up dude. Fat suits, tree smashing, jumping off buildings, medieval jousting, - it's all in a day's twisted work for Bam."
     pro_challenge_tag_line = "Ready to be a jackass?"
     pro_challenge_pro_name = "Bam"
     goal_text = "Bam's Pro Specific Challenge"
@@ -2798,7 +2798,7 @@ script Alc_AddGoal_Gaps4
     pro = "photoguy"
     full_name = "Atiba Jefferson"
     goal_description = alc_Gaps4_Desc
-    time = 240
+    time = 300
     goal_start_script = alc_CartRaceStart
     goal_deactivate_script = alc_CartRaceDeactivate
     use_hud_counter
@@ -3530,7 +3530,7 @@ script alc_gap5_spinetransferB
 endscript
 script alc_gaps5_GotTrick01
   GoalManager_SetGoalFlag name = Alc_Goal_Gaps5 got_01 1
-  GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "Great! Now try a liptrick on the watertower railing and do this:\n\t1(\k1)"
+  GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "Great! Now try a liptrick on the water tower railing and do this:\n\t1(\k1)"
   create_panel_block id = current_goal text = <tricktext> style = panel_message_goal
 endscript
 script alc_gap5_WTLipTrick
@@ -3546,13 +3546,13 @@ script alc_gap5_WTLipTrick
   endif
   if TriggerType [ TRIGGER_LIP_ON ]
     StartGap GapID = wired flags = PURE_LIP
-    EndGap GapID = wired score = 25 text = "Watertower Lip"
+    EndGap GapID = wired score = 25 text = "Water tower Lip"
   endif
 endscript
 script alc_gap_WTLipTrickHigh
   if TriggerType [ TRIGGER_LIP_ON ]
     StartGap GapID = wired flags = PURE_LIP
-    EndGap GapID = wired score = 50 text = "Watertower Roof Lip"
+    EndGap GapID = wired score = 50 text = "Water tower Roof Lip"
   endif
 endscript
 script alc_gaps5_GotTrick02
@@ -3584,7 +3584,7 @@ script alc_gaps5_GotTrick03
     if GoalManager_GoalFlagSet name = Alc_Goal_Gaps5 flag = got_02
       if not GoalManager_GoalFlagSet name = Alc_Goal_Gaps5 flag = got_03
         GoalManager_SetGoalFlag name = Alc_Goal_Gaps5 got_03 1
-        GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "That's some serious height! Can you liptrick on the cellblock rooftop?:\n\t3(\k3)"
+        GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "That's some serious height! Can you lip trick on the cellblock rooftop?:\n\t3(\k3)"
         create_panel_block id = current_goal text = <tricktext> style = panel_message_goal
       endif
     endif
@@ -3607,7 +3607,7 @@ script alc_gap5_RoofLipTrick
 endscript
 script alc_gaps5_GotTrick04
   GoalManager_SetGoalFlag name = Alc_Goal_Gaps5 got_04 1
-  GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "There's a bowl in this watertower! Spine from the pools into the watertower OVER the wooden planks around the top!"
+  GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "There's a bowl in this water tower! Spine from the pools into the water tower OVER the wooden planks around the top!"
   create_panel_block id = current_goal text = <tricktext> style = panel_message_goal
 endscript
 script alc_gap5_IntoWaterTowerStart
@@ -3617,14 +3617,14 @@ script alc_gap5_IntoWaterTowerCont
   EndGap GapID = gap5_IntoWaterTowerA continue continue = { GapID = gap5_IntoWaterTowerB flags = PURE_AIR }
 endscript
 script alc_gap5_IntoWaterTowerEnd
-  EndGap GapID = gap5_IntoWaterTowerB gapscript = alc_gaps5_GotTrick05 score = 100 text = "Super-high Watertower Spine"
+  EndGap GapID = gap5_IntoWaterTowerB gapscript = alc_gaps5_GotTrick05 score = 100 text = "Super-high Water tower Spine"
 endscript
 script alc_gaps5_GotTrick05
   if GoalManager_GoalIsActive name = Alc_Goal_Gaps5
     if not GoalManager_GoalFlagSet name = Alc_Goal_Gaps5 flag = got_05
       if GoalManager_GoalFlagSet name = Alc_Goal_Gaps5 flag = got_04
         GoalManager_SetGoalFlag name = Alc_Goal_Gaps5 got_05 1
-        GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "Now try a 50,000 point combo inside the watertower!"
+        GoalManager_ReplaceTrickText name = Alc_Goal_Gaps5 text = "Now try a 50,000 point combo inside the water tower!"
         create_panel_block id = current_goal text = <tricktext> style = panel_message_goal
         Create name = ant_gap5_OutOfWTBounds
         Create name = on_gap5_CheckScore
@@ -3657,7 +3657,7 @@ script alc_gaps5_GotTrick06
   GoalManager_SetGoalFlag name = Alc_Goal_Gaps5 got_06 1
   GetKeyComboArrayFromTrickArray tricks = [ Trick_BackFootNosegrab ]
    <combo_1> = ( ( goal_tetris_trick_text.( <keycombos> [ 0 ] ) ) )
-  FormatText TextName = tricks "Now tranfer from the watertower to the pools with a special trick!:\nBackfoot Flip Nosegrab\n%a" a = <combo_1>
+  FormatText TextName = tricks "Now transfer from the water tower to the pools with a special trick!:\nBackfoot Flip Nosegrab\n%a" a = <combo_1>
   create_panel_block id = current_goal text = <tricks> style = panel_message_goal
   Die
 endscript
@@ -3677,7 +3677,7 @@ script alc_gaps5_GotTrick07
   GoalManager_SetGoalFlag name = Alc_Goal_Gaps5 got_07 1
   GetKeyComboArrayFromTrickArray tricks = [ Trick_OneFootBlunt ]
    <combo_1> = ( ( goal_tetris_trick_text.( <keycombos> [ 0 ] ) ) )
-  FormatText TextName = tricks "Okay, big finale! Do a special lip trick on that grommet on top of the watertower:\nOne Foot Blunt\n%a" a = <combo_1>
+  FormatText TextName = tricks "Okay, big finale! Do a special lip trick on that grommet on top of the water tower:\nOne Foot Blunt\n%a" a = <combo_1>
   create_panel_block id = current_goal text = <tricks> style = panel_message_goal
   Create prefix = "tnr_gap5_GrommetLip"
   Create name = "tnp_gap5_LipGrommet"
@@ -4620,7 +4620,7 @@ script alc_Gap_RoofToWall
 endscript
 script alc_Gap_RoofToWallEnd
   if TriggerType [ TRIGGER_LAND_ON TRIGGER_SKATE_ONTO ]
-    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Excercise Yard Wall"
+    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Exercise Yard Wall"
   endif
 endscript
 script alc_Gap_Bleachers

@@ -220,7 +220,7 @@ script Grind GrindTweak = 7 boardscuff = 0 InitSpeed = 1.0
   if GotParam SpecialSounds
     Obj_SpawnScript <SpecialSounds>
   endif
-  if GotParam Stream
+  if ( ( GotParam Stream ) and ( better4_control_specialsfx_value = on ))
     Obj_PlayStream <Stream>
   endif
   Vibrate Actuator = 1 Percent = 50 Duration = 0.25

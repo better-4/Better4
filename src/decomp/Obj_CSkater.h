@@ -27,14 +27,16 @@ typedef struct Obj_CSkater {
     uint8_t in_nollie; // 0x3260
     uint8_t unk7[0x19b];
     uint8_t is_flipped; // 0x33fc
-    uint8_t unk8[0x163];
+    uint8_t unk8[0x12b];
+    int rerail_time; // 0x3528
+    uint8_t unk9[0x34];
     // XXX (ellie): i don't actually know how big CFeeler is; if it increases in size this will break
     CFeeler feeler; // 0x3560, size 0x9c
-    uint8_t unk9[0x184];
+    uint8_t unk10[0x184];
     Mth_Vector current_normal; // 0x3780, size 0x10
-    uint8_t unk10[0x34];
+    uint8_t unk11[0x34];
     uint32_t view_mode; // 0x37c4
-    uint8_t unk11[0xc];
+    uint8_t unk12[0xc];
     struct Obj_CSkaterCam *camera; // 0x37d4
 } Obj_CSkater;
 

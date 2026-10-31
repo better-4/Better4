@@ -21,7 +21,7 @@ Trick_RockOutGrind = { Params = { Name = 'Headbangers Unite' skater = eddie IsSp
 Trick_OneFootSmith = { Params = { Name = 'One Foot Smith' IsSpecial } Template = Template1 Prefix = "Trick_OneFootSmith" }
 Trick_FlipKickDad = { Params = { Name = 'Flip Kick Dad' IsSpecial } Template = Template2 Prefix = "Trick_FlipKickDad2" }
 Trick_FalconSlide = { Params = { Name = 'Falcon Slide' IsSpecial } Template = Template2 Prefix = "Trick_FalconSlide2" }
-Trick_50FingerFlip = { Params = { Name = '5-0 Fingerlfip Nosegrind' IsSpecial } Template = Template2 Prefix = "Trick_50Fingerflip2" }
+Trick_50FingerFlip = { Params = { Name = '5-0 Fingerflip Nosegrind' IsSpecial } Template = Template2 Prefix = "Trick_50Fingerflip2" }
 Trick_FroggyGrind = { Params = { Name = 'Froggy Grind' IsSpecial } Template = Template2 Prefix = "Trick_FroggyGrind2" }
 Trick_CartwheelTo5050 = { Params = { Name = 'Cartwheel 50-50' IsSpecial } Template = Template2 Prefix = "Trick_CartWheelto50502" }
 Trick_SprayPaintGrind = { Params = { Name = 'Ghetto Tag Grind' IsSpecial } Template = Template2 Prefix = "Trick_SprayPaintGrind2" }

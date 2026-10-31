@@ -74,7 +74,13 @@ endscript
 script LoadLevel
   MemPushContext 0
   PreLevelLoad
-  ScreenElementSystemCleanup
+  if not InNetGame
+    ScreenElementSystemCleanup
+  else
+    if LevelIs load_skateshop
+      ScreenElementSystemCleanup
+    endif
+  endif
   remove_temp_textures_from_vram
   LaunchLevel <...>
   PostLevelLoad
@@ -487,7 +493,7 @@ Level_Cnv = {
   qb = "levels\cnv\cnv.qb"
   colpre = "cnvcol.pre"
   pedpre = "cnvped.pre"
-  level_qb = "levels\cnv\cnv_scripts.qb"
+  level_qb = "levels\better4\cnv\cnv_scripts.qb"
   startup_script = Cnv_Startup
   goals_script = cnv_goals
   setup_script = cnv_setup

@@ -535,7 +535,7 @@ script Lon_Goals
         pro_goal
       }
       AddGoal_Trickspot5 {
-        goal_text = "Gap over the sreet and land a \t1\n (\k1)\n to a FS Nosegrind\n (\b7 + \b0)\n on the rail"
+        goal_text = "Gap over the street and land a \t1\n (\k1)\n to a FS Nosegrind\n (\b7 + \b0)\n on the rail"
         view_goals_text = "Rowley's Pro Specific Challenge"
         goal_description = Lon_Trickspot5_Desc
         start_cam_anim = G_TS5_CameraStart

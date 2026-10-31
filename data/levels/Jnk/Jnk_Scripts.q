@@ -291,8 +291,8 @@ script Jnk_AddGoal_Trickspot
 endscript
 script Jnk_AddGoal_Trickspot2
   AddGoal_Trickspot2 {
-    Goal_Text = "Varial kickflip the shack water gap"
-    View_Goals_Text = "Varial kickflip the shack water gap"
+    Goal_Text = "Varial kickflip the Dirty Water gap"
+    View_Goals_Text = "Varial kickflip the Dirty Water gap"
     Pro = "Rune"
     full_name = "Rune Glifberg"
     Reward_Goal = Jnk_Goal_Tetris
@@ -415,8 +415,8 @@ endscript
 script Jnk_AddGoal_Gaps
   AddGoal_Gaps {
     CAREER_ONLY
-    Goal_Text = "Liptrick transfer"
-    View_Goals_Text = "Liptrick transfer"
+    Goal_Text = "Lip trick transfer"
+    View_Goals_Text = "Lip trick transfer"
     Pro = "Bucky"
     full_name = "Bucky Lasek"
     Pro_Goal
@@ -513,7 +513,7 @@ script Jnk_AddGoal_Counter3
     Time = 240
     Pro_specific_challenge
     Pro_challenge_title = "Rusty Old Ramp"
-    Pro_challenge_text = "Bucky is no stranger to gnarly, broken down ramps. Raised near Baltimore's Landsdown Cement Park and on the infamous 'Hell Ramp', if a ramp is still standing - Bucky will rip it up."
+    Pro_challenge_text = "Bucky is no stranger to gnarly, broken down ramps. Raised near Baltimore's Lansdowne Cement Park and on the infamous 'Hell Ramp', if a ramp is still standing - Bucky will rip it up."
     Pro_challenge_tag_line = "Beware of falling objects..."
     Pro_challenge_pro_name = "Bucky"
     Unlocked_By_Another
@@ -3364,12 +3364,12 @@ endscript
 script Jnk_TS2_Intro
   GetKeyComboArrayFromTrickArray tricks = [ Trick_VarialKickflip ]
    <combo_1> = ( ( goal_tetris_trick_text.( <keycombos> [ 0 ] ) ) )
-  FormatText TextName = VKickflipText "Varial kickflip\n (%a)\n the shack water gap" a = <combo_1>
+  FormatText TextName = VKickflipText "Varial kickflip\n (%a)\n the Dirty Water gap" a = <combo_1>
   GoalManager_EditGoal name = Jnk_Goal_Trickspot2 params = { Goal_Text = <VKickflipText> }
 endscript
 script Jnk_TS2_Start
   GetKeyComboArrayFromTrickArray tricks = [ Trick_VarialKickflip ]
    <combo_1> = ( ( goal_tetris_trick_text.( <keycombos> [ 0 ] ) ) )
-  FormatText TextName = VKickflipText "Varial kickflip\n (%a)\n the shack water gap" a = <combo_1>
+  FormatText TextName = VKickflipText "Varial kickflip\n (%a)\n the Dirty Water gap" a = <combo_1>
   GoalManager_EditGoal name = Jnk_Goal_Trickspot2 params = { Goal_Text = <VKickflipText> }
 endscript

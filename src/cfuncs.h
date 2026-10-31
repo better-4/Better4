@@ -33,5 +33,8 @@ int __cdecl CFunc_AutoAspectRatio(CStruct* params) ;
 int __cdecl CFunc_GetStartTime(CStruct* params, CScript *script);
 int __cdecl CFunc_GetElapsedTime(CStruct* params, CScript *script);
 int __cdecl CFunc_IsKing(CStruct* params, CScript *script);
+int __cdecl CFunc_SetQuickRegrind(CStruct* params, CScript *script);
+
+void patchQuickRegrind();
 
 #endif

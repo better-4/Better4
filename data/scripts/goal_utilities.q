@@ -2397,7 +2397,7 @@ script goal_create_counter
       font = small
       text = <hud_counter_caption>
       rgba = [ 85 106 126 100 ]
-      pos = <pos>
+      pos = ( <pos> - (0, -3) )
       just = [ center top ]
       scale = 0.8
       dims = (117.5, 0)

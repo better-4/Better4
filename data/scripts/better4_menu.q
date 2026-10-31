@@ -33,12 +33,26 @@ script better4_create_menu {
 
   pulse_blur
   make_new_menu {
+    type = VScrollingMenu
     menu_id = better4_menu
     vmenu_id = better4_vmenu
     menu_title = <menu_title>
     helper_text = generic_helper_text
+    scrolling_menu_id = better4_scrolling_menu
+    scrolling_menu_title_id = better4_scrolling_menu_title
+    scrolling_menu_offset = (0, 32)
     pos = (198, 59)
+    dims = (500, 186)
   }
+
+  SetScreenElementProps {
+    id = better4_vmenu
+    event_handlers = [
+      { pad_up set_which_arrow params = { arrow = better4_menu_up_arrow } }
+      { pad_down set_which_arrow params = { arrow = better4_menu_down_arrow } }
+    ]
+  }
+
   kill_start_key_binding
 
   if GotParam slow_close
@@ -57,15 +71,12 @@ script better4_create_menu {
   create_icon pos = (151, 65) id = better4_icon texture = <icon>
   draw_menu_box {
     delta_pos = (92, -20)
-    // middle_repeat = 16
     middle_repeat = 13
-    // box_right_scale = (0.8, 1.175)
     box_right_scale = (0.8, 1.0)
     scale = (1.2, 1.0)
     box_bottom_scale = (1.16, 1.0)
     box_right_offset = (-21, 0)
   }
-  better4_menu_spacer
 
   help_text_dims = (640, 60)
 
@@ -98,9 +109,60 @@ script better4_create_menu {
   }
 
   RunScriptOnScreenElement id = current_menu_anchor animate_in
+
+  GetStackedScreenElementPos Y id = better4_scrolling_menu_title offset = (110, -3)
+  CreateScreenElement {
+    type = SpriteElement
+    parent = better4_menu
+    id = better4_menu_up_arrow
+    texture = up_arrow
+    pos = <pos>
+    just = [ left top ]
+    z_priority = 5
+  }
+  CreateScreenElement {
+    type = SpriteElement
+    parent = better4_menu
+    id = better4_menu_down_arrow
+    texture = down_arrow
+    pos = ( <pos> + (0, 235) )
+    just = [ left bottom ]
+    z_priority = 5
+  }
+endscript
+
+script better4_menu_generic_up_or_down menu_id = current_menu
+  better4_vmenu:GetTags
+  if GotParam arrow_id
+    menu_vert_blink_arrow { id = <arrow_id> }
+  endif
+
+  if MenuSelectedIndexIs id = <menu_id> first
+      SetScreenElementProps {
+        id = better4_menu_up_arrow
+        rgba = [ 128 128 128 0 ]
+      }
+  else
+    SetScreenElementProps {
+      id = better4_menu_up_arrow
+      rgba = [ 128 128 128 128 ]
+    }
+    if MenuSelectedIndexIs id = <menu_id> last
+      SetScreenElementProps {
+        id = better4_menu_down_arrow
+        rgba = [ 128 128 128 0 ]
+      }
+    else
+      SetScreenElementProps {
+        id = better4_menu_down_arrow
+        rgba = [ 128 128 128 128 ]
+      }
+    endif
+  endif
 endscript
 
 script better4_menu_item_focus
+  better4_menu_generic_up_or_down
   GetTags
   RunScriptOnScreenElement id = { <id> child = 0 } do_scale_up params = { rgba = [ 128 118 0 128 ] }
   SetScreenElementProps {
@@ -271,9 +333,13 @@ script better4_menu_cycle_control_left
   better4_menu_cycle_control <...> delta = -1
 endscript
 
+script better4_menu_reset
+  Wait 2 gameframe
+  SetScreenElementProps id = better4_scrolling_menu reset_window_top
+endscript
+
 script better4_options_menu
   better4_create_menu menu_title = "BETTER4 OPTIONS" icon = PA_nuke slow_close <...>
-  better4_menu_spacer
   better4_create_menu_item text = "Control Options" id = control_option pad_choose_script = better4_options_controls pad_choose_params = <...>
   better4_create_menu_item text = "HUD Options" id = hud_option pad_choose_script = better4_hud_menu pad_choose_params = <...>
   better4_create_menu_item text = "Camera Options" id = camera_option pad_choose_script = better4_camera_menu pad_choose_params = <...>
@@ -283,11 +349,11 @@ script better4_options_menu
   better4_create_menu_item text = "Misc" id = misc_option pad_choose_script = better4_misc_menu pad_choose_params = <...>
   better4_menu_spacer
   better4_create_menu_item text = "Close" id = close_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
+  better4_menu_reset
 endscript
 
 script better4_options_controls
   better4_create_menu menu_title = "CONTROL OPTIONS" icon = PA_flip close_script = better4_options_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_item text = "In Air" id = inair_option pad_choose_script = better4_inair_menu pad_choose_params = <...>
   better4_create_menu_item text = "In Manual" id = inmanual_option pad_choose_script = better4_inmanual_menu pad_choose_params = <...> 
   better4_create_menu_item text = "On Ground" id = onground_option pad_choose_script = better4_onground_menu pad_choose_params = <...>
@@ -295,11 +361,11 @@ script better4_options_controls
   better4_create_menu_item text = "On Wall" id = onwall_option pad_choose_script = better4_onwall_menu pad_choose_params = <...>
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_onground_menu
   better4_create_menu menu_title = "ON GROUND" icon = PA_save close_script = better4_options_controls close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_revert
   better4_create_menu_control better4_control_powerslide
   better4_create_menu_control better4_control_stancechange
@@ -307,34 +373,34 @@ script better4_onground_menu
   better4_create_menu_control better4_control_doublerevert
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_inair_menu
   better4_create_menu menu_title = "IN AIR" icon = PA_load close_script = better4_options_controls close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_spinkeys
   better4_create_menu_control better4_control_spinetransfer
   better4_create_menu_control better4_control_revertrecovery
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_onrail_menu
   better4_create_menu menu_title = "ON RAIL" icon = PA_lip close_script = better4_options_controls close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_dropdown
   better4_create_menu_control better4_control_directional_dropdown
   better4_create_menu_control better4_control_liptricks
   better4_create_menu_control better4_control_railspin
   better4_create_menu_control better4_control_doubletapgrinds
-  better4_create_menu_control better4_control_grindcooldown
+  better4_create_menu_control better4_control_quickregrind
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_onwall_menu
   better4_create_menu menu_title = "ON WALL" icon = PA_connection close_script = better4_options_controls close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_wallpush
   better4_create_menu_control better4_control_wallspin
   better4_create_menu_control better4_control_wallridebail
@@ -342,21 +408,21 @@ script better4_onwall_menu
   better4_create_menu_control better4_control_boostplant
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_inmanual_menu
   better4_create_menu menu_title = "IN MANUAL" icon = PA_trick close_script = better4_options_controls close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_manualspin
   better4_create_menu_control better4_control_manualfloat
   better4_create_menu_control better4_control_spacewalk
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_hud_menu
   better4_create_menu menu_title = "HUD OPTIONS" icon = PA_trick close_script = better4_options_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_item text = "Adjust Gamma" pad_choose_script = create_gamma_menu pad_choose_params = <...>
   better4_create_menu_control better4_control_buttonsfont
   better4_create_menu_control better4_control_trickstring
@@ -368,34 +434,35 @@ script better4_hud_menu
   better4_create_menu_control better4_control_timer
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_jumptrick_menu
   better4_create_menu menu_title = "JUMPTRICK" icon = PA_trick close_script = create_edit_tricks_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_jumptrick
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = create_edit_tricks_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_camera_menu
   better4_create_menu menu_title = "CAMERA OPTIONS" icon = PA_trick close_script = better4_options_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_aspect_ratio
   better4_create_menu_control better4_control_fov
   better4_create_menu_control better4_control_cameratoggle
   better4_create_menu_control better4_control_freecamcontrols
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_chat_menu
   better4_create_menu menu_title = "CHAT OPTIONS" icon = PA_trick close_script = better4_options_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_chat_size
   better4_create_menu_control better4_control_chat_duration
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 panel_enabled = 1
@@ -412,27 +479,27 @@ endscript
 
 script better4_sound_menu
   better4_create_menu menu_title = "SOUND OPTIONS" icon = PA_sound close_script = better4_options_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_extratrick_sound
   better4_create_menu_control better4_control_specialtrick_sound
   better4_create_menu_control better4_control_skatervoice
   better4_create_menu_control better4_control_musicwhenpaused
+  better4_create_menu_control better4_control_specialsfx
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_career_menu
   better4_create_menu menu_title = "CAREER OPTIONS" icon = PA_trick close_script = better4_options_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_skipsave
   better4_create_menu_control better4_control_skipstats
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript
 
 script better4_misc_menu
   better4_create_menu menu_title = "MISC" icon = PA_trick close_script = better4_options_menu close_params = <...>
-  better4_menu_spacer
   better4_create_menu_control better4_control_boardscuff
   better4_create_menu_control better4_control_pauseonunfocus
   better4_create_menu_control better4_control_menudemo
@@ -455,4 +522,5 @@ script better4_misc_menu
   endif
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_menu pad_choose_params = <...>
+  better4_menu_reset
 endscript

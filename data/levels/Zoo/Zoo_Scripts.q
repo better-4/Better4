@@ -3134,7 +3134,7 @@ script Zoo_BobChallengeManager
              <combo_1> = ( ( goal_tetris_trick_text.( <keycombos> [ 0 ] ) ) )
              <combo_2> = ( ( goal_tetris_trick_text.( <keycombos> [ 1 ] ) ) )
              <combo_3> = ( ( goal_tetris_trick_text.( <keycombos> [ 2 ] ) ) )
-            FormatText TextName = tricks "\n\nMethod %a + \b2 \nSamba Flip %b \nSitDown Air %c" a = <combo_1> b = <combo_2> C = <combo_3>
+            FormatText TextName = tricks "\n\nMethod %a + \b2 \nSamba Flip %b \nSit Down Air %c" a = <combo_1> b = <combo_2> C = <combo_3>
             GoalManager_ReplaceTrickText name = zoo_goal_counter Text = <tricks>
             SpawnScript goal_wait_and_show_key_combo_text params = { Text = <TrickText> }
             Kill prefix = "BobChallenge2_"
