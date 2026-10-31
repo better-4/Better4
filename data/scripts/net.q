@@ -3727,7 +3727,7 @@ script create_net_panel_message msg_time = 2000
   create_panel_block id = net_panel_msg <...> pos = (320, 150) rgba = [ 144 144 144 128 ] dims = (450, 0) z_priority = -10 time = <msg_time>
 endscript
 script kill_net_panel_messages
-  console_clear
+  // console_clear
   if ObjectExists id = net_panel_msg
     DestroyScreenElement id = net_panel_msg
   endif
@@ -3964,7 +3964,11 @@ script restart_local_server
 endscript
 script handle_keyboard_input
   if ObjectExists id = keyboard_anchor
+    keyboard_anchor:GetTags
     if GotParam got_enter
+      if GotParam better4
+        TextElementBackspace id = keyboard_current_string
+      endif
       if ScreenElementExists id = keyboard_done_button
         FireEvent type = pad_choose target = keyboard_done_button
       else
@@ -3972,9 +3976,17 @@ script handle_keyboard_input
       endif
     else
       if GotParam got_backspace
-        keyboard_handle_backspace
+        if GotParam better4
+          better4_keyboard_handle_backspace
+        else
+          keyboard_handle_backspace
+        endif
       else
-        keyboard_button_pressed <...>
+        if GotParam better4
+          better4_keyboard_button_pressed <...>
+        else
+          keyboard_button_pressed <...>
+        endif
       endif
     endif
   endif

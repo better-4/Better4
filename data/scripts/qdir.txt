@@ -178,7 +178,7 @@ skater_sfx.qb
 skater_shoppingcart.qb
 better4/skateshop.qb
 skeleton.qb
-skutils.qb
+better4/skutils.qb
 slap.qb
 sliderbar.qb
 specialitems.qb
@@ -220,3 +220,4 @@ better4/better4_legs_m.qb
 better4/better4_legs_f.qb
 better4/better4_hair_m.qb
 better4/better4_hair_f.qb
+better4/better4_keyboard.qb

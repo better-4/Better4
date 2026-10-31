@@ -563,7 +563,7 @@ script enter_kb_chat
   if IsBetterObserving
     destroy_observer_handlers
   endif
-  create_onscreen_keyboard allow_cancel no_buttons keyboard_done_script = entered_chat_message keyboard_title = "ENTER MESSAGE" min_length = 1 max_length = 50
+  better4_create_onscreen_keyboard text_block allow_cancel no_buttons keyboard_done_script = entered_chat_message keyboard_title = "ENTER MESSAGE" min_length = 1 max_length = 95
 endscript
 script send_chat_message
   LogInfo "Sending chat message..."

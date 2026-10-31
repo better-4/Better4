@@ -136,3 +136,12 @@ script console_message_wait_and_die
   DoMorph time = 0.5 alpha = 0
   Die
 endscript
+script reset_console_message_timers
+  <index> = 0
+  begin
+    if ScreenElementExists id = { console_message_vmenu child = <index> }
+      RunScriptOnScreenElement console_message_wait_and_die id = { console_message_vmenu child = <index> }
+    endif
+    <index> = ( <index> + 1 )
+  repeat number_of_console_lines
+endscript
