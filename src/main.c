@@ -10,6 +10,7 @@
 #include "security.h"
 #include "updater.h"
 #include "wallpush.h"
+#include "zbias.h"
 
 #include "decomp/common.h"
 #include "decomp/CArray.h"
@@ -305,6 +306,7 @@ void patchBetter4() {
 	patchTrickDisplayNames();
 	patchQbStartupLogging();
 	patchQuickRegrind();
+	patchZBias();
 }
 
 void better4Main() {

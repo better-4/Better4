@@ -44,6 +44,8 @@ add_library(better4 SHARED
     "${SRC}/version.h"
     "${SRC}/wallpush.c"
     "${SRC}/wallpush.h"
+    "${SRC}/zbias.c"
+    "${SRC}/zbias.h"
     "${SRC}/decomp/CArray.c"
     "${SRC}/decomp/CArray.h"
     "${SRC}/decomp/CFeeler.h"
