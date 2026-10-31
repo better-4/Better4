@@ -34,7 +34,7 @@ LevelNum_Chopper = 33
 LevelNum_Foundry = 34
 LevelNum_Can = 35
 LevelNum_Rio = 16
-LevelNum_Suburbia = 36
+LevelNum_Sub = 36
 LevelNum_AP = 14
 LevelNum_SkaterIsland = 37
 LevelNum_LA = 12
@@ -72,7 +72,7 @@ thps3_level_info = [
   { text = "Foundry" not_focusable level_num = LevelNum_Foundry level = Load_Foundry level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\foundry" }
   { text = "Canada" level_num = LevelNum_Can level = Load_Can level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\can" }
   { text = "Rio" under_construction level_num = LevelNum_Rio level = Load_Rio level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\rio" }
-  { text = "Suburbia" not_focusable level_num = LevelNum_Suburbia level = Load_Suburbia level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\sub" }
+  { text = "Suburbia" level_num = LevelNum_Sub level = Load_Sub level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\sub" }
   { text = "Airport" under_construction level_num = LevelNum_AP level = Load_AP level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\ap" }
   { text = "Skater Island" not_focusable level_num = LevelNum_SkaterIsland level = Load_SkaterIsland level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\skaterisland" }
   { text = "Los Angeles" under_construction level_num = LevelNum_LA level = Load_LA level_info_defaults taxi_tex = "images\better4\taxi_signs\thps3\la" }
@@ -308,6 +308,29 @@ level_Rio = {
   goals_script = Rio_goals
   setup_script = Rio_setup
   level_number = LevelNum_Rio
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  level_defaults
+}
+
+script Load_Sub
+  load_level level_Sub
+endscript
+
+level_Sub = {
+  structure_name = level_Sub
+  load_script = Load_Sub
+  name = "Suburbia"
+  level = "Sub"
+  qb = "levels\better4\Sub\Sub.qb"
+ // level_qb = "levels\Sub\Sub_scripts.qb"
+  sky = "Sub_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "better4\loadscrn_Sub"
+  startup_script = Sub_Startup
+  goals_script = Sub_goals
+  setup_script = Sub_setup
+  level_number = LevelNum_Sub
   temp_script = load_cameras_and_terrains
   // extranetanimsscript = load_level_anims
   level_defaults

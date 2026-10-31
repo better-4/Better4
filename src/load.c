@@ -154,6 +154,13 @@ void patchLoad() {
     add_path_override("levels\\Rio_Sky\\Rio_Sky.scn.Xbx", "levels\\better4\\Rio_Sky\\Rio_Sky.scn.Xbx");
     add_path_override("levels\\Rio_Sky\\Rio_Sky.tex.Xbx", "levels\\better4\\Rio_Sky\\Rio_Sky.tex.Xbx");
 
+    add_path_override("levels\\Sub\\Sub.col.Xbx", "levels\\better4\\Sub\\Sub.col.Xbx");
+    add_path_override("levels\\Sub\\Sub.scn.Xbx", "levels\\better4\\Sub\\Sub.scn.Xbx");
+    add_path_override("levels\\Sub\\Sub.tex.Xbx", "levels\\better4\\Sub\\Sub.tex.Xbx");
+    add_path_override("levels\\Sub_Sky\\Sub_Sky.col.Xbx", "levels\\better4\\Sub_Sky\\Sub_Sky.col.Xbx");
+    add_path_override("levels\\Sub_Sky\\Sub_Sky.scn.Xbx", "levels\\better4\\Sub_Sky\\Sub_Sky.scn.Xbx");
+    add_path_override("levels\\Sub_Sky\\Sub_Sky.tex.Xbx", "levels\\better4\\Sub_Sky\\Sub_Sky.tex.Xbx");
+
 	add_path_override("levels\\AP\\AP.col.Xbx", "levels\\better4\\AP\\AP.col.Xbx");
 	add_path_override("levels\\AP\\AP.scn.Xbx", "levels\\better4\\AP\\AP.scn.Xbx");
 	add_path_override("levels\\AP\\AP.tex.Xbx", "levels\\better4\\AP\\AP.tex.Xbx");
