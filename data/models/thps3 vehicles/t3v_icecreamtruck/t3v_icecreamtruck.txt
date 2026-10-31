@@ -1,0 +1,80 @@
+%include "qb_table.qbi"
+
+$t3v_icecreamtruck_NodeArray$ =
+:i :a{
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $t3v_icecreamtruck$
+		:i $Class$ = $LevelGeometry$
+		:i $CreatedAtStart$
+		:i $CollisionMode$ = $Geometry$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(-30.039068,88.126213,-41.300903)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $t3v_icecreamtruck_rail01__0$
+		:i $Class$ = $RailNode$
+		:i $Type$ = $Metal$
+		:i $CreatedAtStart$
+		:i $CollisionMode$ = $BoundingBox$
+		:i $TerrainType$ = $TERRAIN_METALSMOOTH$
+		:i $Links$ = :a{%i(2,00000002):a}
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(-29.750353,88.719795,68.343506)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $t3v_icecreamtruck_rail01__1$
+		:i $Class$ = $RailNode$
+		:i $Type$ = $Metal$
+		:i $CreatedAtStart$
+		:i $CollisionMode$ = $BoundingBox$
+		:i $TerrainType$ = $TERRAIN_METALSMOOTH$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(30.039068,88.126213,-41.300903)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $t3v_icecreamtruck_rail02__0$
+		:i $Class$ = $RailNode$
+		:i $Type$ = $Metal$
+		:i $CreatedAtStart$
+		:i $CollisionMode$ = $BoundingBox$
+		:i $TerrainType$ = $TERRAIN_METALSMOOTH$
+		:i $Links$ = :a{%i(4,00000004):a}
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(29.750353,88.719795,68.343506)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $t3v_icecreamtruck_rail02__1$
+		:i $Class$ = $RailNode$
+		:i $Type$ = $Metal$
+		:i $CreatedAtStart$
+		:i $CollisionMode$ = $BoundingBox$
+		:i $TerrainType$ = $TERRAIN_METALSMOOTH$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(31.624750,40.719810,75.808228)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_t3v_icecreamtruck_Skitch01$
+		:i $Class$ = $ObjectHook$
+		:i $CreatedAtStart$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(-29.750353,40.719810,75.808228)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $TRG_t3v_icecreamtruck_Skitch02$
+		:i $Class$ = $ObjectHook$
+		:i $CreatedAtStart$
+	:i :s}
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $t3v_plane$
+		:i $Class$ = $LevelGeometry$
+		:i $CreatedAtStart$
+		:i $CollisionMode$ = $Geometry$
+	:i :s}
+:i :a}
+$t3v_icecreamtruckTriggerScripts$ =
+:i :a{
+:i :a}
