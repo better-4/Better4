@@ -1,6 +1,7 @@
 #include "zbias.h"
 
 #include "decomp/common.h"
+#include "decomp/NxXbox.h"
 
 #include "partymod-thps4/src/patch.h"
 
@@ -9,13 +10,20 @@
 #include <string.h>
 #include <windows.h>
 
-// `set_material` calls, from the xrefs of `0x0043bbd0`.
-// leaving out `0x0044d993`, since that is inside the decal pass.
+// `set_material` (NxXbox::sMaterial::Submit) calls, from the xrefs of `0x0043bbd0`.
+// leaving out `0x0044d993`, since that is inside Nx::plat_texture_splat_render (0x0044d8a0),
+// which already runs with ZBIAS 1 for the whole pass (it's the decals pass).
 static void *const set_material_calls[] = {
-	(void *)0x00443312, /* FUN_00443250, the world scene render */
-	(void *)0x00443384, (void *)0x004433c3, (void *)0x004434ef, (void *)0x0044361d,
-	(void *)0x004436a6, (void *)0x0044e6dc, (void *)0x0044f521, /* plat_render */
-	(void *)0x0044ff76, (void *)0x00451554,
+	(void *)0x00443312, // NxXbox::render_scene (0x00443250)
+	(void *)0x00443384, // NxXbox::render_scene (0x00443250)
+	(void *)0x004433c3, // NxXbox::render_scene (0x00443250)
+	(void *)0x004434ef, // NxXbox::render_scene (0x00443250)
+	(void *)0x0044361d, // NxXbox::render_scene (0x00443250)
+	(void *)0x004436a6, // NxXbox::render_scene (0x00443250)
+	(void *)0x0044e6dc, // Nx::plat_shatter_render (0x0044e6d0)
+	(void *)0x0044f521, // Nx::CXboxParticleFlat::plat_render (0x0044f3e0)
+	(void *)0x0044ff76, // Nx::CXboxParticleGlow::plat_render (0x0044fe00)
+	(void *)0x00451554, // Nx::CXboxParticleGlowRibbonTrail::plat_render (0x00451420)
 };
 
 #define MAX_ZBIAS 16
@@ -35,11 +43,11 @@ typedef struct {
 static Better4ZBias s_entries[MAX_ENTRIES];
 static int s_count;
 
-typedef HRESULT(__stdcall *SetRenderStateFn)(void *device, uint32_t state, uint32_t value);
-
 static int lookupBias(uint32_t checksum) {
 	int i;
 
+	// If we reach the magnitude of hundreds
+	// then a hashmap might be more performant.
 	for (i = 0; i < s_count; i++) {
 		if (s_entries[i].checksum == checksum) {
 			return s_entries[i].bias;
@@ -49,52 +57,17 @@ static int lookupBias(uint32_t checksum) {
 	return 0;
 }
 
-static void applyBias(int bias) {
-	void *device = *(void **)0x00aab478 /* IDirect3DDevice8 */;
-	void **vtable;
-
-	if (!device) {
-		return;
-	}
-
-	vtable = *(void ***)device;
-	// `50` is the vtable entry idx of SetRenderState.
-	((SetRenderStateFn)vtable[50])(device, 47 /*D3DRS_ZBIAS*/, (uint32_t)bias);
-}
-
 void __fastcall SetMaterial_Wrapper(void *material, unused_t _) {
-	static void(__fastcall * _SetMaterial)(void *, unused_t) = (void *)0x0043bbd0;
-
-	_SetMaterial(material, UNUSED);
+	NxXbox_sMaterial_Submit(material);
 
 	if (s_count && material) {
-		applyBias(lookupBias(*(uint32_t *)material));
+		NxXbox_SetDeviceRenderState(D3DRS_ZBIAS, lookupBias(*(uint32_t *)material));
 	}
 }
 
-// Resolves level base name: "levels\zoo\zoo.scn.Xbx" -> "zoo".
-static void levelBaseName(const char *path, char *out, int size) {
-	const char *base = path;
-	const char *p;
-	int i;
-
-	for (p = path; *p; p++) {
-		if (*p == '\\' || *p == '/') {
-			base = p + 1;
-		}
-	}
-
-	for (i = 0; i < size - 1 && base[i] && base[i] != '.'; i++) {
-		out[i] = base[i];
-	}
-
-	out[i] = '\0';
-}
-
-static void loadZbiasFile(const char *scenePath) {
+static void loadZbiasFile(const char *level) {
 	uint8_t records[MAX_ENTRIES * ZB_RECORD];
 	char exeDirectory[MAX_PATH];
-	char level[64];
 	char path[MAX_PATH];
 	char *slash;
 	FILE *file;
@@ -104,8 +77,7 @@ static void loadZbiasFile(const char *scenePath) {
 
 	s_count = 0;
 
-	levelBaseName(scenePath, level, sizeof(level));
-	if (!level[0]) {
+	if (!level || !level[0]) {
 		return;
 	}
 
@@ -138,21 +110,19 @@ static void loadZbiasFile(const char *scenePath) {
 	}
 }
 
-int *__cdecl Nx_s_plat_load_scene(char *name, int param_2, void *param_3, void *param_4, void *param_5) {
-	static int *(__cdecl * _s_plat_load_scene)(char *, int, void *, void *, void *) = (void *)0x00447070;
+// `LoadZBias level = <level>`, called once per level from `load_level`.
+int __cdecl CFunc_LoadZBias(CStruct *params, CScript *script) {
+	const char *level = NULL;
 
-	int *scene = _s_plat_load_scene(name, param_2, param_3, param_4, param_5);
+	CStruct_GetText(params, 0x651533ec /*level*/, &level, 0);
+	loadZbiasFile(level);
 
-	loadZbiasFile(name);
-
-	return scene;
+	return 1;
 }
 
 void patchZBias() {
 	int i;
 	int sites = sizeof(set_material_calls) / sizeof(set_material_calls[0]);
-
-	patchCall((void *)0x00461a36, (void *)Nx_s_plat_load_scene);
 
 	for (i = 0; i < sites; i++) {
 		patchCall(set_material_calls[i], (void *)SetMaterial_Wrapper);

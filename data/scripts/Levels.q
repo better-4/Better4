@@ -209,6 +209,7 @@ script load_level level_number = 0
     LogDebug "load_level: loading level scene level=%l" l = <level>
     LoadScene scene = <level>
   endif
+  LoadZBias level = <level>
   if GotParam level_name
     LogDebug "load_level: setting level_name=%n" n = <level_name>
     SetLevelName <level_name>
