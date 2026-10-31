@@ -69,7 +69,7 @@ $t3v_icecreamtruck_NodeArray$ =
 	:i :s{
 		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
 		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
-		:i $Name$ = $t3v_plane$
+		:i $Name$ = $t3v_icecreamtruck_plane$
 		:i $Class$ = $LevelGeometry$
 		:i $CreatedAtStart$
 		:i $CollisionMode$ = $Geometry$
