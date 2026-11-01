@@ -85,6 +85,11 @@ int CStruct_GetStructure(CStruct *this, uint32_t checksum, CStruct **ret, int as
     return _GetStructure(this, UNUSED, checksum, ret, assert);
 }
 
+int CStruct_GetText(CStruct *this, uint32_t checksum, const char **ret, int assert) {
+    static int(__fastcall* _GetText)(CStruct *, unused_t, uint32_t, const char **, int) = (void *)0x00418890;
+    return _GetText(this, UNUSED, checksum, ret, assert);
+}
+
 void CStruct_RemoveComponent(CStruct *this, uint32_t checksum) {
     static void(__fastcall* _RemoveComponent)(CStruct *, unused_t, uint32_t) = (void *)0x00415b20;
     _RemoveComponent(this, UNUSED, checksum);
