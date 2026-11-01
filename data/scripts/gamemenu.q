@@ -806,11 +806,11 @@ script create_pause_menu
               default
                 if InInternetMode
                   if IsTrue bootstrap_build
-                    make_sprite_menu_item text = "Sit Out" id = menu_network_sit_select pad_choose_script = launch_network_sit_out_menu not_focusable = not_focusable
-                    make_text_sprite texture = PA_pause parent = menu_network_sit_select
+                    //make_sprite_menu_item text = "Sit Out" id = menu_network_sit_select pad_choose_script = launch_network_sit_out_menu not_focusable = not_focusable
+                    //make_text_sprite texture = PA_pause parent = menu_network_sit_select
                   else
-                    make_sprite_menu_item text = "Sit Out" id = menu_network_sit_select pad_choose_script = launch_network_sit_out_menu
-                    make_text_sprite texture = PA_pause parent = menu_network_sit_select
+                    //make_sprite_menu_item text = "Sit Out" id = menu_network_sit_select pad_choose_script = launch_network_sit_out_menu
+                    //make_text_sprite texture = PA_pause parent = menu_network_sit_select
                   endif
                 endif
               endswitch
