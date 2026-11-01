@@ -8,106 +8,156 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
   OnExceptionRun SkateInOrBail_Out
   SetQueueTricks NoTricks
   ClearManualTrick
-  if GotParam FallingRight
-    if SkateInAble Right
-      LogInfo "SkateInable RIGHT >>>>>>>>>>>>>>>>>>>>>>>>"
-      SetLandedFromVert
-      SetState ground
-      Move y = -5
-      Move X = -1
-      OrientToNormal
-      Rotate y = -30 Duration = 0.2 seconds
-      OnGroundExceptions_NoEndRun
-      ClearException GroundGone
-      SetQueueTricks NoTricks
-      SetManualTricks NoTricks
-      if ( better4_modifier_disablerevert_value = off )
-        SetExtraTricks tricks = better4_control_revert_value Duration = 20
-      endif
-      if GotParam OutAnim
-        PlayAnim Anim = <OutAnim> Blendperiod = 0.3
-      else
-        PlayAnim Anim = <initanim> backwards Blendperiod = 0.3
-      endif
-      waitanimwhilstchecking
-      Goto SkateInLand
-    else
-      if ( better4_control_directional_dropdown_value = on )
-        if ControllerPressed Left
-          Move y = <movey>
-          Move X = <moveleft>
-          LogInfo "droppin left"
-        else
-          Move y = <movey>
-          Move X = <moveright>
-          LogInfo "droppin right"
-        endif
-      else
-        Move y = <movey>
-        Move X = <moveright>
-        LogInfo "droppin right"
-      endif
-      if GotParam GrindBail
-        Goto <GrindBail>
-      else
-        Goto FiftyFiftyFall
-      endif
-    endif
+
+  DetermineFallSide <...>
+  DetermineIfSkatingIntoVert <...>
+
+  if (<skating_into_vert> = yes)
+    DoVertDropDown <...>
+  else
+    DoPlainDropDown <...>
   endif
-  if GotParam FallingLeft
-    if SkateInAble Left
-      SetLandedFromVert
-      LogInfo "SkateInable LEFT >>>>>>>>>>>>>>>>>>>>>>>>"
-      SetState ground
-      Move X = 1
-      Move y = -5
-      OrientToNormal
-      Rotate y = 30 Duration = 0.2 seconds
-      SetState ground
-      OnGroundExceptions_NoEndRun
-      ClearException GroundGone
-      SetQueueTricks NoTricks
-      SetManualTricks NoTricks
-      if ( better4_modifier_disablerevert_value = off )
-        SetExtraTricks tricks = better4_control_revert_value Duration = 20
-      endif
-      if GotParam OutAnim
-        PlayAnim Anim = <OutAnim> Blendperiod = 0.3
-      else
-        PlayAnim Anim = <initanim> backwards Blendperiod = 0.3
-      endif
-      waitanimwhilstchecking
-      Goto SkateInLand
-    else
-      if ( better4_control_directional_dropdown_value = on )
-        if ControllerPressed Right
-          Move y = <movey>
-          Move X = <moveright>
-          LogInfo "droppin right"
-        else
-          Move y = <movey>
-          Move X = <moveleft>
-          LogInfo "droppin left"
-        endif
-      else
-        Move y = <movey>
-        Move X = <moveleft>
-        LogInfo "droppin left"
-      endif
-      if GotParam GrindBail
-        Goto <GrindBail>
-      else
-        Goto FiftyFiftyFall
-      endif
-    endif
-  endif
-  LogInfo "Missing a FallingLeft or FallingRight ?"
+  
   if GotParam GrindBail
     Goto <GrindBail>
   else
     Goto FiftyFiftyFall
   endif
 endscript
+
+script DetermineFallSide
+  if ( better4_control_directional_dropdown_value = on )
+    DetermineFallSideFromDirectionalInput <...>
+  else
+    DetermineFallSideFromParam <...>
+  endif
+  return fall_side = <fall_side>
+endscript
+
+script DetermineFallSideFromDirectionalInput
+
+  if ((ControllerPressed Up) or (ControllerPressed Down)) 
+    // Skater is holding up/down, rather than an exclusive left/right.
+    // If a vert dropdown is available, we should prioritize it
+    // over their left/right inputs, so the player can perform
+    // a vert DD BHRA.
+    //
+    // When FallingLeft, the left vert dropdown is prioritized.
+    // When FallingRight, the right vert dropdown is prioritized.
+    DetermineFallSideFromParam <...>
+    if (<fall_side> = left)
+      if SkateInAble left
+        return fall_side = left
+      endif
+      if SkateInAble right
+        return fall_side = right
+      endif
+    endif
+    if (<fall_side> = right)
+      if SkateInAble right
+        return fall_side = right
+      endif
+      if SkateInAble left
+        return fall_side = left
+      endif
+    endif
+  endif
+
+  if ControllerPressed Left
+    return fall_side = left
+  endif
+
+  if ControllerPressed Right
+    return fall_side = right
+  endif
+
+  // Direction is neutral, so default to FallingLeft/FallingRight
+  DetermineFallSideFromParam <...>
+  return fall_side = <fall_side>
+endscript
+
+script DetermineFallSideFromParam
+  if GotParam FallingLeft
+    return fall_side = left
+  endif
+  
+  if GotParam FallingRight
+    return fall_side = right
+  endif
+
+  // This should never happen, but just in case...
+  default_side = right
+  return fall_side = <default_side>
+endscript
+
+script DetermineIfSkatingIntoVert
+  if SkateInable <fall_side>
+    return skating_into_vert = yes
+  else
+    return skating_into_vert = no
+  endif
+endscript
+
+script DoVertDropDown
+  SetLandedFromVert
+  SetState ground
+
+  if (<fall_side> = left)
+    LogInfo "Vert DD (left)"
+    movex = 1
+    movey = -5
+    rotatey = 30
+  else
+    LogInfo "Vert DD (right)"
+    movex = -1
+    movey = -5
+    rotatey = -30
+  endif
+
+  Move y = <movey>
+  Move x = <movex>
+  OrientToNormal
+  Rotate y = <rotatey> Duration = 0.2 seconds
+    
+  if (<fall_side> = left)
+    // The original logic had an extra 'SetState ground' when skating left into vert for some reason.
+    // This conditional branch retains that logic.
+    // Whether it's actually needed or not is debatable.
+    SetState ground
+  endif
+
+  OnGroundExceptions_NoEndRun
+  ClearException GroundGone
+  SetQueueTricks NoTricks
+  SetManualTricks NoTricks
+
+  if ( better4_modifier_disablerevert_value = off )
+    SetExtraTricks tricks = better4_control_revert_value Duration = 20
+  endif
+
+  if GotParam OutAnim
+    PlayAnim Anim = <OutAnim> Blendperiod = 0.3
+  else
+    PlayAnim Anim = <initanim> backwards Blendperiod = 0.3
+  endif
+
+  WaitAnimWhilstChecking
+  Goto SkateInLand
+endscript
+
+script DoPlainDropDown
+  if (<fall_side> = left)
+    LogInfo "Plain DD (left)"
+    movex = <moveleft>
+  else
+    LogInfo "Plain DD (right)"
+    movex = <moveright>
+  endif
+
+  Move y = <movey>
+  Move X = <movex>
+endscript
+
 script SkateInLand
   OnExceptionRun SkateInLandOut
   NollieOff
