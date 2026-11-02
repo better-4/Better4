@@ -131,6 +131,7 @@ ConfigurableTricks = [
   Trick_JumpJets
   Trick_KFBackflip
   Trick_KFIndy
+  Trick_KFMcTwist
   Trick_KFMelon
   Trick_KFSuperman
   Trick_Kickflip

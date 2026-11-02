@@ -90,6 +90,7 @@ Trick_360VarialHeelflipLien= { Scr = FlipTrick Params = { Name = '360 Varial Hee
 Trick_VHeelFlipToJudo = { Scr = FlipTrick Params = { Name = 'Varial Heelflip Judo' Score = 2500 Anim = HeelFlipToJudo RotateAfter Speed = 1.0  IsSpecial trickslack = 25 } }
 Trick_360ShuvitRewind = { Scr = FlipTrick Params = { Name = '360 Shove-It Rewind' Score = 1500 anim = ShoveItRewind trickslack = 25 Speed = 1.0 IsSpecial } }
 Trick_BodyVarial = { Scr = FlipTrick Params = { Name = 'Body Varial' Score = 500 anim = SexChange trickslack = 10 Speed = 1.0 FlipAfter } }
+Trick_KFMcTwist = { Scr = FlipTrick Params = { Name = "Kickflip McTwist" Score = 5000 anim = KickFlipBlendFS anim2 = McTwist kickflipmctwisterz IsSpecial RevertBS NoSpin RotateAfter trickslack = 10 Speed = 1.0 speed2 = 0.95 blend2 = 0.5 Spinslack = 20 } }
 
 
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
@@ -295,6 +296,12 @@ script FlipTrick speed = 1.0 trickslack = 10 grindslack = 25 flip_stat_mod = 1.0
       endif
     else
       PlayAnim Anim = <Anim> BlendPeriod = 0.3 speed = <speed>
+	  if gotparam kickflipmctwisterz
+	    PlayAnim Anim = <Anim> BlendPeriod = 0.3 From = 0 to = 35 speed = <speed>
+		WaitAnim 67 percent
+	    PlayAnim Anim = <anim2> BlendPeriod = <blend2> speed = <speed2>
+		BoardRotateAfter
+	  endif
     endif
   endif
  if not GotParam HoldFrame
