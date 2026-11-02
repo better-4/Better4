@@ -153,6 +153,7 @@ ConfigurableTricks = [
   Trick_MuteInvert
   Trick_NoComplyLate360
   Trick_NollieFlipUnderflip
+  Trick_NoHandsMadonna
   Trick_Noseblunt
   Trick_NosebonePoker
   Trick_Nosegrab
@@ -167,6 +168,7 @@ ConfigurableTricks = [
   Trick_OneFootInvert
   Trick_OneFootJapan
   Trick_OneFootManual
+  Trick_OneFootMute
   Trick_OneFootNosemanual
   Trick_OneFootOneWheel
   Trick_OneFootSmith

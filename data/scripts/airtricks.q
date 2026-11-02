@@ -91,6 +91,8 @@ Trick_VHeelFlipToJudo = { Scr = FlipTrick Params = { Name = 'Varial Heelflip Jud
 Trick_360ShuvitRewind = { Scr = FlipTrick Params = { Name = '360 Shove-It Rewind' Score = 1500 anim = ShoveItRewind trickslack = 25 Speed = 1.0 IsSpecial } }
 Trick_BodyVarial = { Scr = FlipTrick Params = { Name = 'Body Varial' Score = 500 anim = SexChange trickslack = 10 Speed = 1.0 FlipAfter } }
 Trick_KFMcTwist = { Scr = FlipTrick Params = { Name = "Kickflip McTwist" Score = 5000 anim = KickFlipBlendFS anim2 = McTwist kickflipmctwisterz IsSpecial RevertBS NoSpin RotateAfter trickslack = 10 Speed = 1.0 speed2 = 0.95 blend2 = 0.5 Spinslack = 20 } }
+Trick_OneFootMute = { Scr = GrabTrick Params = { Name = 'One Foot Mute' Score = 900 Anim = MuteGrabNoHands Idle = MuteGrabNoHands_Idle Speed = 1.0 } }
+Trick_NoHandsMadonna = { Scr = GrabTrick Params = { Name = 'No Handed Madonna' Score = 900 Anim = MadonnaNoHands Idle = MadonnaNoHands_Idle Speed = 1.0 } }
 
 
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
