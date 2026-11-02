@@ -11,6 +11,8 @@ appearance_burnquist =
   shoes = { desc_id = #"Burnquist Shoe" }
   Glasses = { desc_id = #"Burnquist Glasses" }
   body_shape = hawk_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_caballero =
 {
@@ -24,6 +26,8 @@ appearance_caballero =
   shoes = { desc_id = #"Caballero Shoe" }
   skater_m_socks = { desc_id = Medium }
   body_shape = caballero_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_campbell =
 {
@@ -37,6 +41,8 @@ appearance_campbell =
   skater_m_legs = { desc_id = #"Campbell Pants" }
   shoes = { desc_id = #"campbell Shoe" }
   body_shape = campbell_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_glifberg =
 {
@@ -49,6 +55,8 @@ appearance_glifberg =
   skater_m_legs = { desc_id = #"Glifberg Pants" }
   shoes = { desc_id = #"Glifberg Shoe" }
   body_shape = glifberg_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_hawk =
 {
@@ -61,6 +69,8 @@ appearance_hawk =
   skater_m_legs = { desc_id = #"Hawk Pants" }
   shoes = { desc_id = #"Hawk Shoe" }
   body_shape = hawk_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_koston =
 {
@@ -75,6 +85,8 @@ appearance_koston =
   skater_m_legs = { desc_id = #"Koston Pants" }
   shoes = { desc_id = #"Koston Shoe" }
   body_shape = koston_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_lasek =
 {
@@ -88,6 +100,8 @@ appearance_lasek =
   skater_m_legs = { desc_id = #"Lasek Pants" }
   shoes = { desc_id = #"Lasek Shoe" }
   body_shape = lasek_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_margera =
 {
@@ -100,6 +114,8 @@ appearance_margera =
   skater_m_legs = { desc_id = #"Margera Pants" }
   shoes = { desc_id = #"Margera Shoe" }
   body_shape = margera_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_mullen =
 {
@@ -112,6 +128,8 @@ appearance_mullen =
   skater_m_legs = { desc_id = #"Cargo Pants" }
   shoes = { desc_id = #"Mullen Shoe" }
   body_shape = mullen_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_muska =
 {
@@ -124,6 +142,8 @@ appearance_muska =
   skater_m_legs = { desc_id = #"Muska Pants" }
   shoes = { desc_id = #"Muska Shoe" }
   body_shape = muska_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_reynolds =
 {
@@ -136,6 +156,8 @@ appearance_reynolds =
   skater_m_legs = { desc_id = #"Reynolds Pants" }
   shoes = { desc_id = #"Reynolds Shoe" }
   body_shape = hawk_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_rowley =
 {
@@ -149,6 +171,8 @@ appearance_rowley =
   skater_m_legs = { desc_id = #"Rowley Pants" }
   shoes = { desc_id = #"Rowley Shoe" }
   body_shape = rowley_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_steamer =
 {
@@ -161,6 +185,8 @@ appearance_steamer =
   skater_f_legs = { desc_id = #"Steamer Pants" }
   shoes = { desc_id = #"Steamer Shoe" }
   body_shape = steamer_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_thomas =
 {
@@ -174,6 +200,8 @@ appearance_thomas =
   shoes = { desc_id = #"Thomas Shoe" }
   chest_tattoo = { desc_id = #"Thomas 1" }
   body_shape = thomas_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_eddie =
 {
@@ -182,12 +210,16 @@ appearance_eddie =
   deck_graphic = { desc_id = #"Eddie 1" }
   griptape = { desc_id = #"Generic 9" }
   body_shape = eddie_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_jango =
 {
   body = { desc_id = JANGO }
   board = { desc_id = Hover }
   deck_graphic = { desc_id = #"Jango 1" }
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_vallely =
 {
@@ -202,6 +234,8 @@ appearance_vallely =
   right_bicep_tattoo = { desc_id = #"Tattoo 9" }
   shoes = { desc_id = #"Vallely Shoe" }
   accessoriesR = { desc_id = #"Wrist Tape R" }
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_jenna =
 {
@@ -211,6 +245,8 @@ appearance_jenna =
   skater_f_legs = { desc_id = #"Shorts Daisy" }
   shoes = { desc_id = #"High Heels" }
   body_shape = jenna_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_custom_skater_male =
 {
@@ -228,6 +264,8 @@ appearance_custom_skater_male =
   board = { desc_id = #"Default" }
   deck_graphic = { desc_id = #"CAS 1" }
   griptape = { desc_id = #"Generic 1" }
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 appearance_custom_skater_female =
 {
@@ -247,6 +285,8 @@ appearance_custom_skater_female =
   hat = { desc_id = None }
   shoes = { desc_id = #"Burnquist Shoe" }
   body_shape = female_scale_info
+  sleeves = { desc_id = #"None" }
+  shoelaces = { desc_id = #"None" }
 }
 body = [
   {
@@ -1148,243 +1188,6 @@ skater_m_head = [
     hidden
   }
 ]
-skater_m_legs = [
-  {
-    desc_id = #"Cargo Shorts"
-    frontend_desc = 'Cargo Shorts'
-    mesh = "models/skater_m/pant_cargoshort.skin"
-  }
-  {
-    desc_id = #"Cord Shorts"
-    frontend_desc = 'Cord Shorts'
-    mesh = "models/skater_m/pant_cargoshort.skin"
-    replace = "CS_NH_cargoshorts.png"
-    with = "textures/skater_m/CS_NH_cargoshorts_cords"
-  }
-  {
-    desc_id = #"Camo Shorts"
-    frontend_desc = 'Camo Shorts'
-    mesh = "models/skater_m/pant_vallelly.skin"
-    replace = "CS_EF_MikeV_Shorts01.png"
-    with = "textures/skater_m/CS_NN_Camo_Shorts01"
-  }
-  {
-    desc_id = #"Stripe Shorts"
-    frontend_desc = 'Stripe Shorts'
-    mesh = "models/skater_m/pant_cargoshort.skin"
-    replace = "CS_NH_cargoshorts.png"
-    with = "textures/skater_m/CS_NH_cargoshorts_bar"
-  }
-  {
-    desc_id = #"Vert Shorts"
-    frontend_desc = 'Vert Shorts'
-    mesh = "models/skater_m/pant_vertshorts.skin"
-    supports_kneepads
-  }
-  {
-    desc_id = #"Short Shorts"
-    frontend_desc = 'Short Shorts'
-    mesh = "models/skater_m/pant_shortshort.skin"
-    supports_kneepads
-    is_clowny
-  }
-  {
-    desc_id = Briefs
-    frontend_desc = 'Briefs'
-    supports_kneepads
-    is_clowny
-    no_color
-  }
-  {
-    desc_id = #"Gathered Cargos"
-    frontend_desc = 'Camo Cargos'
-    mesh = "models/skater_m/pant_gatheredcargo.skin"
-  }
-  {
-    desc_id = #"BunchedCargos"
-    frontend_desc = 'Bunched Cargos'
-    mesh = "models/better4/skater_m/pant_gatheredcargo.skin"
-  }
-  {
-    desc_id = #"Baggy Pants"
-    frontend_desc = 'Baggy Pants'
-    mesh = "models/skater_m/pant_baggy.skin"
-  }
-  {
-    desc_id = #"Cargo Pants"
-    frontend_desc = 'Cargo Pants'
-    mesh = "models/skater_m/pant_cargolong.skin"
-  }
-  {
-    desc_id = #"Camo Pants"
-    frontend_desc = 'Camo Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_cargoshorts_camo"
-  }
-  {
-    desc_id = #"Stripe Pants"
-    frontend_desc = 'Stripe Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_baggypants_stripe"
-  }
-  {
-    desc_id = #"Cord Pants"
-    frontend_desc = 'Cord Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_baggypants_cord"
-  }
-  {
-    desc_id = #"Tight Pants"
-    frontend_desc = 'Tight Pants'
-    mesh = "models/skater_m/pant_tight.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_hawk_alt_pants"
-  }
-  {
-    desc_id = #"Plaid Punk Pants"
-    frontend_desc = 'Plaid Punk Pants'
-    mesh = "models/skater_m/pant_tight.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_JB_pants_plaidpunk"
-  }
-  {
-    desc_id = #"Hawk Shorts"
-    frontend_desc = 'Hawk Shorts (Beta)'
-    mesh = "models/better4/skater_m/pant_hawkshorts.skin"
-   }
-  {
-    desc_id = #"Hawk Pants"
-    frontend_desc = 'Hawk Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_hawk_alt_pants"
-  }
-  {
-    desc_id = #"Burnquist Pants"
-    frontend_desc = 'Burnquist Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_Burnquist_pants"
-  }
-  {
-    desc_id = #"Caballero Pants"
-    frontend_desc = 'Caballero Pants'
-    mesh = "models/skater_m/pant_baggy.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_caballero_pants"
-  }
-  {
-    desc_id = #"Campbell Pants"
-    frontend_desc = 'Campbell Pants'
-    mesh = "models/skater_m/pant_baggy.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_campbell_pants"
-  }
-  {
-    desc_id = #"Glifberg Pants"
-    frontend_desc = 'Glifberg Pants'
-    mesh = "models/skater_m/pant_baggy.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_Glifberg_pants"
-  }
-  {
-    desc_id = #"Koston Pants"
-    frontend_desc = 'Koston Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_Koston_pants"
-  }
-  {
-    desc_id = #"Lasek Pants"
-    frontend_desc = 'Lasek Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_lasek_pants"
-  }
-  {
-    desc_id = #"Margera Pants"
-    frontend_desc = 'Margera Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_Margera_pants"
-  }
-  {
-    desc_id = #"Muska Pants"
-    frontend_desc = 'Muska Pants'
-    mesh = "models/skater_m/pant_baggy.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_muska_pants"
-  }
-  {
-    desc_id = #"Reynolds Pants"
-    frontend_desc = 'Reynolds Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_Reynolds_pants"
-  }
-  {
-    desc_id = #"Rowley Pants"
-    frontend_desc = 'Rowley Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NH_Rowley_pants"
-  }
-  {
-    desc_id = #"Thomas Pants"
-    frontend_desc = 'Thomas Pants'
-    mesh = "models/skater_m/pant_thomas.skin"
-  }
-  {
-    desc_id = #"Vallely Shorts"
-    frontend_desc = 'Vallely Shorts'
-    mesh = "models/skater_m/pant_vallelly.skin"
-    only_if_unlocked = Vallely
-  }
-  {
-    desc_id = Kilt
-    frontend_desc = 'Kilt'
-    mesh = "models/skater_m/pant_kilt.skin"
-    unlock_flag = CAS_UNLOCK_13
-    is_clowny
-  }
-  {
-    desc_id = #"Boxer Shorts"
-    frontend_desc = 'Boxer Shorts'
-    mesh = "models/skater_m/pant_boxers.skin"
-    unlock_flag = CAS_UNLOCK_14
-    is_clowny
-  }
-  {
-    desc_id = #"Heart Boxers"
-    frontend_desc = 'Heart Boxers'
-    mesh = "models/skater_m/pant_boxers.skin"
-    replace = "CS_JB_pants_boxers.png"
-    with = "textures/skater_m/CS_JB_pants_boxer_hearts"
-    unlock_flag = CAS_UNLOCK_15
-    is_clowny
-  }
-  {
-    desc_id = #"Ollie Pants"
-    frontend_desc = 'Ollie Pants'
-    mesh = "models/skater_m/pant_thomas.skin"
-    replace = "CS_NH_Thomas_pants.png"
-    with = "textures/skater_m/CS_NN_pant_Ollie"
-    replace1 = "NN_Thomas_beltbuckle.png"
-    with1 = "textures/skater_m/CS_NN_Ollie_beltbuckle"
-    unlock_flag = CAS_UNLOCK_16
-  }
-  {
-    desc_id = #"Clown Pants"
-    frontend_desc = 'Clown Pants'
-    mesh = "models/skater_m/pant_regular.skin"
-    replace = "CS_NH_regular_pants.png"
-    with = "textures/skater_m/CS_NN_baggypants_Clown"
-    unlock_flag = CAS_UNLOCK_17
-  }
-]
 skater_m_hat_hair = [ 
   { 
 	desc_id = None 
@@ -1415,188 +1218,6 @@ skater_m_hat_hair = [
     replace1 = "CS_JB_Hair_BuzzL2.png"
     with1 = "textures/skater_m/CS_JB_Hair_BuzzD2"
     is_short_hair
-  }
-]
-skater_m_hair = [
-  {
-    desc_id = Bald
-    frontend_desc = 'Bald'
-    is_short_hair
-    no_color
-  }
-  {
-    desc_id = #"Buzzed Light"
-    frontend_desc = 'Buzzed Light'
-    mesh = "models/skater_m/Hair_M_W_Buzz.skin"
-    is_short_hair
-  }
-  {
-    desc_id = #"Buzzed Dark"
-    frontend_desc = 'Buzzed Dark'
-    mesh = "models/skater_m/Hair_M_W_Buzz.skin"
-    replace = "CS_JB_Hair_BuzzL1.png"
-    with = "textures/skater_m/CS_JB_Hair_BuzzD1"
-    replace1 = "CS_JB_Hair_BuzzL2.png"
-    with1 = "textures/skater_m/CS_JB_Hair_BuzzD2"
-    is_short_hair
-  }
-  {
-    desc_id = #"Mohawk Light"
-    frontend_desc = 'Mohawk Light'
-    mesh = "models/skater_m/Hair_M_W_Mohawk.skin"
-    replace = "CS_JB_Hair_MohawkD1.png"
-    with = "textures/skater_m/CS_JB_Hair_MohawkL1"
-  }
-  {
-    desc_id = #"Mohawk Dark"
-    frontend_desc = 'Mohawk Dark'
-    mesh = "models/skater_m/Hair_M_W_Mohawk.skin"
-  }
-  {
-    desc_id = #"Liberty Spikes Dark"
-    frontend_desc = 'Liberty Spikes Dark'
-    mesh = "models/skater_m/Hair_M_LibertySpikes.skin"
-  }
-  {
-    desc_id = #"Mullet 1 Light"
-    frontend_desc = 'Mullet 1 Light'
-    mesh = "models/skater_m/Hair_M_W_Mullet_A.skin"
-    replace = "CS_JB_Hair_MulletD1.png"
-    with = "textures/skater_m/CS_JB_Hair_MulletL1"
-  }
-  {
-    desc_id = #"Mullet 1 Dark"
-    frontend_desc = 'Mullet 1 Dark'
-    mesh = "models/skater_m/Hair_M_W_Mullet_A.skin"
-  }
-  {
-    desc_id = #"Mullet 2 Dark"
-    frontend_desc = 'Mullet 2 Dark'
-    mesh = "models/skater_m/Hair_M_Mullet2.skin"
-  }
-  {
-    desc_id = #"Afro Light"
-    frontend_desc = 'Afro Light'
-    mesh = "models/skater_m/Hair_M_W_Afro.skin"
-    replace = "CS_JB_Hair_AfroD1.png"
-    with = "textures/skater_m/CS_JB_Hair_AfroL1"
-    replace1 = "CS_JB_Hair_AfroD2.png"
-    with1 = "textures/skater_m/CS_JB_Hair_AfroL2"
-  }
-  {
-    desc_id = #"Afro Dark"
-    frontend_desc = 'Afro Dark'
-    mesh = "models/skater_m/Hair_M_W_Afro.skin"
-  }
-  {
-    desc_id = #"Long Light"
-    frontend_desc = 'Long Light'
-    mesh = "models/skater_m/Hair_M_W_Longhair_A.skin"
-    replace = "CS_JB_Hair_LonghairD1.png"
-    with = "textures/skater_m/CS_JB_Hair_LonghairL1"
-    replace1 = "CS_JB_Hair_LonghairD2.png"
-    with1 = "textures/skater_m/CS_JB_Hair_LonghairL2"
-    replace2 = "CS_JB_Hair_LonghairD3.png"
-    with2 = "textures/skater_m/CS_JB_Hair_LonghairL3"
-  }
-  {
-    desc_id = #"Long Dark"
-    frontend_desc = 'Long Dark'
-    mesh = "models/skater_m/Hair_M_W_Longhair_A.skin"
-  }
-  {
-    desc_id = #"Ponytail Light"
-    frontend_desc = 'Ponytail Light'
-    mesh = "models/skater_m/Hair_M_W_Ponytail.skin"
-    replace = "CS_JB_Hair_PonytailD1.png"
-    with = "textures/skater_m/CS_JB_Hair_PonytailL1"
-    replace1 = "CS_JB_Hair_PonytailD2.png"
-    with1 = "textures/skater_m/CS_JB_Hair_PonytailL2"
-    replace2 = "CS_JB_Hair_PonytailD3.png"
-    with2 = "textures/skater_m/CS_JB_Hair_PonytailL3"
-  }
-  {
-    desc_id = #"Ponytail Dark"
-    frontend_desc = 'Ponytail Dark'
-    mesh = "models/skater_m/Hair_M_W_Ponytail.skin"
-  }
-  {
-    desc_id = #"Slick Light"
-    frontend_desc = 'Slick Light'
-    mesh = "models/skater_m/Hair_M_W_Slick02.skin"
-    replace = "CS_JB_Hair_SlickD1.png"
-    with = "textures/skater_m/CS_JB_Hair_SlickL1"
-    replace1 = "CS_JB_Hair_SlickD2.png"
-    with1 = "textures/skater_m/CS_JB_Hair_SlickL2"
-  }
-  {
-    desc_id = #"Slick Dark"
-    frontend_desc = 'Slick Dark'
-    mesh = "models/skater_m/Hair_M_W_Slick02.skin"
-  }
-  {
-    desc_id = #"Spiked Light"
-    frontend_desc = 'Spiked Light'
-    mesh = "models/skater_m/Hair_M_W_Spiked.skin"
-    replace = "CS_JB_Hair_Spiked1_D1.png"
-    with = "textures/skater_m/CS_JB_Hair_Spiked1_L1"
-    replace1 = "CS_JB_Hair_Spiked1_D2.png"
-    with1 = "textures/skater_m/CS_JB_Hair_Spiked1_L2"
-    replace2 = "CS_JB_Hair_Spiked1_D3.png"
-    with2 = "textures/skater_m/CS_JB_Hair_Spiked1_L3"
-  }
-  {
-    desc_id = #"Spiked Dark"
-    frontend_desc = 'Spiked Dark'
-    mesh = "models/skater_m/Hair_M_W_Spiked.skin"
-  }
-  {
-    desc_id = #"Bowl Dark"
-    frontend_desc = 'Bowl Dark'
-    mesh = "models/skater_m/Hair_M_Bowl.skin"
-  }
-  {
-    desc_id = #"Medium Dark"
-    frontend_desc = 'Medium Dark'
-    mesh = "models/skater_m/Hair_M_Medium1.skin"
-  }
-  {
-    desc_id = #"Flat Top Dark"
-    frontend_desc = 'Flat Top Dark'
-    mesh = "models/skater_m/Hair_M_JarHead.skin"
-  }
-  {
-    desc_id = #"Balding Dark"
-    frontend_desc = 'Balding Dark'
-    mesh = "models/skater_m/Hair_M_Fritz.skin"
-  }
-  {
-    desc_id = #"Comb Over Dark"
-    frontend_desc = 'Comb Over Dark'
-    mesh = "models/skater_m/Hair_M_CombOver.skin"
-  }
-  {
-    desc_id = #"Pompadour Dark"
-    frontend_desc = 'Pompadour Dark'
-    mesh = "models/skater_m/Hair_M_Pompadour.skin"
-  }
-  {
-    desc_id = #"Eraser Head"
-    frontend_desc = 'Eraser Hair'
-    mesh = "models/skater_m/Hair_M_EraserHead.skin"
-    unlock_flag = CAS_UNLOCK_07
-  }
-  {
-    desc_id = #"Clown Hair"
-    frontend_desc = 'Clown Hair'
-    mesh = "models/skater_m/Hair_M_clown.skin"
-    unlock_flag = CAS_UNLOCK_08
-  }
-  {
-    desc_id = #"Eddie's Hair"
-    frontend_desc = 'Eddie\'s Hair'
-    mesh = "models/skater_m/Hair_Eddie.skin"
-    is_eddie_hair
   }
 ]
 skater_m_kneepads = [

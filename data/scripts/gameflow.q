@@ -139,6 +139,9 @@ script GameFlow_Startup
   endif
 endscript
 script GameFlow_StartRun
+  if InNetGame
+    reset_console_message_timers
+  endif
   if not LevelIs load_skateshop
     if GameModeEquals is_singlesession
       LogInfo "*********** SETTING END OF RUN TYPE ********"

@@ -794,6 +794,21 @@ script better4_change_musicwhenpaused
   endif
 endscript
 
+better4_control_specialsfx_index = 0
+better4_control_specialsfx_value = on
+better4_control_specialsfx = {
+  id = better4_control_specialsfx_id
+  index_name = better4_control_specialsfx_index
+  value_name = better4_control_specialsfx_value
+  text = "Special SFX"
+  ini_key = "SpecialSfx"
+  help = "Toggle whether to play special sounds when performing certain special tricks (e.g. Chomp On This, Muska Beatz)."
+  options = [
+    { text = "On" value = on }
+    { text = "Off" value = off }
+  ]
+}
+
 better4_control_chat_size_index = 2
 better4_control_chat_size_value = 2
 better4_control_chat_size = {
@@ -1341,6 +1356,7 @@ script better4_controls_init
   better4_control_init better4_control_specialtrick_sound
   better4_control_init better4_control_skatervoice
   better4_control_init better4_control_musicwhenpaused
+  better4_control_init better4_control_specialsfx
   better4_control_init better4_control_trickstring
   better4_control_init better4_control_scorepot
   better4_control_init better4_control_specialmeter

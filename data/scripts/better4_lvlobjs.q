@@ -324,7 +324,6 @@ endscript
 script better4_create_lvlobjs_menu
   <close_script> = better4_exit_lvlobjs_menu
   better4_create_menu menu_title = "LEVEL OBJECTS" icon = PA_PRO slow_close <...>
-  better4_menu_spacer
   better4_create_menu_lvlobj better4_lvlobj_compgeo
   better4_create_menu_lvlobj better4_lvlobj_proset1
   better4_create_menu_lvlobj better4_lvlobj_proset2
@@ -335,6 +334,7 @@ script better4_create_lvlobjs_menu
   better4_create_menu_lvlobj better4_lvlobj_proset7
   better4_menu_spacer
   better4_create_menu_item text = "Back" id = back_option pad_choose_script = skateshop_transition pad_choose_params = { new_menu_script = <close_script> }
+  better4_menu_reset
 endscript
 
 script better4_exit_lvlobjs_menu

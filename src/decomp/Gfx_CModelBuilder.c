@@ -83,7 +83,24 @@ uint32_t Gfx_CModelBuilder_geom_set_secondary_color(Gfx_CModelBuilder *this, uin
     }
 
     if (use_default_hsv) {
-        Nx_CModel_ClearColor(mp_model, part);
+        // Check if any parents also have default HSV; if so, clear the color if the entire model
+        for (int i = 0; i < parent->size; i++) {
+            uint32_t parent_part = CArray_Get(parent, i);
+            CStruct *parent_struct = Gfx_CModelAppearance_GetVirtualDescStructure(mp_appearance, parent_part);
+            if (parent_struct) {
+                int parent_use_default_hsv = -1;
+                if (CStruct_GetInteger(parent_struct, 0x97dbdde6/*use_default_hsv*/, &parent_use_default_hsv, 0)) {
+                    if (parent_use_default_hsv) {
+                        logDebug("Clearing color for parent_part=%x", parent_part);
+                        Nx_CModel_ClearColor(mp_model, parent_part);
+                    }
+                } else {
+                    logDebug("Did not get use_default_hsv for parent_part=%x; clearing color", parent_part);
+                    Nx_CModel_ClearColor(mp_model, parent_part);
+                }
+            }
+        }
+
         return 0;
     }
 

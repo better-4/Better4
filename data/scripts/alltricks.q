@@ -4,8 +4,11 @@ ConfigurableTricks = [
   Trick_2KickMadonnaFlip
   Trick_360FlipNoseManual
   Trick_GhettoBird
+  Trick_360ShuvitRewind
   Trick_360Varial
+  Trick_360VarialHeelflipLien
   Trick_360VarialMcTwist
+  Trick_3DScaryGrind
   Trick_4thofJuly
   Trick_540BoardVarial
   Trick_50FingerFlip
@@ -34,6 +37,7 @@ ConfigurableTricks = [
   Trick_BigSpinShifty
   Trick_BloodyEddie
   Trick_Blunt
+  Trick_BodyVarial
   Trick_Bodywrap540
   Trick_Boneless
   Trick_BoomBox
@@ -78,6 +82,7 @@ ConfigurableTricks = [
   Trick_FingerFlipAirWalk
   Trick_Flamingo
   Trick_FlipKickDad
+  Trick_Flip2Switch
   Trick_FroggyGrind
   Trick_FS540
   Trick_FS540HeelFlip
@@ -126,6 +131,7 @@ ConfigurableTricks = [
   Trick_JumpJets
   Trick_KFBackflip
   Trick_KFIndy
+  Trick_KFMcTwist
   Trick_KFMelon
   Trick_KFSuperman
   Trick_Kickflip
@@ -141,11 +147,13 @@ ConfigurableTricks = [
   Trick_Method
   Trick_MightAsWellJump
   Trick_MistyFlip
+  Trick_MixItUp
   Trick_MPCGrind
   Trick_Mute
   Trick_MuteInvert
   Trick_NoComplyLate360
   Trick_NollieFlipUnderflip
+  Trick_NoHandsMadonna
   Trick_Noseblunt
   Trick_NosebonePoker
   Trick_Nosegrab
@@ -160,6 +168,7 @@ ConfigurableTricks = [
   Trick_OneFootInvert
   Trick_OneFootJapan
   Trick_OneFootManual
+  Trick_OneFootMute
   Trick_OneFootNosemanual
   Trick_OneFootOneWheel
   Trick_OneFootSmith
@@ -181,6 +190,7 @@ ConfigurableTricks = [
   Trick_SackTap
   Trick_Salad
   Trick_SalFlip
+  Trick_Salute
   Trick_SambaFlip
   Trick_SaranWrap
   Trick_Seatbelt
@@ -225,6 +235,7 @@ ConfigurableTricks = [
   Trick_PaddleGrind
   Trick_Sobriety
   Trick_Varial
+  Trick_VHeelFlipToJudo
   Trick_HTeethSweeper
   Trick_Summoner
 ]

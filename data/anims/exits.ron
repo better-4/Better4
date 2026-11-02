@@ -47,4 +47,8 @@
         exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
         blend_frames: Some(12),
     ),
+    "Flip2Switch_Out": (
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        blend_frames: Some(12),
+    )
 }

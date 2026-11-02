@@ -137,6 +137,7 @@ script destroy_obs_player_name
 endscript
 
 script create_observer_handlers
+  destroy_observer_handlers
   SetScreenElementProps {
     id = root_window
     event_handlers = [
@@ -160,7 +161,9 @@ script create_observer_ui
     parent = root_window
   }
   display_obs_player_name
-  create_observer_handlers
+  if not ScreenElementExists id = keyboard_anchor
+    create_observer_handlers
+  endif
 endscript
 
 script destroy_observer_handlers

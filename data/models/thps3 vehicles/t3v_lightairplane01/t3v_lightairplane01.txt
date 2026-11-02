@@ -1,0 +1,16 @@
+%include "qb_table.qbi"
+
+$t3v_lightairplane01_NodeArray$ =
+:i :a{
+	:i :s{
+		:i $Position$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Angles$ = %vec3(0.000000,0.000000,0.000000)
+		:i $Name$ = $t3v_lightairplane01$
+		:i $Class$ = $LevelGeometry$
+		:i $CreatedAtStart$
+		:i $CollisionMode$ = $Geometry$
+	:i :s}
+:i :a}
+$t3v_lightairplane01TriggerScripts$ =
+:i :a{
+:i :a}

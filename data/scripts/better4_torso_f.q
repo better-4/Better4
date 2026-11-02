@@ -1,6 +1,6 @@
 better4_skater_f_torso_categories = [
-    better4_skater_f_torso_thps4
-    better4_skater_f_torso_beta
+  better4_skater_f_torso_thps4
+  better4_skater_f_torso_beta
 ]
 
 better4_skater_f_torso_thps4 = {
@@ -113,6 +113,10 @@ better4_skater_f_torso_thps4 = {
     {
       desc_id = #"Padded Jacket"
       frontend_desc = 'Padded Jacket'
+    }
+    {
+      desc_id = #"Padded Jacket 2"
+      frontend_desc = 'Padded Jacket 2'
     }
     {
       desc_id = #"Hoody Up"
@@ -403,6 +407,12 @@ skater_f_torso = [
     with = "textures/skater_m/CS_NH_snowjacket_padded"
     is_long_sleeve
     multicolor
+  }
+  {
+    desc_id = #"Padded Jacket 2"
+    frontend_desc = 'Padded Jacket 2'
+    mesh = "models/better4/skater_f/shirt_paddedjacket.skin"
+    is_long_sleeve
   }
   {
     desc_id = #"Hoody Up"
