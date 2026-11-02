@@ -44,6 +44,7 @@ int CStruct_GetFloat(CStruct *this, uint32_t checksum, float *ret, int assert);
 int CStruct_GetInteger(CStruct *this, uint32_t checksum, int *ret, int assert);
 int CStruct_GetString(CStruct *this, uint32_t checksum, const char **ret, int assert);
 int CStruct_GetStructure(CStruct *this, uint32_t checksum, CStruct **ret, int assert);
+int CStruct_GetText(CStruct *this, uint32_t checksum, const char **ret, int assert);
 void CStruct_RemoveComponent(CStruct *this, uint32_t checksum);
 
 #endif

@@ -17,6 +17,7 @@
 #include "pressures.h"
 #include "version.h"
 #include "wallpush.h"
+#include "zbias.h"
 #include "directory_list.h"
 
 #include "partymod-thps4/src/patch.h"
@@ -29,7 +30,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 65
+#define BETTER4_NUM_CFUNCS 66
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -121,6 +122,7 @@ void addCFuncs() {
 	addCFunc("ChangeLevelObject", (void *)CFunc_ChangeLevelObject);
 	addCFunc("ResetLevelObjects", (void *)CFunc_ResetLevelObjects);
 	addCFunc("SetQuickRegrind", (void *)CFunc_SetQuickRegrind);
+	addCFunc("LoadZBias", (void *)CFunc_LoadZBias);
 }
 
 void printCFuncs() {
