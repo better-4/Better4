@@ -50,6 +50,12 @@ script better4_load_anims_thug
   LoadAnim name = "anims\better4\Flip2Switch_Init.ska" descChecksum = Flip2Switch_Init
   LoadAnim name = "anims\better4\Flip2Switch_Range.ska" descChecksum = Flip2Switch_Range
   LoadAnim name = "anims\better4\Flip2Switch_Out.ska" descChecksum = Flip2Switch_Out
+  
+  LoadAnim name = "anims\better4\MadonnaNoHands.ska" descChecksum = MadonnaNoHands
+  LoadAnim name = "anims\better4\MadonnaNoHands_Idle.ska" descChecksum = MadonnaNoHands_Idle
+
+  LoadAnim name = "anims\better4\MuteGrabNoHands.ska" descChecksum = MuteGrabNoHands
+  LoadAnim name = "anims\better4\MuteGrabNoHands_Idle.ska" descChecksum = MuteGrabNoHands_Idle
 
 endscript
 
