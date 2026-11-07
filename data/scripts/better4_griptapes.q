@@ -154,6 +154,66 @@ griptape = [
     common_griptape_params
     with = "textures/better4/Boards/ducky4"
   }
+  {
+    desc_id = #"Margera"
+    frontend_desc = 'Margera'
+    common_griptape_params
+    with = "textures/better4/Boards/MargeraG01"
+  }
+  {
+    desc_id = #"Steamer"
+    frontend_desc = 'Steamer'
+    common_griptape_params
+    with = "textures/better4/Boards/SteamerG01"
+  }
+  {
+    desc_id = #"Hawk 2"
+    frontend_desc = 'Hawk 2'
+    common_griptape_params
+    with = "textures/better4/Boards/BirdhouseG01"
+  }
+  {
+    desc_id = #"Caballero 2"
+    frontend_desc = 'Caballero 2'
+    common_griptape_params
+    with = "textures/better4/Boards/CaballeroG01"
+  }
+  {
+    desc_id = #"Eyeball"
+    frontend_desc = 'Eyeball'
+    common_griptape_params
+    with = "textures/better4/Boards/EyeballG01"
+  }
+  {
+    desc_id = #"Broken"
+    frontend_desc = 'Broken'
+    common_griptape_params
+    with = "textures/better4/Boards/OllieG01"
+  }
+  {
+    desc_id = #"Square"
+    frontend_desc = 'Square'
+    common_griptape_params
+    with = "textures/better4/Boards/GenericG06"
+  }
+  {
+    desc_id = #"Bat Grip"
+    frontend_desc = 'Bat Grip'
+    common_griptape_params
+    with = "textures/better4/Boards/DemonessG01"
+  }
+  {
+    desc_id = #"Ladies"
+    frontend_desc = 'Ladies'
+    common_griptape_params
+    with = "textures/better4/Boards/CarreraG01"
+  }
+  {
+    desc_id = #"You're a Star"
+    frontend_desc = "You're a Star"
+    common_griptape_params
+    with = "textures/better4/Boards/DickG01"
+  }
   // NOTE (ellie): griptape menu seems to hide the last entry for some reason; make it blank
   {}
 ]
