@@ -4620,7 +4620,7 @@ script alc_Gap_RoofToWall
 endscript
 script alc_Gap_RoofToWallEnd
   if TriggerType [ TRIGGER_LAND_ON TRIGGER_SKATE_ONTO ]
-    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Exercise Yard Wall"
+    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Excercise Yard Wall" // Cellblock Roof 2 Exercise Yard Wall
   endif
 endscript
 script alc_Gap_Bleachers
