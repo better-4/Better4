@@ -1,6 +1,5 @@
 better4_skater_f_torso_categories = [
   better4_skater_f_torso_thps4
-  better4_skater_f_torso_thps3
   better4_skater_f_torso_beta
 ]
 
@@ -150,16 +149,6 @@ better4_skater_f_torso_thps4 = {
     {
       desc_id = #"Rowley Jacket"
       frontend_desc = 'Rowley Jacket'
-    }
-  ]
-}
-
-better4_skater_f_torso_thps3 = {
-  label = "THPS3"
-  items = [
-    {
-      desc_id = #"THPS3 Hawk Shirt"
-      frontend_desc = 'Hawk Shirt'
     }
   ]
 }
@@ -484,12 +473,6 @@ skater_f_torso = [
     mesh = "models/better4/skater_f/THPS4_Rowley_Jacket_F.skin"
     is_long_sleeve
     multicolor
-  }
-  // THPS3
-  {
-    desc_id = #"THPS3 Hawk Shirt"
-    frontend_desc = 'Hawk Shirt'
-    mesh = "models/better4/skater_f/shirt_thps3_hawk.skin"
   }
   // Beta
   {
