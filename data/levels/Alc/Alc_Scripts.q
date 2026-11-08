@@ -3546,13 +3546,13 @@ script alc_gap5_WTLipTrick
   endif
   if TriggerType [ TRIGGER_LIP_ON ]
     StartGap GapID = wired flags = PURE_LIP
-    EndGap GapID = wired score = 25 text = "Water tower Lip"
+    EndGap GapID = wired score = 25 text = "Watertower Lip" // Water tower Lip
   endif
 endscript
 script alc_gap_WTLipTrickHigh
   if TriggerType [ TRIGGER_LIP_ON ]
     StartGap GapID = wired flags = PURE_LIP
-    EndGap GapID = wired score = 50 text = "Water tower Roof Lip"
+    EndGap GapID = wired score = 50 text = "Watertower Roof Lip" // Water tower Roof Lip
   endif
 endscript
 script alc_gaps5_GotTrick02
@@ -3617,7 +3617,7 @@ script alc_gap5_IntoWaterTowerCont
   EndGap GapID = gap5_IntoWaterTowerA continue continue = { GapID = gap5_IntoWaterTowerB flags = PURE_AIR }
 endscript
 script alc_gap5_IntoWaterTowerEnd
-  EndGap GapID = gap5_IntoWaterTowerB gapscript = alc_gaps5_GotTrick05 score = 100 text = "Super-high Water tower Spine"
+  EndGap GapID = gap5_IntoWaterTowerB gapscript = alc_gaps5_GotTrick05 score = 100 text = "Super-high Watertower Spine" // Super-high Water tower Spine
 endscript
 script alc_gaps5_GotTrick05
   if GoalManager_GoalIsActive name = Alc_Goal_Gaps5
@@ -4620,7 +4620,7 @@ script alc_Gap_RoofToWall
 endscript
 script alc_Gap_RoofToWallEnd
   if TriggerType [ TRIGGER_LAND_ON TRIGGER_SKATE_ONTO ]
-    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Exercise Yard Wall"
+    EndGap GapID = roof2wall score = 50 text = "Cellblock Roof 2 Excercise Yard Wall" // Cellblock Roof 2 Exercise Yard Wall
   endif
 endscript
 script alc_Gap_Bleachers
