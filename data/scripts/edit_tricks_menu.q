@@ -193,17 +193,23 @@ script create_edit_tricks_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script create_edit_tricks_sub_menu
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.1"
   if GotParam from_pause_menu
     <exit_params> = { from_pause_menu }
   else
     <exit_params> = {}
   endif
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.2"
   if ObjectExists id = current_menu_anchor
     DestroyScreenElement id = current_menu_anchor
   endif
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.3"
   GoalManager_HidePoints
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.4"
   GoalManager_HideGoalPoints
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.5"
   SetScreenElementLock id = root_window off
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.6"
   switch <type>
   case grab_tricks
      <title> = "GRAB TRICKS"
@@ -238,6 +244,7 @@ script create_edit_tricks_sub_menu
      <vertical_bar_offset> = (30, 17)
      <trick_type> = special_tricks
   endswitch
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.7"
   CreateScreenElement {
     type = ContainerElement
     parent = root_window
@@ -245,9 +252,13 @@ script create_edit_tricks_sub_menu
     dims = (640, 480)
     pos = (320, 240)
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.8"
   AssignAlias id = edit_tricks_sub_menu_anchor alias = current_menu_anchor
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.9"
   create_helper_text generic_helper_text_unassign
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.10"
    <root_pos> = (40, 20)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.11"
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -256,7 +267,9 @@ script create_edit_tricks_sub_menu
     just = [ left top ]
     rgba = [ 127 102 0 128 ]
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.12"
   GetStackedScreenElementPos x id = <id> offset = (0, 2)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.13"
   CreateScreenElement {
     type = TextElement
     parent = current_menu_anchor
@@ -268,7 +281,9 @@ script create_edit_tricks_sub_menu
     pos = ( <pos> + (0, 2) )
     just = [ left top ]
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.14"
   GetStackedScreenElementPos y id = <id> offset = (-15, 1)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.15"
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -279,11 +294,14 @@ script create_edit_tricks_sub_menu
     rgba = [ 0 0 0 128 ]
     z_priority = 1
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.16"
   set_sub_bg_goal {
     pos = (185, 23)
     goal_mid_scale = (20, 1.33)
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.17"
   GetStackedScreenElementPos y id = edit_tricks_sub_menu_title offset = (-10, 42)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.18"
   CreateScreenElement {
     type = VMenu
     parent = current_menu_anchor
@@ -298,7 +316,9 @@ script create_edit_tricks_sub_menu
       { unfocus edit_tricks_menu_destroy_current_mapping_list }
     ]
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.19"
   GetStackedScreenElementPos y id = edit_tricks_sub_menu_title offset = <vertical_bar_offset>
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.20"
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -310,8 +330,11 @@ script create_edit_tricks_sub_menu
     just = [ left top ]
     z_priority = 4
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.21"
    <vertical_bar_id> = <id>
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.22"
   GetStackedScreenElementPos x id = <vertical_bar_id> offset = (8, 24)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.23"
   CreateScreenElement {
     type = VScrollingMenu
     parent = current_menu_anchor
@@ -320,7 +343,9 @@ script create_edit_tricks_sub_menu
     dims = (400, 275)
     internal_just = [ left top ]
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.24"
    <vscrolling_menu_id> = <id>
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.25"
   CreateScreenElement {
     type = VMenu
     parent = <vscrolling_menu_id>
@@ -337,12 +362,18 @@ script create_edit_tricks_sub_menu
       { pad_back generic_menu_pad_back_sound }
     ]
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.26"
   edit_tricks_menu_2:SetTags scrolling_parent = <vscrolling_menu_id>
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.27"
   if ( <trick_type> = special_tricks )
+    LogInfo "@@ create_edit_tricks_sub_menu: 0.28"
     create_special_tricks_menu
+    LogInfo "@@ create_edit_tricks_sub_menu: 0.29"
     return
   endif
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.30"
   GetStackedScreenElementPos x id = <vertical_bar_id> offset = (48, 5)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.31"
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -354,7 +385,9 @@ script create_edit_tricks_sub_menu
     rgba = [ 128 128 128 0 ]
     z_priority = 3
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.32"
   GetStackedScreenElementPos y id = <id> offset = (0, 282)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.33"
   CreateScreenElement {
     type = SpriteElement
     parent = current_menu_anchor
@@ -366,7 +399,9 @@ script create_edit_tricks_sub_menu
     rgba = [ 128 128 128 0 ]
     z_priority = 4
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.34"
   GetStackedScreenElementPos y id = edit_tricks_sub_menu_title offset = (-7, -2)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.35"
   CreateScreenElement {
     type = TextElement
     parent = current_menu_anchor
@@ -377,12 +412,15 @@ script create_edit_tricks_sub_menu
     just = [ left top ]
     rgba = [ 88 105 112 128 ]
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.36"
   if ( <type> = lip_tricks )
      <tap_info_text> = "Trick"
   else
      <tap_info_text> = "Single tap / Double tap"
   endif
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.37"
   GetStackedScreenElementPos x id = <vertical_bar_id> offset = (5, -18)
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.38"
   CreateScreenElement {
     type = TextElement
     parent = current_menu_anchor
@@ -394,34 +432,57 @@ script create_edit_tricks_sub_menu
     scale = 0.9
     just = [ left top ]
   }
+  LogInfo "@@ create_edit_tricks_sub_menu: 0.39"
   if GotParam key_combo_array
+    LogInfo "@@ create_edit_tricks_sub_menu: 0.40"
     GetArraySize <key_combo_array>
+    LogInfo "@@ create_edit_tricks_sub_menu: 0.41"
      <index> = 0
+    LogInfo "@@ create_edit_tricks_sub_menu: 0.42"
     begin
+      LogInfo "@@ create_edit_tricks_sub_menu: 0.43"
       edit_tricks_sub_menu_add_key_combo {
         key_combo = ( <key_combo_array> [ <index> ] )
         highlight_bar_scale = <key_combo_highlight_bar_scale>
         short_highlight_bar_scale = <key_combo_short_highlight_bar_scale>
       }
+    LogInfo "@@ create_edit_tricks_sub_menu: 0.44"
        <index> = ( <index> + 1 )
     repeat <array_size>
   endif
+  LogInfo "@@ create_edit_tricks_sub_menu: 1"
   if GotParam trick_type
+    LogInfo "@@ create_edit_tricks_sub_menu: 2"
     if GetConfigurableTricksFromType type = <trick_type> <special>
+      LogInfo "@@ create_edit_tricks_sub_menu: 3"
       GetArraySize <ConfigurableTricks>
+      LogInfo "@@ create_edit_tricks_sub_menu: 4"
        <index> = 0
+      LogInfo "@@ create_edit_tricks_sub_menu: 5"
       if ( <array_size> > 0 )
+        LogInfo "@@ create_edit_tricks_sub_menu: 6"
         begin
+          LogInfo "@@ create_edit_tricks_sub_menu: 7"
            <trick_name> = ( <ConfigurableTricks> [ <index> ] )
+          LogInfo "@@ create_edit_tricks_sub_menu: 8"
           if not TrickIsLocked trick = <trick_name>
+            LogInfo "@@ create_edit_tricks_sub_menu: 9"
             RemoveParameter extra_trick_string
+            LogInfo "@@ create_edit_tricks_sub_menu: 10"
             GetTrickDisplayText trick = <trick_name>
+            LogInfo "@@ create_edit_tricks_sub_menu: 11"
             if not ( <type> = lip_tricks )
+              LogInfo "@@ create_edit_tricks_sub_menu: 12"
               if GotParam extra_trick_string
+                LogInfo "@@ create_edit_tricks_sub_menu: 13"
                 FormatText TextName = trick_display_text "%f / %s" f = <trick_display_text> s = <extra_trick_string>
               endif
             endif
+            LogInfo "@@ create_edit_tricks_sub_menu: 14"
+            LogInfo "@@ create_edit_tricks_sub_menu: trick_display_text=%t" t = <trick_display_text>
+            LogInfo "@@ create_edit_tricks_sub_menu: extra_trick_string=%e" e = <extra_trick_string>
             if ( <index> = ( <array_size> - 1 ) )
+              LogInfo "@@ create_edit_tricks_sub_menu: 15"
               edit_tricks_sub_menu_add_trick {
                 text = <trick_display_text>
                 trick = <trick_name>
@@ -429,7 +490,9 @@ script create_edit_tricks_sub_menu
                 pad_choose_params = { new_trick = <trick_name> callback = edit_tricks_menu_back_from_trick_list }
               }
             else
+              LogInfo "@@ create_edit_tricks_sub_menu: 16"
               if ( <index> = 0 )
+                LogInfo "@@ create_edit_tricks_sub_menu: 17"
                 edit_tricks_sub_menu_add_trick {
                   text = <trick_display_text>
                   trick = <trick_name>
@@ -437,6 +500,7 @@ script create_edit_tricks_sub_menu
                   pad_choose_params = { new_trick = <trick_name> callback = edit_tricks_menu_back_from_trick_list }
                 }
               else
+                LogInfo "@@ create_edit_tricks_sub_menu: 18"
                 edit_tricks_sub_menu_add_trick {
                   text = <trick_display_text>
                   trick = <trick_name>
@@ -445,6 +509,7 @@ script create_edit_tricks_sub_menu
                 }
               endif
             endif
+            LogInfo "@@ create_edit_tricks_sub_menu: 19"
              <index> = ( <index> + 1 )
           endif
         repeat <array_size>
@@ -460,21 +525,30 @@ script create_edit_tricks_sub_menu
   RunScriptOnScreenElement id = current_menu_anchor animate_in
 endscript
 script create_special_tricks_menu
+  LogInfo "@@ create_special_tricks_menu: 1"
   special_tricks_menu_fill_trick_list
+  LogInfo "@@ create_special_tricks_menu: 2"
   FireEvent type = unfocus target = edit_tricks_menu_2
+  LogInfo "@@ create_special_tricks_menu: 3"
   SetScreenElementProps {
     id = edit_tricks_menu_1
     event_handlers = [ { focus edit_tricks_menu_special_tricks_focus } ]
     replace_handlers
   }
+  LogInfo "@@ create_special_tricks_menu: 4"
   GetCurrentSkaterProfileIndex
+  LogInfo "@@ create_special_tricks_menu: 5"
   GetSkaterProfileInfo player = <currentSkaterProfileIndex>
+  LogInfo "@@ create_special_tricks_menu: 6"
    <index> = 1
+  LogInfo "@@ create_special_tricks_menu: 7"
   begin
     special_tricks_menu_add_slot index = <index>
      <index> = ( <index> + 1 )
   repeat <max_specials>
+  LogInfo "@@ create_special_tricks_menu: 8"
   GetStackedScreenElementPos y id = edit_tricks_sub_menu_title offset = (155, 0)
+  LogInfo "@@ create_special_tricks_menu: 9"
   CreateScreenElement {
     type = TextElement
     parent = current_menu_anchor
@@ -532,9 +606,13 @@ script create_special_tricks_menu
     just = [ left top ]
     z_priority = 4
   }
+  LogInfo "@@ create_special_tricks_menu: 10"
   special_tricks_menu_create_menu_3
+  LogInfo "@@ create_special_tricks_menu: 11"
   FireEvent type = focus target = edit_tricks_menu_1
+  LogInfo "@@ create_special_tricks_menu: 12"
   RunScriptOnScreenElement id = current_menu_anchor animate_in
+  LogInfo "@@ create_special_tricks_menu: 13"
 endscript
 script special_tricks_menu_create_menu_3
   SetScreenElementLock id = current_menu_anchor off
@@ -680,6 +758,7 @@ script edit_tricks_menu_add_item { parent = current_menu
     rgba = [ 88 105 112 128 ]
     text_just = [ center center ]
   }
+  LogInfo "@@ edit_tricks_menu_add_item: text=%t" t = <text>
   CreateScreenElement {
     type = ContainerElement
     parent = <parent>
@@ -754,10 +833,14 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
     highlight_bar_scale = (0.38, 1.2)
     parent = edit_tricks_menu_1
   }
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 1"
   if not GotParam focus_params
+    LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 2"
     focus_params = { highlight_bar_scale = <highlight_bar_scale> }
   endif
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 3"
   SetScreenElementLock id = <parent> off
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 4"
   CreateScreenElement {
     type = ContainerElement
     parent = <parent>
@@ -768,8 +851,11 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
     tags = { tag_grid_x = <index> }
      <not_focusable>
   }
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 5"
    <anchor_id> = <id>
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 6"
   if not GotParam pad_choose_params
+    LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 7"
     pad_choose_params = {
       key_combo = <key_combo>
       index = <index>
@@ -778,6 +864,7 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
       highlight_bar_scale = <short_highlight_bar_scale>
     }
   endif
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 8"
   SetScreenElementProps {
     id = <anchor_id>
     event_handlers = [ { pad_choose <pad_choose_script> params = <pad_choose_params> }
@@ -786,11 +873,15 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
       { pad_choose generic_menu_pad_choose_sound }
     ]
   }
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 9"
   if GotParam not_focusable
+    LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 10"
      <text_rgba> = [ 70 70 70 90 ]
   else
+    LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 11"
      <text_rgba> = [ 128 128 128 128 ]
   endif
+  LogInfo "@@ edit_tricks_sub_menu_add_key_combo: 12"
   CreateScreenElement {
     type = TextElement
     parent = <anchor_id>
@@ -804,6 +895,7 @@ script edit_tricks_sub_menu_add_key_combo { pad_choose_script = edit_tricks_menu
   }
 endscript
 script edit_tricks_sub_menu_add_trick pad_choose_script = edit_tricks_menu_bind_trick
+  LogInfo "@@ edit_tricks_sub_menu_add_trick: text=%t" t = <text>
   CreateScreenElement {
     type = ContainerElement
     parent = edit_tricks_menu_2
@@ -831,6 +923,7 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     pad_square_script = special_tricks_menu_unassign_trick
     highlight_bar_scale = (2, 1.3)
   }
+  LogInfo "@@ special_tricks_menu_add_slot: 1"
   CreateScreenElement {
     type = ContainerElement
     parent = edit_tricks_menu_1
@@ -844,8 +937,11 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     ]
     tags = { tag_grid_x = <index> }
   }
+  LogInfo "@@ special_tricks_menu_add_slot: 2"
    <anchor_id> = <id>
+  LogInfo "@@ special_tricks_menu_add_slot: 3"
   FormatText TextName = slot_num "%s-" s = <index>
+  LogInfo "@@ special_tricks_menu_add_slot: 4"
   CreateScreenElement {
     type = TextElement
     parent = <anchor_id>
@@ -856,6 +952,7 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     rgba = [ 90 90 90 100 ]
     z_priority = 4
   }
+  LogInfo "@@ special_tricks_menu_add_slot: 5"
   CreateScreenElement {
     type = SpriteElement
     parent = <anchor_id>
@@ -866,25 +963,36 @@ script special_tricks_menu_add_slot { pad_choose_script = special_tricks_menu_go
     scale = <highlight_bar_scale>
     z_priority = 3
   }
+  LogInfo "@@ special_tricks_menu_add_slot: 6"
 endscript
 script special_tricks_menu_add_special_to_mapping
+  LogInfo "@@ special_tricks_menu_add_special_to_mapping: 1"
   GetSpecialTrickInfo index = <index>
+  LogInfo "@@ special_tricks_menu_add_special_to_mapping: 2"
   CreateScreenElement {
     type = ContainerElement
     parent = special_tricks_current_mapping
     dims = (40, 24)
   }
+  LogInfo "@@ special_tricks_menu_add_special_to_mapping: 3"
    <anchor_id> = <id>
+  LogInfo "@@ special_tricks_menu_add_special_to_mapping: 4"
   if ( <special_trickname> = Unassigned )
+    LogInfo "@@ special_tricks_menu_add_special_to_mapping: 5"
      <trick_display_text> = "Unassigned"
   else
+    LogInfo "@@ special_tricks_menu_add_special_to_mapping: 6"
     GetTrickDisplayText trick = <special_trickname>
   endif
+  LogInfo "@@ special_tricks_menu_add_special_to_mapping: 7"
   if ( <special_trickslot> = Unassigned )
+    LogInfo "@@ special_tricks_menu_add_special_to_mapping: 8"
      <special_trickslot_text> = ""
   else
+    LogInfo "@@ special_tricks_menu_add_special_to_mapping: 9"
      <special_trickslot_text> = ( goal_tetris_trick_text.<special_trickslot> )
   endif
+  LogInfo "@@ special_tricks_menu_add_special_to_mapping: 10"
   CreateScreenElement {
     type = TextElement
     parent = <anchor_id>
@@ -895,6 +1003,7 @@ script special_tricks_menu_add_special_to_mapping
     just = [ right top ]
     rgba = [ 88 105 112 128 ]
   }
+  LogInfo "@@ special_tricks_menu_add_special_to_mapping: 11"
   CreateScreenElement {
     type = TextElement
     parent = <anchor_id>
@@ -906,14 +1015,18 @@ script special_tricks_menu_add_special_to_mapping
   }
 endscript
 script special_tricks_menu_add_type
+  LogInfo "@@ special_tricks_menu_add_type: 1"
   GetConfigurableTricksFromType type = <type> special
+  LogInfo "@@ special_tricks_menu_add_type: 2"
   SetScreenElementLock id = edit_tricks_menu_2 off
+  LogInfo "@@ special_tricks_menu_add_type: 3"
   CreateScreenElement {
     type = ContainerElement
     parent = edit_tricks_menu_2
     dims = (40, 24)
     not_focusable
   }
+  LogInfo "@@ special_tricks_menu_add_type: 4"
    <anchor_id> = <id>
   CreateScreenElement {
     type = TextElement
@@ -936,20 +1049,27 @@ script special_tricks_menu_add_type
     just = [ left top ]
     z_priority = 0
   }
+  LogInfo "@@ special_tricks_menu_add_type: 5"
   GetArraySize <ConfigurableTricks>
    <index> = 0
   begin
+    LogInfo "@@ special_tricks_menu_add_type: 6"
     if ( ( <index> = 0 ) and ( <type> = FlipTrick ) )
+      LogInfo "@@ special_tricks_menu_add_type: 7"
        <first_item> = first_item
     else
+      LogInfo "@@ special_tricks_menu_add_type: 8"
       RemoveParameter first_item
       if ( ( <index> = ( <array_size> - 1 ) ) and ( <type> = Manual ) )
          <last_item> = last_item
       else
         RemoveParameter last_item
       endif
+      LogInfo "@@ special_tricks_menu_add_type: 9"
     endif
+    LogInfo "@@ special_tricks_menu_add_type: 10"
     if not TrickIsLocked trick = ( <ConfigurableTricks> [ <index> ] )
+      LogInfo "@@ special_tricks_menu_add_type: 11"
       special_tricks_menu_add_trick {
         trick = ( <ConfigurableTricks> [ <index> ] )
         type = <type>
