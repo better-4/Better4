@@ -253,8 +253,12 @@ void patchKoth() {
 uint32_t __fastcall Script_CStruct_GetString_Wrapper(CStruct *this, unused_t _, uint32_t checksum, const char ** out, int assert) {
 	static int(__fastcall* _GetString)(CStruct *, unused_t, uint32_t, const char **, int) = (void *)0x00417f70;
 
+	char *our_out = 0;
+
 	// Use displayname instead of name if specified, for Benihana (extras) etc.
-	if (CStruct_GetString(this, 0x38e23359/*displayname*/, out, assert)) {
+	if (CStruct_GetString(this, 0x38e23359/*displayname*/, &our_out, assert)) {
+		logInfo("Script_CStruct_GetString_Wrapper: overriding display name with %s", our_out);
+		*out = our_out;
 		return 1;
 	} else {
 		return _GetString(this, UNUSED, checksum, out, assert);
