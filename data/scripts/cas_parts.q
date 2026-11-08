@@ -17,7 +17,7 @@ master_editable_list = [
   { part = skater_m_backpack text = "BACKPACK" male = 1 female = 0 submenu = backpack_menu colormenu = pack_color_menu }
   { part = skater_m_jaw text = "M JAW" male = 1 female = 0 submenu = jaw_menu preview_menu = 1 colormenu = facial_hair_color_menu }
   { part = skater_m_kneepads text = "M KNEEPADS" male = 1 female = 0 submenu = kneepads_menu colormenu = kneepads_color_menu }
-  { part = skater_m_socks text = "M SOCKS" male = 1 female = 0 submenu = socks_menu colormenu = socks_color_menu }
+  { part = skater_m_socks text = "M SOCKS" male = 1 female = 0 submenu = socks_menu colormenu = socks_color_menu categories = better4_skater_m_socks_categories }
   { part = skater_m_elbowpads text = "M ELBOWPADS" male = 1 female = 0 submenu = elbowpads_menu colormenu = elbowpads_color_menu }
   { part = skater_f_head text = "F HEADS" male = 0 female = 1 submenu = face_menu preview_menu = 1 }
   { part = skater_f_torso text = "F TORSOS" male = 0 female = 1 submenu = shirt_style_menu colormenu = shirt_color_menu categories = better4_skater_f_torso_categories }
@@ -26,7 +26,7 @@ master_editable_list = [
   { part = skater_f_hat_hair text = "F HAT HAIR" male = 0 female = 1 submenu = hat_hair_menu preview_menu = 1 colormenu = hat_hair_color_menu }
   { part = skater_f_backpack text = "BACKPACK" male = 0 female = 1 submenu = backpack_menu colormenu = pack_color_menu }
   { part = skater_f_kneepads text = "F KNEEPADS" male = 0 female = 1 submenu = kneepads_menu colormenu = kneepads_color_menu }
-  { part = skater_f_socks text = "F SOCKS" male = 0 female = 1 submenu = socks_menu colormenu = socks_color_menu }
+  { part = skater_f_socks text = "F SOCKS" male = 0 female = 1 submenu = socks_menu colormenu = socks_color_menu categories = better4_skater_f_socks_categories }
   { part = skater_f_elbowpads text = "F ELBOWPADS" male = 0 female = 1 submenu = elbowpads_menu colormenu = elbowpads_color_menu }
 	{
     part = sleeves

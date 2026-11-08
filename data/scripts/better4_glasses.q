@@ -1,6 +1,6 @@
 better4_glasses_categories = [
-    better4_glasses_thps3
     better4_glasses_thps4
+    better4_glasses_thps3
 ]
 
 better4_glasses_thps4 = {
