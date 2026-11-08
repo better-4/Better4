@@ -40,6 +40,30 @@ better4_skater_f_socks_thps3 = {
       desc_id = None
       frontend_desc = 'None'
     }
+    {
+      desc_id = #"thps3 Sport 1"
+      frontend_desc = 'Sport 1'
+    }
+    {
+      desc_id = #"thps3 Sport 2"
+      frontend_desc = 'Sport 2'
+    }
+    {
+      desc_id = #"thps3 Lacy"
+      frontend_desc = 'Lacy'
+    }
+    {
+      desc_id = #"thps3 RedBlack"
+      frontend_desc = 'RedBlack'
+    }
+    {
+      desc_id = #"thps3 Golf"
+      frontend_desc = 'Golf'
+    }
+    {
+      desc_id = #"thps3 Checkered"
+      frontend_desc = 'Checkered'
+    }
   ]
 }
 
@@ -81,5 +105,47 @@ skater_f_socks = [
     mesh = "models/skater_f/extra_socks.skin"
     replace = "CS_NN_socks.png"
     with = "textures/skater_m/CAS_MLS_english"
+  }
+  {
+    desc_id = #"thps3 Sport 1"
+    frontend_desc = 'Sport 1'
+    mesh = "models/skater_f/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_sportsocks_32"
+  }
+  {
+    desc_id = #"thps3 Sport 2"
+    frontend_desc = 'Sport 2'
+    mesh = "models/skater_f/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_sportsocksF_32"
+  }
+  {
+    desc_id = #"thps3 Lacy"
+    frontend_desc = 'Lacy'
+    mesh = "models/skater_f/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_lacesocksF"
+  }
+  {
+    desc_id = #"thps3 RedBlack"
+    frontend_desc = 'RedBlack'
+    mesh = "models/skater_f/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_redblack"
+  }
+  {
+    desc_id = #"thps3 Golf"
+    frontend_desc = 'Golf'
+    mesh = "models/skater_f/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_argyllsocks_32"
+  }
+  {
+    desc_id = #"thps3 Checkered"
+    frontend_desc = 'Checkered'
+    mesh = "models/skater_f/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_checksocks_32"
   }
 ]
