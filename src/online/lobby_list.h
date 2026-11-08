@@ -18,5 +18,9 @@ int __cdecl CFunc_StopBetterPlayerList(CStruct *params);
 int __cdecl CFunc_UpdateBetterPlayerList(CStruct *params);
 int __cdecl CFunc_NumBetterPlayersInLobby(CStruct *params, CScript *out);
 int __cdecl CFunc_SendBetterMessage(CStruct *params);
+int __cdecl CFunc_FillPlayerListMenu(CStruct *params);
+int __cdecl CFunc_FocusLobbyPlayer(CStruct *params);
+int __cdecl CFunc_StopFocusingLobbyPlayer(CStruct *params);
+int __cdecl CFunc_FoundPlayers(CStruct *params);
 
 #endif

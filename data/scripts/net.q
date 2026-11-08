@@ -577,12 +577,14 @@ script better_observe_chosen
   endif
 endscript
 script user_list_chosen
-  DoScreenElementMorph id = user_list_up_arrow time = 0 scale = 1
-  DoScreenElementMorph id = user_list_down_arrow time = 0 scale = 1
-  FireEvent type = unfocus target = actions_menu
-  FireEvent type = focus target = lobby_player_list_menu
-  Change current_lobby_focus = 2
-  AssignAlias id = lobby_player_list_menu alias = current_menu
+  if FoundPlayers
+    DoScreenElementMorph id = user_list_up_arrow time = 0 scale = 1
+    DoScreenElementMorph id = user_list_down_arrow time = 0 scale = 1
+    FireEvent type = unfocus target = actions_menu
+    FireEvent type = focus target = lobby_player_list_menu
+    Change current_lobby_focus = 2
+    AssignAlias id = lobby_player_list_menu alias = current_menu
+  endif
 endscript
 script buddy_list_chosen
   FillBuddyList clear_list allow_remove
@@ -1412,7 +1414,20 @@ script player_list_add_item
     return
   endif
   if ObjectExists id = lobby_player_list_menu
-    main_menu_add_item { parent = lobby_player_list_menu highlight_bar_scale = (0.975, 1.2) highlight_bar_pos = (94, -6) focus_script = player_list_focus <...> }
+    main_menu_add_item {
+      parent = lobby_player_list_menu
+      highlight_bar_scale = (0.975, 1.2)
+      highlight_bar_pos = (94, -6)
+      focus_script = player_list_focus
+      focus_params = { id = <id> }
+      <...>
+    }
+  endif
+endscript
+script refocus_player_list
+  if ObjectExists id = lobby_player_list_menu
+    FireEvent type = unfocus target = lobby_player_list_menu
+    FireEvent type = focus target = lobby_player_list_menu
   endif
 endscript
 script update_lobby_player_list
@@ -1468,6 +1483,7 @@ endscript
 script player_list_focus
   generic_menu_update_arrows menu_id = lobby_player_list_menu up_arrow_id = user_list_up_arrow down_arrow_id = user_list_down_arrow
   main_menu_focus
+  FocusLobbyPlayer <...>
 endscript
 script user_blink_up_arrow
   RunScriptOnScreenElement id = user_list_up_arrow menu_blink_arrow
@@ -1614,6 +1630,7 @@ script back_from_better_server_list
   restore_internet_only_menus
 endscript
 script back_from_user_list
+  StopFocusingLobbyPlayer
   actions_menu_anchor:DoMorph scale = 1
   user_list_up_arrow:DoMorph scale = 0
   user_list_down_arrow:DoMorph scale = 0
