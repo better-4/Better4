@@ -1,5 +1,6 @@
 better4_skater_f_torso_categories = [
   better4_skater_f_torso_thps4
+  better4_skater_f_torso_thps3
   better4_skater_f_torso_beta
 ]
 
@@ -149,6 +150,16 @@ better4_skater_f_torso_thps4 = {
     {
       desc_id = #"Rowley Jacket"
       frontend_desc = 'Rowley Jacket'
+    }
+  ]
+}
+
+better4_skater_f_torso_thps3 = {
+  label = "THPS3"
+  items = [
+    {
+      desc_id = #"THPS3 Hawk Shirt"
+      frontend_desc = 'Hawk Shirt'
     }
   ]
 }
@@ -458,45 +469,52 @@ skater_f_torso = [
     mesh = "models/skater_f/shirt_steamer.skin"
   }
   {
-    desc_id = #"Steamer shirt beta"
-    frontend_desc = 'Steamer Shirt (Beta)'
-    mesh = "models/better4/skater_f/shirt_steamer_beta.skin"
-  }
-  {
     desc_id = #"Tube Top"
     frontend_desc = 'Tube Top'
     mesh = "models/skater_f/shirt_jennatube.skin"
   }
-  {
-    desc_id = #"Koston Shirt beta F"
-    frontend_desc = 'Koston Shirt (Beta)'
-    mesh = "models/better4/skater_f/shirt_koston_beta.skin"
-  }  
-  {
-    desc_id = #"Hawk Shirt beta F"
-    frontend_desc = 'Hawk Shirt (Beta)'
-    mesh = "models/better4/skater_f/shirt_hawk_beta.skin"
-  }  
-  {
-    desc_id = #"Glifberg Shirt beta F"
-    frontend_desc = 'Glifberg Shirt (Beta)'
-    mesh = "models/better4/skater_f/shirt_glifberg_beta.skin"
-  }  
   {
     desc_id = #"Campbell Shirt F"
     frontend_desc = 'Campbell Shirt'
     mesh = "models/better4/skater_f/shirt_campbell_F.skin"
   }
   {
-    desc_id = #"Campbell Shirt beta F"
-    frontend_desc = 'Campbell Shirt (Beta)'
-    mesh = "models/better4/skater_f/shirt_campbell_beta.skin"
-  }  
-  {
     desc_id = #"Rowley Jacket"
     frontend_desc = 'Rowley Jacket'
     mesh = "models/better4/skater_f/THPS4_Rowley_Jacket_F.skin"
     is_long_sleeve
     multicolor
+  }
+  // THPS3
+  {
+    desc_id = #"THPS3 Hawk Shirt"
+    frontend_desc = 'Hawk Shirt'
+    mesh = "models/better4/skater_f/shirt_thps3_hawk.skin"
+  }
+  // Beta
+  {
+    desc_id = #"Steamer shirt beta"
+    frontend_desc = 'Steamer Shirt (Beta)'
+    mesh = "models/better4/skater_f/shirt_steamer_beta.skin"
+  }
+  {
+    desc_id = #"Koston Shirt beta F"
+    frontend_desc = 'Koston Shirt (Beta)'
+    mesh = "models/better4/skater_f/shirt_koston_beta.skin"
+  }
+  {
+    desc_id = #"Hawk Shirt beta F"
+    frontend_desc = 'Hawk Shirt (Beta)'
+    mesh = "models/better4/skater_f/shirt_hawk_beta.skin"
+  }
+  {
+    desc_id = #"Glifberg Shirt beta F"
+    frontend_desc = 'Glifberg Shirt (Beta)'
+    mesh = "models/better4/skater_f/shirt_glifberg_beta.skin"
+  }
+  {
+    desc_id = #"Campbell Shirt beta F"
+    frontend_desc = 'Campbell Shirt (Beta)'
+    mesh = "models/better4/skater_f/shirt_campbell_beta.skin"
   }
 ]
