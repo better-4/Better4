@@ -260,9 +260,14 @@ uint32_t __fastcall Script_CStruct_GetString_Wrapper(CStruct *this, unused_t _, 
 		logInfo("Script_CStruct_GetString_Wrapper: overriding display name with %s", our_out);
 		*out = our_out;
 		return 1;
-	} else {
-		return _GetString(this, UNUSED, checksum, out, assert);
 	}
+
+	if (_GetString(this, UNUSED, checksum, out, assert)) {
+		return 1;
+	}
+
+	*out = "...";
+	return 0;
 }
 
 void patchTrickDisplayNames() {
