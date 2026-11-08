@@ -11,7 +11,6 @@
 #include "online/client.h"
 #include "online/host_options.h"
 #include "online/lobby_list.h"
-#include "online/player_list.h"
 #include "online/server.h"
 #include "online/server_list.h"
 #include "pressures.h"
@@ -30,7 +29,7 @@
 
 #define THPS4_CFUNC_LUT_START 0x005aba40
 #define THPS4_NUM_CFUNCS 0x386
-#define BETTER4_NUM_CFUNCS 66
+#define BETTER4_NUM_CFUNCS 69
 #define NUM_CFUNCS (THPS4_NUM_CFUNCS + BETTER4_NUM_CFUNCS)
 
 extern char configFile[1024];
@@ -123,6 +122,9 @@ void addCFuncs() {
 	addCFunc("ResetLevelObjects", (void *)CFunc_ResetLevelObjects);
 	addCFunc("SetQuickRegrind", (void *)CFunc_SetQuickRegrind);
 	addCFunc("LoadZBias", (void *)CFunc_LoadZBias);
+	addCFunc("FocusLobbyPlayer", (void *)CFunc_FocusLobbyPlayer);
+	addCFunc("StopFocusingLobbyPlayer", (void *)CFunc_StopFocusingLobbyPlayer);
+	addCFunc("FoundPlayers", (void *)CFunc_FoundPlayers);
 }
 
 void printCFuncs() {
