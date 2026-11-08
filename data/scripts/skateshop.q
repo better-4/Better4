@@ -5339,6 +5339,7 @@ edit_skater_leg_options = [
     is_visible_params = { group = socks_items }
     is_visible_script2 = check_for_shoe_flags
     is_visible_params2 = { group = socks_items }
+    categorized
   }
   {
     text = 'Socks Color'
