@@ -299,7 +299,7 @@ void patchBetter4() {
 	patchSpineTransfers();
 	patchIykyk();
 	patchGamespyCalls();
-	patchStrcpy();
+	patchSecurity();
 	patchWallpush();
 	patchLoad();
 	patchLevelLimit();
