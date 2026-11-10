@@ -52,7 +52,7 @@
         blend_frames: Some(12),
     ),
     "_360Flip_thug": (
-        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: true, motion: false),
+        exit: Anim(anim: "StretchLegsInit", frame: 0, mirror: false, motion: false),
         blend_frames: Some(12),
     ),
 }
