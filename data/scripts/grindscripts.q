@@ -1429,4 +1429,23 @@ script Trick_GrindOverturnTap_FS_180
   BoardRotateAfter
   Goto Trick_GrindOverturnTap_FS Params = { NoBlend = yes }
 endscript
-
+script Trick_SpideyGrind2
+	Grind {
+		Name = 'Spidey Grind' 
+		Score = 500 
+		initanim = SpideyGrind_Init 
+		Anim = SpideyGrind_Range 
+		outanim = SpideyGrind_Out
+		Type = Grind 
+		NoBlend = <NoBlend> 
+		GrindBail = FiftyFiftyFall 
+		IsSpecial 
+		boardrotate
+		Extratricks = Extra_BS_Grinds 
+		IsExtra = <IsExtra>
+		OutAnimOnOllie
+	}
+endscript
+script Trick_SpideyGrind2_180
+	BackwardsGrind grind = Trick_SpideyGrind2
+endscript

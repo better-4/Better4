@@ -83,6 +83,7 @@ ConfigurableTricks = [
   Trick_Flamingo
   Trick_FlipKickDad
   Trick_Flip2Switch
+  Trick_FlyingSquirrel
   Trick_FroggyGrind
   Trick_FS540
   Trick_FS540HeelFlip
@@ -198,6 +199,7 @@ ConfigurableTricks = [
   Trick_SitDownAir
   Trick_SomiSpin
   Trick_Spacewalk
+  Trick_SpideyGrind
   Trick_SplitsManual
   Trick_SprayPaintGrind
   Trick_Sproing
@@ -218,6 +220,7 @@ ConfigurableTricks = [
   Trick_VarialHeelflip
   Trick_VarialKickflip
   Trick_VarialKickflip2
+  Trick_VKTHUG
   Trick_Layout
   Trick_MaulForceGrab
   Trick_RodeoClown

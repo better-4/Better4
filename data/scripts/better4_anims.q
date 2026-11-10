@@ -56,7 +56,16 @@ script better4_load_anims_thug
 
   LoadAnim name = "anims\better4\MuteGrabNoHands.ska" descChecksum = MuteGrabNoHands
   LoadAnim name = "anims\better4\MuteGrabNoHands_Idle.ska" descChecksum = MuteGrabNoHands_Idle
-
+  
+  LoadAnim name = "anims\better4\_360Flip_thug.ska" descChecksum = _360Flip_thug
+  
+  LoadAnim name = "anims\better4\FlyingSquirrel_Init.ska" descChecksum = FlyingSquirrel_Init
+  LoadAnim name = "anims\better4\FlyingSquirrel_Idle.ska" descChecksum = FlyingSquirrel_Idle
+  
+  LoadAnim name = "anims\better4\SpideyGrind_Init.ska" descChecksum = SpideyGrind_Init
+  LoadAnim name = "anims\better4\SpideyGrind_Range.ska" descChecksum = SpideyGrind_Range
+  LoadAnim name = "anims\better4\SpideyGrind_Out.ska" descChecksum = SpideyGrind_Out
+  
 endscript
 
 script better4_load_anims_th3

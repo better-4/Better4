@@ -93,6 +93,9 @@ Trick_BodyVarial = { Scr = FlipTrick Params = { Name = 'Body Varial' Score = 500
 Trick_KFMcTwist = { Scr = FlipTrick Params = { Name = "Kickflip McTwist" Score = 5000 anim = KickFlipBlendFS anim2 = McTwist kickflipmctwisterz IsSpecial RevertBS NoSpin RotateAfter trickslack = 10 Speed = 1.0 speed2 = 0.95 blend2 = 0.5 Spinslack = 20 } }
 Trick_OneFootMute = { Scr = GrabTrick Params = { Name = 'One Foot Mute' Score = 900 Anim = MuteGrabNoHands Idle = MuteGrabNoHands_Idle Speed = 1.0 } }
 Trick_NoHandsMadonna = { Scr = GrabTrick Params = { Name = 'No Handed Madonna' Score = 900 Anim = MadonnaNoHands Idle = MadonnaNoHands_Idle Speed = 1.0 } }
+Trick_VKTHUG = { Scr = FlipTrick params = { name = 'Varial Kickflip' Score = 300 Anim = VarialKickflip BoardRotate Nollie = NollieVarialKickflip ExtraTricks = Extra_VKTHUG TreNollieFix } }
+Extra_VKTHUG = [ { Trigger = { Press Square 300 } Scr = FlipTrick params = { name = '360 Flip' displayname = '360 Flip (THUG)' Score = 500 Anim = _360Flip_thug Nollie = Nollie360Flip IsExtra UseCurrent TreNollieFix } } ]
+Trick_FlyingSquirrel = { Scr = GrabTrick Params = { Name = 'Flying Squirrel' Speed = 1.3 Score = 1500 Anim = FlyingSquirrel_Init Idle = FlyingSquirrel_Idle IsSpecial } } 
 
 
 Trick_SemiFlip = { Scr = FlipTrick params = { name = 'Semi Flip' Score = 1450 Anim = SemiFlip BoardRotate IsSpecial speed = 1.1 trickslack = 20 } }
