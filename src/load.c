@@ -172,6 +172,14 @@ void patchLoad() {
     add_path_override("levels\\LA\\LA.scn.Xbx", "levels\\better4\\LA\\LA.scn.Xbx");
     add_path_override("levels\\LA\\LA.tex.Xbx", "levels\\better4\\LA\\LA.tex.Xbx");
 
+    add_path_override("levels\\Burn\\Burn.col.Xbx", "levels\\better4\\Burn\\Burn.col.Xbx");
+	add_path_override("levels\\Burn\\Burn.scn.Xbx", "levels\\better4\\Burn\\Burn.scn.Xbx");
+    add_path_override("levels\\Burn\\Burn.tex.Xbx", "levels\\better4\\Burn\\Burn.tex.Xbx");
+	add_path_override("levels\\Burn_Sky\\Burn_Sky.col.Xbx", "levels\\better4\\Burn_Sky\\Burn_Sky.col.Xbx");
+	add_path_override("levels\\Burn_Sky\\Burn_Sky.scn.Xbx", "levels\\better4\\Burn_Sky\\Burn_Sky.scn.Xbx");
+	add_path_override("levels\\Burn_Sky\\Burn_Sky.tex.Xbx", "levels\\better4\\Burn_Sky\\Burn_Sky.tex.Xbx");
+	
+
 	// THPS4
 
 	add_path_override("levels\\skateshop\\skateshop.scn.Xbx", "levels\\better4\\skateshop\\skateshop.scn.Xbx");

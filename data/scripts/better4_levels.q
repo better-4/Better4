@@ -50,7 +50,7 @@ thps_level_info = [
   { text = "Skatepark" level_num = LevelNum_Vans level = Load_Vans level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\vans" }
   { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\downtown" }
   { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\dhj" }
-  { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\burnside" }
+  { text = "Burnside" under_construction level_num = LevelNum_Burnside level = Load_Burn level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\burnside" }
   { text = "Streets" under_construction level_num = LevelNum_Streets level = Load_Streets level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\streets" }
   { text = "Roswell" not_focusable level_num = LevelNum_Roswell level = Load_Roswell level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\roswell" }
 ]
@@ -204,6 +204,46 @@ level_streets = {
   green_1 = 58
   blue_1 = 61
   mod_factor_1 = 0.2
+}
+
+script Load_Burn
+  load_level level_burn
+endscript
+
+level_burn = {
+  structure_name = level_burn
+  load_script = Load_Burn
+  name = "Burnside"
+  level = "Burn"
+  qb = "levels\better4\burn\burn.qb"
+  // level_qb = "levels\better4\Ware\Ware_scripts.qb"
+  sky = "Burn_Sky"
+  ambient_track = "music\amb_alc"
+  loading_screen = "better4\loadscrn_Ware"
+  startup_script = burn_Startup
+  goals_script = burn_goals
+  setup_script = burn_setup
+  level_number = LevelNum_Burnside
+  temp_script = load_cameras_and_terrains
+  // extranetanimsscript = load_level_anims
+  loading_time = 1
+  default_stats = 10
+  ambient_red = 72
+  ambient_green = 72
+  ambient_blue = 72
+  ambient_mod_factor = 0.5
+  heading_0 = 270.0
+  pitch_0 = -60.0
+  red_0 = 75
+  green_0 = 75
+  blue_0 = 75
+  mod_factor_0 = 0.7
+  heading_1 = 0.0
+  pitch_1 = -90.0
+  red_1 = 0
+  green_1 = 0
+  blue_1 = 0
+  mod_factor_1 = 1.0
 }
 
 // THPS2
