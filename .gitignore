@@ -1,1 +1,5 @@
 build/
+*.level.json
+*.log
+*.qbi
+*.txt
