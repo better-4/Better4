@@ -17,6 +17,7 @@ script load_requested_level // zed TODO: Look at later for possible trick font a
 endscript
 script InitializeGameFlow
   load_requested_level
+  ResetSkaters
   StandardGameFlow
 endscript
 script ChangeLevelGameFlow // zed TODO: Look at later for possible trick font and special bar toggle fix
