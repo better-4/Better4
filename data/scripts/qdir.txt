@@ -223,3 +223,6 @@ better4/better4_hair_f.qb
 better4/better4_keyboard.qb
 better4/better4_socks_m.qb
 better4/better4_socks_f.qb
+better4/better4_hathair_m.qb
+better4/better4_hathair_f.qb
+better4/better4_hats.qb
