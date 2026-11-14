@@ -1,3 +1,4 @@
+NEW_LEVEL = 0
 script Game_Update
   GoalManager_UpdateAllGoals
 endscript
@@ -11,16 +12,16 @@ script SetGameState
   cleanup_before_loading_level
   LaunchGame
 endscript
-script load_requested_level // zed TODO: Look at later for possible trick font and special bar toggle fix
+script load_requested_level
   GetCurrentLevel
+  Change NEW_LEVEL = 1
   LoadLevel level = <level>
 endscript
 script InitializeGameFlow
   load_requested_level
-  ResetSkaters
   StandardGameFlow
 endscript
-script ChangeLevelGameFlow // zed TODO: Look at later for possible trick font and special bar toggle fix
+script ChangeLevelGameFlow
   Change FirstTimeInSplitScreen = 1
   if not IsObserving
     Skater:SetCustomRestart clear
@@ -175,8 +176,9 @@ script GameFlow_StartRun
   if not InNetGame
     ResetSkaters
   else
-    if ( better4_control_respawn_on_newrun_value = on )
+    if ((better4_control_respawn_on_newrun_value = on) or (NEW_LEVEL = 1))
       ResetSkaters
+      Change NEW_LEVEL = 0
     else
       skater:GetTags
       if ( <state> = skater_inair )
