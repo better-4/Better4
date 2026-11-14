@@ -13,12 +13,8 @@
 #include "zbias.h"
 
 #include "decomp/common.h"
-#include "decomp/CArray.h"
 #include "decomp/CStruct.h"
 #include "decomp/GameNet_PlayerInfo.h"
-#include "decomp/Gfx_CModelBuilder.h"
-#include "decomp/Net_App.h"
-#include "decomp/Net_Dispatcher.h"
 #include "decomp/Obj_CSkaterCareer.h"
 
 #include "partymod-thps4/src/main.h"
@@ -288,6 +284,31 @@ void patchQbStartupLogging() {
 	patchCall(0x00512045, (void *)Script_LoadQB_);
 }
 
+__declspec(naked) void betterPurelyTransparentCheck() {
+	static void *ret = (void *)0x0043a7e5;
+	__asm {
+		mov eax, dword ptr [esi + 0x54] // instance->scene
+		mov ecx, dword ptr [eax + 0x20] // scene's opaque mesh count
+		or ecx, dword ptr [esi + 0x44] // instance's bone transforms
+		jnz not_pure
+		cmp dword ptr [eax + 0x2c], ecx // scene's transparent mesh count > 0
+		jle not_pure
+		mov al, 0x1
+		jmp dword ptr [ret]
+	not_pure:
+		xor al, al
+		jmp dword ptr [ret]
+	}
+}
+
+void patchTransparency() {
+	patchJmp(0x0043a7ce, (void *)betterPurelyTransparentCheck); // NxXbox::render_instances (0x0043a740)
+}
+
+void patchFarClippingPlane() {
+	patchFloat(0x005a00b0, 48000.0);
+}
+
 void patchBetter4() {
 	logInfo("Initializing Better4 patches, using config=%s", configFile);
 
@@ -316,6 +337,8 @@ void patchBetter4() {
 	patchQbStartupLogging();
 	patchQuickRegrind();
 	patchZBias();
+	patchTransparency();
+	patchFarClippingPlane();
 }
 
 void better4Main() {
