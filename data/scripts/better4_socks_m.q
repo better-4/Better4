@@ -64,6 +64,30 @@ better4_skater_m_socks_thps3 = {
       desc_id = #"thps3 Checkered"
       frontend_desc = 'Checkered'
     }
+    {
+      desc_id = #"thps3 Gentleman"
+      frontend_desc = 'Gentleman'
+    }
+    {
+      desc_id = #"thps3 Question"
+      frontend_desc = 'Question'
+    }
+    {
+      desc_id = #"thps3 Spotty 1"
+      frontend_desc = 'Spotty 1'
+    }
+    {
+      desc_id = #"thps3 Spotty 2"
+      frontend_desc = 'Spotty 2'
+    }
+    {
+      desc_id = #"thps3 Stripe 1"
+      frontend_desc = 'Stripe 1'
+    }
+    {
+      desc_id = #"thps3 Stripe 2"
+      frontend_desc = 'Stripe 2'
+    }
   ]
 }
 
@@ -137,7 +161,7 @@ skater_m_socks = [
   {
     desc_id = #"thps3 Golf"
     frontend_desc = 'Golf'
-    mesh = "models/skater_m/extra_socks.skin"
+    mesh = "models/better4/skater_m/extra_socks.skin"
     replace = "CS_NN_socks.png"
     with = "textures/better4/skater_m/CAS_MLS_argyllsocks_32"
   }
@@ -147,5 +171,47 @@ skater_m_socks = [
     mesh = "models/better4/skater_m/extra_socks.skin"
     // replace = "CS_NN_socks.png"
     // with = "textures/better4/skater_m/CAS_MLS_checksocks_32"
+  }
+  {
+    desc_id = #"thps3 Gentleman"
+    frontend_desc = 'Gentleman'
+    mesh = "models/better4/skater_m/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_gentleman_32"
+  }
+  {
+    desc_id = #"thps3 Question"
+    frontend_desc = 'Question'
+    mesh = "models/better4/skater_m/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_questionsocks"
+  }
+  {
+    desc_id = #"thps3 Spotty 1"
+    frontend_desc = 'Spotty 1'
+    mesh = "models/better4/skater_m/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_spottysocks"
+  }
+  {
+    desc_id = #"thps3 Spotty 2"
+    frontend_desc = 'Spotty 2'
+    mesh = "models/better4/skater_m/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_spottysocks2"
+  }
+  {
+    desc_id = #"thps3 Stripe 1"
+    frontend_desc = 'Stripe 1'
+    mesh = "models/better4/skater_m/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_stripesocks"
+  }
+  {
+    desc_id = #"thps3 Stripe 2"
+    frontend_desc = 'Stripe 2'
+    mesh = "models/better4/skater_m/extra_socks.skin"
+    replace = "CS_NN_socks.png"
+    with = "textures/better4/skater_m/CAS_MLS_stripesocks2"
   }
 ]
