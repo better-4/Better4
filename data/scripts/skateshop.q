@@ -5135,6 +5135,7 @@ edit_skater_head_options = [
     is_visible_params2 = { group = hair_items }
     is_enabled_script = check_if_group_editable
     is_enabled_params = { group = hat_hair_items }
+	categorized
   }
   {
     text = 'Hat Hair Color'
@@ -5171,6 +5172,7 @@ edit_skater_head_options = [
     is_visible_params = { group = hat_items }
     is_visible_script2 = check_for_head_flags
     is_visible_params2 = { group = hat_items }
+	categorized
   }
   {
     text = 'Hat Color'

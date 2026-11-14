@@ -248,6 +248,10 @@ better4_skater_m_torso_thps3 = {
       desc_id = #"THPS3 Hawk Shirt"
       frontend_desc = 'Hawk Shirt'
     }
+    {
+      desc_id = #"THPS3 Lasek Shirt"
+      frontend_desc = 'Lasek Shirt'
+    }
   ]
 }
 
@@ -749,6 +753,11 @@ skater_m_torso = [
     desc_id = #"THPS3 Hawk Shirt"
     frontend_desc = 'Hawk Shirt'
     mesh = "models/better4/skater_m/shirt_thps3_hawk.skin"
+  }
+  {
+    desc_id = #"THPS3 Lasek Shirt"
+    frontend_desc = 'Lasek Shirt'
+    mesh = "models/better4/skater_m/shirt_th3_buckyshirt.skin"
   }
   // Beta
   {
