@@ -1,8 +1,8 @@
 better4_skater_hat_categories = [
   better4_skater_hat_thps4
+  better4_skater_hat_b4
   better4_skater_hat_thug
   better4_skater_hat_thug2
-  better4_skater_hat_b4
 ]
 
 better4_skater_hat_thps4 = {
@@ -201,6 +201,10 @@ better4_skater_hat_b4 = {
     {
       desc_id = #"muska hat"
       frontend_desc = 'Muska Hat'
+    }
+    {
+      desc_id = #"Ranger Ron Hat"
+      frontend_desc = 'Ranger'
     }
   ]
 }
@@ -654,6 +658,15 @@ hat = [
     desc_id = #"Hawk 50 Cent THUG2"
     frontend_desc = 'Hawk 50 Cent'
     mesh = "models/better4/shared/hats/hat_ug2_hawk50cent.skin"
+    script disqualify_script
+      ClearPart part = skater_f_hair
+      ClearPart part = skater_m_hair
+    endscript
+  }
+  {
+    desc_id = #"Ranger Ron Hat"
+    frontend_desc = 'Ranger'
+    mesh = "models/better4/shared/hats/hat_ranger.skin"
     script disqualify_script
       ClearPart part = skater_f_hair
       ClearPart part = skater_m_hair
