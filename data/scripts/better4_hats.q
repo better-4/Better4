@@ -177,8 +177,16 @@ better4_skater_hat_thug2 = {
       frontend_desc = 'Hawk Flip Flop'
     }
     {
-    desc_id = #"Volcom hat THUG2"
-    frontend_desc = 'Volcom Hat'
+      desc_id = #"Volcom hat THUG2"
+      frontend_desc = 'Volcom Hat'
+    }
+    {
+      desc_id = #"Brimmed Beanie THUG2"
+      frontend_desc = 'Visor Beanie'
+    }
+    {
+      desc_id = #"Hawk 50 Cent THUG2"
+      frontend_desc = 'Hawk 50 Cent'
     }
   ]
 }
@@ -631,6 +639,24 @@ hat = [
     script disqualify_script
       ClearPart part = skater_f_hair
 	  ClearPart part = skater_m_hair
+    endscript
+  }
+  {
+    desc_id = #"Brimmed Beanie THUG2"
+    frontend_desc = 'Visor Beanie'
+    mesh = "models/better4/shared/hats/hat_ug2_brimmedbeanie.skin"
+    script disqualify_script
+      ClearPart part = skater_f_hair
+      ClearPart part = skater_m_hair
+    endscript
+  }
+  {
+    desc_id = #"Hawk 50 Cent THUG2"
+    frontend_desc = 'Hawk 50 Cent'
+    mesh = "models/better4/shared/hats/hat_ug2_hawk50cent.skin"
+    script disqualify_script
+      ClearPart part = skater_f_hair
+      ClearPart part = skater_m_hair
     endscript
   }
 ]
