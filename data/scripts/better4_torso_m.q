@@ -19,8 +19,8 @@
 
 better4_skater_m_torso_categories = [
     better4_skater_m_torso_thps4
+    better4_skater_m_torso_b4
     better4_skater_m_torso_thps3
-    better4_skater_m_torso_beta
 ]
 
 better4_skater_m_torso_thps4 = {
@@ -255,8 +255,8 @@ better4_skater_m_torso_thps3 = {
   ]
 }
 
-better4_skater_m_torso_beta = {
-  label = "Beta"
+better4_skater_m_torso_b4 = {
+  label = "Better4"
   items = [
     {
       desc_id = Shirtless
@@ -264,35 +264,39 @@ better4_skater_m_torso_beta = {
     }
     {
       desc_id = #"Burnquist Shirt beta"
-      frontend_desc = 'Burnquist Shirt'
+      frontend_desc = 'Beta Burnquist'
     }
     {
       desc_id = #"Campbell Shirt beta"
-      frontend_desc = 'Campbell Shirt'
+      frontend_desc = 'Beta Campbell'
     }
     {
       desc_id = #"Glifberg Shirt beta"
-      frontend_desc = 'Glifberg Shirt'
+      frontend_desc = 'Beta Glifberg'
     }
     {
       desc_id = #"Koston Shirt beta"
-      frontend_desc = 'Koston Shirt'
+      frontend_desc = 'Beta Koston'
     }
     {
       desc_id = #"Hawk Shirt beta"
-      frontend_desc = 'Hawk Shirt'
+      frontend_desc = 'Beta Hawk'
     }
     {
       desc_id = #"Hawk Shirt Alt. beta"
-      frontend_desc = 'Hawk Alt Shirt'
+      frontend_desc = 'Beta Hawk 2'
     }
     {
       desc_id = #"Lasek Shirt beta"
-      frontend_desc = 'Lasek Shirt'
+      frontend_desc = 'Beta Lasek'
     }
     {
       desc_id = #"Thomas Shirt beta"
-      frontend_desc = 'Thomas Shirt'
+      frontend_desc = 'Beta Thomas'
+    }
+    {
+      desc_id = #"Ranger Vest"
+      frontend_desc = 'Ranger Vest'
     }
   ]
 }
@@ -801,5 +805,10 @@ skater_m_torso = [
     frontend_desc = 'Thomas Shirt'
     mesh = "models/better4/skater_m/shirt_thomas_beta.skin"
     is_long_sleeve
+  }
+  {
+    desc_id = #"Ranger Vest"
+    frontend_desc = 'Ranger Vest'
+    mesh = "models/better4/skater_m/shirt_rangervest.skin"
   }
 ]

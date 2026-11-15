@@ -1,7 +1,7 @@
 better4_skater_f_torso_categories = [
   better4_skater_f_torso_thps4
+  better4_skater_f_torso_b4
   better4_skater_f_torso_thps3
-  better4_skater_f_torso_beta
 ]
 
 better4_skater_f_torso_thps4 = {
@@ -164,28 +164,32 @@ better4_skater_f_torso_thps3 = {
   ]
 }
 
-better4_skater_f_torso_beta = {
-  label = "Beta"
+better4_skater_f_torso_b4 = {
+  label = "Better4"
   items = [
     {
       desc_id = #"Steamer shirt beta"
-      frontend_desc = 'Steamer Shirt'
+      frontend_desc = 'Beta Steamer'
     }
     {
       desc_id = #"Koston Shirt beta F"
-      frontend_desc = 'Koston Shirt'
+      frontend_desc = 'Beta Koston'
     }
     {
       desc_id = #"Hawk Shirt beta F"
-      frontend_desc = 'Hawk Shirt'
+      frontend_desc = 'Beta Hawk'
     }
     {
       desc_id = #"Glifberg Shirt beta F"
-      frontend_desc = 'Glifberg Shirt'
+      frontend_desc = 'Beta Glifberg'
     }
     {
       desc_id = #"Campbell Shirt beta F"
-      frontend_desc = 'Campbell Shirt'
+      frontend_desc = 'Beta Campbell'
+    }
+    {
+      desc_id = #"Ranger Vest"
+      frontend_desc = 'Ranger Vest'
     }
   ]
 }
@@ -516,5 +520,10 @@ skater_f_torso = [
     desc_id = #"Campbell Shirt beta F"
     frontend_desc = 'Campbell Shirt (Beta)'
     mesh = "models/better4/skater_f/shirt_campbell_beta.skin"
+  }
+  {
+    desc_id = #"Ranger Vest"
+    frontend_desc = 'Ranger Vest'
+    mesh = "models/better4/skater_f/shirt_rangervest.skin"
   }
 ]
