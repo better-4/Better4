@@ -844,30 +844,15 @@ script files_menu_focus
   if not ( ( GotParam BadVersion ) or ( GotParam Corrupt ) )
     switch <file_type>
     case OptionsAndPros
-      FormatText {
-        TextName = files_menu_file_info_text
-        '\c3CAREER: %p\% done, %g/%t goals done, $%m'
-        p = ( ( 100 * <NumGoalsBeaten> ) / TotalGoals )
-        g = <NumGoalsBeaten>
-        t = TotalGoals
-        m = <cash>
-      }
+      <files_menu_file_info_text> = '\c3Career'
     case NetworkSettings
-      FormatText {
-        TextName = files_menu_file_info_text
-        '\c3NETWORK SETTINGS: ID=\'%i\''
-        i = <network_id>
-      }
+      <files_menu_file_info_text> = '\c3Network Settings'
     case Cas
        <files_menu_file_info_text> = '\c3Create-a-Skater'
     case Park
        <files_menu_file_info_text> = '\c3Park'
     case Replay
-      FormatText {
-        TextName = files_menu_file_info_text
-        '\c3Replay: %l'
-        l = <LevelName>
-      }
+      <files_menu_file_info_text> = '\c3Replay'
     endswitch
   endif
   SetScreenElementProps {
@@ -986,10 +971,10 @@ script files_menu_delete
       create_snazzy_dialog_box {
         title = 'Delete'
         text = <DeleteText>
-        pad_back_script = launch_files_menu
+        pad_back_script = better4_launch_files_menu
         pad_back_params = { FileType = <MenuFileType> Save }
         buttons = [
-          { font = small text = 'No' pad_choose_script = launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
+          { font = small text = 'No' pad_choose_script = better4_launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
           { font = small text = 'Yes' pad_choose_script = delete_file pad_choose_params = <...> }
         ]
       }
@@ -1008,10 +993,10 @@ script delete_file
     create_snazzy_dialog_box {
       title = 'File Deleted'
       text = 'Delete successful'
-      pad_back_script = launch_files_menu
+      pad_back_script = better4_launch_files_menu
       pad_back_params = { FileType = <MenuFileType> Save }
       buttons = [
-        { font = small text = 'OK' pad_choose_script = launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
+        { font = small text = 'OK' pad_choose_script = better4_launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
       ]
     }
     CheckForCardRemoval menu_id = dialog_box_anchor
@@ -1036,10 +1021,10 @@ script delete_bad_file
       create_snazzy_dialog_box {
         title = 'File Deleted'
         text = 'Delete successful'
-        pad_back_script = launch_files_menu
+        pad_back_script = better4_launch_files_menu
         pad_back_params = { FileType = <MenuFileType> }
         buttons = [
-          { font = small text = 'OK' pad_choose_script = launch_files_menu pad_choose_params = { FileType = <file_type> } }
+          { font = small text = 'OK' pad_choose_script = better4_launch_files_menu pad_choose_params = { FileType = <file_type> } }
         ]
       }
     else
@@ -1072,10 +1057,10 @@ script NGC_delete_bad_file
     create_snazzy_dialog_box {
       title = 'File Deleted'
       text = 'Delete successful'
-      pad_back_script = launch_files_menu
+      pad_back_script = better4_launch_files_menu
       pad_back_params = { FileType = <MenuFileType> Save }
       buttons = [
-        { font = small text = 'OK' pad_choose_script = launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
+        { font = small text = 'OK' pad_choose_script = better4_launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
       ]
     }
     CheckForCardRemoval menu_id = dialog_box_anchor
@@ -1122,10 +1107,10 @@ script OKToOverwrite
   create_snazzy_dialog_box {
     title = 'Overwrite'
     text = <OverwriteText>
-    pad_back_script = launch_files_menu
+    pad_back_script = better4_launch_files_menu
     pad_back_params = { FileType = <MenuFileType> Save }
     buttons = [
-      { font = small text = 'No' pad_choose_script = launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
+      { font = small text = 'No' pad_choose_script = better4_launch_files_menu pad_choose_params = { FileType = <MenuFileType> Save } }
       {
         font = small text = 'Yes'
         pad_choose_script = DeleteOldSaveNewOk
@@ -1176,7 +1161,7 @@ script launch_save_network_settings
   Change DoneScript = exit_net_setting
   Change SavingOrLoading = Saving
   check_card FileType = NetworkSettings Save
-  launch_files_menu Save FileType = NetworkSettings
+  better4_launch_files_menu Save FileType = NetworkSettings
 endscript
 script retry_launch_save_internet_settings
   memcard_menus_cleanup
@@ -1190,7 +1175,7 @@ script launch_save_internet_settings
   Change DoneScript = back_to_internet_options_menu
   Change SavingOrLoading = Saving
   check_card FileType = NetworkSettings Save
-  launch_files_menu Save FileType = NetworkSettings
+  better4_launch_files_menu Save FileType = NetworkSettings
 endscript
 script retry_launch_pause_menu_save_game_sequence
   memcard_menus_cleanup
@@ -1204,7 +1189,7 @@ script launch_pause_menu_save_game_sequence
   Change SavingOrLoading = Saving
   check_card FileType = OptionsAndPros Save
   MaybeSaveCustomSkater
-  launch_files_menu Save FileType = OptionsAndPros
+  better4_launch_files_menu Save FileType = OptionsAndPros
 endscript
 script retry_launch_end_replay_menu_save_replay_sequence
   memcard_menus_cleanup
@@ -1217,7 +1202,7 @@ script launch_end_replay_menu_save_replay_sequence
   Change DoneScript = back_to_end_replay_menu
   Change SavingOrLoading = Saving
   check_card FileType = Replay Save
-  launch_files_menu Save FileType = Replay
+  better4_launch_files_menu Save FileType = Replay
 endscript
 save_successful = 2
 script retry_launch_pause_menu_save_park_sequence
@@ -1231,7 +1216,7 @@ script launch_pause_menu_save_park_sequence
   Change DoneScript = back_to_pause_menu
   Change SavingOrLoading = Saving
   check_card FileType = Park Save
-  launch_files_menu Save FileType = Park
+  better4_launch_files_menu Save FileType = Park
 endscript
 script retry_launch_park_editor_save_park_sequence
   memcard_menus_cleanup
@@ -1245,7 +1230,7 @@ script launch_park_editor_save_park_sequence
   Change SavingOrLoading = Saving
   Change save_successful = 0
   check_card FileType = Park Save
-  launch_files_menu Save FileType = Park
+  better4_launch_files_menu Save FileType = Park
 endscript
 script retry_launch_pause_menu_load_park_sequence
   memcard_menus_cleanup
@@ -1258,7 +1243,7 @@ script launch_pause_menu_load_park_sequence
   Change DoneScript = back_to_pause_menu
   Change SavingOrLoading = Loading
   check_card FileType = Park Load
-  launch_files_menu Load FileType = Park
+  better4_launch_files_menu Load FileType = Park
 endscript
 script retry_launch_level_select_load_park_sequence
   memcard_menus_cleanup
@@ -1271,7 +1256,7 @@ script launch_level_select_load_park_sequence
   Change DoneScript = load_loaded_created_park
   Change SavingOrLoading = Loading
   check_card FileType = Park Load
-  launch_files_menu Load FileType = Park
+  better4_launch_files_menu Load FileType = Park
 endscript
 load_successful = 2
 script retry_launch_upload_park_load_park_sequence
@@ -1285,7 +1270,7 @@ script launch_upload_park_load_park_sequence
   Change DoneScript = back_to_internet_options_menu
   Change SavingOrLoading = Loading
   check_card FileType = Park Load
-  launch_files_menu Load FileType = Park
+  better4_launch_files_menu Load FileType = Park
 endscript
 script retry_launch_download_park_save_sequence
   memcard_menus_cleanup
@@ -1297,7 +1282,7 @@ script launch_download_park_save_sequence
   Change DoneScript = back_from_transfer_succeeded_dialog
   Change SavingOrLoading = Saving
   check_card FileType = Park Save
-  launch_files_menu Save FileType = Park
+  better4_launch_files_menu Save FileType = Park
 endscript
 script retry_launch_save_cas_sequence
   memcard_menus_cleanup
@@ -1311,7 +1296,7 @@ script launch_save_cas_sequence
   Change DoneScript = back_to_main_menu
   Change SavingOrLoading = Saving
   check_card FileType = Cas Save
-  launch_files_menu Save FileType = Cas
+  better4_launch_files_menu Save FileType = Cas
 endscript
 script retry_launch_options_menu_save_game_sequence
   memcard_menus_cleanup
@@ -1326,7 +1311,7 @@ script launch_options_menu_save_game_sequence
   Change SavingOrLoading = Saving
   check_card Save FileType = OptionsAndPros
   MaybeSaveCustomSkater
-  launch_files_menu Save FileType = OptionsAndPros
+  better4_launch_files_menu Save FileType = OptionsAndPros
 endscript
 script retry_launch_beat_goal_save_game_sequence
   memcard_menus_cleanup
@@ -1339,7 +1324,7 @@ script launch_beat_goal_save_game_sequence
   Change SavingOrLoading = Saving
   check_card FileType = OptionsAndPros Save
   MaybeSaveCustomSkater
-  launch_files_menu Save FileType = OptionsAndPros
+  better4_launch_files_menu Save FileType = OptionsAndPros
 endscript
 script AppendDigitsToFilenameUntilNoClash
   PauseMusic 1
@@ -1382,7 +1367,7 @@ script CreateNew
   AppendDigitsToFilenameUntilNoClash file_type = <file_type> filename = <filename>
   create_onscreen_keyboard {
     allow_cancel
-    keyboard_cancel_script = launch_files_menu
+    keyboard_cancel_script = better4_launch_files_menu
     keyboard_cancel_params = { FileType = <file_type> Save }
     keyboard_done_script = CreateNew_Done
     keyboard_title = 'SAVE NAME'
@@ -1459,7 +1444,7 @@ script MaybeSaveCustomSkater
       mem_card_message_pause XSkips NoTimerReset
       memcard_menus_cleanup
       Change DoneScript = PostAutoSaveCas
-      launch_files_menu Save FileType = Cas
+      better4_launch_files_menu Save FileType = Cas
       Goto nullscript
     endif
   endif
@@ -1467,7 +1452,7 @@ endscript
 script PostAutoSaveCas
   Change DoneScript = AbortScript
   Change SavingOrLoading = Saving
-  launch_files_menu Save FileType = OptionsAndPros
+  better4_launch_files_menu Save FileType = OptionsAndPros
 endscript
 DoAutoload = 1
 goto_secret_shop = 0
@@ -1680,7 +1665,7 @@ script launch_load_network_settings
   Change DoneScript = exit_net_setting
   Change SavingOrLoading = Loading
   check_card FileType = NetworkSettings
-  launch_files_menu FileType = NetworkSettings
+  better4_launch_files_menu FileType = NetworkSettings
 endscript
 script retry_launch_options_menu_load_game_sequence
   memcard_menus_cleanup
@@ -1699,7 +1684,7 @@ script launch_options_menu_load_game_sequence
   endif
   Change SavingOrLoading = Loading
   check_card FileType = OptionsAndPros
-  launch_files_menu FileType = OptionsAndPros
+  better4_launch_files_menu FileType = OptionsAndPros
 endscript
 script retry_launch_options_menu_load_replay_sequence
   memcard_menus_cleanup
@@ -1713,7 +1698,7 @@ script launch_options_menu_load_replay_sequence
   Change DoneScript = back_to_options_menu
   Change SavingOrLoading = Loading
   check_card FileType = Replay
-  launch_files_menu FileType = Replay
+  better4_launch_files_menu FileType = Replay
 endscript
 script retry_launch_load_cas_sequence
   memcard_menus_cleanup
@@ -1733,7 +1718,7 @@ script launch_load_cas_sequence
   endif
   Change SavingOrLoading = Loading
   check_card FileType = Cas
-  launch_files_menu FileType = Cas
+  better4_launch_files_menu FileType = Cas
 endscript
 script retry_launch_load_cas_from_select_sequence
   memcard_menus_cleanup
@@ -1747,7 +1732,7 @@ script launch_load_cas_from_select_sequence
   Change RetryScript = retry_launch_load_cas_from_select_sequence
   Change SavingOrLoading = Loading
   check_card FileType = Cas
-  launch_files_menu FileType = Cas
+  better4_launch_files_menu FileType = Cas
 endscript
 script Load
   GetTags
