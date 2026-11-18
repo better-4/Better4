@@ -75,6 +75,8 @@ script better4_create_files_menu pos_tweak = (-20, -45)
     event_handlers = [ { pad_back AbortScript }
       { pad_down menu_vert_blink_arrow params = { id = files_menu_down_arrow } }
       { pad_up menu_vert_blink_arrow params = { id = files_menu_up_arrow } }
+      { pad_left better4_launch_files_menu params = { <...> LastPage  } }
+      { pad_right better4_launch_files_menu params = { <...> NextPage  } }
     ]
   }
   set_sub_bg pos = ( (207, 90) + <pos_tweak> )
@@ -422,7 +424,7 @@ script better4_files_menu_add_bottom_bar
   //GetProperSaveFileCount FileType = <filetype_name>
   FormatText {
     TextName = LeftText
-    '%s Files: %t/200'
+    '%s Files: %t'
     t = <proper_file_count>
     s = <filetype_name>
   }

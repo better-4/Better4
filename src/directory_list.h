@@ -21,9 +21,10 @@ typedef struct
 
 typedef struct
 {
-  save_entry list [75];
+  save_entry *list;
   uint32_t count;
   uint32_t current_count;
+  uint32_t capacity;
   uint32_t type_size;
   char type_ext [4];
   uint32_t page;
@@ -35,5 +36,6 @@ int __cdecl CFunc_GetMostRecentCAS(CStruct *params, CScript *script);
 int __cdecl CFunc_GetSaveDirectoryListing(CStruct *params, CScript *script);
 int __cdecl CFunc_DeleteSaveFile (CStruct *params, CScript *script);
 int __cdecl CFunc_BuildSaveDirectory (CStruct *params, CScript *script); 
+int CompareTimestamp (const void *a, const void *b);
 
 #endif
