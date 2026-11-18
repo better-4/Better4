@@ -46,6 +46,7 @@ script better4_create_files_menu pos_tweak = (-20, -45)
         { text = "\m1 = Back" }
         { text = "\m0 = Accept" }
         { text = "\md = Delete" }
+        { text = "\b6/\b5 = Change Page"}
       ]
     }
   else
@@ -53,6 +54,7 @@ script better4_create_files_menu pos_tweak = (-20, -45)
     helper_text = { helper_text_elements = [ { text = "\b7/\b4 = Select" }
         { text = "\m1 = Back" }
         { text = "\m0 = Accept" }
+        { text = "\b6/\b5 = Change Page"}
       ]
     }
   endif
@@ -428,6 +430,11 @@ script better4_files_menu_add_bottom_bar
     t = <proper_file_count>
     s = <filetype_name>
   }
+   FormatText {
+    TextName = RightText
+    '                                    Page: %t' // idk why the pos of righttext is not cooperating, blame them for this
+    t = <page_count>
+  }
    <text_bg_rgba> = [ 0 0 0 50 ]
    <text_offset> = (5, 2)
   CreateScreenElement {
@@ -441,12 +448,11 @@ script better4_files_menu_add_bottom_bar
     text = <LeftText>
   }
   GetStackedScreenElementPos X id = <id> offset = (3, 0)
-  GetStackedScreenElementPos X id = <id> offset = (3, 0)
   CreateScreenElement {
     type = TextElement
     parent = <mem_info_id>
     font = small
-    pos = ( <pos> + <text_offset> )
+    pos = ( <pos>+ <text_offset> )
     just = [ left top ]
     rgba = [ 88 105 112 128 ]
     scale = 0.75

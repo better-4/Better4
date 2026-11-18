@@ -123,6 +123,7 @@ int __cdecl CFunc_BuildSaveDirectory (CStruct *params, CScript *script) // also 
 	qsort(directory.list,directory.count,sizeof(save_entry),CompareTimestamp);
 	logInfo("%s total file count: %d",FileType, directory.count);
 	CStruct_AddInteger(out,0x0A80A097/*proper_file_count*/, directory.count); 
+	CStruct_AddInteger(out,0x1CA7444B /*page_count*/, directory.page + 1);
 	return 1;
 
 	fail_path:
