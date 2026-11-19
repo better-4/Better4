@@ -32,8 +32,8 @@ script better4_freecam_reset_defaults
 endscript
 
 script better4_enter_freecam
-  if ( ( InNetGame ) and ( ShouldEndRun ) )
-    LogInfo "better4_enter_freecam: preventing freecam in end of run"
+  if ( ( ( InNetGame ) and ( ShouldEndRun ) ) or ( ScreenElementExists id = current_menu_anchor ) )
+    LogInfo "better4_enter_freecam: preventing freecam"
     return
   endif
 
