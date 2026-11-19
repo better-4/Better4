@@ -914,6 +914,7 @@ script special_tricks_menu_add_type
     dims = (40, 24)
     not_focusable
   }
+  <anchor_id> = <id>
   CreateScreenElement {
     type = TextElement
     parent = <anchor_id>
