@@ -118,6 +118,7 @@ script create_big_black_hiding_box
   }
 endscript
 script quit_network_game
+  better4_exit_freecam
   better4_modifiers_init
   better4_lvlobjs_init
   ObserveSelf
