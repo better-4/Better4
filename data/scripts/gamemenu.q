@@ -851,9 +851,6 @@ script create_mp_pause_menu
   RunScriptOnScreenElement id = pause_menu menu_onscreen
 endscript
 script exit_pause_menu menu_id = current_menu_anchor
-  if IsBetterObserving
-    create_observer_ui
-  endif
   Debounce x time = 0.3
   if InNetGame
     if LocalSkaterExists
@@ -930,6 +927,9 @@ script exit_pause_menu menu_id = current_menu_anchor
   if ( HIDEHUD = 1 )
     LogInfo "hiding"
     hide_root_window
+  endif
+  if IsBetterObserving
+    create_observer_ui
   endif
 endscript
 script kill_pause_menu_cams
