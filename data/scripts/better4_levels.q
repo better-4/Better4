@@ -51,7 +51,7 @@ thps_level_info = [
   { text = "Downtown" not_focusable level_num = LevelNum_Downtown level = Load_Downtown level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\downtown" }
   { text = "Downhill Jam" not_focusable level_num = LevelNum_DHJ level = Load_DHJ level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\dhj" }
   { text = "Burnside" not_focusable level_num = LevelNum_Burnside level = Load_Burnside level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\burnside" }
-  { text = "Streets" under_construction level_num = LevelNum_Streets level = Load_Streets level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\streets" }
+  { text = "Streets" level_num = LevelNum_Streets level = Load_Streets level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\streets" }
   { text = "Roswell" not_focusable level_num = LevelNum_Roswell level = Load_Roswell level_info_defaults taxi_tex = "images\better4\taxi_signs\thps1\roswell" }
 ]
 
