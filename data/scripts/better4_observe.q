@@ -161,7 +161,8 @@ script create_observer_ui
     parent = root_window
   }
   display_obs_player_name
-  if ( ( not ScreenElementExists id = keyboard_anchor ) and ( not ScreenElementExists id = current_menu_anchor ) )
+  if ( ( ScreenElementExists id = keyboard_anchor ) or ( ScreenElementExists id = current_menu_anchor ) )
+  else
     create_observer_handlers
   endif
 endscript
