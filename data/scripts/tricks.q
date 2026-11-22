@@ -146,12 +146,12 @@ script OnGroundExceptions
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = Skitched Scr = Skitch
   SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBail
-  if ( ( better4_control_wallpush_value = on ) and ( better4_modifier_disablewallpush_value = off ) )
+  if ( ( better4_control_wallpush_value = 1 ) and ( better4_modifier_disablewallpush_value = 0 ) )
     SetException Ex = Wallpush Scr = Ground_Wallpush
   endif
   SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
-  if ( better4_modifier_disablemanual_value = off )
+  if ( better4_modifier_disablemanual_value = 0 )
     SetManualTricks special = SpecialManualTricks GroundManualTricks
   endif
   SetTags state = skater_onground
@@ -191,7 +191,7 @@ script InAirExceptions
   SetException Ex = MadeOtherSkaterBail Scr = MadeOtherSkaterBailAir CallInsteadofGoto
   SetSkaterAirTricks
   SetExtraGrindTricks special = SpecialGrindTricks GrindTricks
-  if ( better4_modifier_disablemanual_value = off )
+  if ( better4_modifier_disablemanual_value = 0 )
     SetManualTricks special = SpecialManualTricks ManualTricks
   endif
   SetTags state = skater_inair
@@ -701,7 +701,7 @@ script OnGroundNollieAI
   OnGroundExceptions
   SetException Ex = Ollied Scr = Nollie
   SetQueueTricks better4_control_powerslide_value better4_control_jumptrick_value GroundTricks better4_control_stancechange_value
-  if ( better4_modifier_disablemanual_value = off )
+  if ( better4_modifier_disablemanual_value = 0 )
     SetManualTricks special = SpecialManualTricks GroundManualTricks
   endif
   NollieOn
@@ -969,7 +969,7 @@ script Land2 RevertTime = 5
   if LandedFromVert
     OverrideCancelGround
     Obj_ClearFlag FLAG_SKATER_MANUALCHEESE
-    if ( better4_modifier_disablerevert_value = off )
+    if ( better4_modifier_disablerevert_value = 0 )
       SetExtraTricks tricks = better4_control_revert_value Duration = 5
     endif
   else
@@ -1032,7 +1032,7 @@ script Land2 RevertTime = 5
   endif
   ClearTrickQueue
   ClearEventBuffer buttons = [ X ]
-  if ( better4_modifier_disablemanual_value = off )
+  if ( better4_modifier_disablemanual_value = 0 )
     SetManualTricks special = SpecialManualTricks ManualTricks
   endif
   OnGroundExceptions_NoEndRun
@@ -1547,7 +1547,7 @@ script RestartSkaterExceptions
   Obj_AttachFrame bone = "head"
 endscript
 script LaunchSpecialMessage text = "Special Trick" vol = 100 pitch = 100
-if ( better4_control_specialtrick_sound_value = on )
+if ( better4_control_specialtrick_sound_value = 1 )
   if InMultiplayerGame
     PlaySound HUD_specialtrickAA vol = <vol> pitch = <pitch>
   else
@@ -1584,7 +1584,7 @@ script LaunchExtraMessage text = "Hidden Combo!"
      PlaySound extratrick_thug vol = 100
   case THPS3
      PlaySound HUD_specialtrickAA vol = 100
-  case Off
+  case 0
   endswitch
 endscript
 script PedKnockDown

@@ -1,8 +1,6 @@
 MANUAL_DISPLAY_WAIT = 25
 ROTATEY_TRIGGER_TIME = 300
 TRIGGER_MANUAL_BRANCHFLIP = { inorder Square Square 200 }
-off = 0
-on = 1
 SpecialManualTricks =
 [
   { Trigger = { TripleInOrder Up right Triangle 400 } duration = 700 TrickSlot = SpMan_U_R_Triangle }
@@ -190,7 +188,7 @@ script Manual BlendPeriod = 0.3
   ClearExceptions
   ResetLandedFromVert
   KillExtraTricks
-  if ( better4_control_manualfloat_value = off )
+  if ( better4_control_manualfloat_value = 0 )
     ClearTrickQueues
   endif
   SetException Ex = GroundGone Scr = GroundGone params = { NoBoneless }
@@ -212,7 +210,7 @@ script Manual BlendPeriod = 0.3
   SetException Ex = SkaterCollideBail Scr = SkaterCollideBail
   SetException Ex = Skitched Scr = Skitch
 
-  if ( ( better4_control_wallpush_value = on ) and ( better4_modifier_disablewallpush_value = off ) )
+  if ( ( better4_control_wallpush_value = 1 ) and ( better4_modifier_disablewallpush_value = 0 ) )
     if GotParam AllowWallpush
       if GotParam Nollie
         SetException Ex = Wallpush Scr = Manual_Wallpush
@@ -235,7 +233,7 @@ script Manual BlendPeriod = 0.3
     if GotParam IsExtra
       SetManualTricks NoTricks
     else
-      if ( better4_modifier_disablemanual_value = on )
+      if ( better4_modifier_disablemanual_value = 1 )
         SetManualTricks NoTricks
       else
         SetManualTricks NoTricks Special = SpecialManualTricks
@@ -484,7 +482,7 @@ script ManualLink grindslack = 25 trickslack = 10 displaypercent = 50 TimeAdd = 
     SetException Ex = OffMeterBottom Scr = <OffMeterBottom> params = { <...> }
   endif
 
-  if ( ( better4_control_wallpush_value = on ) and ( better4_modifier_disablewallpush_value = off ) )
+  if ( ( better4_control_wallpush_value = 1 ) and ( better4_modifier_disablewallpush_value = 0 ) )
     if GotParam AllowWallpush
       if GotParam Nollie
         SetException Ex = Wallpush Scr = Manual_Wallpush

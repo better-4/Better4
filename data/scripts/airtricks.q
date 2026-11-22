@@ -431,7 +431,7 @@ script GrabTrick speed = 1.0 x = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIU
     Obj_KillSpawnedScript name = JumpJets
     Obj_SpawnScript JumpJets
   endif
-  if ( ( GotParam Stream ) and ( better4_control_specialsfx_value = on ))
+  if ( ( GotParam Stream ) and ( better4_control_specialsfx_value = 1 ) )
     Obj_PlayStream <Stream>
   endif
   if GotParam Bloodframe
@@ -525,7 +525,7 @@ script JumpJets
   Obj_GetId
   MangleChecksums a = skatersplash b = <objId>
   if not Obj_FlagSet FLAG_SKATER_JUMPJETSON
-    if ( better4_modifier_disabletrickboost_value = off )
+    if ( better4_modifier_disabletrickboost_value = 0 )
       begin
         #"Jump"
         Wait 1 game frame

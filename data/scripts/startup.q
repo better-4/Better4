@@ -115,7 +115,7 @@ script startup_loading_screen
   endif
   if IsXBOX
     if CD
-      if ( better4_control_disablemovies_value = off )
+      if ( better4_control_disablemovies_value = 0 )
         PlayMovie "movies\atvi"
         PlayMovie "movies\aspyr"
         PlayMovie "movies\nslogo"

@@ -1,7 +1,5 @@
-off = 0
-on = 1
 script WallRide
-  if ( better4_control_wallspin_value = off )
+  if ( better4_control_wallspin_value = 0 )
     RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
   endif
   ClearExceptions
@@ -17,7 +15,7 @@ script WallRide
     Move X = -36
   endif
   if BailIsOn
-    if ( better4_control_wallridebail_value = on )
+    if ( better4_control_wallridebail_value = 1 )
       SetState Air
       Goto DoingTrickBail
     endif
@@ -113,7 +111,7 @@ WallRideTricks =
 WallRideTricks_Single =
 [ { Trigger = { TapOnceRelease Up X 500 } Scr = Trick_WallPlant } ]
 script Trick_WallPlant
-  if ( ( better4_control_boostplant_value = off ) or ( better4_modifier_disableboostplant_value = on ) )
+  if ( ( better4_control_boostplant_value = 0 ) or ( better4_modifier_disableboostplant_value = 1 ) )
     ClearTrickQueue
   endif
   InAirExceptions

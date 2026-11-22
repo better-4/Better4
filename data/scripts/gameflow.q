@@ -176,7 +176,7 @@ script GameFlow_StartRun
   if not InNetGame
     ResetSkaters
   else
-    if ((better4_control_respawn_on_newrun_value = on) or (NEW_LEVEL = 1))
+    if ((better4_control_respawn_on_newrun_value = 1) or (NEW_LEVEL = 1))
       ResetSkaters
       Change NEW_LEVEL = 0
     else
