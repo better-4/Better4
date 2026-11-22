@@ -381,6 +381,7 @@ script better4_inair_menu
   better4_create_menu_control better4_control_spinkeys
   better4_create_menu_control better4_control_spinetransfer
   better4_create_menu_control better4_control_revertrecovery
+  better4_create_menu_control better4_control_buttslap
   better4_menu_spacer
   better4_create_menu_item text = "Back" pad_choose_script = better4_options_controls pad_choose_params = <...>
   better4_menu_reset

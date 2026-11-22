@@ -302,6 +302,21 @@ better4_control_revertrecovery = {
   ]
 }
 
+better4_control_buttslap_index = 0
+better4_control_buttslap_value = off
+better4_control_buttslap = {
+  id = better4_control_buttslap_id
+  index_name = better4_control_buttslap_index
+  value_name = better4_control_buttslap_value
+  text = "Buttslap"
+  ini_key = "Buttslap"
+  help = "Allow an extra ollie in mid air (air ollie exploit)."
+  options = [
+    { text = "Off" value = off }
+    { text = "On" value = on }
+  ]
+}
+
 // On Rails
 
 DropdownVanilla = [
@@ -1342,6 +1357,7 @@ script better4_controls_init
   better4_control_init better4_control_wallspin
   better4_control_init better4_control_wallridebail
   better4_control_init better4_control_revertrecovery
+  better4_control_init better4_control_buttslap
   better4_control_init better4_control_boardscuff
   better4_control_init better4_control_pauseonunfocus
   better4_control_init better4_control_buttonsfont

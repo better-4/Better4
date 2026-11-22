@@ -393,17 +393,47 @@ SCRIPT HoldAbleFlipTrick
 	ENDIF 
 ENDSCRIPT
 
+better4_buttslap_window_ms = 1000
+better4_buttslap_window_start = 0
+
 script CheckForOllie
   if GotException Ollied
     SetException Ex = Ollied Scr = CalledOllie CallInsteadOfGoto
+    if ( better4_control_buttslap_value = on )
+      // Better4: stamp the moment the trick starts. CalledOllie uses this
+      // to open the buttslap window.
+      GetStartTime
+      Change better4_buttslap_window_start = <StartTime>
+    endif
   endif
 endscript
 script CalledOllie
-  if AirTimeGreaterThan Skater_Late_Jump_Slop
-    ClearException Ollied
+  if ( better4_control_buttslap_value = on )
+    // Better4: buttslap. Every ollie press inside the window opened by the
+    // trick adds another jump, so how many you get depends on how fast you
+    // mash - the same as THUG, where the limit is press speed and not a
+    // counter. Vanilla drops the exception after one ollie, the 2006 mod
+    // never dropped it; here the window does the limiting.
+    GetElapsedTime StartTime = better4_buttslap_window_start
+    if ( <ElapsedTime> < better4_buttslap_window_ms )
+      #"Jump"
+    else
+      // Window is over: fall back to the vanilla rules so a late ollie is
+      // never swallowed.
+      if AirTimeGreaterThan Skater_Late_Jump_Slop
+        ClearException Ollied
+      else
+        #"Jump"
+        ClearException Ollied
+      endif
+    endif
   else
-    #"Jump"
-    ClearException Ollied
+    if AirTimeGreaterThan Skater_Late_Jump_Slop
+      ClearException Ollied
+    else
+      #"Jump"
+      ClearException Ollied
+    endif
   endif
 endscript
 script GrabTrick speed = 1.0 x = -180 duration = 1.0 GrabTweak = GRABTWEAK_MEDIUM WaitPercent = 60
