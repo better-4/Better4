@@ -16,6 +16,21 @@ HOST_MODE_AUTO_SERVE = 1
 HOST_MODE_FCFS = 2
 JOIN_MODE_PLAY = 0
 JOIN_MODE_OBSERVE = 1
+
+// Better4: the vanilla list (gameoptions.qb) stops at 10 minutes.
+// net.q is loaded after gameoptions.qb, so redefining the global array
+// here extends the Time Limit menu without touching the vanilla file.
+time_limit_options = [
+  { name = "30 seconds" checksum = time_30 time = 30 }
+  { name = "1 minute" checksum = time_60 time = 60 }
+  { name = "2 minutes" checksum = time_120 time = 120 }
+  { name = "5 minutes" checksum = time_300 time = 300 }
+  { name = "10 minutes" checksum = time_600 time = 600 }
+  { name = "15 minutes" checksum = time_900 time = 900 }
+  { name = "20 minutes" checksum = time_1200 time = 1200 }
+  { name = "30 minutes" checksum = time_1800 time = 1800 }
+]
+
 e3_level_info = [
   { name = "College" checksum = load_sch }
   { name = "Zoo" checksum = load_zoo }
@@ -2691,12 +2706,27 @@ script create_network_game_options_captures_menu
   draw_menu_box delta_pos = (97, 30)
   create_icon texture = PA_options
 endscript
+script draw_time_limit_box
+  // The box is assembled from repeatable tiles and the vanilla geometry was
+  // tuned for the 5 entries of gameoptions.qb. Ours has 8 entries, and the
+  // stock ratio is ~1.4 tiles per row (5 rows = 7 tiles), so 8 rows need 11.
+  // The right cap follows the convention used by the other long menus:
+  // box_right_scale.y = 0.1875 + middle_repeat * 0.0625.
+  // Values must be literals: tuples are compile-time constants and cannot
+  // contain variables.
+  GetArraySize time_limit_options
+  if ( <array_size> > 5 )
+    draw_menu_box delta_pos = (97, 30) middle_repeat = 11 box_right_scale = (0.8, 0.875)
+  else
+    draw_menu_box delta_pos = (97, 30) middle_repeat = 7 box_right_scale = (0.8, 0.625)
+  endif
+endscript
 script create_network_game_options_target_time_menu
   remove_pause_menu_textures_from_vram
   add_ss_menu_textures_to_vram
   create_game_options_sub_menu menu_title = "TIME LIMIT" pref_type = <prefs> pref_field = "target_score" array = time_limit_options call_script = select_game_option helper_text = generic_helper_text <...>
   set_sub_bg type = SpriteElement
-  draw_menu_box delta_pos = (97, 30)
+  draw_time_limit_box
   create_icon texture = PA_options
 endscript
 script create_network_game_options_time_menu
@@ -2704,7 +2734,7 @@ script create_network_game_options_time_menu
   add_ss_menu_textures_to_vram
   create_game_options_sub_menu menu_title = "TIME LIMIT" pref_type = network pref_field = "time_limit" array = time_limit_options call_script = select_game_option helper_text = generic_helper_text <...>
   set_sub_bg type = SpriteElement
-  draw_menu_box delta_pos = (97, 30)
+  draw_time_limit_box
   create_icon texture = PA_options
 endscript
 script create_mp_game_options_time_menu
@@ -2712,7 +2742,7 @@ script create_mp_game_options_time_menu
   add_ss_menu_textures_to_vram
   create_game_options_sub_menu menu_title = "TIME LIMIT" pref_type = splitscreen pref_field = "time_limit" array = time_limit_options call_script = select_game_option helper_text = generic_helper_text <...>
   set_sub_bg type = SpriteElement
-  draw_menu_box delta_pos = (97, 30)
+  draw_time_limit_box
   create_icon texture = PA_options
 endscript
 script create_mp_game_options_horse_time_menu
