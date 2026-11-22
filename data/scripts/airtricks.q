@@ -393,7 +393,7 @@ SCRIPT HoldAbleFlipTrick
 	ENDIF 
 ENDSCRIPT
 
-better4_buttslap_window_ms = 1000
+better4_buttslap_window_ms = 250
 better4_buttslap_window_start = 0
 
 script CheckForOllie
