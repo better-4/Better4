@@ -137,7 +137,7 @@ script better4_lvlobj_init
   CastToInteger value
   ChangeGlobal Name = <value_name> value = <value>
   LogInfo "Initializing lvlobj %t to %v" t = <text> v = <value>
-  better4_lvlobj_handle_changed <...>
+  better4_lvlobj_handle_changed <...> new_value = <value>
 endscript
 
 script better4_lvlobjs_init
