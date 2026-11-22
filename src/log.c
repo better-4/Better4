@@ -76,6 +76,35 @@ static LONG WINAPI crash_handler(EXCEPTION_POINTERS *ep) {
     return EXCEPTION_CONTINUE_SEARCH;
 }
 
+// The game install used to collect one better4.log in its root, which buries the
+// rest of the directory. Write into a "logs" subfolder next to the executable
+// instead, creating it on first run. The layout is stable on purpose: tools and
+// bug-report instructions can rely on <game>\logs\better4.log. If the folder
+// cannot be used, fall back to the old path in the game root so that a log is
+// always produced.
+static void openLogFile(void) {
+    char exe_path[MAX_PATH];
+    DWORD len = GetModuleFileNameA(NULL, exe_path, MAX_PATH);
+    if (len > 0 && len < MAX_PATH) {
+        char *slash = strrchr(exe_path, '\\');
+        if (slash) {
+            char log_dir[MAX_PATH];
+            char log_path[MAX_PATH];
+
+            slash[1] = '\0';
+            snprintf(log_dir, MAX_PATH, "%slogs", exe_path);
+            snprintf(log_path, MAX_PATH, "%s\\better4.log", log_dir);
+
+            CreateDirectoryA(log_dir, NULL);
+            fopen_s(&fp_log, log_path, "w");
+        }
+    }
+
+    if (!fp_log) {
+        fopen_s(&fp_log, "better4.log", "w");
+    }
+}
+
 void initializeLogging(int console, int level) {
 	log_level = level;
 
@@ -91,7 +120,7 @@ void initializeLogging(int console, int level) {
 		allocated_console = 1;
 	}
 
-    fopen_s(&fp_log, "better4.log", "w");
+    openLogFile();
 	AddVectoredExceptionHandler(1, crash_handler);
 }
 
