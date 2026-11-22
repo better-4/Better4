@@ -11,6 +11,7 @@
 #include "updater.h"
 #include "wallpush.h"
 #include "zbias.h"
+#include "playlist.h"
 
 #include "decomp/common.h"
 #include "decomp/CStruct.h"
@@ -339,6 +340,7 @@ void patchBetter4() {
 	patchZBias();
 	patchTransparency();
 	patchFarClippingPlane();
+	patchPlaylist();
 }
 
 void better4Main() {

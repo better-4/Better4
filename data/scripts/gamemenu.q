@@ -5089,18 +5089,20 @@ endscript
 script change_track_state
   GetTags
   if TrackEnabled <index>
-    ChangeTrackState <index> off
+    // Better4: ChangeTrackState is replaced in C (see src/playlist.c) and takes
+    // an explicit flag. Without "enabled = 1" the track is disabled.
+    ChangeTrackState index = <index>
     RestoreMenuMusic
     SetScreenElementProps id = { <id> child = 1 } text = "off"
   else
-    ChangeTrackState <index> on
+    ChangeTrackState index = <index> enabled = 1
     SetScreenElementProps id = { <id> child = 1 } text = "on"
   endif
 endscript
 script preview_music_track
   GetTags
   if not TrackEnabled <index>
-    ChangeTrackState <index> on
+    ChangeTrackState index = <index> enabled = 1
     SetScreenElementProps id = { <id> child = 1 } text = "on"
   endif
   if MusicIsPaused

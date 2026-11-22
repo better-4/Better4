@@ -34,6 +34,8 @@ add_library(better4 SHARED
     "${SRC}/member.h"
     "${SRC}/online.c"
     "${SRC}/online.h"
+    "${SRC}/playlist.c"
+    "${SRC}/playlist.h"
     "${SRC}/pressures.c"
     "${SRC}/pressures.h"
     "${SRC}/security.c"
