@@ -1,5 +1,3 @@
-off = 0
-on = 1
 TRICK_PRELOAD_TIME = 160
 Jumptricks0 =
 [ { Trigger = { TapOnceRelease Up X 300 } Scr = NoComply Params = { Name = 'No Comply' Score = 100 } } ]
@@ -34,7 +32,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   ClearException Ollied
   SetSpecialFriction [ 0 10 15 20 30 50 ]
   SetQueueTricks NoTricks
-  if ( better4_modifier_disablemanual_value = off )
+  if ( better4_modifier_disablemanual_value = 0 )
     SetManualTricks Special = SpecialManualTricks ManualTricks
   endif
   NollieOff 
@@ -64,7 +62,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   BlendPeriodOut 0.0
   Wait 0.1 seconds
   SetException Ex = Ollied Scr = Ollie
-  if ( better4_control_doublerevert_value = off )
+  if ( better4_control_doublerevert_value = 0 )
     ResetLandedFromVert
   endif
   WaitAnimFinished
@@ -76,7 +74,7 @@ script Revert FSName = 'FS Revert' BSName = 'BS Revert' FSAnim = RevertFS BSAnim
   OverrideCancelGround off
   ClearEventBuffer
   ClearManualTrick
-  if ( better4_control_revertrecovery_value = off )
+  if ( better4_control_revertrecovery_value = 0 )
      PlayAnim Anim = CrouchIdle BlendPeriod = 0.3
   else 
      PlayAnim Anim = CrouchIdle BlendPeriod = 0.3 speed = 1.9
@@ -349,7 +347,7 @@ script NoComply
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump"
-  if (better4_control_pressure_value = on) // vanilla 4 doesn't clear stance
+  if (better4_control_pressure_value = 1) // vanilla 4 doesn't clear stance
     NollieOff 
     PressureOff 
   endif
@@ -395,7 +393,7 @@ script Boneless Anim = Boneless Name = 'Boneless' Score = 250
   ClearTrickQueue
   ClearEventBuffer Buttons = Dpad OlderThan = TRICK_PRELOAD_TIME
   #"Jump" BonelessHeight
-  if (better4_control_pressure_value = on) // vanilla 4 doesn't clear stance
+  if (better4_control_pressure_value = 1) // vanilla 4 doesn't clear stance
     NollieOff 
     PressureOff 
   endif

@@ -1,6 +1,3 @@
-off = 0
-on = 1
-
 better4_controls_ini_section = "Controls"
 
 // In Air
@@ -189,7 +186,7 @@ better4_control_manualspin = {
 }
 
 better4_control_wallpush_index = 0
-better4_control_wallpush_value = off
+better4_control_wallpush_value = 0
 better4_control_wallpush = {
   id = better4_control_wallpush_id
   index_name = better4_control_wallpush_index
@@ -198,8 +195,8 @@ better4_control_wallpush = {
   ini_key = "Wallpush"
   help = "Toggle wallpush (\b0) on or off."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
   change_script = better4_control_wallpush_change
 }
@@ -233,7 +230,7 @@ flatland_branches_spacewalk_off = [
 ]
 
 better4_control_spacewalk_index = 0
-better4_control_spacewalk_value = off
+better4_control_spacewalk_value = 0
 better4_control_spacewalk = {
   id = better4_control_spacewalk_id
   index_name = better4_control_spacewalk_index
@@ -242,23 +239,23 @@ better4_control_spacewalk = {
   ini_key = "Spacewalk"
   help = "Toggle spacewalk (\b6 \b5 \b1) on or off."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
   change_script = better4_control_spacewalk_change
 }
 
 script better4_control_spacewalk_change
   switch better4_control_spacewalk_value
-  case off
+  case 0
     Change FlatLandBranches = flatland_branches_spacewalk_off
-  case on
+  case 1
     Change FlatLandBranches = flatland_branches_spacewalk_on
   endswitch
 endscript
 
 better4_control_manualfloat_index = 0
-better4_control_manualfloat_value = off
+better4_control_manualfloat_value = 0
 better4_control_manualfloat = {
   id = better4_control_manualfloat_id
   index_name = better4_control_manualfloat_index
@@ -267,13 +264,13 @@ better4_control_manualfloat = {
   ini_key = "ManualFloat"
   help = "Toggle PS2-exclusive manual float glitches on or off."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_doublerevert_index = 1
-better4_control_doublerevert_value = on
+better4_control_doublerevert_value = 1
 better4_control_doublerevert = {
   id = better4_control_doublerevert_id
   index_name = better4_control_doublerevert_index
@@ -282,13 +279,13 @@ better4_control_doublerevert = {
   ini_key = "DoubleRevert"
   help = "Toggle whether a second revert is required after dropping down into a revert."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_revertrecovery_index = 0
-better4_control_revertrecovery_value = off
+better4_control_revertrecovery_value = 0
 better4_control_revertrecovery = {
   id = better4_control_revertrecovery_id
   index_name = better4_control_revertrecovery_index
@@ -297,8 +294,8 @@ better4_control_revertrecovery = {
   ini_key = "RevertRecovery"
   help = "Change the speed at which the skater is actionable after finishing a revert in the air."
   options = [
-    { text = "Vanilla" value = off }
-    { text = "Fast" value = on }
+    { text = "Vanilla" value = 0 }
+    { text = "Fast" value = 1 }
   ]
 }
 
@@ -341,7 +338,7 @@ better4_control_dropdown = {
 }
 
 better4_control_directional_dropdown_index = 0
-better4_control_directional_dropdown_value = off
+better4_control_directional_dropdown_value = 0
 better4_control_directional_dropdown = {
   id = better4_control_directional_dropdown_id
   index_name = better4_control_directional_dropdown_index
@@ -350,13 +347,13 @@ better4_control_directional_dropdown = {
   ini_key = "DirectionalDD"
   help = "Toggle whether you can change dropdown direction by pressing \b6/\b5"
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_liptricks_index = 1
-better4_control_liptricks_value = on
+better4_control_liptricks_value = 1
 better4_control_liptricks = {
   id = better4_control_liptricks_id
   index_name = better4_control_liptricks_index
@@ -365,25 +362,25 @@ better4_control_liptricks = {
   ini_key = "LipTricks"
   help = "Toggle lip tricks on or off."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
   change_script = better4_control_liptricks_change
 }
 
 script better4_control_liptricks_change
   switch better4_control_liptricks_value
-  case off
+  case 0
     Change LipAllowAngle = 360
     Change LipAllowAngle_Override = 360
-  case on
+  case 1
     Change LipAllowAngle = 15
     Change LipAllowAngle_Override = 60
   endswitch
 endscript
 
 better4_control_railspin_index = 1
-better4_control_railspin_value = on
+better4_control_railspin_value = 1
 better4_control_railspin = {
   id = better4_control_railspin_id
   index_name = better4_control_railspin_index
@@ -392,13 +389,13 @@ better4_control_railspin = {
   ini_key = "RailSpin"
   help = "Toggle whether manual spins carry into a grind."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_doubletapgrinds_index = 0
-better4_control_doubletapgrinds_value = off
+better4_control_doubletapgrinds_value = 0
 better4_control_doubletapgrinds = {
   id = better4_control_doubletapgrinds_id
   index_name = better4_control_doubletapgrinds_index
@@ -407,13 +404,13 @@ better4_control_doubletapgrinds = {
   ini_key = "DoubleTapGrinds"
   help = "Toggle whether double-tap grinds (5-0 overturn, darkslide, etc.) are enabled."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_quickregrind_index = 0
-better4_control_quickregrind_value = off
+better4_control_quickregrind_value = 0
 better4_control_quickregrind = {
   id = better4_control_quickregrind_id
   index_name = better4_control_quickregrind_index
@@ -422,8 +419,8 @@ better4_control_quickregrind = {
   ini_key = "grindcooldown"
   help = "Change grind cooldown behavior to enable quick regrinds after performing a dropdown."
   options = [
-    { text = "THPS4" value = off }
-    { text = "Better4" value = on }
+    { text = "THPS4" value = 0 }
+    { text = "Better4" value = 1 }
   ]
   change_script = better4_control_quickregrind_change
 }
@@ -433,7 +430,7 @@ script better4_control_quickregrind_change
 endscript
 
 better4_control_pressure_index = 0
-better4_control_pressure_value = off
+better4_control_pressure_value = 0
 better4_control_pressure = {
   id = better4_control_pressure_id
   index_name = better4_control_pressure_index
@@ -442,8 +439,8 @@ better4_control_pressure = {
   ini_key = "PressureStance"
   help = "Toggle pressure flips on or off."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
@@ -468,7 +465,7 @@ better4_control_wallieplant = {
 }
 
 better4_control_wallspin_index = 1
-better4_control_wallspin_value = on
+better4_control_wallspin_value = 1
 better4_control_wallspin = {
   id = better4_control_wallspin_id
   index_name = better4_control_wallspin_index
@@ -477,13 +474,13 @@ better4_control_wallspin = {
   ini_key = "WallSpin"
   help = "Toggle whether manual spins carry into a wallride."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_wallridebail_index = 1
-better4_control_wallridebail_value = on
+better4_control_wallridebail_value = 1
 better4_control_wallridebail = {
   id = better4_control_wallridebail_id
   index_name = better4_control_wallridebail_index
@@ -492,15 +489,15 @@ better4_control_wallridebail = {
   ini_key = "WallrideBail"
   help = "Toggle whether doing a trick into a wallride causes the skater to bail."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 // MISC
 
 better4_control_boardscuff_index = 1
-better4_control_boardscuff_value = on
+better4_control_boardscuff_value = 1
 better4_control_boardscuff = {
   id = better4_control_boardscuff_id
   index_name = better4_control_boardscuff_index
@@ -509,8 +506,8 @@ better4_control_boardscuff = {
   ini_key = "BoardScuff"
   help = "Toggle board scuff on or off."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
@@ -712,8 +709,8 @@ better4_control_extratrick_sound = {
   options = [
     { text = "THPS4" value = THPS4 }
     { text = "THUG" value = THUG }
-	{ text = "THPS3" value = THPS3 }
-    { text = "Off" value = off }	
+    { text = "THPS3" value = THPS3 }
+    { text = "Off" value = 0 }
   ]
   change_script = better4_change_extratrick_sound
 }
@@ -727,13 +724,13 @@ if ScreenElementExists  id = better4_vmenu
      PlaySound extratrick_thug vol = 100
   case THPS3
      PlaySound HUD_specialtrickAA vol = 100
-  case Off
+  case 0
   endswitch
 endif
 endscript
 
 better4_control_specialtrick_sound_index = 0
-better4_control_specialtrick_sound_value = on
+better4_control_specialtrick_sound_value = 1
 better4_control_specialtrick_sound = {
   id = better4_control_specialtrick_sound_id
   index_name = better4_control_specialtrick_sound_index
@@ -742,15 +739,15 @@ better4_control_specialtrick_sound = {
   ini_key = "SpecialTrickSound"
   help = "Toggle whether performing a special trick plays the special trick sound."
   options = [
-    { text = "On" value = on }
-    { text = "Off" value = off }	
+    { text = "On" value = 1 }
+    { text = "Off" value = 0 }	
   ]
   change_script = better4_change_specialtrick_sound
 }
 
 script better4_change_specialtrick_sound
   if ScreenElementExists id = better4_vmenu
-    if (better4_control_specialtrick_sound_value = on)
+    if (better4_control_specialtrick_sound_value = 1)
       PlaySound HUD_specialtrickAA vol = 100 pitch = 100
     else
     endif
@@ -758,7 +755,7 @@ script better4_change_specialtrick_sound
 endscript
 
 better4_control_skatervoice_index = 0
-better4_control_skatervoice_value = on
+better4_control_skatervoice_value = 1
 better4_control_skatervoice = {
   id = better4_control_skatervoice_id
   index_name = better4_control_skatervoice_index
@@ -767,13 +764,13 @@ better4_control_skatervoice = {
   ini_key = "SkaterVoice"
   help = "Toggle whether skater voices play when bailing."
   options = [
-    { text = "On" value = on }
-    { text = "Off" value = off }
+    { text = "On" value = 1 }
+    { text = "Off" value = 0 }
   ]
 }
 
 better4_control_musicwhenpaused_index = 1
-better4_control_musicwhenpaused_value = off
+better4_control_musicwhenpaused_value = 0
 better4_control_musicwhenpaused = {
   id = better4_control_musicwhenpaused_id
   index_name = better4_control_musicwhenpaused_index
@@ -782,8 +779,8 @@ better4_control_musicwhenpaused = {
   ini_key = "MusicWhenPaused"
   help = "Toggle whether the soundtrack keeps playing while the game is paused. Music always keeps playing between runs."
   options = [
-    { text = "On" value = on }
-    { text = "Off" value = off }
+    { text = "On" value = 1 }
+    { text = "Off" value = 0 }
   ]
   change_script = better4_change_musicwhenpaused
 }
@@ -795,7 +792,7 @@ script better4_change_musicwhenpaused
 endscript
 
 better4_control_specialsfx_index = 0
-better4_control_specialsfx_value = on
+better4_control_specialsfx_value = 1
 better4_control_specialsfx = {
   id = better4_control_specialsfx_id
   index_name = better4_control_specialsfx_index
@@ -804,8 +801,8 @@ better4_control_specialsfx = {
   ini_key = "SpecialSfx"
   help = "Toggle whether to play special sounds when performing certain special tricks (e.g. Chomp On This, Muska Beatz)."
   options = [
-    { text = "On" value = on }
-    { text = "Off" value = off }
+    { text = "On" value = 1 }
+    { text = "Off" value = 0 }
   ]
 }
 
@@ -887,7 +884,7 @@ better4_control_trickstring = {
   ini_key = "TrickString"
   help = "Change the size of the trick string."
   options = [
-    { text = "Off" value = off }
+    { text = "Off" value = 0 }
     { text = "Small" value = 0.33 }
     { text = "Medium" value = 0.67 }
     { text = "Large" value = 1.0 }
@@ -945,7 +942,7 @@ better4_control_scorepot = {
   ini_key = "ScorePot"
   help = "Change the size of the score pot (directly above the trick string)."
   options = [
-    { text = "Off" value = off }
+    { text = "Off" value = 0 }
     { text = "Small" value = 0.33 }
     { text = "Medium" value = 0.67 }
     { text = "Large" value = 1.0 }
@@ -997,7 +994,7 @@ better4_control_specialmeter = {
   ini_key = "SpecialMeter"
   help = "Change the size of the special meter and total score."
   options = [
-    { text = "Off" value = off }
+    { text = "Off" value = 0 }
     { text = "Small" value = 0.33 }
     { text = "Medium" value = 0.67 }
     { text = "Large" value = 1.0 }
@@ -1049,7 +1046,7 @@ better4_control_perfectlanding = {
   ini_key = "PerfectLanding"
   help = "Change the size of perfect/sloppy landing messages."
   options = [
-    { text = "Off" value = off }
+    { text = "Off" value = 0 }
     { text = "Small" value = 0.33 }
     { text = "Medium" value = 0.67 }
     { text = "Large" value = 1.0 }
@@ -1093,7 +1090,7 @@ better4_control_goalpts = {
   ini_key = "GoalPts"
   help = "Change the size of the cash and goal points icon."
   options = [
-    { text = "Off" value = off }
+    { text = "Off" value = 0 }
     { text = "Small" value = 0.33 }
     { text = "Medium" value = 0.67 }
     { text = "Large" value = 1.0 }
@@ -1168,7 +1165,7 @@ better4_control_playerlist = {
   ini_key = "Player List"
   help = "Change the size of the player list in net games."
   options = [
-    { text = "Off" value = off }
+    { text = "Off" value = 0 }
     { text = "Small" value = 0.33 }
     { text = "Medium" value = 0.67 }
     { text = "Large" value = 1.0 }
@@ -1195,7 +1192,7 @@ better4_control_timer = {
   ini_key = "Timer"
   help = "Change the size of the timer displayed at the top of the screen."
   options = [
-    { text = "Off" value = off }
+    { text = "Off" value = 0 }
     { text = "Small" value = 0.33 }
     { text = "Medium" value = 0.67 }
     { text = "Large" value = 1.0 }
@@ -1213,7 +1210,7 @@ script better4_change_timer
 endscript
 
 better4_control_menudemo_index = 1
-better4_control_menudemo_value = on
+better4_control_menudemo_value = 1
 better4_control_menudemo = {
   id = better4_control_menudemo_id
   index_name = better4_control_menudemo_index
@@ -1222,13 +1219,13 @@ better4_control_menudemo = {
   ini_key = "MenuDemo"
   help = "Toggle the main menu demo on or off."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_respawn_on_newrun_index = 1
-better4_control_respawn_on_newrun_value = on
+better4_control_respawn_on_newrun_value = 1
 better4_control_respawn_on_newrun = {
   id = better4_control_respawn_on_newrun_id
   index_name = better4_control_respawn_on_newrun_index
@@ -1237,8 +1234,8 @@ better4_control_respawn_on_newrun = {
   ini_key = "RespawnOnNewRun"
   help = "Toggle whether you respawn upon game start/end."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
@@ -1261,7 +1258,7 @@ script better4_control_updatedcollision_change
 endscript
 
 better4_control_boostplant_index = 1
-better4_control_boostplant_value = on
+better4_control_boostplant_value = 1
 better4_control_boostplant = {
   id = better4_control_boostplant_id
   index_name = better4_control_boostplant_index
@@ -1270,13 +1267,13 @@ better4_control_boostplant = {
   ini_key = "Boostplant"
   help = "Toggle whether boostplants are enabled or disabled."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_disablemovies_index = 0
-better4_control_disablemovies_value = off
+better4_control_disablemovies_value = 0
 better4_control_disablemovies = {
   id = better4_control_disablemovies_id
   index_name = better4_control_disablemovies_index
@@ -1285,13 +1282,13 @@ better4_control_disablemovies = {
   ini_key = "DisableMovies"
   help = "Toggle whether movies play when launching the game."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_skipsave_index = 0
-better4_control_skipsave_value = off
+better4_control_skipsave_value = 0
 better4_control_skipsave = {
   id = better4_control_skipsave_id
   index_name = better4_control_skipsave_index
@@ -1300,13 +1297,13 @@ better4_control_skipsave = {
   ini_key = "SkipSave"
   help = "Toggle whether the 'Do you want to save?' dialog appears after completing a goal."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 
 better4_control_skipstats_index = 0
-better4_control_skipstats_value = off
+better4_control_skipstats_value = 0
 better4_control_skipstats = {
   id = better4_control_skipstats_id
   index_name = better4_control_skipstats_index
@@ -1315,8 +1312,8 @@ better4_control_skipstats = {
   ini_key = "SkipStats"
   help = "Toggle whether the stats menu appears after obtaining a stat point."
   options = [
-    { text = "Off" value = off }
-    { text = "On" value = on }
+    { text = "Off" value = 0 }
+    { text = "On" value = 1 }
   ]
 }
 

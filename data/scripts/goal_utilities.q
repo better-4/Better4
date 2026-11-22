@@ -1728,7 +1728,7 @@ script goal_give_rewards
       ForEachIn master_skater_list do = goal_award_stat_point
     repeat <reward_stat>
     goal_got_stat reward_stat = <reward_stat>
-    if ( better4_control_skipstats_value = off ) // Better4 setting param that skips the stats screen when you get a stat point. Message still appears regardless.
+    if ( better4_control_skipstats_value = 0 ) // Better4 setting param that skips the stats screen when you get a stat point. Message still appears regardless.
       WaitForEvent type = goal_got_reward_done
       DebugFn 765
       add_pause_menu_textures_to_vram
@@ -1768,7 +1768,7 @@ script goal_give_rewards
   if GotParam volume
     SetMusicVolume ( <volume> * 10 )
   endif
-  if ( better4_control_skipsave_value = off ) // Better4 setting param that skips the save prompt when you complete a goal
+  if ( better4_control_skipsave_value = 0 ) // Better4 setting param that skips the save prompt when you complete a goal
     goal_want_to_save
     WaitForEvent type = goal_wait_for_save
   endif

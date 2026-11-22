@@ -1,5 +1,3 @@
-off = 0
-on = 1
 script DoingTrickBail
   if backwards
     GotoRandomScript [ BackwardFaceSlam Shoulders ]
@@ -181,14 +179,14 @@ script NutterBackward
     GroundGoneBail = GroundGoneBail AnimFall1 = HeadFirstFall AnimFall2 = HeadFirstSplat AnimFall3 = GetUpBackwards }
 endscript
 script GeneralBail Friction = 18 Friction2 = 20 HeavyFriction = 100
-  if (better4_control_pressure_value = on) // vanilla 4 doesn't clear stance
-    NollieOff 
-    PressureOff 
+  if ( better4_control_pressure_value = 1 ) // vanilla 4 doesn't clear stance
+    NollieOff
+    PressureOff
   endif
   KillSpecial
   SpawnClothingLandScript
   if not GotParam NoScuff
-    if ( better4_control_skatervoice_value = on )
+    if ( better4_control_skatervoice_value = 1 )
       PlaySkaterStream type = "bail"
     endif
   endif
@@ -398,7 +396,7 @@ script CleanUp_Deck
   Obj_ReplaceTexture src = "CS_NN_board_trans01.png" dest = "textures/scuffs/CS_NN_board_trans01"
 endscript
 script DoBoardScuff
- if ( better4_misc_boardscuff_value = on )
+ if ( better4_control_boardscuff_value = 1 )
   switch <boardscuff>
   case 10
     Obj_ReplaceTexture src = "CS_NN_board_trans01.png" dest = "textures/scuffs/CS_NN_boardscuff_01"

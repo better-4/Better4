@@ -25,7 +25,7 @@ script ApplyStanceToggle
         NollieOn 
         SetException Ex = Ollied Scr = Nollie Params = { <...> } 
       else
-        if ( better4_control_pressure_value = on ) 
+        if ( better4_control_pressure_value = 1 ) 
           PressureOn
           NollieOff
         else
@@ -52,7 +52,7 @@ script ApplyStanceToggle
         SetException Ex = Ollied Scr = Nollie Params = { <...> } 
         return DontDoAnimation = 1
       else
-        if ( better4_control_pressure_value = on ) 
+        if ( better4_control_pressure_value = 1 ) 
           PressureOn
           NollieOff
         else
@@ -84,7 +84,7 @@ script Toggle_Nollie_Pressure_States
 endscript
 
 script WaitWhilstChecking_ForPressure 
-  if ( better4_control_pressure_value = on )
+  if ( better4_control_pressure_value = 1 )
     if not ( better4_control_stancechange_index = 1 ) // not off
       switch better4_control_stancechange_index
         case 0 

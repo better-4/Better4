@@ -59,7 +59,7 @@ script PauseStreamsPauseMenu
   better4_apply_pause_menu_music
 endscript
 script better4_apply_pause_menu_music
-  if ( better4_control_musicwhenpaused_value = on )
+  if ( better4_control_musicwhenpaused_value = 1 )
     if IsTrue better4_pause_menu_had_music
       PauseMusic 0
     endif

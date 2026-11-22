@@ -26,7 +26,7 @@ script SkateInOrBail moveleft = 1 moveright = -1 movey = -5
 endscript
 
 script DetermineFallSide
-  if ( better4_control_directional_dropdown_value = on )
+  if ( better4_control_directional_dropdown_value = 1 )
     DetermineFallSideFromDirectionalInput <...>
   else
     DetermineFallSideFromParam <...>
@@ -131,7 +131,7 @@ script DoVertDropDown
   SetQueueTricks NoTricks
   SetManualTricks NoTricks
 
-  if ( better4_modifier_disablerevert_value = off )
+  if ( better4_modifier_disablerevert_value = 0 )
     SetExtraTricks tricks = better4_control_revert_value Duration = 20
   endif
 
@@ -238,11 +238,11 @@ Extra_BS_Grinds =
   { Trigger = { InOrder square Circle 300 } Scr = Trick_5_0_BS Params = { name = 'BS 5-0' IsExtra = yes } }
 ]
 script Grind GrindTweak = 7 boardscuff = 0 InitSpeed = 1.0
-  if ( better4_control_railspin_value = off )
+  if ( better4_control_railspin_value = 0 )
     RotateDisplay Y duration = 0.01 seconds StartAngle = 0.0 EndAngle = 0.0 SinePower = 0 RotationOffset = (0, 30, 0)
   endif
   KillExtraTricks
-  if ( better4_control_doubletapgrinds_value = on )
+  if ( better4_control_doubletapgrinds_value = 1 )
     if not GotParam IsATap
       if not GotParam IsExtra
         if ChecksumEquals a = <Extratricks> b = Extra_BS_Grinds
@@ -270,7 +270,7 @@ script Grind GrindTweak = 7 boardscuff = 0 InitSpeed = 1.0
   if GotParam SpecialSounds
     Obj_SpawnScript <SpecialSounds>
   endif
-  if ( ( GotParam Stream ) and ( better4_control_specialsfx_value = on ))
+  if ( ( GotParam Stream ) and ( better4_control_specialsfx_value = 1 ))
     Obj_PlayStream <Stream>
   endif
   Vibrate Actuator = 1 Percent = 50 Duration = 0.25

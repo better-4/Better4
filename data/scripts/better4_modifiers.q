@@ -46,10 +46,10 @@ better4_modifier_disablewallpush = {
 
 script better4_modifier_disablewallpush_change
   switch better4_modifier_disablewallpush_value
-  case off
+  case 0
     better4_control_wallpush_change
-  case on
-    SetWallpushEnabled enabled = off
+  case 1
+    SetWallpushEnabled enabled = 0
   endswitch
 endscript
 
@@ -66,9 +66,9 @@ better4_modifier_disablespacewalk = {
 
 script better4_modifier_disablespacewalk_change
   switch better4_modifier_disablespacewalk_value
-  case off
+  case 0
     better4_control_spacewalk_change
-  case on
+  case 1
     Change FlatLandBranches = flatland_branches_spacewalk_off
   endswitch
 endscript
@@ -86,9 +86,9 @@ better4_modifier_alwaysspecial = {
 
 script better4_modifier_alwaysspecial_change
   switch better4_modifier_alwaysspecial_value
-  case off
+  case 0
     UnSetGlobalFlag flag = CHEAT_ALWAYS_SPECIAL
-  case on
+  case 1
     SetGlobalFlag flag = CHEAT_ALWAYS_SPECIAL
   endswitch
 endscript
@@ -106,9 +106,9 @@ better4_modifier_perfectrail = {
 
 script better4_modifier_perfectrail_change
   switch better4_modifier_perfectrail_value
-  case off
+  case 0
     UnSetGlobalFlag flag = CHEAT_PERFECT_RAIL
-  case on
+  case 1
     SetGlobalFlag flag = CHEAT_PERFECT_RAIL
   endswitch
 endscript
@@ -126,9 +126,9 @@ better4_modifier_perfectmanual = {
 
 script better4_modifier_perfectmanual_change
   switch better4_modifier_perfectmanual_value
-  case off
+  case 0
     UnSetGlobalFlag flag = CHEAT_PERFECT_MANUAL
-  case on
+  case 1
     SetGlobalFlag flag = CHEAT_PERFECT_MANUAL
   endswitch
 endscript
@@ -146,9 +146,9 @@ better4_modifier_perfectskitch = {
 
 script better4_modifier_perfectskitch_change
   switch better4_modifier_perfectskitch_value
-  case off
+  case 0
     UnSetGlobalFlag flag = CHEAT_PERFECT_SKITCH
-  case on
+  case 1
     SetGlobalFlag flag = CHEAT_PERFECT_SKITCH
   endswitch
 endscript
