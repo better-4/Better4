@@ -199,6 +199,7 @@ script better4_freecam_toggle_hidehud
   else
     Change better4_freecam_hidehud = 0
   endif
+  PlaySound MenuSelect vol = 100
   better4_freecam_apply_hidehud
 endscript
 
@@ -218,6 +219,7 @@ script better4_freecam_toggle_hidenames
   else
     Change better4_freecam_hidenames = 0
   endif
+  PlaySound MenuSelect vol = 100
   better4_freecam_apply_hidenames
 endscript
 
@@ -234,18 +236,44 @@ script better4_freecam_apply_hidenames
   endif
 endscript
 
+// Speed/look/fov adjustments are driven by autorepeat (~ every 50ms while held),
+// so the feedback sound is throttled to avoid a machine-gun effect.
+better4_freecam_sound_time = 0
+
+script better4_freecam_play_speed_up_sound
+  GetElapsedTime StartTime = better4_freecam_sound_time
+  if ( <ElapsedTime> < 110 )
+    return
+  endif
+  GetStartTime
+  Change better4_freecam_sound_time = <StartTime>
+  PlaySound MenuUp vol = 60
+endscript
+
+script better4_freecam_play_speed_down_sound
+  GetElapsedTime StartTime = better4_freecam_sound_time
+  if ( <ElapsedTime> < 110 )
+    return
+  endif
+  GetStartTime
+  Change better4_freecam_sound_time = <StartTime>
+  PlaySound MenuDown vol = 60
+endscript
+
 better4_freecam_move_speed = 1.0
 
 script better4_freecam_increase_move_speed
   LogDebug "better4_freecam_increase_move_speed"
   <new_move_speed> = ( better4_freecam_move_speed + 0.1 )
   Change better4_freecam_move_speed = <new_move_speed>
+  better4_freecam_play_speed_up_sound
   better4_notify_move_speed_changed
 endscript
 
 script better4_freecam_decrease_move_speed
   if ( better4_freecam_move_speed > 0.15 )
     Change better4_freecam_move_speed = ( better4_freecam_move_speed - 0.1 )
+    better4_freecam_play_speed_down_sound
     better4_notify_move_speed_changed
   endif
 endscript
@@ -268,12 +296,14 @@ better4_freecam_look_speed = 1.0
 script better4_freecam_increase_look_speed
   <new_look_speed> = ( better4_freecam_look_speed + 0.1 )
   Change better4_freecam_look_speed = <new_look_speed>
+  better4_freecam_play_speed_up_sound
   better4_notify_look_speed_changed
 endscript
 
 script better4_freecam_decrease_look_speed
   if ( better4_freecam_look_speed > 0.15 )
     Change better4_freecam_look_speed = ( better4_freecam_look_speed - 0.1 )
+    better4_freecam_play_speed_down_sound
     better4_notify_look_speed_changed
   endif
 endscript
@@ -307,6 +337,7 @@ script better4_freecam_increase_fov
   if ( ( better4_control_fov_value + better4_freecam_fov ) < 177 )
     <new_fov> = ( better4_freecam_fov + 1 )
     Change better4_freecam_fov = <new_fov>
+    better4_freecam_play_speed_up_sound
     better4_notify_fov_changed
   endif
 endscript
@@ -315,6 +346,7 @@ script better4_freecam_decrease_fov
   if ( ( better4_control_fov_value + better4_freecam_fov ) > 1 )
     <new_fov> = ( better4_freecam_fov - 1 )
     Change better4_freecam_fov = <new_fov>
+    better4_freecam_play_speed_down_sound
     better4_notify_fov_changed
   endif
 endscript
