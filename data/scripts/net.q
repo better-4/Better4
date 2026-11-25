@@ -1,5 +1,6 @@
 InNetOptionsFromNetPlay = 0
 CAME_FROM_LAN = 0
+CAME_FROM_LOBBY = 0 // 0 = false, 1 = lan, 2 = internet
 script launch_viewer
   LogInfo "launch_viewer is no longer needed ... you can remove it from your startup script"
 endscript
@@ -157,6 +158,13 @@ script quit_network_game
       Wait 1
     endif
   repeat
+  if (CAME_FROM_LAN = 1)
+    Change CAME_FROM_LOBBY = 1
+    LogInfo "coming from land game"
+  else
+    Change CAME_FROM_LOBBY = 2
+    LogInfo "coming from ilanet game"
+  endif
   level_select_change_level level = load_skateshop no_levelUnload
 endscript
 script spawned_chosen_host_game
