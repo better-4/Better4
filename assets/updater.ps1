@@ -29,6 +29,7 @@ $EXIT_UPDATING = 2
 
 $InstallDir = $PSScriptRoot
 $IniPath = Join-Path $InstallDir "better4.ini"
+$LogPath = Join-Path $InstallDir "logs\better4updater.log"
 
 Add-Type -Namespace Better4 -Name IniFile -MemberDefinition @'
 [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -49,6 +50,37 @@ function Get-IniValue {
 function Set-IniValue {
     param([string]$Path, [string]$Section, [string]$Key, [string]$Value)
     [Better4.IniFile]::WritePrivateProfileString($Section, $Key, $Value, $Path) | Out-Null
+}
+
+function Write-UpdaterLog {
+    param([string]$Message)
+    try {
+        $dir = Split-Path $LogPath -Parent
+        if (-not (Test-Path $dir)) {
+            New-Item -ItemType Directory -Path $dir -Force | Out-Null
+        }
+        $line = "{0} {1}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $Message
+        Add-Content -Path $LogPath -Value $line -Encoding UTF8 -ErrorAction SilentlyContinue
+    } catch {
+    }
+}
+
+function Get-ErrorSummary {
+    # The localized exception text arrives in the console code page and turns
+    # into mojibake once written to a UTF-8 log, so log only Latin-safe detail.
+    param($ErrorRecord)
+
+    $exception = $ErrorRecord.Exception
+    $status = $null
+    if ($exception.Response -and $exception.Response.StatusCode) {
+        $status = [int]$exception.Response.StatusCode
+    }
+
+    $type = $exception.GetType().Name
+    if ($status) {
+        return "$type HTTP $status"
+    }
+    return $type
 }
 
 function Initialize-Forms {
@@ -220,6 +252,162 @@ function Test-DirectoryWritable {
         return $true
     } catch {
         return $false
+    }
+}
+
+function Get-HtmlText {
+    param([string]$Html)
+    $text = $Html -replace '<li[^>]*>', "`n- " -replace '<br\s*/?>', "`n" -replace '</p>', "`n" -replace '<[^>]+>', ''
+    $text = [Net.WebUtility]::HtmlDecode($text)
+    $text = ($text -split "`n" | ForEach-Object { $_.TrimEnd() }) -join "`n"
+    return ($text -replace "(`n\s*){3,}", "`n`n").Trim()
+}
+
+function Get-ReleaseInfoFromApi {
+    $response = Invoke-RestMethod -Uri "https://api.github.com/repos/better-4/Better4/releases/latest" `
+        -Headers @{ "User-Agent" = "better4-updater"; "Accept" = "application/vnd.github+json" } `
+        -TimeoutSec 8
+
+    $assets = @($response.assets)
+    if ($assets.Count -eq 0) {
+        return $null
+    }
+
+    $zip = $assets | Where-Object { $_.name -like '*.zip' } | Select-Object -First 1
+    if (-not $zip) {
+        $zip = $assets[0]
+    }
+
+    return @{
+        Tag = $response.tag_name
+        Changelog = $response.body
+        ZipUrl = $zip.browser_download_url
+    }
+}
+
+function Get-ReleaseInfoFromWeb {
+    # The unauthenticated GitHub API allows 60 requests per hour per IP. When a
+    # shared or corporate address runs out of quota it answers 403, and the
+    # updater used to treat that as "no updates available". These pages are
+    # served by github.com itself and are not rate limited the same way.
+    $headers = @{ "User-Agent" = "better4-updater" }
+
+    $latestUri = "https://github.com/better-4/Better4/releases/latest"
+    $request = [Net.HttpWebRequest]::Create($latestUri)
+    $request.AllowAutoRedirect = $false
+    $request.UserAgent = "better4-updater"
+    $request.Timeout = 10000
+
+    $tag = $null
+    $response = $request.GetResponse()
+    try {
+        $location = $response.Headers['Location']
+        if ($location -match '/releases/tag/([^/?#]+)') {
+            $tag = $matches[1]
+        }
+    } finally {
+        $response.Close()
+    }
+
+    if (-not $tag) {
+        return $null
+    }
+
+    $zipUrl = $null
+    $assetsPage = Invoke-WebRequest -Uri "https://github.com/better-4/Better4/releases/expanded_assets/$tag" `
+        -Headers $headers -UseBasicParsing -TimeoutSec 15
+    $zipMatch = [regex]::Match($assetsPage.Content, '/better-4/Better4/releases/download/[^"''\s]+\.zip')
+    if ($zipMatch.Success) {
+        $zipUrl = "https://github.com" + $zipMatch.Value
+    }
+
+    if (-not $zipUrl) {
+        return $null
+    }
+
+    $changelog = ""
+    try {
+        $releasePage = Invoke-WebRequest -Uri "https://github.com/better-4/Better4/releases/tag/$tag" `
+            -Headers $headers -UseBasicParsing -TimeoutSec 15
+        $bodyMatch = [regex]::Match($releasePage.Content,
+            '<div[^>]*class="[^"]*markdown-body[^"]*"[^>]*>(.*?)</div>\s*</div>',
+            [Text.RegularExpressions.RegexOptions]::Singleline)
+        if ($bodyMatch.Success) {
+            $changelog = Get-HtmlText $bodyMatch.Groups[1].Value
+        }
+    } catch {
+    }
+
+    return @{
+        Tag = $tag
+        Changelog = $changelog
+        ZipUrl = $zipUrl
+    }
+}
+
+function Get-LatestRelease {
+    try {
+        $info = Get-ReleaseInfoFromApi
+        if ($info) {
+            Write-UpdaterLog "release resolved via api: $($info.Tag)"
+            return $info
+        }
+        Write-UpdaterLog "api returned no usable release; falling back to web"
+    } catch {
+        Write-UpdaterLog "api lookup failed ($(Get-ErrorSummary $_)); falling back to web"
+    }
+
+    try {
+        $info = Get-ReleaseInfoFromWeb
+        if ($info) {
+            Write-UpdaterLog "release resolved via web: $($info.Tag)"
+            return $info
+        }
+        Write-UpdaterLog "web lookup returned no usable release"
+    } catch {
+        Write-UpdaterLog "web lookup failed: $(Get-ErrorSummary $_)"
+    }
+
+    return $null
+}
+
+function Save-Download {
+    param([string]$Uri, [string]$OutFile, $ProgressBar, $StatusLabel)
+
+    $request = [Net.HttpWebRequest]::Create($Uri)
+    $request.UserAgent = "better4-updater"
+    $request.Timeout = 30000
+    $request.ReadWriteTimeout = 30000
+
+    $response = $request.GetResponse()
+    try {
+        $total = $response.ContentLength
+        $stream = $response.GetResponseStream()
+        $file = [IO.File]::Create($OutFile)
+        try {
+            $buffer = New-Object byte[] 65536
+            $received = 0
+            while (($read = $stream.Read($buffer, 0, $buffer.Length)) -gt 0) {
+                $file.Write($buffer, 0, $read)
+                $received += $read
+                if ($ProgressBar -and $total -gt 0) {
+                    $percent = [int](($received * 100) / $total)
+                    if ($percent -gt $ProgressBar.Maximum) { $percent = $ProgressBar.Maximum }
+                    $ProgressBar.Value = $percent
+                    if ($StatusLabel) {
+                        $mb = [math]::Round($received / 1MB, 1)
+                        $totalMb = [math]::Round($total / 1MB, 1)
+                        $StatusLabel.Text = "Downloading update... $mb of $totalMb MB"
+                    }
+                    [System.Windows.Forms.Application]::DoEvents()
+                }
+            }
+        } finally {
+            $file.Close()
+            $stream.Close()
+        }
+    } finally {
+        $response.Close()
     }
 }
 
@@ -412,21 +600,17 @@ switch ($PSCmdlet.ParameterSetName) {
         Initialize-Forms
         $checkingForm = Show-CheckingWindow
         try {
-            try {
-                [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-                $release = Invoke-RestMethod -Uri "https://api.github.com/repos/better-4/Better4/releases/latest" `
-                    -Headers @{ "User-Agent" = "better4-updater"; "Accept" = "application/vnd.github+json" } `
-                    -TimeoutSec 5
-            } catch {
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+            $release = Get-LatestRelease
+            if (-not $release) {
+                Write-UpdaterLog "no release info available; skipping"
                 exit $EXIT_CONTINUE
             }
 
-            $latestTag = $release.tag_name
-            $changelog = $release.body
-            if (-not $release.assets -or $release.assets.Count -eq 0) {
-                exit $EXIT_CONTINUE
-            }
-            $zipUrl = $release.assets[0].browser_download_url
+            $latestTag = $release.Tag
+            $changelog = $release.Changelog
+            $zipUrl = $release.ZipUrl
 
             try {
                 $latestVersion = [version]$latestTag
@@ -469,10 +653,10 @@ switch ($PSCmdlet.ParameterSetName) {
                     try {
                         $tempDir = [IO.Path]::GetTempPath()
                         $zipPath = Join-Path $tempDir "better4-update.zip"
-                        Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing -TimeoutSec 30
+                        Save-Download -Uri $zipUrl -OutFile $zipPath `
+                            -ProgressBar $downloadProgressBar -StatusLabel $downloadLabel
 
                         $downloadLabel.Text = "Installing update..."
-                        $downloadProgressBar.Value = 51
                         $downloadProgressBar.Value = 50
                         [System.Windows.Forms.Application]::DoEvents()
 
@@ -481,7 +665,10 @@ switch ($PSCmdlet.ParameterSetName) {
                             Remove-Item $extractDir -Recurse -Force
                         }
                         Expand-Archive -Path $zipPath -DestinationPath $extractDir -Force
+
+                        Remove-Item $zipPath -Force -ErrorAction SilentlyContinue
                     } catch {
+                        Write-UpdaterLog "download failed: $(Get-ErrorSummary $_)"
                         exit $EXIT_CONTINUE
                     }
                 } finally {
