@@ -705,6 +705,19 @@ script create_main_menu
   PlaySkaterCamAnim name = SS_MenuCam play_hold
   SetLightDirection index = 0 heading = 330.0 pitch = -40.0
   MakeSkaterGoto SkateshopAI params = { NoSFX }
+  if (CAME_FROM_LOBBY = 2) // gotos used or else main menu spawns on top
+    Change CAME_FROM_LOBBY = 0
+    LogInfo "trying to open net menu from leaving game"
+    change_gamemode_net
+    Goto launch_network_select_games_menu
+  else 
+    if (CAME_FROM_LOBBY = 1)
+      Change CAME_FROM_LOBBY = 0
+      LogInfo "trying to open lan net from leaving game"
+      change_gamemode_net
+      Goto launch_network_select_lan_games_menu
+    endif
+  endif
   SetMemThreadSafe off
   SetMenuPadMappings [ active
     use_as_first
